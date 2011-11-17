@@ -1,0 +1,75 @@
+Developer Setup Instructions
+
+Git
+============================================
+
+1. Go to http://code.google.com/p/msysgit/downloads/list
+2. Download Git-1.7.7
+3. Start the installer
+4. Choose 'Run git from the windows command prompt' and 'use OpenSSH'.
+   Default selection can be used for all other settings.
+5. Start GitBash
+6. Type: git config --global user.name "Your Name"
+7. Type: git config --global user.email my@mail.com
+8. Type: ssh-keygen -t rsa -C "my@mail.com"
+
+
+GitHub
+============================================
+
+ 1. Go to https://github.com/signup/free
+ 2. Enter your data to create an account
+ 3. Go to your account settings
+ 4. Choose SSH Public Keys
+ 5. Click "Add another public key"
+ 6. Find the file C:\Users\Name\.ssh\id_rsa.pub
+ 7. Copy and paste the content of the file into the field on the github website
+ 8. Save Changes
+ 9. Go to GitBash and type ssh -T git@github.com to check your settings
+10. You should get the messaege "Hi <<name>>! You've successfully authenticated,
+    but GitHub does not provide shell access."
+11. Goto https://github.com/WWI09SWB/DualonCMS and create a fork (Click "Fork")
+
+
+Local development environment
+============================================
+
+1. Create a directory on your hard drive
+2. Start GitBash
+3. Change to the directory you just created
+4. Type: git clone git@github.com:<< username >>/DualonCMS.git
+5. Type: cd DualonCMS
+6. Type: git remote add upstream git://github.com/WWI09SWB/DualonCMS.git
+7. Type: git fetch upstream
+
+
+Developing
+============================================
+1. Create a new branch for every new feature or bugfix. The name of the
+   branch should match the name of the task in the project management system.
+2. To create a branch type: git branch name
+3. To switch between branches type: git checkout name
+4. start developing and comit your changes to your local repository
+5. send your changes to the master repository (description below)
+4. After you are done with a task use the following command to merge the branches:
+    git checkout master
+    git merge name
+
+
+Other things to to
+============================================
+- to push your local changes to the github repository type:
+  git push origin master
+- to update things that changed in the master repository type:
+  git fetch upstream
+  git merge upstream/master
+- delete a branch
+  git branch -d name
+
+
+Sending code to the master repository
+============================================
+1. go to your github site and select the branch, that contains all the commits you did
+2. click on "pull request"
+3. you can then review your commit and type in a message for the admins
+4. you can manage your requests by clicking "Pull requests" on your dashboard
