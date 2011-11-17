@@ -49,7 +49,7 @@ Developing
    branch should match the name of the task in the project management system.
 2. To create a branch type: git branch name
 3. To switch between branches type: git checkout name
-4. start developing and comit your changes to your local repository
+4. start developing and commit your changes to your local repository
 5. send your changes to the master repository (description below)
 4. After you are done with a task use the following command to merge the branches:
     git checkout master
