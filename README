@@ -71,7 +71,7 @@ Developing
    branch should match the name of the task in the project management system.
 2. To create a branch select: Team -> Switch to -> New branch
 4. When you're done with all changes commit the changes: Team -> Commit
-5. You can merge Branches via Team -> Merge
+5. You can merge Branches via Team -> Merge1
 
 
 Other things to to (everything can also be accessed via Team in Eclipse)
