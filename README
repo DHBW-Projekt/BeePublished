@@ -49,21 +49,33 @@ Local development environment
 6. Type: git remote add upstream git://github.com/WWI09SWB/DualonCMS.git
 7. Type: git fetch upstream
 
+Eclipse
+============================================
+1. Download Eclipse Indigo
+2. Via Help -> Install new software... install the following components:
+   - PHP Development Tools (PDT)
+   - Eclipse EGit
+3. Switch to "Git Repository Exploring" perspective (you might have to add
+   it via Window -> Open Perspective
+4. Click: "Add an existing local Git Repository to this view"
+5. Select the directory where you created the repository and add it
+6. Right click on you Repository and select Import projects
+7. Select Import general project
+8. After creating the project switch to the PHP perspective
+9. Right click on your project and select Configure -> Add PHP Support
+
 
 Developing
 ============================================
 1. Create a new branch for every new feature or bugfix. The name of the
    branch should match the name of the task in the project management system.
-2. To create a branch type: git branch name
-3. To switch between branches type: git checkout name
-4. start developing and commit your changes to your local repository
-5. send your changes to the master repository (description below)
-4. After you are done with a task use the following command to merge the branches:
-    git checkout master
-    git merge name
+2. To create a branch select: Team -> Switch to -> New branch
+3. After you made change stage the files (Team -> Add..)
+4. When you're done with all changes commit the changes: Team -> Commit
+5. You can merge Branches via Team -> Merge
 
 
-Other things to to
+Other things to to (everything can also be accessed via Team in Eclipse)
 ============================================
 - to push your local changes to the github repository type:
   git push origin branchname
