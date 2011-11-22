@@ -70,7 +70,6 @@ Developing
 1. Create a new branch for every new feature or bugfix. The name of the
    branch should match the name of the task in the project management system.
 2. To create a branch select: Team -> Switch to -> New branch
-3. After you made change stage the files (Team -> Add..)
 4. When you're done with all changes commit the changes: Team -> Commit
 5. You can merge Branches via Team -> Merge
 
