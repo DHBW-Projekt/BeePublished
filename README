@@ -46,7 +46,7 @@ Local development environment
 3. Change to the directory you just created
 4. Type: git clone git@github.com:<< username >>/DualonCMS.git
 5. Type: cd DualonCMS
-6. Type: git remote add upstream git://github.com/WWI09SWB/DualonCMS.git
+6. Type: git remote add upstream git@github.com:WWI09SWB/DualonCMS.git
 7. Type: git fetch upstream
 
 Eclipse
@@ -79,8 +79,7 @@ Other things to to (everything can also be accessed via Team in Eclipse)
 - to push your local changes to the github repository type:
   git push origin branchname
 - to update things that changed in the master repository type:
-  git fetch upstream
-  git merge upstream/master
+  git pull upstream master
 - delete a branch
   git branch -d name
 
