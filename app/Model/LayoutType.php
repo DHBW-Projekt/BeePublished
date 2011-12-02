@@ -3,7 +3,7 @@ App::uses('AppModel', 'Model');
 /**
  * LayoutType Model
  *
- * @property Layout $Layout
+ * @property Container $Container
  */
 class LayoutType extends AppModel {
 /**
@@ -21,8 +21,8 @@ class LayoutType extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'Layout' => array(
-			'className' => 'Layout',
+		'Container' => array(
+			'className' => 'Container',
 			'foreignKey' => 'layout_type_id',
 			'dependent' => false,
 			'conditions' => '',

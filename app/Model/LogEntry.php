@@ -22,13 +22,6 @@ class LogEntry extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		),
-		'Object' => array(
-			'className' => 'Object',
-			'foreignKey' => 'object_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
 		)
 	);
 }
