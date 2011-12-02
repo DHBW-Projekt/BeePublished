@@ -4,7 +4,6 @@ App::uses('AppModel', 'Model');
  * LogEntry Model
  *
  * @property User $User
- * @property Object $Object
  */
 class LogEntry extends AppModel {
 
