@@ -1,5 +1,5 @@
 <?php
-/* Container Test cases generated on: 2011-12-01 17:40:22 : 1322757622*/
+/* Container Test cases generated on: 2011-12-02 19:36:57 : 1322851017*/
 App::uses('Container', 'Model');
 
 /**
@@ -12,7 +12,7 @@ class ContainerTestCase extends CakeTestCase {
  *
  * @var array
  */
-	public $fixtures = array('app.container', 'app.layout', 'app.content', 'app.page');
+	public $fixtures = array('app.container', 'app.layout_type', 'app.content', 'app.page', 'app.user', 'app.role', 'app.menu_entry', 'app.log_entry');
 
 /**
  * setUp method

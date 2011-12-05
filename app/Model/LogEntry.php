@@ -4,7 +4,6 @@ App::uses('AppModel', 'Model');
  * LogEntry Model
  *
  * @property User $User
- * @property Object $Object
  */
 class LogEntry extends AppModel {
 
@@ -19,13 +18,6 @@ class LogEntry extends AppModel {
 		'User' => array(
 			'className' => 'User',
 			'foreignKey' => 'user_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'Object' => array(
-			'className' => 'Object',
-			'foreignKey' => 'object_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
