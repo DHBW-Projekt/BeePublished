@@ -64,3 +64,4 @@ Cache::config('default', array('engine' => 'File'));
  *
  */
 CakePlugin::load('AclExtras');
+CakePlugin::loadAll();
