@@ -57,8 +57,8 @@ class CMSPluginComponent extends Component
 
         $notFound = 0;
 
-        foreach($schemaTables as $schemaTable => $table) {
-            if (!in_array($schemaTable,$installedTables)) {
+        foreach ($schemaTables as $schemaTable => $table) {
+            if (!in_array($schemaTable, $installedTables)) {
                 $notFound++;
             }
         }
@@ -85,5 +85,22 @@ class CMSPluginComponent extends Component
         $schema = $schema->load(array('plugin' => $plugin));
 
         return $schema;
+    }
+
+    function executeSQL($contents, $db)
+    {
+        foreach ($contents as $table => $sql) {
+            if (!empty($sql)) {
+                $error = null;
+                try {
+                    $db->execute($sql);
+                } catch (PDOException $e) {
+                    $error = $table . ': ' . $e->getMessage();
+                }
+                if (!empty($error)) {
+                    throw new CakeException($error);
+                }
+            }
+        }
     }
 }

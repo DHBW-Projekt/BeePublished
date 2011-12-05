@@ -60,7 +60,7 @@ class PluginsController extends AppController
             }
         }
 
-        $this->executeSQL($contents, $db);
+        $this->CMSPlugin->executeSQL($contents, $db);
         $this->Session->setFlash(__('Plugin tables are now up to date.'));
         $this->redirect(array('action' => 'index'));
     }
@@ -84,25 +84,8 @@ class PluginsController extends AppController
             $drop[$table] = $db->dropSchema($schema, $table);
         }
 
-        $this->executeSQL($drop, $db);
+        $this->CMSPlugin->executeSQL($drop, $db);
         $this->Session->setFlash(__('Plugin successfully uninstalled.'));
         $this->redirect(array('action' => 'index'));
-    }
-
-    private function executeSQL($contents, $db)
-    {
-        foreach ($contents as $table => $sql) {
-            if (!empty($sql)) {
-                $error = null;
-                try {
-                    $db->execute($sql);
-                } catch (PDOException $e) {
-                    $error = $table . ': ' . $e->getMessage();
-                }
-                if (!empty($error)) {
-                    throw new CakeException($error);
-                }
-            }
-        }
     }
 }
