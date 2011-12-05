@@ -1,5 +1,5 @@
 <?php
-/* MenuEntry Fixture generated on: 2011-12-01 17:42:51 : 1322757771 */
+/* MenuEntry Fixture generated on: 2011-12-02 19:38:47 : 1322851127 */
 
 /**
  * MenuEntryFixture
@@ -37,8 +37,8 @@ class MenuEntryFixture extends CakeTestFixture {
 			'role_id' => 1,
 			'page_id' => 1,
 			'published' => 1,
-			'validFrom' => '2011-12-01 17:42:51',
-			'validTo' => '2011-12-01 17:42:51',
+			'validFrom' => '2011-12-02 19:38:47',
+			'validTo' => '2011-12-02 19:38:47',
 			'order' => 1
 		),
 	);
