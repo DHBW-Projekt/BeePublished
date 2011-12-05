@@ -12,5 +12,6 @@
     <?php elseif(array_key_exists('content',$child)): ?>
         <?php echo pr($child);?>
         <?php echo $child['content'];?>
+                                <?php echo $this->element($child['content'], array( 'data' => $column['children'] )); ?>
     <?php endif; ?>
 <?php endforeach; ?>
