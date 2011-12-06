@@ -81,8 +81,8 @@ class CMSPluginComponent extends Component
 
     function initSchema($plugin)
     {
-        $schema = new CakeSchema(array('plugin' => $plugin));
-        $schema = $schema->load(array('plugin' => $plugin));
+        $schema = new CakeSchema(array('plugin' => $plugin, 'name' => $plugin));
+        $schema = $schema->load(array('plugin' => $plugin, 'name' => $plugin));
 
         return $schema;
     }
