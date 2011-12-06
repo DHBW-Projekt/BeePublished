@@ -9,6 +9,8 @@ App::uses('AppModel', 'Model');
  * @property User $User
  */
 class Role extends AppModel {
+	public $actsAs = array('Acl' => array('type' => 'requester'));
+
 /**
  * Display field
  *
@@ -80,4 +82,12 @@ class Role extends AppModel {
 		)
 	);
 
+/**
+ * parentNode function
+ * 
+ * @return array
+ */
+	function parentNode() {
+		return null;
+	}
 }
