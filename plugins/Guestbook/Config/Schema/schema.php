@@ -1,6 +1,6 @@
 <?php
 
-class AppSchema extends CakeSchema {
+class GuestbookSchema extends CakeSchema {
 	function before($event = array()) {
 		return true;
 	}
