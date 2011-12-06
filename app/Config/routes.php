@@ -22,7 +22,7 @@
  */
 
 
-	Router::connect('/', array('controller' => 'pages', 'action' => 'index'));
+	Router::connect('/', array('controller' => 'pages', 'action' => 'display'));
 
 
 /**
