@@ -84,7 +84,7 @@ class PagesController extends AppController
                 if ($name != ".") {
                     $contentData['plugin'] = $childContent['module_name'];
                     $contentData['view'] = $childContent['view_name'];
-                    $contentData['viewData'] = $this->Components->load($name)->getData($params);
+                    $contentData['viewData'] = $this->Components->load($name)->getData($this, $params);
                 }
                 $children['columns'][$childContent['column'] - 1]['children'][$childContent['order']]['content'] = $contentData;
             }
