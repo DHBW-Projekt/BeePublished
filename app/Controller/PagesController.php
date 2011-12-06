@@ -21,18 +21,20 @@ class PagesController extends AppController
         //Load required models
         $this->loadModel('Container');
         $this->loadModel('LayoutType');
+        $this->loadModel('Content');
+        $this->loadModel('ContentValue');
 
         //Get page to display
         $page = $this->Page->findById(1);
 
         //Find elements for page to display
-        $elements = $this->setupPageElements($page['Container'],true);
+        $elements = $this->setupPageElements($page['Container'], true);
 
         //Output data
         $this->set('elements', $elements);
     }
 
-    private function setupPageElements($container,$root=false)
+    private function setupPageElements($container, $root = false)
     {
         $container = $this->Container->findById($container['id']);
         $children = array();
@@ -62,9 +64,9 @@ class PagesController extends AppController
                     $children[$childContainer['order']] = $this->setupPageElements($childContainer);
                 } else {
                     if ($root && $container['LayoutType']['id'] != null) {
-                        $children[$childContainer['column']-1]['children'][$childContainer['order']] = $this->setupPageElements($childContainer);
+                        $children[$childContainer['column'] - 1]['children'][$childContainer['order']] = $this->setupPageElements($childContainer);
                     } else {
-                        $children['columns'][$childContainer['column']-1]['children'][$childContainer['order']] = $this->setupPageElements($childContainer);
+                        $children['columns'][$childContainer['column'] - 1]['children'][$childContainer['order']] = $this->setupPageElements($childContainer);
                     }
                 }
             }
@@ -72,12 +74,24 @@ class PagesController extends AppController
 
         if (array_key_exists('Content', $container) && sizeof($container['Content'] > 0)) {
             foreach ($container['Content'] as $childContent) {
-                $children['columns'][$childContent['column']-1]['children'][$childContent['order']]['content'] = 'test text<br/>';
+                $contentValues = $this->ContentValue->findAllByContentId($childContent['id']);
+                $params = array();
+                foreach($contentValues as $contentValue) {
+                    $params[$contentValue['ContentValue']['key']] = $contentValue['ContentValue']['value'];
+                }
+                $name = $childContent['module_name'].'.'.$childContent['view_name'];
+                $contentData = array();
+                if ($name != ".") {
+                    $contentData['plugin'] = $childContent['module_name'];
+                    $contentData['view'] = $childContent['view_name'];
+                    $contentData['viewData'] = $this->Components->load($name)->getData($params);
+                }
+                $children['columns'][$childContent['column'] - 1]['children'][$childContent['order']]['content'] = $contentData;
             }
         }
 
-        if (array_key_exists('columns',$children) && $children['columns'] != null) {
-            foreach($children['columns'] as $idx => $column) {
+        if (array_key_exists('columns', $children) && $children['columns'] != null) {
+            foreach ($children['columns'] as $idx => $column) {
                 ksort($children['columns'][$idx]['children']);
             }
         }

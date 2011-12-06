@@ -4,6 +4,7 @@ App::uses('AppModel', 'Model');
  * Content Model
  *
  * @property Container $Container
+ * @property ContentValue $ContentValue
  */
 class Content extends AppModel {
 
@@ -23,4 +24,26 @@ class Content extends AppModel {
 			'order' => ''
 		)
 	);
+
+/**
+ * hasMany associations
+ *
+ * @var array
+ */
+	public $hasMany = array(
+		'ContentValue' => array(
+			'className' => 'ContentValue',
+			'foreignKey' => 'content_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
+	);
+
 }
