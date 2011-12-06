@@ -1,5 +1,5 @@
 <?php 
-/* App schema generated on: 2011-12-06 09:24:21 : 1323159861*/
+/* App schema generated on: 2011-12-06 09:26:03 : 1323159963*/
 class AppSchema extends CakeSchema {
 	function before($event = array()) {
 		return true;
@@ -61,7 +61,7 @@ class AppSchema extends CakeSchema {
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'key' => 'primary', 'collate' => NULL, 'comment' => ''),
 		'content_id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'key' => 'index', 'collate' => NULL, 'comment' => ''),
 		'key' => array('type' => 'string', 'null' => false, 'default' => NULL, 'length' => 50, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'charset' => 'latin1'),
-		'value' => array('type' => 'string', 'null' => false, 'default' => NULL, 'length' => 50, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'charset' => 'latin1'),
+		'value' => array('type' => 'text', 'null' => false, 'default' => NULL, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'charset' => 'latin1'),
 		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1), 'content_id' => array('column' => 'content_id', 'unique' => 0)),
 		'tableParameters' => array('charset' => 'latin1', 'collate' => 'latin1_swedish_ci', 'engine' => 'InnoDB')
 	);
