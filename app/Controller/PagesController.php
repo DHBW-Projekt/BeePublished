@@ -8,12 +8,14 @@ App::uses('AppController', 'Controller');
 class PagesController extends AppController
 {
 
+    public $components = array('Menu');
+
     function beforeFilter()
     {
         parent::beforeFilter();
 
         //Actions which don't require authorization
-        $this->Auth->allow('display');
+        $this->Auth->allow('*');
     }
 
     function display()
@@ -23,6 +25,7 @@ class PagesController extends AppController
         $this->loadModel('LayoutType');
         $this->loadModel('Content');
         $this->loadModel('ContentValue');
+        $this->loadModel('MenuEntry');
 
         //Get page to display
         $page = $this->Page->findById(1);
@@ -31,6 +34,7 @@ class PagesController extends AppController
         $elements = $this->setupPageElements($page['Container'], true);
 
         //Output data
+        $this->set('menu',$this->Menu->buildMenu($this,NULL));
         $this->set('elements', $elements);
     }
 

@@ -8,7 +8,11 @@
 </head>
 <body>
 <div id="header">
-
+    <div id="menu">
+        <ul>
+            <?php echo $this->element('menu', array('data' => $menu)); ?>
+        </ul>
+    </div>
 </div>
 <?php echo $content_for_layout ?>
 <div id="footer">
