@@ -26,7 +26,7 @@
         <?php echo $content_for_layout ?>
     </div>
     <div id="footer">
-    Dieses Layout dient nur zum testen!
+        Dieses Layout dient nur zum testen!
         <div>Kontakt | Impressum | DualonCMS c2011</div>
     </div>
 </div>
