@@ -34,7 +34,7 @@ class PagesController extends AppController
         $elements = $this->setupPageElements($page['Container'], true);
 
         //Output data
-        $this->set('menu',$this->Menu->buildMenu($this,NULL));
+        $this->set('menu', $this->Menu->buildMenu($this, NULL));
         $this->set('elements', $elements);
     }
 
@@ -80,10 +80,10 @@ class PagesController extends AppController
             foreach ($container['Content'] as $childContent) {
                 $contentValues = $this->ContentValue->findAllByContentId($childContent['id']);
                 $params = array();
-                foreach($contentValues as $contentValue) {
+                foreach ($contentValues as $contentValue) {
                     $params[$contentValue['ContentValue']['key']] = $contentValue['ContentValue']['value'];
                 }
-                $name = $childContent['module_name'].'.'.$childContent['view_name'];
+                $name = $childContent['module_name'] . '.' . $childContent['view_name'];
                 $contentData = array();
                 if ($name != ".") {
                     $contentData['plugin'] = $childContent['module_name'];
