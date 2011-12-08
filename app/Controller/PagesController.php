@@ -8,12 +8,14 @@ App::uses('AppController', 'Controller');
 class PagesController extends AppController
 {
 
+    public $components = array('Menu');
+
     function beforeFilter()
     {
         parent::beforeFilter();
 
         //Actions which don't require authorization
-        $this->Auth->allow('display');
+        $this->Auth->allow('*');
     }
 
     function display()
@@ -23,6 +25,7 @@ class PagesController extends AppController
         $this->loadModel('LayoutType');
         $this->loadModel('Content');
         $this->loadModel('ContentValue');
+        $this->loadModel('MenuEntry');
 
         //Get page to display
         $page = $this->Page->findById(1);
@@ -31,6 +34,7 @@ class PagesController extends AppController
         $elements = $this->setupPageElements($page['Container'], true);
 
         //Output data
+        $this->set('menu', $this->Menu->buildMenu($this, NULL));
         $this->set('elements', $elements);
     }
 
@@ -76,15 +80,15 @@ class PagesController extends AppController
             foreach ($container['Content'] as $childContent) {
                 $contentValues = $this->ContentValue->findAllByContentId($childContent['id']);
                 $params = array();
-                foreach($contentValues as $contentValue) {
+                foreach ($contentValues as $contentValue) {
                     $params[$contentValue['ContentValue']['key']] = $contentValue['ContentValue']['value'];
                 }
-                $name = $childContent['module_name'].'.'.$childContent['view_name'];
+                $name = $childContent['module_name'] . '.' . $childContent['view_name'];
                 $contentData = array();
                 if ($name != ".") {
                     $contentData['plugin'] = $childContent['module_name'];
                     $contentData['view'] = $childContent['view_name'];
-                    $contentData['viewData'] = $this->Components->load($name)->getData($params);
+                    $contentData['viewData'] = $this->Components->load($name)->getData($this, $params);
                 }
                 $children['columns'][$childContent['column'] - 1]['children'][$childContent['order']]['content'] = $contentData;
             }
