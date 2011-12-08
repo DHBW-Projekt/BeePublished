@@ -3,9 +3,10 @@ App::uses('AppModel', 'Model');
 /**
  * Container Model
  *
- * @property Layout $Layout
+ * @property Container $ParentContainer
+ * @property LayoutType $LayoutType
+ * @property Container $ChildContainer
  * @property Content $Content
- * @property Layout $Layout
  * @property Page $Page
  */
 class Container extends AppModel {
@@ -18,9 +19,16 @@ class Container extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'Layout' => array(
-			'className' => 'Layout',
-			'foreignKey' => 'layout_id',
+		'ParentContainer' => array(
+			'className' => 'Container',
+			'foreignKey' => 'parent_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'LayoutType' => array(
+			'className' => 'LayoutType',
+			'foreignKey' => 'layout_type_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -33,9 +41,9 @@ class Container extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'Content' => array(
-			'className' => 'Content',
-			'foreignKey' => 'container_id',
+		'ChildContainer' => array(
+			'className' => 'Container',
+			'foreignKey' => 'parent_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
@@ -46,8 +54,8 @@ class Container extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-		'Layout' => array(
-			'className' => 'Layout',
+		'Content' => array(
+			'className' => 'Content',
 			'foreignKey' => 'container_id',
 			'dependent' => false,
 			'conditions' => '',
