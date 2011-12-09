@@ -10,7 +10,6 @@ App::uses('AppModel', 'Model', 'AuthComponent', 'Controller/Component');
 class User extends AppModel
 {
     public $name = 'User';
-    public $actsAs = array('Acl' => array('type' => 'requester'));
 
     public $validate = array(
         'username' => array(
