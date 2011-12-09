@@ -1,5 +1,5 @@
 <?php
-/* MenuEntry Test cases generated on: 2011-12-01 17:42:51 : 1322757771*/
+/* MenuEntry Test cases generated on: 2011-12-02 19:38:48 : 1322851128*/
 App::uses('MenuEntry', 'Model');
 
 /**
@@ -12,7 +12,7 @@ class MenuEntryTestCase extends CakeTestCase {
  *
  * @var array
  */
-	public $fixtures = array('app.menu_entry', 'app.role', 'app.page');
+	public $fixtures = array('app.menu_entry', 'app.role', 'app.user', 'app.log_entry', 'app.page', 'app.container', 'app.layout_type', 'app.content');
 
 /**
  * setUp method

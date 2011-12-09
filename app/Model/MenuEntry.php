@@ -8,58 +8,65 @@ App::uses('AppModel', 'Model');
  * @property Page $Page
  * @property MenuEntry $ChildMenuEntry
  */
-class MenuEntry extends AppModel {
+class MenuEntry extends AppModel
+{
+    /**
+     * Display field
+     *
+     * @var string
+     */
+    public $displayField = 'name';
 
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
+    //The Associations below have been created with all possible keys, those that are not needed can be removed
 
-/**
- * belongsTo associations
- *
- * @var array
- */
-	public $belongsTo = array(
-		'ParentMenuEntry' => array(
-			'className' => 'MenuEntry',
-			'foreignKey' => 'parent_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'Role' => array(
-			'className' => 'Role',
-			'foreignKey' => 'role_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'Page' => array(
-			'className' => 'Page',
-			'foreignKey' => 'page_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		)
-	);
+    /**
+     * belongsTo associations
+     *
+     * @var array
+     */
+    public $belongsTo = array(
+        'ParentMenuEntry' => array(
+            'className' => 'MenuEntry',
+            'foreignKey' => 'parent_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
+        'Role' => array(
+            'className' => 'Role',
+            'foreignKey' => 'role_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
+        'Page' => array(
+            'className' => 'Page',
+            'foreignKey' => 'page_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        )
+    );
 
-/**
- * hasMany associations
- *
- * @var array
- */
-	public $hasMany = array(
-		'ChildMenuEntry' => array(
-			'className' => 'MenuEntry',
-			'foreignKey' => 'parent_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		)
-	);
+    /**
+     * hasMany associations
+     *
+     * @var array
+     */
+    public $hasMany = array(
+        'ChildMenuEntry' => array(
+            'className' => 'MenuEntry',
+            'foreignKey' => 'parent_id',
+            'dependent' => false,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
+        )
+    );
 
 }
