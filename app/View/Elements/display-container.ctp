@@ -13,7 +13,7 @@
     <?php if (!array_key_exists('plugin', $child['content'])): ?>
         <?php echo __('Unknown module'); ?>
         <?php else: ?>
-        <?php echo $this->element($child['content']['view'], array('text' => $child['content']['viewData']), array('plugin' => $child['content']['plugin'])); ?>
+        <?php echo $this->element($child['content']['view'], array('data' => $child['content']['viewData']), array('plugin' => $child['content']['plugin'])); ?>
         <?php endif; ?>
     <?php endif; ?>
 <?php endforeach; ?>
