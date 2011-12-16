@@ -20,6 +20,14 @@ class PagesController extends AppController
 
     function display()
     {
+        $path = func_get_args();
+        if ($path[0] == 'admin')
+        {
+            //Check Admin rights
+            array_shift($path);
+        }
+        $url = '/' . implode('/',$path);
+
         //Load required models
         $this->loadModel('Container');
         $this->loadModel('LayoutType');
@@ -28,7 +36,12 @@ class PagesController extends AppController
         $this->loadModel('MenuEntry');
 
         //Get page to display
-        $page = $this->Page->findById(1);
+        $page = $this->Page->findByName($url);
+
+        if (!$page) {
+            echo "404 PAGE NOT FOUND";
+            exit;
+        }
 
         //Find elements for page to display
         $elements = $this->setupPageElements($page['Container'], true);

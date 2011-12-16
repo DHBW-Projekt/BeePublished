@@ -22,17 +22,22 @@
  */
 
 
-	Router::connect('/', array('controller' => 'pages', 'action' => 'display'));
+Router::connect('/users/:action/*', array('controller' => 'users'));
+Router::connect('/roles/:action/*', array('controller' => 'roles'));
+Router::connect('/menuentries/:action/*', array('controller' => 'menuentries'));
+Router::connect('/pages/:action/*', array('controller' => 'pages'));
+Router::connect('/*', array('controller' => 'pages', 'action' => 'display'));
+Router::connect('/admin/*', array('controller' => 'pages', 'action' => 'display'));
 
 
 /**
- * Load all plugin routes.  See the CakePlugin documentation on 
+ * Load all plugin routes.  See the CakePlugin documentation on
  * how to customize the loading of plugin routes.
  */
-	CakePlugin::routes();
+CakePlugin::routes();
 
 /**
  * Load the CakePHP default routes. Remove this if you do not want to use
  * the built-in default routes.
  */
-	require CAKE . 'Config' . DS . 'routes.php';
+//	require CAKE . 'Config' . DS . 'routes.php';
