@@ -9,6 +9,7 @@ class PagesController extends AppController
 {
 
     public $components = array('Menu');
+    public $helpers = array('Html','Js' => array('Jquery'));
 
     function beforeFilter()
     {
@@ -21,7 +22,8 @@ class PagesController extends AppController
     function display()
     {
         $path = func_get_args();
-        if ($path[0] == 'admin')
+
+        if (sizeof($path) > 0 && $path[0] == 'admin')
         {
             //Check Admin rights
             array_shift($path);
