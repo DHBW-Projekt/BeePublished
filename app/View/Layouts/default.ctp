@@ -10,6 +10,7 @@
     <?php echo $this->Html->script('jquery-1.6.2.min'); ?>
     <?php echo $this->Html->script('jquery-ui-1.8.16.custom.min'); ?>
     <?php echo $this->Html->script('dualon'); ?>
+    <?php echo $scripts_for_layout; ?>
 </head>
 <body>
 <div id="main">
