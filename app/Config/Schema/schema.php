@@ -1,15 +1,12 @@
-<?php
-/* App schema generated on: 2011-12-06 09:26:03 : 1323159963*/
-class AppSchema extends CakeSchema
-{
-    function before($event = array())
-    {
-        return true;
-    }
+<?php 
+/* App schema generated on: 2011-12-18 16:04:13 : 1324220653*/
+class AppSchema extends CakeSchema {
+	function before($event = array()) {
+		return true;
+	}
 
-    function after($event = array())
-    {
-    }
+	function after($event = array()) {
+	}
 
     var $configurations = array(
         'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'key' => 'primary', 'collate' => NULL, 'comment' => ''),
@@ -139,6 +136,13 @@ class AppSchema extends CakeSchema
         'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1), 'username' => array('column' => 'username', 'unique' => 1), 'role_id' => array('column' => 'role_id', 'unique' => 0)),
         'tableParameters' => array('charset' => 'latin1', 'collate' => 'latin1_swedish_ci', 'engine' => 'InnoDB')
     );
+	var $permissions = array(
+		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10, 'key' => 'primary', 'collate' => NULL, 'comment' => ''),
+		'module_name' => array('type' => 'string', 'null' => false, 'default' => NULL, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'charset' => 'latin1'),
+		'role_id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10, 'collate' => NULL, 'comment' => ''),
+		'action' => array('type' => 'string', 'null' => false, 'default' => NULL, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'charset' => 'latin1'),
+		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1)),
+		'tableParameters' => array('charset' => 'latin1', 'collate' => 'latin1_swedish_ci', 'engine' => 'InnoDB')
+	);
 }
-
 ?>
