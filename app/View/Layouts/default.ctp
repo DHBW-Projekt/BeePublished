@@ -6,16 +6,14 @@
     <title><?php echo $title_for_layout?></title>
     <?php echo $this->Html->css('/yaml/core/base'); ?>
     <?php echo $this->Html->css('main'); ?>
-    <?php echo $this->Html->css('admin'); ?>
     <?php echo $this->Html->css('smoothness/jquery-ui-1.8.16.custom'); ?>
     <?php echo $this->Html->script('jquery-1.6.2.min'); ?>
     <?php echo $this->Html->script('jquery-ui-1.8.16.custom.min'); ?>
     <?php echo $this->Html->script('dualon'); ?>
-    <?php echo $this->Html->script('admin'); ?>
+    <?php echo $scripts_for_layout; ?>
 </head>
 <body>
 <div id="main">
-    <?php echo $this->element('admin-sidebar'); ?>
     <div id="header" class="ui-state-default">
         <div>DualonCMS Test-Umgebung</div>
     </div>
