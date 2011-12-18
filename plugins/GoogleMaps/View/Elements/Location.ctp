@@ -4,7 +4,7 @@ $this->Html->script('/google_maps/js/googlemaps', false);
 $this->Html->scriptBlock('
         $(document).ready(function () {
             initializeGoogleMaps(\'map\');
-            //showLocation(\'map\', \'' . implode(",", $data['GoogleMapsLocation']) . '\');
+            showLocation(\'map\', \'' . implode(",", $data['GoogleMapsLocation']) . '\');
         });
         ', array('inline' => false)
 );
