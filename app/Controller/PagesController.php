@@ -10,6 +10,7 @@ class PagesController extends AppController
 
     public $components = array('Menu');
     public $helpers = array('Html','Js' => array('Jquery'));
+    public $uses = array('Page','Plugin');
 
     function beforeFilter()
     {
@@ -98,10 +99,13 @@ class PagesController extends AppController
                 foreach ($contentValues as $contentValue) {
                     $params[$contentValue['ContentValue']['key']] = $contentValue['ContentValue']['value'];
                 }
-                $name = $childContent['module_name'] . '.' . $childContent['view_name'];
+
+                $plugin = $this->Plugin->findById($childContent['plugin_id']);
+
+                $name = $plugin['Plugin']['name'] . '.' . $childContent['view_name'];
                 $contentData = array();
                 if ($name != ".") {
-                    $contentData['plugin'] = $childContent['module_name'];
+                    $contentData['plugin'] = $plugin['Plugin']['name'];
                     $contentData['view'] = $childContent['view_name'];
                     $contentData['viewData'] = $this->Components->load($name)->getData($this, $params);
                 }
