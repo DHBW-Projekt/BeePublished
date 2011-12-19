@@ -29,7 +29,7 @@ class PagesController extends AppController
             //Check Admin rights
             array_shift($path);
         }
-        $url = '/' . implode('/',$path);
+        $url = implode('/',$path);
 
         //Load required models
         $this->loadModel('Container');
@@ -39,22 +39,31 @@ class PagesController extends AppController
         $this->loadModel('MenuEntry');
 
         //Get page to display
-        $page = $this->Page->findByName($url);
+        $page = $this->findPage($url);
 
         if (!$page) {
             echo "404 PAGE NOT FOUND";
             exit;
         }
 
+        $pageUrl = $page['Page']['name'];
+        $url = '/' . $url;
+        $count = 1;
+        $diff = substr($url,strlen($pageUrl));
+
+        if (substr($diff,0,1) == '/') {
+            $diff = substr($diff,1);
+        }
+
         //Find elements for page to display
-        $elements = $this->setupPageElements($page['Container'], true);
+        $elements = $this->setupPageElements($page['Container'], $diff, true);
 
         //Output data
         $this->set('menu', $this->Menu->buildMenu($this, NULL));
         $this->set('elements', $elements);
     }
 
-    private function setupPageElements($container, $root = false)
+    private function setupPageElements($container, $diff, $root = false)
     {
         $container = $this->Container->findById($container['id']);
         $children = array();
@@ -81,12 +90,12 @@ class PagesController extends AppController
         if (array_key_exists('ChildContainer', $container)) {
             foreach ($container['ChildContainer'] as $childContainer) {
                 if ($container['LayoutType']['id'] == null) {
-                    $children[$childContainer['order']] = $this->setupPageElements($childContainer);
+                    $children[$childContainer['order']] = $this->setupPageElements($childContainer,$diff);
                 } else {
                     if ($root && $container['LayoutType']['id'] != null) {
-                        $children[$childContainer['column'] - 1]['children'][$childContainer['order']] = $this->setupPageElements($childContainer);
+                        $children[$childContainer['column'] - 1]['children'][$childContainer['order']] = $this->setupPageElements($childContainer,$diff);
                     } else {
-                        $children['columns'][$childContainer['column'] - 1]['children'][$childContainer['order']] = $this->setupPageElements($childContainer);
+                        $children['columns'][$childContainer['column'] - 1]['children'][$childContainer['order']] = $this->setupPageElements($childContainer,$diff);
                     }
                 }
             }
@@ -107,7 +116,8 @@ class PagesController extends AppController
                 if ($name != ".") {
                     $contentData['plugin'] = $plugin['Plugin']['name'];
                     $contentData['view'] = $childContent['view_name'];
-                    $contentData['viewData'] = $this->Components->load($name)->getData($this, $params);
+                    $contentData['viewData'] = $this->Components->load($name)->getData($this, $params, $diff);
+                    $contentData['params'] = $diff;
                 }
                 $children['columns'][$childContent['column'] - 1]['children'][$childContent['order']]['content'] = $contentData;
             }
@@ -126,6 +136,18 @@ class PagesController extends AppController
         }
 
         return $children;
+    }
+
+    private function findPage($url)
+    {
+        $page = $this->Page->findByName('/'.$url);
+        if ($page == null) {
+            $urlParts = explode('/',$url);
+            array_pop($urlParts);
+            return $this->findPage(implode('/',$urlParts));
+        } else {
+            return $page;
+        }
     }
 }
 
