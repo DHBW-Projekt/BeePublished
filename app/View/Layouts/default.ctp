@@ -18,7 +18,7 @@
     </div>
     <div id="menu" class="ui-state-default">
         <ul>
-            <?php echo $this->element('menu', array('data' => $menu)); ?>
+            <?php echo $this->element('menu', array('data' => "Menu")); ?>
         </ul>
     </div>
     <div id="content">
