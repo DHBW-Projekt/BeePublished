@@ -1,6 +1,9 @@
 <?php
+App::uses('Xml', 'Utility');
+
 class CMSPluginComponent extends Component
 {
+
     function getPluginList()
     {
         $allPlugins = App::objects('plugins');
@@ -11,14 +14,38 @@ class CMSPluginComponent extends Component
                 $xmlData = Xml::toArray($xml);
 
                 $pluginData = $xmlData['dualon']['plugin'];
-                $pluginData['hasSchema'] = $this->hasSchema($plugin);
-                $pluginData['status'] = $this->getInstallStatus($plugin);
 
                 $cmsPlugins[] = $pluginData;
             }
         }
         return $cmsPlugins;
     }
+
+    function getVersion($plugin)
+    {
+        $xml = Xml::build($this->getConfigPath($plugin));
+        $xmlData = Xml::toArray($xml);
+        return $xmlData['dualon']['plugin']['version'];
+    }
+
+    function getAuthor($plugin)
+    {
+        $xml = Xml::build($this->getConfigPath($plugin));
+        $xmlData = Xml::toArray($xml);
+        return $xmlData['dualon']['plugin']['author'];
+    }
+
+    function getPermissions($plugin)
+    {
+        $xml = Xml::build($this->getConfigPath($plugin));
+        $xmlData = Xml::toArray($xml);
+        if (array_key_exists('permissions', $xmlData['dualon']['plugin'])) {
+            return $xmlData['dualon']['plugin']['permissions'];
+        } else {
+            return null;
+        }
+    }
+
 
     function isCMSPlugin($plugin)
     {
@@ -28,6 +55,11 @@ class CMSPluginComponent extends Component
     function hasSchema($plugin)
     {
         return file_exists($this->getSchemaPath($plugin));
+    }
+
+    function hasRouting($plugin)
+    {
+        return file_exists($this->getRoutingPath($plugin));
     }
 
     function getConfigPath($plugin)
@@ -42,40 +74,44 @@ class CMSPluginComponent extends Component
         return $path . DS . 'Config' . DS . 'Schema' . DS . 'schema.php';
     }
 
+    function getRoutingPath($plugin)
+    {
+        $path = CakePlugin::path($plugin);
+        return $path . DS . 'Config' . DS . 'routes.php';
+    }
+
     function getInstallStatus($plugin)
     {
-        if (!$this->hasSchema($plugin)) {
-            return 0;
-        }
+        if ($this->hasSchema($plugin)) {
+            $schema = $this->initSchema($plugin);
+            $db = ConnectionManager::getDataSource($schema->connection);
+            $db->cacheSources = false;
 
-        $schema = $this->initSchema($plugin);
-        $db = ConnectionManager::getDataSource($schema->connection);
-        $db->cacheSources = false;
+            $installedTables = $db->listSources();
+            $schemaTables = $schema->tables;
 
-        $installedTables = $db->listSources();
-        $schemaTables = $schema->tables;
+            $notFound = 0;
 
-        $notFound = 0;
-
-        foreach ($schemaTables as $schemaTable => $table) {
-            if (!in_array($schemaTable, $installedTables)) {
-                $notFound++;
+            foreach ($schemaTables as $schemaTable => $table) {
+                if (!in_array($schemaTable, $installedTables)) {
+                    $notFound++;
+                }
             }
-        }
 
-        if ($notFound == sizeof($schemaTables)) {
-            return 1;
-        } elseif ($notFound > 0) {
-            return 2;
-        }
+            if ($notFound == sizeof($schemaTables)) {
+                return 1;
+            } elseif ($notFound > 0) {
+                return 2;
+            }
 
-        $installed = $schema->read(array('plugin' => $plugin));
-        $compare = $schema->compare($installed, $schema);
+            $installed = $schema->read(array('plugin' => $plugin));
+            $compare = $schema->compare($installed, $schema);
 
-        if (!empty($compare)) {
-            return 2;
-        } else {
-            return 3;
+            if (!empty($compare)) {
+                return 2;
+            } else {
+                return 3;
+            }
         }
     }
 
