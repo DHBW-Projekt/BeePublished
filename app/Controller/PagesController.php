@@ -116,8 +116,14 @@ class PagesController extends AppController
                 if ($name != ".") {
                     $contentData['plugin'] = $plugin['Plugin']['name'];
                     $contentData['view'] = $childContent['view_name'];
-                    $contentData['viewData'] = $this->Components->load($name)->getData($this, $params, $diff);
-                    $contentData['params'] = $diff;
+                    $urlParts = explode('/',$diff);
+                    if ($urlParts[0] == strtolower($plugin['Plugin']['name'])) {
+                        array_shift($urlParts);
+                        $url = $urlParts;
+                    } else {
+                        $url = null;
+                    }
+                    $contentData['viewData'] = $this->Components->load($name)->getData($this, $params, $url);
                 }
                 $children['columns'][$childContent['column'] - 1]['children'][$childContent['order']]['content'] = $contentData;
             }
