@@ -33,11 +33,6 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 
 		echo $scripts_for_layout;
 	?>
-	<?php 
-		print $html->charsetTag('UTF-8');
-		print $javascript->link('prototype');
-		print $javascript->link('scriptaculous.js?load=effects'); 
-	?>
 </head>
 <body>
 	<div id="container">
