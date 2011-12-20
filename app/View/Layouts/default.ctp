@@ -5,11 +5,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title><?php echo $title_for_layout?></title>
     <?php echo $this->Html->css('/yaml/core/base'); ?>
+    <?php echo $this->Html->css('/fancybox/jquery.fancybox-1.3.4');?>
     <?php echo $this->Html->css('main'); ?>
     <?php echo $this->Html->css('smoothness/jquery-ui-1.8.16.custom'); ?>
     <?php echo $this->Html->script('jquery-1.6.2.min'); ?>
     <?php echo $this->Html->script('jquery-ui-1.8.16.custom.min'); ?>
+    <?php echo $this->Html->script('jquery.fancybox-1.3.4.pack'); ?>
     <?php echo $this->Html->script('dualon'); ?>
+    <?php echo $scripts_for_layout; ?>
 </head>
 <body>
 <div id="main">

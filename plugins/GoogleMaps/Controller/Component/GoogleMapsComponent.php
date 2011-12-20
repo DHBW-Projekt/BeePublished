@@ -1,7 +1,7 @@
 <?php
 
 class GoogleMapsComponent extends Component {
-	
+
 	public function getLocation($controller, $params)
 	{
 		if (!array_key_exists('LocationID',$params)) {
