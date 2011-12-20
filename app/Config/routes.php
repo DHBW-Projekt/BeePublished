@@ -21,13 +21,12 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-CakePlugin::routes();
 Router::connect('/users/:action/*', array('controller' => 'users'));
 Router::connect('/roles/:action/*', array('controller' => 'roles'));
 Router::connect('/plugins/:action/*', array('controller' => 'plugins'));
 Router::connect('/menuentries/:action/*', array('controller' => 'menuentries'));
 Router::connect('/pages/:action/*', array('controller' => 'pages'));
 Router::connect('/:plugin/:controller/:action/*');
+CakePlugin::routes();
 Router::connect('/*', array('controller' => 'pages', 'action' => 'display'));
-Router::connect('/admin/*', array('controller' => 'pages', 'action' => 'display'));
 
