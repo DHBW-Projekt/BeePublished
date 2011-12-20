@@ -1,6 +1,6 @@
 <dualon>
     <plugin>
-        <name>Static Text</name>
+        <name>StaticText</name>
         <author>Christoph Krämer</author>
         <version>1.0</version>
     </plugin>
