@@ -1,0 +1,92 @@
+Developer Setup Instructions
+
+Git
+============================================
+
+1. Go to http://code.google.com/p/msysgit/downloads/list (Mac-User: http://code.google.com/p/git-osx-installer/)
+2. Download Git-1.7.7
+3. Start the installer
+4. Choose 'Run git from the windows command prompt' and 'use OpenSSH'.
+   Default selection can be used for all other settings.
+5. Start GitBash (Mac-Users: use "Terminal")
+6. Type: git config --global user.name "Your Name"
+   Enter your first and lastname.
+7. Type: git config --global user.email my@mail.com
+   Enter the mail address with which you want to sign up at github.
+8. Type: ssh-keygen -t rsa -C "my@mail.com"
+   The mail address need to match the mail address you just entered
+9. Just keep the standard path. You don't need to provide a password.
+
+
+GitHub
+============================================
+
+ 1. Go to https://github.com/signup/free
+ 2. Enter your data to create an account
+ 3. Go to your account settings
+ 4. Choose SSH Public Keys
+ 5. Click "Add another public key"
+ 6. Find the file C:\Users\Name\.ssh\id_rsa.pub
+    (Mac-User: Finder => Shift+Cmd+G  => /Users/<<name>>/.ssh and open id_rsa.pub
+    with TextEdit )
+ 7. Copy and paste the content of the file into the field on the github website
+ 8. Save Changes
+ 9. Go to GitBash (Mac: Terminal) and type ssh -T git@github.com to check your settings
+10. "Are you sure you want to continue?" ==> YES
+10. You should get the messaege "Hi <<name>>! You've successfully authenticated,
+    but GitHub does not provide shell access."
+11. Goto https://github.com/WWI09SWB/DualonCMS and create a fork (Click "Fork")
+
+
+Local development environment
+============================================
+
+1. Create a directory on your hard drive
+2. Start GitBash
+3. Change to the directory you just created
+4. Type: git clone git@github.com:<< username >>/DualonCMS.git
+5. Type: cd DualonCMS
+6. Type: git remote add upstream git@github.com:WWI09SWB/DualonCMS.git
+7. Type: git fetch upstream
+
+Eclipse
+============================================
+1. Download Eclipse Indigo
+2. Via Help -> Install new software... install the following components:
+   - PHP Development Tools (PDT)
+   - Eclipse EGit
+3. Switch to "Git Repository Exploring" perspective (you might have to add
+   it via Window -> Open Perspective
+4. Click: "Add an existing local Git Repository to this view"
+5. Select the directory where you created the repository and add it
+6. Right click on you Repository and select Import projects
+7. Select Import general project
+8. After creating the project switch to the PHP perspective
+9. Right click on your project and select Configure -> Add PHP Support
+
+
+Developing
+============================================
+1. Create a new branch for every new feature or bugfix. The name of the
+   branch should match the name of the task in the project management system.
+2. To create a branch select: Team -> Switch to -> New branch
+3. When you're done with all changes commit the changes: Team -> Commit
+4. You can merge Branches via Team -> Merge
+
+
+Other things to to (everything can also be accessed via Team in Eclipse)
+============================================
+- to push your local changes to the github repository type:
+  git push origin branchname
+- to update things that changed in the master repository type:
+  git pull upstream master
+- delete a branch
+  git branch -d name
+
+
+Sending code to the master repository
+============================================
+1. go to your github site and select the branch, that contains all the commits you did
+2. click on "pull request"
+3. you can then review your commit and type in a message for the admins
+4. you can manage your requests by clicking "Pull requests" on your dashboard
