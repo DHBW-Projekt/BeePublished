@@ -1,17 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <dualon>
-    <plugin>
-        <name>Guestbook</name>
-        <author>Christoph Krämer</author>
-        <version>1.0</version>
-        <permissions>
-            <permission>
-                <role>Autor</role>
-                <action>Write</action>
-            </permission>
-            <permission>
-                <role>Administrator</role>
-                <action>Publish</action>
-            </permission>
-        </permissions>
-    </plugin>
+	<plugin>
+		<name>Guestbook</name>
+		<author>Sebastian Haase</author>
+		<version>1.0</version>
+		<permissions>
+			<permission>
+				<role>Admin</role>
+				<action>release</action>
+			</permission>
+			<permission>
+				<role>Admin</role>
+				<action>delete</action>
+			</permission>
+		</permissions>	
+	</plugin>
 </dualon>
