@@ -3,5 +3,15 @@
         <name>Guestbook</name>
         <author>Christoph Krämer</author>
         <version>1.0</version>
+        <permissions>
+            <permission>
+                <role>Autor</role>
+                <action>Write</action>
+            </permission>
+            <permission>
+                <role>Administrator</role>
+                <action>Publish</action>
+            </permission>
+        </permissions>
     </plugin>
 </dualon>
