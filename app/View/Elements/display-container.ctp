@@ -13,7 +13,16 @@
     <?php if (!array_key_exists('plugin', $child['content'])): ?>
         <?php echo __('Unknown module'); ?>
         <?php else: ?>
-        <?php echo $this->element($child['content']['view'], array('data' => $child['content']['viewData']), array('plugin' => $child['content']['plugin'])); ?>
+			<div class="plugin_content">
+			<?php 
+				echo $this->Html->link(
+	    			$this->Html->image('settings_64.png', array('class' => 'setting_image')),
+	    			array('plugin' => $child['content']['plugin'], 'controller' => $child['content']['view'], 'action' => 'admin', $child['content']['id']),
+	    			array('escape' => False, 'id' => 'overlay', 'class' => 'setting_button')
+	    		);
+			?>
+	        <?php echo $this->element($child['content']['view'], array('data' => $child['content']['viewData']), array('plugin' => $child['content']['plugin'])); ?>
+        </div>
         <?php endif; ?>
     <?php endif; ?>
 <?php endforeach; ?>
