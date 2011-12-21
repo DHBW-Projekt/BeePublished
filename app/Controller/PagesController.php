@@ -123,7 +123,7 @@ class PagesController extends AppController
                     } else {
                         $url = null;
                     }
-                    $contentData['viewData'] = $this->Components->load($name)->getData($this, $params, $url);
+                    $contentData['viewData'] = $this->Components->load($name)->getData($this, $params, $url, $childContent['id']);
                     $contentData['id'] = $childContent['id'];
                 }
                 $children['columns'][$childContent['column'] - 1]['children'][$childContent['order']]['content'] = $contentData;
