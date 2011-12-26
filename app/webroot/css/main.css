@@ -48,7 +48,7 @@
 
 .setting_button {
 	position: absolute;
-	top: 5px;
+	top: 35px;
 	right: 5px;
 	z-index: 1000;
 	display: none;

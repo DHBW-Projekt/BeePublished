@@ -20,12 +20,3 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
-
-Router::connect('/users/:action/*', array('controller' => 'users'));
-Router::connect('/roles/:action/*', array('controller' => 'roles'));
-Router::connect('/plugins/:action/*', array('controller' => 'plugins'));
-Router::connect('/menuentries/:action/*', array('controller' => 'menuentries'));
-Router::connect('/Overlay/:plugin/:controller/*', array('action' => 'admin'));
-Router::connect('/pages/:action/*', array('controller' => 'pages'));
-CakePlugin::routes();
-Router::connect('/*', array('controller' => 'pages', 'action' => 'display'));
