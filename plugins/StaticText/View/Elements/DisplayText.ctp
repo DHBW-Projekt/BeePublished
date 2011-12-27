@@ -1,1 +1,2 @@
-<?php echo $data;?>
+<?php echo $data;
+?>
