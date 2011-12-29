@@ -23,7 +23,9 @@
             echo $this->element('login');
         } else {
             if (!$adminMode) {
-                echo $this->Html->link('Admin Mode','/admin'.$_SERVER['REQUEST_URI']);
+                echo $this->Html->link('Admin Mode','/admin'.$this->request->here);
+            } else {
+                echo $this->Html->link('User Mode',substr($this->request->here,6));
             }
             echo $this->Html->link('Logout',array('controller'=>'users','action'=>'logout'),array('class'=>'signout'));
         }
