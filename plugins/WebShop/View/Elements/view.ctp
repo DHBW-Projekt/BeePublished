@@ -1,8 +1,5 @@
 <!-- Web-Shop product detail view -->
-<?php 
-	//CALL stylesheet
-	echo $this->Html->css('webshop');
-	
+<?php 	
 	//INTEGRATE searchbar
 	echo $this->element('SearchBar');
 	
