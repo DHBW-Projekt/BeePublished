@@ -7,8 +7,8 @@ App::uses('AppController', 'Controller');
  */
 class UsersController extends AppController
 {
-    public $uses = array('User', 'Role');
-    var $components = array('Email');
+    public $uses = array('User', 'Role', 'MenuEntry');
+    var $components = array('Email','Menu');
 
     /**
      * index method
@@ -156,6 +156,8 @@ class UsersController extends AppController
                 }
             }
         }
+        $this->set('adminMode', false);
+        $this->set('menu', $this->Menu->buildMenu($this, NULL));
     }
 
     /**
