@@ -7,6 +7,7 @@
     <?php echo $this->Html->css('/yaml/core/base'); ?>
     <?php echo $this->Html->css('/fancybox/jquery.fancybox-1.3.4');?>
     <?php echo $this->Html->css('main'); ?>
+    <?php echo $this->Html->css('sidebar'); ?>
     <?php echo $this->Html->css('smoothness/jquery-ui-1.8.16.custom'); ?>
     <?php echo $this->Html->script('jquery-1.6.2.min'); ?>
     <?php echo $this->Html->script('jquery-ui-1.8.16.custom.min'); ?>
@@ -31,6 +32,11 @@
         Dieses Layout dient nur zum testen!
         <div>Kontakt | Impressum | DualonCMS c2011</div>
     </div>
+</div>
+<? if ($adminMode) {
+    echo $this->element('sidebar');
+}
+?>
 </div>
 </body>
 </html>
