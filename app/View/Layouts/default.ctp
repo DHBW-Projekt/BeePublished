@@ -17,6 +17,15 @@
 </head>
 <body>
 <div id="main">
+    <div id="topnav" class="topnav">
+        <?php
+        if (AuthComponent::user('id') == null) {
+            echo $this->element('login');
+        } else {
+            echo $this->Html->link('Logout',array('controller'=>'users','action'=>'logout'),array('class'=>'signout'));
+        }
+        ?>
+    </div>
     <div id="header" class="ui-state-default">
         <div>DualonCMS Test-Umgebung</div>
     </div>

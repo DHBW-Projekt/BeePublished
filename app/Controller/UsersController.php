@@ -8,7 +8,7 @@ App::uses('AppController', 'Controller');
 class UsersController extends AppController
 {
     public $uses = array('User', 'Role', 'MenuEntry');
-    var $components = array('Email','Menu');
+    var $components = array('Email', 'Menu');
 
     /**
      * index method
@@ -79,6 +79,8 @@ class UsersController extends AppController
         }
         $roles = $this->User->Role->find('list');
         $this->set(compact('roles'));
+        $this->set('adminMode', false);
+        $this->set('menu', $this->Menu->buildMenu($this, NULL));
     }
 
     /**
@@ -179,7 +181,7 @@ class UsersController extends AppController
     function beforeFilter()
     {
         parent::beforeFilter();
-        $this->Auth->allow('register','logout');
+        $this->Auth->allow('register', 'logout');
         $this->Auth->autoRedirect = false;
     }
 }

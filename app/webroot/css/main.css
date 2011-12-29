@@ -1,7 +1,28 @@
+a {
+    color: #000000;
+}
+
 #main {
     width: 800px;
     height: 600px;
     margin: 0 auto;
+}
+
+#topnav {
+    width: 100%;
+    padding: 5px 0px 5px;
+    font-size: 11px;
+    line-height: 23px;
+    text-align: right;
+    position: relative;
+}
+
+#small_signup {
+    display: inline;
+    float: none;
+    line-height: 23px;
+    margin: 25px 0 0;
+    width: 170px;
 }
 
 #header {
@@ -47,18 +68,85 @@
 }
 
 .setting_button {
-	position: absolute;
-	top: 5px;
-	right: 5px;
-	z-index: 1000;
-	display: none;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 1000;
+    display: none;
 }
 
 .plugin_content {
-	position: relative;
+    position: relative;
 }
 
 .setting_image {
-	width: 25px;
-	height: 25px;
+    width: 25px;
+    height: 25px;
+}
+
+#topnav a.signin, #topnav a.signout  {
+    background: #eeeeee;
+    color: #000000;
+    padding: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+#topnav a.signin:hover, #topnav a.signout:hover {
+    background: #cccccc;
+}
+
+a.signin, a.signout {
+    position: relative;
+    margin-left: 3px;
+}
+
+#topnav a.menu-open {
+    background: #bbbbbb;
+    outline: none;
+}
+
+#signin_menu {
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    display: none;
+    background-color: #bbbbbb;
+    position: absolute;
+    width: 210px;
+    z-index: 100;
+    border: 0;
+    text-align: left;
+    padding: 10px;
+    top: 20px;
+    right: 0px;
+    margin-top: 5px;
+    margin-right: 0px;
+    color: #ffffff;
+    font-size: 11px;
+}
+
+#signin_menu input[type=text], #signin_menu input[type=password] {
+    display: block;
+    border: 1px solid #999999;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0px 0px 8px #bbbbbb;
+    -moz-box-shadow: inset 0px 0px 8px #bbbbbb;
+    box-shadow: inset 0px 0px 8px #bbbbbb;
+    font-size: 13px;
+    margin: 0 0 5px;
+    padding: 5px;
+    width: 203px;
+}
+
+#signin_menu div a {
+    color: #ffffff;
 }
