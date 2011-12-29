@@ -43,7 +43,6 @@ class PermissionComponent extends Component {
 		$parentRole = $this->Role->findById($currentRoleId);
 		
 		while (true) {
-			var_dump($currentRoleId);
 			if ($currentRoleId == $userRoleId){
 				//user is allowed to perform the action
 				$actionAllowed = true;
@@ -70,7 +69,6 @@ class PermissionComponent extends Component {
 		$parentRole = $this->Role->findById($currentRoleId);
 		
 		while (true) {
-			var_dump($currentRoleId);
 			if ($currentRoleId == $userRoleId){
 				//user is allowed to perform the action
 				$actionAllowed = true;
