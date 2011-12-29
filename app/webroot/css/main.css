@@ -96,7 +96,7 @@ a {
 }
 
 #topnav a.signin:hover, #topnav a.signout:hover {
-    background: #cccccc;
+    background: #bbbbbb;
 }
 
 a.signin, a.signout {
@@ -105,7 +105,7 @@ a.signin, a.signout {
 }
 
 #topnav a.menu-open {
-    background: #bbbbbb;
+    background: #cccccc;
     outline: none;
 }
 
@@ -117,7 +117,7 @@ a.signin, a.signout {
     -webkit-border-bottom-left-radius: 5px;
     -webkit-border-bottom-right-radius: 5px;
     display: none;
-    background-color: #bbbbbb;
+    background-color: #cccccc;
     position: absolute;
     width: 210px;
     z-index: 100;
@@ -128,7 +128,7 @@ a.signin, a.signout {
     right: 0px;
     margin-top: 5px;
     margin-right: 0px;
-    color: #ffffff;
+    color: #000000;
     font-size: 11px;
 }
 
@@ -145,8 +145,4 @@ a.signin, a.signout {
     margin: 0 0 5px;
     padding: 5px;
     width: 203px;
-}
-
-#signin_menu div a {
-    color: #ffffff;
 }

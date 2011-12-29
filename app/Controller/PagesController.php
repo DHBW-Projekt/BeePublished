@@ -22,9 +22,8 @@ class PagesController extends AppController
 
     function display()
     {
-        $path = func_get_args();
+        $path = explode('/',$this->request->url);
         $this->set('adminMode', false);
-
         if (sizeof($path) > 0 && $path[0] == 'admin') {
             array_shift($path);
             //Check Admin rights

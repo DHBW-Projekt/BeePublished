@@ -22,6 +22,9 @@
         if (AuthComponent::user('id') == null) {
             echo $this->element('login');
         } else {
+            if (!$adminMode) {
+                echo $this->Html->link('Admin Mode','/admin'.$_SERVER['REQUEST_URI']);
+            }
             echo $this->Html->link('Logout',array('controller'=>'users','action'=>'logout'),array('class'=>'signout'));
         }
         ?>
