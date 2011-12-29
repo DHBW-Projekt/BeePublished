@@ -1,8 +1,11 @@
+<!-- Creates short text based on long text -->
 <?php
+	//Attributes
 	$word_limit = 30;
 	$txt_cnt = str_word_count($text);
 	$short_text = '';
 	
+	/*CREATE short text*/
 	if ($txt_cnt <= $word_limit){
 		echo '<p>'.$text.'</p>';
 	}else{

@@ -1,12 +1,15 @@
-<div id="websop_searchbar" style="width:100%">   
+<!-- Web-Shop Searchbar -->
+<div id="websop_searchbar">   
     <?php    	    
-    	echo '<div id="webshop_search" style="float:left">';
+    	//CREATE search-fields
+    	echo '<div class="webshop_searchfield">';
 		    echo $this->Form->create('Search', array('url' => '/webshop/search'));
 		    echo $this->Form->input('Suche', array('div' => false));
 		    echo $this->Form->submit('Los', array('div' => false,));
 		    echo $this->Form->end();
 	    echo '</div>';
-	
+		
+	    //CREATE shopping cart
 	    echo '<div id="webshop_cart" style="float:right">';
 	    echo $this->Html->link(
 	    	 $this->Html->image('/WebShop/img/Cart-32.png'),
