@@ -36,8 +36,4 @@
     <div id="sidebar-content">
         <div style="height: 100%; width: 100%">test</div>
     </div>
-    <div id="sidebar-footer">
-        <hr/>
-        <?php echo $this->Html->link(__('Logout'), array('controller' => 'users', 'action' => 'logout'), array('class' => 'button')); ?>
-    </div>
 </div>

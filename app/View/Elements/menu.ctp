@@ -9,7 +9,7 @@
         echo "</a>";
     }
     if (array_key_exists('Children', $entry) && sizeof($entry['Children']) > 0) {
-        echo "<ul>";
+        echo '<ul class="subnav">';
         echo $this->element('menu', array('data' => $entry['Children']));
         echo "</ul>";
     }

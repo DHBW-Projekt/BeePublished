@@ -84,7 +84,7 @@ a {
     height: 25px;
 }
 
-#topnav a.signin, #topnav a.signout  {
+#topnav a.signin, #topnav a.signout {
     background: #eeeeee;
     color: #000000;
     padding: 4px;
@@ -145,4 +145,74 @@ a.signin, a.signout {
     margin: 0 0 5px;
     padding: 5px;
     width: 203px;
+}
+
+ul.nav {
+    list-style: none;
+    padding: 0 20px;
+    margin: 0;
+    float: left;
+    width: 100%;
+    font-size: 13px;
+    z-index: 1000;
+}
+
+ul.nav li ul.subnav {
+    position: absolute;
+    left: 0;
+    top: 25px;
+    background: #eeeeee;
+    margin: 0;
+    padding: 0;
+    display: none;
+    float: left;
+    width: 170px;
+    border: 1px solid #cccccc;
+}
+
+ul.subnav li ul.subnav {
+    left: 170px;
+    top: -1px;
+}
+
+ul.nav li {
+    float: left;
+    margin: 0;
+    position: relative;
+    display: block;
+    height: 25px;
+    line-height: 25px;
+    vertical-align: middle;
+    padding-right: 5px;
+    padding-left: 5px;
+    z-index: 1000;
+}
+
+ul.nav li ul.subnav li {
+    margin: 0;
+    padding: 0;
+    clear: both;
+    width: 165px;
+    padding-left: 5px;
+}
+
+ul.nav li:hover {
+    background: #cccccc;
+}
+
+ul.nav li a {
+    float: left;
+}
+
+ul.nav li span {
+    padding-left: 5px;
+    width: 10px;
+    height: 25px;
+    float: left;
+    background: url(../img/arrow_down.png) no-repeat center center;
+}
+
+ul.subnav li span {
+    float: right;
+    background: url(../img/arrow_right.png) no-repeat center center;
 }

@@ -35,9 +35,10 @@
         <div>DualonCMS Test-Umgebung</div>
     </div>
     <div id="menu" class="ui-state-default">
-        <ul>
+        <ul class="nav">
             <?php echo $this->element('menu', array('data' => $menu)); ?>
         </ul>
+        <div style="clear:both;"></div>
     </div>
     <div id="content">
         <?php echo $content_for_layout ?>

@@ -74,4 +74,15 @@ $(document).ready(function () {
         }
     });
 
+    $("ul.subnav").parent().append("<span></span>");
+
+    $("ul.nav li").hover(
+        function () {
+            $(this).children("ul.subnav").slideDown('fast').show();
+        },
+        function () {
+            $(this).children("ul.subnav").slideUp('fast');
+        }
+    );
+
 });
