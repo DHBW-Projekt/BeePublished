@@ -22,6 +22,8 @@
  */
 
 Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
+Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
+
 Router::connect('/users/:action/*', array('controller' => 'users'));
 Router::connect('/roles/:action/*', array('controller' => 'roles'));
 Router::connect('/plugins/:action/*', array('controller' => 'plugins'));
