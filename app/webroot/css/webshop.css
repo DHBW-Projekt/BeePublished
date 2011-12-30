@@ -39,6 +39,19 @@
 	margin-right: 10px;
 }
 
+#webshop_create form{
+	margin-top: 10px;
+}
+
+#webshop_create td{
+	vertical-align: top;
+}
+
+#webshop_create input, textarea{
+	margin-bottom: 3px;
+	margin-left: 3px;
+}
+
 .webshop_detailview_image{
 	float: left;
 	width: 300px;
@@ -58,7 +71,13 @@
 }
 
 .webshop_searchfield{
+	margin-top: 6px;
 	float: left;
+}
+
+.webshop_cartfield{
+	float: right;
+	margin-top: 1px;
 }
 
 .webshop_searchfield label{

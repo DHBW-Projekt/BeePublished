@@ -10,7 +10,7 @@
 	    echo '</div>';
 		
 	    //CREATE shopping cart
-	    echo '<div id="webshop_cart" style="float:right">';
+	    echo '<div class="webshop_cartfield">';
 	    echo $this->Html->link(
 	    	 $this->Html->image('/WebShop/img/Cart-32.png'),
 	    	 '/webshop/cart', 

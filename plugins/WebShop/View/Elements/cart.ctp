@@ -8,7 +8,7 @@
 	echo '<h2>Einkaufswagen</h2>';
 	
 	//CHECK if cart has products
-	if(isset($data)){
+	if(!isset($data)){
 		echo '<p>Keine Elemente in Ihrem Einkaufswagen.</p>';
 	} else {
 		echo '<table>';
