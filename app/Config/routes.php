@@ -24,11 +24,14 @@
 Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
 Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
 Router::connect('/register', array('controller' => 'users', 'action' => 'register'));
+Router::connect('/menuentries/:action/*', array('controller' => 'menuentries'));
+Router::connect('/pages/:action/*', array('controller' => 'pages'));
+Router::connect('/LayoutManager/:action/*', array('controller' => 'LayoutManager'));
+Router::connect('/PageManager/:action/*', array('controller' => 'PageManager'));
 
 Router::connect('/users/:action/*', array('controller' => 'users'));
 Router::connect('/roles/:action/*', array('controller' => 'roles'));
 Router::connect('/plugins/:action/*', array('controller' => 'plugins'));
-Router::connect('/menuentries/:action/*', array('controller' => 'menuentries'));
 Router::connect('/plugin/:plugin/:controller/:action/*');
 CakePlugin::routes();
 Router::connect('/*', array('controller' => 'pages', 'action' => 'display'));

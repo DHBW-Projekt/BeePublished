@@ -74,15 +74,18 @@ $(document).ready(function () {
         }
     });
 
-    $("ul.subnav").parent().append("<span></span>");
+    initMenu();
+});
 
-    $("ul.nav li").hover(
+function initMenu() {
+    $("ol.subnav").parent().append("<span></span>");
+
+    $("ol.nav li").hover(
         function () {
-            $(this).children("ul.subnav").slideDown('fast').show();
+            $(this).children("ol.subnav").show();
         },
         function () {
-            $(this).children("ul.subnav").slideUp('fast');
+            $(this).children("ol.subnav").hide();
         }
     );
-
-});
+}

@@ -3,8 +3,8 @@ App::uses('AppModel', 'Model');
 /**
  * Page Model
  *
- * @property Container $Container
  * @property User $User
+ * @property Container $Container
  * @property MenuEntry $MenuEntry
  */
 class Page extends AppModel
@@ -16,6 +16,18 @@ class Page extends AppModel
      */
     public $displayField = 'name';
 
+    public $validate = array(
+        'name' => array(
+            'custom' => array(
+                'rule' => array('custom', '#^/[a-z0-9\-]*$#'),
+                'message' => 'Not a valid URL. (Starting with / and characters a-z, 0-9 and -)'
+            ),
+            'isUnique' => array(
+                'rule' => array('isUnique'),
+                'message' => 'URL already in use.'
+            )
+        )
+    );
     //The Associations below have been created with all possible keys, those that are not needed can be removed
 
     /**
@@ -24,19 +36,19 @@ class Page extends AppModel
      * @var array
      */
     public $belongsTo = array(
-        'Container' => array(
-            'className' => 'Container',
-            'foreignKey' => 'container_id',
-            'conditions' => '',
-            'fields' => '',
-            'order' => ''
-        ),
         'User' => array(
             'className' => 'User',
             'foreignKey' => 'user_id',
             'conditions' => '',
             'fields' => '',
             'order' => ''
+        )
+    );
+
+    public $hasOne = array(
+        'Container' => array(
+            'className' => 'Container',
+            'dependent' => true
         )
     );
 

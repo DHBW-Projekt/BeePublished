@@ -1,5 +1,5 @@
 <?php
-/* Page Test cases generated on: 2011-12-02 19:31:26 : 1322850686*/
+/* Page Test cases generated on: 2011-12-30 13:33:03 : 1325248383*/
 App::uses('Page', 'Model');
 
 /**
@@ -12,7 +12,7 @@ class PageTestCase extends CakeTestCase {
  *
  * @var array
  */
-	public $fixtures = array('app.page', 'app.container', 'app.layout_type', 'app.content', 'app.user', 'app.role', 'app.menu_entry', 'app.log_entry');
+	public $fixtures = array('app.page', 'app.user', 'app.role', 'app.menu_entry', 'app.log_entry', 'app.container', 'app.layout_type', 'app.content', 'app.plugin', 'app.permission', 'app.content_value');
 
 /**
  * setUp method

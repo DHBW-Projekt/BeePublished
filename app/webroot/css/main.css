@@ -1,3 +1,7 @@
+body {
+    font-family: Arial, Tahoma, sans-serif;
+}
+
 a {
     color: #000000;
 }
@@ -40,6 +44,16 @@ a {
     font-size: 40px;
     text-shadow: #c0c0c0 3px 3px 5px;
     color: #464647;
+}
+
+#menu {
+    position: relative;
+    height: 25px;
+}
+
+.sort {
+    float:right;
+    padding: 5px;
 }
 
 #content {
@@ -147,17 +161,17 @@ a.signin, a.signout {
     width: 203px;
 }
 
-ul.nav {
+ol.nav {
+    position: absolute;
     list-style: none;
-    padding: 0 20px;
+    padding: 0px 20px;
     margin: 0;
     float: left;
-    width: 100%;
     font-size: 13px;
     z-index: 1000;
 }
 
-ul.nav li ul.subnav {
+ol.nav li ol.subnav {
     position: absolute;
     left: 0;
     top: 25px;
@@ -166,16 +180,15 @@ ul.nav li ul.subnav {
     padding: 0;
     display: none;
     float: left;
-    width: 170px;
     border: 1px solid #cccccc;
 }
 
-ul.subnav li ul.subnav {
-    left: 170px;
+ol.subnav li ol.subnav {
     top: -1px;
+    left: 100%;
 }
 
-ul.nav li {
+ol.nav li {
     float: left;
     margin: 0;
     position: relative;
@@ -188,23 +201,18 @@ ul.nav li {
     z-index: 1000;
 }
 
-ul.nav li ul.subnav li {
+ol.nav li ol.subnav li {
     margin: 0;
-    padding: 0;
+    padding: 0 0 0 5px;
     clear: both;
-    width: 165px;
-    padding-left: 5px;
+    width: 200px;
 }
 
-ul.nav li:hover {
+ol.nav li:hover {
     background: #cccccc;
 }
 
-ul.nav li a {
-    float: left;
-}
-
-ul.nav li span {
+ol.nav li span {
     padding-left: 5px;
     width: 10px;
     height: 25px;
@@ -212,7 +220,12 @@ ul.nav li span {
     background: url(../img/arrow_down.png) no-repeat center center;
 }
 
-ul.subnav li span {
+ol.subnav li span {
     float: right;
     background: url(../img/arrow_right.png) no-repeat center center;
+}
+
+.editIconContainer {
+    float:right;
+    padding: 4px;
 }

@@ -22,7 +22,7 @@ class PagesController extends AppController
 
     function display()
     {
-        $path = explode('/',$this->request->url);
+        $path = explode('/', $this->request->url);
         $this->set('adminMode', false);
         if (sizeof($path) > 0 && $path[0] == 'admin') {
             array_shift($path);
@@ -153,6 +153,18 @@ class PagesController extends AppController
         } else {
             return $page;
         }
+    }
+
+    public function delete($id = null)
+    {
+        if (!$this->request->is('post')) {
+            throw new MethodNotAllowedException();
+        }
+        $this->Page->id = $id;
+        if (!$this->Page->exists()) {
+            throw new NotFoundException(__('Invalid menu entry'));
+        }
+        $this->Page->delete();
     }
 }
 
