@@ -1,7 +1,7 @@
 <!-- Frame to integrate the elements -->
 <?php 
 	//CALL stylesheet
-	echo $this->Html->css('webshop');
+	echo $this->Html->css('webshop/webshop');
 ?>
 
 <div id="webshop_content">

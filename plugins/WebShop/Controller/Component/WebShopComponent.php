@@ -89,7 +89,7 @@ class WebShopComponent extends Component {
 	
 		/* FILE */
 		$file = $controller->request->data['Product']['submittedfile'];
-		$file_path = "";
+		$file_path = WWW_ROOT.'../../plugins/WebShop/webroot/img/';
 		$file_name = str_replace(' ', '_', $file['name']);
 		$upload_error = true;
 		
@@ -113,7 +113,7 @@ class WebShopComponent extends Component {
 			//NEW file-name
 			$file_name = $file_name.$now;
 		}
-			
+		
 		//MOVE file
 		if(!$upload_error){
 			move_uploaded_file($file['tmp_name'], $file_path.$file_name);
