@@ -4,7 +4,7 @@
 	echo $this->element('SearchBar');
 	
 	//TITLE
-	echo '<div id ="webshop_search">';
+	echo '<div id ="websop_productcatalog">';
 	echo '<h2>Suchergebnisse</h2>';
 	
 	//CREATE search results
@@ -24,11 +24,11 @@
 	echo '<ol>';
 	foreach ((!isset($data)) ? array() : $data as $product){
 		echo '<li>';
-		echo $this->Html->image('/WebShop/img/'.$product['Product']['picture'], array('style' => "float: left", "width" => "200px"));
+		echo $this->Html->image('/WebShop/img/'.$product['Product']['picture']);
 	
-		echo '<h2>';
+		echo '<h3>';
 		echo $this->Html->link($product['Product']['name'], '/webshop/view/'.$product['Product']['id']);
-		echo '</h2>';
+		echo '</h3>';
 	
 		echo '<p class="websop_price">'.$product['Product']['price'];
 		echo ' '.$product['Product']['currency'].'</p>';
@@ -42,12 +42,6 @@
 		}
 	}
 	echo '</ol>';
-	
-	//Paginator
-	//echo $this->Paginator->prev('Ç Previous', null, null, array('class' => 'disabled'));
-	//echo $this->Paginator->numbers(array('first' => 2, 'last' => 2));
-	//echo $this->Paginator->next('Next È', null, null, array('class' => 'disabled'));
-	//echo $this->Paginator->counter();
 	
 	echo '</div>';
 ?>
