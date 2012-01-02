@@ -229,6 +229,7 @@ function dnd(dropzoneClass) {
             connectWith:'.subcl, .subcr, .subc, #content',
             placeholder:"placeholder",
             forcePlaceholderSize:true,
+            tolerance: 'pointer',
             receive:function (event, ui) {
                 updatePosition(event, ui);
             },
