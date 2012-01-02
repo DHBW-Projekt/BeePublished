@@ -1,6 +1,6 @@
 function callLayouts() {
     var request = $.ajax({
-        url:"/layouts/json",
+        url:"../../layouts/json",
         type:"POST",
         context:document.body,
         success:function () {
@@ -30,7 +30,7 @@ function createLayouts(layouts) {
 
 function callPlugins() {
     var request = $.ajax({
-        url:"/pluginviews/json",
+        url:"../../pluginviews/json",
         type:"POST",
         context:document.body,
         success:function () {
@@ -65,7 +65,7 @@ function createLayout(container, layout, typeid) {
     var order = $(container).children().length + 1;
 
     var request = $.ajax({
-        url:"/containers/add/" + parent + "/" + column + "/" + type + "/" + order,
+        url:"../../containers/add/" + parent + "/" + column + "/" + type + "/" + order,
         type:"POST",
         context:document.body,
         success:function () {
@@ -100,7 +100,7 @@ function createLayout(container, layout, typeid) {
 
 function removeLayout(id, container) {
     var request = $.ajax({
-        url:"/containers/delete/" + id,
+        url:"../../containers/delete/" + id,
         type:"POST",
         context:document.body,
         success:function () {
@@ -118,7 +118,7 @@ function createPlugin(container, layout, pluginid) {
     var order = $(container).children().length + 1;
 
     var request = $.ajax({
-        url:"/content/add/" + parent + "/" + column + "/" + plugin + "/" + order,
+        url:"../../content/add/" + parent + "/" + column + "/" + plugin + "/" + order,
         type:"POST",
         context:document.body,
         success:function () {
@@ -133,7 +133,7 @@ function createPlugin(container, layout, pluginid) {
 
 function removePlugin(id, container) {
     var request = $.ajax({
-        url:"/content/delete/" + id,
+        url:"../../content/delete/" + id,
         type:"POST",
         context:document.body,
         success:function () {
@@ -144,7 +144,7 @@ function removePlugin(id, container) {
 
 function callPageLayout(pageid) {
     var request = $.ajax({
-        url:"/containers/json/" + pageid,
+        url:"../../containers/json/" + pageid,
         type:"POST",
         context:document.body,
         success:function () {
@@ -191,7 +191,7 @@ function loadPageLayout(layout, object) {
 
 function loadPluginContent(id, container) {
     var request = $.ajax({
-        url:"/content/display/" + id,
+        url:"../../content/display/" + id,
         type:"GET",
         context:document.body,
         success:function () {
@@ -319,7 +319,7 @@ function updatePosition(event, ui) {
             break;
     }
     var request = $.ajax({
-        url:"/" + type + "/newPosition/" + id + "/" + parent + "/" + column + "/" + position,
+        url:"../../" + type + "/newPosition/" + id + "/" + parent + "/" + column + "/" + position,
         type:"POST",
         context:document.body
     });
