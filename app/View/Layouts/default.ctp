@@ -34,11 +34,15 @@
         if (AuthComponent::user('id') == null) {
             echo $this->element('login');
         } else {
-            if (!$adminMode) {
-                echo $this->Html->link('Admin Mode', '/admin' . $this->request->here);
+            if ($this->request->webroot != '/') {
+                $path = str_replace($this->request->webroot,'',$this->request->here);
             } else {
-                $link = substr($this->request->here, 6);
-                if ($link == "") $link = '/';
+                $path = substr($this->request->here,1);
+            }
+            if (!$adminMode) {
+                echo $this->Html->link('Admin Mode', '/admin/' . $path);
+            } else {
+                $link = '/'.substr($path, 6);
                 echo $this->Html->link('User Mode', $link);
             }
             echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout'), array('class' => 'signout'));
