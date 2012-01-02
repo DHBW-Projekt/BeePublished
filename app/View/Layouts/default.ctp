@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title><?php echo $title_for_layout?></title>
     <?php
+    $this->Js->set('webroot', $this->request->webroot);
     echo $this->Html->css('/yaml/core/base');
     echo $this->Html->css('/fancybox/jquery.fancybox-1.3.4');
     echo $this->Html->css('main');
@@ -77,5 +78,8 @@
 }
 ?>
 </div>
+<?php
+echo $this->Js->writeBuffer(array('inline' => true));
+?>
 </body>
 </html>
