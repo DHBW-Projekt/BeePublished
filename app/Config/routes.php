@@ -21,12 +21,20 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-Router::connect('/users/:action/*', array('controller' => 'users'));
-Router::connect('/roles/:action/*', array('controller' => 'roles'));
-Router::connect('/plugins/:action/*', array('controller' => 'plugins'));
+Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
+Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
+Router::connect('/register', array('controller' => 'users', 'action' => 'register'));
 Router::connect('/menuentries/:action/*', array('controller' => 'menuentries'));
 Router::connect('/pages/:action/*', array('controller' => 'pages'));
-Router::connect('/:plugin/:controller/:action/*');
+Router::connect('/containers/:action/*', array('controller' => 'containers'));
+Router::connect('/layouts/:action/*', array('controller' => 'layouttypes'));
+Router::connect('/content/:action/*', array('controller' => 'contents'));
+Router::connect('/plugins/:action/*', array('controller' => 'plugins'));
+Router::connect('/pluginviews/:action/*', array('controller' => 'pluginviews'));
+
+Router::connect('/users/:action/*', array('controller' => 'users'));
+Router::connect('/roles/:action/*', array('controller' => 'roles'));
+Router::connect('/plugin/:plugin/:controller/:action/*');
 CakePlugin::routes();
 Router::connect('/*', array('controller' => 'pages', 'action' => 'display'));
 

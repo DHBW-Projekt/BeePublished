@@ -1,17 +1,23 @@
 <?php foreach ($data as $entry): ?>
-<li>
+<li id="menu_entry_<?php echo $entry['id']; ?>">
     <?php
-    if ($entry['page_id'] != null) {
+    if ($adminMode) {
+        echo "<div>";
+    }
+    if ($entry['page_id'] != null && !$adminMode) {
         echo "<a href=\"" . $entry['Page']['name'] . "\">";
     }
     echo $entry['name'];
-    if ($entry['page_id'] != null) {
+    if ($entry['page_id'] != null && !$adminMode) {
         echo "</a>";
     }
+    if ($adminMode) {
+        echo "</div>";
+    }
     if (array_key_exists('Children', $entry) && sizeof($entry['Children']) > 0) {
-        echo "<ul>";
-        echo $this->element('menu', array('data' => $entry['Children']));
-        echo "</ul>";
+        echo '<ol class="subnav">';
+        echo $this->element('menu', array('data' => $entry['Children'], 'adminMode' => $adminMode));
+        echo "</ol>";
     }
     ?>
 </li>

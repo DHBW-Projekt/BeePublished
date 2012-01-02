@@ -46,6 +46,17 @@ class CMSPluginComponent extends Component
         }
     }
 
+    function getViews($plugin)
+    {
+        $xml = Xml::build($this->getConfigPath($plugin));
+        $xmlData = Xml::toArray($xml);
+        if (array_key_exists('views', $xmlData['dualon']['plugin'])) {
+            return $xmlData['dualon']['plugin']['views'];
+        } else {
+            return null;
+        }
+    }
+
 
     function isCMSPlugin($plugin)
     {
@@ -60,6 +71,11 @@ class CMSPluginComponent extends Component
     function hasRouting($plugin)
     {
         return file_exists($this->getRoutingPath($plugin));
+    }
+
+    function getPath($plugin)
+    {
+        return CakePlugin::path($plugin);
     }
 
     function getConfigPath($plugin)
