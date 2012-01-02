@@ -36,7 +36,7 @@
         } else {
             $path = str_replace($this->request->webroot,'',$this->request->here);
             if (!$adminMode) {
-                echo $this->Html->link('Admin Mode', '/admin/' . str_replace($this->request->webroot,'',$this->request->here));
+                echo $this->Html->link('Admin Mode', '/admin/' . $path);
             } else {
                 $link = substr($path, 6);
                 if ($link == "") $link = '/';
