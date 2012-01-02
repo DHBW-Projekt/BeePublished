@@ -146,7 +146,8 @@ class MenuEntriesController extends AppController
             } else {
                 $link = null;
             }
-            $menu[$idx]['link'] = $link;
+            $root = substr($this->request['webroot'],0,-1);
+            $menu[$idx]['link'] = $root . $link;
             $menu[$idx]['page'] = $entry['page_id'];
             if (!empty($entry['Children'])) {
                 $menu[$idx]['submenu'] = $this->createMenuArray($entry['Children']);
