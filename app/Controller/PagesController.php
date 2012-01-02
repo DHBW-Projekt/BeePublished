@@ -9,7 +9,7 @@ class PagesController extends AppController
 {
 
     public $components = array('Menu');
-    public $helpers = array('Html','Js' => array('Jquery'));
+    public $helpers = array('Html','Js' => array('Jquery'), 'Javascript', 'Ajax');
     public $uses = array('Page','Plugin');
 
     function beforeFilter()

@@ -15,5 +15,5 @@
 </div>
 </div>
 
-<?=$ajax->tabs('tabs')?>
+<?php echo $this->Ajax->tabs('tabs')?>
             
