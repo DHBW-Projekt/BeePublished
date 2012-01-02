@@ -40,26 +40,27 @@ class PagesController extends AppController
         $page = $this->findPage($url);
 
         if (!$page) {
-            echo "404 PAGE NOT FOUND";
-            exit;
+            echo "NO PAGE IN DATABASE!!!";
+            $this->set('elements', array());
+        } else {
+
+            $pageUrl = $page['Page']['name'];
+            $url = '/' . $url;
+            $count = 1;
+            $diff = substr($url, strlen($pageUrl));
+
+            if (substr($diff, 0, 1) == '/') {
+                $diff = substr($diff, 1);
+            }
+
+            //Find elements for page to display
+            $elements = $this->setupPageElements($page['Container'], $diff, true);
+
+            //Output data
+            $this->set('elements', $elements);
         }
-
-        $pageUrl = $page['Page']['name'];
-        $url = '/' . $url;
-        $count = 1;
-        $diff = substr($url, strlen($pageUrl));
-
-        if (substr($diff, 0, 1) == '/') {
-            $diff = substr($diff, 1);
-        }
-
-        //Find elements for page to display
-        $elements = $this->setupPageElements($page['Container'], $diff, true);
-
-        //Output data
-        $this->set('pageid', $page['Page']['id']);
         $this->set('menu', $this->Menu->buildMenu($this, NULL));
-        $this->set('elements', $elements);
+        $this->set('pageid', $page['Page']['id']);
     }
 
     private function setupPageElements($container, $diff, $root = false)
@@ -120,7 +121,7 @@ class PagesController extends AppController
                     } else {
                         $url = null;
                     }
-                    $contentData['viewData'] = $this->Components->load($contentData['plugin'].'.'.$contentData['view'])->getData($this, $params, $url, $childContent['id']);
+                    $contentData['viewData'] = $this->Components->load($contentData['plugin'] . '.' . $contentData['view'])->getData($this, $params, $url, $childContent['id']);
                     $contentData['id'] = $childContent['id'];
                 }
                 $children['columns'][$childContent['column'] - 1]['children'][$childContent['order']]['content'] = $contentData;
@@ -145,6 +146,9 @@ class PagesController extends AppController
     private function findPage($url)
     {
         $page = $this->Page->findByName('/' . $url);
+        if ($url == '' && $page == null) {
+            return null;
+        }
         if ($page == null) {
             $urlParts = explode('/', $url);
             array_pop($urlParts);

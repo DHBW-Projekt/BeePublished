@@ -150,7 +150,9 @@ function callPageLayout(pageid) {
         success:function () {
             var layout = $.parseJSON(request.responseText);
             $('#content').attr('rel', layout['id'] + '-1');
-            loadPageLayout(layout['columns']['1']['children'], $('#content'));
+            if (layout['columns'] != undefined) {
+                loadPageLayout(layout['columns']['1']['children'], $('#content'));
+            }
         }
     });
 
@@ -317,7 +319,7 @@ function updatePosition(event, ui) {
             break;
     }
     var request = $.ajax({
-        url:"/"+type+"/newPosition/" + id + "/" + parent + "/" + column + "/" + position,
+        url:"/" + type + "/newPosition/" + id + "/" + parent + "/" + column + "/" + position,
         type:"POST",
         context:document.body
     });
