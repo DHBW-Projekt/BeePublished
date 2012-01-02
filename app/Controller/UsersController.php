@@ -1,14 +1,15 @@
 <?php
-App::uses('AppController', 'Controller');
+App::uses('AppController', 'Controller', 'CakeEmail', 'Network/Email');
 /**
  * Users Controller
  *
  * @property User $User
  */
+
 class UsersController extends AppController
 {
     public $uses = array('User', 'Role', 'MenuEntry');
-    var $components = array('Email', 'Menu');
+    var $components = array('Email', 'Password', 'Menu');
 
     /**
      * index method
@@ -158,8 +159,6 @@ class UsersController extends AppController
                 }
             }
         }
-        $this->set('adminMode', false);
-        $this->set('menu', $this->Menu->buildMenu($this, NULL));
     }
 
     /**
@@ -184,4 +183,85 @@ class UsersController extends AppController
         $this->Auth->allow('register', 'logout');
         $this->Auth->autoRedirect = false;
     }
+
+    /**
+     * resetPassword function
+     * Generates a new password and send it per email to the user
+     * Passwordlenght is 10 characters
+     * @return void
+     */
+    function resetpassword($id = null)
+    {
+        $this->User->id = $id;
+        //check if user exist
+        if (!$this->User->exists()) {
+            throw new NotFoundException(('Invalid user'));
+        }
+
+        $role = $this->Role->findById('roleId');
+        $roleId = $role['Role']['id'];
+        $user['role_id'] = $roleId;
+        //read user
+        $user =
+            // Generates a new password (10 characters)
+        $newpw = $this->Password->generatePassword(10);
+        //Set new password
+        $this->User->password = $newpw;
+
+        if ($this->request->is('post') || $this->request->is('put')) {
+            if ($this->User->save($this->request->data)) {
+
+                //build email header for verification
+                $this->Email->from = 'tmp@dualoncms.de';
+                $this->Email->to = $this->request->data['User']['email'];
+                $this->Email->subject = 'DualonCMS: Your new password';
+                $this->Email->sendAs = 'both'; // because we like to send pretty mail
+                $this->email->send("Your new paaword is " + $newpw + ".<br> Please change it imemdiately! <br><br> Your DualonCMS administrator");
+                $this->Session->setFlash(('User password reseted. Please check your emails!'));
+                //$this->redirect(array('action'=>'index'));
+            } else {
+                $this->Session->setFlash(('Userpassword was not reseted.You received an email with your new password!'));
+            }
+        } else {
+            $this->request->data = $this->User->read(null, $id);
+        }
+    }
+
+    /**
+     * changeRole method
+     *
+     * @param string $id
+     * @return void
+     */
+    function changerole($id = null, $newRole = null)
+    {
+        $this->User->id = $id;
+        if (!$this->User->exists()) {
+            throw new NotFoundException(__('Invalid user'));
+        }
+        //
+        if ($this->request->is('post') || $this->request->is('put')) {
+            //Read user
+            $user = $this->request->data['User'];
+            //Set new Role
+            $role = $this->Role->findById($newRole);
+            $roleId = $role['Role']['id'];
+            $user['role_id'] = $roleId;
+            //
+            if ($this->User->save($user)) {
+                $this->Session->setFlash(__('The user has been saved'));
+                $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+            }
+        } else {
+            $this->request->data = $this->User->read(null, $id);
+        }
+        $this->User->recursive = 0;
+        $this->set('users', $this->paginate());
+        //Roles auflisten
+        $roles = $this->User->Role->find('list');
+        $this->set(compact('roles'));
+    }
+
 }
