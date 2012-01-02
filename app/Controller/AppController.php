@@ -11,7 +11,7 @@ class AppController extends Controller
         )
     );
 
-    public $helpers = array('Html', 'Form', 'Session');
+    public $helpers = array('Html', 'Form', 'Session', 'Js');
 
     function beforeFilter()
     {
