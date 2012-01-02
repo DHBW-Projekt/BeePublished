@@ -52,12 +52,11 @@ a {
 }
 
 .sort {
-    float:right;
+    float: right;
     padding: 5px;
 }
 
 #content {
-    height: 400px;
     background-color: #ededed;
     font-family: arial;
     font-size: 13px;
@@ -69,7 +68,6 @@ a {
     border-radius: 10px;
     border: 1px solid #d3d3d3;
     padding: 10px 20px;
-    overflow: auto;
 }
 
 #footer {
@@ -83,8 +81,8 @@ a {
 
 .setting_button {
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 40px;
+    right: 0px;
     z-index: 1000;
     display: none;
 }
@@ -226,6 +224,32 @@ ol.subnav li span {
 }
 
 .editIconContainer {
-    float:right;
+    float: right;
     padding: 4px;
+}
+
+.button {
+    display: block;
+    line-height: 30px;
+    vertical-align: middle;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    color: #ffffff;
+    border: 1px solid #095B85;
+    background-color: #0F73A6;
+    height: 30px;
+    width: 100%;
+    padding: 5px;
+    margin-top: 10px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0px 0px 8px #095B85;
+    -moz-box-shadow: inset 0px 0px 8px #095B85;
+    box-shadow: inset 0px 0px 8px #095B85;
+}
+
+.button:hover {
+    background-color: #329CD1;
 }

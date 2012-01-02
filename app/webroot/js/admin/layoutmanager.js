@@ -1,22 +1,14 @@
 function callLayouts() {
-    var request;
-    var layouts;
-
-    request = $.ajax({
-        url:"../../DualonCMS/LayoutManager/jsonCall",
+    var request = $.ajax({
+        url:"/layouts/json",
         type:"POST",
         context:document.body,
-        beforeSend:function () {
-        },
-        error:function () {
-        },
         success:function () {
-            layouts = $.parseJSON(request.responseText);
-            createLayouts(layouts);
+            createLayouts($.parseJSON(request.responseText));
         }
     });
 
-} // function callLayouts
+} //fertig
 
 function createLayouts(layouts) {
 
@@ -27,66 +19,25 @@ function createLayouts(layouts) {
     for (var i = 0; i < layouts.length; i++) {
         $('#layout_container').append($('<li></li>')
             .addClass("layout")
-            .attr("id", "layouttype_" + layouts[i].id)
+            .attr("id", "lt_" + layouts[i].id)
             .html(layouts[i].weight)
         );
 
     } // for
 
     dnd("dropzone");
+} //fertig
 
-} // function createLayouts
-
-function getContainerID() {
-
-    var request;
-    var jsonstring;
-    var id = $('#content > .active').attr('id');
-
-    request = $.ajax({
-        url:"../../DualonCMS/LayoutManager/getContainerID",
+function callPlugins() {
+    var request = $.ajax({
+        url:"/pluginviews/json",
         type:"POST",
         context:document.body,
-        beforeSend:function () {
-        },
-        error:function () {
-        },
         success:function () {
-            jsonstring = preparePageLayout(id, request.responseText);
-            savePageLayout(jsonstring);
+            createPlugins($.parseJSON(request.responseText));
         }
     });
-
-
-} // function getContainerID
-
-function savePageLayout(jsonstring) {
-
-    var request;
-    var id = $('#content > .active').attr('id').replace('page_', '');
-    var pagename = $('#menu_' + id).find('span').html();
-
-    //alert(pagename);
-    //alert(jsonstring);
-    alert("localhost/DualonCMS/LayoutManager/savePageLayout/?pagename=" + pagename + "&jsonstring=" + escape(jsonstring));
-
-    request = $.ajax({
-        url:"../../DualonCMS/LayoutManager/savePageLayout/?pagename=" + pagename + "&jsonstring=" + jsonstring,
-        type:"POST",
-        context:document.body,
-        beforeSend:function () {
-        },
-        error:function () {
-        },
-        success:function () {
-            // u mad?
-            $('#troll').show();
-            //alert("Gespeichert");
-        }
-    });
-
-
-} // function savePageLayout
+} //fertig
 
 function createPlugins(plugins) {
     var pluginlist = $(document.createElement('ul')).attr({
@@ -97,519 +48,156 @@ function createPlugins(plugins) {
 
     $(plugins).each(function () {
         var plugin = $(document.createElement('li')).attr({
-            "id":"pluginid_" + this.id,
+            "id":"pl_" + this.id,
             "class":"plugin"
-        }).html(this.name);
+        }).html(this.plugin + ' - ' + this.name);
         $(pluginlist).append(plugin);
     });
     dnd('dropzone');
-} // createPlugins
+} //fertig
 
+function createLayout(container, layout, typeid) {
+    var details = $(container).attr('rel');
+    details = details.split("-");
+    var parent = details[0];
+    var column = details[1];
+    var type = typeid.substring(3);
+    var order = $(container).children().length + 1;
 
-function getPluginList() {
-    var request;
-    var plugins;
-
-    request = $.ajax({
-        url:"/LayoutManager/getPluginList",
+    var request = $.ajax({
+        url:"/containers/add/" + parent + "/" + column + "/" + type + "/" + order,
         type:"POST",
         context:document.body,
-        beforeSend:function () {
-        },
-        error:function () {
-        },
         success:function () {
-            //alert(request.responseText);
-            plugins = $.parseJSON(request.responseText);
-            createPlugins(plugins);
-        }
-    });
-} // function getPluginList
+            var columns = layout.split(":");
+            var subcolumns = $('<div></div>').attr('class', 'subcolumns');
+            subcolumns.append(generateLayoutHandler(request.responseText));
+            for (var i = 0; i < columns.length; i++) {
+                var column = columns[i];
+                var columnClass = null;
+                var contentClass = null;
+                if (i == 0) {
+                    columnClass = 'c' + column + 'l';
+                    contentClass = 'subcl';
+                } else if (i == columns.length - 1) {
+                    columnClass = 'c' + column + 'r';
+                    contentClass = 'subcr';
+                } else {
+                    columnClass = 'c' + column + 'l';
+                    contentClass = 'subc';
+                }
+                var coldiv = $('<div></div>').attr('class', columnClass + ' dropzone');
+                var contentdiv = $('<div></div>').attr('class', contentClass).attr('rel', request.responseText + '-' + (i + 1));
 
-var layouts = new Array();
-
-function setupLayouts(data) {
-    $(data).each(function (index, value) {
-        layout = {
-            "id":this.id,
-            "weight":this.weight
-        };
-        layouts.push(layout);
-    });
-}
-
-function getLayout(id) {
-    weight = null;
-    id = parseInt(id);
-    $(layouts).each(function () {
-        if (id == this.id)
-            weight = this.weight;
-    });
-    layout = weight.split(":");
-    return layout;
-}
-
-function createPlugin(container, plugin, id) {
-    var me = container;
-    var row = $(document.createElement('div')).attr({
-        "class":"row " + id,
-        "id":"type_plugin"
-    });
-
-    var plugindiv = $(document.createElement('div')).attr({
-        "class":"type_plugin"
-    });
-
-    $(plugindiv).css({
-        "padding":"15px",
-        "width":"100%",
-        "height":"100%",
-        "border":"1px dotted black",
-        "overflow":"hidden"
-    });
-
-    var plugincontent = $(document.createElement('div')).attr({
-        "class":""
-    }).html($(plugin).html());
-    //anstatt html($(plugin).html()) ajax call -> get pluginhtml und in html() die response reinschreiben
-
-    var handle = $(document.createElement('div')).attr({
-        "class":"handle ui-widget-header "
-    });
-
-    var close_btn = $(document.createElement('span')).attr({
-        "class":"close_btn"
-    }).html("Delete Plugin");
-
-    $(close_btn).css({
-        "position":"absolute",
-        "cursor":"pointer",
-        "z-index":"100"
-    });
-
-    //Append to parent
-    $(handle).append(close_btn);
-    $(plugindiv).append(handle);
-    $(plugindiv).append(plugincontent);
-    $(row).append(plugindiv);
-    $(me).append(row);
-
-    //adjust handle width
-    $(".handle").each(function () {
-        width = parseInt($(this).width());
-        width += 30;
-        $(this).css("width", width + "px");
-    });
-
-    //adjust height of rows
-    rows = $(me).children(".row");
-    height = 100 / $(rows).size();
-    $(rows).each(function () {
-        $(this).css({
-            "height":height + "%"
-        });
-    });
-
-    // event handling
-    $(plugindiv, handle).hover(function () {
-        $(handle).show();
-    });
-
-    $(plugindiv, handle).hover(
-        function () {
-            $.data(this, 'hover', true);
-        },
-        function () {
-            $.data(this, 'hover', false);
-        }
-    ).data('hover', false);
-
-    $(plugindiv).mouseout(function (event) {
-        if (!($(plugindiv, handle).data('hover')))
-            $(handle).hide();
-    });
-
-    $(handle).mouseout(function (event) {
-        if (!($(plugindiv, handle).data('hover')))
-            $(handle).hide();
-    });
-
-    $(close_btn).click(function () {
-        parent = $(this).parent().parent().parent().parent();
-        $(this).parent().parent().parent().remove();
-        rows = $(parent).children(".row");
-        height = 100 / $(rows).size();
-        $(rows).each(function () {
-            $(this).css({
-                "height":height + "%"
-            });
-        });
-    });
-}
-
-function createColumns(container, layouttype, layouttypeid, parent_id) {
-    var me = container;
-    var summe = 0;
-    var parentid = null;
-    if (parent_id == undefined)
-        parentid = "nn";
-    else
-        parentid = parent_id;
-
-    $(layouttype).each(function () {
-        summe += parseInt(this);
-    });
-
-    var row = $(document.createElement('div')).attr({
-        "class":"row layouttype_" + layouttypeid + " parentid_" + parentid,
-        "id":"type_layout"
-    });
-
-    $(layouttype).each(function () {
-        var width = parseInt(this);
-
-        if (summe < 100)
-            width += 0.33;
-
-        var col = $(document.createElement('div')).attr({
-            "class":"dropzone type_layout"
-        });
-
-        $(col).css({
-            "width":width + "%",
-            "height":"100%",
-            "float":"left",
-            "border":"1px dotted black",
-            "overflow":"hidden",
-            "padding":"15px"
-        });
-
-        var handle = $(document.createElement('div')).attr({
-            "class":"handle ui-widget-header "
-        });
-
-
-        var close_btn = $(document.createElement('span')).attr({
-            "class":"close_btn"
-        }).html("Delete Layout");
-
-        $(close_btn).css({
-            "position":"absolute",
-            "cursor":"pointer",
-            "z-index":"100"
-        });
-
-        //Append to parent
-        $(handle).append(close_btn);
-        $(col).append(handle);
-        $(row).append(col);
-
-        // event handling
-        $(col, handle).hover(function () {
-            $(handle).show();
-        });
-
-        $(col, handle).hover(
-            function () {
-                $.data(this, 'hover', true);
-            },
-            function () {
-                $.data(this, 'hover', false);
+                coldiv.append(contentdiv);
+                subcolumns.append(coldiv);
             }
-        ).data('hover', false);
-
-        $(col).mouseout(function (event) {
-            if (!($(col, handle).data('hover')))
-                $(handle).hide();
-        });
-
-        $(handle).mouseout(function (event) {
-            if (!($(col, handle).data('hover')))
-                $(handle).hide();
-        });
-
-        $(close_btn).click(function () {
-            parent = $(this).parent().parent().parent().parent();
-            $(this).parent().parent().parent().remove();
-            rows = $(parent).children(".row");
-            height = 100 / $(rows).size();
-            $(rows).each(function () {
-                $(this).css({
-                    "height":height + "%"
-                });
-            });
-        });
+            $(container).append(subcolumns);
+            dnd("dropzone");
+        }
     });
+} //fertig
 
-    //append row to parent
-    $(me).append(row);
-
-    //adjust handle width
-    $(".handle").each(function () {
-        width = parseInt($(this).width());
-        width += 30;
-        $(this).css("width", width + "px");
-    });
-
-    //adjust height of rows
-    rows = $(me).children(".row");
-    height = 100 / $(rows).size();
-    $(rows).each(function () {
-        $(this).css({
-            "height":height + "%"
-        });
-    });
-
-    // make columns dragable + dropable
-    dnd("dropzone");
-}
-
-function callPageLayout(pagename) {
-    var request;
-    var layouts;
-    var pageid = $('#content > .active').attr('id');
-    var menuid = $('#menu_' + pageid.replace('page_', '')).attr('id');
-    var menuname = $('#' + menuid + ' > span').html();
-
-    //empty existing layout
-    $("#" + pageid).empty();
-
-    //alert(menuname);
-    request = $.ajax({
-        url:"../../DualonCMS/LayoutManager/getLayoutTree/?pagename=" + menuname,
+function removeLayout(id, container) {
+    var request = $.ajax({
+        url:"/containers/delete/" + id,
         type:"POST",
         context:document.body,
-        beforeSend:function () {
-        },
-        error:function () {
-        },
         success:function () {
-            alert(request.responseText);
-            loadPageLayout(pageid, request.responseText);
+            $(container).parent().remove();
+        }
+    });
+} //fertig
+
+function createPlugin(container, layout, pluginid) {
+    var details = $(container).attr('rel');
+    details = details.split("-");
+    var parent = details[0];
+    var column = details[1];
+    var plugin = pluginid.substring(3);
+    var order = $(container).children().length + 1;
+
+    var request = $.ajax({
+        url:"/content/add/" + parent + "/" + column + "/" + plugin + "/" + order,
+        type:"POST",
+        context:document.body,
+        success:function () {
+            var plugin = $('<div></div>').attr('class', 'plugin_content');
+            plugin.append(generatePluginHandler(request.responseText));
+            loadPluginContent(request.responseText, plugin);
+            $(container).append(plugin);
+            setSettingOptions();
+        }
+    });
+} //fertig
+
+function removePlugin(id, container) {
+    var request = $.ajax({
+        url:"/content/delete/" + id,
+        type:"POST",
+        context:document.body,
+        success:function () {
+            $(container).parent().remove();
+        }
+    });
+} //fertig
+
+function callPageLayout(pageid) {
+    var request = $.ajax({
+        url:"/containers/json/" + pageid,
+        type:"POST",
+        context:document.body,
+        success:function () {
+            var layout = $.parseJSON(request.responseText);
+            $('#content').attr('rel', layout['id'] + '-1');
+            loadPageLayout(layout['columns']['1']['children'], $('#content'));
         }
     });
 
 } // function callPageLayout
 
-function loadPageLayout(pageid, jsonstring) {
-    //get json string with pageid from backend service
-    //jsonstring =...
+function loadPageLayout(layout, object) {
+    for (var content in layout) {
+        var container = layout[content];
+        if (container['Plugin'] == undefined) {
+            var subcolumns = $('<div></div>').attr('class', 'subcolumns');
 
-    //var jsonstring = "{\"layoutobjects\":[{\"containers\":[{\"id\":1,\"parent_id\":\"null\",\"layout_type_id\":\"null\",\"column\":\"0\",\"order\":\"0\"},{\"id\":2,\"parent_id\":1,\"layout_type_id\":1,\"column\":\"1\",\"order\":1},{\"id\":3,\"parent_id\":2,\"layout_type_id\":1,\"column\":2,\"order\":1},{\"id\":4,\"parent_id\":1,\"layout_type_id\":5,\"column\":\"1\",\"order\":2},{\"id\":5,\"parent_id\":4,\"layout_type_id\":1,\"column\":1,\"order\":1},{\"id\":6,\"parent_id\":4,\"layout_type_id\":2,\"column\":2,\"order\":1},{\"id\":7,\"parent_id\":4,\"layout_type_id\":5,\"column\":3,\"order\":1}]},{\"plugins\":[{\"module_id\":5,\"parent_id\":3,\"column\":2,\"order\":1},{\"module_id\":8,\"parent_id\":6,\"column\":2,\"order\":1},{\"module_id\":10,\"parent_id\":7,\"column\":2,\"order\":1},{\"module_id\":13,\"parent_id\":7,\"column\":3,\"order\":1}]},{\"layouts\":[{\"id\":\"1\",\"weight\":\"50:50\"},{\"id\":\"2\",\"weight\":\"33:66\"},{\"id\":\"3\",\"weight\":\"25:75\"},{\"id\":\"4\",\"weight\":\"75:25\"},{\"id\":\"5\",\"weight\":\"33:33:33\"}]}]}";
-    var layoutobjects = $.parseJSON(jsonstring);
-    var containers = layoutobjects["layoutobjects"]["containers"];
+            subcolumns.append(generateLayoutHandler(container['id']));
 
-    if (layoutobjects["layoutobjects"]["plugins"] != undefined)
-        var plugins = layoutobjects["layoutobjects"]["plugins"];
-    var layouts = layoutobjects["layoutobjects"]["layouts"];
+            var counter = 1;
+            for (var column in container['columns']) {
+                column = container['columns'][column];
+                var coldiv = $('<div></div>').attr('class', column['class'] + ' dropzone');
+                var contentdiv = $('<div></div>').attr('class', column['contentClass']).attr('rel', container['id'] + '-' + counter);
 
-    setupLayouts(layouts);
-
-    var pagediv = $("#content > .active");
-
-    var maincontainerid = containers[0].id;
-
-    //load containers
-    $(containers).each(function (index, value) {
-        if (this.id == maincontainerid) {
-            $(pagediv).addClass("parentid_" + this.id);
-        }
-        if (this.parent_id == maincontainerid) {
-            layouttype = getLayout(this.layout_type_id);
-            createColumns(pagediv, layouttype, this.layout_type_id, this.id);
-        } else if (this.parent_id != maincontainerid) {
-            if (this.layout_type_id != undefined && this.layout_type_id != "null" && this.layout_type_id != "0") {
-                parent = $(".parentid_" + this.parent_id);
-                var column = parseInt(this.column);
-                $(parent).children(".dropzone").each(function (index, value) {
-                    if ((index + 1) == column)
-                        column = this;
-                });
-                layouttype = getLayout(this.layout_type_id);
-                createColumns(column, layouttype, this.layout_type_id, this.id);
+                coldiv.append(contentdiv);
+                loadPageLayout(column['children'], contentdiv);
+                subcolumns.append(coldiv);
+                counter++;
             }
-        }
-    });
 
-    //load plugins
-    $(plugins).each(function (index, value) {
-        if (this.container_id == maincontainerid) {
-            createPlugin(pagediv, $(this), this.plugin_id);
+            object.append(subcolumns);
         } else {
-            parent = $(".parentid_" + this.container_id);
-            var column = parseInt(this.column);
-            $(parent).children(".dropzone").each(function (index, value) {
-                if ((index + 1) == column)
-                    column = this;
-            });
-            createPlugin(column, $(this), this.plugin_id);
+            var plugin = $('<div></div>').attr('class', 'plugin_content');
+            plugin.append(generatePluginHandler(container['id']));
+            loadPluginContent(container['id'], plugin);
+            object.append(plugin);
         }
-    });
-
-    rows = $(pagediv).children(".row");
-    height = 100 / $(rows).size();
-    $(rows).each(function () {
-        $(this).css({
-            "height":height + "%"
-        });
-    });
-    //
+    }
+    dnd("dropzone");
 }
 
-function preparePageLayout(pageid, maxids) {
-    var ids = maxids.split("|");
-    var maxcontainerid = parseInt(ids[0]);
-    var maxcontentid = parseInt(ids[1]);
-    var id = maxcontainerid;
-    var contentid = maxcontentid;
-    var jsonString = null;
-    var layoutobjects = new Object();
-    var containers = new Object();
-    containers["containers"] = new Array();
-    var plugins = new Object();
-    plugins["plugins"] = new Array();
-    var parentid = null;
-
-    var rows = $('#' + pageid).children(".row");
-
-    if ($(rows).size() > 0) {
-        var mainContainer = {
-            "id":maxcontainerid,
-            "parent_id":"null",
-            "layout_type_id":"null",
-            "column":"0",
-            "order":"0"
-        };
-
-        containers["containers"].push(mainContainer);
-
-        $(rows).each(function (i, value) {
-            var type = $(this).attr("id");
-            type = type.replace("type_", "");
-
-            if (type == "plugin") {
-                var pluginid = $(this).attr("class");
-                pluginid = parseInt(pluginid.replace(/row\spluginid_/g, ""));
-                var plugin = {
-                    "id":contentid,
-                    "plugin_id":pluginid,
-                    "container_id":maxcontainerid,
-                    "column":1,
-                    "order":i + 1
-                };
-                contentid++;
-                plugins["plugins"].push(plugin);
-            } else {
-                var layouttypeid = $(this).attr("class");
-                layouttypeid = parseInt(layouttypeid.replace(/row\slayouttype_/g, ""));
-                id++;
-                var container = {
-                    "id":id,
-                    "parent_id":maxcontainerid,
-                    "layout_type_id":layouttypeid,
-                    "column":"1",
-                    "order":i + 1
-                };
-                containers["containers"].push(container);
-
-                parentid = id;
-                var columns = $(this).children('.dropzone');
-
-                $(columns).each(function (k, value) {
-                    var columnorder = k + 1;
-                    var innerrows = $(this).children(".row");
-
-                    $(innerrows).each(function (j, value) {
-                        var type = $(this).attr("id");
-                        type = type.replace("type_", "");
-
-                        if (type == "plugin") {
-                            var pluginid = $(this).attr("class");
-                            pluginid = parseInt(pluginid.replace(/row\spluginid_/g, ""));
-                            var plugin = {
-                                "id":contentid,
-                                "plugin_id":pluginid,
-                                "container_id":parentid,
-                                "column":columnorder,
-                                "order":j + 1
-                            };
-                            contentid++;
-                            plugins["plugins"].push(plugin);
-                        } else {
-                            var layouttypeid = $(this).attr("class");
-                            layouttypeid = parseInt(layouttypeid.replace(/row\slayouttype_/g, ""));
-                            id++;
-                            var container = {
-                                "id":id,
-                                "parent_id":parentid,
-                                "layout_type_id":layouttypeid,
-                                "column":columnorder,
-                                "order":j + 1
-                            };
-                            containers["containers"].push(container);
-
-                            var innerparentid = id;
-
-                            var innercolumns = $(this).children('.dropzone');
-
-                            $(innercolumns).each(function (n, value) {
-                                var columnorder = n + 1;
-                                var pluginrows = $(this).children(".row");
-                                $(pluginrows).each(function (m, value) {
-                                    var pluginid = $(this).attr("class");
-                                    pluginid = parseInt(pluginid.replace(/row\spluginid_/g, ""));
-                                    var plugin = {
-                                        "id":contentid,
-                                        "plugin_id":pluginid,
-                                        "container_id":innerparentid,
-                                        "column":columnorder,
-                                        "order":m + 1
-                                    };
-                                    contentid++;
-                                    plugins["plugins"].push(plugin);
-                                });
-                            });
-                        } // else
-                    }); // innerrows
-                }); // each columns
-            } // else
-        }); // each outerrows
-
-        layoutobjects["layoutobjects"] = new Array();
-        layoutobjects["layoutobjects"].push(containers);
-        layoutobjects["layoutobjects"].push(plugins);
-        /*
-         var layouts = new Object();
-         layouts["layouts"] = new Array();
-         layouts["layouts"].push({
-         "id": "1",
-         "weight": "50:50"
-         });
-         layouts["layouts"].push({
-         "id": "2",
-         "weight": "33:66"
-         });
-         layouts["layouts"].push({
-         "id": "3",
-         "weight": "25:75"
-         });
-         layouts["layouts"].push({
-         "id": "4",
-         "weight": "75:25"
-         });
-         layouts["layouts"].push({
-         "id": "5",
-         "weight": "33:33:33"
-         });
-         layoutobjects["layoutobjects"].push(layouts);
-         */
-        jsonString = JSON.stringify(layoutobjects);
-
-        return jsonString;
-    } else {
-        return false;
-    }
-} // function savePageLayout
+function loadPluginContent(id, container) {
+    var request = $.ajax({
+        url:"/content/display/" + id,
+        type:"GET",
+        context:document.body,
+        success:function () {
+            container.append(request.responseText);
+            setSettingOptions();
+        }
+    });
+}
 
 function dnd(dropzoneClass) {
     //adjust accordion height
@@ -632,78 +220,105 @@ function dnd(dropzoneClass) {
         helper:'clone'
     });
 
-    //	var dropzoneArr = $("."+dropzoneClass);
-    //	 dropzone handling
-    //	var prevDiv = null;
-    //	var prevDropObj = null;
-
-    $("." + dropzoneClass).droppable({
-        accept:".layout , .plugin",
-        hoverClass:"ui-state-active",
-        greedy:true,
-        //		over: function(event, ui){
-        //			height = $(this).height();
-        //			bottom = height * 0.9;
-        //			$(this).mousemove(function(e){
-        //			      if(e.pageY >= bottom)
-        //			    	  $(".50_50").css("height", "50%");
-        //			 });
-        //		},
-        drop:function (event, ui) {
-            var me = this;
-            //			if(this.innerHTML == ""){
-            //				if(prevDropObj == this)
-            //					$(prevDiv).remove();
-            //				prevDropOjb = this;
-            //				var div = $(document.createElement('div')).attr({
-            //					name: $(ui.draggable).attr("id"),
-            //					"class": widgetClass
-            //				});
-            //				$(div).css("background-image", ui.draggable.css("background-image"));
-            //				$(div).draggable({
-            //					revert: true,
-            //					opacity: 0.35
-            //				});
-            //				$(this).append(div);
-            //				prevDiv = div;
-            //				$(ui.draggable).hide();
-            switch ($(ui.draggable).attr("class")) {
-                case "plugin":
-                    var pluginid = $(ui.draggable).attr('id');
-                    createPlugin(me, $(ui.draggable), pluginid);
-                    break;
-                case "layout":
-                    var id = "";
-
-                    if (!($(this).parent().parent().parent().parent().attr("id") == null)) {
-                        id = $(this).parent().parent().parent().parent().attr("id");
-                    } // if
-
-                    if (id.indexOf("page_") == -1) {
-                        layouttype = $(ui.draggable).html();
-                        layouttype = layouttype.split(":");
-                        layouttypeid = $(ui.draggable).attr('id');
-                        layouttypeid = layouttypeid.replace("layouttype_", "");
-
-                        createColumns(me, layouttype, layouttypeid);
-                    } else {
-                        alert('Maximum count of layers reached!');
-                    }
-                    break;
-                default:
-                    break;
+    $('.subcl, .subcr, .subc, #content')
+        .sortable({
+            handle:".handler",
+            appendTo:'body',
+            connectWith:'.subcl, .subcr, .subc, #content',
+            placeholder:"placeholder",
+            forcePlaceholderSize:true,
+            receive:function (event, ui) {
+                updatePosition(event, ui);
+            },
+            stop:function (event, ui) {
+                updatePosition(event, ui);
             }
-            //
-        }
-    }).sortable({
-            handle:".handle"
+        })
+        .droppable({
+            accept:".layout , .plugin",
+            hoverClass:"ui-state-active",
+            greedy:true,
+            drop:function (event, ui) {
+                switch ($(ui.draggable).attr("class")) {
+                    case 'layout':
+                        createLayout(this, $(ui.draggable).html(), $(ui.draggable).attr('id'));
+                        break;
+                    case 'plugin':
+                        createPlugin(this, $(ui.draggable).html(), $(ui.draggable).attr('id'));
+                        break;
+                }
+            }
         });
+} //fertig
 
-//		$("body").droppable({
-//			accept: ".dropable",
-//			drop: function( event, ui ) {
-//				$("#"+ui.draggable.attr("name")).show();
-//				$(ui.draggable).remove();
-//			}
-//		});		
+function generateLayoutHandler(id) {
+    var layoutHandler = $('<div></div>').html('Layout').attr('class', 'handler ui-widget-header').attr('rel', id);
+    var layoutCloseButton = $('><div><img src="/img/delete.png" width="15" height="15"/></div>');
+    layoutCloseButton.css({
+        'position':'absolute',
+        'right':'2px',
+        'top':'2px'
+    });
+    layoutCloseButton.click(function () {
+        if (confirm('Do you really want to delete this container and all subcontainers?')) {
+            removeLayout(layoutHandler.attr('rel'), layoutHandler);
+        }
+    });
+    layoutHandler.append(layoutCloseButton);
+    return layoutHandler;
+}
+
+function generatePluginHandler(id) {
+    var pluginHandler = $('<div></div>').html('Plugin').attr('class', 'handler ui-widget-header').attr('rel', id);
+    var pluginCloseButton = $('><div><img src="/img/delete.png" width="15" height="15"/></div>');
+    pluginCloseButton.css({
+        'position':'absolute',
+        'right':'2px',
+        'top':'2px'
+    });
+    pluginCloseButton.click(function () {
+        if (confirm('Do you really want to delete this plugin?')) {
+            removePlugin(pluginHandler.attr('rel'), pluginHandler);
+        }
+    });
+    pluginHandler.append(pluginCloseButton);
+    return pluginHandler;
+}
+
+function setSettingOptions() {
+    $(".plugin_content").mouseenter(function () {
+        $(".setting_button", this).css("display", "inline");
+    });
+    $(".plugin_content").mouseleave(function () {
+        $(".setting_button", this).css("display", "none");
+    });
+    $("a#overlay").fancybox({
+        'type':'iframe',
+        'onClosed':function () {
+            window.location.reload(true);
+        }
+    });
+}
+
+function updatePosition(event, ui) {
+    var id = $(ui.item).children('.handler').attr('rel');
+    var details = $(ui.item).parent().attr('rel');
+    details = details.split("-");
+    var parent = details[0];
+    var column = details[1];
+    var position = $(ui.item).index() + 1;
+    var type = null;
+    switch ($(ui.item).attr("class")) {
+        case 'subcolumns':
+            type = 'containers';
+            break;
+        case 'plugin_content':
+            type = 'content';
+            break;
+    }
+    var request = $.ajax({
+        url:"/"+type+"/newPosition/" + id + "/" + parent + "/" + column + "/" + position,
+        type:"POST",
+        context:document.body
+    });
 }

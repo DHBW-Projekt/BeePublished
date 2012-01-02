@@ -14,15 +14,6 @@
         <?php echo __('Unknown module'); ?>
         <?php else: ?>
         <div class="plugin_content">
-            <?php
-            if ($adminMode) {
-                echo $this->Html->link(
-                    $this->Html->image('tools.png', array('class' => 'setting_image')),
-                    array('plugin' => $child['content']['plugin'], 'controller' => $child['content']['view'], 'action' => 'admin', $child['content']['id']),
-                    array('escape' => False, 'id' => 'overlay', 'class' => 'setting_button')
-                );
-            }
-            ?>
             <?php echo $this->element($child['content']['view'], array('data' => $child['content']['viewData']), array('plugin' => $child['content']['plugin'])); ?>
         </div>
         <?php endif; ?>

@@ -10,7 +10,7 @@ class PagesController extends AppController
 
     public $components = array('Menu');
     public $helpers = array('Html', 'Js' => array('Jquery'));
-    public $uses = array('Page', 'Plugin', 'Container', 'LayoutType', 'Content', 'ContentValue', 'MenuEntry');
+    public $uses = array('Page', 'PluginView', 'Container', 'LayoutType', 'Content', 'ContentValue', 'MenuEntry');
 
     function beforeFilter()
     {
@@ -57,6 +57,7 @@ class PagesController extends AppController
         $elements = $this->setupPageElements($page['Container'], $diff, true);
 
         //Output data
+        $this->set('pageid', $page['Page']['id']);
         $this->set('menu', $this->Menu->buildMenu($this, NULL));
         $this->set('elements', $elements);
     }
@@ -107,13 +108,11 @@ class PagesController extends AppController
                     $params[$contentValue['ContentValue']['key']] = $contentValue['ContentValue']['value'];
                 }
 
-                $plugin = $this->Plugin->findById($childContent['plugin_id']);
-
-                $name = $plugin['Plugin']['name'] . '.' . $childContent['view_name'];
                 $contentData = array();
-                if ($name != ".") {
+                if ($childContent['plugin_view_id'] != null) {
+                    $plugin = $this->PluginView->findById($childContent['plugin_view_id']);
                     $contentData['plugin'] = $plugin['Plugin']['name'];
-                    $contentData['view'] = $childContent['view_name'];
+                    $contentData['view'] = $plugin['PluginView']['name'];
                     $urlParts = explode('/', $diff);
                     if ($urlParts[0] == strtolower($plugin['Plugin']['name'])) {
                         array_shift($urlParts);
@@ -121,7 +120,7 @@ class PagesController extends AppController
                     } else {
                         $url = null;
                     }
-                    $contentData['viewData'] = $this->Components->load($name)->getData($this, $params, $url, $childContent['id']);
+                    $contentData['viewData'] = $this->Components->load($contentData['plugin'].'.'.$contentData['view'])->getData($this, $params, $url, $childContent['id']);
                     $contentData['id'] = $childContent['id'];
                 }
                 $children['columns'][$childContent['column'] - 1]['children'][$childContent['order']]['content'] = $contentData;
@@ -165,6 +164,19 @@ class PagesController extends AppController
             throw new NotFoundException(__('Invalid menu entry'));
         }
         $this->Page->delete();
+    }
+
+    function json($id)
+    {
+        $data = $this->Page->findById($id);
+        $page['Page'] = $data['Page'];
+        $page['Page']['id'] = $page['Page']['id'];
+        $page['Page']['name'] = $page['Page']['title'];
+        $page['Container'] = $data['Container'];
+        $this->layout = 'ajax';
+        $this->response->type('json');
+        $jsonString = json_encode($page);
+        $this->set('page', $jsonString);
     }
 }
 

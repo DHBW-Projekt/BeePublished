@@ -36,15 +36,10 @@
     <div id="sidebar-content">
         <div id="sidebar-menu" class="ui-state-default" style="height:100%">
             <h3><a href="#">Plugin</a></h3>
-
             <div id="plugins">
             </div>
             <h3><a href="#">Layout</a></h3>
-
             <div id="layouts"></div>
-            <h3><a href="#">Design</a></h3>
-
-            <div>Bla3</div>
         </div>
     </div>
 </div>

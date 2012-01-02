@@ -16,10 +16,12 @@
     echo $this->Html->script('dualon');
     if ($adminMode) {
         echo $this->Html->css('sidebar');
+        echo $this->Html->css('admin/layoutmanager');
         echo $this->Html->script('admin/layoutmanager');
         echo $this->Html->script('admin/main');
         echo $this->Html->script('admin/menu');
         echo $this->Html->script('admin/page');
+        echo '<meta id="' . $pageid . '" />';
     }
     echo $scripts_for_layout;
     ?>

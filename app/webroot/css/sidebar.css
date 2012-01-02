@@ -60,7 +60,7 @@
     margin-top: 5px;
 }
 
-#sidebar input, .button {
+#sidebar input {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
@@ -75,7 +75,7 @@
     box-shadow: inset 0px 0px 8px #bbbbbb;
 }
 
-#sidebar input[type=submit], .button {
+#sidebar input[type=submit] {
     height: 30px;
     font-size: 15px;
     border: 1px solid #095B85;
@@ -88,21 +88,8 @@
     box-shadow: inset 0px 0px 8px #095B85;
 }
 
-.button:hover, .small-button:hover, #sidebar input[type=submit]:hover {
+.small-button:hover, #sidebar input[type=submit]:hover {
     background-color: #329CD1;
-}
-
-.button {
-    line-height: 30px;
-    vertical-align: middle;
-    padding: 0px;
-    text-align: center;
-}
-
-.button {
-    display: block;
-    color: #ffffff;
-    text-decoration: none;
 }
 
 .button-bar {
