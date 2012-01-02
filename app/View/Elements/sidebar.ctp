@@ -1,8 +1,8 @@
 <div id="sidebar">
-    <div id="sidebar-opener" class="closed"><img src="/img/tools.png" width="32" height="32"/></div>
+    <div id="sidebar-opener" class="closed"><?php echo $this->Html->image("tools.png", array('width' => 32, 'height' => 32)); ?></div>
     <div id="sidebar-shadow"></div>
     <div id="sidebar-top">
-        <div id="logo"><img src="/img/logo.png"/></div>
+        <div id="logo"><?php echo $this->Html->image("logo.png"); ?></div>
         <h1>BeePublished</h1>
         <hr/>
         <div class="button-bar">

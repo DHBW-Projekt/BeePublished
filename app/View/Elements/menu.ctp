@@ -5,11 +5,9 @@
         echo "<div>";
     }
     if ($entry['page_id'] != null && !$adminMode) {
-        echo "<a href=\"" . $entry['Page']['name'] . "\">";
-    }
-    echo $entry['name'];
-    if ($entry['page_id'] != null && !$adminMode) {
-        echo "</a>";
+        echo $this->Html->link($entry['name'],$entry['Page']['name']);
+    } else {
+        echo $entry['name'];
     }
     if ($adminMode) {
         echo "</div>";
