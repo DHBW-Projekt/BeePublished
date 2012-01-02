@@ -1,6 +1,6 @@
 function callMenu() {
     var request = $.ajax({
-        url:"/menuentries/json",
+        url:"../../menuentries/json",
         type:"POST",
         context:document.body,
         success:function () {
@@ -34,10 +34,10 @@ function createMenu(menuData, append, parentid) {
             }
             content.attr({id:"menu_entry_" + menuData[i]['id']});
 
-            var edit = $('<a href="/menuentries/edit/' + menuData[i]['id'] + '"><img src="/img/edit.png" width="16" height="16"></a>');
+            var edit = $('<a href="../../menuentries/edit/' + menuData[i]['id'] + '"><img src="../../img/edit.png" width="16" height="16"></a>');
             edit.attr('class', 'iframe');
             edit.fancybox();
-            var del = $('<img src="/img/delete.png" width="16" height="16">');
+            var del = $('<img src="../../img/delete.png" width="16" height="16">');
             del.click({'id':menuData[i]['id'], 'page':menuData[i]['page']}, deleteEntry);
 
             var control = $('<div></div>');
@@ -61,7 +61,7 @@ function createMenu(menuData, append, parentid) {
 
     var link = $('<a></a>')
         .html('Add Entry')
-        .attr('href', '/menuentries/add/' + parentid)
+        .attr('href', '../../menuentries/add/' + parentid)
         .attr('class', 'iframe')
         .fancybox();
 
@@ -83,9 +83,9 @@ function deleteEntry(data) {
     if (confirm('Do you really want to delete this entry?')) {
         var url;
         if (page != null && confirm('Do you also want to delete the corresponding page?')) {
-            url = "/pages/delete/" + page;
+            url = "../../pages/delete/" + page;
         } else {
-            url = "/menuentries/delete/" + id;
+            url = "../../menuentries/delete/" + id;
         }
 
         var request = $.ajax({
