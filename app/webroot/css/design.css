@@ -1,0 +1,112 @@
+body {
+    font-family: Arial, Tahoma, sans-serif;
+    background-image: url(../img/bg.jpg);
+}
+
+a {
+    color: #000000;
+}
+
+#topnav {
+    font-size: 11px;
+}
+
+#topnav a.signin, #topnav a.signout {
+    background: #eeeeee;
+    color: #000000;
+    font-weight: bold;
+}
+
+#topnav a.signin:hover, #topnav a.signout:hover {
+    background: #bbbbbb;
+}
+
+#topnav a.menu-open {
+    background: #cccccc;
+    outline: none;
+}
+
+#signin_menu {
+    background-color: #cccccc;
+    border: 0;
+    color: #000000;
+    font-size: 11px;
+}
+
+#signin_menu input[type=text], #signin_menu input[type=password] {
+    border: 1px solid #999999;
+    -webkit-box-shadow: inset 0px 0px 8px #bbbbbb;
+    -moz-box-shadow: inset 0px 0px 8px #bbbbbb;
+    box-shadow: inset 0px 0px 8px #bbbbbb;
+    font-size: 13px;
+}
+
+#menu {
+    background-image: url(../img/nav.gif);
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-bottom: 5px solid #3292DD;
+}
+
+ol.nav {
+    font-size: 13px;
+}
+
+ol.nav li ol.subnav {
+    background: #363A41;
+    border: 1px solid #2A2F37;
+    color: #ffffff;
+}
+
+ol.nav li {
+    border-right: 1px solid #cccccc;
+    font-size: 14px;
+}
+
+ol.nav li a {
+    color: #2A2F37;
+    text-decoration: none;
+}
+
+ol.subnav li a {
+    color: #ffffff;
+}
+
+ol.nav li a:hover {
+    color: #3292DD;
+}
+
+ol.nav li span {
+    background: url(../img/arrow_down.png) no-repeat center center;
+}
+
+ol.subnav li span {
+    background: url(../img/arrow_right.png) no-repeat center center;
+}
+
+#content {
+    background-color: #ffffff;
+    padding: 10px 20px;
+}
+
+#footer {
+    background-color: #ffffff;
+    font-size: 12px;
+    padding: 10px 20px;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    color: #cccccc;
+}
+
+.button {
+    font-size: 15px;
+    color: #ffffff;
+    border: 1px solid #095B85;
+    background-color: #0F73A6;
+    -webkit-box-shadow: inset 0px 0px 8px #095B85;
+    -moz-box-shadow: inset 0px 0px 8px #095B85;
+    box-shadow: inset 0px 0px 8px #095B85;
+}
+
+.button:hover {
+    background-color: #3292DD;
+}
