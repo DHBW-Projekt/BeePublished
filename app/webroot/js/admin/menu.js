@@ -1,6 +1,6 @@
 function callMenu() {
     var request = $.ajax({
-        url:this.app.webroot+"menuentries/json",
+        url:window.app.webroot+"menuentries/json",
         type:"POST",
         context:document.body,
         success:function () {
@@ -34,10 +34,10 @@ function createMenu(menuData, append, parentid) {
             }
             content.attr({id:"menu_entry_" + menuData[i]['id']});
 
-            var edit = $('<a href="'+this.app.webroot+'menuentries/edit/' + menuData[i]['id'] + '"><img src="'+this.app.webroot+'img/edit.png" width="16" height="16"></a>');
+            var edit = $('<a href="'+window.app.webroot+'menuentries/edit/' + menuData[i]['id'] + '"><img src="'+window.app.webroot+'img/edit.png" width="16" height="16"></a>');
             edit.attr('class', 'iframe');
             edit.fancybox();
-            var del = $('<img src="'+this.app.webroot+'img/delete.png" width="16" height="16">');
+            var del = $('<img src="'+window.app.webroot+'img/delete.png" width="16" height="16">');
             del.click({'id':menuData[i]['id'], 'page':menuData[i]['page']}, deleteEntry);
 
             var control = $('<div></div>');
@@ -61,7 +61,7 @@ function createMenu(menuData, append, parentid) {
 
     var link = $('<a></a>')
         .html('Add Entry')
-        .attr('href', this.app.webroot+'menuentries/add/' + parentid)
+        .attr('href', window.app.webroot+'menuentries/add/' + parentid)
         .attr('class', 'iframe')
         .fancybox();
 
@@ -83,11 +83,10 @@ function deleteEntry(data) {
     if (confirm('Do you really want to delete this entry?')) {
         var url;
         if (page != null && confirm('Do you also want to delete the corresponding page?')) {
-            url = this.app.webroot+"pages/delete/" + page;
+            url = window.app.webroot+"pages/delete/" + page;
         } else {
-            url = this.app.webroot+"menuentries/delete/" + id;
+            url = window.app.webroot+"menuentries/delete/" + id;
         }
-
         var request = $.ajax({
             url:url,
             type:"POST",
