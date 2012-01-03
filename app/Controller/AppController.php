@@ -9,10 +9,10 @@ class AppController extends Controller
             'loginRedirect' => '/',
             'logoutRedirect' => '/'
         ),
-        'Permission'
+        'PermissionValidation'
     );
 
-    public $helpers = array('Html', 'Form', 'Session', 'Js', 'Permission');
+    public $helpers = array('Html', 'Form', 'Session', 'Js', 'PermissionValidation');
 
     function beforeFilter()
     {

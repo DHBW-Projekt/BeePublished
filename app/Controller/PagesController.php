@@ -26,7 +26,7 @@ class PagesController extends AppController
         if (sizeof($path) > 0 && $path[0] == 'admin') {
             array_shift($path);
             //Check Admin rights
-            if ($this->Permission->getUserRoleId() == 6 || $this->Permission->getUserRoleId() == 7) {
+            if ($this->PermissionValidation->getUserRoleId() == 6 || $this->PermissionValidation->getUserRoleId() == 7) {
                 $this->set('adminMode', true);
             } else {
                 $url = $this->request->webroot . implode('/', $path);
