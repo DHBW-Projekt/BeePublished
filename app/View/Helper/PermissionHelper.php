@@ -4,9 +4,9 @@ App::uses('AppHelper', 'View/Helper');
 class PermissionHelper extends AppHelper {
 	var $helpers = array('Session');
 	
-	public function getUserRoleId(){
+	public function getUserRole(){
 		//get currently logged in user and his role
-		$userRoleId = (int)$this->Session->read('Auth.User.id');
+		$userRoleId = (int)$this->Session->read('Auth.User.role_id');
 		return $userRoleId;
 	}
 	

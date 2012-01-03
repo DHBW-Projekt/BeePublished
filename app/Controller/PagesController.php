@@ -16,7 +16,7 @@ class PagesController extends AppController
         parent::beforeFilter();
 
         //Actions which don't require authorization
-        $this->Auth->allow('*');
+        $this->Auth->allow('display');
     }
 
     function display()
@@ -26,10 +26,10 @@ class PagesController extends AppController
         if (sizeof($path) > 0 && $path[0] == 'admin') {
             array_shift($path);
             //Check Admin rights
-            if ($this->Auth->User('id') != null) {
+            if ($this->Permission->getUserRoleId() == 6 || $this->Permission->getUserRoleId() == 7) {
                 $this->set('adminMode', true);
             } else {
-                $url = '/' . implode('/', $path);
+                $url = $this->request->webroot . implode('/', $path);
                 $this->redirect($url);
             }
         }
@@ -121,8 +121,10 @@ class PagesController extends AppController
                     } else {
                         $url = null;
                     }
+                    var_dump($urlParts[0]);
                     $contentData['viewData'] = $this->Components->load($contentData['plugin'] . '.' . $contentData['view'])->getData($this, $params, $url, $childContent['id']);
                     $contentData['id'] = $childContent['id'];
+                    $contentData['pageUrl'] = $container['Page']['name'];
                 }
                 $children['columns'][$childContent['column'] - 1]['children'][$childContent['order']]['content'] = $contentData;
             }
