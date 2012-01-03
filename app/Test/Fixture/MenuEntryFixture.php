@@ -1,5 +1,5 @@
 <?php
-/* MenuEntry Fixture generated on: 2011-12-02 19:38:47 : 1322851127 */
+/* MenuEntry Fixture generated on: 2011-12-30 13:34:26 : 1325248466 */
 
 /**
  * MenuEntryFixture
@@ -17,6 +17,7 @@ class MenuEntryFixture extends CakeTestFixture {
 		'parent_id' => array('type' => 'integer', 'null' => true, 'default' => NULL, 'key' => 'index', 'collate' => NULL, 'comment' => ''),
 		'role_id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'key' => 'index', 'collate' => NULL, 'comment' => ''),
 		'page_id' => array('type' => 'integer', 'null' => true, 'default' => NULL, 'key' => 'index', 'collate' => NULL, 'comment' => ''),
+		'name' => array('type' => 'string', 'null' => false, 'default' => NULL, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'charset' => 'latin1'),
 		'published' => array('type' => 'boolean', 'null' => false, 'default' => NULL, 'collate' => NULL, 'comment' => ''),
 		'validFrom' => array('type' => 'datetime', 'null' => false, 'default' => NULL, 'collate' => NULL, 'comment' => ''),
 		'validTo' => array('type' => 'datetime', 'null' => false, 'default' => NULL, 'collate' => NULL, 'comment' => ''),
@@ -36,9 +37,10 @@ class MenuEntryFixture extends CakeTestFixture {
 			'parent_id' => 1,
 			'role_id' => 1,
 			'page_id' => 1,
+			'name' => 'Lorem ipsum dolor sit amet',
 			'published' => 1,
-			'validFrom' => '2011-12-02 19:38:47',
-			'validTo' => '2011-12-02 19:38:47',
+			'validFrom' => '2011-12-30 13:34:26',
+			'validTo' => '2011-12-30 13:34:26',
 			'order' => 1
 		),
 	);
