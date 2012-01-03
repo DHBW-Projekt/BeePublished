@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dualon>
+    <plugin>
+        <name>Newsletter</name>
+        <author>MArcus Lieberenz</author>
+        <version>1.0</version>
+        <permissions>
+        </permissions>
+        <views>
+            <view>
+                <name>Subscription</name>
+            </view>
+        </views>
+    </plugin>
+</dualon>
