@@ -12,7 +12,10 @@ class PluginsController extends AppController
     function beforeFilter()
     {
         parent::beforeFilter();
-
+        $role = $this->Permission->getUserRoleId();
+        if ($role != 6 && $role != 7) {
+            $this->redirect($this->request->webroot);
+        }
     }
 
     function index()
