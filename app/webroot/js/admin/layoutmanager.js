@@ -262,7 +262,7 @@ function dnd(dropzoneClass) {
 } //fertig
 
 function generateLayoutHandler(id) {
-    var layoutHandler = $('<div></div>').html('Layout').attr('class', 'handler ui-widget-header').attr('rel', id);
+    var layoutHandler = $('<div></div>').html('Layout').attr('class', 'handler ui-state-default').attr('rel', id);
     var layoutCloseButton = $('<div><img src="' + this.app.webroot + 'img/delete.png" width="15" height="15"/></div>');
     layoutCloseButton.css({
         'position':'absolute',
@@ -279,7 +279,7 @@ function generateLayoutHandler(id) {
 }
 
 function generatePluginHandler(id) {
-    var pluginHandler = $('<div></div>').html('Plugin').attr('class', 'handler ui-widget-header').attr('rel', id);
+    var pluginHandler = $('<div></div>').html('Plugin').attr('class', 'handler ui-state-default').attr('rel', id);
     var pluginCloseButton = $('><div><img src="' + this.app.webroot + 'img/delete.png" width="15" height="15"/></div>');
     pluginCloseButton.css({
         'position':'absolute',
