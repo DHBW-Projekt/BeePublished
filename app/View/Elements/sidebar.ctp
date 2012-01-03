@@ -22,8 +22,8 @@
         ));
             ?>
             <?php echo $this->Html->image("box.png", array(
-            'alt' => __('User Management'),
-            'url' => array('controller' => 'user', 'action' => 'index'),
+            'alt' => __('Plugin Management'),
+            'url' => array('controller' => 'plugins', 'action' => 'index'),
             'class' => 'small-button',
             'width' => 20,
             'height' => 20
