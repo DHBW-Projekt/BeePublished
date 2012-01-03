@@ -1,18 +1,18 @@
-<?php
-App::uses('AppHelper', 'View/Helper');
+<?php 
 
-class PermissionHelper extends AppHelper {
-	var $helpers = array('Session');
+class PermissionValidationComponent extends Component {
+	var $components = array('Auth');
 	
-	public function getUserRole(){
+	public function getUserRoleId(){
 		//get currently logged in user and his role
-		$userRoleId = (int)$this->Session->read('Auth.User.role_id');
+		$userRoleId = (int)$this->Auth->user('role_id');
 		return $userRoleId;
 	}
 	
 	public function getPermissions($pluginId = null){
 		//get currently logged in user and his role
-		$userRoleId = (int)$this->Session->read('Auth.User.role_id');
+		$userRoleId = (int)$this->Auth->user('role_id');
+		
 		$allPermissionsOfPlugin = $this->Permission->find('all', array('conditions' => array('plugin_id' => $pluginId)));
 		$allActions = array();
 		foreach ($allPermissionsOfPlugin as $aPermission){
@@ -29,7 +29,9 @@ class PermissionHelper extends AppHelper {
 		$this->Role = ClassRegistry::init('Role');
 		
 		//get currently logged in user and his role
-		$userRoleId = (int)$this->Session->read('Auth.User.role_id');
+		$user = $this->Auth->user();
+		$userRoleId = (int)$user['role_id'];
+
 		//get required permission for given plugin and action
 		$permissionQueryOptions = array('conditions' => array('plugin_id' => $pluginId, 'action' => $action));
 		$permissionEntry = $this->Permission->find('first', $permissionQueryOptions);
