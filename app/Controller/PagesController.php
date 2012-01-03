@@ -121,7 +121,6 @@ class PagesController extends AppController
                     } else {
                         $url = null;
                     }
-                    var_dump($urlParts[0]);
                     $contentData['viewData'] = $this->Components->load($contentData['plugin'] . '.' . $contentData['view'])->getData($this, $params, $url, $childContent['id']);
                     $contentData['id'] = $childContent['id'];
                     $contentData['pageUrl'] = $container['Page']['name'];
