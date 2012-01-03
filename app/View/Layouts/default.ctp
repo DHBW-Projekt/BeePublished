@@ -8,8 +8,9 @@
     $this->Js->set('webroot', $this->request->webroot);
     echo $this->Html->css('/yaml/core/base');
     echo $this->Html->css('/fancybox/jquery.fancybox-1.3.4');
-    echo $this->Html->css('main');
-    echo $this->Html->css('smoothness/jquery-ui-1.8.16.custom');
+    echo $this->Html->css('jquery-ui/jquery-ui-1.8.16.custom');
+    echo $this->Html->css('design');
+    echo $this->Html->css('template');
     echo $this->Html->script('jquery-1.6.2.min');
     echo $this->Html->script('jquery-ui-1.8.16.custom.min');
     echo $this->Html->script('jquery.fancybox-1.3.4.pack');
@@ -29,30 +30,38 @@
 </head>
 <body>
 <div id="main">
-    <div id="topnav" class="topnav">
-        <?php
-        if (AuthComponent::user('id') == null) {
-            echo $this->element('login');
-        } else {
-            if ($this->request->webroot != '/') {
-                $path = str_replace($this->request->webroot,'',$this->request->here);
+    <div id="header">
+        <div id="pagelogo">
+            <?php
+            echo $this->Html->link(
+                $this->Html->image('beelogo.png'),
+                '/',
+                array('escape' => false)
+            );
+            ?>
+        </div>
+        <div id="topnav" class="topnav">
+            <?php
+            if (AuthComponent::user('id') == null) {
+                echo $this->element('login');
             } else {
-                $path = substr($this->request->here,1);
+                if ($this->request->webroot != '/') {
+                    $path = str_replace($this->request->webroot, '', $this->request->here);
+                } else {
+                    $path = substr($this->request->here, 1);
+                }
+                if (!$adminMode) {
+                    echo $this->Html->link('Admin Mode', '/admin/' . $path);
+                } else {
+                    $link = '/' . substr($path, 6);
+                    echo $this->Html->link('User Mode', $link);
+                }
+                echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout'), array('class' => 'signout'));
             }
-            if (!$adminMode) {
-                echo $this->Html->link('Admin Mode', '/admin/' . $path);
-            } else {
-                $link = '/'.substr($path, 6);
-                echo $this->Html->link('User Mode', $link);
-            }
-            echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout'), array('class' => 'signout'));
-        }
-        ?>
+            ?>
+        </div>
     </div>
-    <div id="header" class="ui-state-default">
-        <div>DualonCMS Test-Umgebung</div>
-    </div>
-    <div id="menu" class="ui-state-default">
+    <div id="menu">
         <ol class="nav" id="ul_0">
             <?php echo $this->element('menu', array('data' => $menu)); ?>
         </ol>
@@ -73,8 +82,7 @@
         <?php echo $content_for_layout ?>
     </div>
     <div id="footer">
-        Dieses Layout dient nur zum testen!
-        <div>Kontakt | Impressum | DualonCMS c2011</div>
+        Powered by BeePublished - All rights reserved - &copy; Copyright 2011-2012
     </div>
 </div>
 <? if ($adminMode) {
