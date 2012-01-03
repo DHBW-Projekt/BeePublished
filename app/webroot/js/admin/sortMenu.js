@@ -16,7 +16,7 @@ $(document).ready(function () {
     $('.saveButton').click(function (e) {
         var menu = $('ol.nav').nestedSortable('serialize');
         var request = $.ajax({
-            url:this.app.webroot+"menuentries/sort",
+            url:window.app.webroot+"menuentries/sort",
             type:"POST",
             context:document.body,
             data:menu,
