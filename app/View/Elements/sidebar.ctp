@@ -2,8 +2,7 @@
     <div id="sidebar-opener" class="closed"><?php echo $this->Html->image("tools.png", array('width' => 32, 'height' => 32)); ?></div>
     <div id="sidebar-shadow"></div>
     <div id="sidebar-top">
-        <div id="logo"><?php echo $this->Html->image("logo.png"); ?></div>
-        <h1>BeePublished</h1>
+        <div id="logo"><?php echo $this->Html->image("beelogo.png", array('width' => 180)); ?></div>
         <hr/>
         <div class="button-bar">
             <?php echo $this->Html->image("group.png", array(
