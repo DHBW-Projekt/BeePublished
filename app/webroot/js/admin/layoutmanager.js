@@ -1,6 +1,6 @@
 function callLayouts() {
     var request = $.ajax({
-        url:this.app.webroot+"layouts/json",
+        url:this.app.webroot + "layouts/json",
         type:"POST",
         context:document.body,
         success:function () {
@@ -30,7 +30,7 @@ function createLayouts(layouts) {
 
 function callPlugins() {
     var request = $.ajax({
-        url:this.app.webroot+"pluginviews/json",
+        url:this.app.webroot + "pluginviews/json",
         type:"POST",
         context:document.body,
         success:function () {
@@ -58,14 +58,17 @@ function createPlugins(plugins) {
 
 function createLayout(container, layout, typeid) {
     var details = $(container).attr('rel');
+    if (details == undefined) {
+        alert('This page doesn\'t exist in the database. Please create a page before you can add elements');
+        return;
+    }
     details = details.split("-");
     var parent = details[0];
     var column = details[1];
     var type = typeid.substring(3);
     var order = $(container).children().length + 1;
-
     var request = $.ajax({
-        url:this.app.webroot+"containers/add/" + parent + "/" + column + "/" + type + "/" + order,
+        url:this.app.webroot + "containers/add/" + parent + "/" + column + "/" + type + "/" + order,
         type:"POST",
         context:document.body,
         success:function () {
@@ -100,7 +103,7 @@ function createLayout(container, layout, typeid) {
 
 function removeLayout(id, container) {
     var request = $.ajax({
-        url:this.app.webroot+"containers/delete/" + id,
+        url:this.app.webroot + "containers/delete/" + id,
         type:"POST",
         context:document.body,
         success:function () {
@@ -111,6 +114,10 @@ function removeLayout(id, container) {
 
 function createPlugin(container, layout, pluginid) {
     var details = $(container).attr('rel');
+    if (details == undefined) {
+        alert('This page doesn\'t exist in the database. Please create a page before you can add elements');
+        return;
+    }
     details = details.split("-");
     var parent = details[0];
     var column = details[1];
@@ -118,7 +125,7 @@ function createPlugin(container, layout, pluginid) {
     var order = $(container).children().length + 1;
 
     var request = $.ajax({
-        url:this.app.webroot+"content/add/" + parent + "/" + column + "/" + plugin + "/" + order,
+        url:this.app.webroot + "content/add/" + parent + "/" + column + "/" + plugin + "/" + order,
         type:"POST",
         context:document.body,
         success:function () {
@@ -133,7 +140,7 @@ function createPlugin(container, layout, pluginid) {
 
 function removePlugin(id, container) {
     var request = $.ajax({
-        url:this.app.webroot+"content/delete/" + id,
+        url:this.app.webroot + "content/delete/" + id,
         type:"POST",
         context:document.body,
         success:function () {
@@ -144,7 +151,7 @@ function removePlugin(id, container) {
 
 function callPageLayout(pageid) {
     var request = $.ajax({
-        url:this.app.webroot+"containers/json/" + pageid,
+        url:this.app.webroot + "containers/json/" + pageid,
         type:"POST",
         context:document.body,
         success:function () {
@@ -191,7 +198,7 @@ function loadPageLayout(layout, object) {
 
 function loadPluginContent(id, container) {
     var request = $.ajax({
-        url:this.app.webroot+"content/display/" + id,
+        url:this.app.webroot + "content/display/" + id,
         type:"GET",
         context:document.body,
         success:function () {
@@ -229,6 +236,7 @@ function dnd(dropzoneClass) {
             connectWith:'.subcl, .subcr, .subc, #content',
             placeholder:"placeholder",
             forcePlaceholderSize:true,
+            tolerance:'pointer',
             receive:function (event, ui) {
                 updatePosition(event, ui);
             },
@@ -255,7 +263,7 @@ function dnd(dropzoneClass) {
 
 function generateLayoutHandler(id) {
     var layoutHandler = $('<div></div>').html('Layout').attr('class', 'handler ui-widget-header').attr('rel', id);
-    var layoutCloseButton = $('<div><img src="'+this.app.webroot+'img/delete.png" width="15" height="15"/></div>');
+    var layoutCloseButton = $('<div><img src="' + this.app.webroot + 'img/delete.png" width="15" height="15"/></div>');
     layoutCloseButton.css({
         'position':'absolute',
         'right':'2px',
@@ -272,7 +280,7 @@ function generateLayoutHandler(id) {
 
 function generatePluginHandler(id) {
     var pluginHandler = $('<div></div>').html('Plugin').attr('class', 'handler ui-widget-header').attr('rel', id);
-    var pluginCloseButton = $('><div><img src="'+this.app.webroot+'img/delete.png" width="15" height="15"/></div>');
+    var pluginCloseButton = $('><div><img src="' + this.app.webroot + 'img/delete.png" width="15" height="15"/></div>');
     pluginCloseButton.css({
         'position':'absolute',
         'right':'2px',
