@@ -50,11 +50,13 @@
                 } else {
                     $path = substr($this->request->here, 1);
                 }
-                if (!$adminMode) {
-                    echo $this->Html->link('Admin Mode', '/admin/' . $path);
-                } else {
-                    $link = '/' . substr($path, 6);
-                    echo $this->Html->link('User Mode', $link);
+                if (!$systemPage) {
+                    if (!$adminMode) {
+                        echo $this->Html->link('Admin Mode', '/admin/' . $path);
+                    } else {
+                        $link = '/' . substr($path, 6);
+                        echo $this->Html->link('User Mode', $link);
+                    }
                 }
                 echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout'), array('class' => 'signout'));
             }

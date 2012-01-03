@@ -7,14 +7,12 @@ App::uses('AppController', 'Controller');
 class PluginsController extends AppController
 {
     public $components = array('CMSPlugin');
-    public $uses = array('Plugin', 'Permission', 'Role','PluginView');
+    public $uses = array('Plugin', 'Permission', 'Role', 'PluginView');
 
     function beforeFilter()
     {
         parent::beforeFilter();
 
-        //Actions which don't require authorization
-        $this->Auth->allow('index', 'install', 'uninstall');
     }
 
     function index()
@@ -28,6 +26,9 @@ class PluginsController extends AppController
         $available = $this->CMSPlugin->getPluginList();
         $this->set('installed', $installed);
         $this->set('available', $available);
+        $this->set('systemPage', true);
+        $this->set('adminMode', false);
+        $this->set('menu', array());
     }
 
     function install($plugin)
