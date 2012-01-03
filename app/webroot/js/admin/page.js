@@ -1,5 +1,8 @@
 function callPages() {
     var id = $('head').find('meta[id]').attr('id');
+    if (id == undefined) {
+        return;
+    }
     var request = $.ajax({
         url:window.app.webroot+"pages/json/" + id,
         type:"POST",
