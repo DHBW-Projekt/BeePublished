@@ -11,6 +11,8 @@ class PagesController extends AppController
     public $components = array('Menu');
     public $uses = array('Page', 'PluginView', 'Container', 'LayoutType', 'Content', 'ContentValue', 'MenuEntry');
 
+    private $myUrl = null;
+
     function beforeFilter()
     {
         parent::beforeFilter();
@@ -41,9 +43,11 @@ class PagesController extends AppController
         if (!$page) {
             echo "NO PAGE IN DATABASE!!!";
             $this->set('elements', array());
+            $this->myUrl = null;
         } else {
 
             $pageUrl = $page['Page']['name'];
+            $this->myUrl = $pageUrl;
             $url = '/' . $url;
             $count = 1;
             $diff = substr($url, strlen($pageUrl));
@@ -115,7 +119,7 @@ class PagesController extends AppController
                     $contentData['plugin'] = $plugin['Plugin']['name'];
                     $contentData['view'] = $plugin['PluginView']['name'];
                     $urlParts = explode('/', $diff);
-                    if ($urlParts[0] == strtolower($plugin['Plugin']['name'])) {
+                    if ($urlParts[0] == strtolower($plugin['PluginView']['name'])) {
                         array_shift($urlParts);
                         $url = $urlParts;
                     } else {
@@ -123,7 +127,7 @@ class PagesController extends AppController
                     }
                     $contentData['viewData'] = $this->Components->load($contentData['plugin'] . '.' . $contentData['view'])->getData($this, $params, $url, $childContent['id']);
                     $contentData['id'] = $childContent['id'];
-                    $contentData['pageUrl'] = $container['Page']['name'];
+                    $contentData['pageUrl'] = $this->myUrl;
                 }
                 $children['columns'][$childContent['column'] - 1]['children'][$childContent['order']]['content'] = $contentData;
             }
