@@ -3,8 +3,8 @@ App::uses('AppModel', 'Model');
 /**
  * Plugin Model
  *
- * @property Content $Content
  * @property Permission $Permission
+ * @property PluginView $PluginView
  */
 class Plugin extends AppModel {
 /**
@@ -22,8 +22,8 @@ class Plugin extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'Content' => array(
-			'className' => 'Content',
+		'Permission' => array(
+			'className' => 'Permission',
 			'foreignKey' => 'plugin_id',
 			'dependent' => false,
 			'conditions' => '',
@@ -35,8 +35,8 @@ class Plugin extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-		'Permission' => array(
-			'className' => 'Permission',
+		'PluginView' => array(
+			'className' => 'PluginView',
 			'foreignKey' => 'plugin_id',
 			'dependent' => false,
 			'conditions' => '',
