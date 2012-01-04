@@ -25,10 +25,10 @@ class SubscriptionController extends AppController {
 				'user_id' => '2',
 				'active' => '1'));
 			$this->NewsletterRecipient->save();
-			$this->redirect($this->referer());
+			//$this->redirect($this->referer());
 		}	
 			
 //		$this->set('errors', $this->GuestbookPost->validationErrors);
-		$this->redirect($this->referer());
+		//$this->redirect($this->referer());
 	}
 }
