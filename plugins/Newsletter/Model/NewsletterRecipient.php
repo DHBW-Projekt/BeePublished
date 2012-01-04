@@ -12,8 +12,8 @@ class NewsletterRecipient extends AppModel {
 	    public $validate = array(
         'email' => array(
             'required' => array(
-                'rule' => array('email'),
-                'message' => 'An email is required.'
+                'rule' => array('email','isUnique'),
+                'message' => 'The e-mail address was not entered correctly.'
             )
         )
     );
