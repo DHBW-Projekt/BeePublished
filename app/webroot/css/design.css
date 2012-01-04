@@ -115,3 +115,15 @@ ol.subnav li span {
 	font-weight:bold;
 	color:#A00000;
 }
+
+.flash_success {
+	border:3px solid #bedf5d;
+	background:#e2f1a8;
+	font-weight:bold;
+}
+
+.flash_failure {
+	border:3px solid #990000;
+	background:#f97d88;
+	font-weight:bold;
+}

@@ -13,7 +13,6 @@ class SubscriptionController extends AppController {
 	}
 	
 	public function admin($contentID){
-// 		$this->loadModel("ContentValues");
 		
 	}	
 	
