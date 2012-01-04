@@ -2,15 +2,17 @@
 	$user = $this->Session->read('Auth.User'); // get data for current user
 	$validationErrors = $this->Session->read('Validation.NewsletterRecipient.validationErrors');
 	$this->Html->script('/newsletter/js/newsletter', false);
+	$this->Html->script('/ckeditor/ckeditor', false);
+	
 ?>
 <div id="subscription">
-
 	<?php
 		if (($user['role_id']) == '7') {
 			echo $this->Form->create('Subscription',array('url' => array('plugin' => 'Newsletter',
 													   		  	'controller' 	  => 'Subscription',
 													   		  	'action'  	      => 'subscribe')));
 			echo $this->Form->input('NewsletterRecipient.email', array('label' => 'E-Mail:'));
+			echo $this->Fck->load('NewsletterRecipient.email');
 			echo $this->Html->div('validation_error',$validationErrors['email'][0]);
     		echo $this->Form->end('(Un)subscribe');
     		echo $this->Session->flash('NewsletterRecipient');

@@ -22,12 +22,9 @@ class SubscriptionController extends AppController {
 	}
 	
 	public function subscribe() {
-	
-		debug($this->request->data, $showHTML = false, $showFrom = true);	
 		if ($this->request->is('post')){
 			$this->NewsletterRecipient->set(array(
 				'email' => $this->request->data['NewsletterRecipient']['email'],
-				'user_id' => '2',
 				'active' => '1'));
 			if($this->NewsletterRecipient->save()) {
 				$this->Session->setFlash('The user was added successfully.', 'default', array('class' => 'flash_success'), 'NewsletterRecipient');
