@@ -3,9 +3,11 @@ $user = $this->Session->read('Auth.User');
 ?>
 <div id="subscription">
 	<?php
-		if (($user['role_id']) == '2') {
-			echo $this->Form->create('Subscription');
-	    	echo $this->Form->input('email:');
+		if (($user['role_id']) == '3') {
+			echo $this->Form->create('Subscription',array('url' => array('plugin' => 'Newsletter',
+														   		  'controller' => 'Subscription',
+														   		  'action' => 'subscribe')));
+	    	echo $this->Form->input('email');
 	    	echo $this->Form->end('(Un)subscribe');
 	    } else if (($user['role_id']) >= '3') {
 	    	echo $user['email'];
