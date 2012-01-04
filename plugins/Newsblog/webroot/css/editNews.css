@@ -1,0 +1,26 @@
+.editNewsContainer{
+	
+}
+
+.editNewsTitle{
+	font-size: 18px;
+	line-height: 22px;
+}
+
+.editNewsBody{
+	
+}
+
+.editValidConfiguration{
+	
+}
+
+.editNewsButtons{
+	text-align: right;
+}
+
+.nbTitleTextfield{
+	border:1px solid black;
+	font-size: 16px;
+	padding: 6px;
+}
