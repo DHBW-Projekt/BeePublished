@@ -4,6 +4,7 @@ class SubscriptionController extends AppController {
 		
 	public $name = 'Subscription';
 	public $uses = array('Newsletter.NewsletterRecipient');
+	var $autoLayout = false;
 
 	function beforeFilter()
 	{
@@ -16,6 +17,10 @@ class SubscriptionController extends AppController {
 // 		$this->loadModel("ContentValues");
 		
 	}	
+	
+	public function admin2(){
+		
+	}
 	
 	public function subscribe() {
 		debug($this->request->data, $showHTML = false, $showFrom = true);	
