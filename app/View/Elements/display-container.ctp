@@ -14,7 +14,7 @@
         <?php echo __('Unknown module'); ?>
         <?php else: ?>
         <div class="plugin_content">
-            <?php echo $this->element($child['content']['view'], array('data' => $child['content']['viewData']), array('plugin' => $child['content']['plugin'])); ?>
+            <?php echo $this->element($child['content']['view'], array('data' => $child['content']['viewData'], 'url' => $child['content']['pageUrl'], 'contentId' => $child['content']['id'], 'pluginId' => $child['content']['pluginid']), array('plugin' => $child['content']['plugin'])); ?>
         </div>
         <?php endif; ?>
     <?php endif; ?>

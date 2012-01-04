@@ -29,6 +29,7 @@ Router::connect('/pages/:action/*', array('controller' => 'pages'));
 Router::connect('/containers/:action/*', array('controller' => 'containers'));
 Router::connect('/layouts/:action/*', array('controller' => 'layouttypes'));
 Router::connect('/content/:action/*', array('controller' => 'contents'));
+Router::connect('/plugins', array('controller' => 'plugins', 'action' => 'index'));
 Router::connect('/plugins/:action/*', array('controller' => 'plugins'));
 Router::connect('/pluginviews/:action/*', array('controller' => 'pluginviews'));
 
