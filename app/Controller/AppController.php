@@ -2,12 +2,7 @@
 
 class AppController extends Controller
 {
-
-    function afterFilter(){
-    	$this->_deleteValidation();
-    }
-    
-    public $components = array(
+	public $components = array(
         'Session',
         'Auth' => array(
             'loginRedirect' => '/',
@@ -16,6 +11,12 @@ class AppController extends Controller
         'PermissionValidation'
     );
     
+    public $helpers = array('Html', 'Form', 'Session', 'Js', 'PermissionValidation');
+
+    function afterFilter(){
+    	$this->_deleteValidation();
+    }
+
     function _persistValidation() {
         $args = func_get_args();      	
         foreach($args as $modelName) {
@@ -32,6 +33,4 @@ class AppController extends Controller
     function _deleteValidation() {
     	$this->Session->delete('Validation');    	
     }
-
-    public $helpers = array('Html', 'Form', 'Session', 'Js', 'PermissionValidation');
 }
