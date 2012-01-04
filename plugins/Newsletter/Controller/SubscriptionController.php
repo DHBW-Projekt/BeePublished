@@ -13,7 +13,6 @@ class SubscriptionController extends AppController {
 	}
 	
 	public function admin($contentID){
-// 		$this->loadModel("ContentValues");
 		
 	}	
 	
@@ -34,18 +33,5 @@ class SubscriptionController extends AppController {
 			}
 		}
 		$this->redirect($this->referer());
-		//debug($this->NewsletterRecipient->validationErrors, $showHTML = false, $showFrom = true);
-		//debug($this->NewsletterRecipient->invalidFields(), $showHTML = false, $showFrom = true);
-		//debug($this, $showHTML = false, $showFrom = true);
-		//$this->set('errors', $this->NewsletterRecipient->validationErrors);
-		//$this->Session->delete('Validation');
-//        $this->Session->write('Validation.'.'Subscription', array(
-//														'controller'           => $this->name,
-//                                                        'data'                 => $this->NewsletterRecipient->data,
-//                                                        'validationErrors'     => $this->NewsletterRecipient->validationErrors
-//        ));
-		
-       // $this->Session->write('Validation.'.'NewsletterRecipient', $this->NewsletterRecipient->invalidFields());
-
 	}
 }
