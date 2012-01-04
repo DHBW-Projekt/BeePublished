@@ -168,12 +168,7 @@ ol.subnav li span {
     cursor: move;
 }
 
-.flash_success {
-	padding:10px;
-	margin:15px 0;
-}
-
-.flash_failure {
+.flash_success, .flash_failure {
 	padding:10px;
 	margin:15px 0;
 }
