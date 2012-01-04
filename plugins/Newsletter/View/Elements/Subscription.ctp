@@ -1,5 +1,5 @@
 <?php
-$user = $this->Session->read('Auth.User');
+$user = $this->Session->read('Auth.User'); // get data for current user
 ?>
 <div id="subscription">
 	<?php
@@ -9,14 +9,19 @@ $user = $this->Session->read('Auth.User');
 														   		  'action' => 'subscribe')));
 	    	echo $this->Form->input('email');
 	    	echo $this->Form->end('(Un)subscribe');
-	    } else if (($user['role_id']) >= '3') {
+	    } 
+// 	if current user is registred
+	    else if (($user['role_id']) >= '3') {
+// check for newsletter subscription
 	    	echo $user['email'];
 	    };
 	?>
 </div>
 
+
 <?php
+// react on button click
 	if (isset($this->data['Subscription'])) {
-	   echo "Subscription was successfull";
+	   echo "Subscription was successful";
 	}
 ?>
