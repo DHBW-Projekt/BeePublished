@@ -17,8 +17,8 @@
 		$shorttextLength = 250;
 	}
 	
-	$deleteAllowed = $this->PermissionValidation->actionAllowed(22, 'Delete');
-	$editAllowed = $this->PermissionValidation->actionAllowed(22, 'Edit');
+	$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Delete');
+	$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Edit');
 	$newsblogTitle = $data['newsblogTitle']['NewsblogTitle']['title'];
 ?>
 
@@ -28,7 +28,12 @@
 		$newsEntryId = $NewsEntry['NewsEntry']['id'];
 		$newsblogEntryDivId = "newsblogEntry".$newsEntryId;
 		$title = $NewsEntry['NewsEntry']['title'];
-		$titleForUrl = iconv("utf-8", "ASCII//TRANSLIT", $title);
+		$titleForUrl = iconv("utf-8", "ASCII//TRANSLIT", utf8_encode($title));
+		$titleForUrl = str_replace(array('"a','"A'),'ae',$titleForUrl);
+		$titleForUrl = str_replace(array('"o','"O'),'oe',$titleForUrl);
+		$titleForUrl = str_replace(array('"u','"U'),'ue',$titleForUrl);
+		$titleForUrl = strtolower(trim(preg_replace('/[^\w\d_ -]/si', '', $titleForUrl)));
+        $titleForUrl = str_replace(' ', '-', $titleForUrl);
 		$text = $NewsEntry['NewsEntry']['text'];
 		if(strlen($text) > $shorttextLength){
 			$substrEnd = $shorttextLength - 3;
@@ -48,7 +53,7 @@
 				<?php 
 				echo $this->Html->link(
 					'> Weiterlesen',
-					$url.'/newsblog/'.$newsEntryId.'-'.$titleForUrl,
+					$url.'/shownews/'.$newsEntryId.'-'.$titleForUrl,
 					array('class' => 'newsblog_entry_read_link', 'escape' => false)
 				);
 				?>
