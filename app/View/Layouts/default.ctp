@@ -45,7 +45,7 @@
             if (AuthComponent::user('id') == null) {
                 echo $this->element('login');
             } else {
-                $role = $this->Permission->getUserRole();
+                $role = $this->PermissionValidation->getUserRole();
                 if ($this->request->webroot != '/') {
                     $path = str_replace($this->request->webroot, '', $this->request->here);
                 } else {
