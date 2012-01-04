@@ -117,6 +117,7 @@ class PagesController extends AppController
                 if ($childContent['plugin_view_id'] != null) {
                     $plugin = $this->PluginView->findById($childContent['plugin_view_id']);
                     $contentData['plugin'] = $plugin['Plugin']['name'];
+                    $contentData['pluginId'] = $plugin['Plugin']['id'];
                     $contentData['view'] = $plugin['PluginView']['name'];
                     $urlParts = explode('/', $diff);
                     if ($urlParts[0] == strtolower($plugin['PluginView']['name'])) {
