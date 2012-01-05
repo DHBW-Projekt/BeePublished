@@ -7,6 +7,6 @@
  echo 'Date: <input id="datepicker" type="text" size="15"/>';
  //echo $this->Form->end();        
 
- echo $this->Ajax->datepicker('datepicker');
+echo $this->Html->scriptBlock('$(function() {$( "#datepicker" ).datepicker();});',array('inline'=>'true'));
  ?>          
 </div>

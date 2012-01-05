@@ -2,9 +2,9 @@
 class ContentComponent extends Component {
 	
 	public function getData($controller, $params, $url)	{
-		$controller->loadModel('FoodMenuMenu');
-		$controller->loadModel('FoodMenuCategory');
-		$controller->loadModel('FoodMenuEntry');
+		$controller->loadModel('FoodMenu.FoodMenuMenu');
+		$controller->loadModel('FoodMenu.FoodMenuCategory');
+		$controller->loadModel('FoodMenu.FoodMenuEntry');
 		$menu = $controller->FoodMenuMenu->find('all');
 		$category = $controller->FoodMenuCategory->find('all');
 		$entry = $controller->FoodMenuEntry->find('all');

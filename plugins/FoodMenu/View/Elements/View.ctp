@@ -20,10 +20,10 @@
 	
 	echo $this->element('SelectDate');
 	//echo $this->element('MenuLinks');
-	//echo $this->element('AdminMenus');
-	echo $this->element('AdminCategories');
-	echo $this->element('AdminEntries');
-	echo $this->element('CreateMenu');
+	echo $this->element('AdminMenus', array('data' => $data));
+	echo $this->element('AdminCategories', array('data' => $data));
+	echo $this->element('AdminEntries', array('data' => $data));
+	echo $this->element('CreateMenu', array('data' => $data));
 	echo $this->element('CreateCategory');
 	echo $this->element('CreateEntry');
 ?>
