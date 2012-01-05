@@ -15,12 +15,13 @@ class SubscriptionController extends AppController {
 	}
 	
 	public function admin($contentID){
-		
+		$recipients = $this->NewsletterRecipient->find('all');
+		$this->set('recipients', $recipients);
 	}	
 	
-	public function content(){
+// 	public function content(){
 		
-	}
+// 	}
 	
 	public function subscribe() {
 		if ($this->request->is('post')){
