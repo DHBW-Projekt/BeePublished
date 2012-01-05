@@ -1,20 +1,13 @@
 <?php
 
 class EditorController extends AppController {
-var $autoLayout = false;
+	//var $autoLayout = false;
+	public $helpers = array('Html', 'Form', 'Js' => array('Jquery'));
 	
 	public function admin($contentID){
 		$this->loadModel("ContentValues");
-		if (empty($this->data)) {
-			$contentValue = $this->_getContentValue($contentID);
-			if ($contentValue['ContentValues']['key'] == 'Text') {
-				//Get Data from table content_values
-				$this->data =  $this->ContentValues->find('first', array('conditions' => array('ContentValues.content_id' => $contentID)));
-				//$this->data =  $contentValue['ContentValues']['value'];
-			}
-		} else {
-			
-			
+		//Load and save data
+		if (!(empty($this->data))) {
 			$textID = $this->_checkIfTextExists($contentID);
 				
 			if (!$textID) {
@@ -25,11 +18,18 @@ var $autoLayout = false;
 			$contentValue = $this->_getContentValue($contentID);
 			$this->ContentValues->set($contentValue);
 			$this->ContentValues->set('key', 'Text');
-			$this->ContentValues->set('value', $this->data['ContentValues']['value']);
+			$this->ContentValues->set('value',$this->data['editTextEditor']); //$this->data['ContentValues']['value'] ); //$this->data['editTextEditor']) ;//['textarea']);
 			$this->ContentValues->save();
+			
+		}
+		$contentValue = $this->_getContentValue($contentID);
+		if ($contentValue['ContentValues']['key'] == 'Text') {
+			//Get Data from table content_values
+			$tmpContent =  $this->ContentValues->find('first', array('conditions' => array('ContentValues.content_id' => $contentID)));
+			$this->set('contentValue', $tmpContent);
+			$this->data =  $tmpContent;
 		}
 	}
-	
 	
 	function _checkIfTextExists($contentID) {
 		$this->loadModel("ContentValues");
