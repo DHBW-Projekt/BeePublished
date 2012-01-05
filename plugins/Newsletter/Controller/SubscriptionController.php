@@ -15,11 +15,28 @@ class SubscriptionController extends AppController {
 	}
 	
 	public function admin($contentID){
-		
+		$recipients = $this->findActiveRecipients();
+		$this->set('recipients', $recipients);
 	}	
 	
-	public function content(){
-		
+	public function findActiveRecipients(){
+		$recipients = $this->NewsletterRecipient->find('all', array('conditions' => array ('NewsletterRecipient.active' => '1')));
+		return $recipients;
+	}
+
+	public function add(){
+		if ($this->request->is('post')){
+			$this->NewsletterRecipient->set(array(
+						'email' => $this->request->data['NewsletterRecipient']['email'],
+						'active' => '1'));
+			if($this->NewsletterRecipient->save()) {
+				$this->Session->setFlash('The user was added successfully.', 'default', array('class' => 'flash_success'), 'NewsletterRecipient');
+			} else {
+				$this->Session->setFlash('The user was not added.', 'default', array('class' => 'flash_failure'), 'NewsletterRecipient');
+				$this->_persistValidation('NewsletterRecipient');
+			}
+		}
+		$this->redirect($this->referer());
 	}
 	
 	public function subscribe() {
