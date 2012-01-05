@@ -11,6 +11,15 @@ class ContainersController extends AppController
     public $uses = array('Container', 'Page', 'Content', 'Plugin');
     public $components = array('CMSPlugin');
 
+    function beforeFilter()
+    {
+        parent::beforeFilter();
+        $role = $this->PermissionValidation->getUserRoleId();
+        if ($role != 6 && $role != 7) {
+            $this->redirect($this->request->webroot);
+        }
+    }
+
     function add($parent, $column, $type, $order)
     {
         $this->autoLayout = false;
@@ -49,13 +58,13 @@ class ContainersController extends AppController
         $oldOrder = $container['Container']['order'];
         $oldColumn = $container['Container']['column'];
         if ($this->request->is('post')) {
-            $this->Container->query('UPDATE containers SET `order` = `order`-1 WHERE parent_id='.$oldContainer.' AND `column`='.$oldColumn.' AND `order`>='.$oldOrder);
-            $this->Content->query('UPDATE contents SET `order` = `order`-1 WHERE container_id='.$oldContainer.' AND `column`='.$oldColumn.' AND `order`>='.$oldOrder);
-            $this->Container->query('UPDATE containers SET `order` = `order`+1 WHERE parent_id='.$newContainer.' AND `column`='.$newColumn.' AND `order`>='.$newOrder);
-            $this->Content->query('UPDATE contents SET `order` = `order`+1 WHERE container_id='.$newContainer.' AND `column`='.$newColumn.' AND `order`>='.$newOrder);
-            $this->Container->set('parent_id',$newContainer);
-            $this->Container->set('column',$newColumn);
-            $this->Container->set('order',$newOrder);
+            $this->Container->query('UPDATE containers SET `order` = `order`-1 WHERE parent_id=' . $oldContainer . ' AND `column`=' . $oldColumn . ' AND `order`>=' . $oldOrder);
+            $this->Content->query('UPDATE contents SET `order` = `order`-1 WHERE container_id=' . $oldContainer . ' AND `column`=' . $oldColumn . ' AND `order`>=' . $oldOrder);
+            $this->Container->query('UPDATE containers SET `order` = `order`+1 WHERE parent_id=' . $newContainer . ' AND `column`=' . $newColumn . ' AND `order`>=' . $newOrder);
+            $this->Content->query('UPDATE contents SET `order` = `order`+1 WHERE container_id=' . $newContainer . ' AND `column`=' . $newColumn . ' AND `order`>=' . $newOrder);
+            $this->Container->set('parent_id', $newContainer);
+            $this->Container->set('column', $newColumn);
+            $this->Container->set('order', $newOrder);
             $this->Container->save($this->request->data);
         }
         $this->render('json');

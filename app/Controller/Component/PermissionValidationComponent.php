@@ -1,6 +1,6 @@
 <?php 
 
-class PermissionComponent extends Component {
+class PermissionValidationComponent extends Component {
 	var $components = array('Auth');
 	
 	public function getUserRoleId(){

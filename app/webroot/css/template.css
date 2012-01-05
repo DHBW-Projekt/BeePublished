@@ -167,3 +167,8 @@ ol.subnav li span {
 .handler {
     cursor: move;
 }
+
+.flash_success, .flash_failure {
+	padding:10px;
+	margin:15px 0;
+}

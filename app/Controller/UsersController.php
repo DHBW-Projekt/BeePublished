@@ -82,6 +82,7 @@ class UsersController extends AppController
         $this->set(compact('roles'));
         $this->set('adminMode', false);
         $this->set('menu', $this->Menu->buildMenu($this, NULL));
+        $this->set('systemPage', true);
     }
 
     /**
@@ -159,6 +160,9 @@ class UsersController extends AppController
                 }
             }
         }
+        $this->set('menu', $this->Menu->buildMenu($this, NULL));
+        $this->set('adminMode', false);
+        $this->set('systemPage', true);
     }
 
     /**
