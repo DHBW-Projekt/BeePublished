@@ -6,6 +6,13 @@ class SubscriptionController extends AppController {
 	public $uses = array('Newsletter.NewsletterRecipient');
 	var $autoLayout = false;
 	
+	public $paginate = array(
+        'limit' => 10,
+        'order' => array(
+            'NewsletterRecipient.email' => 'asc'
+        )
+    );
+	
 
 	function beforeFilter()
 	{
@@ -15,15 +22,11 @@ class SubscriptionController extends AppController {
 	}
 	
 	public function admin($contentID){
-		$recipients = $this->findActiveRecipients();
+//		$recipients = $this->NewsletterRecipient->find('all');
+		$recipients = $this->paginate('NewsletterRecipient');
 		$this->set('recipients', $recipients);
-	}	
-	
-	public function findActiveRecipients(){
-		$recipients = $this->NewsletterRecipient->find('all', array('conditions' => array ('NewsletterRecipient.active' => '1')));
-		return $recipients;
 	}
-
+	
 	public function add(){
 		if ($this->request->is('post')){
 			$this->NewsletterRecipient->set(array(
