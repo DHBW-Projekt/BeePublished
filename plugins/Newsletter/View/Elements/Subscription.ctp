@@ -22,7 +22,6 @@
 			// check for newsletter subscription
 	    	echo $user['email'];
 //	    	echo '<br>'.$plugin.'<br>'.$view.'<br>'.$id;
-	  	
 			// if current user is admin (change later: role_id >= 4), for development: >= 3
 		   	echo $this->Html->link(
 	      		$this->Html->image('tools.png', array('class' => 'setting_image')),
