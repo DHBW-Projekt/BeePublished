@@ -12,6 +12,17 @@
 	<?php
 //	debug($NewsletterRecipient, $showHtml=null, $showFrom=true);
 	//$data = $NewsletterRecipient;
+	$paging_params = $this->Paginator->params();
+	if ($paging_params['count'] > 0){
+		echo $this->Paginator->counter(__('Einträge {:start} bis {:end} von {:count}, Seite {:page} von {:pages} '));
+		if ($this->Paginator->hasPrev()){
+			echo $this->Paginator->prev('<< ');
+		}
+		echo $this->Paginator->numbers();
+		if ($this->Paginator->hasNext()){
+			echo $this->Paginator->next(' >>');
+		}
+	}
 	if (isset($recipients)){
 	//	if (array_key_exists('NewsletterRecipient', $data)){
 	//	$recipients = $data;

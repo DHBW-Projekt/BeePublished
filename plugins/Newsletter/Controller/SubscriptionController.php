@@ -6,6 +6,13 @@ class SubscriptionController extends AppController {
 	public $uses = array('Newsletter.NewsletterRecipient');
 	var $autoLayout = false;
 	
+	public $paginate = array(
+        'limit' => 10,
+        'order' => array(
+            'NewsletterRecipient.email' => 'asc'
+        )
+    );
+	
 
 	function beforeFilter()
 	{
@@ -15,7 +22,8 @@ class SubscriptionController extends AppController {
 	}
 	
 	public function admin($contentID){
-		$recipients = $this->NewsletterRecipient->find('all');
+//		$recipients = $this->NewsletterRecipient->find('all');
+		$recipients = $this->paginate('NewsletterRecipient');
 		$this->set('recipients', $recipients);
 	}	
 	
