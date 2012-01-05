@@ -29,7 +29,7 @@ class SubscriptionController extends AppController {
 				'active' => '1'));
 			if($this->NewsletterRecipient->save()) {
 				$this->Session->setFlash('The user was added successfully.', 'default', array('class' => 'flash_success'), 'NewsletterRecipient');
-				$this->_deleteValidation();
+//				$this->_deleteValidation();
 			} else {
 				$this->Session->setFlash('The user was not added.', 'default', array('class' => 'flash_failure'), 'NewsletterRecipient');
 				$this->_persistValidation('NewsletterRecipient');
