@@ -5,6 +5,7 @@ class SubscriptionController extends AppController {
 	public $name = 'Subscription';
 	public $uses = array('Newsletter.NewsletterRecipient');
 	var $autoLayout = false;
+	
 
 	function beforeFilter()
 	{
@@ -17,7 +18,7 @@ class SubscriptionController extends AppController {
 		
 	}	
 	
-	public function admin2(){
+	public function content(){
 		
 	}
 	
