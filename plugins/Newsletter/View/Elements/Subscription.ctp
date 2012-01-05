@@ -1,11 +1,13 @@
 <?php
 $user = $this->Session->read('Auth.User'); // get data for current user
 $this->Html->script('/newsletter/js/newsletter', false);
+
 ?>
 <div id="subscription">
 
 	<?php
-		if (($user['role_id']) == '2') {
+//		if (($user['role_id']) == '2') {
+		if (!($user)){	
 			echo $this->Form->create('Subscription',array('url' => array('plugin' => 'Newsletter',
 														   		  'controller' => 'Subscription',
 														   		  'action' => 'subscribe')));
@@ -20,17 +22,17 @@ $this->Html->script('/newsletter/js/newsletter', false);
 			
 			// check for newsletter subscription
 	    	echo $user['email'];
-//	    	echo '<br>'.$plugin.'<br>'.$view.'<br>'.$id;
-	    	
 			  	
+			  	
+			// if current user is admin (change later: role_id >= 4), for development: >= 3
+		   	
 		   	echo $this->Html->link(
 	      		$this->Html->image('tools.png', array('class' => 'setting_image')),
-	       		array('plugin' => 'Newsletter', 'controller' => 'Subscription', 'action' => 'admin2'),
-	      		array('escape' => False, 'id' => 'overlay') //, 'class' => 'setting_button')
+	       		array('plugin' => 'Newsletter', 'controller' => 'Subscription', 'action' => 'content'),
+	      		array('escape' => False, 'class' => 'newsletter-overlay') //, 'class' => 'setting_button')
 	    	);
 	    		
-		    	
-		    // if current user is admin (change later: role_id >= 4), for development: 3
+		   
 
       	};
        

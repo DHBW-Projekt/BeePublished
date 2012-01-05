@@ -5,6 +5,7 @@ class SubscriptionController extends AppController {
 	public $name = 'Subscription';
 	public $uses = array('Newsletter.NewsletterRecipient');
 	var $autoLayout = false;
+	
 
 	function beforeFilter()
 	{
@@ -18,7 +19,7 @@ class SubscriptionController extends AppController {
 		
 	}	
 	
-	public function admin2(){
+	public function content(){
 		
 	}
 	
@@ -36,4 +37,12 @@ class SubscriptionController extends AppController {
 //		$this->set('errors', $this->GuestbookPost->validationErrors);
 		$this->redirect($this->referer());
 	}
+
+
+
+
+
+
+
+	
 }
