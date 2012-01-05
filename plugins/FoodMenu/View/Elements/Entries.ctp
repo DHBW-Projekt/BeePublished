@@ -4,7 +4,7 @@
 	if (isset($data)) {
 		foreach ($data as $entry){
 			echo '<tr>';
-			echo '<td>'.echo $this->Form->checkbox($entry['Entry']['ID'], array('hiddenField' => false)).'</td>';
+			echo '<td>'.$this->Form->checkbox($entry['Entry']['ID'], array('hiddenField' => false)).'</td>';
 			echo '<td>'.$entry['Entry']['name'].'</td>';
 			echo '<td>'.$entry['Entry']['price'].' '.$entry['Entry']['currency'].'</td>';
 			// Icons mit Funktionen einfügen

@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dualon>
-	<plugin>
-		<name>FoodMenu</name>
-		<author>Benedikt Steffan</author>
-		<version>1.0</version>
-	</plugin>
+    <plugin>
+        <name>FoodMenu</name>
+        <author>Benedikt Steffan</author>
+        <version>1.0</version>
+        <permissions>
+        </permissions>
+        <views>
+            <view>
+                <name>View</name>
+            </view>
+        </views>
+    </plugin>
 </dualon>
