@@ -9,4 +9,11 @@ $(document).ready(function () {
 	$(".newsentry_delete_button_icon" ,this).click(function(){
 		
 	})
+	
+	$(".newsblog_overlay").fancybox({
+		'type':'inline',
+		'onClosed':function () {
+			window.location.reload(true);
+		}
+	});
 });

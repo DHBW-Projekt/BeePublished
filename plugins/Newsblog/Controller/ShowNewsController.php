@@ -39,6 +39,7 @@ class ShowNewsController extends AppController{
 		$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Edit');
 		if($editAllowed){
 			$this->autoLayout = true;
+			$this->layout = 'fancybox';
 			//load current data of newsentry with id = $newsEntryId
 			$this->loadModel('Newsblog.NewsEntry');
 			$entry = $this->NewsEntry->findById($newsEntryId);

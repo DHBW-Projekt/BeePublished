@@ -1,8 +1,8 @@
 <?php 
 	$this->Html->css('/newsblog/css/editNews', null, array('inline' => false));
-	$this->Html->script('/newsblog/js/editNews', false);
-	$this->Html->script('/ckeditor/ckeditor', false);
-	$this->Html->script('/ckeditor/adapters/jquery', false);
+	$this->Html->script('/newsblog/js/editNews', array('inline' => false));
+	$this->Html->script('/ckeditor/ckeditor', array('inline' => false));
+	$this->Html->script('/ckeditor/adapters/jquery', array('inline' => false));
 	
 	//get configured date format
 	//split valid from

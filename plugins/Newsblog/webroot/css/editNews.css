@@ -24,3 +24,11 @@
 	font-size: 16px;
 	padding: 6px;
 }
+
+.button {
+	background-color: #0F73A6;
+	border: 1px solid #095B85;
+	box-shadow: 0 0 8px #095B85 inset;
+	color: #FFFFFF;
+	font-size: 15px;
+}

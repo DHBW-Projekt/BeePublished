@@ -21,11 +21,7 @@ class NewsblogOverviewComponent extends Component {
 		$optionsNE['conditions'] = $conditionsNE;
 		$optionsNE['order'] = array('createdOn DESC');
 		
-		$conditionsNT = array("NewsblogTitle.content_id" => $id);
-		$optionsNT['conditions'] = $conditionsNT;
-		
 		$data['publishedNewsEntries'] = $controller->NewsEntry->find('all',$optionsNE);
-		$data['newsblogTitle'] = $controller->NewsblogTitle->find('first', $optionsNT);
 		$data['view'] = 'NewsblogOverview';
 		return $data;
 	}

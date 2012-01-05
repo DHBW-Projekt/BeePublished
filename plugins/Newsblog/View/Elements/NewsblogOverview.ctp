@@ -1,5 +1,6 @@
 <?php
 	$DateTimeHelper = $this->Helpers->load('Time');
+	$this->Helpers->load('Slug');
 	
 	$this->Html->script('/newsblog/js/showNews', false);
 	$this->Html->css('/newsblog/css/showNews', null, array('inline' => false));
@@ -19,21 +20,15 @@
 	
 	$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Delete');
 	$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Edit');
-	$newsblogTitle = $data['newsblogTitle']['NewsblogTitle']['title'];
 ?>
 
-<div id='newsblogcontainer_<?php echo $newsblogTitle?>'>
+<div class='newsblogcontainer'>
 
 <?php foreach($data['publishedNewsEntries'] as $NewsEntry):
 		$newsEntryId = $NewsEntry['NewsEntry']['id'];
 		$newsblogEntryDivId = "newsblogEntry".$newsEntryId;
 		$title = $NewsEntry['NewsEntry']['title'];
-		$titleForUrl = iconv("utf-8", "ASCII//TRANSLIT", utf8_encode($title));
-		$titleForUrl = str_replace(array('"a','"A'),'ae',$titleForUrl);
-		$titleForUrl = str_replace(array('"o','"O'),'oe',$titleForUrl);
-		$titleForUrl = str_replace(array('"u','"U'),'ue',$titleForUrl);
-		$titleForUrl = strtolower(trim(preg_replace('/[^\w\d_ -]/si', '', $titleForUrl)));
-        $titleForUrl = str_replace(' ', '-', $titleForUrl);
+		$titleForUrl = $this->Slug->generateSlug($title);
 		$text = $NewsEntry['NewsEntry']['text'];
 		if(strlen($text) > $shorttextLength){
 			$substrEnd = $shorttextLength - 3;
@@ -65,7 +60,7 @@
 				echo $this->Html->link(
 					$this->Html->image('/Newsblog/img/Edit.png', array('class' => 'newsentry_edit_button_icon', 'alt' => 'Edit')),
 					array('plugin' => 'Newsblog', 'controller' => 'ShowNews', 'action' => 'editNews', $newsEntryId),
-					array('escape' => false, 'class' => 'iframe')
+					array('escape' => false, 'class' => 'newsblog_overlay')
 				);
 			}
 			if($deleteAllowed){
