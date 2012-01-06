@@ -10,8 +10,12 @@ class ViewComponent extends Component {
 		$entry = $controller->FoodMenuEntry->find('all');
 		
 		$data = array('FoodMenuMenu' => $menu, 'FoodMenuCategory' => $category, 'FoodMenuEntry' => $entry);
-		if ($data != null)
+		//debug($data, $showHtml=false, $showFrom=true);
+		$controller->set('data', $data);
+		if ($data != null) {
+			//debug($menu,$showHtml=false,$showFrom=true);
 			return $data;
+		}
 		else
 			return __('no entries');
 	}

@@ -19,5 +19,7 @@ echo 'Sa: '.$this->Form->checkbox('sa', array('value' => 32, 'checked' => true, 
 echo 'So: '.$this->Form->checkbox('su', array('value' => 64, 'checked' => true, 'hiddenField' => true));
 echo '</td></tr>';
 echo '</table>';
-echo $this->Form->end('Speichern');
+echo $this->Form->button(__('Speichern'), array('type' => 'submit', 'onClick' => 'showDiv(\'adminMenuOverview\', \'adminMenuEdit\')'));
+echo $this->Form->button(__('Zurück'), array('type' => 'button', 'onClick' => 'showDiv(\'adminMenuOverview\', \'adminMenuEdit\')'));
+echo $this->Form->end();
 ?>

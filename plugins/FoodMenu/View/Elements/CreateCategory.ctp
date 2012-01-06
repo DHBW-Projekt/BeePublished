@@ -6,5 +6,7 @@ echo '<td>';
 echo $this->Form->input('name').'<br />';
 echo '</td></tr>';
 echo '</table>';
-echo $this->Form->end('Speichern');
+echo $this->Form->button(__('Speichern'), array('type' => 'submit', 'onClick' => 'showDiv(\'adminCategoryOverview\', \'adminCategoryEdit\')'));
+echo $this->Form->button(__('Zurück'), array('type' => 'button', 'onClick' => 'showDiv(\'adminCategoryOverview\', \'adminCategoryEdit\')'));
+echo $this->Form->end();
 ?>

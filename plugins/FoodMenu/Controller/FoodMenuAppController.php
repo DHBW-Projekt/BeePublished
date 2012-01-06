@@ -4,8 +4,8 @@ class FoodMenuAppController extends AppController {
 	
 	public $name = 'FoodMenuApp';
 	public $uses = array('FoodMenu.FoodMenuMenu', 'FoodMenu.FoodMenuCategory', 'FoodMenu.FoodMenuEntry');
-	var $helpers = array('Html', 'Form', 'Javascript', 'Ajax');
-	
+	var $helpers = array('Html', 'Form');
+	var $autoLayout = false;
 	
 	function beforeFilter()
     {
@@ -13,34 +13,39 @@ class FoodMenuAppController extends AppController {
 
         //Actions which don't require authorization
         $this->Auth->allow('*');
-    }
+    }//beforeFilter
 
 	function viewMenu() {
-		$this->loadModel('FoodMenuMenu');
-		$this->loadModel('FoodMenuCategory');
-		$this->loadModel('FoodMenuEntry');
-		$this->FoodMenuMenu->bindModel(array('hasAndBelongsToMany' => array('FoodMenuCategory' => array('conditions'=>array('Category.ID'=>'*')))));
+//		$this->loadModel('FoodMenuMenu');
+//		$this->loadModel('FoodMenuCategory');
+//		$this->loadModel('FoodMenuEntry');
+//		$this->FoodMenuMenu->bindModel(array('hasAndBelongsToMany' => array('FoodMenuCategory' => array('conditions'=>array('Category.ID'=>'*')))));
+//
+//		$menus = $this->FoodMenuMenu->find('all');
+//		$categories = $this->FoodMenuCategory->find('all');
+//		$entries = $this->FoodMenuEntry->find('all');
+//		$this->set('data', array($menus, $categories, $entries));
+//		
+//		$this->render('/Elements/MenuLinks');
+	}//viewMenu
 
-		$menus = $this->FoodMenuMenu->find('all');
-		$categories = $this->FoodMenuCategory->find('all');
-		$entries = $this->FoodMenuEntry->find('all');
-		$this->set('data', array($menus, $categories, $entries));
-		
-		$this->render('/Elements/MenuLinks');
-	}
-	
-	function showCategories() {
-		
-		$selectedMenu = $this->request->data['url']; //Get ID of selected FoodMenu
-		
-		$this->loadModel('FoodMenuCategory');
-		$this->loadModel('FoodMenuMenu');
-		$this->FoodMenuMenu->bindModel(array('hasAndBelongsToMany' => array('FoodMenuCategory' => array())));
-
-		$menu = $this->FoodMenuMenu->find('all', array('conditions'=>array('Menu.name'=>$selectedMenu)));
-		
-		$this->render('/Elements/MenuLinks');
-	}
+//	function showCategories( $name = null, $id = null ) {
+//		
+////		$selectedMenu = $id; //Get ID of selected FoodMenu
+////		
+////		$this->loadModel('FoodMenuMenu');
+////		$this->loadModel('FoodMenuCategory');
+////	
+////		$categories = $this->FoodMenuCategory->query('SELECT Category.* FROM food_menu_categories AS Category
+////				LEFT JOIN (food_menu_menus_food_menu_categories) 
+////				ON (food_menu_menus_food_menu_categories.food_menu_category_id = Category.id)
+////				WHERE food_menu_menus_food_menu_categories.food_menu_menu_id ='.$selectedMenu.'');
+////		debug($categories,$showHtml=false, $showFrom=true);
+////		$this->set('categories', $categories);
+////		
+////		//$this->redirect($this->referer());
+////  		$this->render('/Elements/View');
+//	}
 	
 	function showEntries() {
 		$selectedCategory = $this->request->data['url']; //Get ID of selected FoodMenu
@@ -53,14 +58,14 @@ class FoodMenuAppController extends AppController {
 		$entry = $this->FoodMenuEntry->find('all', array('conditions'=>array('Category.name'=>$selectedCategory)));
 		
 		$this->render('/Elements/MenuLinks');
-	}
+	}//showEntries
 	
 	function addCategories() {
 		
-	}
+	}//addCategories
 	
 	function editMenu($name = null, $id = null) {
-		$this->FoodMenuMenu->ID = $id;
+		$this->FoodMenuMenu->id = $id;
     	if ($this->request->is('get')) {
         	$this->request->data = $this->FoodMenuMenu->read();
     	} else {
@@ -69,30 +74,27 @@ class FoodMenuAppController extends AppController {
             	$this->redirect(array($this->referer()));
         	} else {
             	$this->Session->setFlash('Die Speisekarte konnte nicht geändert werden.');
-        	}
-    }
-		
-		
-	}
+        	}//else
+    	}//else
+	}//editMenu
 	
 	function deleteMenu($name = null, $id = null) {
-		$this->FoodMenuMenu->ID = $id;
+		$this->FoodMenuMenu->id = $id;
 		if ($this->request->is('get')) {
 			$this->request->data = $this->FoodMenuMenu->read('deleted', $id);
 			$this->request->data['FoodMenuMenu']['deleted'] = date("Y-m-d H:i:s");
 			if($this->FoodMenuMenu->save($this->request->data)) {
 				$this->Session->setFlash(__('Der Speiseplan wurde entfernt.'));
 				$this->redirect($this->referer());
-			}
-		}
-	}
+			}//if
+		}//if
+	}//deleteMenu
 	
 	function addEntries() {
-		
-	}
+	}//addEntries
 	
 	function editCategory($name = null, $id = null) {
-		$this->FoodMenuCategory->ID = $id;
+		$this->FoodMenuCategory->id = $id;
     	if ($this->request->is('get')) {
         	$this->request->data = $this->FoodMenuCategory->read();
     	} else {
@@ -101,25 +103,24 @@ class FoodMenuAppController extends AppController {
             	$this->redirect(array($this->referer()));
         	} else {
             	$this->Session->setFlash('Die Kategorie konnte nicht geändert werden.');
-        	}
-		
-	}
+        	}//else
+		}//else
+	}//editCategory
 	
 	function deleteCategory($name = null, $id = null) {
-		$this->FoodMenuCategory->ID = $id;
+		$this->FoodMenuCategory->id = $id;
 		if ($this->request->is('get')) {
 			$this->request->data = $this->FoodMenuCategory->read('deleted', $id);
 			$this->request->data['FoodMenuCategory']['deleted'] = date("Y-m-d H:i:s");
 			if($this->FoodMenuCategory->save($this->request->data)) {
 				$this->Session->setFlash(__('Die Kategorie wurde entfernt.'));
 				$this->redirect($this->referer());
-			}
-		}
-		
-	}
+			}//if
+		}//if
+	}//deleteCategory
 	
 	function editEntry($name = null, $id = null) {
-		$this->FoodMenuEntry->ID = $id;
+		$this->FoodMenuEntry->id = $id;
     	if ($this->request->is('get')) {
         	$this->request->data = $this->FoodMenuEntry->read();
     	} else {
@@ -128,23 +129,22 @@ class FoodMenuAppController extends AppController {
             	$this->redirect(array($this->referer()));
         	} else {
             	$this->Session->setFlash('Der Eintrag konnte nicht geändert werden.');
-        	}
-	}
+        	}//else
+	}//else
 		
-	}
+	}//editEntry
 	
 	function deleteEntry($name = null, $id = null) {
-		$this->FoodMenuEntry->ID = $id;
+		$this->FoodMenuEntry->id = $id;
 		if ($this->request->is('get')) {
 			$this->request->data = $this->FoodMenuEntry->read('deleted', $id);
 			$this->request->data['FoodMenuEntry']['deleted'] = date("Y-m-d H:i:s");
 			if($this->FoodMenuEntry->save($this->request->data)) {
 				$this->Session->setFlash(__('Der Speiseplan wurde entfernt.'));
 				$this->redirect($this->referer());
-			}
-		}
-		
-	}
+			}//if
+		}//if	
+	}//deleteEntry
 	
 	function addMenu() {
 		if ($this->request->is('post')) {
@@ -160,9 +160,9 @@ class FoodMenuAppController extends AppController {
                 $this->redirect($this->referer());
             } else {
                 $this->Session->setFlash(__('Der Speiseplan konnte nicht gespeichert werden.'));
-            }
-        }
-	}
+            }//else
+        }//if
+	}//addMenu
 	
 	function addCategory() {
 		if ($this->request->is('post')) {			
@@ -171,9 +171,9 @@ class FoodMenuAppController extends AppController {
                 $this->redirect($this->referer());
             } else {
                 $this->Session->setFlash(__('Die Kategorie konnte nicht gespeichert werden.'));
-            }
-        }
-	}
+            }//else
+        }//if
+	}//addCategory
 	
 	function addEntry() {
 			if ($this->request->is('post')) {			
@@ -182,8 +182,7 @@ class FoodMenuAppController extends AppController {
                 $this->redirect($this->referer());
             } else {
                 $this->Session->setFlash(__('Der Eintrag konnte nicht gespeichert werden.'));
-            }
-        }
-	}
-}
+            }//else
+        }//if
+	}//addEntry
 }

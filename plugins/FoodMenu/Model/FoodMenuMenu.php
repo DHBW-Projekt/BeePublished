@@ -12,7 +12,7 @@ class FoodMenuMenu extends AppModel {
  *
  * @var string
  */
-	public $primaryKey = 'ID';
+	public $primaryKey = 'id';
 /**
  * Display field
  *

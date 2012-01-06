@@ -1,7 +1,8 @@
-<div id="adminMenu">
+<div id="adminEntry">
+<div id="adminEntryOverview" style="display:block;">
 <?php 
 echo $this->Form->create('FoodMenuEntry');
-echo $this->Form->button('Neuer Eintrag');
+echo $this->Form->button('Neuer Eintrag', array('type' => 'button', 'onClick' => 'showDiv(\'adminEntryEdit\', \'adminEntryOverview\')'));
 echo $this->Form->button('Auswahl löschen');
 ?>
 <table>
@@ -26,22 +27,22 @@ echo $this->Form->button('Auswahl löschen');
 </tr>
 </thead>
 <?php
-if (isset($data)) {
-		if(array_key_exists('FoodMenuEntry', $data)) {
-			$menuItems = $data['FoodMenuEntry'];
-		}
-foreach ($menuItems as $menuEntry) {
-	if ( $menuEntry['FoodMenuEntry']['deleted'] != NULL ) continue;
+if (isset($entries)) {
+//		if(array_key_exists('FoodMenuEntry', $data)) {
+//			$menuItems = $data['FoodMenuEntry'];
+//		}
+foreach ($entries as $entry) {
+	if ( $entry['FoodMenuEntry']['deleted'] != NULL ) continue;
 	else {
 	echo '<tr>';
-	echo '<td>'.$this->Form->checkbox($menuEntry['FoodMenuEntry']['ID'], array('value' => 1, 'checked' => false, 'hiddenField' => false)).'</td>';
-	echo '<td>'.$menuEntry['FoodMenuEntry']['name'].'</td>';
-	echo '<td>'.$menuEntry['FoodMenuEntry']['price'].'</td>';
-	echo '<td>'.$menuEntry['FoodMenuEntry']['currency'].'</td>';
+	echo '<td>'.$this->Form->checkbox($entry['FoodMenuEntry']['id'], array('value' => 1, 'checked' => false, 'hiddenField' => false)).'</td>';
+	echo '<td>'.$entry['FoodMenuEntry']['name'].'</td>';
+	echo '<td>'.$entry['FoodMenuEntry']['price'].'</td>';
+	echo '<td>'.$entry['FoodMenuEntry']['currency'].'</td>';
 	echo '<td>';
-	echo $this->Html->image('/app/webroot/img/edit.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[e]Edit', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuApp', 'action' => 'editEntry', $menuEntry['FoodMenuEntry']['name'], $menuEntry['FoodMenuEntry']['ID'])));
+	echo $this->Html->image('/app/webroot/img/edit.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[e]Edit', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuApp', 'action' => 'editEntry', $entry['FoodMenuEntry']['name'], $entry['FoodMenuEntry']['id'])));
 	echo '</td><td>';
-	echo $this->Html->image('/app/webroot/img/delete.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[x]Delete', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuApp', 'action' => 'deleteEntry', $menuEntry['FoodMenuEntry']['name'], $menuEntry['FoodMenuEntry']['ID'])));
+	echo $this->Html->image('/app/webroot/img/delete.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[x]Delete', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuApp', 'action' => 'deleteEntry', $entry['FoodMenuEntry']['name'], $entry['FoodMenuEntry']['id'])));
 	echo '</td>';
     echo '</tr>';
 	}
@@ -50,4 +51,8 @@ foreach ($menuItems as $menuEntry) {
 ?>
 </table>
 <?php echo $this->Form->end(); ?>
+</div>
+<div id="adminEntryEdit" style="display:none;">
+<?php echo $this->element('CreateEntry');?>
+</div>
 </div>

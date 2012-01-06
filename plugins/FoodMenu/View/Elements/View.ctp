@@ -1,8 +1,6 @@
 <?php 
-//	  echo $this->Html->script('/app/jquery-1.6.2.min');
-//      echo $this->Html->script('/app/jquery-ui-1.8.16.custom.min');
-//	  $this->Html->css('/css/jquery-ui/jquery-ui-1.8.16.custom'); 
-	  echo $this->Html->script('/food_menu/js/foodmenu', false);
+    echo $this->Html->script('/food_menu/js/foodmenu', false);
+    echo $this->Html->css('/food_menu/css/menu'); 
 ?>
 <?php 
 	$user = $this->Session->read('Auth.User');
@@ -10,57 +8,55 @@
 <div id="foodMenuMain" style="width:100%; height:450px">
 <?php
 	echo $this->Session->flash();
-	if ( $user['role_id'] >= 3 ) {
-	echo $this->Html->link( 
-		$this->Html->image('tools.png', array('class' => 'setting_image')), 
-		array('plugin' => 'FoodMenu', 'controller' => 'View', 'action' => 'content'), 
-		array('escape' => False, 'class' => 'foodmenu-overlay')
-	);
-	}
 	
 	echo $this->element('SelectDate');
-	//echo $this->element('MenuLinks');
-	echo $this->element('AdminMenus', array('data' => $data));
-	echo $this->element('AdminCategories', array('data' => $data));
-	echo $this->element('AdminEntries', array('data' => $data));
-	echo $this->element('CreateMenu', array('data' => $data));
-	echo $this->element('CreateCategory');
-	echo $this->element('CreateEntry');
+	echo $this->element('MenuLinks', array('data' => $data));
 ?>
-<div id="foodMenuMenu" style="width:100%; height:30px">
-<ul style="float:left">
-<?php
-	if (isset($data)) {
-		if(array_key_exists('FoodMenuMenu', $data)) {
-			$menuItems = $data['FoodMenuMenu'];
-			foreach ($menuItems as $dataItem){
-			if ( $dataItem['FoodMenuMenu']['deleted'] != NULL ) continue;
-			else {
-			$menu = $dataItem;
-			echo '<li>'.$this->Html->link($menu['FoodMenuMenu']['name'], array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuApp', 'action' => 'showCatergories', $menu['FoodMenuMenu']['name']), array()).'</li>'; //$menu['FoodMenuMenu']['name']).' ';	
-			}
+	
+	<?php
+		if(isset($categories)) {
+//			$this->element('ShowCategories', $categories);
+			debug($categories,$showHtml=false, $showFrom=true);
+			if(array_key_exists('Category', $categories)) {
+				echo '<ul id="FoodMenuMenu">';
+				foreach ($categories as $category) {
+					if ( $category['Category']['deleted'] != NULL ) continue;
+					else {
+						echo '<li>'.$this->Html->link($category['Category']['name'], array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuApp', 'action' => 'showEntries', $category['Category']['name'], $menu['Category']['id'])).'</li>';	
+					}	
+				}
+				echo '</ul><br />';
 			}
 		}
-		echo '</ul><br />';	
+//	if (isset($categories)) {
+//		debug($categories,$showHtml=false, $showFrom=true);
+//		if(array_key_exists('Category', $categories)) {
+//			echo '<ul id="FoodMenuMenu">';
+//			foreach ($categories as $category) {
+//				if ( $category['Category']['deleted'] != NULL ) continue;
+//				else {
+//					echo '<li>'.$this->Html->link($category['Category']['name'], array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuApp', 'action' => 'showEntries', $category['Category']['name'], $menu['Category']['id'])).'</li>';	
+//			}
+//				
+//			}
+//			echo '</ul>';
+		//}
+//	}
 		
-		
-		if(array_key_exists('FoodMenuCategory', $data)) {
-			echo '<ul style="float:left; list-style-type: none">';
-			$categoryItems = $data['FoodMenuCategory'];
-			foreach ($categoryItems as $dataItem){
-			if ( $dataItem['FoodMenuCategory']['deleted'] != NULL ) continue;
-			else {
-			$menu = $dataItem;
-			echo '<li>'.$this->Html->link($menu['FoodMenuCategory']['name'], array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuApp', 'action' => 'showEntries', $menu['FoodMenuCategory']['name']), array()).'</li>'; //$menu['FoodMenuMenu']['name']).' ';					
-			}
-			}
-		}	
-		if(array_key_exists('FoodMenuEntry', $data)) {
-			$entryItems = $data['FoodMenuEntry'];
-		}			
+//		if(array_key_exists('FoodMenuCategory', $data)) {
+//			echo '<ul id="FoodMenuMenu">';
+//			$categoryItems = $data['FoodMenuCategory'];
+//			foreach ($categoryItems as $dataItem){
+//			if ( $dataItem['FoodMenuCategory']['deleted'] != NULL ) continue;
+//			else {
+//			$menu = $dataItem;
+//			echo '<li>'.$this->Html->link($menu['FoodMenuCategory']['name'], array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuApp', 'action' => 'showEntries', $menu['FoodMenuCategory']['name']), array()).'</li>'; //$menu['FoodMenuMenu']['name']).' ';					
+//			}
+//			}
+//		}	
+//		if(array_key_exists('FoodMenuEntry', $data)) {
+//			$entryItems = $data['FoodMenuEntry'];
+//		}			
 
-	}
 ?>
-</ul>
-</div>
 </div>

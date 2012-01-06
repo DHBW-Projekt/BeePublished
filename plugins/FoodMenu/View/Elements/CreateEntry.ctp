@@ -9,5 +9,7 @@ echo $this->Form->input('price').'<br />';
 echo $this->Form->input('currency').'<br />';
 echo '</td></tr>';
 echo '</table>';
-echo $this->Form->end('Speichern');
+echo $this->Form->button(__('Speichern'), array('type' => 'submit', 'onClick' => 'showDiv(\'adminEntryOverview\', \'adminEntryEdit\')'));
+echo $this->Form->button(__('Zurück'), array('type' => 'button', 'onClick' => 'showDiv(\'adminEntryOverview\', \'adminEntryEdit\')'));
+echo $this->Form->end();
 ?>
