@@ -1,4 +1,4 @@
-SET FOREIGN_KEY_CHECKS=0;DROP TABLE IF EXISTS configurations ;
+SET FOREIGN_KEY_CHECKS=0;DROP TABLE IF EXISTSconfigurations;
 
 CREATE TABLE `configurations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -25,7 +25,7 @@ CREATE TABLE `configurations` (
 
 
 
-DROP TABLE IF EXISTS containers ;
+DROP TABLE IF EXISTScontainers;
 
 CREATE TABLE `containers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -41,14 +41,17 @@ CREATE TABLE `containers` (
   CONSTRAINT `containers_ibfk_3` FOREIGN KEY (`page_id`) REFERENCES `pages` (`id`) ON DELETE CASCADE,
   CONSTRAINT `containers_ibfk_1` FOREIGN KEY (`layout_type_id`) REFERENCES `layout_types` (`id`),
   CONSTRAINT `containers_ibfk_2` FOREIGN KEY (`parent_id`) REFERENCES `containers` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=latin1;
 
 INSERT INTO containers VALUES("71","0","22","0","0","0");
 INSERT INTO containers VALUES("72","71","0","1","1","1");
+INSERT INTO containers VALUES("73","","23","","0","0");
+INSERT INTO containers VALUES("74","73","","2","1","1");
+INSERT INTO containers VALUES("75","74","","5","1","1");
 
 
 
-DROP TABLE IF EXISTS content_values ;
+DROP TABLE IF EXISTScontent_values;
 
 CREATE TABLE `content_values` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -64,7 +67,7 @@ CREATE TABLE `content_values` (
 
 
 
-DROP TABLE IF EXISTS contents ;
+DROP TABLE IF EXISTScontents;
 
 CREATE TABLE `contents` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -83,7 +86,7 @@ INSERT INTO contents VALUES("27","72","1","1","6");
 
 
 
-DROP TABLE IF EXISTS google_maps_locations ;
+DROP TABLE IF EXISTSgoogle_maps_locations;
 
 CREATE TABLE `google_maps_locations` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
@@ -99,7 +102,7 @@ CREATE TABLE `google_maps_locations` (
 
 
 
-DROP TABLE IF EXISTS i18n ;
+DROP TABLE IF EXISTSi18n;
 
 CREATE TABLE `i18n` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
@@ -118,7 +121,7 @@ CREATE TABLE `i18n` (
 
 
 
-DROP TABLE IF EXISTS layout_types ;
+DROP TABLE IF EXISTSlayout_types;
 
 CREATE TABLE `layout_types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -140,7 +143,7 @@ INSERT INTO layout_types VALUES("8","3 Spalten selbe Größe","","0","33:33:33");
 
 
 
-DROP TABLE IF EXISTS log_entries ;
+DROP TABLE IF EXISTSlog_entries;
 
 CREATE TABLE `log_entries` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -159,7 +162,7 @@ CREATE TABLE `log_entries` (
 
 
 
-DROP TABLE IF EXISTS menu_entries ;
+DROP TABLE IF EXISTSmenu_entries;
 
 CREATE TABLE `menu_entries` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -178,13 +181,14 @@ CREATE TABLE `menu_entries` (
   CONSTRAINT `menu_entries_ibfk_5` FOREIGN KEY (`page_id`) REFERENCES `pages` (`id`) ON DELETE CASCADE,
   CONSTRAINT `menu_entries_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`),
   CONSTRAINT `menu_entries_ibfk_4` FOREIGN KEY (`parent_id`) REFERENCES `menu_entries` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=latin1;
 
 INSERT INTO menu_entries VALUES("63","0","2","22","home","0","0000-00-00 00:00:00","0000-00-00 00:00:00","0");
+INSERT INTO menu_entries VALUES("64","","2","23","JUHU","0","0000-00-00 00:00:00","0000-00-00 00:00:00","0");
 
 
 
-DROP TABLE IF EXISTS pages ;
+DROP TABLE IF EXISTSpages;
 
 CREATE TABLE `pages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -202,13 +206,14 @@ CREATE TABLE `pages` (
   UNIQUE KEY `name` (`name`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `pages_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
 INSERT INTO pages VALUES("22","4","home","/","0000-00-00 00:00:00","0000-00-00 00:00:00","0","","0000-00-00 00:00:00","0000-00-00 00:00:00","");
+INSERT INTO pages VALUES("23","4","JUHU","/test","0000-00-00 00:00:00","0000-00-00 00:00:00","0","","0000-00-00 00:00:00","0000-00-00 00:00:00","");
 
 
 
-DROP TABLE IF EXISTS permissions ;
+DROP TABLE IF EXISTSpermissions;
 
 CREATE TABLE `permissions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -225,7 +230,7 @@ CREATE TABLE `permissions` (
 
 
 
-DROP TABLE IF EXISTS plugin_views ;
+DROP TABLE IF EXISTSplugin_views;
 
 CREATE TABLE `plugin_views` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -241,7 +246,7 @@ INSERT INTO plugin_views VALUES("6","22","Route");
 
 
 
-DROP TABLE IF EXISTS plugins ;
+DROP TABLE IF EXISTSplugins;
 
 CREATE TABLE `plugins` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -258,7 +263,7 @@ INSERT INTO plugins VALUES("23","StaticText","0","1","1.0","Christoph KrÃ¤mer");
 
 
 
-DROP TABLE IF EXISTS roles ;
+DROP TABLE IF EXISTSroles;
 
 CREATE TABLE `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -278,7 +283,7 @@ INSERT INTO roles VALUES("7","0","Super-Adminsitrator");
 
 
 
-DROP TABLE IF EXISTS users ;
+DROP TABLE IF EXISTSusers;
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -299,7 +304,7 @@ CREATE TABLE `users` (
 INSERT INTO users VALUES("1","2","christoph","9617b34607ee4ef23ee07b341de5a7ca26ede8c7","christoph@christophkraemer.de","2012-01-02 11:32:57","0000-00-00 00:00:00","","1");
 INSERT INTO users VALUES("2","7","test123","e84f100d33cda3f881fe00a334e9dd941dfe2d15","christoph@christophkraemer.de","0000-00-00 00:00:00","2011-12-08 12:26:59","aaaf13160053ec8e18083ecfeb79a2ed34f7f32b","0");
 INSERT INTO users VALUES("3","3","blubb","39bd73dac29aa4190d929fc2ce056dcd31bb4585","test@test.de","2011-12-08 12:44:50","2011-12-08 12:44:38","064acc795ba7d0834d6cafad0ff2b65fbf42e676","0");
-INSERT INTO users VALUES("4","7","alex_m","b9c66d0192cca90fbc63ccb596b6f35b1b78ae91","alexan.chr.mueller@googlemail.com","2012-01-04 17:29:28","2012-01-04 17:28:46","467af5d818717500bf93cd87ed86e72fee934c85","0");
+INSERT INTO users VALUES("4","7","alex_m","b9c66d0192cca90fbc63ccb596b6f35b1b78ae91","alexan.chr.mueller@googlemail.com","2012-01-05 12:57:16","2012-01-04 17:28:46","467af5d818717500bf93cd87ed86e72fee934c85","0");
 
 
 

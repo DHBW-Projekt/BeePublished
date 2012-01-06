@@ -8,8 +8,8 @@ if(isset($_POST['DBPw']) && isset($_POST['DBLogin'])){
 		$db_server;
 		$db_name;
 		$homeurl;
-		$db_pw = $_POST['DBPw'];
-		$db_login = $_POST['DBLogin'];
+		$db_pw = trim($_POST['DBPw']);
+		$db_login = trim($_POST['DBLogin']);
 		
 		//get dbhost and dbname out of config file
 		$c_filename = "../config.php";
@@ -24,11 +24,11 @@ if(isset($_POST['DBPw']) && isset($_POST['DBLogin'])){
 			// = split("#", $row);
 			$data = explode("#", $row);
 			if($data[0] == "DBHOST"){
-				$db_server= $data['1'];
+				$db_server= trim($data['1']);
 			}elseif ($data[0]  =="DBNAME"){
-				$db_name= $data['1'];
+				$db_name= trim($data['1']);
 			}elseif($data[0]  =="HOMEURL"){
-				$homeurl = $data['1'];
+				$homeurl = trim($data['1']);
 			}
 		}
 		fclose($c_file);
@@ -48,19 +48,20 @@ if(isset($_POST['DBPw']) && isset($_POST['DBLogin'])){
 		//echo $db_name."<br>";
 		
 		//build up script line
-		$mysqlDump = $mysql_path.'/mysqldump ';
+		/*$mysqlDump = $mysql_path.'/mysqldump ';
     	$mysqlDump .= '--user="' . $db_login . '" ';
    		$mysqlDump .= '--password="' .$db_pw . '" ';
    		//$mysqlDump .= '--host="' . $db_server . '" ';
    		$mysqlDump .= $db_name . ' > ' .$db_script_path;
-   		
+   		*/
    		//echo $mysqlDump."<br>";
 		//execute script call
-		
-   		$sqldump_url = $homeurl."/services/backup/testdump.sql";
+		$sqldump_url = date('ljSFYh-i-s')."backup.sql";
+		backup_DB("localhost",$db_login,$db_pw,$db_name, $sqldump_url);
+   		
    		$zip_url = $homeurl."/services/backup/archive.zip";
     	//passthru($mysqlDump);
-		
+		$sqldump_url = $homeurl."/services/backup/".$sqldump_url;
 		echo getAnswer(getbackupServiceAnswer($sqldump_url, $zip_url).getRC0Xml());
 		
  	
@@ -118,5 +119,73 @@ public \$default = array(
 	$c_configtbool = fclose($c_file);
 	
 	return ($cake_configtbool && $c_configtbool );
+}
+
+function backup_db($host,$user,$pass,$name,$path){
+  	$tables = '*';
+  	
+  	$host = trim($host);
+  	$name = trim ($name);
+  	$pass = trim ($pass);
+  	$user = trim($user);
+  	$path = trim($path);
+
+
+	$link = mysql_connect(mysql_real_escape_string($host),$user,$pass);
+ 	mysql_select_db($name,$link);
+  
+  //get all of the tables
+  if($tables == '*')
+  {
+    $tables = array();
+    $query = mysql_query('SHOW TABLES IN '.$name);
+    while($row = mysql_fetch_row($query))
+    {
+      $tables[] = $row[0];
+    }
+  }
+  else
+  {
+    $tables = is_array($tables) ? $tables : explode(',',$tables);
+  }
+  $return = "SET FOREIGN_KEY_CHECKS=0;";
+  //cycle through
+  foreach($tables as $table)
+  {
+  	//$bla = $table;
+
+  	$sql = 'SELECT * FROM '.$table;
+    $result= mysql_query($sql);
+    $num_fields = mysql_num_fields($result);
+
+    $return.= 'DROP TABLE IF EXISTS '.$table.' ;';
+    $row2 = mysql_fetch_row(mysql_query('SHOW CREATE TABLE '.$table));
+    $return.= "\n\n".$row2[1].";\n\n";
+
+    for ($i = 0; $i < $num_fields; $i++) 
+    {
+      while($row = mysql_fetch_row($result))
+      {
+        $return.= 'INSERT INTO '.$table.' VALUES(';
+        for($j=0; $j<$num_fields; $j++) 
+        {
+          $row[$j] = addslashes($row[$j]);
+          $row[$j] = str_replace("\n","\\n",$row[$j]);
+          if (isset($row[$j])) { $return.= '"'.$row[$j].'"' ; } else { $return.= '""'; }
+          if ($j<($num_fields-1)) { $return.= ','; }
+        }
+        $return.= ");\n";
+      }
+    }
+    if($i != $num_fields-1){
+    	  $return.="\n\n\n";
+    }
+  
+  }
+  
+  //save file
+  $handle = fopen($path,'w+');
+  fwrite($handle,$return);
+  fclose($handle);
 }
 ?>

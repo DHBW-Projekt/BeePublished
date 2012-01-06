@@ -7,30 +7,32 @@ if(isset($_POST['HomeUrl']) &&isset($_POST['DBHost']) && isset($_POST['DBName'])
 		//build up good answer xml
 		//start sql dump script
 		
-		$mysql_path = $_SERVER['MYSQL_HOME'];
-		$db_script_path = getcwd() . "/cake.sql";
-		$db_server = $_POST['DBHost'];
-		$db_name = $_POST['DBName'];
-		$db_pw = $_POST['DBPw'];
-		$db_login = $_POST['DBLogin'];
+		//$mysql_path = $_SERVER['MYSQL_HOME'];
+		
+		$db_script_path ="cake.sql";
+		$db_server = trim($_POST['DBHost']);
+		$db_name = trim($_POST['DBName']);
+		$db_pw = trim($_POST['DBPw']);
+		$db_login = trim($_POST['DBLogin']);
 		
 
 
 		//replace folder separators
-		$mysql_path = str_replace("\\","/",$mysql_path);
-		$db_script_path = str_replace("\\","/",$db_script_path);	
+		//$mysql_path = str_replace("\\","/",$mysql_path);
+		//$db_script_path = str_replace("\\","/",$db_script_path);	
 		
 
-		
+		$return_code = build_DB($db_server, $db_login, $db_pw, $db_name, $db_script_path);
 		
 		//build up script line
-		$mysqlDump = 'mysql ';
+		/*$mysqlDump = 'mysql ';
     	$mysqlDump .= '-h ' . $db_server . ' ';
     	$mysqlDump .= '-u ' . $db_login . ' ';
    		$mysqlDump .= '-p' .$db_pw . ' ';
    		$mysqlDump .= $db_name . ' < ' . 'cake.sql';
 		
     	$returncodeexec = passthru($mysqlDump);
+
 		//passthru("mysql -h mysql5.ms-mediagroup.de -u db115933_10 -pcms1 db115933_10 < "."cake.sql");
 
     	//step 1: connect to db
@@ -56,15 +58,21 @@ if(isset($_POST['HomeUrl']) &&isset($_POST['DBHost']) && isset($_POST['DBName'])
 			echo "test2";
 			echo getAnswer( getRC1Xml());
 		}
- 	
+ 		*/
+		if ($return_code == 1065 || $return_code == 0) {
+			echo getAnswer( getRC0Xml());
+		} else {
+			echo getAnswer( getRC1Xml());
+		}
+		
 	} else {
-		echo "test";
 		echo getAnswer( getRC1Xml());
+		
 		//build up bad answer xml
 	}
 }else {
-		echo "test";
 		echo getAnswer( getRC1Xml());
+	
 }
 
 function createConfigFile($homeurl, $dbhost,$dblogin, $dbname, $dbpw){
@@ -119,6 +127,27 @@ public \$default = array(
 	
 	return ($cake_configtbool && $c_configtbool );
 }
-
-
+function build_DB($host,$user,$pass,$name,$path){
+	$link = mysql_connect($host,$user,$pass);
+ 	 mysql_select_db($name,$link);
+ 	 //$query = file_get_contents();
+ 	 //echo $query;
+ 	 $sqlErrorCode = 0;
+     $f = fopen($path,"r+");
+     $sqlFile = fread($f,filesize($path));
+     $sqlArray = explode(';',$sqlFile); 
+ 	   foreach ($sqlArray as $stmt) {
+       if (strlen($stmt)>3 && !empty($stmt) && $stmt != " "){
+       		//echo "commando: ".$stmt."<br>";
+            $result = mysql_query($stmt);
+              if (!$result){
+                 $sqlErrorCode = mysql_errno();
+                 $sqlErrorText = mysql_error();
+                 $sqlStmt      = $stmt;
+                 break;
+              }
+           }
+      }  
+      return  $sqlErrorCode;	
+}
 ?>
