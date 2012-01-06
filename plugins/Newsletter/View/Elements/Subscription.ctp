@@ -11,7 +11,7 @@
 		if (!($user)){	
 			echo $this->Form->create('Subscription',array('url' => array('plugin' => 'Newsletter',
 													   		  	'controller' 	  => 'Subscription',
-													   		  	'action'  	      => 'subscribe')));
+													   		  	'action'  	      => 'unSubscribe')));
 			echo $this->Form->input('NewsletterRecipient.email', array('label' => 'E-Mail:'));
 //			echo $this->Fck->load('NewsletterRecipient.email');
 			echo $this->Html->div('validation_error',$validationErrors['email'][0]);

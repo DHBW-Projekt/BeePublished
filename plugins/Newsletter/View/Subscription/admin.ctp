@@ -9,7 +9,7 @@
     echo $this->Html->scriptBlock(
     	'$(function() {
     		$("#tabs").tabs();
-    		$("#tabs").tabs("select",1);
+    		$("#tabs").tabs("select",0);
 		});
     	',array('inline' => true)
     );
@@ -28,8 +28,8 @@
 
 	</ul>
 	<div id="tabs-1">
-		<?php 
-		echo $this->element('RecipientsList');
+	<?php 
+			echo $this->element('Newsletter');
 		?>
 	</div>
 	<div id="tabs-2">
@@ -39,10 +39,10 @@
 		?>
 	</div>
 	<div id="tabs-3">
-		<p>geht</p>
+		<p></p>
 	</div>
 	<div id="tabs-4">
-		<p>doch</p>
+		<p></p>
 	</div>
 </div>
 

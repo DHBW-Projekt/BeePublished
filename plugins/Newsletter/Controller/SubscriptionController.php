@@ -3,58 +3,165 @@
 class SubscriptionController extends AppController {
 		
 	public $name = 'Subscription';
-	public $uses = array('Newsletter.NewsletterRecipient');
+	public $uses = array('Newsletter.NewsletterRecipient', 'Newsletter.NewsletterLetter');
 	var $autoLayout = false;
 	
-	public $paginate = array(
-        'limit' => 10,
-        'order' => array(
-            'NewsletterRecipient.email' => 'asc'
-        )
-    );
 	
+	public $paginate = array(
+		'NewsletterRecipient' => array(
+			'limit' => 10,
+			'order'	=> array('NewsletterRecipient.email' => 'asc'),
+			'conditions' => array('NewsletterRecipient.active' => 1)
+		),
+		'NewsletterLetter' => array(
+			'limit' => 5, 
+			'order' => array('NewsletterLetter.date' => 'desc')
+		) 
+	);
+			
+	public function test($recipient_id){
+			
+		$this->redirect($this->referer());
+	}
+	
+	public function admin($contentID){
+		$recipients = $this->getActiveRecipients();
+ 		$newsletters = $this->getNewsletters();
+		$this->set(array(
+			'newsletters' => $newsletters,
+			'recipients' => $recipients
+			));
+	}
+	
+	private function getActiveRecipients(){
+		$recipients = $this->paginate('NewsletterRecipient');
+		return $recipients;
+	}
+	
+	private function getNewsletters(){
+		$newsletters = $this->paginate('NewsletterLetter');
+		return $newsletters;
+	}
+	
+	private function getRecipient($email){
+		// returns recipient if existing
+		$recipient = $this->NewsletterRecipient->find('first', array(
+							'conditions' => array('NewsletterRecipient.email' => $email)
+			)
+		);
+		return $recipient;
+	}
+	
+	private function checkRecipientIsActive($recipient){
+		$isActive = $recipient['NewsletterRecipient']['active'];
+		return $isActive;
+	}
+	
+	public function unSubscribe(){
+		if ($this->request->is('post')){
+			// check if recipient exists
+			if($recipient = $this->getRecipient($this->request->data['NewsletterRecipient']['email'])){
+				// check if recipient is active
+				if($this->checkRecipientIsActive($recipient)){
+					// inactivate recipient
+					$recipient = $this->setRecipientInactive($recipient);
+					$action = 'delete'; 
+				} else {
+					// else activate recipient
+					$recipient = $this->setRecipientActive($recipient);
+					$action = 'add';
+				}		
+			} else {
+				// if recipient doesn't exist, create a new one
+				$recipient = $this->createNewRecipient();
+				$action = 'add';
+			}
+			// update or save recipient
+			$this->saveRecipient($recipient, $action);
+		}
+		// get back to calling page
+		$this->redirect($this->referer());
+	}
 
+	
+	private function setRecipientInactive($recipient){
+		$recipient['NewsletterRecipient']['active'] = 0;
+		return $recipient;
+	}
+	
+	public function setRecipientInactiveByEmail($email){
+		$recipient = $this->getRecipient($email);
+// 		debug($recipient, $showHtml=null, $showFrom=true);
+		$recipient = $this->setRecipientInactive($recipient);
+// 		debug($recipient, $showHtml=null, $showFrom=true);
+		$action = 'delete';
+		$this->saveRecipient($recipient, $action);
+		$this->redirect($this->referer());
+	}
+	
+	private function setRecipientActive($recipient){
+		$recipient['NewsletterRecipient']['active'] = 1;
+		return $recipient;
+		
+	}
+	
+	private function saveRecipient($recipient, $action){
+		$this->NewsletterRecipient->set($recipient);
+		if($this->NewsletterRecipient->save()) {
+			if ($action == 'add'){
+				$this->Session->setFlash('The user was added successfully.', 'default', array('class' => 'flash_success'), 'NewsletterRecipient');
+			} else {
+				$this->Session->setFlash('The user was removed successfully.', 'default', array('class' => 'flash_success'), 'NewsletterRecipient');
+			}
+		} else {
+			$this->Session->setFlash('The user was not added.', 'default', array('class' => 'flash_failure'), 'NewsletterRecipient');
+			$this->_persistValidation('NewsletterRecipient');
+		}
+	}
+	
+	private function createNewRecipient(){
+		// create new recipient from post data
+		$recipient = array(
+			'email' => $this->request->data['NewsletterRecipient']['email'],
+			'active' => '1'
+		);
+		return $recipient;
+	}
+	
+	public function addRecipient(){
+		if ($this->request->is('post')){
+			$recipient = $this->getRecipient($this->request->data['NewsletterRecipient']['email']);
+			if (($recipient) && (($this->checkRecipientIsActive($recipient)) == 0)){
+				$recipient = $this->setRecipientActive($recipient);
+			} else {
+				$recipient = $this->createNewRecipient();
+			}	
+			$action = 'add';
+			$this->saveRecipient($recipient, $action);		
+		}
+		$this->redirect($this->referer());
+	}
+	
 	function beforeFilter()
 	{
 		//Actions which don't require authorization
 		parent::beforeFilter();
-		$this->Auth->allow('*'); 
+		$this->Auth->allow('*');
 	}
 	
-	public function admin($contentID){
-//		$recipients = $this->NewsletterRecipient->find('all');
-		$recipients = $this->paginate('NewsletterRecipient');
-		$this->set('recipients', $recipients);
-	}
 	
-	public function add(){
-		if ($this->request->is('post')){
-			$this->NewsletterRecipient->set(array(
-						'email' => $this->request->data['NewsletterRecipient']['email'],
-						'active' => '1'));
-			if($this->NewsletterRecipient->save()) {
-				$this->Session->setFlash('The user was added successfully.', 'default', array('class' => 'flash_success'), 'NewsletterRecipient');
-			} else {
-				$this->Session->setFlash('The user was not added.', 'default', array('class' => 'flash_failure'), 'NewsletterRecipient');
-				$this->_persistValidation('NewsletterRecipient');
-			}
-		}
-		$this->redirect($this->referer());
-	}
-	
-	public function subscribe() {
-		if ($this->request->is('post')){
-			$this->NewsletterRecipient->set(array(
-				'email' => $this->request->data['NewsletterRecipient']['email'],
-				'active' => '1'));
-			if($this->NewsletterRecipient->save()) {
-				$this->Session->setFlash('The user was added successfully.', 'default', array('class' => 'flash_success'), 'NewsletterRecipient');
-//				$this->_deleteValidation();
-			} else {
-				$this->Session->setFlash('The user was not added.', 'default', array('class' => 'flash_failure'), 'NewsletterRecipient');
-				$this->_persistValidation('NewsletterRecipient');
-			}
-		}
-		$this->redirect($this->referer());
-	}
+// 	public function subscribe() {
+// 		if ($this->request->is('post')){
+// 			$this->NewsletterRecipient->set(array(
+// 				'email' => $this->request->data['NewsletterRecipient']['email'],
+// 				'active' => '1'));
+// 			if($this->NewsletterRecipient->save()) {
+// 				$this->Session->setFlash('The user was added successfully.', 'default', array('class' => 'flash_success'), 'NewsletterRecipient');
+// 			} else {
+// 				$this->Session->setFlash('The user was not added.', 'default', array('class' => 'flash_failure'), 'NewsletterRecipient');
+// 				$this->_persistValidation('NewsletterRecipient');
+// 			}
+// 		}
+// 		$this->redirect($this->referer());
+// 	}
 }
