@@ -51,7 +51,13 @@ class CMSPluginComponent extends Component
         $xml = Xml::build($this->getConfigPath($plugin));
         $xmlData = Xml::toArray($xml);
         if (array_key_exists('views', $xmlData['dualon']['plugin'])) {
-            return $xmlData['dualon']['plugin']['views'];
+            $views = $xmlData['dualon']['plugin']['views'];
+            if (array_key_exists('name',$views['view'])) {
+                $viewsArray = array();
+                $viewsArray['view'][0]['name'] = $views['view']['name'];
+                $views = $viewsArray;
+            }
+            return $views;
         } else {
             return null;
         }
