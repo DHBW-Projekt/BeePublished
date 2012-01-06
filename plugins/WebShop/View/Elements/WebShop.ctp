@@ -1,7 +1,6 @@
 <!-- Frame to integrate the elements -->
 <?php 
 	//CALL stylesheet
-	echo CSS_URL;
 	echo $this->Html->css('/WebShop/css/webshop');
 ?>
 
