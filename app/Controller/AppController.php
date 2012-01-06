@@ -8,12 +8,30 @@ class AppController extends Controller
         'Auth' => array(
             'loginRedirect' => '/',
             'logoutRedirect' => '/'
-        )
+        ),
+        'PermissionValidation'
     );
+    
+    public $helpers = array('Html', 'Form', 'Session', 'Js', 'PermissionValidation');
 
-    public $helpers = array('Html', 'Form', 'Session', 'Js');
+    function afterFilter(){
+    	$this->_deleteValidation();
+    }
 
-    function beforeFilter()
-    {
+    function _persistValidation() {
+        $args = func_get_args();      	
+        foreach($args as $modelName) {
+			if (!empty($this->{$modelName}->validationErrors)) {
+				$this->Session->write('Validation.'.$modelName, array(
+                                                        'controller'           => $this->name,
+                                                        'data'                 => $this->{$modelName}->data,
+                                                        'validationErrors'     => $this->{$modelName}->validationErrors
+                ));
+            }
+        }
+    }
+    
+    function _deleteValidation() {
+    	$this->Session->delete('Validation');    	
     }
 }

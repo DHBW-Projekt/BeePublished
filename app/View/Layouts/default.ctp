@@ -45,12 +45,13 @@
             if (AuthComponent::user('id') == null) {
                 echo $this->element('login');
             } else {
+                $role = $this->PermissionValidation->getUserRole();
                 if ($this->request->webroot != '/') {
                     $path = str_replace($this->request->webroot, '', $this->request->here);
                 } else {
                     $path = substr($this->request->here, 1);
                 }
-                if (!$systemPage) {
+                if (!$systemPage && ($role == 6 || $role == 7)) {
                     if (!$adminMode) {
                         echo $this->Html->link('Admin Mode', '/admin/' . $path);
                     } else {

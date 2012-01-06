@@ -10,6 +10,15 @@ class ContentsController extends AppController
 
     public $uses = array('Content', 'PluginView', 'Container');
 
+    function beforeFilter()
+    {
+        parent::beforeFilter();
+        $role = $this->PermissionValidation->getUserRoleId();
+        if ($role != 6 && $role != 7) {
+            $this->redirect($this->request->webroot);
+        }
+    }
+
     function add($parent, $column, $plugin, $order)
     {
         $this->autoLayout = false;

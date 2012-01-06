@@ -11,12 +11,14 @@ class PagesController extends AppController
     public $components = array('Menu');
     public $uses = array('Page', 'PluginView', 'Container', 'LayoutType', 'Content', 'ContentValue', 'MenuEntry');
 
+    private $myUrl = null;
+
     function beforeFilter()
     {
         parent::beforeFilter();
 
         //Actions which don't require authorization
-        $this->Auth->allow('*');
+        $this->Auth->allow('display');
     }
 
     function display()
@@ -26,10 +28,10 @@ class PagesController extends AppController
         if (sizeof($path) > 0 && $path[0] == 'admin') {
             array_shift($path);
             //Check Admin rights
-            if ($this->Auth->User('id') != null) {
+            if ($this->PermissionValidation->getUserRoleId() == 6 || $this->PermissionValidation->getUserRoleId() == 7) {
                 $this->set('adminMode', true);
             } else {
-                $url = '/' . implode('/', $path);
+                $url = $this->request->webroot . implode('/', $path);
                 $this->redirect($url);
             }
         }
@@ -41,9 +43,11 @@ class PagesController extends AppController
         if (!$page) {
             echo "NO PAGE IN DATABASE!!!";
             $this->set('elements', array());
+            $this->myUrl = null;
         } else {
 
             $pageUrl = $page['Page']['name'];
+            $this->myUrl = $pageUrl;
             $url = '/' . $url;
             $count = 1;
             $diff = substr($url, strlen($pageUrl));
@@ -113,9 +117,10 @@ class PagesController extends AppController
                 if ($childContent['plugin_view_id'] != null) {
                     $plugin = $this->PluginView->findById($childContent['plugin_view_id']);
                     $contentData['plugin'] = $plugin['Plugin']['name'];
+                    $contentData['pluginId'] = $plugin['Plugin']['id'];
                     $contentData['view'] = $plugin['PluginView']['name'];
                     $urlParts = explode('/', $diff);
-                    if ($urlParts[0] == strtolower($plugin['Plugin']['name'])) {
+                    if ($urlParts[0] == strtolower($plugin['PluginView']['name'])) {
                         array_shift($urlParts);
                         $url = $urlParts;
                     } else {
@@ -123,6 +128,7 @@ class PagesController extends AppController
                     }
                     $contentData['viewData'] = $this->Components->load($contentData['plugin'] . '.' . $contentData['view'])->getData($this, $params, $url, $childContent['id']);
                     $contentData['id'] = $childContent['id'];
+                    $contentData['pageUrl'] = $this->myUrl;
                 }
                 $children['columns'][$childContent['column'] - 1]['children'][$childContent['order']]['content'] = $contentData;
             }
