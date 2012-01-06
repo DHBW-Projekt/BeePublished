@@ -29,16 +29,18 @@
 					echo '</td>';
 					echo '</tr>';
 				}	
-			$paging_params = $this->Paginator->params();
-			if ($paging_params['count'] > 0){
-				echo $this->Paginator->counter(__('Entrys {:start} to {:end} of {:count}, page {:page} of {:pages} '));
+			$paging_params = $this->Paginator->params('NewsletterRecipient');
+			if ($paging_params['count'] > 0){ 
+// 				echo $this->Paginator->counter(('Entrys {:start} to {:end} of {:count}, page {:page} of {:pages} '), array('model' => 'NewsletterRecipient'));
+				echo $this->Paginator->counter(array( 'format' => 'Entrys {:start} to {:end} of {:count}, page {:page} of {:pages}',
+												'model' => 'NewsletterRecipient'));
 			
-				if ($this->Paginator->hasPrev()){
-					echo $this->Paginator->prev('<< ');
+				if ($this->Paginator->hasPrev('NewsletterRecipient')){
+					echo $this->Paginator->prev('<< ', array('model' => 'NewsletterRecipient'));
 				}
-				echo $this->Paginator->numbers();
-				if ($this->Paginator->hasNext()){
-					echo $this->Paginator->next(' >>');
+				echo $this->Paginator->numbers(array('model' => 'NewsletterRecipient'));
+				if ($this->Paginator->hasNext('NewsletterRecipient')){
+					echo $this->Paginator->next(' >>', array('model' => 'NewsletterRecipient'));
 				}
 			
 			}

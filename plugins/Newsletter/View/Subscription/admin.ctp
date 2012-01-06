@@ -5,11 +5,13 @@
 	echo $this->Html->script('/newsletter/js/newsletter', true);
 	echo $this->Html->script('/js/jquery-1.6.2.min.js', true);
 	echo $this->Html->script('/js/jquery-ui-1.8.16.custom.min.js', true);
+
+
 	
     echo $this->Html->scriptBlock(
-    	'$(function() {
-    		$("#tabs").tabs();
-    		$("#tabs").tabs("select",0);
+	    	'$(function() {
+    			$("#tabs").tabs();
+			$("#tabs").tabs("select", 0);
 		});
     	',array('inline' => true)
     );
@@ -29,7 +31,9 @@
 	</ul>
 	<div id="tabs-1">
 	<?php 
-			echo $this->element('Newsletter');
+// 			debug($newsletterToEdit, $showHtml=null, $showFrom=true);
+			
+			echo $this->element('newsletteradmin');
 		?>
 	</div>
 	<div id="tabs-2">

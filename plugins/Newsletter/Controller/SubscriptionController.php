@@ -1,5 +1,7 @@
 <?php
 
+
+
 class SubscriptionController extends AppController {
 		
 	public $name = 'Subscription';
@@ -7,30 +9,38 @@ class SubscriptionController extends AppController {
 	var $autoLayout = false;
 	
 	
+	
 	public $paginate = array(
-		'NewsletterRecipient' => array(
-			'limit' => 10,
-			'order'	=> array('NewsletterRecipient.email' => 'asc'),
-			'conditions' => array('NewsletterRecipient.active' => 1)
-		),
 		'NewsletterLetter' => array(
 			'limit' => 5, 
 			'order' => array('NewsletterLetter.date' => 'desc')
-		) 
+		),
+		 'NewsletterRecipient' => array(
+			'limit' => 10,
+			'order'	=> array('NewsletterRecipient.email' => 'asc'),
+			'conditions' => array('NewsletterRecipient.active' => 1)
+		)
 	);
 			
-	public function test($recipient_id){
-			
-		$this->redirect($this->referer());
+	public function newsletteradmin($id){
+		$newsletterToEdit = $this->NewsletterLetter->find('first', array(
+														'conditions' => array('NewsletterLetter.id' => $id)));
+		$this->set('newsletterToEdit', $newsletterToEdit);
+		$this->getAndSetData();
+		$this->render('admin');
+	}
+	
+	private function getAndSetData(){
+		$newsletters = $this->getNewsletters();
+		$recipients = $this->getActiveRecipients();
+		$this->set(array(
+							'newsletters' => $newsletters,
+							'recipients' => $recipients
+		));
 	}
 	
 	public function admin($contentID){
-		$recipients = $this->getActiveRecipients();
- 		$newsletters = $this->getNewsletters();
-		$this->set(array(
-			'newsletters' => $newsletters,
-			'recipients' => $recipients
-			));
+		$this->getAndSetData();
 	}
 	
 	private function getActiveRecipients(){
