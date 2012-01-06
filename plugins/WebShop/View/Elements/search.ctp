@@ -24,7 +24,8 @@
 	echo '<ol>';
 	foreach ((!isset($data)) ? array() : $data as $product){
 		echo '<li>';
-		echo $this->Html->image('/WebShop/img/'.$product['Product']['picture']);
+		
+		echo $this->Html->image('/WebShop/img/'.$product['Product']['picture'], array('url' => '/webshop/view/'.$product['Product']['id'], 'escape' => False));
 	
 		echo '<h3>';
 		echo $this->Html->link($product['Product']['name'], '/webshop/view/'.$product['Product']['id']);

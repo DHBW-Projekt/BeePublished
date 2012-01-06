@@ -205,7 +205,12 @@ class WebShopComponent extends Component {
 		//REMOVE prod. from cart
 		for($i = 0; $i < count($productIDs); $i++){
 			if ($productIDs[$i]['id'] == $id){
-				$productIDs[$i]['count'] = $productIDs[$i]['count'] - 1;
+				
+				if($productIDs[$i]['count'] == 1)
+					unset($productIDs[$i]);
+				else
+					$productIDs[$i]['count'] = $productIDs[$i]['count'] - 1;
+				
 				break;
 			}
 		}

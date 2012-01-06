@@ -11,13 +11,10 @@
 	foreach ((!isset($data)) ? array() : $data as $product){
 		echo '<li>';
 		
-		echo $this->Html->link(
-		$this->Html->image('/WebShop/img/'.$product['Products']['picture']),
-		array('plugin' => 'webshop', 'controller' => '', 'action' => 'view', $product['Products']['id']), array('escape' => False)
-		);	
+		echo $this->Html->image('/WebShop/img/'.$product['Products']['picture'], array('url' => '/webshop/view/'.$product['Products']['id'], 'escape' => False));
 		
 		echo '<h3>';
-		echo $this->Html->link($product['Products']['name'], array('plugin' => 'webshop', 'controller' => '', 'action' => 'view', $product['Products']['id']));
+		echo $this->Html->link($product['Products']['name'], '/webshop/view/'.$product['Products']['id']);
 		echo '</h3>';
 		
 		
