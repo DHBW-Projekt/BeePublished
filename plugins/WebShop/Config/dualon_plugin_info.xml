@@ -8,7 +8,7 @@
         </permissions>
         <views>
             <view>
-                <name>ProductOverview</name>
+                <name>productOverview</name>
             </view>
         </views>
 	</plugin>
