@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dualon>
 	<plugin>
-		<name>GoogleMaps</name>
-		<author>Patrick Zamzow</author>
+		<name>WebShop</name>
+		<author>Maximilian Stueber und Patrick Zamzow</author>
 		<version>1.0</version>
+		<permissions>
+        </permissions>
+        <views>
+            <view>
+                <name>ProductOverview</name>
+            </view>
+        </views>
 	</plugin>
 </dualon>
