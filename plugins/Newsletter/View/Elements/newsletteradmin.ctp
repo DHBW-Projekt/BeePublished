@@ -17,6 +17,9 @@
 	
 	<?php
 		$this->Html->script('/ckeditor/ckeditor', false);
+		$this->Html->script('/ckeditor/adapters/jquery', false);
+		
+		$this->Html->scriptBlock('$( \'NewsletterLetterContent\' ).val( \'my new content\' );', array('inline' => true));
 		if (isset($newsletters)){
 				foreach($newsletters as $newsletter){
 					echo '<tr>';
