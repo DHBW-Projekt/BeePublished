@@ -47,42 +47,6 @@ a {
     border-bottom: 5px solid #3292DD;
 }
 
-ol.nav {
-    font-size: 13px;
-}
-
-ol.nav li ol.subnav {
-    background: #363A41;
-    border: 1px solid #2A2F37;
-    color: #ffffff;
-}
-
-ol.nav li {
-    border-right: 1px solid #cccccc;
-    font-size: 14px;
-}
-
-ol.nav li a {
-    color: #2A2F37;
-    text-decoration: none;
-}
-
-ol.subnav li a {
-    color: #ffffff;
-}
-
-ol.nav li a:hover {
-    color: #3292DD;
-}
-
-ol.nav li span {
-    background: url(../img/arrow_down.png) no-repeat center center;
-}
-
-ol.subnav li span {
-    background: url(../img/arrow_right.png) no-repeat center center;
-}
-
 #content {
     background-color: #ffffff;
     padding: 10px 20px;
