@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+#list{
+	width:20%;
+	position:relative;
+}
+#editor{
+	width:80%
+	position:relative;
+}

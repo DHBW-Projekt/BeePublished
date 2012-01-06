@@ -1,3 +1,7 @@
+<?php 
+
+?>
+
 <table>
 	<colgroup>
 		<col/>
@@ -10,6 +14,7 @@
 		<th>Active</th>
 	</tr>
 	<?php
+	
 		if (isset($recipients)){
 				foreach($recipients as $recipient){
 					echo '<tr>';

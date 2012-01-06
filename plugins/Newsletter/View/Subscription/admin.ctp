@@ -5,6 +5,7 @@
 	echo $this->Html->script('/newsletter/js/newsletter', true);
 	echo $this->Html->script('/js/jquery-1.6.2.min.js', true);
 	echo $this->Html->script('/js/jquery-ui-1.8.16.custom.min.js', true);
+	echo $this->Html->script('/ckeditor/ckeditor', true);
 
 
 	
@@ -34,6 +35,10 @@
 // 			debug($newsletterToEdit, $showHtml=null, $showFrom=true);
 			
 			echo $this->element('newsletteradmin');
+
+			
+			
+
 		?>
 	</div>
 	<div id="tabs-2">

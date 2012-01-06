@@ -1,11 +1,9 @@
 <?php
-
-
-
 class SubscriptionController extends AppController {
 		
 	public $name = 'Subscription';
 	public $uses = array('Newsletter.NewsletterRecipient', 'Newsletter.NewsletterLetter');
+ 	public $helpers = array('Fck');
 	var $autoLayout = false;
 	
 	

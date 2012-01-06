@@ -1,3 +1,6 @@
+<?php
+	$this->Html->css('/newsletter/css/newsletter', NULL, array('inline' => true));
+?>
 <div id='list'>
 <table>
 	<colgroup>
@@ -13,7 +16,7 @@
 
 	
 	<?php
-
+		$this->Html->script('/ckeditor/ckeditor', false);
 		if (isset($newsletters)){
 				foreach($newsletters as $newsletter){
 					echo '<tr>';
@@ -37,7 +40,6 @@
 				}	
 			$paging_params = $this->Paginator->params('NewsletterLetter');
 			if ($paging_params['count'] > 0){ 
-// 				echo $this->Paginator->counter(('Entrys {:start} to {:end} of {:count}, page {:page} of {:pages} '), array('model' => 'NewsletterRecipient'));
 				echo $this->Paginator->counter(array( 'format' => 'Entrys {:start} to {:end} of {:count}, page {:page} of {:pages}  ',
 												'model' => 'NewsletterLetter'));
 			
@@ -48,7 +50,6 @@
 				if ($this->Paginator->hasNext('NewsletterLetter')){
 					echo $this->Paginator->next(' >> ', array('model' => 'NewsletterLetter'));
 				}
-			
 			}
 		}	
 
@@ -61,9 +62,14 @@
  <?php 
  	echo '<br><br><br><br>';
  	if (isset($newsletterToEdit)){
-		echo $newsletterToEdit;
+		$content = $newsletterToEdit['NewsletterLetter']['content'];
+		echo $this->Form->create('editor');
+		echo $this->Form->input('NewsletterLetter.content', array('label' => ''));
+		echo $this->Fck->load('NewsletterLetter.content');
+// 		echo $this->Fck->load('edit');
  	};
- 	echo $this->Form->input('edit', array('label' => '', 'id' => 'edit'));
- ?>
+ 	
+
+?>
 </div>
 
