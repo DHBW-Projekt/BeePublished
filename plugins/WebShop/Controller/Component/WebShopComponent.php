@@ -119,7 +119,6 @@ class WebShopComponent extends Component {
 		$file_path = WWW_ROOT.'../../plugins/WebShop/webroot/img/';
 		$file_name = str_replace(' ', '_', $file['name']);
 		$upload_error = true;
-		
 			
 		//CHECK filetype
 		$permitted = array('image/gif','image/jpeg','image/pjpeg','image/png');
@@ -138,7 +137,8 @@ class WebShopComponent extends Component {
 			$now = date('Y-m-d-His');
 	
 			//NEW file-name
-			$file_name = $file_name.$now;
+			$tmp = explode('.', $file_name);	
+			$file_name = $tmp[0].$now.'.'.$tmp[1];
 		}
 		
 		//MOVE file
@@ -150,7 +150,7 @@ class WebShopComponent extends Component {
 		$data['Product']['name'] = $controller->data['Product']['name'];
 		$data['Product']['description'] = $controller->data['Product']['description'];
 		$data['Product']['price'] = $controller->data['Product']['price'];
-		$data['Product']['picture'] = $file_path.$file_name;
+		$data['Product']['picture'] = $file_name;
 		
 		//SAVE on db
 		if ($controller->Product->save($data)) {
