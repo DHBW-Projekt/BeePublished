@@ -1,5 +1,6 @@
 <!-- Web-Shop Search View -->
 <?php
+
 	//INTEGRATE searchbar
 	echo $this->element('SearchBar');
 	
@@ -8,19 +9,25 @@
 	echo '<h2>Suchergebnisse</h2>';
 	
 	//CREATE search results
-	if (count($data) > 1 || count($data) == 0) {
+	if(isset($this->Paginator))
+		$result_count = $this->Paginator->counter('{:count}');
+	else 
+		$result_count = 0;
+	
+	if ($result_count > 1 || $result_count == 0) {
 		$count_lbl = 'Suchergebnisse';
 	}else{
 		$count_lbl = 'Suchergebniss';
 	}
-	
+
 	echo '<p class="webshop_search_result">';	
-		echo count($data).' '.$count_lbl;
+		echo $result_count.' '.$count_lbl;
 	echo '</p>';
 	
 	//CREATE serch catalog
 	$last_element = (!isset($data)) ? null : end($data);
 	
+	//PRINT products
 	echo '<ol>';
 	foreach ((!isset($data)) ? array() : $data as $product){
 		echo '<li>';
@@ -43,6 +50,29 @@
 		}
 	}
 	echo '</ol>';
+	
+	//PAGINATION numbers
+	if (isset($this->Paginator) && $this->Paginator->counter('{:pages}') > 1) {
+		
+		//Attribute
+		$link_pattern = 'pages/display/';
+		
+		//PREV
+		if($this->Paginator->counter('{:page}') != 1){
+			$prev = $this->Paginator->prev('<<');
+			echo str_replace($link_pattern, '', $prev).' ';
+		}
+	
+		//NUMBERS
+		$numbers = $this->Paginator->numbers();
+		echo str_replace($link_pattern, '', $numbers);
+		
+		//NEXT
+		if($this->Paginator->counter('{:page}') != $this->Paginator->counter('{:pages}')){
+			$next = $this->Paginator->next('>>');
+			echo ' '.str_replace($link_pattern, '', $next);
+		}
+	}
 	
 	echo '</div>';
 ?>

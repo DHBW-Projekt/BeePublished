@@ -54,12 +54,35 @@ class WebShopComponent extends Component {
 		//LOAD model
 		$controller->loadModel('Product');
 		
+		//DATA from request
 		if (!empty($controller->data)) {
-			//SEARCH for products using MySQL fulltext search
-			$params = array('conditions' => array('MATCH(Product.name,Product.description) AGAINST("'.$controller->data['Search']['Suche'].'" IN BOOLEAN MODE)'));
+			
+			//PAGINATION options
+			$controller->paginate = array(
+					        'conditions' => array('MATCH(Product.name,Product.description) AGAINST("'.$controller->data['Search']['Suche'].'" IN BOOLEAN MODE)'),
+					        'limit' => 10
+			);
+			
+			//WRITE search-key to session
+			$controller->Session->write('searchkey', $controller->data['Search']['Suche']);
 			
 			//RETURN results for view
-			return $controller->Product->find('all', $params);
+			return $controller->paginate('Product');
+		}
+		
+		//DATA from session
+		$search_key = $controller->Session->read('searchkey');
+		
+		if (!empty($search_key)){
+			
+			//PAGINATION options
+			$controller->paginate = array(
+								        'conditions' => array('MATCH(Product.name,Product.description) AGAINST("'.$search_key.'" IN BOOLEAN MODE)'),
+								        'limit' => 10
+			);
+			
+			//RETURN results for view
+			return $controller->paginate('Product');
 		}
 	}
 	

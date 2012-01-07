@@ -19,6 +19,18 @@ class Product extends AppModel {
 	
 	
 	/**
+	 * 
+	 * Pagination
+	 */
+	public $paginate = array(
+	        'limit' => 10,
+	        'order' => array(
+	            'Product.id' => 'asc'
+	)
+	);
+	
+	
+	/**
 	 *  Validation
 	 */
 	public $validate = array(
