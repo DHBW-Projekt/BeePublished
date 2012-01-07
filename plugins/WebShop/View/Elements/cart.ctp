@@ -30,4 +30,8 @@
 		echo '</table>';
 	}
 	
+	//ORDER button
+	if(!empty($data))
+		echo $this->Html->link('Bestellung abschicken', '/webshop/submitOrder');
+	
 	echo '</div>';

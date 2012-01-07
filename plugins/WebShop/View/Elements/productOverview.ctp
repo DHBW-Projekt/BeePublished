@@ -17,7 +17,6 @@
 		echo $this->Html->link($product['Products']['name'], '/webshop/view/'.$product['Products']['id']);
 		echo '</h3>';
 		
-		
 		echo '<p class="websop_price">'.$product['Products']['price'].' '.$product['Products']['currency'].'</p>';
 		echo $this->element('ShortText', array( 'text' => $product['Products']['description'], 'productID' => $product['Products']['id']));
 		

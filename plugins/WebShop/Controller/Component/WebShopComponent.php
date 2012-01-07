@@ -86,6 +86,10 @@ class WebShopComponent extends Component {
 		//CHECK request
 		if (!$controller->request->is('post'))
 			return;
+		
+		//VALIDATE data
+		if(!$controller->Product->validates())
+			return;
 	
 		/* FILE */
 		$file = $controller->request->data['Product']['submittedfile'];
@@ -127,7 +131,9 @@ class WebShopComponent extends Component {
 		
 		//SAVE on db
 		if ($controller->Product->save($data)) {
-			$controller->Session->setFlash('Artikel wurde angelegt.');
+			$controller->Session->setFlash('Artikel wurde angelegt.', 'default', array('class' => 'flash_success'), 'Product');
+		}else{
+			$controller->Session->setFlash('Fehler bei der Anlage.', 'default', array('class' => 'flash_failure'), 'Product');
 		}
 	}
 	
@@ -218,6 +224,45 @@ class WebShopComponent extends Component {
 		//WRITE to SESSION
 		$controller->Session->write('products', $productIDs);
 	
+		//REDIRECT to cart
+		$controller->redirect('/webshop/cart');
+	}
+	
+	/**
+	 * Submit oder to Administrator.
+	 */
+	function submitOrder($controller){
+		
+		//LOAD model
+		$controller->loadModel('Product');
+		
+		//GET all IDs (+ amount) from session
+		$productIDs = $controller->Session->read('products');
+		
+		//BUILD mail
+		$subject = '---- Bestellung ----';
+		$text_start = 'Eine neue Bestellung wurde aufgegeben:<br>';
+		$text_ende = '<br><br><br>#### Diese Nachricht wurde automatisch erstellt ####';
+		
+		$user_data = '<br><br><br>';
+		$order = '';
+		
+		//GET products
+		foreach($productIDs as $productID){
+			$product = $controller->Product->findById($productID['id'], array('fields' => 'Product.id, Product.name, Product.price, Product.picture'));
+			$order = $order.'<br>'.$product['Product']['name'].' ('.$product['Product']['id'].'): Menge '.$productID['count'];
+		}
+		
+		//SEND email
+		App::uses('CakeEmail', 'Network/Email');
+		$email = new CakeEmail();
+		$email->from(array('maximilian.stueber@me.com' => 'DualonCMS'));
+		$email->to('maximilian.stueber@me.com');
+		$email->subject($subject);
+		
+		//UNSET cart
+		$controller->Session->write('products', null);
+		
 		//REDIRECT to cart
 		$controller->redirect('/webshop/cart');
 	}
