@@ -111,8 +111,10 @@ class WebShopComponent extends Component {
 			return;
 		
 		//VALIDATE data
-		if(!$controller->Product->validates())
+		if(!$controller->Product->validates()){
 			return;
+		}
+			
 	
 		/* FILE */
 		$file = $controller->request->data['Product']['submittedfile'];
@@ -143,19 +145,25 @@ class WebShopComponent extends Component {
 		
 		//MOVE file
 		if(!$upload_error){
-			move_uploaded_file($file['tmp_name'], $file_path.$file_name);
+			$upload_error = !move_uploaded_file($file['tmp_name'], $file_path.$file_name);
 		}
 		
-		//GET all data
-		$data['Product']['name'] = $controller->data['Product']['name'];
-		$data['Product']['description'] = $controller->data['Product']['description'];
-		$data['Product']['price'] = $controller->data['Product']['price'];
-		$data['Product']['picture'] = $file_name;
+		//SAVE on DB
+		if(!$upload_error){
+			//GET all data
+			$data['Product']['name'] = $controller->data['Product']['name'];
+			$data['Product']['description'] = $controller->data['Product']['description'];
+			$data['Product']['price'] = $controller->data['Product']['price'];
+			$data['Product']['picture'] = $file_name;
 		
-		//SAVE on db
-		if ($controller->Product->save($data)) {
+			//SAVE on db
+			$upload_error = !$controller->Product->save($data);
+		}
+		
+		//PRINT message
+		if(!$upload_error){
 			$controller->Session->setFlash('Artikel wurde angelegt.', 'default', array('class' => 'flash_success'), 'Product');
-		}else{
+		} else {
 			$controller->Session->setFlash('Fehler bei der Anlage.', 'default', array('class' => 'flash_failure'), 'Product');
 		}
 	}

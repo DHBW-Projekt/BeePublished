@@ -2,7 +2,6 @@
 App::uses('AppModel', 'Model');
 /**
  * Product Model.
- *
  */
 class Product extends AppModel {
 	
@@ -34,14 +33,23 @@ class Product extends AppModel {
 	 *  Validation
 	 */
 	public $validate = array(
-		        'name' => array('rule' => 'notEmpty'),
-		        'description' => array('rule' => 'notEmpty'),
+		        'name' => array(
+		        	'rule' => 'notEmpty',
+					'required' => true,
+		        	'message' => '"Name" ist ein Pflichtfeld.'
+		        ),
+		        
+		        'description' => array(
+		        	'rule' => 'notEmpty',
+					'required' => true,
+			        'message' => '"Beschreibung" ist ein Pflichtfeld.'
+		        ),
+		        
 				'price' => array(
 					'rule' => array('decimal', 2),
 				    'required' => true,
 					'allowEmpty' => false,
 				    'message'  => 'Preis ist eine Zahl.'
-				),
-				//'picture' => array('rule' => 'notEmpty')
+				)
 	);
 }
