@@ -1,5 +1,5 @@
 function callPages() {
-    var id = $('head').find('meta[id]').attr('id');
+    var id = window.app.pageid;
     if (id == undefined) {
         return;
     }
