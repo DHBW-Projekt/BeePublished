@@ -58,10 +58,12 @@ class PagesController extends AppController
 
             //Find elements for page to display
             $elements = $this->setupPageElements($page['Container'], $diff, true);
+            ksort($elements);
 
             //Output data
             $this->set('elements', $elements);
         }
+
         $this->set('menu', $this->Menu->buildMenu($this, NULL));
         $this->set('pageid', $page['Page']['id']);
         $this->set('systemPage', false);
@@ -130,7 +132,11 @@ class PagesController extends AppController
                     $contentData['id'] = $childContent['id'];
                     $contentData['pageUrl'] = $this->myUrl;
                 }
-                $children['columns'][$childContent['column'] - 1]['children'][$childContent['order']]['content'] = $contentData;
+                if ($container['LayoutType']['id'] == null) {
+                    $children[$childContent['order']]['content'] = $contentData;
+                } else {
+                    $children['columns'][$childContent['column'] - 1]['children'][$childContent['order']]['content'] = $contentData;
+                }
             }
         }
 

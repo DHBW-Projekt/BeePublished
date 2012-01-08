@@ -1,48 +1,4 @@
 $(document).ready(function () {
-    $('#sidebar-opener').click(function () {
-            if ($(this).attr('class') == 'closed') {
-                $('#sidebar').stop(true, true).animate({
-                    left:'0'
-                }, {
-                    queue:true,
-                    duration:'fast'
-                });
-                $('#sidebar-opener').stop(true, true).animate({
-                    left:'200'
-                }, {
-                    queue:true,
-                    duration:'fast'
-                });
-                $('body').stop(true, true).animate({
-                    'margin-left':'200'
-                }, {
-                    queue:true,
-                    duration:'fast'
-                });
-                $(this).attr('class', 'opened');
-            } else {
-                $('#sidebar').stop(true, true).animate({
-                    left:'-200'
-                }, {
-                    queue:true,
-                    duration:'fast'
-                });
-                $('#sidebar-opener').stop(true, true).animate({
-                    left:'0'
-                }, {
-                    queue:true,
-                    duration:'fast'
-                });
-                $('body').stop(true, true).animate({
-                    'margin-left':'0'
-                }, {
-                    queue:true,
-                    duration:'fast'
-                });
-                $(this).attr('class', 'closed');
-            }
-        }
-    );
 
     $(".signin").click(function (e) {
         e.preventDefault();

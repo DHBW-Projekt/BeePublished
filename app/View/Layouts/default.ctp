@@ -17,15 +17,16 @@
     echo $this->Html->script('jquery-ui-1.8.16.custom.min');
     echo $this->Html->script('jquery.fancybox-1.3.4.pack');
     echo $this->Html->script('jquery.blockUI');
+    echo $this->Html->script('jquery.cookie');
     echo $this->Html->script('dualon');
     if ($adminMode) {
+        $this->Js->set('pageid', $pageid);
         echo $this->Html->css('sidebar');
         echo $this->Html->css('admin/layoutmanager');
         echo $this->Html->script('admin/layoutmanager');
         echo $this->Html->script('admin/main');
         echo $this->Html->script('admin/menu');
         echo $this->Html->script('admin/page');
-        echo '<meta id="' . $pageid . '" />';
     }
     echo $scripts_for_layout;
     ?>
