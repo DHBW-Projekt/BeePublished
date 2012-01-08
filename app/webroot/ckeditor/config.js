@@ -8,7 +8,7 @@ CKEDITOR.editorConfig = function (config) {
     // config.language = 'fr';
     // config.uiColor = '#AADC6E';
     config.extraPlugins = 'bbcode';
-    config.removePlugins = 'bidi,button,dialogadvtab,div,filebrowser,flash,format,forms,horizontalrule,iframe,indent,justify,liststyle,pagebreak,showborders,stylescombo,table,tabletools,templates';
+    config.removePlugins = 'bidi,button,dialogadvtab,div,flash,format,forms,horizontalrule,iframe,indent,justify,liststyle,pagebreak,showborders,stylescombo,table,tabletools,templates';
     config.disableObjectResizing = true;
     config.fontSize_sizes = "30/30%;50/50%;100/100%;120/120%;150/150%;200/200%;300/300%";
     config.toolbar = [
@@ -30,4 +30,10 @@ CKEDITOR.editorConfig = function (config) {
         'smiley', 'sad', 'wink', 'laugh', 'cheeky', 'blush', 'surprise',
         'indecision', 'angel', 'cool', 'crying', 'kiss'
     ];
+    config.filebrowserBrowseUrl = '/kcfinder/browse.php?type=files&cms=beepublished';
+    config.filebrowserImageBrowseUrl = '/kcfinder/browse.php?type=images&cms=beepublished';
+    config.filebrowserFlashBrowseUrl = '/kcfinder/browse.php?type=flash&cms=beepublished';
+    config.filebrowserUploadUrl = '/kcfinder/upload.php?type=files&cms=beepublished';
+    config.filebrowserImageUploadUrl = '/kcfinder/upload.php?type=images&cms=beepublished';
+    config.filebrowserFlashUploadUrl = '/kcfinder/upload.php?type=flash&cms=beepublished';
 };
