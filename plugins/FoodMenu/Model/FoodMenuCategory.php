@@ -28,11 +28,11 @@ class FoodMenuCategory extends AppModel {
  * @var array
  */
 	public $hasAndBelongsToMany = array(
-		'FoodMenuEntry' => array(
-			'className' => 'FoodMenuEntry',
-			'joinTable' => 'food_menu_categories_food_menu_entries',
+		'FoodMenuMenu' => array(
+			'className' => 'FoodMenuMenu',
+			'joinTable' => 'food_menu_menus_food_menu_categories',
 			'foreignKey' => 'food_menu_category_id',
-			'associationForeignKey' => 'food_menu_entry_id',
+			'associationForeignKey' => 'food_menu_menu_id',
 			'unique' => true,
 			'conditions' => '',
 			'fields' => '',
@@ -43,11 +43,11 @@ class FoodMenuCategory extends AppModel {
 			'deleteQuery' => '',
 			'insertQuery' => ''
 		),
-		'FoodMenuMenu' => array(
-			'className' => 'FoodMenuMenu',
-			'joinTable' => 'food_menu_menus_food_menu_categories',
+		'FoodMenuEntry' => array(
+			'className' => 'FoodMenuEntry',
+			'joinTable' => 'food_menu_categories_food_menu_entries',
 			'foreignKey' => 'food_menu_category_id',
-			'associationForeignKey' => 'food_menu_menu_id',
+			'associationForeignKey' => 'food_menu_entry_id',
 			'unique' => true,
 			'conditions' => '',
 			'fields' => '',

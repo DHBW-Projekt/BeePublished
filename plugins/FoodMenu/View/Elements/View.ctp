@@ -14,20 +14,20 @@
 ?>
 	
 	<?php
-		if(isset($categories)) {
-//			$this->element('ShowCategories', $categories);
-			debug($categories,$showHtml=false, $showFrom=true);
-			if(array_key_exists('Category', $categories)) {
-				echo '<ul id="FoodMenuMenu">';
-				foreach ($categories as $category) {
-					if ( $category['Category']['deleted'] != NULL ) continue;
-					else {
-						echo '<li>'.$this->Html->link($category['Category']['name'], array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuApp', 'action' => 'showEntries', $category['Category']['name'], $menu['Category']['id'])).'</li>';	
-					}	
-				}
-				echo '</ul><br />';
-			}
-		}
+//		if(isset($data)) {
+////			$this->element('ShowCategories', $categories);
+//			if(array_key_exists('FoodMenuCategory', $data['FoodMenuMenu'])) {
+//				$categories = $data['FoodMenuMenu']['FoodMenuCategory'];
+//				echo '<ul id="FoodMenuMenu">';
+//				foreach ($categories as $category) { 
+//					if ( $category['FoodMenuCategory']['deleted'] == NULL ) continue;
+//					else {
+//						echo '<li>'.$this->Html->link($category['FoodMenuCategory']['name'], array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuApp', 'action' => 'showEntries', $category['FoodMenuCategory']['name'], $menu['FoodMenuCategory']['id'])).'</li>';	
+//					}	
+//				echo '</ul><br />';
+//				}
+//			}
+//		}
 //	if (isset($categories)) {
 //		debug($categories,$showHtml=false, $showFrom=true);
 //		if(array_key_exists('Category', $categories)) {

@@ -1,12 +1,27 @@
 <?php
-echo $this->Form->create('FoodMenuCategory', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuApp', 'action' => 'addCategory')));
+if(!(isset($mode))) $mode = '';
+if ($mode=='edit') {
+	echo $this->Form->create('FoodMenuMenu', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuApp', 'action' => 'editCategory')));
+}
+else {
+	echo $this->Form->create('FoodMenuMenu', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuApp', 'action' => 'addCategory')));
+}
+echo $this->Session->flash();
 echo '<table>';
 echo '<tr>';
 echo '<td>';
-echo $this->Form->input('name').'<br />';
-echo '</td></tr>';
+
+if (isset($category)) {
+	echo $this->Form->hidden('id', array('value' => $category['FoodMenuCategory']['id']));
+	echo $this->Form->input('name').'<br />';
+	echo '</td></tr>';
+}
+else {
+	echo $this->Form->input('name').'<br />';
+	echo '</td></tr>';
+}
 echo '</table>';
-echo $this->Form->button(__('Speichern'), array('type' => 'submit', 'onClick' => 'showDiv(\'adminCategoryOverview\', \'adminCategoryEdit\')'));
+echo $this->Form->button(__('Speichern'), array('type' => 'submit'));
 echo $this->Form->button(__('Zurück'), array('type' => 'button', 'onClick' => 'showDiv(\'adminCategoryOverview\', \'adminCategoryEdit\')'));
 echo $this->Form->end();
 ?>

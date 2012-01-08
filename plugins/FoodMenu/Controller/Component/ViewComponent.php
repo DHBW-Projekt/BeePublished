@@ -5,15 +5,14 @@ class ViewComponent extends Component {
 		$controller->loadModel('FoodMenuMenu');
 		$controller->loadModel('FoodMenuCategory');
 		$controller->loadModel('FoodMenuEntry');
-		$menu = $controller->FoodMenuMenu->find('all');
-		$category = $controller->FoodMenuCategory->find('all');
-		$entry = $controller->FoodMenuEntry->find('all');
 		
-		$data = array('FoodMenuMenu' => $menu, 'FoodMenuCategory' => $category, 'FoodMenuEntry' => $entry);
-		//debug($data, $showHtml=false, $showFrom=true);
+		$menu = $controller->FoodMenuMenu->find('all');
+//		$category = $controller->FoodMenuCategory->find('all');
+//		$entry = $controller->FoodMenuEntry->find('all');
+//		$data = array('FoodMenuMenu' => $menu, 'FoodMenuCategory' => $category, 'FoodMenuEntry' => $entry);
+		$data = array('FoodMenuMenu' => $menu);
 		$controller->set('data', $data);
 		if ($data != null) {
-			//debug($menu,$showHtml=false,$showFrom=true);
 			return $data;
 		}
 		else
