@@ -1,10 +1,17 @@
 <?php
 $this->Html->script('http://maps.googleapis.com/maps/api/js?sensor=true&amp;language=de&amp;region=DE', false);
 $this->Html->script('/google_maps/js/googlemaps', false);
+
+if ($data <> __('no location')) {
+	$location = 'showLocation(\'map\', \'' . implode(",", $data['GoogleMapsLocation']) . '\');';
+} else {
+	$location = '';
+}
+
 $this->Html->scriptBlock('
         $(document).ready(function () {
             initializeGoogleMaps(\'map\');
-            showLocation(\'map\', \'' . implode(",", $data['GoogleMapsLocation']) . '\');
+            '.$location.'
         });
         ', array('inline' => false)
 );
