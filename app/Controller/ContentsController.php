@@ -8,7 +8,7 @@ App::uses('AppController', 'Controller');
 class ContentsController extends AppController
 {
 
-    public $uses = array('Content', 'PluginView', 'Container');
+    public $uses = array('Content', 'PluginView', 'Container', 'Page');
 
     function beforeFilter()
     {
@@ -67,10 +67,11 @@ class ContentsController extends AppController
         }
     }
 
-    public function display($id)
+    public function display($id,$pageid)
     {
         $this->layout = 'reload';
         $content = $this->Content->findById($id);
+        $page = $this->Page->findById($pageid);
 
         $params = array();
         foreach ($content['ContentValue'] as $contentValue) {
@@ -82,6 +83,7 @@ class ContentsController extends AppController
             $this->set('plugin', $plugin['Plugin']['name']);
             $this->set('view', $plugin['PluginView']['name']);
             $this->set('data', $this->Components->load($plugin['Plugin']['name'] . '.' . $plugin['PluginView']['name'])->getData($this, $params, null, $id));
+            $this->set('url',$page['Page']['name']);
             $this->set('adminMode', true);
             $this->set('id', $id);
         } else {
