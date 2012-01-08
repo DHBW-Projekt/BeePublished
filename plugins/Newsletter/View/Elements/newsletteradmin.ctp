@@ -64,7 +64,7 @@
  	if (isset($newsletterToEdit)){
 		$content = $newsletterToEdit['NewsletterLetter']['content'];
 		echo $this->Form->create('editor');
-		echo $this->Form->input('NewsletterLetter.content', array('label' => ''));
+		echo $this->Form->input('NewsletterLetter.content', array('label' => '', 'value' => $content));
 		echo $this->Fck->load('NewsletterLetter.content');
 // 		echo $this->Fck->load('edit');
  	};

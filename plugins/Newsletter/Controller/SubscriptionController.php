@@ -4,7 +4,6 @@ class SubscriptionController extends AppController {
 	public $name = 'Subscription';
 	public $uses = array('Newsletter.NewsletterRecipient', 'Newsletter.NewsletterLetter');
  	public $helpers = array('Fck');
-	var $autoLayout = false;
 	
 	
 	
@@ -37,7 +36,16 @@ class SubscriptionController extends AppController {
 		));
 	}
 	
+	
 	public function admin($contentID){
+		$user = $this->Auth->user();
+		echo $user['email'];
+		$email = $user['email'];
+		$recipient = $this->getRecipient($email);
+		$isRecipient = $this->checkRecipientIsActive($recipient);
+		print_r($isRecipient);
+		$this->set('isRecipient', $isRecipient);	
+		$this->layout = 'overlay';
 		$this->getAndSetData();
 	}
 	
@@ -80,8 +88,9 @@ class SubscriptionController extends AppController {
 					$action = 'add';
 				}		
 			} else {
+				
 				// if recipient doesn't exist, create a new one
-				$recipient = $this->createNewRecipient();
+				$recipient = $this->createNewRecipient($this->request->data['NewsletterRecipient']['email'], NULL);
 				$action = 'add';
 			}
 			// update or save recipient
@@ -90,7 +99,34 @@ class SubscriptionController extends AppController {
 		// get back to calling page
 		$this->redirect($this->referer());
 	}
-
+	
+	public function userUnSubscribe(){
+		if ($this->request->is('post')){
+			$user = $this->Auth->user();
+// 			debug($user, $showHtml=null, $showFrom=true);
+			if($recipient = $this->getRecipient($user['email'])){
+				// check if recipient is active
+				if($this->checkRecipientIsActive($recipient)){
+					// inactivate recipient
+					$recipient = $this->setRecipientInactive($recipient);
+					$action = 'delete';
+				} else {
+					// else activate recipient
+					$recipient = $this->setRecipientActive($recipient);
+					$action = 'add';
+				}
+			} else {
+				// if recipient doesn't exist, create a new one
+				$recipient = $this->createNewRecipient($user['email'],$user['id']);
+				$action = 'add';
+			}
+			// update or save recipient
+			$this->NewsletterRecipient->set($recipient);
+			$this->NewsletterRecipient->save();
+			$this->saveRecipient($recipient, $action);
+		}
+		$this->redirect($this->referer());
+	}
 	
 	private function setRecipientInactive($recipient){
 		$recipient['NewsletterRecipient']['active'] = 0;
@@ -127,10 +163,11 @@ class SubscriptionController extends AppController {
 		}
 	}
 	
-	private function createNewRecipient(){
+	private function createNewRecipient($email,$user_id){
 		// create new recipient from post data
 		$recipient = array(
-			'email' => $this->request->data['NewsletterRecipient']['email'],
+			'email' => $email,
+			'user_id' => $user_id,
 			'active' => '1'
 		);
 		return $recipient;
