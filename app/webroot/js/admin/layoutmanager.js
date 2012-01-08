@@ -198,7 +198,7 @@ function loadPageLayout(layout, object) {
 
 function loadPluginContent(id, container) {
     var request = $.ajax({
-        url:window.app.webroot + "content/display/" + id,
+        url:window.app.webroot + "content/display/" + id + "/" + window.app.pageid,
         type:"GET",
         context:document.body,
         success:function () {
