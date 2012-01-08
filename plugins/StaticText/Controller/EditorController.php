@@ -1,8 +1,6 @@
 <?php
 
 class EditorController extends AppController {
-	//var $autoLayout = false;
-	public $helpers = array('Html', 'Form', 'Js' => array('Jquery'));
 	
 	public function admin($contentID){
 		$this->loadModel("ContentValues");
