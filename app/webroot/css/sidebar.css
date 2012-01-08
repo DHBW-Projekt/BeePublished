@@ -1,3 +1,7 @@
+body.sidebar-open {
+    margin-left: 200px;
+}
+
 #sidebar {
     height: 100%;
     width: 200px;
@@ -5,6 +9,10 @@
     left: -200px;
     z-index: 100;
     border-right: 1px solid #999999;
+}
+
+#sidebar.opened {
+    left: 0px;
 }
 
 #sidebar-opener {
@@ -16,6 +24,10 @@
     border-top: 1px solid #999999;
     border-bottom: 1px solid #999999;
     border-right: 1px solid #999999;
+}
+
+#sidebar-opener.opened {
+    left: 200px;
 }
 
 #sidebar, #sidebar-opener {
