@@ -16,9 +16,12 @@ class WebShopComponent extends Component {
 		if (isset($url)){
 			$data['Element'] = array_shift($url);
 			$func_params = $url;
-		} else {
+		} else if (isset($params['DefaultView'])) {
 			$data['Element'] = $params['DefaultView'];
 			$func_params = $params;
+		} else {
+			$data['Element'] = 'productOverview';
+			$func_params = null;
 		}
 		
 		//CALL corresponding comp. method
