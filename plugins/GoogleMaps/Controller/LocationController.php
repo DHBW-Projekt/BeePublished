@@ -2,9 +2,9 @@
 
 class LocationController extends AppController {
 		
-	var $autoLayout = false;
+	var $layout = 'overlay';
 	
-	public function admin($contentID){
+	public function admin($contentID){	
 		$this->loadModel("ContentValues");
 		$this->loadModel("GoogleMapsLocation");
 		if (empty($this->data)) {
