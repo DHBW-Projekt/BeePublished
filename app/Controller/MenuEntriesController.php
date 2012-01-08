@@ -22,7 +22,7 @@ class MenuEntriesController extends AppController
 
     function add($parent)
     {
-        $this->autoLayout = false;
+        $this->layout = 'overlay';
         if ($this->request->is('post')) {
             $error = false;
             $this->MenuEntry->create();
@@ -68,7 +68,7 @@ class MenuEntriesController extends AppController
 
     function edit($id)
     {
-        $this->autoLayout = false;
+        $this->layout = 'overlay';
         $this->MenuEntry->id = $id;
         if (!$this->MenuEntry->exists()) {
             throw new NotFoundException(__('Invalid Menu Entry'));
@@ -103,7 +103,7 @@ class MenuEntriesController extends AppController
 
     function sort()
     {
-        $this->autoLayout = false;
+        $this->layout = 'overlay';
         if ($this->request->is('post')) {
             $data = $this->request->data;
             $order = array();
