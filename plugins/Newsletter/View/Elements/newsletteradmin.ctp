@@ -66,8 +66,14 @@
  	echo '<br><br><br><br>';
  	if (isset($newsletterToEdit)){
 		$content = $newsletterToEdit['NewsletterLetter']['content'];
-		echo $this->Form->create('editor');
-		echo $this->Form->input('NewsletterLetter.content', array('label' => ''));
+// 		debug($newsletterToEdit);
+		echo $this->Form->create('editor', array('url' => array('plugin' => 'Newsletter',
+	    											'controller' => 'Subscription',
+	    											'action' => 'saveNewsletter' , $newsletterToEdit['NewsletterLetter']['id'])));
+		echo $this->Form->input('NewsletterLetter.subject', array('label' => 'Betreff:', 'value' => $newsletterToEdit['NewsletterLetter']['subject']));
+		echo $this->Form->input('NewsletterLetter.content', array('label' => '', 'value' => $newsletterToEdit['NewsletterLetter']['content']));
+		echo $this->Form->button('Save', array('type' => 'submit', 'value' => 'save'));
+		echo $this->Form->end();
 		echo $this->Fck->load('NewsletterLetter.content');
 // 		echo $this->Fck->load('edit');
  	};

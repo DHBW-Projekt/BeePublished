@@ -9,10 +9,11 @@
 	<?php
 	
 //		if (($user['role_id']) == '2') {
+		
 		if (!($user)){	
 			echo $this->Form->create('Subscription',array('url' => array('plugin' => 'Newsletter',
-													   		  	'controller' 	  => 'Subscription',
-													   		  	'action'  	      => 'unSubscribe')));
+																	   		  	'controller' 	  => 'Subscription',
+																	   		  	'action'  	      => 'unSubscribe')));
 			echo $this->Form->input('NewsletterRecipient.email', array('label' => 'E-Mail:'));
 //			echo $this->Fck->load('NewsletterRecipient.email');
 			echo $this->Html->div('validation_error',$validationErrors['email'][0]);
@@ -22,7 +23,19 @@
 		// 	if current user is registered
 	    else if (($user['role_id']) >= '7') {
 			// check for newsletter subscription
-	    	echo $user['email'];
+// 	    	debug($data['userAsRecipient'], $showHtml=null, $showFrom=true);
+	    	$userAsRecipient = $data['userAsRecipient'];
+	    	echo $this->Form->create('UserSubscription', array('url' => array('plugin' => 'Newsletter',
+	    																	'controller' => 'Subscription',
+	    																	'action' => 'userUnSubscribe')));
+			if ((isset($userAsRecipient)) and ($userAsRecipient['active'] == 1)){
+				echo 'You subscribed for the newsletter';
+				echo $this->Form->end('Unsubscribe');
+			} else {
+				echo 'You didn\'t subscribe for the newsletter';
+				echo $this->Form->end('Subscribe');
+			};
+// 	    	echo $user['email'];
 //	    	echo '<br>'.$plugin.'<br>'.$view.'<br>'.$id;
 			// if current user is admin (change later: role_id >= 4), for development: >= 3
 // 		   	echo $this->Html->link(
