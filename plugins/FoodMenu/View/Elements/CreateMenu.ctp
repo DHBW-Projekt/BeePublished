@@ -1,10 +1,10 @@
 <?php
 if(!(isset($mode))) $mode = '';
 if ($mode=='edit') {
-	echo $this->Form->create('FoodMenuMenu', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuApp', 'action' => 'editMenu')));
+	echo $this->Form->create('FoodMenuMenu', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'View', 'action' => 'editMenu')));
 }
 else {
-	echo $this->Form->create('FoodMenuMenu', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuApp', 'action' => 'addMenu')));
+	echo $this->Form->create('FoodMenuMenu', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'View', 'action' => 'addMenu')));
 }
 echo $this->Session->flash();
 echo '<table>';

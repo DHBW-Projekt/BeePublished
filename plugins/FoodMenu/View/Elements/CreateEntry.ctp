@@ -1,5 +1,5 @@
 <?php
-echo $this->Form->create('FoodMenuEntry', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuApp', 'action' => 'addEntry')));
+echo $this->Form->create('FoodMenuEntry', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'View', 'action' => 'addEntry')));
 echo '<table>';
 echo '<tr>';
 echo '<td>';

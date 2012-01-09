@@ -1,0 +1,12 @@
+  ul#FoodMenuMenu {
+    margin: 0; padding: 0.8em;
+    text-align: center;
+  }
+  ul#FoodMenuMenu li {
+    list-style: none;
+    display: inline;
+    margin: 0.4em; padding: 0;
+  }
+  ul#FoodMenuMenu a:hover, ul#FoodMenuMenu span {
+    text-decoration: none;
+  }

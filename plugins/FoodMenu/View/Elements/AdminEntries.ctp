@@ -1,19 +1,19 @@
 <div id="adminEntry">
 	<div id="adminEntryOverview" style="display:block;">
 	<?php 
-		echo $this->Form->create('FoodMenuEntry', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuApp', 'action' => 'deleteEntries')));
+		echo $this->Form->create('FoodMenuEntry', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'View', 'action' => 'deleteEntries')));
 		echo $this->Form->button('Neuer Eintrag', array('type' => 'button', 'onClick' => 'showDiv(\'adminEntryEdit\', \'adminEntryOverview\')'));
 		echo $this->Form->button('Auswahl löschen', array('type' => 'submit'));
 		?>
 	<table>
 	<colgroup>
-		<col width="10px"/>
-		<col width="200px"/>
-		<col width="100px"/>
-		<col width="100px"/>
-		<col width="20px"/>
-		<col width="20px"/>
-		<col width="20px"/>
+		<col width="5%"/>
+		<col width="40%"/>
+		<col width="20%"/>
+		<col width="20%"/>
+		<col width="5%"/>
+		<col width="5%"/>
+		<col width="5%"/>
 	</colgroup>
 	<thead>
 	<tr>
@@ -40,9 +40,9 @@
 		echo '<td>'.$entry['FoodMenuEntry']['price'].'</td>';
 		echo '<td>'.$entry['FoodMenuEntry']['currency'].'</td>';
 		echo '<td>';
-		echo $this->Html->image('/app/webroot/img/edit.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[e]Edit', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuApp', 'action' => 'editEntry', $entry['FoodMenuEntry']['name'], $entry['FoodMenuEntry']['id'])));
+		echo $this->Html->image('/app/webroot/img/edit.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[e]Edit', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'View', 'action' => 'editEntry', $entry['FoodMenuEntry']['name'], $entry['FoodMenuEntry']['id'])));
 		echo '</td><td>';
-		echo $this->Html->image('/app/webroot/img/delete.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[x]Delete', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuApp', 'action' => 'deleteEntry', $entry['FoodMenuEntry']['name'], $entry['FoodMenuEntry']['id'])));
+		echo $this->Html->image('/app/webroot/img/delete.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[x]Delete', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'View', 'action' => 'deleteEntry', $entry['FoodMenuEntry']['name'], $entry['FoodMenuEntry']['id'])));
 		echo '</td>';
 	    echo '</tr>';
 		}
