@@ -31,7 +31,7 @@ function showLocation(panel, home) {
 function printRoute(panel, start, destination) {
     var directionsDisplay = new google.maps.DirectionsRenderer();
     var directionsService = new google.maps.DirectionsService();
-
+    
     var request = {
         origin:start,
         destination:destination,
