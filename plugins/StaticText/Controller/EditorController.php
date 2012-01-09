@@ -3,22 +3,34 @@
 class EditorController extends AppController {
 	
 	public function admin($contentID){
+		//Load datatables
 		$this->loadModel("ContentValues");
-		//Load and save data
-		if (!(empty($this->data))) {
-			$textID = $this->_checkIfTextExists($contentID);
+		$this->loadModel('Plugin');
+		//find plugin
+		$textPlugin = $this->Plugin->findByName($this->plugin);
+		//Get plugin-ID
+		$pluginId = $textPlugin['Plugin']['id'];
+		
+		$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'edit');
+		if ($editAllowed){	
+			//Load and save data
+			if (!(empty($this->data))) {
+				$textID = $this->_checkIfTextExists($contentID);
+					
+				if (!$textID) {
+				 	$cv = $this->data['ContentValues'];
+				 	$cv['content_id'] = $contentID;
+					$textID = $this->ContentValues->create($cv);
+				}
+				$contentValue = $this->_getContentValue($contentID);
+				$this->ContentValues->set($contentValue);
+				$this->ContentValues->set('key', 'Text');
+				$this->ContentValues->set('value',$this->data['editTextEditor']); //$this->data['ContentValues']['value'] ); //$this->data['editTextEditor']) ;//['textarea']);
+				$this->ContentValues->save();
 				
-			if (!$textID) {
-			 	$cv = $this->data['ContentValues'];
-			 	$cv['content_id'] = $contentID;
-				$textID = $this->ContentValues->create($cv);
 			}
-			$contentValue = $this->_getContentValue($contentID);
-			$this->ContentValues->set($contentValue);
-			$this->ContentValues->set('key', 'Text');
-			$this->ContentValues->set('value',$this->data['editTextEditor']); //$this->data['ContentValues']['value'] ); //$this->data['editTextEditor']) ;//['textarea']);
-			$this->ContentValues->save();
-			
+		} else{
+			$this->redirect($this->referer());
 		}
 		$contentValue = $this->_getContentValue($contentID);
 		if ($contentValue['ContentValues']['key'] == 'Text') {
@@ -45,7 +57,8 @@ class EditorController extends AppController {
 		return $this->ContentValues->find('first', array('conditions' => array('ContentValues.content_id' => $contentID)));
 	}
 	
-	public function beforeFilter(){
-		$this->Auth->allow('*');
-	}
+	
+	
+	
+	
 }
