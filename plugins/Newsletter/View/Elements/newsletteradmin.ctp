@@ -10,12 +10,7 @@
 		    document.getElementById(idOff).style.display="block";
 		};
 	}');
-
-	if ($mode == 'edit'){
-		echo '<div id="list" style="display:none">';
-	} else {
-		echo '<div id="list" style="display:block">';
-	}
+	
 	echo '<table>';
 	echo	'<colgroup>';
 	echo		'<col/>';
@@ -92,11 +87,7 @@
 	};
 	echo '</table>';
 	echo '</div>';
-if ($mode == 'edit'){
-		echo '<div id="editor" style="display:block">';
-	} else {
-		echo '<div id="editor" style="display:none">';
-	}
+	
  	if (isset($newsletterToEdit)){
 		$content = $newsletterToEdit['NewsletterLetter']['content'];
 		echo $this->Form->create('editor', array(
@@ -115,13 +106,12 @@ if ($mode == 'edit'){
 			'label' => '', 
 			'value' => $newsletterToEdit['NewsletterLetter']['content'],
 			'rows' => '30'));
+		echo '<input type=button onClick="location.href=\'\Newsletter\Subscription\admin\sendNewsletter\'" value=\'click here\'>';
 		echo $this->Form->button('Save', array(
 			'type' => 'submit', 
 			'value' => 'save'));
-		echo $this->Form->button('Back', array(
-			'type' => 'button',
-			'onClick' => 'showDiv(\'list\', \'editor\')'));
 		echo $this->Form->end();
+				
 		echo $this->Fck->load('NewsletterLetter.content');
  	};
  	echo '</div>';

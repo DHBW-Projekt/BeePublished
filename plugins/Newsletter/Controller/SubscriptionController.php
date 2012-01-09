@@ -46,23 +46,15 @@ class SubscriptionController extends AppController {
 	
 	public function sendNewsletter() {
 		
-//		$email = new CakeEmail();
-//    	$email->emailFormat('html');
-//		$email->template('user_activated', 'email');
-//    	$email->subject('About');
-//		$email->to('tobiashoehmann@googlemail.com');
-//		$email->from('noreply@DualonCMS.de', 'DualonCMS');
-//		
-//		$email->send();
-$anEmail = new CakeEmail();
-		$anEmail->template('newsletter.user_activated', 'email')
-			->emailFormat('html')
-			->to('tobiashoehmann@googlemail.com')
-			->from('noreply@localhost')
-			->subject(' - Your new password')
-			->send();
-		debug($email, $showHTML = false, $showFrom = true);
+		$email = new CakeEmail();
+    	$email->emailFormat('html');
+		$email->template('user_activated', 'email');
+    	$email->subject('About');
+		$email->to('tobiashoehmann@googlemail.com');
+		$email->from('noreply@DualonCMS.de', 'DualonCMS');
 		
+		$email->send();
+//		$this->redirect($this->referer());
 	}
 	
 	public function saveNewsletter($newsletter_id){
@@ -216,11 +208,10 @@ $anEmail = new CakeEmail();
 		}
 	}
 	
-	private function createNewRecipient($email,$user_id){
+	private function createNewRecipient($email){
 		// create new recipient from post data
 		$recipient = array(
 			'email' => $email,
-			'user_id' => $user_id,
 			'active' => '1'
 		);
 		return $recipient;
@@ -232,7 +223,7 @@ $anEmail = new CakeEmail();
 			if (($recipient) && (($this->checkRecipientIsActive($recipient)) == 0)){
 				$recipient = $this->setRecipientActive($recipient);
 			} else {
-				$recipient = $this->createNewRecipient();
+				$recipient = $this->createNewRecipient($this->request->data['NewsletterRecipient']['email']);
 			}	
 			$action = 'add';
 			$this->saveRecipient($recipient, $action);		
