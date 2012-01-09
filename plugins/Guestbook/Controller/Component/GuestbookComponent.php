@@ -5,13 +5,6 @@ class GuestbookComponent extends Component {
 	public $name = 'GuestbookComponent';
 	public $components = array('Paginator','PermissionValidation');
 
-	function beforeFilter()
-	{
-		//Actions which don't require authorization
-		parent::beforeFilter();
-		$this->Auth->allow('display');
-	}
-
 	public function getData($controller, $params){
 		
 		//set page title
