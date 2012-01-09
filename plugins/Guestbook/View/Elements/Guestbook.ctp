@@ -17,7 +17,7 @@
 
 <div id='guestbook_write'>
 
-<?php echo $this->Form->create('GuestbookPost', array('url' => array('plugin' => 'Guestbook', 'controller' => 'Guestbook','action' => 'save')));?>
+<?php echo $this->Form->create('GuestbookPost', array('url' => array('plugin' => 'Guestbook', 'controller' => 'GuestbookPost','action' => 'save')));?>
 	<table>
 		<tr>
 			<td> <?php echo $this->Form->label('author', __('Name'));?>
@@ -96,12 +96,12 @@
 				<?php 						
 					if (($GuestbookPost['GuestbookPost']['released'] == '0000-00-00 00:00:00') && $this->PermissionValidation->actionAllowed($pluginId, 'release')) {
 						echo $this->Html->link($this->Html->image('/img/check.png', array('height' => 16, 'width' => 16, 'alt' => __('Release post'))),
-							array('plugin' => 'Guestbook', 'controller' => 'Guestbook', 'action' => 'release', $GuestbookPost['GuestbookPost']['id']),
+							array('plugin' => 'Guestbook', 'controller' => 'GuestbookPost', 'action' => 'release', $GuestbookPost['GuestbookPost']['id']),
 							array('escape' => false, 'title' => __('Release post')));
 					}
 					if (($GuestbookPost['GuestbookPost']['deleted'] == '0000-00-00 00:00:00') && $this->PermissionValidation->actionAllowed($pluginId, 'delete')) {
 						echo $this->Html->link($this->Html->image('/img/delete.png', array('height' => 16, 'width' => 16, 'alt' => __('Delete post'))),
-							array('plugin' => 'Guestbook', 'controller' => 'Guestbook', 'action' => 'delete', $GuestbookPost['GuestbookPost']['id']),
+							array('plugin' => 'Guestbook', 'controller' => 'GuestbookPost', 'action' => 'delete', $GuestbookPost['GuestbookPost']['id']),
 							array('escape' => false, 'title' => __('Delete post')),
 							__('Do you really want to delete this post?'));
 					}
