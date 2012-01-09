@@ -19,9 +19,9 @@
 			</permission>			
 		</permissions>	
 		<views>
-            <view>
-                <name>Guestbook</name>
-            </view>
-        </views>
+            		<view>
+            			<name>Guestbook</name>
+           	 	</view>
+       		</views>
 	</plugin>
 </dualon>
