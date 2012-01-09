@@ -15,6 +15,13 @@
         <?php else: ?>
         <div class="plugin_content">
             <?php echo $this->element($child['content']['view'], array('data' => $child['content']['viewData'], 'url' => $child['content']['pageUrl'], 'contentId' => $child['content']['id'], 'pluginId' => $child['content']['pluginId']), array('plugin' => $child['content']['plugin'])); ?>
+            <?php if($this->PermissionValidation->getUserRole() == 6 || $this->PermissionValidation->getUserRole() == 7): ?>
+            <div class="plugin_administration">
+                <?php
+                    echo $this->Html->link($this->Html->image('tools_small.png'),array('plugin' => $child['content']['plugin'], 'controller' => $child['content']['view'], 'action' => 'admin', $child['content']['id']), array('escape' => false));
+                ?>
+            </div>
+            <?php endif; ?>
         </div>
         <?php endif; ?>
     <?php endif; ?>
