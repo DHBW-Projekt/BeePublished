@@ -1,6 +1,6 @@
 <?php
 class SubscriptionController extends AppController {
-		
+	
 	public $name = 'Subscription';
 	public $uses = array('Newsletter.NewsletterRecipient', 'Newsletter.NewsletterLetter', 'Newsletter.EmailTemplate');
  	public $helpers = array('Fck');
@@ -41,6 +41,20 @@ class SubscriptionController extends AppController {
 		$this->getAndSetData();
 		$this->layout = 'overlay';
 		$this->render('admin');
+	}
+	
+	public function sendNewsletter() {
+		App::uses('CakeEmail', 'Network/Email');
+		$email = new CakeEmail();
+    	$email->emailFormat('html');
+		$email->template('file', 'email');
+    	$email->subject('About');
+		$email->to('tobiashoehmann@googlemail.com');
+		$email->from('noreply@DualonCMS.de', 'DualonCMS');
+		
+		$email->send();
+		debug($email, $showHTML = false, $showFrom = true);
+		
 	}
 	
 	public function saveNewsletter($newsletter_id){

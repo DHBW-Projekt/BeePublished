@@ -27,7 +27,7 @@
 	    	$userAsRecipient = $data['userAsRecipient'];
 	    	echo $this->Form->create('UserSubscription', array('url' => array('plugin' => 'Newsletter',
 	    																	'controller' => 'Subscription',
-	    																	'action' => 'userUnSubscribe')));
+	    																	'action' => 'sendNewsletter')));
 			if ((isset($userAsRecipient)) and ($userAsRecipient['active'] == 1)){
 				echo 'You subscribed for the newsletter';
 				echo $this->Form->end('Unsubscribe');
