@@ -73,7 +73,7 @@ class PluginsController extends AppController
                 if (in_array($permission['action'], $existingPermissions)) {
                     continue;
                 }
-                $role = $this->Role->find('first', array('conditions' => array('Role.name' => $permission['role'])));
+                $role = $this->Role->findByName($permission['role']);
                 $this->Permission->create();
                 $permissionObject = array(
                     'plugin_id' => $pluginObject['id'],
