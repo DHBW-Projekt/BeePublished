@@ -11,15 +11,15 @@ class GuestbookPost extends AppModel {
 	public $validate = array(
 		'author' => array(
 		        'rule' => 'notEmpty',
-		        'message' => 'Bitte geben Sie Ihren Namen ein!',
+		        'message' => 'Please enter your name.',
 		),
 		'title' => array(
 		        'rule' => 'notEmpty',
-		        'message' => 'Bitte geben Sie einen Titel ein!',
+		        'message' => 'Please enter a title.',
 		),
 	    'text' => array(
 	        'rule' => 'notEmpty',
-	        'message' => 'Bitte geben Sie einen Text ein!',
+	        'message' => 'Please enter some text.',
 		),
 	);	
 	

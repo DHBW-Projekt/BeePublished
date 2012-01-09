@@ -17,7 +17,7 @@
 
 <div id='guestbook_write'>
 
-<?php echo $this->Form->create('GuestbookPost', array('url' => array('plugin' => 'Guestbook', 'controller' => 'GuestbookApp','action' => 'save')));?>
+<?php echo $this->Form->create('GuestbookPost', array('url' => array('plugin' => 'Guestbook', 'controller' => 'Guestbook','action' => 'save')));?>
 	<table>
 		<tr>
 			<td> <?php echo $this->Form->label('author', __('Name'));?>
@@ -34,7 +34,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td> <?php echo $this->Form->label('title', __('Titel'));?>
+			<td> <?php echo $this->Form->label('title', __('Title'));?>
 			</td>
 			<td> <?php if (($input != NULL) && array_key_exists('title', $input['GuestbookPost'])){
 							echo $this->Form->input('title', array('label' => false, 'value' => $input['GuestbookPost']['title']));
@@ -63,7 +63,7 @@
 		</tr>
 		<tr>
 			<td></td>
-			<td> <?php echo $this->Form->end('Eintrag speichern');?>
+			<td> <?php echo $this->Form->end('Save Post');?>
 			</td>
 	</table>
 </div>
@@ -74,7 +74,7 @@
 	<?php
 	$paging_params = $this->Paginator->params();
 	if ($paging_params['count'] > 0){
-		echo $this->Paginator->counter(__('Einträge {:start} bis {:end} von {:count}, Seite {:page} von {:pages}, '));
+		echo $this->Paginator->counter(__('Posts {:start} to {:end} of {:count}, Page {:page} of {:pages}, '));
 		if ($this->Paginator->hasPrev()){
 			echo $this->Html->link('<< ', $route . '/page:' . ($this->Paginator->current() - 1));
 		}
@@ -89,21 +89,21 @@
 	
 		<div class='guestbook_post'>		
 			<div class='guestbook_post_author'>
-				<?php echo $GuestbookPost['GuestbookPost']['author'] . __(' am ') . $this->Time->format('d.m.Y', $GuestbookPost['GuestbookPost']['created']) . __(' um ') . $this->Time->format('H:i:s',$GuestbookPost['GuestbookPost']['created'])?>
+				<?php echo $GuestbookPost['GuestbookPost']['author'] . __(' on ') . $this->Time->format('d.m.Y', $GuestbookPost['GuestbookPost']['created']) . __(' at ') . $this->Time->format('H:i:s',$GuestbookPost['GuestbookPost']['created'])?>
 			</div>				
 			<div class='guestbook_post_title'>
 				<?php echo $GuestbookPost['GuestbookPost']['title']?>
 				<?php 						
 					if (($GuestbookPost['GuestbookPost']['released'] == '0000-00-00 00:00:00') && $this->PermissionValidation->actionAllowed($pluginId, 'release')) {
-						echo $this->Html->link($this->Html->image('/Guestbook/img/check.png', array('height' => 16, 'width' => 16, 'alt' => __('Eintrag freigeben'))),
-							array('plugin' => 'Guestbook', 'controller' => 'GuestbookApp', 'action' => 'release', $GuestbookPost['GuestbookPost']['id']),
-							array('escape' => false, 'title' => __('Eintrag freigeben')));
+						echo $this->Html->link($this->Html->image('/img/check.png', array('height' => 16, 'width' => 16, 'alt' => __('Release post'))),
+							array('plugin' => 'Guestbook', 'controller' => 'Guestbook', 'action' => 'release', $GuestbookPost['GuestbookPost']['id']),
+							array('escape' => false, 'title' => __('Release post')));
 					}
 					if (($GuestbookPost['GuestbookPost']['deleted'] == '0000-00-00 00:00:00') && $this->PermissionValidation->actionAllowed($pluginId, 'delete')) {
-						echo $this->Html->link($this->Html->image('/img/delete.png', array('height' => 16, 'width' => 16, 'alt' => __('Eintrag entfernen'))),
-							array('plugin' => 'Guestbook', 'controller' => 'GuestbookApp', 'action' => 'delete', $GuestbookPost['GuestbookPost']['id']),
-							array('escape' => false, 'title' => __('Eintrag entfernen')),
-							__('Soll der Eintrag wirklich entfernt werden?'));
+						echo $this->Html->link($this->Html->image('/img/delete.png', array('height' => 16, 'width' => 16, 'alt' => __('Delete post'))),
+							array('plugin' => 'Guestbook', 'controller' => 'Guestbook', 'action' => 'delete', $GuestbookPost['GuestbookPost']['id']),
+							array('escape' => false, 'title' => __('Delete post')),
+							__('Do you really want to delete this post?'));
 					}
 				?>	
 			</div>			

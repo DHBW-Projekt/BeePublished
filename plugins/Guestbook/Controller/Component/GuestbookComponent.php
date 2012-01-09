@@ -8,7 +8,7 @@ class GuestbookComponent extends Component {
 	public function getData($controller, $params){
 		
 		//set page title
-		$controller->set('title_for_layout', __('Gästebuch'));
+		$controller->set('title_for_layout', __('Guestbook'));
 		
 		//load the used model in order to receive data
 		$controller->loadModel('Guestbook.GuestbookPost');

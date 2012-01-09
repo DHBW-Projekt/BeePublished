@@ -1,1 +1,1 @@
-<p><?php echo __('Für das Gästebuch sind zur Zeit keine Einstellungsmöglichkeiten vorhanden.')?></p>
+<p><?php echo __('There are no configuration options avaliable.')?></p>
