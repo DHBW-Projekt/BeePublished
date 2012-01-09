@@ -1,8 +1,5 @@
 <!-- Create new products for the catalog -->
 <?php 
-	//INTEGRATE searchbar
-	echo $this->element('SearchBar');
-	
 	//TITLE
 	echo '<div id ="webshop_create">';
 	echo '<h2>Artikel erstellen</h2>';
