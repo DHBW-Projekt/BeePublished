@@ -1,8 +1,4 @@
-$(document).ready(function () {
-	$('#editTextEditor').ckeditor(
-	function() { /* callback code */ },
-	{
-			toolbar: 'Basic'
-	} 
-	);
-});
+$(function() {
+	$( "#tabs" ).tabs();
+	});
+var ck_textContent = CKEDITOR.replace( 'editTextEditor' );

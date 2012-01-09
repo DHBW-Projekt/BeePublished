@@ -1,6 +1,6 @@
 <?php
 
-class EditorController extends AppController {
+class EditorController extends StaticTextAppController {
 	
 	public function admin($contentID){
 		//Load datatables

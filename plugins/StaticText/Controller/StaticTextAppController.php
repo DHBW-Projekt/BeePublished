@@ -1,10 +1,12 @@
 <?php
 
 class StaticTextAppController extends AppController {
-	// Includes the Component
-	
+	//used for tests
+	/*
 	public function beforeFilter(){
 		$this->Auth->allow('*');
-	}
+	}*/
+	
+	
 }
 
