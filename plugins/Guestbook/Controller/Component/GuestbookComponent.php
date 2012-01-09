@@ -1,6 +1,6 @@
 <?php
 
-class DisplayComponent extends Component {
+class GuestbookComponent extends Component {
 
 	public $name = 'GuestbookComponent';
 	public $components = array('Paginator','PermissionValidation');
@@ -24,10 +24,10 @@ class DisplayComponent extends Component {
 		$this->Paginator->settings = array(
 		 			'limit' => 10,
 		);
-
+		
 		//check user authorisation and get data
 		//unfortunately query for NOT seems to be not working if NULL is used...
-		if ($this->PermissionValidation->actionAllowed('', 'release')){ 
+		if ($this->PermissionValidation->actionAllowed($this->_getPluginId($controller), 'release')){ 
 			//show all posts which are not already deleted
 			$allGuestbookPosts = $controller->paginate('GuestbookPost', array('deleted' => '0000-00-00 00:00:00'));
 		} else {
@@ -37,5 +37,10 @@ class DisplayComponent extends Component {
 		
 		return $allGuestbookPosts;
 	}
-
+	
+	function _getPluginId($controller){
+		$controller->loadModel('Plugin');
+		$plugin = $controller->Plugin->findByName('Guestbook');
+		return $plugin['Plugin']['id'];
+	}
 }

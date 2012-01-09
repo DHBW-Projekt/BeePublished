@@ -1,6 +1,6 @@
 <?php
 
-// App::uses('Sanitize');
+App::uses('Sanitize','Utility');
 
 class GuestbookAppController extends AppController {
 	
@@ -17,19 +17,18 @@ class GuestbookAppController extends AppController {
 	}
 
 	function save(){
-// 		die(debug($this->request->data));
 		if ($this->request->is('post')){
-// 			$this->request->data = Sanitize::clean($this->request->data);
+			$this->request->data = Sanitize::clean($this->request->data);
 			if ($this->GuestbookPost->save($this->request->data)) {
 				$this->Session->delete('input');
-				$this->Session->delete('errors');
+				$this->_deleteValidation();
 				$this->Session->setFlash(__('Der Eintrag wurde gespeichert.
-										   				 Er wird von einem Administrator überprüft und dann freigegeben.'));
+										   				 Er wird von einem Administrator überprüft und dann freigegeben.'), 'default', array('class' => 'flash_success'), 'Guestbook');
 				$this->redirect($this->referer());
 			}		
-			$this->Session->setFlash(__('Es sind Fehler aufgetreten.'));
+			$this->Session->setFlash(__('Es sind Fehler aufgetreten.'), 'default', array('class' => 'flash_failure'), 'Guestbook');
+			$this->_persistValidation('GuestbookPost');
 			$this->Session->write('input', $this->request->data);
-			$this->Session->write('errors', $this->GuestbookPost->validationErrors);
 			$this->redirect($this->referer());
 		}
 	}
@@ -40,7 +39,7 @@ class GuestbookAppController extends AppController {
 			$this->request->data = $this->GuestbookPost->read();
 			$this->request->data['GuestbookPost']['released'] = date("Y-m-d H:i:s");
 			if ($this->GuestbookPost->save($this->request->data)) {
-				$this->Session->setFlash(__('Der Eintrag wurde freigegeben.'));
+				$this->Session->setFlash(__('Der Eintrag wurde freigegeben.'), 'default', array('class' => 'flash_success'), 'Guestbook');
 				$this->redirect($this->referer());
 			}
 		}
@@ -52,7 +51,7 @@ class GuestbookAppController extends AppController {
 			$this->request->data = $this->GuestbookPost->read();
 			$this->request->data['GuestbookPost']['deleted'] = date("Y-m-d H:i:s");
 			if ($this->GuestbookPost->save($this->request->data)) {
-				$this->Session->setFlash(__('Der Eintrag wurde entfernt.'));
+				$this->Session->setFlash(__('Der Eintrag wurde entfernt.'), 'default', array('class' => 'flash_success'), 'Guestbook');
 				$this->redirect($this->referer());
 			}
 		}
