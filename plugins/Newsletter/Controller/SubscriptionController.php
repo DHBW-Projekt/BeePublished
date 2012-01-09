@@ -1,4 +1,5 @@
 <?php
+App::uses('CakeEmail', 'Network/Email','AppController', 'Controller');
 class SubscriptionController extends AppController {
 	
 	public $name = 'Subscription';
@@ -44,15 +45,22 @@ class SubscriptionController extends AppController {
 	}
 	
 	public function sendNewsletter() {
-		App::uses('CakeEmail', 'Network/Email');
-		$email = new CakeEmail();
-    	$email->emailFormat('html');
-		$email->template('file', 'email');
-    	$email->subject('About');
-		$email->to('tobiashoehmann@googlemail.com');
-		$email->from('noreply@DualonCMS.de', 'DualonCMS');
 		
-		$email->send();
+//		$email = new CakeEmail();
+//    	$email->emailFormat('html');
+//		$email->template('user_activated', 'email');
+//    	$email->subject('About');
+//		$email->to('tobiashoehmann@googlemail.com');
+//		$email->from('noreply@DualonCMS.de', 'DualonCMS');
+//		
+//		$email->send();
+$anEmail = new CakeEmail();
+		$anEmail->template('newsletter.user_activated', 'email')
+			->emailFormat('html')
+			->to('tobiashoehmann@googlemail.com')
+			->from('noreply@localhost')
+			->subject(' - Your new password')
+			->send();
 		debug($email, $showHTML = false, $showFrom = true);
 		
 	}
