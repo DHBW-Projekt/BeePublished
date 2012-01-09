@@ -47,7 +47,7 @@ class ContainersTestCase extends CakeTestCase {
 		parent::setUp();
 
 		$this->Containers = new TestContainers();
-		$this->->constructClasses();
+		$this->constructClasses();
 	}
 
 /**

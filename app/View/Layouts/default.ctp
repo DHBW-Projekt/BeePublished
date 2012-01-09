@@ -11,19 +11,22 @@
     echo $this->Html->css('jquery-ui/jquery-ui-1.8.16.custom');
     echo $this->Html->css('design');
     echo $this->Html->css('template');
+    echo $this->Html->css('menu-design');
+    echo $this->Html->css('menu-template');
     echo $this->Html->script('jquery-1.6.2.min');
     echo $this->Html->script('jquery-ui-1.8.16.custom.min');
     echo $this->Html->script('jquery.fancybox-1.3.4.pack');
     echo $this->Html->script('jquery.blockUI');
+    echo $this->Html->script('jquery.cookie');
     echo $this->Html->script('dualon');
     if ($adminMode) {
+        $this->Js->set('pageid', $pageid);
         echo $this->Html->css('sidebar');
         echo $this->Html->css('admin/layoutmanager');
         echo $this->Html->script('admin/layoutmanager');
         echo $this->Html->script('admin/main');
         echo $this->Html->script('admin/menu');
         echo $this->Html->script('admin/page');
-        echo '<meta id="' . $pageid . '" />';
     }
     echo $scripts_for_layout;
     ?>
@@ -82,10 +85,12 @@
         <div style="clear:both;"></div>
     </div>
     <div id="content">
+        <?php echo $this->Session->flash(); ?>
         <?php echo $content_for_layout ?>
     </div>
     <div id="footer">
-        Powered by BeePublished - All rights reserved - &copy; Copyright 2011-2012
+        Powered by BeePublished - All rights reserved - &copy; Copyright 2011-2012<br/><br/>
+        <?php echo $this->element('sql_dump'); ?>
     </div>
 </div>
 <? if ($adminMode) {
