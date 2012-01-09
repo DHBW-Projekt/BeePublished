@@ -6,24 +6,20 @@
 	echo $this->Html->script('/js/jquery-1.6.2.min.js', true);
 	echo $this->Html->script('/js/jquery-ui-1.8.16.custom.min.js', true);
 	echo $this->Html->script('/ckeditor/ckeditor', true);
-
-
-	
-    echo $this->Html->scriptBlock(
+	echo $this->Html->scriptBlock(
 	    	'$(function() {
     			$("#tabs").tabs();
 			$("#tabs").tabs("select", 0);
 		});
     	',array('inline' => true)
     );
-    
-    
     $validationErrors = $this->Session->read('Validation.NewsletterRecipient.validationErrors');
+    if(!isset($mode)){
+    	$mode = '';
+    };
 ?>
-
 <div id="tabs">
 	<ul>
-		
 		<li><a href="#tabs-1">Newsletter</a></li>
 		<li><a href="#tabs-2">Recipients</a></li>
 		<li><a href="#tabs-3">Templates</a></li>
@@ -31,14 +27,8 @@
 
 	</ul>
 	<div id="tabs-1">
-	<?php 
-// 			debug($newsletterToEdit, $showHtml=null, $showFrom=true);
-			
-			echo $this->element('newsletteradmin');
-
-			
-			
-
+		<?php 
+			echo $this->element('newsletteradmin', array('mode' => $mode));
 		?>
 	</div>
 	<div id="tabs-2">

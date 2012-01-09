@@ -2,28 +2,42 @@
 class SubscriptionController extends AppController {
 		
 	public $name = 'Subscription';
-	public $uses = array('Newsletter.NewsletterRecipient', 'Newsletter.NewsletterLetter');
+	public $uses = array('Newsletter.NewsletterRecipient', 'Newsletter.NewsletterLetter', 'Newsletter.EmailTemplate');
  	public $helpers = array('Fck');
-//  	var $autoLayout = false;
-	
-	
-	
+//  var $autoLayout = false;
+// 	var $autoRender = false;
+		
 	public $paginate = array(
 		'NewsletterLetter' => array(
 			'limit' => 5, 
-			'order' => array('NewsletterLetter.date' => 'desc')
-		),
+			'order' => array(
+				'NewsletterLetter.date' => 'desc')),
 		 'NewsletterRecipient' => array(
 			'limit' => 10,
-			'order'	=> array('NewsletterRecipient.email' => 'asc'),
-			'conditions' => array('NewsletterRecipient.active' => 1)
-		)
+			'order'	=> array(
+				'NewsletterRecipient.email' => 'asc'),
+			'conditions' => array(
+				'NewsletterRecipient.active' => 1)),
+		'EmailTemplate' => array(
+			'limit' => 10,
+			'order' => array(
+				'EmailTemplate.id' => 'asc'))
 	);
 			
 	public function newsletteradmin($id){
+		$this->getAndSetData();
+		$this->set('mode', '');
+		$this->layout = 'overlay';
+		$this->render('admin');
+	}
+	
+	public function editNewsletter($id){
 		$newsletterToEdit = $this->NewsletterLetter->find('first', array(
-														'conditions' => array('NewsletterLetter.id' => $id)));
-		$this->set('newsletterToEdit', $newsletterToEdit);
+			'conditions' => array(
+				'NewsletterLetter.id' => $id)));
+		$this->set(array(
+			'newsletterToEdit' => $newsletterToEdit,
+			'mode' => 'edit'));
 		$this->getAndSetData();
 		$this->layout = 'overlay';
 		$this->render('admin');
@@ -34,14 +48,12 @@ class SubscriptionController extends AppController {
 			$newsletter2 = $this->request->data['NewsletterLetter'];
 			$newsletter = $this->NewsletterLetter->findById($newsletter_id);
 			$newsletter = $newsletter['NewsletterLetter'];
-// 			debug($newsletter);
-// 			debug($newsletter2);
 			$newsletter['subject'] = $newsletter2['subject'];
 			$newsletter['content'] = $newsletter2['content'];
-// 			debug($newsletter);
+			$date = date('Y-m-d', time());
+			$newsletter['date'] = $date;
 			$this->NewsletterLetter->set($newsletter);
 			$this->NewsletterLetter->save();
-			
 		}
 		$this->redirect($this->referer());
 	}
@@ -50,15 +62,13 @@ class SubscriptionController extends AppController {
 		$newsletters = $this->getNewsletters();
 		$recipients = $this->getActiveRecipients();
 		$this->set(array(
-							'newsletters' => $newsletters,
-							'recipients' => $recipients
+			'newsletters' => $newsletters,
+			'recipients' => $recipients
 		));
 	}
 	
-	
 	public function admin($contentID){
 		$user = $this->Auth->user();
-		echo $user['email'];
 		$email = $user['email'];
 		$recipient = $this->getRecipient($email);
 		$isRecipient = $this->checkRecipientIsActive($recipient);
@@ -81,9 +91,8 @@ class SubscriptionController extends AppController {
 	private function getRecipient($email){
 		// returns recipient if existing
 		$recipient = $this->NewsletterRecipient->find('first', array(
-							'conditions' => array('NewsletterRecipient.email' => $email)
-			)
-		);
+			'conditions' => array(
+				'NewsletterRecipient.email' => $email)));
 		return $recipient;
 	}
 	
@@ -122,7 +131,6 @@ class SubscriptionController extends AppController {
 	public function userUnSubscribe(){
 		if ($this->request->is('post')){
 			$user = $this->Auth->user();
-// 			debug($user, $showHtml=null, $showFrom=true);
 			if($recipient = $this->getRecipient($user['email'])){
 				// check if recipient is active
 				if($this->checkRecipientIsActive($recipient)){
@@ -136,7 +144,7 @@ class SubscriptionController extends AppController {
 				}
 			} else {
 				// if recipient doesn't exist, create a new one
-				$recipient = $this->createNewRecipient($user['email'],$user['id']);
+				$recipient = $this->createNewRecipient(NULL,$user['id']);
 				$action = 'add';
 			}
 			// update or save recipient
@@ -154,9 +162,7 @@ class SubscriptionController extends AppController {
 	
 	public function setRecipientInactiveByEmail($email){
 		$recipient = $this->getRecipient($email);
-// 		debug($recipient, $showHtml=null, $showFrom=true);
 		$recipient = $this->setRecipientInactive($recipient);
-// 		debug($recipient, $showHtml=null, $showFrom=true);
 		$action = 'delete';
 		$this->saveRecipient($recipient, $action);
 		$this->redirect($this->referer());
@@ -172,12 +178,18 @@ class SubscriptionController extends AppController {
 		$this->NewsletterRecipient->set($recipient);
 		if($this->NewsletterRecipient->save()) {
 			if ($action == 'add'){
-				$this->Session->setFlash('The user was added successfully.', 'default', array('class' => 'flash_success'), 'NewsletterRecipient');
+				$this->Session->setFlash('The user was added successfully.', 'default', array(
+					'class' => 'flash_success'), 
+					'NewsletterRecipient');
 			} else {
-				$this->Session->setFlash('The user was removed successfully.', 'default', array('class' => 'flash_success'), 'NewsletterRecipient');
+				$this->Session->setFlash('The user was removed successfully.', 'default', array(
+				'class' => 'flash_success'), 
+				'NewsletterRecipient');
 			}
 		} else {
-			$this->Session->setFlash('The user was not added.', 'default', array('class' => 'flash_failure'), 'NewsletterRecipient');
+			$this->Session->setFlash('The user was not added.', 'default', array(
+			'class' => 'flash_failure'), 
+			'NewsletterRecipient');
 			$this->_persistValidation('NewsletterRecipient');
 		}
 	}
@@ -213,19 +225,4 @@ class SubscriptionController extends AppController {
 		$this->Auth->allow('*');
 	}
 	
-	
-// 	public function subscribe() {
-// 		if ($this->request->is('post')){
-// 			$this->NewsletterRecipient->set(array(
-// 				'email' => $this->request->data['NewsletterRecipient']['email'],
-// 				'active' => '1'));
-// 			if($this->NewsletterRecipient->save()) {
-// 				$this->Session->setFlash('The user was added successfully.', 'default', array('class' => 'flash_success'), 'NewsletterRecipient');
-// 			} else {
-// 				$this->Session->setFlash('The user was not added.', 'default', array('class' => 'flash_failure'), 'NewsletterRecipient');
-// 				$this->_persistValidation('NewsletterRecipient');
-// 			}
-// 		}
-// 		$this->redirect($this->referer());
-// 	}
 }
