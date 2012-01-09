@@ -32,10 +32,11 @@ $currentRow = 0;
         <?php
         $numOfDays = cal_days_in_month(CAL_GREGORIAN, date('n', $time), date('Y', $time));
         for ($j = 0; $j < $numOfDays; $j++) {
+            $day = date('Y-m-d', $time);
             if ($currentColumn == 0) {
                 echo '<tr>';
                 if ($ShowWeeks) {
-                    echo '<td class="' . $ClassPrefix . 'week">' . $this->Html->link(date('W', $time), $url . 'largecalendar/week/' . date('Y-W', $time)) . '</td>';
+                    echo '<td class="' . $ClassPrefix . 'week">' . $this->Html->link(date('W', $time), $url . 'largecalendar/week/' . date('Y-\WW', $time)) . '</td>';
                 }
                 if ($currentRow == 0) {
                     $colspan = -$FDOW + date('N', $time);
@@ -48,14 +49,27 @@ $currentRow = 0;
                     $currentColumn += $colspan;
                 }
             }
-            echo '<td>';
+            if (array_key_exists(date('Y-m-d', $time), $Entries)) {
+                $hasDateClass = ' class="has-date"';
+            } else {
+                $hasDateClass = '';
+            }
+            echo '<td' . $hasDateClass . '>';
             echo '<div class="' . $ClassPrefix . 'calendar_date">';
             echo $this->Html->link(date('j', $time), $url . 'largecalendar/day/' . date('Y-m-d', $time));
-            if ($navigation) {
-                echo ' ' . $this->Html->link($this->Html->image('add.png', array('width' => 12, 'height' => 12)), array('plugin' => 'Calendar', 'controller' => 'Events', 'action' => 'add'), array('escape' => false, 'class' => 'calendar_add_entry'));
+            if ($navigation && $this->PermissionValidation->actionAllowed($PluginId,'CreateEvent')) {
+                echo ' ' . $this->Html->link($this->Html->image('add.png', array('width' => 12, 'height' => 12)), array('plugin' => 'Calendar', 'controller' => 'CalendarEntries', 'action' => 'add', date('Y-m-d', $time)), array('escape' => false, 'class' => 'calendar_add_entry'));
             }
             echo '</div>';
-            echo '<div class="' . $ClassPrefix . 'calendar_content"></div>';
+            echo '<div class="' . $ClassPrefix . 'calendar_content">';
+            if ($ShowEntries && array_key_exists($day, $Entries)) {
+                foreach ($Entries[$day] as $entry) {
+                    echo '<div class="' . $ClassPrefix . 'calendar_entry">';
+                    echo $entry['name'];
+                    echo '</div>';
+                }
+            }
+            echo '</div>';
             echo '</td>';
             $time += 86400;
             $currentColumn++;

@@ -22,8 +22,6 @@ function CheckAuthentication()
         $_SESSION['KCFINDER']['disabled'] = true;
         return false;
     }
-    var_dump(CakeSession::read('Auth'));
-    var_dump($_SESSION);
 
 }
 

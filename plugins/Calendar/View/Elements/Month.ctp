@@ -6,7 +6,10 @@ echo $this->element('CalendarFactory',
         'time' => $StartTime,
         'ClassPrefix' => '',
         'url' => $URL,
-        'navigation' => true
+        'navigation' => true,
+        'Entries' => $Entries,
+        'ShowEntries' => true,
+        'PluginId' => $PluginId
     ),
     array('plugin' => 'Calendar'));
 ?>

@@ -304,6 +304,8 @@ function setSettingOptions() {
     });
     $("a#overlay").fancybox({
         'type':'iframe',
+        width: '90%',
+        height: '90%',
         'onClosed':function () {
             window.location.reload(true);
         }

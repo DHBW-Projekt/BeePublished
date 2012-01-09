@@ -32,6 +32,10 @@
     text-align: center;
 }
 
+.small_calendar td.has-date {
+    background-color: #cccccc;
+}
+
 .calendar th {
     background-color: #3292DD;
 }
