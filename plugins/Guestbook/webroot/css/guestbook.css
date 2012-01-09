@@ -1,4 +1,43 @@
+div #flashMessage {
+	border-style: solid;
+	border-width: 1px;
+	border-color: red;
+	padding: 5px;
+}
 
-p {
+div #guestbook_write {
+	padding: 20px;
+}
+
+div #guestbook_write label{
+	padding: 10px;
+	margin: 10px;
 	font-weight: bold;
+}
+
+div.guestbook_navigation {
+	padding: 5px;
+}
+
+div.guestbook_post {
+	border-style: solid;
+	border-width: 1px;
+	padding: 5px;
+	margin: 5px;
+}
+
+div.guestbook_post_title {
+	float: left;
+	font-size: 125%;
+	font-weight: bold;
+}
+
+div.guestbook_post_author {
+	float: right;
+	text-align: right;
+	font-size: 75%;
+}
+
+div.guestbook_post_text{
+	clear: both;
 }

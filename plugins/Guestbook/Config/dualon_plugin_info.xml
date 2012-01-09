@@ -6,13 +6,22 @@
 		<version>1.0</version>
 		<permissions>
 			<permission>
-				<role>Admin</role>
+				<role>Guest</role>
+				<action>save</action>
+			</permission>
+			<permission>
+				<role>Editor</role>
 				<action>release</action>
 			</permission>
 			<permission>
-				<role>Admin</role>
+				<role>Administrator</role>
 				<action>delete</action>
-			</permission>
+			</permission>			
 		</permissions>	
+		<views>
+            <view>
+                <name>Display</name>
+            </view>
+        </views>
 	</plugin>
 </dualon>

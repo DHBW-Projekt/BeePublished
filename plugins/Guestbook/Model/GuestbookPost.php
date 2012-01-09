@@ -10,10 +10,8 @@ class GuestbookPost extends AppModel {
 	public $order = array('created' => 'desc');
 	public $validate = array(
 		'author' => array(
-		        'rule'       => 'alphaNumeric', 
-		        'required'   => true,
-		        'allowEmpty' => false,
-		        'message'    => 'Bitte geben Sie Ihren Namen ein!',
+		        'rule' => 'notEmpty',
+		        'message' => 'Bitte geben Sie Ihren Namen ein!',
 		),
 		'title' => array(
 		        'rule' => 'notEmpty',

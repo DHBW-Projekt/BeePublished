@@ -3,7 +3,7 @@
 class DisplayComponent extends Component {
 
 	public $name = 'GuestbookComponent';
-	public $components = array('Paginator');
+	public $components = array('Paginator','PermissionValidation');
 
 	function beforeFilter()
 	{
@@ -26,11 +26,15 @@ class DisplayComponent extends Component {
 		);
 
 		//check user authorisation and get data
-		// TODO implement check
-		//normal user / guest is only allowed to see released and not deleted posts
-		// 		$allGuestbookPosts = $controller->paginate('GuestbookPost', array('released NOT' => NULL,'deleted' => NULL));
-		//admin user has to have unreleaased posts in order to release them
-		$allGuestbookPosts = $controller->paginate('GuestbookPost',array('deleted' => NULL));
+		//unfortunately query for NOT seems to be not working if NULL is used...
+		if ($this->PermissionValidation->actionAllowed('', 'release')){ 
+			//show all posts which are not already deleted
+			$allGuestbookPosts = $controller->paginate('GuestbookPost', array('deleted' => '0000-00-00 00:00:00'));
+		} else {
+			//normal user / guest is only allowed to see released and not deleted posts
+			$allGuestbookPosts = $controller->paginate('GuestbookPost', array('released NOT' => '0000-00-00 00:00:00','deleted' => '0000-00-00 00:00:00'));
+		}
+		
 		return $allGuestbookPosts;
 	}
 
