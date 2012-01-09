@@ -1,7 +1,6 @@
 <?php
-App::uses('CakeEmail', 'Network/Email','AppController', 'Controller');
 class SubscriptionController extends AppController {
-	
+		
 	public $name = 'Subscription';
 	public $uses = array('Newsletter.NewsletterRecipient', 'Newsletter.NewsletterLetter', 'Newsletter.EmailTemplate');
  	public $helpers = array('Fck');
@@ -36,6 +35,20 @@ class SubscriptionController extends AppController {
 		$newsletterToEdit = $this->NewsletterLetter->find('first', array(
 			'conditions' => array(
 				'NewsletterLetter.id' => $id)));
+		$newsletterToEdit = $newsletterToEdit['NewsletterLetter'];
+		$this->set(array(
+			'newsletterToEdit' => $newsletterToEdit,
+			'mode' => 'edit'));
+		$this->getAndSetData();
+		$this->layout = 'overlay';
+		$this->render('admin');
+	}
+	
+	public function createNewsletter(){
+		$newsletterToEdit = array(
+			'subject' => NULL,
+			'content' => NULL,
+			'id' => 'new');
 		$this->set(array(
 			'newsletterToEdit' => $newsletterToEdit,
 			'mode' => 'edit'));
@@ -57,19 +70,32 @@ class SubscriptionController extends AppController {
 //		$this->redirect($this->referer());
 	}
 	
+	public function deleteNewsletter($id){
+		$this->NewsletterLetter->delete($id);
+		$this->redirect($this->referer());
+	}
+	
 	public function saveNewsletter($newsletter_id){
 		if ($this->request->is('post')){
 			$newsletter2 = $this->request->data['NewsletterLetter'];
-			$newsletter = $this->NewsletterLetter->findById($newsletter_id);
-			$newsletter = $newsletter['NewsletterLetter'];
+			if (!($newsletter_id == 'new')){
+				$newsletter = $this->NewsletterLetter->findById($newsletter_id);
+			} else {
+				$newsletter = array();
+			};
 			$newsletter['subject'] = $newsletter2['subject'];
 			$newsletter['content'] = $newsletter2['content'];
+			$newsletter['draft'] = 1;
 			$date = date('Y-m-d', time());
 			$newsletter['date'] = $date;
 			$this->NewsletterLetter->set($newsletter);
-			$this->NewsletterLetter->save();
+			$newsletter = $this->NewsletterLetter->save();
+			$newsletter = $newsletter['NewsletterLetter'];
+// 			debug($newsletter);
+			$this->editNewsletter($newsletter['id']);
+			
 		}
-		$this->redirect($this->referer());
+// 		$this->redirect($this->referer());
 	}
 	
 	private function getAndSetData(){
@@ -208,10 +234,11 @@ class SubscriptionController extends AppController {
 		}
 	}
 	
-	private function createNewRecipient($email){
+	private function createNewRecipient($email,$user_id){
 		// create new recipient from post data
 		$recipient = array(
 			'email' => $email,
+			'user_id' => $user_id,
 			'active' => '1'
 		);
 		return $recipient;
@@ -223,7 +250,7 @@ class SubscriptionController extends AppController {
 			if (($recipient) && (($this->checkRecipientIsActive($recipient)) == 0)){
 				$recipient = $this->setRecipientActive($recipient);
 			} else {
-				$recipient = $this->createNewRecipient($this->request->data['NewsletterRecipient']['email']);
+				$recipient = $this->createNewRecipient();
 			}	
 			$action = 'add';
 			$this->saveRecipient($recipient, $action);		

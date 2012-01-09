@@ -14,6 +14,9 @@
     	',array('inline' => true)
     );
     $validationErrors = $this->Session->read('Validation.NewsletterRecipient.validationErrors');
+    if(!isset($mode)){
+    	$mode = '';
+    };
 ?>
 <div id="tabs">
 	<ul>
@@ -25,7 +28,7 @@
 	</ul>
 	<div id="tabs-1">
 		<?php 
-			echo $this->element('newsletteradmin');
+			echo $this->element('newsletteradmin', array('mode' => $mode));
 		?>
 	</div>
 	<div id="tabs-2">

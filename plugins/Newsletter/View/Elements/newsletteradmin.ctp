@@ -10,7 +10,11 @@
 		    document.getElementById(idOff).style.display="block";
 		};
 	}');
-	
+	if ($mode == 'edit'){
+		echo '<div id="list" style="display:none">';
+	} else {
+		echo '<div id="list" style="display:block">';
+	}
 	echo '<table>';
 	echo	'<colgroup>';
 	echo		'<col/>';
@@ -21,6 +25,13 @@
 	echo		'<th>Subject</th>';
 	echo		'<th>Date</th>';
 	echo	'</tr>';
+	echo $this->Form->create('createNewsletter', array(
+			'url' => array(
+				'plugin' => 'Newsletter',
+	    		'controller' => 'Subscription',
+	    		'action' => 'createNewsletter' , '')));
+	echo $this->Form->submit('Create newsletter');
+	echo $this->Form->end();
 	if (isset($newsletters)){
 		foreach($newsletters as $newsletter){
 			echo '<tr>';
@@ -48,7 +59,7 @@
 									'style' => 'float: left', 
 									'width' => '20px', 
 									'alt' => '[]Edit', 
-									'onClick' => 'showDiv(\'editor\', \'list\')',
+// 									'onClick' => 'showDiv(\'editor\', \'list\')',
 									'url' => array(
 										'plugin' => 'Newsletter', 
 										'controller' => 'Subscription', 
@@ -87,31 +98,32 @@
 	};
 	echo '</table>';
 	echo '</div>';
-	
+if ($mode == 'edit'){
+		echo '<div id="editor" style="display:block">';
+	} else {
+		echo '<div id="editor" style="display:none">';
+	}
  	if (isset($newsletterToEdit)){
-		$content = $newsletterToEdit['NewsletterLetter']['content'];
 		echo $this->Form->create('editor', array(
 			'url' => array(
 				'plugin' => 'Newsletter',
 	    		'controller' => 'Subscription',
-	    		'action' => 'saveNewsletter' , $newsletterToEdit['NewsletterLetter']['id'])));
-// 		debug($templatesForEditor);
-// 		echo $this->Form->input('EmailTemplate.name', $templatesForEditor, array('type' => 'select'));
-// 		echo $this->Form->input('EmailTemplate', array(
-// 			'type' => 'select'));
+	    		'action' => 'saveNewsletter' , $newsletterToEdit['id'])));
+// 		debug($newsletterToEdit);
 		echo $this->Form->input('NewsletterLetter.subject', array(
 			'label' => 'Betreff:', 
-			'value' => $newsletterToEdit['NewsletterLetter']['subject']));
+			'value' => $newsletterToEdit['subject']));
 		echo $this->Form->textarea('NewsletterLetter.content', array(
 			'label' => '', 
-			'value' => $newsletterToEdit['NewsletterLetter']['content'],
+			'value' => $newsletterToEdit['content'],
 			'rows' => '30'));
-		echo '<input type=button onClick="location.href=\'\Newsletter\Subscription\admin\sendNewsletter\'" value=\'click here\'>';
 		echo $this->Form->button('Save', array(
 			'type' => 'submit', 
 			'value' => 'save'));
+		echo $this->Form->button('Back', array(
+			'type' => 'button',
+			'onClick' => 'showDiv(\'list\', \'editor\')'));
 		echo $this->Form->end();
-				
 		echo $this->Fck->load('NewsletterLetter.content');
  	};
  	echo '</div>';
