@@ -87,6 +87,12 @@
     position: relative;
 }
 
+.plugin_administration {
+    position: relative;
+    padding: 2px;
+    margin-bottom: 10px;
+}
+
 .setting_button {
     position: absolute;
     top: 40px;
@@ -105,6 +111,6 @@
 }
 
 .flash_success, .flash_failure {
-	padding:10px;
-	margin:15px 0;
+    padding: 10px;
+    margin: 15px 0;
 }
