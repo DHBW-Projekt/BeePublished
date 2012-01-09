@@ -17,6 +17,7 @@ $(document).ready(function () {
     });
 
     initMenu();
+    initAdmin();
 });
 
 function initMenu() {
@@ -30,4 +31,15 @@ function initMenu() {
             $(this).children("ol.subnav").hide();
         }
     );
+}
+
+function initAdmin() {
+    $(".plugin_administration a").fancybox({
+        'type':'iframe',
+        width:'90%',
+        height:'90%',
+        'onClosed':function () {
+            window.location.reload(true);
+        }
+    });
 }
