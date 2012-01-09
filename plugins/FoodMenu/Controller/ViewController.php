@@ -5,8 +5,6 @@ class ViewController extends AppController {
 	public $name = 'View';
 	public $uses = array('FoodMenu.FoodMenuMenu', 'FoodMenu.FoodMenuCategory', 'FoodMenu.FoodMenuEntry');
 	//var $autoLayout = false;
-	//var $autoRender = false;
-
 
 	function beforeFilter()
     {
@@ -29,7 +27,7 @@ class ViewController extends AppController {
 //		}   
 
 	public function admin( $contentID ) {
-		$this->layout('overlay');
+		$this->layout = 'overlay';
 		$menus = $this->FoodMenuMenu->find('all');
 		$this->set('menus', $menus);
 		

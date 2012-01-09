@@ -10,7 +10,9 @@
 	echo $this->Session->flash();
 	
 	echo $this->element('SelectDate');
-	echo $this->element('MenuLinks', array('data' => $data));
+	if(!(isset($categories))) $categories = '';
+	if(!(isset($entries))) $entries = '';
+	echo $this->element('MenuLinks', array('data' => $data, 'categories' => $categories, 'entries' => $entries));
 ?>
 	
 	<?php

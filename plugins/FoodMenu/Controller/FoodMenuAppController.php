@@ -6,8 +6,8 @@ class FoodMenuAppController extends AppController {
 	public $uses = array('FoodMenu.FoodMenuMenu', 'FoodMenu.FoodMenuCategory', 'FoodMenu.FoodMenuEntry');
 	var $helpers = array('Html', 'Form');
 	var $layout = 'default';
-	//var $autoLayout = false;
-	//var $autoRender = false;	
+	var $autoLayout = true;
+	var $autoRender = true;	
 	
 	function beforeFilter()
     {
@@ -17,19 +17,6 @@ class FoodMenuAppController extends AppController {
         $this->Auth->allow('*');
     }//beforeFilter
 
-	function viewMenu() {
-//		$this->loadModel('FoodMenuMenu');
-//		$this->loadModel('FoodMenuCategory');
-//		$this->loadModel('FoodMenuEntry');
-//		$this->FoodMenuMenu->bindModel(array('hasAndBelongsToMany' => array('FoodMenuCategory' => array('conditions'=>array('Category.ID'=>'*')))));
-//
-//		$menus = $this->FoodMenuMenu->find('all');
-//		$categories = $this->FoodMenuCategory->find('all');
-//		$entries = $this->FoodMenuEntry->find('all');
-//		$this->set('data', array($menus, $categories, $entries));
-//		
-//		$this->render('/Elements/MenuLinks');
-	}//viewMenu
 	
 	function showEntries() {
 		$selectedCategory = $this->request->data['url']; //Get ID of selected FoodMenu
@@ -79,6 +66,7 @@ class FoodMenuAppController extends AppController {
 		$entries = $this->FoodMenuEntry->find('all');
 		$this->set('entries', $entries);
 		
+		$this->layout = 'overlay';
     	$this->render('/View/admin');
     	//$this->redirect($this->referer());
 		
@@ -126,6 +114,7 @@ class FoodMenuAppController extends AppController {
 		$entries = $this->FoodMenuEntry->find('all');
 		$this->set('entries', $entries);
 		
+		$this->layout = 'overlay';
     	$this->render('/View/admin');
     	//$this->redirect($this->referer());
 	}//editCategory
@@ -169,6 +158,7 @@ class FoodMenuAppController extends AppController {
 		$entries = $this->FoodMenuEntry->find('all');
 		$this->set('entries', $entries);
 		
+		$this->layout = 'overlay';	
     	$this->render('/View/admin');
     	//$this->redirect($this->referer());
 	}//editEntry
@@ -291,15 +281,43 @@ class FoodMenuAppController extends AppController {
 		
 		$selectedMenu = $id; //Get ID of selected FoodMenu
 				
-		$categories = $this->FoodMenuMenu->find('all', array('conditions' => 'FoodMenuMenu.id = '.$selectedMenu.''));
-		$data = array('FoodMenuMenu' => $categories);
-		$this->set('data', $data);
-		$this->layout = 'default';
-		$this->render('/Elements/View');
-		
-		//$this->redirect($this->referer());
+		//$categories = $this->FoodMenuMenu->find('all', array('conditions' => 'FoodMenuMenu.id = '.$selectedMenu.''));
+		$categories = $this->FoodMenuMenu->findById($selectedMenu);
+		echo $selectedMenu;
+		$categories = array('FoodMenuMenu' => $categories);
+		$this->set('categories', $categories);
+		$this->redirect($this->referer());
+		//$this->render('/Elements/View');
 	}
 	function addCategoriesToMenu() {
+		// Has any form data been POSTed?
+    	if ($this->request->is('post')) {
+        	// If the form data can be validated and saved...
+        	$save = $this->request->data;
+        	if ($this->FoodMenuCategory->saveAll($save)) {
+            	// Set a session flash message and redirect.
+            	$this->Session->setFlash("Kategorien hinzugefügt");
+            	$this->set('mode', null);
+            	$this->redirect($this->referer());
+            	//$this->render('/View/admin');
+        	}
+    	}
+	    // If no form data, find the recipe to be edited
+    	// and hand it to the view.
+    	$menu = $this->FoodMenuMenu->findById($id);
+    	$this->set('menu', $menu);
+    	$this->set('mode', 'add');
+    	
+    	//Submit variables of admin method to make back-button work
+    	$menus = $this->FoodMenuMenu->find('all');
+		$this->set('menus', $menus);
+		$categories = $this->FoodMenuCategory->find('all');
+		$this->set('categories', $categories);
+		$entries = $this->FoodMenuEntry->find('all');
+		$this->set('entries', $entries);
+		
+    	$this->render('/View/admin');
+    	//$this->redirect($this->referer());
 		
 	}
 }

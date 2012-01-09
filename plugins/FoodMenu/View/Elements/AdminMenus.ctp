@@ -1,9 +1,9 @@
-<div id="adminMenu" style="width:100%">
+<div id="adminMenu">
 	<?php 
 	if ($mode=='edit')
-			echo '<div id="adminMenuOverview" style="float:left; display:none;">';
+			echo '<div id="adminMenuOverview" style="display:none;">';
 	else 
-		echo '<div id="adminMenuOverview" style="float:left; display:block;">';
+		echo '<div id="adminMenuOverview" style="display:block;">';
 	
 	echo $this->Form->create('FoodMenuMenu', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuApp', 'action' => 'deleteMenus')));
 	echo $this->Form->button('Neuer Speiseplan', array('type' => 'button', 'onClick' => 'showDiv(\'adminMenuEdit\', \'adminMenuOverview\')'));
@@ -41,7 +41,7 @@
 			echo '<td>'.$menuEntry['FoodMenuMenu']['valid_from'].'</td>';
 			echo '<td>'.$menuEntry['FoodMenuMenu']['valid_until'].'</td>';
 			echo '<td>';
-			echo $this->Html->image('/app/webroot/img/Add.png', array('align' => 'left', 'style' => 'float: left', 'width' => '20px', 'alt' => '[+]Add', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuApp', 'action' => 'addCategories', $menuEntry['FoodMenuMenu']['name'], $menuEntry['FoodMenuMenu']['id'])));
+			echo $this->Html->image('/app/webroot/img/Add.png', array('onClick' => 'showDiv(\'adminAddCategoryToMenu\', \'adminMenuOverview\')', 'align' => 'left', 'style' => 'float: left', 'width' => '20px', 'alt' => '[+]Add', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuApp', 'action' => 'addCategoriesToMenu', $menuEntry['FoodMenuMenu']['name'], $menuEntry['FoodMenuMenu']['id'])));
 			echo '</td><td>';
 			echo $this->Html->image('/app/webroot/img/edit.png', array('onClick' => 'showDiv(\'adminMenuEdit\', \'adminMenuOverview\')', 'style' => 'float: left', 'width' => '20px', 'alt' => '[e]Edit', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuApp', 'action' => 'editMenu', $menuEntry['FoodMenuMenu']['name'], $menuEntry['FoodMenuMenu']['id'])));
 			echo '</td><td>';
@@ -58,9 +58,10 @@
 	<?php
 	if ($mode == 'edit')
 		echo '<div id="adminMenuEdit" style="display:block;">';
-	else
+	else {
 		echo '<div id="adminMenuEdit" style="display:none;">';
+	}
     echo $this->element('CreateMenu');
     ?>
-	</div>
+    </div>
 </div>

@@ -6,6 +6,18 @@ class ViewComponent extends Component {
 		$controller->loadModel('FoodMenuCategory');
 		$controller->loadModel('FoodMenuEntry');
 		
+		debug($params);
+		debug($url);
+		debug($controller);
+		
+//		if (isset($url)){
+//			$data['Element'] = array_shift($url);
+//			$func_params = $url;
+//		} else {
+//			$data['Element'] = $params['DefaultView'];
+//			$func_params = $params;
+//		}
+		
 		$menu = $controller->FoodMenuMenu->find('all');
 //		$category = $controller->FoodMenuCategory->find('all');
 //		$entry = $controller->FoodMenuEntry->find('all');

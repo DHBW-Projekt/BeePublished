@@ -27,7 +27,7 @@
 <li><a href="#tabs-2"><?php echo (__('Kategorien')); ?></a></li>
 <li><a href="#tabs-3"><?php echo (__('Einträge')); ?></a></li>
 </ul>
-<div id="tabs-1" style="height:80%;">
+<div id="tabs-1">
 <?php if(!(isset($mode))) $mode = ''; ?>
 <p><?php echo $this->element('AdminMenus', array('menus' => $menus, 'mode' => $mode)); ?></p>
 </div>
