@@ -1,6 +1,6 @@
 <?php
 class SubscriptionController extends AppController {
-		
+	
 	public $name = 'Subscription';
 	public $uses = array('Newsletter.NewsletterRecipient', 'Newsletter.NewsletterLetter');
  	public $helpers = array('Fck');
@@ -27,6 +27,14 @@ class SubscriptionController extends AppController {
 		$this->getAndSetData();
 		$this->layout = 'overlay';
 		$this->render('admin');
+	}
+	
+	public function sendNewsletter() {
+		App::uses('CakeEmail', 'Network/Email');
+		$email = new CakeEmail('gmail');
+    	$email->subject('About');
+    	$email->send('My message');
+		$email->sendAs = 'both';
 	}
 	
 	public function saveNewsletter($newsletter_id){

@@ -17,9 +17,6 @@
 	
 	<?php
 		$this->Html->script('/ckeditor/ckeditor', false);
-		$this->Html->script('/ckeditor/adapters/jquery', false);
-		
-		$this->Html->scriptBlock('$( \'NewsletterLetterContent\' ).val( \'my new content\' );', array('inline' => true));
 		if (isset($newsletters)){
 				foreach($newsletters as $newsletter){
 					echo '<tr>';
@@ -69,7 +66,7 @@
 // 		debug($newsletterToEdit);
 		echo $this->Form->create('editor', array('url' => array('plugin' => 'Newsletter',
 	    											'controller' => 'Subscription',
-	    											'action' => 'saveNewsletter' , $newsletterToEdit['NewsletterLetter']['id'])));
+	    											'action' => 'sendNewsletter' , $newsletterToEdit['NewsletterLetter']['id'])));
 		echo $this->Form->input('NewsletterLetter.subject', array('label' => 'Betreff:', 'value' => $newsletterToEdit['NewsletterLetter']['subject']));
 		echo $this->Form->input('NewsletterLetter.content', array('label' => '', 'value' => $newsletterToEdit['NewsletterLetter']['content']));
 		echo $this->Form->button('Save', array('type' => 'submit', 'value' => 'save'));
