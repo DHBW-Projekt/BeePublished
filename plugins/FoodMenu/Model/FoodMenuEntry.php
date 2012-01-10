@@ -3,15 +3,9 @@ App::uses('AppModel', 'Model');
 /**
  * FoodMenuEntry Model
  *
- * @property FoodMenuCategory $FoodMenuCategory
+ * @property FoodMenuCategoriesFoodMenuEntry $FoodMenuCategoriesFoodMenuEntry
  */
 class FoodMenuEntry extends AppModel {
-/**
- * Primary key field
- *
- * @var string
- */
-	public $primaryKey = 'id';
 /**
  * Display field
  *
@@ -22,25 +16,23 @@ class FoodMenuEntry extends AppModel {
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
- * hasAndBelongsToMany associations
+ * hasMany associations
  *
  * @var array
  */
-	public $hasAndBelongsToMany = array(
-		'FoodMenuCategory' => array(
-			'className' => 'FoodMenuCategory',
-			'joinTable' => 'food_menu_categories_food_menu_entries',
+	public $hasMany = array(
+		'FoodMenuCategoriesFoodMenuEntry' => array(
+			'className' => 'FoodMenuCategoriesFoodMenuEntry',
 			'foreignKey' => 'food_menu_entry_id',
-			'associationForeignKey' => 'food_menu_category_id',
-			'unique' => true,
+			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
 			'limit' => '',
 			'offset' => '',
+			'exclusive' => '',
 			'finderQuery' => '',
-			'deleteQuery' => '',
-			'insertQuery' => ''
+			'counterQuery' => ''
 		)
 	);
 

@@ -3,8 +3,8 @@ class ViewComponent extends Component {
 	
 	public function getData($controller, $params, $url)	{
 		$controller->loadModel('FoodMenuMenu');
-//		$controller->loadModel('FoodMenuCategory');
-//		$controller->loadModel('FoodMenuEntry');
+		$controller->loadModel('FoodMenuCategory');
+		$controller->loadModel('FoodMenuEntry');
 		
 		
 		$menu = $controller->FoodMenuMenu->find('all');
@@ -12,7 +12,6 @@ class ViewComponent extends Component {
 //		$entry = $controller->FoodMenuEntry->find('all');
 //		$data = array('FoodMenuMenu' => $menu, 'FoodMenuCategory' => $category, 'FoodMenuEntry' => $entry);
 		$data = array('FoodMenuMenu' => $menu);
-		$controller->set('data', $data);
 		if ($data != null) {
 			return $data;
 		}

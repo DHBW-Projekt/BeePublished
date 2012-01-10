@@ -3,16 +3,10 @@ App::uses('AppModel', 'Model');
 /**
  * FoodMenuCategory Model
  *
- * @property FoodMenuEntry $FoodMenuEntry
- * @property FoodMenuMenu $FoodMenuMenu
+ * @property FoodMenuMenusFoodMenuCategory $FoodMenuMenusFoodMenuCategory
+ * @property FoodMenuCategoriesFoodMenuEntry $FoodMenuCategoriesFoodMenuEntry
  */
 class FoodMenuCategory extends AppModel {
-/**
- * Primary key field
- *
- * @var string
- */
-	public $primaryKey = 'id';
 /**
  * Display field
  *
@@ -23,40 +17,36 @@ class FoodMenuCategory extends AppModel {
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
- * hasAndBelongsToMany associations
+ * hasMany associations
  *
  * @var array
  */
-	public $hasAndBelongsToMany = array(
-		'FoodMenuMenu' => array(
-			'className' => 'FoodMenuMenu',
-			'joinTable' => 'food_menu_menus_food_menu_categories',
+	public $hasMany = array(
+		'FoodMenuMenusFoodMenuCategory' => array(
+			'className' => 'FoodMenuMenusFoodMenuCategory',
 			'foreignKey' => 'food_menu_category_id',
-			'associationForeignKey' => 'food_menu_menu_id',
-			'unique' => true,
+			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
 			'limit' => '',
 			'offset' => '',
+			'exclusive' => '',
 			'finderQuery' => '',
-			'deleteQuery' => '',
-			'insertQuery' => ''
+			'counterQuery' => ''
 		),
-		'FoodMenuEntry' => array(
-			'className' => 'FoodMenuEntry',
-			'joinTable' => 'food_menu_categories_food_menu_entries',
+		'FoodMenuCategoriesFoodMenuEntry' => array(
+			'className' => 'FoodMenuCategoriesFoodMenuEntry',
 			'foreignKey' => 'food_menu_category_id',
-			'associationForeignKey' => 'food_menu_entry_id',
-			'unique' => true,
+			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
 			'limit' => '',
 			'offset' => '',
+			'exclusive' => '',
 			'finderQuery' => '',
-			'deleteQuery' => '',
-			'insertQuery' => ''
+			'counterQuery' => ''
 		)
 	);
 

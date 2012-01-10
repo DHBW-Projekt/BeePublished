@@ -15,7 +15,7 @@
   									  document.getElementById(idOff).style.display="block";
   									  }
  								   }');
- 	//echo $this->Html->scriptBlock('$( ".selector" ).tabs({ cookie: { expires: 7 } });');
+ 	echo $this->Html->scriptBlock('$( ".selector" ).tabs({ cookie: { expires: 7 } });');
 ?>
 
 <div class="content">
@@ -32,10 +32,10 @@
 <p><?php echo $this->element('AdminMenus', array('menus' => $menus, 'mode' => $mode)); ?></p>
 </div>
 <div id="tabs-2">
-<p><?php echo $this->element('AdminCategories', $categories); ?></p>
+<p><?php echo $this->element('AdminCategories', array('categories' => $categories, 'mode' => $mode)); ?></p>
 </div>
 <div id="tabs-3">
-<p><?php echo $this->element('AdminEntries', $entries); ?></p>
+<p><?php echo $this->element('AdminEntries', array('entries' =>$entries, 'mode' => $mode)); ?></p>
 </div>
 </div>
 </div>

@@ -1,6 +1,10 @@
 <div id="adminCategory">
-	<div id="adminCategoryOverview" style="display:block;">
-	<?php 
+<?php
+ if ($mode=='edit')
+	echo '<div id="adminCategoryOverview" style="display:none;">';
+ else 
+ 	echo '<div id="adminCategoryOverview" style="display:block;">';
+
 	echo $this->Form->create('FoodMenuCategory', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'View', 'action' => 'deleteCategories')));
 	echo $this->Form->button('Neue Kategorie', array('type' => 'button', 'onClick' => 'showDiv(\'adminCategoryEdit\', \'adminCategoryOverview\')'));
 	echo $this->Form->button('Auswahl löschen', array('type' => 'submit'));
@@ -45,7 +49,11 @@
 	</table>
 	<?php echo $this->Form->end(); ?>
 	</div>
-	<div id="adminCategoryEdit" style="display:none;">
-	<?php echo $this->element('CreateCategory');?>
+	<?php
+	if ($mode == 'edit')
+		echo '<div id="adminCategoryEdit" style="display:block;">';
+	else
+		echo '<div id="adminCategoryEdit" style="display:none;">';
+    echo $this->element('CreateCategory');?>
 	</div>
 </div>

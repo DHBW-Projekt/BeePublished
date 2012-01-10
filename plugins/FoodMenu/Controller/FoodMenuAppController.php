@@ -5,7 +5,7 @@ class FoodMenuAppController extends AppController {
 	public $name = 'FoodMenuApp';
 	public $uses = array('FoodMenu.FoodMenuMenu', 'FoodMenu.FoodMenuCategory', 'FoodMenu.FoodMenuEntry');
 	public $components = array('FoodMenu.View');
-	var $helpers = array('Html', 'Form');
+	var $helpers = array('Html', 'Form', 'Number');
 	//var $layout = 'default';
 	var $autoLayout = true;
 	var $autoRender = true;	
@@ -36,13 +36,30 @@ class FoodMenuAppController extends AppController {
 	function showCategories( $name = null, $id = null ) {
 		
 		$selectedMenu = $id; //Get ID of selected FoodMenu
-		$menus = $this->FoodMenuMenu->find('list');		
-		//$categories = $this->FoodMenuMenu->find('all', array('conditions' => 'FoodMenuMenu.id = '.$selectedMenu.''));
-		$categories = $this->FoodMenuMenu->findById($selectedMenu);
+		$categoryIDs = $this->FoodMenuMenu->findById($id);
 		
-		$this->set('menus', $menus);
-		$this->set('categories', $categories);
+		$returnData = null;
+		foreach ($categoryIDs['FoodMenuMenusFoodMenuCategory'] as $categoryID) {
+			$entryIDs = $this->FoodMenuCategory->findById($categoryID['ID']);
+			//$returnData['Category']  = $returnData['Category'] + $entryIDs['FoodMenuCategory']['name'];
+			foreach ($entryIDs['FoodMenuCategoriesFoodMenuEntry'] as $entryID) {
+				$returnData['Category'] = $entryID['name'];
+				$name = $this->FoodMenuEntry->findById($entryID['ID']);
+				$returnData['Category'][$entryID['name']] = $returnData['Category'][$entryID['name']] + $name['FoodMenuEntry']['name'];
+			}
+		}
+		debug($returnData);
+//	   $categories = $this->FoodMenuMenu->query('SELECT DISTINCT FoodMenuCategory.name, FoodMenuEntry.* FROM food_menu_categories AS FoodMenuCategory
+//													JOIN (food_menu_menus_food_menu_categories AS FoodMenuMenusFoodMenuCategory) ON (FoodMenuMenusFoodMenuCategory.food_menu_category_id = FoodMenuCategory.id)
+//													JOIN (food_menu_menus AS FoodMenuMenu) ON (FoodMenuMenu.id = FoodMenuMenusFoodMenuCategory.food_menu_menu_id)
+//													JOIN (food_menu_categories_food_menu_entries AS FoodMenuCategoriesFoodMenuEntries) ON (FoodMenuCategoriesFoodMenuEntries.food_menu_category_id = FoodMenuCategory.id)
+//													JOIN (food_menu_entries AS FoodMenuEntry) ON (FoodMenuEntry.id = FoodMenuCategoriesFoodMenuEntries.food_menu_entry_id)
+//													WHERE FoodMenuMenu.id = '.$selectedMenu.'');
+		//$categories = $this->FoodMenuMenu->findById($selectedMenu);
+		
+		$this->set('menuName', $name);
+		$this->set('menuEntries', $categories);
 		//$this->redirect($this->referer());
-		$this->render('/Elements/View');
+		$this->render('/View/ShowCategories', 'default');
 	}
 }
