@@ -3,7 +3,7 @@ $(document).ready(function () {
     callMenu();
     callLayouts();
     callPlugins();
-    $("#sidebar-menu").accordion({ autoHeight:true });
+    $("#sidebar-menu").accordion();
     callPages();
     $('.sort a').fancybox({
         'onClosed':function () {
@@ -41,6 +41,7 @@ function initSidebar() {
                     queue:true,
                     duration:'fast'
                 });
+                $(this).attr('class', 'opened');
             } else {
                 $.cookie("beeSidebar", null, { path: '/' });
                 $('#sidebar').stop(true, true).animate({
@@ -61,6 +62,7 @@ function initSidebar() {
                     queue:true,
                     duration:'fast'
                 });
+                $(this).attr('class', 'closed');
             }
         }
     );
