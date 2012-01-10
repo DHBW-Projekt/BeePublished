@@ -1,15 +1,16 @@
 <?php
 
 class LocationController extends AppController {
-		
+	
+	public $components = array('ContentValueManager');
 	var $layout = 'overlay';
 	
 	public function admin($contentID){	
 		$this->loadModel("GoogleMapsLocation");
 		
-		$contentValue = $this->_getContentValue($contentID);
-		if ($contentValue['ContentValues']['key'] == 'LocationID') {
-			$currentLocation = $this->GoogleMapsLocation->find('first', array('conditions' => array('GoogleMapsLocation.id' => $contentValue['ContentValues']['value'])));
+		$contentValue = $this->ContentValueManager->getContentValues($contentID);
+		if (isset($contentValue['LocationID'])) {
+			$currentLocation = $this->GoogleMapsLocation->find('first', array('conditions' => array('GoogleMapsLocation.id' => $contentValue['LocationID'])));
 		} else {
 			$currentLocation = null;
 		}
@@ -19,15 +20,10 @@ class LocationController extends AppController {
 		$this->set('contentID', $contentID);
 	}
 	
-	function setLocation($contentID, $locationID) {
-		$this->loadModel("ContentValues");
-		
-		$this->ContentValues->set($this->_getContentValue($contentID));
-		$this->ContentValues->set('content_id', $contentID);
-		$this->ContentValues->set('key', 'LocationID');
-		$this->ContentValues->set('value', $locationID);
-		$this->ContentValues->save();
-		
+	function setLocation($contentID, $locationID) {		
+		$contentValue['LocationID'] = $locationID;
+		$this->ContentValueManager->saveContentValues($contentID, $contentValue);
+
 		$this->redirect(array('action' => 'admin', $contentID));
 	}
 	
@@ -37,7 +33,7 @@ class LocationController extends AppController {
 		
 		$this->GoogleMapsLocation->delete($locationID);
 		
-		$contentValue = $this->ContentValues->set($this->_getContentValue($contentID));
+		$contentValue = $this->ContentValues->set($this->ContentValues->find('first', array('conditions' => array('ContentValues.content_id' => $contentID))));
 		if ($contentValue['ContentValues']['key'] == 'LocationID' and $contentValue['ContentValues']['value'] == $locationID) {
 			$this->ContentValues->delete($contentValue['ContentValues']['id']);
 		}
@@ -54,12 +50,6 @@ class LocationController extends AppController {
     	}
 		
     	$this->set('contentID', $contentID);
-	}
-	
-	function _getContentValue($contentID) {
-		$this->loadModel("ContentValues");
-		
-		return $this->ContentValues->find('first', array('conditions' => array('ContentValues.content_id' => $contentID)));
 	}
 	
 	public function beforeFilter(){
