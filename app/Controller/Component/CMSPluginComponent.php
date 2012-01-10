@@ -40,7 +40,31 @@ class CMSPluginComponent extends Component
         $xml = Xml::build($this->getConfigPath($plugin));
         $xmlData = Xml::toArray($xml);
         if (array_key_exists('permissions', $xmlData['dualon']['plugin'])) {
-            return $xmlData['dualon']['plugin']['permissions'];
+            $permissions = $xmlData['dualon']['plugin']['permissions'];
+            if (array_key_exists('action', $permissions['permission'])) {
+                $permissionsArray = array();
+                $permissionsArray['permission'][0]['role'] = $permissions['permission']['role'];
+                $permissionsArray['permission'][0]['action'] = $permissions['permission']['action'];
+                $permissions = $permissionsArray;
+            }
+            return $permissions;
+        } else {
+            return null;
+        }
+    }
+
+    function getViews($plugin)
+    {
+        $xml = Xml::build($this->getConfigPath($plugin));
+        $xmlData = Xml::toArray($xml);
+        if (array_key_exists('views', $xmlData['dualon']['plugin'])) {
+            $views = $xmlData['dualon']['plugin']['views'];
+            if (array_key_exists('name', $views['view'])) {
+                $viewsArray = array();
+                $viewsArray['view'][0]['name'] = $views['view']['name'];
+                $views = $viewsArray;
+            }
+            return $views;
         } else {
             return null;
         }
@@ -60,6 +84,11 @@ class CMSPluginComponent extends Component
     function hasRouting($plugin)
     {
         return file_exists($this->getRoutingPath($plugin));
+    }
+
+    function getPath($plugin)
+    {
+        return CakePlugin::path($plugin);
     }
 
     function getConfigPath($plugin)
