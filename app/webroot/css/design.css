@@ -80,7 +80,7 @@ a {
 	color:#A00000;
 }
 
-.flash_success {
+.flash_success, #flashMessage.message {
 	border:3px solid #bedf5d;
 	background:#e2f1a8;
 	font-weight:bold;
@@ -90,4 +90,10 @@ a {
 	border:3px solid #990000;
 	background:#f97d88;
 	font-weight:bold;
+}
+
+.plugin_administration {
+    background-image: url(../img/nav.gif);
+    background-position: bottom;
+    border: 1px solid #3292DD;
 }

@@ -133,7 +133,7 @@ function createPlugin(container, layout, pluginid) {
             plugin.append(generatePluginHandler(request.responseText));
             loadPluginContent(request.responseText, plugin);
             $(container).append(plugin);
-            setSettingOptions();
+            setSettingOptions(plugin, request.responseText);
         }
     });
 } //fertig
@@ -203,7 +203,7 @@ function loadPluginContent(id, container) {
         context:document.body,
         success:function () {
             container.append(request.responseText);
-            setSettingOptions();
+            setSettingOptions(container, id);
         }
     });
 }
@@ -295,7 +295,7 @@ function generatePluginHandler(id) {
     return pluginHandler;
 }
 
-function setSettingOptions() {
+function setSettingOptions(container, id) {
     $(".plugin_content").mouseenter(function () {
         $(".setting_button", this).css("display", "inline");
     });
@@ -304,10 +304,12 @@ function setSettingOptions() {
     });
     $("a#overlay").fancybox({
         'type':'iframe',
-        'height':'90%',
-        'width':'90%',
+        width:'90%',
+        height:'90%',
         'onClosed':function () {
-            window.location.reload(true);
+            container.empty();
+            container.append(generatePluginHandler(id));
+            loadPluginContent(id, container);
         }
     });
 }
