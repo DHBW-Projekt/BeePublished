@@ -80,7 +80,7 @@ a {
 	color:#A00000;
 }
 
-.flash_success {
+.flash_success, #flashMessage.message {
 	border:3px solid #bedf5d;
 	background:#e2f1a8;
 	font-weight:bold;
