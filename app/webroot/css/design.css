@@ -97,3 +97,19 @@ a {
     background-position: bottom;
     border: 1px solid #3292DD;
 }
+
+
+.role {
+    border: 1px solid #3292DD;
+}
+
+.users_role {
+    background-color: #3292DD;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.user_detail, .users-placeholder {
+    border: 1px dotted #3292DD;
+    background-color: #ffffff;
+}

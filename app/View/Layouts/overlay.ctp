@@ -13,6 +13,7 @@
     echo $this->Html->script('jquery-ui-1.8.16.custom.min');
     echo $this->Html->script('jquery.fancybox-1.3.4.pack');
     echo $this->Html->script('jquery.blockUI');
+    echo $this->Html->script('jquery.cookie');
     echo $scripts_for_layout;
     ?>
 </head>
