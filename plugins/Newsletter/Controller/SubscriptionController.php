@@ -81,13 +81,26 @@ class SubscriptionController extends AppController {
     	
     	$newsletter = $this->NewsletterLetter->findById($newsletter_id);
     	$email->subject($newsletter['NewsletterLetter']['subject']);
-		$email->to('tobiashoehmann@googlemail.com');
+		$email->to('marcuslieberenz@googlemail.com');
 		$email->from('noreply@DualonCMS.de', 'DualonCMS');
 		$email->viewVars(array(
 			'content' => $newsletter['NewsletterLetter']['content'],
         ));
-		$email->send();
-		$this->redirect('/plugin/Newsletter/Subscription/newsletteradmin/');
+		$this->redirect('/plugin/Newsletter/Subscription/newsletteradmin');
+		if($email->send()){
+		$this->Session->setFlash('The mail was sent successfully.', 'default', array(
+			'class' => 'flash_success'), 
+			'NewsletterLetter');
+		$this->redirect('/plugin/Newsletter/Subscription/newsletteradmin');
+// 		$this->getAndSetData();
+// 		$this->layout = 'overlay';
+// 		$this->render('admin');
+		} else {
+			$this->Session->setFlash('The mail was not sent successfully.', 'default', array(
+						'class' => 'flash_failure'), 
+						'NewsletterLetter');
+			$this->redirect('/plugin/Newsletter/Subscription/newsletteradmin');
+		};
 	}
 	
 	public function deleteNewsletter($id){

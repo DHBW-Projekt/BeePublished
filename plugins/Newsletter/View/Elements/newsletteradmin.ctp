@@ -66,6 +66,9 @@
 										'action' => 'editNewsletter', $newsletter['NewsletterLetter']['id'])));
 				echo 	'</td>';
 				echo 	'<td>';
+				
+// 				echo $html->link(__('Delete', true), array('plugin' => 'Newsletter', 'controller' => 'Subscription', 'action'=>'deleteNewsletter', $id), null, sprintf(__('Are you sure you want to delete?', true), $id));
+				
 				echo 		$this->Html->image('/app/webroot/img/delete.png',
 								array(
 									'style' => 'float: left', 
