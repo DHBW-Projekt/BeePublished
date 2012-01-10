@@ -6,6 +6,7 @@
 		echo $this->Html->scriptBlock('$(function() {$( "#tabs" ).tabs();});',array('inline' => true));
 	?>
 	
+	
 	<div id="tabs">
 		<ul>
 			<li><a href="#tabs-1">Producte verwalten</a></li>
