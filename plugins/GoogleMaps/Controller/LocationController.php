@@ -2,15 +2,14 @@
 
 class LocationController extends AppController {
 	
-	public $components = array('ContentValueManager');
+	var $components = array('ContentValueManager');
+	var $uses = array('GoogleMapsLocation');
 	var $layout = 'overlay';
 	
 	public function admin($contentID){	
-		$this->loadModel("GoogleMapsLocation");
-		
 		$contentValue = $this->ContentValueManager->getContentValues($contentID);
 		if (isset($contentValue['LocationID'])) {
-			$currentLocation = $this->GoogleMapsLocation->find('first', array('conditions' => array('GoogleMapsLocation.id' => $contentValue['LocationID'])));
+			$currentLocation = $this->GoogleMapsLocation->findById($contentValue['LocationID']);
 		} else {
 			$currentLocation = null;
 		}
@@ -28,22 +27,13 @@ class LocationController extends AppController {
 	}
 	
 	function remove($contentID, $locationID) {
-		$this->loadModel("GoogleMapsLocation");
-		$this->loadModel("ContentValues");
-		
 		$this->GoogleMapsLocation->delete($locationID);
-		
-		$contentValue = $this->ContentValues->set($this->ContentValues->find('first', array('conditions' => array('ContentValues.content_id' => $contentID))));
-		if ($contentValue['ContentValues']['key'] == 'LocationID' and $contentValue['ContentValues']['value'] == $locationID) {
-			$this->ContentValues->delete($contentValue['ContentValues']['id']);
-		}
+		$this->ContentValueManager->removeContentValues($contentID, array('LocationID' => $locationID));
 		
 		$this->redirect(array('action' => 'admin', $contentID));
 	}
 	
 	function create($contentID) {
-		$this->loadModel("GoogleMapsLocation");
-		
 		if (!empty($this->data)) {
     		$this->GoogleMapsLocation->save($this->data);
     		$this->setLocation($contentID, $this->GoogleMapsLocation->id);
