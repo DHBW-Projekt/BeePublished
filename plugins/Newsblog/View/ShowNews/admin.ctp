@@ -98,7 +98,7 @@
 			if(count($entriesToPublish) > 0){
 				foreach($entriesToPublish as $entryToPublish):
 					$id = $entryToPublish['NewsEntry']['id'];
-					$username = $entryToPublish['User']['username'];
+					$username = $entryToPublish['Author']['username'];
 					$title = $entryToPublish['NewsEntry']['title'];
 					$text = $entryToPublish['NewsEntry']['text'];
 					$createdOn = $entryToPublish['NewsEntry']['createdOn'];

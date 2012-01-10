@@ -18,8 +18,9 @@
 		$shorttextLength = 250;
 	}
 	
-	$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Delete');
-	$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Edit');
+	$allowedActions = $this->PermissionValidation->getPermissions($pluginId);
+	$deleteAllowed = $allowedActions['Delete'];
+	$editAllowed = $allowedActions['Edit'];
 ?>
 
 <div class='newsblogcontainer'>
@@ -36,7 +37,8 @@
 		}
 		$createdOnDate = $DateTimeHelper->format('m-d-Y', $NewsEntry['NewsEntry']['createdOn']);
 		$createdOnTime = $DateTimeHelper->format('H:i', $NewsEntry['NewsEntry']['createdOn']);
-		$createdBy = $NewsEntry['User']['username'];
+		$createdBy = $NewsEntry['Author']['username'];
+		$contentId = $NewsEntry['NewsEntry']['content_id'];
 	?>
 	
 	<div class="newsblog_entry" id="<?php echo $newsblogEntryDivId?>">
@@ -78,3 +80,10 @@
 <?php endforeach;?>
 
 </div>
+<?php
+if($this->PermissionValidation->getUserRole() < 6 && ($allowedActions['Write'] || $allowedActions['Publish'])){
+	echo '<div class="plugin_administration">';
+		echo $this->Html->link($this->Html->image('tools_small.png'),array('plugin' => 'Newsblog', 'controller' => 'ShowNews', 'action' => 'admin', $contentId), array('escape' => false));
+	echo '</div>';
+}
+?>

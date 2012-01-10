@@ -1,15 +1,14 @@
 <?php
 class ShowNewsController extends AppController{
 	var $autoLayout = false;
+	public $uses = array('Newsblog.NewsEntry', 'Plugin');
 	public $helpers = array('Html');
 	public $components = array('Menu', 'RequestHandler');
 	
 	public function admin($contentId = null){
 		$this->autoLayout = true;
 		$this->layout = 'overlay';
-		$this->loadModel('Newsblog.NewsEntry');
 		
-		$this->loadModel('Plugin');
 		$newsblogPlugin = $this->Plugin->findByName('Newsblog');
 		$pluginId = $newsblogPlugin['Plugin']['id'];
 		$this->set('pluginId', $pluginId);
@@ -18,15 +17,6 @@ class ShowNewsController extends AppController{
 		if($publishAllowed){
 			$conditions = array("NewsEntry.content_id" => $contentId, "NewsEntry.published !=" => true, "NewsEntry.deleted !=" => true);
 				
-			$this->NewsEntry->bindModel(
-				array('belongsTo' => array(
-					'User' => array(
-						'className' => 'User',
-						'foreignKey' => 'author_id'
-					)
-				))
-			);
-			
 			$options['conditions'] = $conditions;
 			$options['order'] = array("createdOn DESC");
 			$entriesToPublish = $this->NewsEntry->find('all',$options);
@@ -35,7 +25,6 @@ class ShowNewsController extends AppController{
 	}
 	
 	public function editNews($newsEntryId = null){
-		$this->loadModel('Plugin');
 		$newsblogPlugin = $this->Plugin->findByName($this->plugin);
 		$pluginId = $newsblogPlugin['Plugin']['id'];
 		$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Edit');
@@ -43,23 +32,21 @@ class ShowNewsController extends AppController{
 			$this->autoLayout = true;
 			$this->layout = 'overlay';
 			//load current data of newsentry with id = $newsEntryId
-			$this->loadModel('Newsblog.NewsEntry');
 			$entry = $this->NewsEntry->findById($newsEntryId);
 			//send data to view
 			$this->set('newsentry', $entry);
 		} else{
+			$this->Session->setFlash("Action not allowed!");
 			$this->redirect($this->referer());
 		}
 	}
 	
 	public function deleteNews($newsEntryId = null){
 		$userId = $this->Auth->user('id');
-		$this->loadModel('Plugin');
 		$newsblogPlugin = $this->Plugin->findByName($this->plugin);
 		$pluginId = $newsblogPlugin['Plugin']['id'];
 		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Delete');
 		if ($deleteAllowed){
-			$this->loadModel('Newsblog.NewsEntry');
 			$this->NewsEntry->id = $newsEntryId;
 			$newsEntry = array();
 			$newsEntry['deleted'] = true;
@@ -78,7 +65,6 @@ class ShowNewsController extends AppController{
 		if($this->RequestHandler->request->is('get')){
 			
 		} else{
-			$this->loadModel('Plugin');
 			$newsblogPlugin = $this->Plugin->findByName($this->plugin);
 			$pluginId = $newsblogPlugin['Plugin']['id'];
 			$writeAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Write');
@@ -116,10 +102,6 @@ class ShowNewsController extends AppController{
 				if(isset($data['contentId'])){
 					$content_id = $data['contentId'];
 				}
-				
-				//load NewsEntry Model
-				$this->loadModel('Newsblog.NewsEntry');
-				
 				//message for response on the ajax call
 				switch ($action) {
 					case 'createNews':
@@ -221,14 +203,12 @@ class ShowNewsController extends AppController{
 		
 		//get plugin and check for required permissions
 		$userId = $this->Auth->user('id');
-		$this->loadModel('Plugin');
 		$newsblogPlugin = $this->Plugin->findByName($this->plugin);
 		$pluginId = $newsblogPlugin['Plugin']['id'];
 		$publishAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Publish');
 			
 		$message;
 		if ($publishAllowed){
-			$this->loadModel('Newsblog.NewsEntry');
 			$this->NewsEntry->id = $newsEntryId;
 			$publishNews = array();
 			$publishNews['published'] = true;
@@ -237,13 +217,16 @@ class ShowNewsController extends AppController{
 			
 			if ($this->NewsEntry->save($publishNews)){
 				$publishNews['id'] = $newsEntryId;
+				$this->Session->setFlash("The selected news has been published.");
 				$message = json_encode(array('success' => true, 'action' => 'publishNews', 'data' => $publishNews));
 			} else{
+				$this->Session->setFlash("The selected news hasn\'t been published.");
 				$message = json_encode(array('success' => false, 'action' => 'publishNews', 'data' => $publishNews));
 			}
 				
 		} else{
 			$message = json_encode(array('success' => false, 'action' => 'publishNews', 'data' => 'Action not allowed!'));
+			$this->Session->setFlash("Action not allowed!");
 		}
 		
 		if ($this->RequestHandler->request->is('ajax')) {
@@ -251,36 +234,6 @@ class ShowNewsController extends AppController{
 			exit();
 		} else{
 			$this->redirect($this->referer());
-		}
-	}
-	
-	public function saveNewsblogTitle($content_id = null, $newsblogTitle = null){
-		if ($this->RequestHandler->request->is('ajax')) {
-			//configure for response with a json object
-			$this->layout = 'ajax';
-			$this->autoLayout = false;
-			$this->autoRender = false;
-			$this->RequestHandler->response->type('json','application/json');
-			//get data of request
-			$requestData = $this->RequestHandler->request->data;
-			$newsblogTitle = $requestData['newsblogTitle'];
-			$content_id = $requestData['content_id'];
-			
-			$this->loadModel('Newsblog.NewsblogTitle');
-			$newsblogTitleFromDB = $this->NewsblogTitle->find('first', array('conditions' => array('content_id' => $content_id)));
-			$this->NewsblogTitle->id = $newsblogTitleFromDB['NewsblogTitle']['id'];
-			$newsblogTitleFromDB['NewsblogTitle']['title'] = $newsblogTitle;
-			
-			$message;
-			if($this->NewsblogTitle->save($newsblogTitleFromDB['NewsblogTitle'])){
-				$message = json_encode(array('success' => true, 'action' => 'storeNewsblogTitle', 'data' => $newsblogTitleFromDB['NewsblogTitle']));
-			} else{
-				$message = json_encode(array('success' => false, 'action' => 'storeNewsblogTitle', 'data' => $newsblogTitleFromDB['NewsblogTitle']));
-			}
-			echo $message;
-			exit();
-		} else{
-			
 		}
 	}
 }

@@ -9,12 +9,4 @@ class ShowNewsComponent extends Component {
 			return $this->NewsblogOverview->getData($controller, $params, $url, $id);
 		}
 	}
-
-	public function beforeFilter() {
-		parent::beforeFilter();
-
-		//Actions which don't require authorization
-		$this->Auth->allow('*');
-	}
-
 }

@@ -9,19 +9,11 @@ class NewsblogDetailComponent extends Component {
 		//load current data of newsentry with id = $newsEntryId
 		$controller->loadModel('Newsblog.NewsEntry');
 		$controller->loadModel('User');
-			
-		$controller->NewsEntry->bindModel(
-			array('belongsTo' => array(
-				'User' => array(
-					'className' => 'User',
-					'foreignKey' => 'author_id'
-				)
-			))
-		);
+		
 		$newsEntry = $controller->NewsEntry->findById($newsEntryId);
 		
 		$data['NewsEntry'] = $newsEntry['NewsEntry'];
-		$data['Author'] = $newsEntry['User']['username'];
+		$data['Author'] = $newsEntry['Author']['username'];
 		$data['view'] = 'NewsblogDetail';
 		return $data;
 	}
