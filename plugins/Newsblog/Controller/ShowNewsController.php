@@ -75,7 +75,6 @@ class ShowNewsController extends AppController{
 	}
 	
 	public function saveNewsData(){
-		
 		if($this->RequestHandler->request->is('get')){
 			
 		} else{
@@ -97,12 +96,18 @@ class ShowNewsController extends AppController{
 			if ($this->RequestHandler->request->is('ajax') || $this->RequestHandler->request->is('post')) {
 				//read request data in variables
 				$data = $this->RequestHandler->request->data;
+				$now = date('Y-m-d H:i:s');
 				$title = $data['title'];
 				$text = $data['text'];
 				$validFrom = $data['validFrom'];
+				if($validFrom == "" || $validFrom == null){
+					$validFrom = $now;
+				}
 				$validTo = $data['validTo'];
+				if($validTo == "" || $validTo == null){
+					$validTo = '9999-12-31 23:59:59';
+				}
 				$action = $data['action'];
-				$now = date('Y-m-d H:i:s');
 				$id = null;
 				if(isset($data['id'])){
 					$id = $data['id'];
