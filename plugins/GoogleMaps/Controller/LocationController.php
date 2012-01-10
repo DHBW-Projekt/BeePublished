@@ -45,14 +45,15 @@ class LocationController extends AppController {
 		$this->redirect(array('action' => 'admin', $contentID));
 	}
 	
-	function createLocation($contentID) {
+	function create($contentID) {
 		$this->loadModel("GoogleMapsLocation");
 		
 		if (!empty($this->data)) {
     		$this->GoogleMapsLocation->save($this->data);
+    		$this->setLocation($contentID, $this->GoogleMapsLocation->id);
     	}
 		
-    	$this->setLocation($contentID, $this->GoogleMapsLocation->id);
+    	$this->set('contentID', $contentID);
 	}
 	
 	function _getContentValue($contentID) {
