@@ -20,6 +20,7 @@
     echo $this->Html->script('jquery.cookie');
     echo $this->Html->script('dualon');
     if ($adminMode) {
+        $this->Js->set('pageid', $pageid);
         echo $this->Html->css('sidebar');
         echo $this->Html->css('admin/layoutmanager');
         echo $this->Html->script('admin/layoutmanager');
