@@ -110,7 +110,7 @@
     cursor: move;
 }
 
-.flash_success, .flash_failure {
+.flash_success, .flash_failure, #flashMessage {
     padding: 10px;
     margin: 15px 0;
 }
