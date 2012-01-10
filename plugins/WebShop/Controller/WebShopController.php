@@ -18,8 +18,10 @@ class WebShopController extends AppController {
 		if (isset($contentVars['NumberOfEntries'])) {
 			$contentValues['ContentValues']['NumberOfEntries'] = $contentVars['NumberOfEntries'];
 		} 		
+		if (isset($contentValues)) {
+			$this->data = $contentValues;
+		}
 		
-		$this->data = $contentValues;
 		$this->set('products', $this->Products->find('all'));
 		$this->set('viewNames', $this->viewNames);
 		$this->set('productAdminView', 'productsAdministration');
