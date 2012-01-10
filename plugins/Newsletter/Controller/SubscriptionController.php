@@ -74,8 +74,11 @@ class SubscriptionController extends AppController {
 	}
 	
 	public function sendNewsletter($newsletter_id) {
+		debug($newsletter['NewsletterLetter']['content']);
+		$newsletter = $this->NewsletterLetter->findById($newsletter_id);
 		
 		$email = new CakeEmail();
+<<<<<<< HEAD
     	$email->emailFormat('html');
     	$email->template('user_activated', 'email');
     	
@@ -102,6 +105,17 @@ class SubscriptionController extends AppController {
 						'NewsletterLetter');
 			$this->redirect('/plugin/Newsletter/Subscription/newsletteradmin');
 		};
+=======
+    	$email->emailFormat('html')
+    			->template('newsletter', 'email')
+				->subject($newsletter['NewsletterLetter']['subject'])
+				->to('tobiashoehmann@googlemail.com')
+				->from('noreply@DualonCMS.de', 'DualonCMS')
+				->viewVars(array('text' => $newsletter['NewsletterLetter']['content']
+        		))
+        		->send();
+		$this->redirect('/plugin/Newsletter/Subscription/newsletteradmin/');
+>>>>>>> upstream/newsletter
 	}
 	
 	public function deleteNewsletter($id){

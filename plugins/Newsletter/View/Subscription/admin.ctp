@@ -6,11 +6,12 @@
 	echo $this->Html->script('/js/jquery-1.6.2.min.js', true);
 	echo $this->Html->script('/js/jquery-ui-1.8.16.custom.min.js', true);
 	echo $this->Html->script('/ckeditor/ckeditor', true);
+	echo $this->Html->script('jquery.cookie', true);
 	echo $this->Html->scriptBlock(
-	    	'$(function() {
-    			$("#tabs").tabs();
-			$("#tabs").tabs("select", 0);
-		});
+	    	'
+	    	$(function() {
+    			$("#tabs").tabs({cookie:{}});
+			});
     	',array('inline' => true)
     );
     $validationErrors = $this->Session->read('Validation.NewsletterRecipient.validationErrors');

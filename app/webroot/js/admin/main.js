@@ -41,6 +41,7 @@ function initSidebar() {
                     queue:true,
                     duration:'fast'
                 });
+                $(this).attr('class', 'opened');
             } else {
                 $.cookie("beeSidebar", null, { path: '/' });
                 $('#sidebar').stop(true, true).animate({
@@ -61,6 +62,7 @@ function initSidebar() {
                     queue:true,
                     duration:'fast'
                 });
+                $(this).attr('class', 'closed');
             }
         }
     );
