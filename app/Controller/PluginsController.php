@@ -29,8 +29,8 @@ class PluginsController extends AppController
         $available = $this->CMSPlugin->getPluginList();
         $this->set('installed', $installed);
         $this->set('available', $available);
-        $this->set('systemPage', true);
-        $this->set('adminMode', false);
+        $this->set('systemPage', false);
+        $this->set('adminMode', true);
         $this->set('menu', array());
     }
 

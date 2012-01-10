@@ -18,6 +18,18 @@ $currentRow = 0;
             class="<?php echo $ClassPrefix; ?>calendar_name"><?php echo $this->Html->link(date('F Y', $time), $url . 'largecalendar/month/' . date('Y-m', $time));?></div>
     </div>
     <table cellspacing="0">
+        <colgroup>
+            <?php if ($ShowWeeks): ?>
+            <col class="week">
+            <?php endif; ?>
+            <col class="day">
+            <col class="day">
+            <col class="day">
+            <col class="day">
+            <col class="day">
+            <col class="day">
+            <col class="day">
+        </colgroup>
         <thead>
         <tr>
             <?php if ($ShowWeeks): ?>
@@ -57,15 +69,25 @@ $currentRow = 0;
             echo '<td' . $hasDateClass . '>';
             echo '<div class="' . $ClassPrefix . 'calendar_date">';
             echo $this->Html->link(date('j', $time), $url . 'largecalendar/day/' . date('Y-m-d', $time));
-            if ($navigation && $this->PermissionValidation->actionAllowed($PluginId,'CreateEvent')) {
+            if ($navigation && $this->PermissionValidation->actionAllowed($PluginId, 'CreateEvent')) {
                 echo ' ' . $this->Html->link($this->Html->image('add.png', array('width' => 12, 'height' => 12)), array('plugin' => 'Calendar', 'controller' => 'CalendarEntries', 'action' => 'add', date('Y-m-d', $time)), array('escape' => false, 'class' => 'calendar_add_entry'));
             }
             echo '</div>';
             echo '<div class="' . $ClassPrefix . 'calendar_content">';
             if ($ShowEntries && array_key_exists($day, $Entries)) {
                 foreach ($Entries[$day] as $entry) {
-                    echo '<div class="' . $ClassPrefix . 'calendar_entry">';
-                    echo $entry['name'];
+                    if ($entry['notime']) {
+                        $notimeClass = ' notime';
+                    } else {
+                        $notimeClass = '';
+                    }
+                    echo '<div class="' . $ClassPrefix . 'calendar_entry' . $notimeClass . '">';
+                    if (!$entry['notime']) {
+                        echo '<div class="' . $ClassPrefix . 'calendar_entry_time_start">';
+                        echo substr($entry['start_time'], 0, 5);
+                        echo '</div>';
+                    }
+                    echo '<div class="' . $ClassPrefix . 'calendar_entry_content">' . $entry['name'] . '</div>';
                     echo '</div>';
                 }
             }
