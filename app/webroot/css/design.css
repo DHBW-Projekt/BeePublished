@@ -80,7 +80,7 @@ a {
 	color:#A00000;
 }
 
-.flash_success {
+.flash_success, #flashMessage.message {
 	border:3px solid #bedf5d;
 	background:#e2f1a8;
 	font-weight:bold;
@@ -96,4 +96,20 @@ a {
     background-image: url(../img/nav.gif);
     background-position: bottom;
     border: 1px solid #3292DD;
+}
+
+
+.role {
+    border: 1px solid #3292DD;
+}
+
+.users_role {
+    background-color: #3292DD;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.user_detail, .users-placeholder {
+    border: 1px dotted #3292DD;
+    background-color: #ffffff;
 }

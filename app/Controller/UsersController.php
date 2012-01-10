@@ -18,8 +18,10 @@ class UsersController extends AppController
      */
     public function index()
     {
-        $this->User->recursive = 0;
-        $this->set('users', $this->paginate());
+        $roles = $this->Role->find('all');
+        $this->set('roles', $roles);
+        $this->set('systemPage', false);
+        $this->set('adminMode',true);
     }
 
     /**
@@ -93,6 +95,7 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
+        $this->layout = 'overlay';
         $this->User->id = $id;
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));
@@ -100,15 +103,12 @@ class UsersController extends AppController
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->User->save($this->request->data)) {
                 $this->Session->setFlash(__('The user has been saved'));
-                $this->redirect(array('action' => 'index'));
             } else {
                 $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
             }
         } else {
             $this->request->data = $this->User->read(null, $id);
         }
-        $roles = $this->User->Role->find('list');
-        $this->set(compact('roles'));
     }
 
     /**
@@ -119,9 +119,6 @@ class UsersController extends AppController
      */
     public function delete($id = null)
     {
-        if (!$this->request->is('post')) {
-            throw new MethodNotAllowedException();
-        }
         $this->User->id = $id;
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));
@@ -237,35 +234,17 @@ class UsersController extends AppController
      * @param string $id
      * @return void
      */
-    function changerole($id = null, $newRole = null)
+    function changeRole($id = null, $newRole = null)
     {
         $this->User->id = $id;
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));
         }
-        //
-        if ($this->request->is('post') || $this->request->is('put')) {
-            //Read user
-            $user = $this->request->data['User'];
-            //Set new Role
-            $role = $this->Role->findById($newRole);
-            $roleId = $role['Role']['id'];
-            $user['role_id'] = $roleId;
-            //
-            if ($this->User->save($user)) {
-                $this->Session->setFlash(__('The user has been saved'));
-                $this->redirect(array('action' => 'index'));
-            } else {
-                $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
-            }
-        } else {
-            $this->request->data = $this->User->read(null, $id);
+
+        if ($this->request->is('post')) {
+            $this->User->set('role_id',$newRole);
+            $this->User->save();
         }
-        $this->User->recursive = 0;
-        $this->set('users', $this->paginate());
-        //Roles auflisten
-        $roles = $this->User->Role->find('list');
-        $this->set(compact('roles'));
     }
 
 }
