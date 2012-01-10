@@ -1,6 +1,6 @@
 <?php
 if(!(isset($mode))) $mode = '';
-if ($mode=='edit') {
+if ($mode=='editCategory') {
 	echo $this->Form->create('FoodMenuMenu', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'View', 'action' => 'editCategory')));
 }
 else {

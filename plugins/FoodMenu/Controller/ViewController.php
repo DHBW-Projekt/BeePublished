@@ -99,7 +99,7 @@ class ViewController extends AppController {
     	// and hand it to the view.
     	$menu = $this->FoodMenuMenu->findById($id);
     	$this->set('menu', $menu);
-    	$this->set('mode', 'edit');
+    	$this->set('mode', 'editMenu');
     	
     	//Submit variables of admin method to make back-button work
     	$menus = $this->FoodMenuMenu->find('all');
@@ -132,7 +132,7 @@ class ViewController extends AppController {
     	// and hand it to the view.
     	$category = $this->FoodMenuCategory->findById($id);
     	$this->set('category', $category);
-    	$this->set('mode', 'edit');
+    	$this->set('mode', 'editCategory');
     	
     	//Submit variables of admin method to make back-button work
     	$menus = $this->FoodMenuMenu->find('all');
@@ -164,7 +164,7 @@ class ViewController extends AppController {
     	// and hand it to the view.
     	$entry = $this->FoodMenuEntry->findById($id);
     	$this->set('entry', $entry);
-    	$this->set('mode', 'edit');
+    	$this->set('mode', 'editEntry');
     	
     	//Submit variables of admin method to make back-button work
     	$menus = $this->FoodMenuMenu->find('all');
