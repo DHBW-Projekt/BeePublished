@@ -5,49 +5,41 @@ class WebShopController extends AppController {
 	var $components = array('ContentValueManager');
 	var $uses = array('Product'); 
 	var $layout = 'overlay';
-	var $viewNames = array('Product Overview');
-	var $views = array('0' => 'productOverview');
 	
 	public function admin($contentID){
-		$contentVars = $this->ContentValueManager->getContentValues($contentID);
-		
-		if (isset($contentVars['DefaultView'])) {
-			$contentValues['ContentValues']['DefaultView'] = array_search($contentVars['DefaultView'], $this->views);
-		}
-		if (isset($contentVars['NumberOfEntries'])) {
-			$contentValues['ContentValues']['NumberOfEntries'] = $contentVars['NumberOfEntries'];
-		} 		
-		if (isset($contentValues)) {
-			$this->data = $contentValues;
-		}
-		
+		$this->setContentVar($contentID);
 		$this->set('products', $this->Product->find('all'));
-		$this->set('viewNames', $this->viewNames);
 		$this->set('productAdminView', 'productsAdministration');
 		$this->set('contentID', $contentID);
 	}
 	
 	public function create($contentID){
 		if (empty($this->data)) {
+			$this->setContentVar($contentID);
 			$this->set('productAdminView', "create");
 			$this->set('contentID', $contentID);
 			$this->render("admin");
 		} else {
-			$this->createProduct($this);
+			if (isset($this->params['data']['save'])) {
+				$this->createProduct($this);
+			}
 			$this->redirect(array('action' => 'admin', $contentID));
 		}
 	}
 	
 	public function edit($contentID, $productID=null){
 		$this->Product->id = $productID;
-		
+
 		if (!empty($this->data)) {
-			$this->Product->set($this->Product->read());
-			$this->Product->set($this->data);
-			$this->Product->save();
+			if (isset($this->params['data']['save'])) {
+				$this->Product->set($this->Product->read());
+				$this->Product->set($this->data);
+				$this->Product->save();
+			}
 			$this->redirect(array('action' => 'admin', $contentID));
 		} else {
-			$this->data = $this->Product->read();	
+			$this->setContentVar($contentID);
+			$this->data = $this->Product->read();
 			$this->set('productAdminView', "edit");
 			$this->set('contentID', $contentID);
 			$this->render("admin");
@@ -56,22 +48,24 @@ class WebShopController extends AppController {
 	
 	public function remove($contentID, $productID){
 		$this->Product->delete($productID);
-		
 		$this->redirect(array('action' => 'admin', $contentID));
 	}
 	
 	public function setContentValues($contentID) {
 		if (!empty($this->data)) {
-			if (isset($this->data['ContentValues']['DefaultView'])) {
-				$contentValues['DefaultView'] = $this->views[$this->data['ContentValues']['DefaultView']];
-			}
-
 			if (isset($this->data['ContentValues']['NumberOfEntries'])) {
-				$contentValues['NumberOfEntries'] = $this->data['ContentValues']['NumberOfEntries'];
+				$this->ContentValueManager->saveContentValues($contentID, $this->data['ContentValues']['NumberOfEntries']);
 			}
 			
-			$this->ContentValueManager->saveContentValues($contentID, $contentValues);
 			$this->redirect(array('action' => 'admin', $contentID));
+		}
+	}
+	
+	function setContentVar($contentID) {
+		$contentVars = $this->ContentValueManager->getContentValues($contentID);
+		
+		if (isset($contentVars['NumberOfEntries'])) {
+			$this->set('numberOfEntries', $contentVars['NumberOfEntries']);
 		}
 	}
 	

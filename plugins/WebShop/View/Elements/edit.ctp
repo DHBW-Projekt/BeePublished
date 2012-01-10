@@ -59,4 +59,6 @@
 			</td>
 		</tr>
 	</table>
-<?php echo $this->Form->end('Speichern'); ?>
+	<?php echo $this->Form->submit(__('Speichern', true), array('name' => 'save', 'div' => false)); ?>
+	<?php echo $this->Form->submit(__('Abbrechen', true), array('name' => 'cancel', 'div' => false)); ?> 
+<?php echo $this->Form->end(); ?>
