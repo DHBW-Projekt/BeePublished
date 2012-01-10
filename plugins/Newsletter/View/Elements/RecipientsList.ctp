@@ -18,7 +18,11 @@
 		if (isset($recipients)){
 				foreach($recipients as $recipient){
 					echo '<tr>';
-					echo '<td>'.$recipient['NewsletterRecipient']['email'].'</td>';
+					if (isset($recipient['NewsletterRecipient']['user_id'])){
+						echo '<td>'.'test'.'</td>';
+					} else {
+						echo '<td>'.$recipient['NewsletterRecipient']['email'].'</td>';
+					};
 					echo '<td>'.$recipient['NewsletterRecipient']['user_id'].'</td>';
 					echo '<td>'.$recipient['NewsletterRecipient']['active'].'</td>';
 					echo '<td>';

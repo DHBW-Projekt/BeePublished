@@ -16,6 +16,7 @@ class SubscriptionController extends AppController {
 				'NewsletterLetter.date' => 'desc')),
 		 'NewsletterRecipient' => array(
 			'limit' => 10,
+// 			'fields' => array('')
 			'order'	=> array(
 				'NewsletterRecipient.email' => 'asc'),
 			'conditions' => array(
