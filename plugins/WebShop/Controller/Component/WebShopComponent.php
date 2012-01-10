@@ -229,16 +229,5 @@ class WebShopComponent extends Component {
 		
 		//REDIRECT to cart
 		$controller->redirect('/webshop/cart');
-	}
-	
-	/**
-	* BeforeFilter.
-	*/
-	public function beforeFilter() {
-		parent::beforeFilter();
-		
-		//Actions which don't require authorization
-		$this->Auth->allow('*');
-	}
-	
+	}	
 }

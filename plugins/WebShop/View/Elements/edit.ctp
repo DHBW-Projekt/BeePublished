@@ -8,7 +8,7 @@
 	//echo $this->Html->div('validation_error',$validationErrors);
 	echo $this->Session->flash('Product');
 	
-	echo $this->Form->create('Products', array('enctype' => 'multipart/form-data', 'url' => array('controller' => 'WebShop', 'action' => 'edit', $contentID, $this->data['Products']['id']))); ?>
+	echo $this->Form->create('Product', array('enctype' => 'multipart/form-data', 'url' => array('controller' => 'WebShop', 'action' => 'edit', $contentID, $this->data['Product']['id']))); ?>
 	<table>
 		<tr>
 			<td>

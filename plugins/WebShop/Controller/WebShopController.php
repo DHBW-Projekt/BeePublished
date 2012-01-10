@@ -1,15 +1,14 @@
 <?php
 
 class WebShopController extends AppController {
-	
-	public $components = array('ContentValueManager');
+
+	var $components = array('ContentValueManager');
+	var $uses = array('Product'); 
 	var $layout = 'overlay';
 	var $viewNames = array('Product Overview');
 	var $views = array('0' => 'productOverview');
 	
 	public function admin($contentID){
-		$this->loadModel("Products");
-		
 		$contentVars = $this->ContentValueManager->getContentValues($contentID);
 		
 		if (isset($contentVars['DefaultView'])) {
@@ -22,7 +21,7 @@ class WebShopController extends AppController {
 			$this->data = $contentValues;
 		}
 		
-		$this->set('products', $this->Products->find('all'));
+		$this->set('products', $this->Product->find('all'));
 		$this->set('viewNames', $this->viewNames);
 		$this->set('productAdminView', 'productsAdministration');
 		$this->set('contentID', $contentID);
@@ -40,17 +39,15 @@ class WebShopController extends AppController {
 	}
 	
 	public function edit($contentID, $productID=null){
-		$this->loadModel("Products");
-		
-		$this->Products->id = $productID;
+		$this->Product->id = $productID;
 		
 		if (!empty($this->data)) {
-			$this->Products->set($this->Products->read());
-			$this->Products->set($this->data);
-			$this->Products->save();
+			$this->Product->set($this->Product->read());
+			$this->Product->set($this->data);
+			$this->Product->save();
 			$this->redirect(array('action' => 'admin', $contentID));
 		} else {
-			$this->data = $this->Products->read();	
+			$this->data = $this->Product->read();	
 			$this->set('productAdminView', "edit");
 			$this->set('contentID', $contentID);
 			$this->render("admin");
@@ -58,9 +55,7 @@ class WebShopController extends AppController {
 	}
 	
 	public function remove($contentID, $productID){
-		$this->loadModel("Products");
-		
-		$this->Products->delete($productID);
+		$this->Product->delete($productID);
 		
 		$this->redirect(array('action' => 'admin', $contentID));
 	}
@@ -84,10 +79,7 @@ class WebShopController extends AppController {
 	* Create new products.
 	*/
 	function createProduct($controller){
-	
-		//LOAD model
-		$controller->loadModel('Product');
-	
+		
 		//CHECK request
 		if (!$controller->request->is('post'))
 		return;
