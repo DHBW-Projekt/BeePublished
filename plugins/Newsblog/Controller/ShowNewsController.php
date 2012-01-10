@@ -6,15 +6,17 @@ class ShowNewsController extends AppController{
 	
 	public function admin($contentId = null){
 		$this->autoLayout = true;
-		$this->layout = 'fancybox';
+		$this->layout = 'overlay';
 		$this->loadModel('Newsblog.NewsEntry');
 		
 		$this->loadModel('Plugin');
 		$newsblogPlugin = $this->Plugin->findByName('Newsblog');
 		$pluginId = $newsblogPlugin['Plugin']['id'];
+		$this->set('pluginId', $pluginId);
+		$this->set('contentId', $contentId);
 		$publishAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Publish');
 		if($publishAllowed){
-			$conditions = array("NewsEntry.published" => false, "NewsEntry.deleted !=" => true);
+			$conditions = array("NewsEntry.content_id" => $contentId, "NewsEntry.published !=" => true, "NewsEntry.deleted !=" => true);
 				
 			$this->NewsEntry->bindModel(
 				array('belongsTo' => array(
@@ -39,7 +41,7 @@ class ShowNewsController extends AppController{
 		$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Edit');
 		if($editAllowed){
 			$this->autoLayout = true;
-			$this->layout = 'fancybox';
+			$this->layout = 'overlay';
 			//load current data of newsentry with id = $newsEntryId
 			$this->loadModel('Newsblog.NewsEntry');
 			$entry = $this->NewsEntry->findById($newsEntryId);
@@ -73,101 +75,128 @@ class ShowNewsController extends AppController{
 	}
 	
 	public function saveNewsData(){
-		if ($this->RequestHandler->request->is('ajax')) {
-			//configure for response with a json object
-			$this->layout = 'ajax';
-			$this->autoLayout = false;
-			$this->autoRender = false;
-			$this->RequestHandler->response->type('json','application/json');
-			//get plugin and check for required permissions
-			$userId = $this->Auth->user('id');
+		
+		if($this->RequestHandler->request->is('get')){
+			
+		} else{
 			$this->loadModel('Plugin');
 			$newsblogPlugin = $this->Plugin->findByName($this->plugin);
 			$pluginId = $newsblogPlugin['Plugin']['id'];
 			$writeAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Write');
 			$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Edit');
-			//load NewsEntry Model
-			$this->loadModel('Newsblog.NewsEntry');
-			//get request data and read it in variables
-			$data = $this->RequestHandler->request->data;
-			$action = $data['action'];
-			$id = null;
-			if(isset($data['id'])){
-				$id = $data['id'];
-			}
-			$id = $data['id'];
-			$content_id = null;
-			if(isset($data['content_id'])){
-				$content_id = $data['content_id'];
+			$userId = $this->Auth->user('id');
+			
+			if($this->RequestHandler->request->is('ajax')){
+				//configure for response with a json object
+				$this->layout = 'ajax';
+				$this->autoLayout = false;
+				$this->autoRender = false;
+				$this->RequestHandler->response->type('json','application/json');
 			}
 			
-			$title = $data['title'];
-			$text = $data['text'];
-			$validFrom = $data['validFrom'];
-			$validTo = $data['validTo'];
-			//message for response on the ajax call
-			$message = null;
-			switch ($action) {
-				case 'createNews':
-					if($writeAllowed){
-						$newNews = array();
-						$this->NewsEntry->create();
-						//set data in array
-						$newNews['title'] = $title;
-						$newNews['text'] = $text;
-						$newNews['content_id'] = $content_id;
-						$newNews['author_id'] = $userId;
-						$newNews['createdOn'] = date('Y-m-d H:i:s');
-						$newNews['validFrom'] = $validFrom;
-						$newNews['validTo'] = $validTo;
-						$newNews['published'] = false;
-						//save array on database
-						if($this->NewsEntry->save($newNews)){
-							$message = json_encode(array('success' => true, 'action' => 'createNews', 'data' => $newNews));
+			if ($this->RequestHandler->request->is('ajax') || $this->RequestHandler->request->is('post')) {
+				//read request data in variables
+				$data = $this->RequestHandler->request->data;
+				$title = $data['title'];
+				$text = $data['text'];
+				$validFrom = $data['validFrom'];
+				$validTo = $data['validTo'];
+				$action = $data['action'];
+				$now = date('Y-m-d H:i:s');
+				$id = null;
+				if(isset($data['id'])){
+					$id = $data['id'];
+				}
+				$content_id = null;
+				if(isset($data['contentId'])){
+					$content_id = $data['contentId'];
+				}
+				
+				//load NewsEntry Model
+				$this->loadModel('Newsblog.NewsEntry');
+				
+				//message for response on the ajax call
+				switch ($action) {
+					case 'createNews':
+						if($writeAllowed){
+							$newNews = array();
+							$this->NewsEntry->create();
+							//set data in array
+							$newNews['title'] = $title;
+							$newNews['text'] = $text;
+							$newNews['content_id'] = $content_id;
+							$newNews['author_id'] = $userId;
+							$newNews['createdOn'] = $now;
+							$newNews['validFrom'] = $validFrom;
+							$newNews['validTo'] = $validTo;
+							$newNews['published'] = false;
+							//save array on database
+							if($this->NewsEntry->save($newNews)){
+								if ($this->RequestHandler->request->is('ajax')){
+									$message = json_encode(array('success' => true, 'action' => 'createNews', 'data' => $newNews));
+								}
+								if ($this->RequestHandler->request->is('post')){
+									$this->Session->setFlash("The news has been created! It has to be published!");
+									$this->redirect($this->referer());
+								}
+							} else{
+								if ($this->RequestHandler->request->is('ajax')){
+									$message = json_encode(array('success' => false, 'action' => 'createNews', 'data' => $newNews));
+								}
+								if ($this->RequestHandler->request->is('post')){
+									$this->Session->setFlash("The news hasn\'t been created!");
+									$this->redirect($this->referer());
+								}
+							}
 						} else{
-							$message = json_encode(array('success' => false, 'action' => 'createNews', 'data' => $newNews));
+								
 						}
-					} else{
-			
-					}
-					break;
-				case 'editNews':
-					if($editAllowed){
-						$newNews = array();
-						//set id to update newsentry
-						$this->NewsEntry->id = $id;
-						//set data in array
-						$newNews['id'] = $id;
-						$newNews['title'] = $title;
-						$newNews['text'] = $text;
-						$newNews['lastModifiedBy'] = $userId;
-						$newNews['lastModifiedOn'] = date('Y-m-d H:i:s');
-						$newNews['validFrom'] = $validFrom;
-						$newNews['validTo'] = $validTo;
-						//save array on database
-						if($this->NewsEntry->save($newNews)){
-							$message = json_encode(array('success' => true, 'action' => 'editNews', 'data' => $newNews));
+						break;
+					case 'editNews':
+						if($editAllowed){
+							$newNews = array();
+							//set id to update newsentry
+							$this->NewsEntry->id = $id;
+							//set data in array
+							$newNews['id'] = $id;
+							$newNews['title'] = $title;
+							$newNews['text'] = $text;
+							$newNews['lastModifiedBy'] = $userId;
+							$newNews['lastModifiedOn'] = $now;
+							$newNews['validFrom'] = $validFrom;
+							$newNews['validTo'] = $validTo;
+							//save array on database
+							if($this->NewsEntry->save($newNews)){
+								if ($this->RequestHandler->request->is('ajax')){
+									$message = json_encode(array('success' => true, 'action' => 'editNews', 'data' => $newNews));
+								}
+								if ($this->RequestHandler->request->is('post')){
+									$this->Session->setFlash("Your changes has been saved successfully!");
+									$this->redirect($this->referer());
+								}
+							} else{
+								if ($this->RequestHandler->request->is('ajax')){
+									$message = json_encode(array('success' => false, 'action' => 'editNews', 'data' => $newNews));
+								}
+								if ($this->RequestHandler->request->is('post')){
+									$this->Session->setFlash("Your changes hasn\'t been saved successfully!");
+									$this->redirect($this->referer());
+								}
+							}
 						} else{
-							$message = json_encode(array('success' => false, 'action' => 'editNews', 'data' => $newNews));
+				
 						}
-					} else{
-						
-					}
-					break;
-				default:
-					
-					break;
+						break;
+					default:
+							
+						break;
+				}
+				
+				if($this->RequestHandler->request->is('ajax')){
+					echo $message;
+					exit();
+				}
 			}
-			
-			echo $message;
-			exit();
-		} else{
-			var_dump($this->RequestHandler->request);
-			$this->layout = 'ajax';
-			$this->autoLayout = false;
-			$this->autoRender = false;
-			echo "true";
-			exit();
 		}
 	}
 	
@@ -175,42 +204,48 @@ class ShowNewsController extends AppController{
 		if ($this->RequestHandler->request->is('ajax')) {
 			//configure for response with a json object
 			$this->layout = 'ajax';
-			$this->autoLayout = false;
-			$this->autoRender = false;
 			$this->RequestHandler->response->type('json','application/json');
 			//get data of request
 			$requestData = $this->RequestHandler->request->data;
 			$newsEntryId = $requestData['id'];
-			//get plugin and check for required permissions
-			$userId = $this->Auth->user('id');
-			$this->loadModel('Plugin');
-			$newsblogPlugin = $this->Plugin->findByName($this->plugin);
-			$pluginId = $newsblogPlugin['Plugin']['id'];
-			$publishAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Publish');
+		} elseif($this->RequestHandler->request->is('post')) {
+			var_dump($this->RequestHandler->request->data);
+			$requestData = $this->RequestHandler->request->data;
+			$newsEntryId = $requestData['id'];
+		}
+		
+		//get plugin and check for required permissions
+		$userId = $this->Auth->user('id');
+		$this->loadModel('Plugin');
+		$newsblogPlugin = $this->Plugin->findByName($this->plugin);
+		$pluginId = $newsblogPlugin['Plugin']['id'];
+		$publishAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Publish');
 			
-			$message;
-			if ($publishAllowed){
-				$this->loadModel('Newsblog.NewsEntry');
-				$this->NewsEntry->id = $newsEntryId;
-				$publishNews = array();
-				$publishNews['published'] = true;
-				$publishNews['publishedBy'] = $userId;
-				$publishNews['publishedOn'] = date('Y-m-d');
-				
-				if ($this->NewsEntry->save($publishNews)){
-					$publishNews['id'] = $newsEntryId;
-					$message = json_encode(array('success' => true, 'action' => 'publishNews', 'data' => $publishNews));
-				} else{
-					$message = json_encode(array('success' => false, 'action' => 'publishNews', 'data' => $publishNews));
-				}
-				
+		$message;
+		if ($publishAllowed){
+			$this->loadModel('Newsblog.NewsEntry');
+			$this->NewsEntry->id = $newsEntryId;
+			$publishNews = array();
+			$publishNews['published'] = true;
+			$publishNews['publishedBy'] = $userId;
+			$publishNews['publishedOn'] = date('Y-m-d');
+			
+			if ($this->NewsEntry->save($publishNews)){
+				$publishNews['id'] = $newsEntryId;
+				$message = json_encode(array('success' => true, 'action' => 'publishNews', 'data' => $publishNews));
 			} else{
-				$message = json_encode(array('success' => false, 'action' => 'publishNews', 'data' => 'Action not allowed!'));
+				$message = json_encode(array('success' => false, 'action' => 'publishNews', 'data' => $publishNews));
 			}
+				
+		} else{
+			$message = json_encode(array('success' => false, 'action' => 'publishNews', 'data' => 'Action not allowed!'));
+		}
+		
+		if ($this->RequestHandler->request->is('ajax')) {
 			echo $message;
 			exit();
 		} else{
-			
+			$this->redirect($this->referer());
 		}
 	}
 	

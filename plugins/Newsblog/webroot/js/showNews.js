@@ -10,8 +10,10 @@ $(document).ready(function () {
 		
 	})
 	
-	$(".newsblog_overlay").fancybox({
-		'type':'inline',
+	$(".overlay").fancybox({
+		'type':'iframe',
+		'width':'90%',
+		'height':'90%',
 		'onClosed':function () {
 			window.location.reload(true);
 		}

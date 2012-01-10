@@ -60,7 +60,7 @@
 				echo $this->Html->link(
 					$this->Html->image('/Newsblog/img/Edit.png', array('class' => 'newsentry_edit_button_icon', 'alt' => 'Edit')),
 					array('plugin' => 'Newsblog', 'controller' => 'ShowNews', 'action' => 'editNews', $newsEntryId),
-					array('escape' => false, 'class' => 'newsblog_overlay')
+					array('escape' => false, 'class' => 'overlay')
 				);
 			}
 			if($deleteAllowed){

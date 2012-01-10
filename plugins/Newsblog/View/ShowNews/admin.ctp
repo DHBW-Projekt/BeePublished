@@ -1,28 +1,135 @@
 <?php 
 	$this->Html->script('/newsblog/js/admin', false);
 	$this->Html->css('/newsblog/css/admin', null, array('inline' => false));
+	$this->Html->script('/ckeditor/ckeditor', array('inline' => false));
+	$this->Html->script('/ckeditor/adapters/jquery', array('inline' => false));
+	
+	$DateTimeHelper = $this->Helpers->load('Time');
+	
+	$writeAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Write');
+	$publishAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Publish');
 ?>
 
 <div id="admin_newsblog" class="admin_newsblog_container">
 	<ul>
-		<li><a href="#admin_newsblog-1">Write News</a></li>
-		<li><a href="#admin_newsblog-2">Publish News</a></li>
-		<li><a href="#admin_newsblog-3">General</a></li>
-	</ul>
-	<div id="admin_newsblog-write">
-		<p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
-	</div>
-	<div id="admin_newsblog-publish">
 		<?php 
-			foreach($entriesToPublish as $entryToPublish):
-				
-			endforeach;
+			if($writeAllowed){
+				echo '<li><a href="#admin_newsblog-write">Write News</a></li>';
+			}
+			if($publishAllowed){
+				echo '<li><a href="#admin_newsblog-publish">Publish News</a></li>';
+			}
 		?>
 		
-		<p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
-	</div>
+		<li><a href="#admin_newsblog-config">General</a></li>
+	</ul>
+	
+	<?php 
+		if($writeAllowed){
+			echo '<div id="admin_newsblog-write">';
+			echo '<div class="writeNewsContainer">';
+			
+			//create form
+			echo $this->Form->create('NewsEntry', array('url' => array('plugin' => 'Newsblog', 'controller' => 'ShowNews', 'action' => 'saveNewsData')));
+			//create title input
+			echo $this->Form->input('NewsEntry.title', array(
+				'div' => 'writeNewsTitle',
+				'label' => false,
+				'name' => 'title'
+			));
+			//create entrytext textarea
+			echo $this->Form->textarea('NewsEntry.text', array(
+				'div' => 'writeNewsBody',
+				'label' => false,
+				'id' => 'writeNewsTextEditor',
+				'name' => 'text'
+			));
+			//create validFrom input
+			echo $this->Form->text(null, array(
+				'div' => 'writeValidConfiguration',
+				'id' => 'nbValidFromDatepicker',
+				'name' => 'validFrom',
+				'class' => 'datepicker',
+				'label' => 'Valid from:'
+			));
+			//create validTo input
+			echo $this->Form->text(null, array(
+				'div' => 'writeValidConfiguration',
+				'id' => 'nbValidToDatepicker',
+				'name' => 'validTo',
+				'class' => 'datepicker',
+				'label' => 'Valid to:'
+			));
+			//hidden fields
+			//contentid
+			echo $this->Form->hidden(null,array(
+				'name' => 'contentId',
+				'value' => $contentId
+			));
+			//action set to editNews
+			echo $this->Form->hidden(null,array(
+				'name' => 'action',
+				'value' => 'createNews'
+			));
+			
+			//create submit button
+			echo $this->Form->submit("Create News", array(
+				'div' => 'writeNewsButtons',
+				'class' => 'button'
+			));
+		echo '</div>';
+		echo '</div>';	
+			
+					/*echo '<div class="writeNewsTitle">';
+						echo '<input type="text" id="nbTitleTextfield" class="nbTitleTextfield">';
+					echo '</div>';
+					echo '<div class="writeNewsBody">';
+						echo '<textarea id="writeNewsTextEditor" name="editNewsTextEditor"></textarea>';
+					echo '</div>';
+					echo '<div class="writeValidConfiguration">';
+						echo 'valid from <input type="text" id="nbValidFromDatepicker" class="datepicker"> to <input type="text" id="nbValidToDatepicker" class="datepicker">';
+					echo '</div>';
+					echo '<div class="writeNewsButtons">';
+						echo '<div id="CreateButton" class="button">Create News</div>';
+					echo '</div>';*/
+		}
+		if($publishAllowed){
+			echo '<div id="admin_newsblog-publish">';
+			if(count($entriesToPublish) > 0){
+				foreach($entriesToPublish as $entryToPublish):
+					$id = $entryToPublish['NewsEntry']['id'];
+					$username = $entryToPublish['User']['username'];
+					$title = $entryToPublish['NewsEntry']['title'];
+					$text = $entryToPublish['NewsEntry']['text'];
+					$createdOn = $entryToPublish['NewsEntry']['createdOn'];
+					$createdOnDate = $DateTimeHelper->format('m-d-Y', $entryToPublish['NewsEntry']['createdOn']);
+					$createdOnTime = $DateTimeHelper->format('H:i', $entryToPublish['NewsEntry']['createdOn']);
+					
+					echo '<div class="unpublished_newsentry" id="'.$id.'">';
+						echo '<div class="newsentry_publish_container">';
+							echo '<div class="newsentry_publish_title">'.$title.'</div>';
+							echo '<div class="newsentry_publish_info">by '.$username.' on '.$createdOnDate.' at '.$createdOnTime.'</div>';
+							echo '<div class="newsentry_publish_content">'.$text.'</div>';
+						echo '</div>';
+						echo '<div class="newsentry_publish_buttons">';
+							echo $this->Html->link(
+								$this->Html->image('/Newsblog/img/Symbol_Check.png', array('class' => 'newsentry_publish_icon', 'alt' => 'Publish')),
+								array('plugin' => 'Newsblog', 'controller' => 'ShowNews', 'action' => 'publishNews', $id),
+								array('class' => 'newsentry_publish_link', 'escape' => false)
+							);
+						echo '</div>';
+					echo '<hr></div>';
+				endforeach;
+			} else{
+				echo 'No entries to publish!';
+			}
+			echo '</div>';
+		}
+	?>
+	
+	
+	
 	<div id="admin_newsblog-config">
-		<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
-		<p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+		
 	</div>
 </div>
