@@ -1,0 +1,9 @@
+@CHARSET "ISO-8859-1";
+
+div #guestbook_write label{
+	font-weight: bold;
+}
+
+div.guestbook_post_title {
+	font-weight: bold;
+}

@@ -1,15 +1,20 @@
+@CHARSET "ISO-8859-1";
 
 div #guestbook_write {
 	padding: 20px;
 }
 
+div #guestbook_write td.label{
+	text-align: right;
+}
+
 div #guestbook_write label{
 	padding: 10px;
 	margin: 10px;
-	font-weight: bold;
 }
 
 div.guestbook_navigation {
+	text-align: right;
 	padding: 5px;
 }
 
@@ -23,7 +28,6 @@ div.guestbook_post {
 div.guestbook_post_title {
 	float: left;
 	font-size: 125%;
-	font-weight: bold;
 }
 
 div.guestbook_post_author {

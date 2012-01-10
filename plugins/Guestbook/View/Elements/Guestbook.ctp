@@ -1,11 +1,10 @@
 <?php $this->Helpers->load('Time');?>
 <?php $this->Helpers->load('Paginator');?>
-<?php $this->Html->css('/Guestbook/css/guestbook',null,array('inline' => false));?>
-
+<?php $this->Html->css('/Guestbook/css/template',null,array('inline' => false));?>
+<?php $this->Html->css('/Guestbook/css/design',null,array('inline' => false));?>
 <?php $input = $this->Session->read('Validation.GuestbookPost.data');?>
 <?php $errors = $this->Session->read('Validation.GuestbookPost.validationErrors');?>
-
-<?php //needed for pagination
+<?php //needed for pagination - get route where plugin is displayed
 	  $route = substr($this->here, strlen($this->base));
 	  if (strrpos ($route, '/') != 0) {
 	  	$waste = substr($route, strrpos($route, '/'));
@@ -20,9 +19,10 @@
 <?php echo $this->Form->create('GuestbookPost', array('url' => array('plugin' => 'Guestbook', 'controller' => 'GuestbookPost','action' => 'save')));?>
 	<table>
 		<tr>
-			<td> <?php echo $this->Form->label('author', __('Name'));?>
+			<td class="label"> <?php echo $this->Form->label('author', __('Name'));?>
 			</td>
-			<td> <?php if (($input != NULL) && array_key_exists('author', $input['GuestbookPost'])){
+			<td> <?php //for each input field check whether a value is already preset or an error had occured
+						if (($input != NULL) && array_key_exists('author', $input['GuestbookPost'])){
 							echo $this->Form->input('author', array('label' => false, 'value' => $input['GuestbookPost']['author']));
 						} else {
 							echo $this->Form->input('author', array('label' => false));
@@ -34,7 +34,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td> <?php echo $this->Form->label('title', __('Title'));?>
+			<td class="label"> <?php echo $this->Form->label('title', __('Title'));?>
 			</td>
 			<td> <?php if (($input != NULL) && array_key_exists('title', $input['GuestbookPost'])){
 							echo $this->Form->input('title', array('label' => false, 'value' => $input['GuestbookPost']['title']));
@@ -48,7 +48,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td> <?php echo $this->Form->label('text', __('Text'));?>
+			<td class="label"> <?php echo $this->Form->label('text', __('Text'));?>
 			</td>
 			<td> <?php if (($input != NULL) && array_key_exists('text', $input['GuestbookPost'])){
 							echo $this->Form->input('text', array('label' => false, 'value' => $input['GuestbookPost']['text']));
@@ -69,21 +69,6 @@
 </div>
 
 <div id='guestbook_display'>
-
-	<div class='guestbook_navigation'>
-	<?php
-	$paging_params = $this->Paginator->params();
-	if ($paging_params['count'] > 0){
-		echo $this->Paginator->counter(__('Posts {:start} to {:end} of {:count}, Page {:page} of {:pages}, '));
-		if ($this->Paginator->hasPrev()){
-			echo $this->Html->link('<< ', $route . '/page:' . ($this->Paginator->current() - 1));
-		}
-		if ($this->Paginator->hasNext()){
-			echo $this->Html->link('>> ', $route . '/page:' . ($this->Paginator->current() + 1));
-		}
-	}
-	?>
-	</div>
 		
 	<?php foreach($data as $GuestbookPost):?>
 	
@@ -93,7 +78,7 @@
 			</div>				
 			<div class='guestbook_post_title'>
 				<?php echo $GuestbookPost['GuestbookPost']['title']?>
-				<?php 						
+				<?php // creates release and delete links for admins/editors						
 					if (($GuestbookPost['GuestbookPost']['released'] == '0000-00-00 00:00:00') && $this->PermissionValidation->actionAllowed($pluginId, 'release')) {
 						echo $this->Html->link($this->Html->image('/img/check.png', array('height' => 16, 'width' => 16, 'alt' => __('Release post'))),
 							array('plugin' => 'Guestbook', 'controller' => 'GuestbookPost', 'action' => 'release', $GuestbookPost['GuestbookPost']['id']),
@@ -115,17 +100,21 @@
 	<?php endforeach;?>
 
 	<div class='guestbook_navigation'>
-		<?php 
-		$paging_params = $this->Paginator->params();
-		if ($paging_params['count'] > 0){
-			echo $this->Paginator->counter(__('Seite {:page} von {:pages}, '));
-			if ($this->Paginator->hasPrev()){
-				echo $this->Html->link('<< ', $route . '/page:' . ($this->Paginator->current() - 1));
+		<?php // Pagination get currnet page and create prev / next page accordingly - $route (see top) is used to get working links
+			$paging_params = $this->Paginator->params();
+			if ($paging_params['count'] > 0){
+				echo 'Page ';
+				$currentPageNumber = $this->Paginator->current();
+				if ($this->Paginator->hasPrev()){
+					echo $this->Html->link(($currentPageNumber -1), $route . '/page:' . ($currentPageNumber - 1));
+					echo ' | ';
+				}
+				echo $currentPageNumber;
+				if ($this->Paginator->hasNext()){
+					echo ' | ';
+					echo $this->Html->link(($currentPageNumber +1), $route . '/page:' . ($currentPageNumber + 1));
+				}
 			}
-			if ($this->Paginator->hasNext()){
-				echo $this->Html->link('>> ', $route . '/page:' . ($this->Paginator->current() + 1));
-			}
-		}
 		?>
 	</div>
 
