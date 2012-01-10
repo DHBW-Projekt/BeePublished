@@ -157,6 +157,14 @@ class SubscriptionController extends AppController {
 		return $recipient;
 	}
 	
+	private function getRecipientByUserId($user_id){
+		// returns recipient if existing
+		$recipient = $this->NewsletterRecipient->find('first', array(
+			'conditions' => array(
+				'NewsletterRecipient.user_id' => $user_id)));
+		return $recipient;
+	}
+	
 	private function checkRecipientIsActive($recipient){
 		$isActive = $recipient['NewsletterRecipient']['active'];
 		return $isActive;
@@ -192,8 +200,10 @@ class SubscriptionController extends AppController {
 	public function userUnSubscribe(){
 		if ($this->request->is('post')){
 			$user = $this->Auth->user();
-			if($recipient = $this->getRecipient($user['email'])){
+			debug($user['user_id']);
+			if($recipient = $this->getRecipientByUserId($user['user_id'])){
 				// check if recipient is active
+				debug($recipient);
 				if($this->checkRecipientIsActive($recipient)){
 					// inactivate recipient
 					$recipient = $this->setRecipientInactive($recipient);
@@ -213,7 +223,7 @@ class SubscriptionController extends AppController {
 			$this->NewsletterRecipient->save();
 			$this->saveRecipient($recipient, $action);
 		}
-		$this->redirect($this->referer());
+//		$this->redirect($this->referer());
 	}
 	
 	private function setRecipientInactive($recipient){
@@ -271,7 +281,7 @@ class SubscriptionController extends AppController {
 			if (($recipient) && (($this->checkRecipientIsActive($recipient)) == 0)){
 				$recipient = $this->setRecipientActive($recipient);
 			} else {
-				$recipient = $this->createNewRecipient();
+				$recipient = $this->createNewRecipient($this->request->data['NewsletterRecipient']['email'], NULL);
 			}	
 			$action = 'add';
 			$this->saveRecipient($recipient, $action);		
