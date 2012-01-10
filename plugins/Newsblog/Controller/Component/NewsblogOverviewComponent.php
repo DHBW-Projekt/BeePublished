@@ -13,6 +13,7 @@ class NewsblogOverviewComponent extends Component {
 		
 		$data['publishedNewsEntries'] = $controller->NewsEntry->find('all',$optionsNE);
 		$data['view'] = 'NewsblogOverview';
+		$data['contentId'] = $id;
 		return $data;
 	}
 }

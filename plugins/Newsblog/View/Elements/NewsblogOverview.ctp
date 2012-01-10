@@ -38,7 +38,6 @@
 		$createdOnDate = $DateTimeHelper->format('m-d-Y', $NewsEntry['NewsEntry']['createdOn']);
 		$createdOnTime = $DateTimeHelper->format('H:i', $NewsEntry['NewsEntry']['createdOn']);
 		$createdBy = $NewsEntry['Author']['username'];
-		$contentId = $NewsEntry['NewsEntry']['content_id'];
 	?>
 	
 	<div class="newsblog_entry" id="<?php echo $newsblogEntryDivId?>">
@@ -60,14 +59,14 @@
 			<?php 
 			if($editAllowed){
 				echo $this->Html->link(
-					$this->Html->image('/Newsblog/img/Edit.png', array('class' => 'newsentry_edit_button_icon', 'alt' => 'Edit')),
+					$this->Html->image('edit.png', array('class' => 'newsentry_edit_button_icon', 'alt' => 'Edit')),
 					array('plugin' => 'Newsblog', 'controller' => 'ShowNews', 'action' => 'editNews', $newsEntryId),
 					array('escape' => false, 'class' => 'overlay')
 				);
 			}
 			if($deleteAllowed){
 				echo $this->Html->link(
-					$this->Html->image('/Newsblog/img/Delete.png', array('class' => 'newsentry_delete_button_icon', 'alt' => 'Delete')),
+					$this->Html->image('delete.png', array('class' => 'newsentry_delete_button_icon', 'alt' => 'Delete')),
 					array('plugin' => 'Newsblog', 'controller' => 'ShowNews', 'action' => 'deleteNews', $newsEntryId),
 					array('escape' => false),
 					"Do you really would like to delete this entry?"
@@ -83,7 +82,7 @@
 <?php
 if($this->PermissionValidation->getUserRole() < 6 && ($allowedActions['Write'] || $allowedActions['Publish'])){
 	echo '<div class="plugin_administration">';
-		echo $this->Html->link($this->Html->image('tools_small.png'),array('plugin' => 'Newsblog', 'controller' => 'ShowNews', 'action' => 'admin', $contentId), array('escape' => false));
+		echo $this->Html->link($this->Html->image('tools_small.png'),array('plugin' => 'Newsblog', 'controller' => 'ShowNews', 'action' => 'admin', $data['contentId']), array('escape' => false));
 	echo '</div>';
 }
 ?>

@@ -78,20 +78,7 @@
 				'class' => 'button'
 			));
 		echo '</div>';
-		echo '</div>';	
-			
-					/*echo '<div class="writeNewsTitle">';
-						echo '<input type="text" id="nbTitleTextfield" class="nbTitleTextfield">';
-					echo '</div>';
-					echo '<div class="writeNewsBody">';
-						echo '<textarea id="writeNewsTextEditor" name="editNewsTextEditor"></textarea>';
-					echo '</div>';
-					echo '<div class="writeValidConfiguration">';
-						echo 'valid from <input type="text" id="nbValidFromDatepicker" class="datepicker"> to <input type="text" id="nbValidToDatepicker" class="datepicker">';
-					echo '</div>';
-					echo '<div class="writeNewsButtons">';
-						echo '<div id="CreateButton" class="button">Create News</div>';
-					echo '</div>';*/
+		echo '</div>';
 		}
 		if($publishAllowed){
 			echo '<div id="admin_newsblog-publish">';
@@ -113,7 +100,7 @@
 						echo '</div>';
 						echo '<div class="newsentry_publish_buttons">';
 							echo $this->Html->link(
-								$this->Html->image('/Newsblog/img/Symbol_Check.png', array('class' => 'newsentry_publish_icon', 'alt' => 'Publish')),
+								$this->Html->image('check.png', array('class' => 'newsentry_publish_icon', 'alt' => 'Publish')),
 								array('plugin' => 'Newsblog', 'controller' => 'ShowNews', 'action' => 'publishNews', $id),
 								array('class' => 'newsentry_publish_link', 'escape' => false)
 							);
