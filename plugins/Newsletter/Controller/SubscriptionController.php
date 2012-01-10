@@ -1,9 +1,11 @@
 <?php
+App::uses('CakeEmail', 'Network/Email');
 class SubscriptionController extends AppController {
 		
 	public $name = 'Subscription';
 	public $uses = array('Newsletter.NewsletterRecipient', 'Newsletter.NewsletterLetter', 'Newsletter.EmailTemplate');
  	public $helpers = array('Fck');
+ 	
 //  var $autoLayout = false;
 // 	var $autoRender = false;
 		
@@ -24,9 +26,22 @@ class SubscriptionController extends AppController {
 				'EmailTemplate.id' => 'asc'))
 	);
 			
-	public function newsletteradmin($id){
+	public function newsletteradmin(){
 		$this->getAndSetData();
 		$this->set('mode', '');
+		$this->layout = 'overlay';
+		$this->render('admin');
+	}
+	
+	public function newsletterPreview($id){
+		$newsletterToPreview = $this->NewsletterLetter->find('first', array(
+			'conditions' => array(
+				'NewsletterLetter.id' => $id)));
+		$newsletterToPreview = $newsletterToPreview['NewsletterLetter'];
+		$this->set(array(
+			'newsletterToPreview' => $newsletterToPreview,
+			'mode' => 'preview'));
+		$this->getAndSetData();
 		$this->layout = 'overlay';
 		$this->render('admin');
 	}
@@ -57,17 +72,22 @@ class SubscriptionController extends AppController {
 		$this->render('admin');
 	}
 	
-	public function sendNewsletter() {
+	public function sendNewsletter($newsletter_id) {
 		
 		$email = new CakeEmail();
     	$email->emailFormat('html');
-		$email->template('user_activated', 'email');
-    	$email->subject('About');
+    	$email->template('user_activated', 'email');
+    	
+    	
+    	$newsletter = $this->NewsletterLetter->findById($newsletter_id);
+    	$email->subject($newsletter['NewsletterLetter']['subject']);
 		$email->to('tobiashoehmann@googlemail.com');
 		$email->from('noreply@DualonCMS.de', 'DualonCMS');
-		
+		$email->viewVars(array(
+			'content' => $newsletter['NewsletterLetter']['content'],
+        ));
 		$email->send();
-//		$this->redirect($this->referer());
+		$this->redirect('/plugin/Newsletter/Subscription/newsletteradmin/');
 	}
 	
 	public function deleteNewsletter($id){
@@ -83,14 +103,15 @@ class SubscriptionController extends AppController {
 			} else {
 				$newsletter = array();
 			};
-			$newsletter['subject'] = $newsletter2['subject'];
-			$newsletter['content'] = $newsletter2['content'];
-			$newsletter['draft'] = 1;
+			$newsletter['NewsletterLetter']['subject'] = $newsletter2['subject'];
+			$newsletter['NewsletterLetter']['content'] = $newsletter2['content'];
+			$newsletter['NewsletterLetter']['draft'] = 1;
 			$date = date('Y-m-d', time());
-			$newsletter['date'] = $date;
+			$newsletter['NewsletterLetter']['date'] = $date;
 			$this->NewsletterLetter->set($newsletter);
 			$newsletter = $this->NewsletterLetter->save();
 			$newsletter = $newsletter['NewsletterLetter'];
+			
 // 			debug($newsletter);
 			$this->editNewsletter($newsletter['id']);
 			

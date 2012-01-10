@@ -10,7 +10,7 @@
 		    document.getElementById(idOff).style.display="block";
 		};
 	}');
-	if ($mode == 'edit'){
+	if ($mode == 'edit' or $mode == 'preview'){
 		echo '<div id="list" style="display:none">';
 	} else {
 		echo '<div id="list" style="display:block">';
@@ -98,34 +98,75 @@
 	};
 	echo '</table>';
 	echo '</div>';
-if ($mode == 'edit'){
+	if ($mode == 'edit'){
 		echo '<div id="editor" style="display:block">';
+		if (isset($newsletterToEdit)){
+			echo $this->Form->create('editor', array(
+				'url' => array(
+					'plugin' => 'Newsletter',
+		    		'controller' => 'Subscription',
+		    		'action' => 'saveNewsletter' , $newsletterToEdit['id'])));
+//	 		debug($newsletterToEdit);
+			echo $this->Form->input('NewsletterLetter.subject', array(
+				'label' => 'Betreff:', 
+				'value' => $newsletterToEdit['subject']));
+			echo $this->Form->textarea('NewsletterLetter.content', array(
+				'label' => '', 
+				'value' => $newsletterToEdit['content'],
+				'rows' => '30'));
+			echo $this->Form->button('Save', array(
+				'type' => 'submit', 
+				'value' => 'save'));
+			echo $this->Form->button('Back', array(
+				'type' => 'button',
+				'onClick' => 'location.href=\'/plugin/Newsletter/Subscription/newsletteradmin/\';'));
+			echo $this->Form->end();
+			echo $this->Fck->load('NewsletterLetter.content');
+ 		};
+ 		echo '</div>';
+	} else {
+		echo '<div id="editor" style="display:none">';
+		echo '</div>';
+	}
+	
+	if ($mode == 'preview'){
+		echo '<div id="editor" style="display:block">';
+		if (isset($newsletterToPreview)){
+			echo $this->Form->create('editor', array(
+				'url' => array(
+					'plugin' => 'Newsletter',
+		    		'controller' => 'Subscription',
+		    		'action' => 'sendNewsletter' , $newsletterToPreview['id'])));
+	// 		debug($newsletterToEdit);
+			echo $this->Form->input('NewsletterLetter.subject', array(
+				'label' => 'Betreff:', 
+				'value' => $newsletterToPreview['subject']));
+			echo $this->Form->textarea('NewsletterLetter.content', array(
+				'label' => '', 
+				'value' => $newsletterToPreview['content'],
+				'rows' => '30'));
+			echo $this->Form->button('Send', array(
+				'type' => 'submit', 
+				'value' => 'save'));
+			echo $this->Form->button('Back', array(
+				'type' => 'button',
+				'onClick' => 'location.href=\'/plugin/Newsletter/Subscription/newsletteradmin/\';'));
+			echo $this->Form->end();
+			
+//			echo $this->Fck->load('NewsletterLetter.content');
+			
+			echo $this->Html->scriptBlock('
+				CKEDITOR.replace( \'NewsletterLetterContent\',
+									{
+       									readOnly : \'true\',
+    								});
+				'
+			, array('inline' => true));
+				
+ 		};
 	} else {
 		echo '<div id="editor" style="display:none">';
 	}
- 	if (isset($newsletterToEdit)){
-		echo $this->Form->create('editor', array(
-			'url' => array(
-				'plugin' => 'Newsletter',
-	    		'controller' => 'Subscription',
-	    		'action' => 'saveNewsletter' , $newsletterToEdit['id'])));
-// 		debug($newsletterToEdit);
-		echo $this->Form->input('NewsletterLetter.subject', array(
-			'label' => 'Betreff:', 
-			'value' => $newsletterToEdit['subject']));
-		echo $this->Form->textarea('NewsletterLetter.content', array(
-			'label' => '', 
-			'value' => $newsletterToEdit['content'],
-			'rows' => '30'));
-		echo $this->Form->button('Save', array(
-			'type' => 'submit', 
-			'value' => 'save'));
-		echo $this->Form->button('Back', array(
-			'type' => 'button',
-			'onClick' => 'showDiv(\'list\', \'editor\')'));
-		echo $this->Form->end();
-		echo $this->Fck->load('NewsletterLetter.content');
- 	};
- 	echo '</div>';
+	echo '</div>';
  ?>	
 
