@@ -81,6 +81,7 @@ class ContentsController extends AppController
         if ($content['PluginView']['id'] != null) {
             $plugin = $this->PluginView->findById($content['PluginView']['id']);
             $this->set('plugin', $plugin['Plugin']['name']);
+            $this->set('pluginId', $plugin['Plugin']['id']);
             $this->set('view', $plugin['PluginView']['name']);
             $this->set('data', $this->Components->load($plugin['Plugin']['name'] . '.' . $plugin['PluginView']['name'])->getData($this, $params, null, $id));
             $this->set('url',$page['Page']['name']);
