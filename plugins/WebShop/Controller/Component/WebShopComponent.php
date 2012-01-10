@@ -16,9 +16,12 @@ class WebShopComponent extends Component {
 		if (isset($url)){
 			$data['Element'] = array_shift($url);
 			$func_params = $url;
-		} else {
+		} else if (isset($params['DefaultView'])) {
 			$data['Element'] = $params['DefaultView'];
 			$func_params = $params;
+		} else {
+			$data['Element'] = 'productOverview';
+			$func_params = null;
 		}
 		
 		//CALL corresponding comp. method
@@ -96,76 +99,6 @@ class WebShopComponent extends Component {
 		
 		//RETURN product
 		return $controller->Product->findById($id);
-	}
-	
-	/**
-	* Create new products.
-	*/
-	function create($controller){
-	
-		//LOAD model
-		$controller->loadModel('Product');
-		
-		//CHECK request
-		if (!$controller->request->is('post'))
-			return;
-		
-		//VALIDATE data
-		if(!$controller->Product->validates()){
-			return;
-		}
-			
-	
-		/* FILE */
-		$file = $controller->request->data['Product']['submittedfile'];
-		$file_path = WWW_ROOT.'../../plugins/WebShop/webroot/img/';
-		$file_name = str_replace(' ', '_', $file['name']);
-		$upload_error = true;
-			
-		//CHECK filetype
-		$permitted = array('image/gif','image/jpeg','image/pjpeg','image/png');
-		
-		foreach($permitted as $type) {
-			if($type == $file['type']) {
-				$upload_error = false;
-				break;
-			}
-		}
-	
-		//CHECK filename
-		if(file_exists($file_path.'/'.$file_name)) {
-			//GET time
-			ini_set('date.timezone', 'Europe/London');
-			$now = date('Y-m-d-His');
-	
-			//NEW file-name
-			$tmp = explode('.', $file_name);	
-			$file_name = $tmp[0].$now.'.'.$tmp[1];
-		}
-		
-		//MOVE file
-		if(!$upload_error){
-			$upload_error = !move_uploaded_file($file['tmp_name'], $file_path.$file_name);
-		}
-		
-		//SAVE on DB
-		if(!$upload_error){
-			//GET all data
-			$data['Product']['name'] = $controller->data['Product']['name'];
-			$data['Product']['description'] = $controller->data['Product']['description'];
-			$data['Product']['price'] = $controller->data['Product']['price'];
-			$data['Product']['picture'] = $file_name;
-		
-			//SAVE on db
-			$upload_error = !$controller->Product->save($data);
-		}
-		
-		//PRINT message
-		if(!$upload_error){
-			$controller->Session->setFlash('Artikel wurde angelegt.', 'default', array('class' => 'flash_success'), 'Product');
-		} else {
-			$controller->Session->setFlash('Fehler bei der Anlage.', 'default', array('class' => 'flash_failure'), 'Product');
-		}
 	}
 	
    /**
@@ -296,16 +229,5 @@ class WebShopComponent extends Component {
 		
 		//REDIRECT to cart
 		$controller->redirect('/webshop/cart');
-	}
-	
-	/**
-	* BeforeFilter.
-	*/
-	public function beforeFilter() {
-		parent::beforeFilter();
-		
-		//Actions which don't require authorization
-		$this->Auth->allow('*');
-	}
-	
+	}	
 }
