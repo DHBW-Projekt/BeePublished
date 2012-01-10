@@ -5,7 +5,7 @@
         <version>2.0</version>
         <permissions>
             <permission>
-                <role>Autor</role>
+                <role>Author</role>
                 <action>edit</action>
             </permission>
         </permissions>
