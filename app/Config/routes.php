@@ -29,12 +29,11 @@ Router::connect('/pages/:action/*', array('controller' => 'pages'));
 Router::connect('/containers/:action/*', array('controller' => 'containers'));
 Router::connect('/layouts/:action/*', array('controller' => 'layouttypes'));
 Router::connect('/content/:action/*', array('controller' => 'contents'));
-Router::connect('/plugins', array('controller' => 'plugins', 'action' => 'index'));
-Router::connect('/plugins/:action/*', array('controller' => 'plugins'));
+Router::connect('/admin/plugins', array('controller' => 'plugins', 'action' => 'index'));
+Router::connect('/admin/plugins/:action/*', array('controller' => 'plugins'));
+Router::connect('/admin/users', array('controller' => 'users', 'action' => 'index'));
+Router::connect('/admin/users/:action/*', array('controller' => 'users'));
 Router::connect('/pluginviews/:action/*', array('controller' => 'pluginviews'));
-
-Router::connect('/users/:action/*', array('controller' => 'users'));
-Router::connect('/roles/:action/*', array('controller' => 'roles'));
 Router::connect('/plugin/:plugin/:controller/:action/*');
 CakePlugin::routes();
 Router::connect('/*', array('controller' => 'pages', 'action' => 'display'));
