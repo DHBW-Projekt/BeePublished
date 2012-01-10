@@ -8,17 +8,13 @@
 	
 	<div id="tabs">
 		<ul>
-			<li><a href="#tabs-1">Artikel erstellen</a></li>
-			<li><a href="#tabs-2">Artikel verwalten</a></li>
-			<li><a href="#tabs-3">Einstellungen</a></li>
+			<li><a href="#tabs-1">Producte verwalten</a></li>
+			<li><a href="#tabs-2">Einstellungen</a></li>
 		</ul>
 		<div id="tabs-1">
-			<?php echo $this->Html->link("create", array('action' => 'create')); ?>
+			<?php echo $this->element($productAdminView); ?>
 		</div>
 		<div id="tabs-2">
-			<?php echo $this->element("create"); ?>
-		</div>
-		<div id="tabs-3">
 			<?php echo $this->element("settings"); ?>
 		</div>
 	</div>

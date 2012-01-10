@@ -1,7 +1,6 @@
 <!-- Create new products for the catalog -->
 <?php 
 	//TITLE
-	echo '<div id ="webshop_create">';
 	echo '<h2>Artikel erstellen</h2>';
 	
 	//PRINT error/success messages
@@ -9,7 +8,7 @@
 	//echo $this->Html->div('validation_error',$validationErrors);
 	echo $this->Session->flash('Product');
 
-	echo $this->Form->create('Product', array('enctype' => 'multipart/form-data')); ?>
+	echo $this->Form->create('Product', array('enctype' => 'multipart/form-data', 'url' => array('controller' => 'WebShop', 'action' => 'create', $contentID))); ?>
 	<table>
 		<tr>
 			<td>
@@ -60,8 +59,4 @@
 			</td>
 		</tr>
 	</table>
-<?php
-	echo $this->Form->end('Speichern');
-	
-	echo '</div>';
- ?>
+<?php echo $this->Form->end('Speichern'); ?>
