@@ -2,7 +2,7 @@
 	Produkte
 	<?php 
     	echo $this->Html->link(
-    				$this->Html->image("/WebShop/img/add_product.png", array('width' => '32px')), 
+    				$this->Html->image("add2.png", array('width' => '32px')), 
     				array('action' => 'create', $contentID),
     				array('escape' => False)
     	);
@@ -27,7 +27,7 @@
 		    <td>
 		    	<?php 
 		    		echo $this->Html->link(
-		    					$this->Html->image("/WebShop/img/edit.png", array('width' => '32px')), 
+		    					$this->Html->image("edit.png", array('width' => '32px')), 
 		    					array('action' => 'edit', $contentID, $product['Products']['id']),
 		    					array('escape' => False)
 		    		);
@@ -36,7 +36,7 @@
 		    <td>
 		    	<?php 
 		    		echo $this->Html->link(
-		    					$this->Html->image("/WebShop/img/remove.png", array('width' => '32px')), 
+		    					$this->Html->image("remove.png", array('width' => '32px')), 
 		    					array('action' => 'remove', $contentID, $product['Products']['id']),
 		    					array('escape' => False)
 		    		);
