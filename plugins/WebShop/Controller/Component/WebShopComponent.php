@@ -204,25 +204,17 @@ class WebShopComponent extends Component {
 		$productIDs = $controller->Session->read('products');
 		
 		//BUILD mail
-		$subject = '---- Bestellung ----';
-		$text_start = 'Eine neue Bestellung wurde aufgegeben:<br>';
-		$text_ende = '<br><br><br>#### Diese Nachricht wurde automatisch erstellt ####';
-		
-		$user_data = '<br><br><br>';
-		$order = '';
-		
-		//GET products
-		foreach($productIDs as $productID){
-			$product = $controller->Product->findById($productID['id'], array('fields' => 'Product.id, Product.name, Product.price, Product.picture'));
-			$order = $order.'<br>'.$product['Product']['name'].' ('.$product['Product']['id'].'): Menge '.$productID['count'];
-		}
-		
-		//SEND email
-		App::uses('CakeEmail', 'Network/Email');
 		$email = new CakeEmail();
-		$email->from(array('maximilian.stueber@me.com' => 'DualonCMS'));
-		$email->to('maximilian.stueber@me.com');
-		$email->subject($subject);
+		$email->template('order', 'email')
+			  ->emailFormat('html')
+			  ->to('maximilian.stueber@me.com')
+	          ->from('noreply@'.env('SERVER_NAME'), env('SERVER_NAME'))
+			  ->subject('Order')
+			  ->viewVars(array(
+		        	'order' => $productIDs,
+					'url' => env('SERVER_NAME'),
+		))
+		->send();
 		
 		//UNSET cart
 		$controller->Session->write('products', null);
