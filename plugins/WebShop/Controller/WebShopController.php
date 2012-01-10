@@ -47,7 +47,16 @@ class WebShopController extends AppController {
 	}
 	
 	public function remove($contentID, $productID){
+		
+		//REMOVE picture
+		$data = $this->Product->findById($productID);
+		$file_path = WWW_ROOT.'../../plugins/WebShop/webroot/product_img/';
+		
+		unlink($file_path.$data['Product']['picture']);
+		
+		//REMOVE db entry
 		$this->Product->delete($productID);
+		
 		$this->redirect(array('action' => 'admin', $contentID));
 	}
 	
@@ -76,19 +85,21 @@ class WebShopController extends AppController {
 		
 		//CHECK request
 		if (!$controller->request->is('post'))
-		return;
+			return;
 	
 		//VALIDATE data
-		if(!$controller->Product->validates()){
+		if(!$controller->Product->validates())
 			return;
-		}
-			
-	
+		
 		/* FILE */
 		$file = $controller->request->data['Product']['submittedfile'];
-		$file_path = WWW_ROOT.'../../plugins/WebShop/webroot/img/';
+		$file_path = WWW_ROOT.'../../plugins/WebShop/webroot/product_img/';
 		$file_name = str_replace(' ', '_', $file['name']);
 		$upload_error = true;
+		
+		//CREATE folder
+		if(!is_dir ($file_path))
+			mkdir($file_path);
 			
 		//CHECK filetype
 		$permitted = array('image/gif','image/jpeg','image/pjpeg','image/png');

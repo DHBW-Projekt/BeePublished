@@ -1,5 +1,9 @@
 <!-- Create new products for the catalog -->
 <?php 
+	//LOAD js
+	$this->Html->script('/ckeditor/ckeditor',false);
+	$this->Html->script('/ckeditor/adapters/jquery',false);
+	
 	//TITLE
 	echo '<h2>Artikel bearbeiten</h2>';
 
