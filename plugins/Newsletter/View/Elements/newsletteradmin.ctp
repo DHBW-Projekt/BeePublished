@@ -50,7 +50,7 @@
 								'url' => array(
 									'plugin' => 'Newsletter', 
 									'controller' => 'Subscription', 
-									'action' => 'newsletterPreview', $newsletter['NewsletterLetter']['id'])));
+									'action' => 'previewNewsletter', $newsletter['NewsletterLetter']['id'])));
 			echo 	'</td>';
 			if ($newsletter['NewsletterLetter']['draft'] == 1){
 				echo 	'<td>';
@@ -65,19 +65,19 @@
 										'controller' => 'Subscription', 
 										'action' => 'editNewsletter', $newsletter['NewsletterLetter']['id'])));
 				echo 	'</td>';
-				echo 	'<td>';
-				
-// 				echo $html->link(__('Delete', true), array('plugin' => 'Newsletter', 'controller' => 'Subscription', 'action'=>'deleteNewsletter', $id), null, sprintf(__('Are you sure you want to delete?', true), $id));
-				
-				echo 		$this->Html->image('/app/webroot/img/delete.png',
-								array(
-									'style' => 'float: left', 
-									'width' => '20px', 
-									'alt' => '[x]Delete', 
-									'url' => array(
-										'plugin' => 'Newsletter', 
-										'controller' => 'Subscription', 
-										'action' => 'deleteNewsletter', $newsletter['NewsletterLetter']['id'])));
+				echo 	'<td>';				
+				echo $this->Html->link($this->Html->image('/app/webroot/img/delete.png', array(
+					'height' => 20, 
+					'width' => 20, 
+					'alt' => __('[x]Delete'))),
+					array(
+						'plugin' => 'Newsletter', 
+						'controller' => 'Subscription', 
+						'action' => 'deleteNewsletter', $newsletter['NewsletterLetter']['id']),
+						array(
+							'escape' => false, 
+							'title' => __('Delete newsletter')),
+							__('Do you really want to delete this newsletter?'));
 				echo 	'</td>';
 				};
 			echo 	'</tr>';

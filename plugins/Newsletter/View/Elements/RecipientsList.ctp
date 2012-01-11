@@ -11,30 +11,37 @@
 	<tr>
 		<th>Email</th>
 		<th>User-ID</th>
-		<th>Active</th>
 	</tr>
 	<?php
 	
 		if (isset($recipients)){
 				foreach($recipients as $recipient){
 					echo '<tr>';
-					if (isset($recipient['NewsletterRecipient']['user_id'])){
-						echo '<td>'.'test'.'</td>';
-					} else {
-						echo '<td>'.$recipient['NewsletterRecipient']['email'].'</td>';
-					};
+					echo '<td>'.$recipient['NewsletterRecipient']['email'].'</td>';
 					echo '<td>'.$recipient['NewsletterRecipient']['user_id'].'</td>';
-					echo '<td>'.$recipient['NewsletterRecipient']['active'].'</td>';
+// 					echo '<td>'.$recipient['NewsletterRecipient']['active'].'</td>';
 					echo '<td>';
-					echo $this->Html->image('/app/webroot/img/delete.png', 
-											array(
-												'style' => 'float: left', 
-												'width' => '20px', 
-												'alt' => '[x]Delete', 
-												'url' => array(
-													'plugin' => 'Newsletter', 
-													'controller' => 'Subscription', 
-													'action' => 'setRecipientInactiveByEmail', $recipient['NewsletterRecipient']['email'])));
+					echo $this->Html->link($this->Html->image('/app/webroot/img/delete.png', array(
+						'height' => 20, 
+						'width' => 20, 
+						'alt' => __('[x]Delete'))),
+						array(
+							'plugin' => 'Newsletter', 
+							'controller' => 'Subscription', 
+							'action' => 'setRecipientInactiveByEmail', $recipient['NewsletterRecipient']['email']),
+							array(
+								'escape' => false, 
+								'title' => __('Delete recipient')),
+								__('Do you really want to delete this recipient?'));
+// 					echo $this->Html->image('/app/webroot/img/delete.png', 
+// 											array(
+// 												'style' => 'float: left', 
+// 												'width' => '20px', 
+// 												'alt' => '[x]Delete', 
+// 												'url' => array(
+// 													'plugin' => 'Newsletter', 
+// 													'controller' => 'Subscription', 
+// 													'action' => 'setRecipientInactiveByEmail', $recipient['NewsletterRecipient']['email'])));
 					echo '</td>';
 					echo '</tr>';
 				}	
