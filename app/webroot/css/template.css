@@ -10,6 +10,13 @@
     height: 100px;
 }
 
+#overlay-header {
+    position: relative;
+    padding: 5px;
+    padding-bottom: 10px;
+    height: 45px;
+}
+
 #pagelogo {
     position: absolute;
     left: 10px;
@@ -66,6 +73,10 @@
 #menu {
     position: relative;
     text-transform: uppercase;
+}
+
+#menu.overlay {
+    margin: -10px -20px 20px;
 }
 
 .button {
