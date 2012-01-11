@@ -137,7 +137,7 @@ class SubscriptionController extends AppController {
 		
 		$email = new CakeEmail();
     	$email->emailFormat('html')
-    			->template('newsletter', 'email')
+    			->template('Newsletter.newsletter', 'email')
 				->subject($newsletter['NewsletterLetter']['subject'])
 				->to('tobiashoehmann@googlemail.com')
 				->from('noreply@DualonCMS.de', 'DualonCMS')
