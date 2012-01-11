@@ -1,9 +1,15 @@
-<div id="adminEntry">
-	<div id="adminEntryOverview" style="display:block;">
+<div id="adminEntryOverview">
 	<?php 
+		echo $this->element('PluginMenu');
 		echo $this->Form->create('FoodMenuEntry', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'View', 'action' => 'deleteEntries')));
-		echo $this->Form->button('Neuer Eintrag', array('type' => 'button', 'onClick' => 'showDiv(\'adminEntryEdit\', \'adminEntryOverview\')'));
-		echo $this->Form->button('Auswahl löschen', array('type' => 'submit'));
+//		echo $this->Form->button((__('New Entry')), array('type' => 'button'));
+//		echo $this->Form->button((__('Delete Selection')), array('type' => 'submit'));
+		echo '<div id="buttonlink" class="buttonlink">';
+		echo '<ul class="buttonlink">';
+		echo '<li class="buttonlink">'.$this->Html->link((__('New Entry')), array('plugin' => 'FoodMenu', 'controller' => 'View', 'action' => 'addEntry'), array('class' => 'buttonlink')).'</li>
+			  <li class="buttonlink">'.$this->Html->link((__('Delete Selection')), '#', array('onClick' => 'document.forms["FoodMenuEntryViewEntryForm"].submit()', 'class' => 'buttonlink')).'</li>';
+		echo '</ul><br />';
+		echo '</div>';
 		?>
 	<table>
 	<colgroup>
@@ -51,8 +57,4 @@
 	?>
 	</table>
 	<?php echo $this->Form->end(); ?>
-	</div>
-	<div id="adminEntryEdit" style="display:none;">
-	<?php echo $this->element('CreateEntry');?>
-	</div>
 </div>

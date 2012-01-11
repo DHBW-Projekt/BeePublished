@@ -25,6 +25,22 @@ class ViewController extends AppController {
 		$this->set('entries', $entries);
 	}
 	
+	public function viewMenus() {
+		$menus = $this->FoodMenuMenu->find('all');
+		$this->set('menus', $menus);
+		$this->render('/Admin/ViewMenus');	
+	}
+	public function viewCategories() {
+		$categories = $this->FoodMenuCategory->find('all');
+		$this->set('categories', $categories);
+		$this->render('/Admin/ViewCategories');	
+	}
+	public function viewEntries() {
+		$entries = $this->FoodMenuEntry->find('all');
+		$this->set('entries', $entries);
+		$this->render('/Admin/ViewEntries');		
+	}
+	
 	/* BEGIN OF
 	 * Methods to CREATE new menus, categories or entries 
 	 */
@@ -45,6 +61,7 @@ class ViewController extends AppController {
                 $this->Session->setFlash(__('Der Speiseplan konnte nicht gespeichert werden.'));
             }//else
         }//if
+        $this->render('/Admin/CreateMenu');
 	}//addMenu
 	
 	function addCategory() {
@@ -56,6 +73,7 @@ class ViewController extends AppController {
                 $this->Session->setFlash(__('Die Kategorie konnte nicht gespeichert werden.'));
             }//else
         }//if
+        $this->render('/Admin/CreateCategory');
 	}//addCategory
 	
 	function addEntry() {
@@ -67,6 +85,7 @@ class ViewController extends AppController {
                 $this->Session->setFlash(__('Der Eintrag konnte nicht gespeichert werden.'));
             }//else
         }//if
+        $this->render('/Admin/CreateEntry');
 	}//addEntry
 	
 	/* END OF
@@ -80,7 +99,7 @@ class ViewController extends AppController {
 	
 	function editMenu($name = null, $id = null) {
 		
-		// Has any form data been POSTed?
+		//Has any form data been POSTed?
     	if ($this->request->is('post')) {
         	// If the form data can be validated and saved...
         	$saveData = $this->request->data;
@@ -90,16 +109,15 @@ class ViewController extends AppController {
         	if ($this->FoodMenuMenu->save($save)) {
             	// Set a session flash message and redirect.
             	$this->Session->setFlash("Speiseplan geändert");
-            	$this->set('mode', null);
+            	$this->set('mode', 'edit');
             	$this->redirect($this->referer());
-            	//$this->render('/View/admin');
         	}
     	}
 	    // If no form data, find the recipe to be edited
     	// and hand it to the view.
     	$menu = $this->FoodMenuMenu->findById($id);
     	$this->set('menu', $menu);
-    	$this->set('mode', 'editMenu');
+    	$this->set('mode', 'edit');
     	
     	//Submit variables of admin method to make back-button work
     	$menus = $this->FoodMenuMenu->find('all');
@@ -109,10 +127,7 @@ class ViewController extends AppController {
 		$entries = $this->FoodMenuEntry->find('all');
 		$this->set('entries', $entries);
 		
-		$this->layout = 'overlay';
-    	$this->render('/View/admin');
-    	//$this->redirect($this->referer());
-		
+    	$this->render('/Admin/EditMenu');		
 	}//editMenu
 	
 	function editCategory($name = null, $id = null) {	
@@ -123,7 +138,7 @@ class ViewController extends AppController {
         	if ($this->FoodMenuCategory->save($save)) {
             	// Set a session flash message and redirect.
             	$this->Session->setFlash("Kategorie geändert");
-            	$this->set('mode', null);
+            	$this->set('mode', 'edit');
             	$this->redirect($this->referer());
             	//$this->render('/View/admin');
         	}
@@ -132,7 +147,7 @@ class ViewController extends AppController {
     	// and hand it to the view.
     	$category = $this->FoodMenuCategory->findById($id);
     	$this->set('category', $category);
-    	$this->set('mode', 'editCategory');
+    	$this->set('mode', 'edit');
     	
     	//Submit variables of admin method to make back-button work
     	$menus = $this->FoodMenuMenu->find('all');
@@ -142,9 +157,7 @@ class ViewController extends AppController {
 		$entries = $this->FoodMenuEntry->find('all');
 		$this->set('entries', $entries);
 		
-		$this->layout = 'overlay';
-    	$this->render('/View/admin');
-    	//$this->redirect($this->referer());
+    	$this->render('/Admin/EditCategory');	
 	}//editCategory
 	
 	function editEntry($name = null, $id = null) {	
@@ -155,7 +168,7 @@ class ViewController extends AppController {
         	if ($this->FoodMenuEntry->save($save)) {
             	// Set a session flash message and redirect.
             	$this->Session->setFlash("Kategorie geändert");
-            	$this->set('mode', null);
+            	$this->set('mode', 'edit');
             	$this->redirect($this->referer());
             	//$this->render('/View/admin');
         	}
@@ -164,7 +177,7 @@ class ViewController extends AppController {
     	// and hand it to the view.
     	$entry = $this->FoodMenuEntry->findById($id);
     	$this->set('entry', $entry);
-    	$this->set('mode', 'editEntry');
+    	$this->set('mode', 'edit');
     	
     	//Submit variables of admin method to make back-button work
     	$menus = $this->FoodMenuMenu->find('all');
@@ -173,9 +186,8 @@ class ViewController extends AppController {
 		$this->set('categories', $categories);
 		$entries = $this->FoodMenuEntry->find('all');
 		$this->set('entries', $entries);
-		
-		$this->layout = 'overlay';	
-    	$this->render('/View/admin');
+			
+    	$this->render('/Admin/EditEntry');
     	//$this->redirect($this->referer());
 	}//editEntry
 	

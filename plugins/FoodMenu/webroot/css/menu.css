@@ -10,3 +10,22 @@
   ul#FoodMenuMenu a:hover, ul#FoodMenuMenu span {
     text-decoration: none;
   }
+
+.buttonlink {
+  }
+ div.buttonlink {
+ 	float:none;
+ }
+ a.buttonlink {
+    border-radius:4px;
+    background:none repeat scroll 0 0 #eee;
+    border:1px solid #999;
+    cursor:pointer;
+    padding:4px;
+    color:#000;
+    text-decoration:none;
+    float:left;
+  }
+li.buttonlink {
+    display:inline;
+    float:left;

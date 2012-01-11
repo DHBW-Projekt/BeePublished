@@ -26,7 +26,7 @@
 				if ( $dataItem['FoodMenuMenu']['deleted'] != NULL ) continue;
 				else {
 					$menu = $dataItem;
-					echo '<li>'.$this->Html->link($menu['FoodMenuMenu']['name'], $url . '/menu/' .  $menu['FoodMenuMenu']['name'] . '/' . $menu['FoodMenuMenu']['id']).'</li>';	
+					echo '<li>'.$this->Html->link($menu['FoodMenuMenu']['name'], $url . '/view/menu/' .  $menu['FoodMenuMenu']['name'] . '/' . $menu['FoodMenuMenu']['id']).'</li>';	
 				}//else
 			}//foreach
 		}//if

@@ -1,10 +1,11 @@
 <?php
 	echo $this->Html->css('/css/jquery-ui/jquery-ui-1.8.16.custom');
+	echo $this->Html->css('food_menu/css/menu');
 	echo $this->Html->script('/food_menu/js/foodmenu', true); 
 	echo $this->Html->script('/food_menu/js/jquery.cookie', true);
 	echo $this->Html->script('/js/jquery-1.6.2.min.js', true); 
 	echo $this->Html->script('/js/jquery-ui-1.8.16.custom.min.js', true);
-    echo $this->Html->scriptBlock('$(function() {$( "#tabs" ).tabs();});',array('inline' => true));
+    //echo $this->Html->scriptBlock('$(function() {$( "#tabs" ).tabs();});',array('inline' => true));
     echo $this->Html->scriptBlock('function showDiv(idOn,idOff){
  								    if(document.getElementById(idOn).style.display=="none") {
  								      document.getElementById(idOff).style.display="none";
@@ -15,27 +16,28 @@
   									  document.getElementById(idOff).style.display="block";
   									  }
  								   }');
- 	echo $this->Html->scriptBlock('$( ".selector" ).tabs({ cookie: { expires: 7 } });');
+// 	echo $this->Html->scriptBlock('$( ".selector" ).tabs({ cookie: { expires: 1 } });');
 ?>
-
+<?php
+	echo $this->element('PluginMenu');
+?>
 <div class="content">
 
-<div id="tabs">
-
-<ul>
-<li><a href="#tabs-1"><?php echo (__('Speisepläne')); ?></a></li>
-<li><a href="#tabs-2"><?php echo (__('Kategorien')); ?></a></li>
-<li><a href="#tabs-3"><?php echo (__('Einträge')); ?></a></li>
-</ul>
-<div id="tabs-1">
-<?php if(!(isset($mode))) $mode = ''; ?>
-<p><?php echo $this->element('AdminMenus', array('menus' => $menus, 'mode' => $mode)); ?></p>
-</div>
-<div id="tabs-2">
-<p><?php echo $this->element('AdminCategories', array('categories' => $categories, 'mode' => $mode)); ?></p>
-</div>
-<div id="tabs-3">
-<p><?php echo $this->element('AdminEntries', array('entries' =>$entries, 'mode' => $mode)); ?></p>
-</div>
-</div>
+<?php
+//		debug($mode);
+//		if(!(isset($mode)) || $mode = '') {$mode = 'overview';}
+//		switch($mode){
+//			case 'edit':
+//				echo "blub";
+//				$showDiv = array('overview' => 'display:none;', 'create' => 'display:none;', 'edit' => 'display:block;');
+//				break;
+//			case 'create':
+//				$showDiv = array('overview' => 'display:none;', 'create' => 'display:block;', 'edit' => 'display:none;');
+//				break;
+//			case 'overview':
+//				$showDiv = array('overview' => 'display:block;', 'create' => 'display:none;', 'edit' => 'display:none;');
+//				break;
+//			}
+//		debug($showDiv);
+	?>
 </div>
