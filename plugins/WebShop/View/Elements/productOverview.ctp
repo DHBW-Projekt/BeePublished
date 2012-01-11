@@ -18,7 +18,7 @@
 		echo '</h3>';
 		
 		echo '<p class="websop_price">'.$product['Products']['price'].' '.$product['Products']['currency'].'</p>';
-		echo $this->element('ShortText', array( 'text' => $product['Products']['description'], 'productID' => $product['Products']['id']));
+		echo $this->element('ShortText', array( 'text' => $product['Products']['description'], 'productID' => $product['Products']['id'], 'url' => $url));
 		
 		echo '</li>';
 		
