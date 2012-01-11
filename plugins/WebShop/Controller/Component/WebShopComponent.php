@@ -52,10 +52,14 @@ class WebShopComponent extends Component {
 	function productOverview($controller, $params){
 		
 		//LOAD model
-		$controller->loadModel("Products");
-		
-		//RETURN products
-		return array('data' => $controller->Products->find('all', array('limit'=>$params['NumberOfEntries'],'order' => array('created' => 'desc'))));
+		$controller->loadModel("Product");
+			
+		//PAGINATION options
+		$controller->paginate = array('order' => array( 'Product.created' => 'desc'),
+							       	  'limit' => $params['NumberOfEntries']);
+	
+		//RETURN results for view
+		return array('data' => $controller->paginate('Product'));
 	}
 	
    /**
@@ -165,6 +169,9 @@ class WebShopComponent extends Component {
 				array_push($productIDs, $positon);
 			}
 		}
+		
+		//SORT
+		sort($productIDs);
 			
 		//WRITE to SESSION		
 		$controller->Session->write('products', $productIDs);
@@ -194,6 +201,9 @@ class WebShopComponent extends Component {
 				break;
 			}
 		}
+		
+		//SORT
+		sort($productIDs);
 	
 		//WRITE to SESSION
 		$controller->Session->write('products', $productIDs);

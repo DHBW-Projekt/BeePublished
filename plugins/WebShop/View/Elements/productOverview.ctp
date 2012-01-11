@@ -6,19 +6,24 @@
 	//CREATE catalog
 	$last_element = (!isset($data)) ? null : end($data);
 	
-	echo '<ol id="websop_productcatalog">';
+	if (isset($this->Paginator) && $this->Paginator->counter('{:pages}') > 1)
+		$start_value = ($this->Paginator->counter('{:page}') - 1) * 5 + 1;
+	else
+		$start_value = 1;
+	
+	echo '<ol start="'.$start_value.'" id="websop_productcatalog">';
 	
 	foreach ((!isset($data)) ? array() : $data as $product){
 		echo '<li>';
 		
-		echo $this->Html->image('/WebShop/img/products/'.$product['Products']['picture'], array('url' => $url.'/webshop/view/'.$product['Products']['id'], 'escape' => False));
+		echo $this->Html->image('/WebShop/img/products/'.$product['Product']['picture'], array('url' => $url.'/webshop/view/'.$product['Product']['id'], 'escape' => False));
 		
 		echo '<h3>';
-		echo $this->Html->link($product['Products']['name'], $url.'/webshop/view/'.$product['Products']['id']);
+		echo $this->Html->link($product['Product']['name'], $url.'/webshop/view/'.$product['Product']['id']);
 		echo '</h3>';
 		
-		echo '<p class="websop_price">'.$product['Products']['price'].' '.$product['Products']['currency'].'</p>';
-		echo $this->element('ShortText', array( 'text' => $product['Products']['description'], 'productID' => $product['Products']['id'], 'url' => $url));
+		echo '<p class="websop_price">'.$product['Product']['price'].' '.$product['Product']['currency'].'</p>';
+		echo $this->element('ShortText', array( 'text' => $product['Product']['description'], 'productID' => $product['Product']['id'], 'url' => $url));
 		
 		echo '</li>';
 		
@@ -32,4 +37,27 @@
 	}
 	
 	echo '</ol>';
+	
+	//PAGINATION numbers
+	if (isset($this->Paginator) && $this->Paginator->counter('{:pages}') > 1) {
+	
+		//Attribute
+		$link_pattern = 'pages/display/';
+	
+		//PREV
+		if($this->Paginator->counter('{:page}') != 1){
+			$prev = $this->Paginator->prev('<<');
+			echo str_replace($link_pattern, '', $prev).' ';
+		}
+	
+		//NUMBERS
+		$numbers = $this->Paginator->numbers();
+		echo str_replace($link_pattern, '', $numbers);
+	
+		//NEXT
+		if($this->Paginator->counter('{:page}') != $this->Paginator->counter('{:pages}')){
+			$next = $this->Paginator->next('>>');
+			echo ' '.str_replace($link_pattern, '', $next);
+		}
+	}
 ?>
