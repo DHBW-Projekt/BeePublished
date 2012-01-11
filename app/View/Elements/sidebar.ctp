@@ -7,7 +7,7 @@
         <div class="button-bar">
             <?php echo $this->Html->image("group.png", array(
             'alt' => __('User Management'),
-            'url' => array('controller' => 'user', 'action' => 'index'),
+            'url' => array('controller' => 'users', 'action' => 'index'),
             'class' => 'small-button',
             'width' => 20,
             'height' => 20
