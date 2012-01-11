@@ -32,6 +32,6 @@
 	
 	//ORDER button
 	if(!empty($data))
-		echo $this->Html->link('Bestellung abschicken', '/webshop/submitOrder');
+		echo $this->Html->link('Bestellung abschicken', $url.'/webshop/submitOrder');
 	
 	echo '</div>';
