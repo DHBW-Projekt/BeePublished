@@ -16,6 +16,7 @@ class NewsEntriesController extends NewsblogAppController {
 			$this->layout = 'overlay';
 			$this->set('pluginId', $pluginId);
 			$this->set('contentId', $contentId);
+			$this->set('webroot', $this->webroot);
 		} else{
 			$data = $this->request->data;
 			$now = date('Y-m-d H:i:s');
@@ -128,6 +129,7 @@ class NewsEntriesController extends NewsblogAppController {
 			
 			$this->set('pluginId', $pluginId);
 			$this->set('contentId', $contentId);
+			$this->set('webroot', $this->webroot);
 			$publishAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Publish');
 			if($publishAllowed){
 				$conditions = array("NewsEntry.content_id" => $contentId, "NewsEntry.published !=" => true, "NewsEntry.deleted !=" => true);

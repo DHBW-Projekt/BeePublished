@@ -5,7 +5,7 @@ $this->Html->css('/newsblog/css/admin', null, array('inline' => false));
 $DateTimeHelper = $this->Helpers->load('Time');
 
 echo $this->element('admin_menu',array('plugin' => 'Newsblog'), array('contentId' => $contentId));
-
+$this->Js->set('webroot', $webroot);
 $publishAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Publish');
 
 if($publishAllowed){

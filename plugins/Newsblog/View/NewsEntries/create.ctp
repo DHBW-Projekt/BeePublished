@@ -7,7 +7,7 @@ $this->Html->script('/ckeditor/adapters/jquery', array('inline' => false));
 $DateTimeHelper = $this->Helpers->load('Time');
 
 echo $this->element('admin_menu',array('plugin' => 'Newsblog'), array('contentId' => $contentId));
-
+$this->Js->set('webroot', $webroot);
 $writeAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Write');
 
 if($writeAllowed){
