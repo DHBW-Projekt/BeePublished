@@ -3,6 +3,9 @@
         <name>StaticText</name>
         <author>Viene Sülzer</author>
         <version>2.0</version>
+        <views>
+        	<view>DisplayText</view>
+        </views>
         <permissions>
             <permission>
                 <role>Author</role>
