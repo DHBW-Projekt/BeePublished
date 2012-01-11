@@ -3,6 +3,15 @@ body {
     background-image: url(../img/bg.jpg);
 }
 
+body.overlay {
+    background-color: #ffffff;
+    background-image: none;
+}
+
+#overlay-header {
+    background-image: url(../img/bg.jpg);
+}
+
 a {
     color: #000000;
 }
