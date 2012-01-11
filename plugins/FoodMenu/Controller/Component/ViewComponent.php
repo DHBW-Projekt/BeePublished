@@ -3,28 +3,43 @@ class ViewComponent extends Component {
 	public $components = array('FoodMenu.FetchFoodMenuEntries');
 	
 	public function getData($controller, $params, $url, $id)	{
+		
+		/*   $url
+		 *     [0] => 'menu'
+    		   [1] => name of the menu
+    		   [2] => id of the menu
+               [3] => 'category'
+               [4] => name of the category
+               [5] => id of the category
+		 * 
+		 */
+		
 		debug($params);
 		debug($url);
  		$data = array();
 		if (sizeof($url) != 0) {
-            switch ($url[0]) {
-                case 'menu':
+            if ($url[0] == 'menu') {
                     $data['Page'] = 'View';
                     $data['Action'] = 'showCategories';
                     if (array_key_exists(2, $url)) {
                     	//check if there is a proper menuID
                     	$mID = $url[2];
-                    	if(is_int($mID)) $menuId = $mID;
+                    	if(is_numeric($mID)) $menuId = $mID;
                     }
-                    break;
-                case 'category':
-                    $data['Page'] = 'View';
-                    $data['Action'] = 'showEntries';
-                    break;
-                default:
-                    $data['Page'] = 'View';
-        	        $data['Action'] = 'showMenus';
-        	        break;
+                    if(sizeof($url)>3) {
+                    	if (array_key_exists(5, $url)) {
+                    		if($url[3]=='category') {
+                    			$data['Page'] = 'View';
+                    			$data['Action'] = 'showEntries';
+                    			$cID = $url[5];
+                    			if(is_numeric($cID)) $categoryId = $cID;
+                    		}
+                    	}
+                    }
+            }
+            else {
+            	$data['Page'] = 'View';
+        	       $data['Action'] = 'showMenus';
             }
         } else {
         	$data['Page'] = 'View';
@@ -47,18 +62,21 @@ class ViewComponent extends Component {
         	case 'showMenus':
 		        if(!(isset($selectedDate))) {
 //		        	$selectedDate = date('Y-m-d');
-					$data['FoodMenuMenu'] = $this->FetchFoodMenuEntries->getMenus($controller);
-		        } else { $data['FoodMenuMenu'] = $this->FetchFoodMenuEntries->getMenus($controller, $selectedDate); }
+					$data['show'] = $this->FetchFoodMenuEntries->getMenus($controller);
+		        } else { $data['show'] = $this->FetchFoodMenuEntries->getMenus($controller, $selectedDate); }
                 break;
             case 'showCategories':
-            	if(isset($data['datepicker'])) {
-            		$data['FoodMenuCategory'] = $this->FetchFoodMenuEntries->getCategories($controller, $menuId);
-            	}              
+            	if(!(isset($selectedDate))) {
+            		$data['show']['FoodMenuCategory'] = $this->FetchFoodMenuEntries->getCategories($controller, $menuId);
+            		$data['show']['FoodMenuMenu'] = $this->FetchFoodMenuEntries->getMenus($controller);
+           			debug($data['show']);
+            	} else {$data['show'] = $this->FetchFoodMenuEntries->getCategories($controller, $menuId, $selectedDate);}
                 break;
             case 'showEntries':
-                $startDate = date('Y-m-d', $data['StartTime']);
-                $menuId = $data['FoodMenuMenu']['id'];
-                break;
+            	if(!(isset($selectedDate))) {
+                	$data['show'] = $this->FetchFoodMenuEntries->getEntries($controller, $menuId, $categoryId);
+            	} else {$data['show'] = $this->FetchFoodMenuEntries->getEntries($controller, $menuId, $categoryId, $selectedDate);}
+            	break;
         }
         return $data;
 	}
