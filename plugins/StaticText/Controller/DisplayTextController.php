@@ -5,6 +5,7 @@
 class DisplayTextController extends StaticTextAppController {
 	//main-function
 	public function admin($contentID){
+		$this->layout = 'overlay';
 		//Load datatables
 		$this->loadModel("ContentValues");
 		$this->loadModel('Plugin');

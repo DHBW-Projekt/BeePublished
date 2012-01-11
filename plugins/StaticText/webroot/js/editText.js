@@ -1,3 +1,7 @@
-$(function() {
-	$( "#tabs" ).tabs();
-	});
+$(document).ready(function () {
+    $('#editTextEditor').ckeditor(function () {
+        },
+        {
+
+        });
+});
