@@ -3,6 +3,15 @@ body {
     background-image: url(../img/bg.jpg);
 }
 
+body.overlay {
+    background-color: #ffffff;
+    background-image: none;
+}
+
+#overlay-header {
+    background-image: url(../img/bg.jpg);
+}
+
 a {
     color: #000000;
 }
@@ -96,4 +105,20 @@ a {
     background-image: url(../img/nav.gif);
     background-position: bottom;
     border: 1px solid #3292DD;
+}
+
+
+.role {
+    border: 1px solid #3292DD;
+}
+
+.users_role {
+    background-color: #3292DD;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.user_detail, .users-placeholder {
+    border: 1px dotted #3292DD;
+    background-color: #ffffff;
 }
