@@ -13,14 +13,13 @@
     echo $this->Html->script('jquery-ui-1.8.16.custom.min');
     echo $this->Html->script('jquery.fancybox-1.3.4.pack');
     echo $this->Html->script('jquery.blockUI');
+    echo $this->Html->script('jquery.cookie');
     echo $scripts_for_layout;
     ?>
 </head>
-<body>
-<div id="menu" style="padding:3px">
-    <?php
-    echo $this->Html->image('beelogo_small.png');
-    ?>
+<body class="overlay">
+<div id="overlay-header">
+    <?php echo $this->Html->image('beelogo_small.png'); ?>
 </div>
 <div id="content">
     <?php echo $this->Session->flash(); ?>

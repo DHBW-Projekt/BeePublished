@@ -32,5 +32,16 @@ class ContentValueManagerComponent extends Component
             $this->ContentValue->save();
         }
     }
+    
+    public function removeContentValues($contentId, $data)
+    {
+    	$this->ContentValue = ClassRegistry::init('ContentValue');
+    	foreach ($data as $key => $value) {
+    		$contentValue = $this->ContentValue->findByContentIdAndKey($contentId, $key);
+    		if ($contentValue) {
+    			$this->ContentValue->delete($contentValue['ContentValue']['id']);
+    		}
+    	}
+    }
 
 }

@@ -22,6 +22,7 @@
     border-style: solid;
     border-color: #3292DD;
     margin-bottom: 10px;
+    table-layout: fixed;
 }
 
 .small_calendar td, .small_calendar th, .calendar td, .calendar th {
@@ -55,14 +56,52 @@
     background-color: #eeeeee;
 }
 
-.calendar_date {
-    text-align: right;
-}
-
 .month_minus {
     float: left;
 }
 
 .month_plus {
     float: right;
+}
+
+.calendar_date {
+    text-align: right;
+    margin-bottom: 5px;
+}
+
+.calendar_entry {
+    font-size: 12px;
+    height: 15px;
+    margin-bottom: 2px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.calendar_entry.notime {
+    border: 1px solid #5CB3FF;
+    background-color: #CFECEC;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin-bottom: 2px;
+}
+
+.calendar_entry_time_start {
+    margin-right: 2px;
+    color: #888888;
+    vertical-align: top;
+    float:left;
+}
+
+col.week {
+    width: 25px;
+}
+
+.calendar_entry_content {
+    text-align: left;
+    overflow: hidden;
+}
+
+.notime .calendar_entry_content {
+    text-align: center;
 }
