@@ -15,12 +15,12 @@ class SubscriptionComponent extends Component {
 			// check if user has subscribed while not registred or logged in and add user_id  in case
 			if ($userAsRecipient && !($userAsRecipient['NewsletterRecipient']['user_id']) && ($user['id'])){
 				$userAsRecipient['NewsletterRecipient']['user_id'] = $user['id'];
-// 				$userAsRecipient['NewsletterRecipient']['email'] = NULL;
 				$controller->NewsletterRecipient->set($userAsRecipient);
 				$controller->NewsletterRecipient->save();
 			};
 			// check if user changed emailaddress
 			if($user['email'] != $userAsRecipient['NewsletterRecipient']['email']){
+				echo '2';
 				$userAsRecipient['NewsletterRecipient']['email'] = $user['email'];
 				$controller->NewsletterRecipient->set($userAsRecipient);
 				$controller->NewsletterRecipient->save();
