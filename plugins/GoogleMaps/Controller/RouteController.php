@@ -1,7 +1,7 @@
 <?php
 
-class LocationController extends GoogleMapsAppController {
-	
+class RouteController extends GoogleMapsAppController {
+
 	var $layout = 'overlay';
 	
 	public function beforeFilter(){
