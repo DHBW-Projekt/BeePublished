@@ -1,10 +1,11 @@
 <div id="foodMenuHeader" style="padding: 10px; width:100%;">
 <?php
- echo '<p>'.__('Bitte wählen Sie einen Tag aus:').'</p>';
- echo $this->Form->button('today', array('onClick' => 'setToday()', 'id' => 'today'));
- echo $this->Form->button('tomorrow', array('onClick' => 'setTomorrow()', 'id' => 'tomorrow'));
- echo 'Date: <input id="datepicker" type="text" size="15"/>';     
-
+ echo '<h1 style="align:left;">'.__('Bill of Fare').'</h1>';
+ echo '<p>';
+ echo $this->Html->link((__('today')), '#', array('onClick' => 'setToday()', 'id' => 'today'));
+ echo '   <input id="datepicker" type="text" size="10"/>   ';     
+ echo $this->Html->link((__('tomorrow')), '#', array('onClick' => 'setTomorrow()', 'id' => 'tomorrow'));
+ echo '</p>';
  echo $this->Html->scriptBlock('$(function() {$( "#datepicker" ).datepicker();});',array('inline'=>'true'));
  ?>          
 </div>
