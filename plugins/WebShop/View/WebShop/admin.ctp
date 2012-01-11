@@ -1,7 +1,12 @@
 <!-- Create new products for the catalog -->
+	<?php
+	//LOAD js
+	 $this->Html->script('/web_shop/js/admin', false); 
 	
-	<?php $this->Html->script('/web_shop/js/admin', false); ?>
-
+	//LOAD style-sheet
+	echo $this->Html->css('/web_shop/css/webshop');
+	?>
+	
 	<div id="tabs">
 		<ul>
 			<li><a href="#tabs-1">Produkte verwalten</a></li>

@@ -8,7 +8,6 @@
 #websop_searchbar{
 	width: 100%;
 	margin-bottom:10px;
-	padding: 2px 10px 2px 10px;
 	background-color:#146EB4;
 	-moz-border-radius:15px;
 	-khtml-border-radius:15px;
@@ -20,6 +19,8 @@
 
 #webshop_cart table{
 	width:100%;
+	margin-top: 5px;
+	margin-bottom: 20px;
 }
 
 #websop_productcatalog li{
@@ -45,9 +46,19 @@
 	margin-left: 3px;
 }
 
+#webshop_product_administration table{
+	margin-top:10px;
+	margin-bottom:20px;
+}
+
+#webshop_product_administration td{
+	padding-right:25px;
+}
+
 .webshop_detailview_image{
 	float: left;
-	width: 300px;
+	width: 275px;
+	margin-bottom: 10px;
 }
 
 .websop_price{
@@ -64,6 +75,7 @@
 }
 
 .webshop_searchfield{
+	padding: 2px 10px 2px 10px;
 	margin-top: 6px;
 	float: left;
 }
@@ -71,6 +83,7 @@
 .webshop_cartfield{
 	float: right;
 	margin-top: 1px;
+	padding: 2px 10px 2px 10px;
 }
 
 .webshop_searchfield label{
@@ -91,4 +104,14 @@
 	margin-top:5px;
 	margin-bottom:5px;
 	font-style:italic;
+}
+
+.webshop_infobox{
+	background-color: #EEEEEE;
+	border: 1px solid #CCCCCC;
+	margin-top: 10px;
+}
+
+.webshop_infobox td{
+	padding: 5px 10px 5px 10px;
 }

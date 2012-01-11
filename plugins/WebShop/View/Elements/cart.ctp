@@ -23,7 +23,7 @@
 			echo '<td>'.$this->Html->link($product['Product']['name'], $url.'/webshop/view/'.$product['Product']['id']).'</td>';
 			echo '<td>'.$product['Product']['price'].'</td>';
 			echo '<td>'.$product['count'].'</td>';
-			echo '<td>'.$this->Html->image('Add.png', array('url' => $url.'/webshop/add/'.$product['Product']['id'], 'class' => "webshop_cart_icon")).$this->Html->image('delete.png',array('url' => $url.'/webshop/remove/'.$product['Product']['id'], 'class' => "webshop_cart_icon")).'</td>';
+			echo '<td>'.$this->Html->image('add2.png', array('url' => $url.'/webshop/add/'.$product['Product']['id'], 'class' => "webshop_cart_icon")).$this->Html->image('remove.png',array('url' => $url.'/webshop/remove/'.$product['Product']['id'], 'class' => "webshop_cart_icon")).'</td>';
 			echo '</tr>';
 		}
 	
@@ -32,6 +32,6 @@
 	
 	//ORDER button
 	if(!empty($data))
-		echo $this->Html->link('Bestellung abschicken', $url.'/webshop/submitOrder');
+		echo $this->Html->link('Bestellung abschicken', $url.'/webshop/submitOrder', array('style' => 'font-weight: bold'));
 	
 	echo '</div>';

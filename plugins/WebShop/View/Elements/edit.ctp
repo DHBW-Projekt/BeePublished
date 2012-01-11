@@ -5,9 +5,6 @@
 	$this->Html->script('/ckeditor/adapters/jquery',false);
 	$this->Html->script('/web_shop/js/admin',false);
 	
-	//LOAD style-sheet
-	echo $this->Html->css('/web_shop/css/webshop');
-	
 	//DIV
 	echo '<div id="webshop_create">';
 	
@@ -36,6 +33,10 @@
 		<tr>
 			<td><?php echo $this->Form->label('Bild:'); ?></td>
 			<td><?php echo $this->Form->file('Products.submittedfile', array('label' => false, 'div' => ''));?></td>
+		</tr>
+		<tr>
+			<td><?php echo $this->Form->label('Aktuelles Bild:'); ?></td>
+			<td><?php echo $this->Html->image('/WebShop/img/products/'.$this->data['Product']['picture'], array('style' => 'width: 100px')); ?></td>
 		</tr>
 	</table>
 	<?php echo $this->Form->submit(__('Speichern', true), array('name' => 'save', 'div' => false)); ?>

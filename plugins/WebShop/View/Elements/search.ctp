@@ -17,7 +17,7 @@
 	if ($result_count > 1 || $result_count == 0) {
 		$count_lbl = 'Suchergebnisse';
 	}else{
-		$count_lbl = 'Suchergebniss';
+		$count_lbl = 'Suchergebnis';
 	}
 
 	echo '<p class="webshop_search_result">';	

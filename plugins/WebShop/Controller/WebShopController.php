@@ -99,7 +99,7 @@ class WebShopController extends AppController {
 		
 		//CREATE folder
 		if(!is_dir ($file_path))
-			mkdir($file_path);
+			@mkdir($file_path);
 			
 		//CHECK filetype
 		$permitted = array('image/gif','image/jpeg','image/pjpeg','image/png');
@@ -140,11 +140,11 @@ class WebShopController extends AppController {
 		}
 	
 		//PRINT message
-		if(!$upload_error){
-			//$controller->Session->setFlash('Artikel wurde angelegt.', 'default', array('class' => 'flash_success'), 'Product');
+		/*if(!$upload_error){
+			$controller->Session->setFlash('Artikel wurde angelegt.', 'default', array('class' => 'flash_success'), 'Product');
 		} else {
-			//$controller->Session->setFlash('Fehler bei der Anlage.', 'default', array('class' => 'flash_failure'), 'Product');
-		}
+			$controller->Session->setFlash('Fehler bei der Anlage.', 'default', array('class' => 'flash_failure'), 'Product');
+		}*/
 	}
 
 	public function beforeFilter(){
