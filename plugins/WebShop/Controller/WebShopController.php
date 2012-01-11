@@ -50,7 +50,7 @@ class WebShopController extends AppController {
 		
 		//REMOVE picture
 		$data = $this->Product->findById($productID);
-		$file_path = WWW_ROOT.'../../plugins/WebShop/webroot/product_img/';
+		$file_path = WWW_ROOT.'../../plugins/WebShop/webroot//img/products/';
 		
 		unlink($file_path.$data['Product']['picture']);
 		
@@ -93,7 +93,7 @@ class WebShopController extends AppController {
 		
 		/* FILE */
 		$file = $controller->request->data['Product']['submittedfile'];
-		$file_path = WWW_ROOT.'../../plugins/WebShop/webroot/product_img/';
+		$file_path = WWW_ROOT.'../../plugins/WebShop/webroot/img/products/';
 		$file_name = str_replace(' ', '_', $file['name']);
 		$upload_error = true;
 		

@@ -18,6 +18,6 @@
 		}
 		
 		echo '<p>'.$short_text.'... ';
-		echo $this->Html->link('mehr',  '/webshop/view/'.$productID);
+		echo $this->Html->link('mehr',  $url.'/webshop/view/'.$productID);
 		echo '</p>';
 	}

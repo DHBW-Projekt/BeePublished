@@ -26,11 +26,20 @@ class WebShopComponent extends Component {
 		
 		//CALL corresponding comp. method
 		if (method_exists($this, $data['Element'])){
-			$data['data'] = call_user_method($data['Element'], $this, $controller, $func_params);
+			$func_data = $this->{$data['Element']}($controller, $func_params);
+			if (isset($func_data['data'])) {
+				$data['data'] = $func_data['data'];
+			}
+			if (isset($func_data['Element'])) {
+				$data['Element'] = $func_data['Element'];
+			}
 		}
 		
 		//RETURN data
 		if ($data != null) {
+			if (!isset($data['data'])) { $data['data'] = null; }
+			if (!isset($data['Element'])) { $data['Element'] = null; }
+			
 			return $data;
 		} else {
 			return __('no data');
@@ -46,7 +55,7 @@ class WebShopComponent extends Component {
 		$controller->loadModel("Products");
 		
 		//RETURN products
-		return $controller->Products->find('all', array('limit'=>$params['NumberOfEntries'],'order' => array('created' => 'desc')));
+		return array('data' => $controller->Products->find('all', array('limit'=>$params['NumberOfEntries'],'order' => array('created' => 'desc'))));
 	}
 	
    /**
@@ -70,7 +79,7 @@ class WebShopComponent extends Component {
 			$controller->Session->write('searchkey', $controller->data['Search']['Suche']);
 			
 			//RETURN results for view
-			return $controller->paginate('Product');
+			return array('data' => $controller->paginate('Product'));
 		}
 		
 		//DATA from session
@@ -85,7 +94,7 @@ class WebShopComponent extends Component {
 			);
 			
 			//RETURN results for view
-			return $controller->paginate('Product');
+			return array('data' => $controller->paginate('Product'));
 		}
 	}
 	
@@ -98,7 +107,7 @@ class WebShopComponent extends Component {
 		$controller->loadModel('Product');
 		
 		//RETURN product
-		return $controller->Product->findById($id);
+		return array('data' => $controller->Product->findById($id));
 	}
 	
    /**
@@ -123,7 +132,7 @@ class WebShopComponent extends Component {
 		}
 		
 		//RETURN products
-		return $data;
+		return array('data' => $data);
 	}
 	
    /**
@@ -161,7 +170,8 @@ class WebShopComponent extends Component {
 		$controller->Session->write('products', $productIDs);
 		
 		//REDIRECT to cart
-		$controller->redirect('/webshop/cart');
+		$data = $this->cart($controller);
+		return array('Element' => 'cart', 'data' => $data['data']);
 	}
 	
    /**
@@ -189,7 +199,8 @@ class WebShopComponent extends Component {
 		$controller->Session->write('products', $productIDs);
 	
 		//REDIRECT to cart
-		$controller->redirect('/webshop/cart');
+		$data = $this->cart($controller);
+		return array('Element' => 'cart', 'data' => $data['data']);
 	}
 	
 	/**
@@ -204,6 +215,7 @@ class WebShopComponent extends Component {
 		$productIDs = $controller->Session->read('products');
 		
 		//BUILD mail
+		App::uses('CakeEmail', 'Network/Email');
 		$email = new CakeEmail();
 		$email->template('order', 'email')
 			  ->emailFormat('html')
@@ -220,6 +232,7 @@ class WebShopComponent extends Component {
 		$controller->Session->write('products', null);
 		
 		//REDIRECT to cart
-		$controller->redirect('/webshop/cart');
+		$data = $this->cart($controller);
+		return array('Element' => 'cart', 'data' => $data['data']);
 	}	
 }

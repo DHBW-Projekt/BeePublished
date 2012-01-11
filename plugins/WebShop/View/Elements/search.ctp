@@ -2,7 +2,7 @@
 <?php
 
 	//INTEGRATE searchbar
-	echo $this->element('SearchBar');
+	echo $this->element('SearchBar', array('url' => $url));
 	
 	//TITLE
 	echo '<div id ="websop_productcatalog">';
@@ -32,15 +32,15 @@
 	foreach ((!isset($data)) ? array() : $data as $product){
 		echo '<li>';
 		
-		echo $this->Html->image('/WebShop/product_img/'.$product['Product']['picture'], array('url' => '/webshop/view/'.$product['Product']['id'], 'escape' => False));
+		echo $this->Html->image('/WebShop/img/products/'.$product['Product']['picture'], array('url' => $url.'/webshop/view/'.$product['Product']['id'], 'escape' => False));
 	
 		echo '<h3>';
-		echo $this->Html->link($product['Product']['name'], '/webshop/view/'.$product['Product']['id']);
+		echo $this->Html->link($product['Product']['name'], $url.'/webshop/view/'.$product['Product']['id']);
 		echo '</h3>';
 	
 		echo '<p class="websop_price">'.$product['Product']['price'];
 		echo ' '.$product['Product']['currency'].'</p>';
-		echo $this->element('ShortText', array( 'text' => $product['Product']['description'], 'productID' => $product['Product']['id']));
+		echo $this->element('ShortText', array( 'text' => $product['Product']['description'], 'productID' => $product['Product']['id'], 'url' => $url));
 		echo '<br style="clear:left">';
 		echo '</li>';
 		
