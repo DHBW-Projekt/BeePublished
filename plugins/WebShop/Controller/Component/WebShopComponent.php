@@ -55,6 +55,10 @@ class WebShopComponent extends Component {
 		
 		//LOAD model
 		$controller->loadModel("Product");
+		
+		//Default NumberOfEntries
+		if(!isset($params['NumberOfEntries']))
+			$params['NumberOfEntries'] = 5;
 			
 		//PAGINATION options
 		$controller->paginate = array('order' => array( 'Product.created' => 'desc'),
