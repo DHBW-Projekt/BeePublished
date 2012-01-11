@@ -17,11 +17,9 @@
     echo $scripts_for_layout;
     ?>
 </head>
-<body>
-<div id="menu" style="padding:3px">
-    <?php
-    echo $this->Html->image('beelogo_small.png');
-    ?>
+<body class="overlay">
+<div id="overlay-header">
+    <?php echo $this->Html->image('beelogo_small.png'); ?>
 </div>
 <div id="content">
     <?php echo $this->Session->flash(); ?>
