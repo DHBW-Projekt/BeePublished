@@ -204,6 +204,7 @@ class WebShopComponent extends Component {
 		$productIDs = $controller->Session->read('products');
 		
 		//BUILD mail
+		App::uses('CakeEmail', 'Network/Email');
 		$email = new CakeEmail();
 		$email->template('order', 'email')
 			  ->emailFormat('html')

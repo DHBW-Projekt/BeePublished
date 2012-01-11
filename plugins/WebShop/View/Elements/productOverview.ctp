@@ -11,7 +11,7 @@
 	foreach ((!isset($data)) ? array() : $data as $product){
 		echo '<li>';
 		
-		echo $this->Html->image('/WebShop/product_img/'.$product['Products']['picture'], array('url' => '/webshop/view/'.$product['Products']['id'], 'escape' => False));
+		echo $this->Html->image('/WebShop/img/products/'.$product['Products']['picture'], array('url' => '/webshop/view/'.$product['Products']['id'], 'escape' => False));
 		
 		echo '<h3>';
 		echo $this->Html->link($product['Products']['name'], '/webshop/view/'.$product['Products']['id']);
