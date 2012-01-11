@@ -1,5 +1,10 @@
 <!-- Create new products for the catalog -->
 <?php 
+	//LOAD js
+	$this->Html->script('/ckeditor/ckeditor',false);
+	$this->Html->script('/ckeditor/adapters/jquery',false);
+	$this->Html->script('/WebShop/js/admin',false);
+	
 	//TITLE
 	echo '<h2>Artikel erstellen</h2>';
 	
@@ -59,4 +64,6 @@
 			</td>
 		</tr>
 	</table>
-<?php echo $this->Form->end('Speichern'); ?>
+	<?php echo $this->Form->submit(__('Speichern', true), array('name' => 'save', 'div' => false)); ?>
+	<?php echo $this->Form->submit(__('Abbrechen', true), array('name' => 'cancel', 'div' => false)); ?>
+<?php echo $this->Form->end(); ?>

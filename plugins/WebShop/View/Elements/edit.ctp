@@ -1,5 +1,9 @@
 <!-- Create new products for the catalog -->
 <?php 
+	//LOAD js
+	$this->Html->script('/ckeditor/ckeditor',false);
+	$this->Html->script('/ckeditor/adapters/jquery',false);
+	
 	//TITLE
 	echo '<h2>Artikel bearbeiten</h2>';
 
@@ -8,7 +12,7 @@
 	//echo $this->Html->div('validation_error',$validationErrors);
 	echo $this->Session->flash('Product');
 	
-	echo $this->Form->create('Products', array('enctype' => 'multipart/form-data', 'url' => array('controller' => 'WebShop', 'action' => 'edit', $contentID, $this->data['Products']['id']))); ?>
+	echo $this->Form->create('Product', array('enctype' => 'multipart/form-data', 'url' => array('controller' => 'WebShop', 'action' => 'edit', $contentID, $this->data['Product']['id']))); ?>
 	<table>
 		<tr>
 			<td>
@@ -59,4 +63,6 @@
 			</td>
 		</tr>
 	</table>
-<?php echo $this->Form->end('Speichern'); ?>
+	<?php echo $this->Form->submit(__('Speichern', true), array('name' => 'save', 'div' => false)); ?>
+	<?php echo $this->Form->submit(__('Abbrechen', true), array('name' => 'cancel', 'div' => false)); ?> 
+<?php echo $this->Form->end(); ?>

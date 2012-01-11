@@ -1,56 +1,45 @@
 <?php
 
 class WebShopController extends AppController {
-	
-	public $components = array('ContentValueManager');
+
+	var $components = array('ContentValueManager');
+	var $uses = array('Product'); 
 	var $layout = 'overlay';
-	var $viewNames = array('Product Overview');
-	var $views = array('0' => 'productOverview');
 	
 	public function admin($contentID){
-		$this->loadModel("Products");
-		
-		$contentVars = $this->ContentValueManager->getContentValues($contentID);
-		
-		if (isset($contentVars['DefaultView'])) {
-			$contentValues['ContentValues']['DefaultView'] = array_search($contentVars['DefaultView'], $this->views);
-		}
-		if (isset($contentVars['NumberOfEntries'])) {
-			$contentValues['ContentValues']['NumberOfEntries'] = $contentVars['NumberOfEntries'];
-		} 		
-		if (isset($contentValues)) {
-			$this->data = $contentValues;
-		}
-		
-		$this->set('products', $this->Products->find('all'));
-		$this->set('viewNames', $this->viewNames);
+		$this->setContentVar($contentID);
+		$this->set('products', $this->Product->find('all'));
 		$this->set('productAdminView', 'productsAdministration');
 		$this->set('contentID', $contentID);
 	}
 	
 	public function create($contentID){
 		if (empty($this->data)) {
+			$this->setContentVar($contentID);
 			$this->set('productAdminView', "create");
 			$this->set('contentID', $contentID);
 			$this->render("admin");
 		} else {
-			$this->createProduct($this);
+			if (isset($this->params['data']['save'])) {
+				$this->createProduct($this);
+			}
 			$this->redirect(array('action' => 'admin', $contentID));
 		}
 	}
 	
 	public function edit($contentID, $productID=null){
-		$this->loadModel("Products");
-		
-		$this->Products->id = $productID;
-		
+		$this->Product->id = $productID;
+
 		if (!empty($this->data)) {
-			$this->Products->set($this->Products->read());
-			$this->Products->set($this->data);
-			$this->Products->save();
+			if (isset($this->params['data']['save'])) {
+				$this->Product->set($this->Product->read());
+				$this->Product->set($this->data);
+				$this->Product->save();
+			}
 			$this->redirect(array('action' => 'admin', $contentID));
 		} else {
-			$this->data = $this->Products->read();	
+			$this->setContentVar($contentID);
+			$this->data = $this->Product->read();
 			$this->set('productAdminView', "edit");
 			$this->set('contentID', $contentID);
 			$this->render("admin");
@@ -58,25 +47,34 @@ class WebShopController extends AppController {
 	}
 	
 	public function remove($contentID, $productID){
-		$this->loadModel("Products");
 		
-		$this->Products->delete($productID);
+		//REMOVE picture
+		$data = $this->Product->findById($productID);
+		$file_path = WWW_ROOT.'../../plugins/WebShop/webroot//img/products/';
+		
+		unlink($file_path.$data['Product']['picture']);
+		
+		//REMOVE db entry
+		$this->Product->delete($productID);
 		
 		$this->redirect(array('action' => 'admin', $contentID));
 	}
 	
 	public function setContentValues($contentID) {
 		if (!empty($this->data)) {
-			if (isset($this->data['ContentValues']['DefaultView'])) {
-				$contentValues['DefaultView'] = $this->views[$this->data['ContentValues']['DefaultView']];
-			}
-
 			if (isset($this->data['ContentValues']['NumberOfEntries'])) {
-				$contentValues['NumberOfEntries'] = $this->data['ContentValues']['NumberOfEntries'];
+				$this->ContentValueManager->saveContentValues($contentID, $this->data['ContentValues']['NumberOfEntries']);
 			}
 			
-			$this->ContentValueManager->saveContentValues($contentID, $contentValues);
 			$this->redirect(array('action' => 'admin', $contentID));
+		}
+	}
+	
+	function setContentVar($contentID) {
+		$contentVars = $this->ContentValueManager->getContentValues($contentID);
+		
+		if (isset($contentVars['NumberOfEntries'])) {
+			$this->set('numberOfEntries', $contentVars['NumberOfEntries']);
 		}
 	}
 	
@@ -84,25 +82,24 @@ class WebShopController extends AppController {
 	* Create new products.
 	*/
 	function createProduct($controller){
-	
-		//LOAD model
-		$controller->loadModel('Product');
-	
+		
 		//CHECK request
 		if (!$controller->request->is('post'))
-		return;
+			return;
 	
 		//VALIDATE data
-		if(!$controller->Product->validates()){
+		if(!$controller->Product->validates())
 			return;
-		}
-			
-	
+		
 		/* FILE */
 		$file = $controller->request->data['Product']['submittedfile'];
-		$file_path = WWW_ROOT.'../../plugins/WebShop/webroot/img/';
+		$file_path = WWW_ROOT.'../../plugins/WebShop/webroot/img/products/';
 		$file_name = str_replace(' ', '_', $file['name']);
 		$upload_error = true;
+		
+		//CREATE folder
+		if(!is_dir ($file_path))
+			mkdir($file_path);
 			
 		//CHECK filetype
 		$permitted = array('image/gif','image/jpeg','image/pjpeg','image/png');

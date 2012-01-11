@@ -8,7 +8,7 @@
 	
 	<div id="tabs">
 		<ul>
-			<li><a href="#tabs-1">Producte verwalten</a></li>
+			<li><a href="#tabs-1">Produkte verwalten</a></li>
 			<li><a href="#tabs-2">Einstellungen</a></li>
 		</ul>
 		<div id="tabs-1">

@@ -19,11 +19,11 @@
 		//GET all products
 		foreach ($data as $product){
 			echo '<tr>';
-			echo '<td>'.$this->Html->image('/WebShop/img/'.$product['Product']['picture'], array('class' => "webshop_cart_product_img")).'</td>';
+			echo '<td>'.$this->Html->image('/WebShop/img/products/'.$product['Product']['picture'], array('class' => "webshop_cart_product_img")).'</td>';
 			echo '<td>'.$this->Html->link($product['Product']['name'], '/webshop/view/'.$product['Product']['id']).'</td>';
 			echo '<td>'.$product['Product']['price'].'</td>';
 			echo '<td>'.$product['count'].'</td>';
-			echo '<td>'.$this->Html->image('/WebShop/img/Add.png', array('url' => '/webshop/add/'.$product['Product']['id'], 'class' => "webshop_cart_icon")).$this->Html->image('/WebShop/img/Minus.png',array('url' => '/webshop/remove/'.$product['Product']['id'], 'class' => "webshop_cart_icon")).'</td>';
+			echo '<td>'.$this->Html->image('Add.png', array('url' => '/webshop/add/'.$product['Product']['id'], 'class' => "webshop_cart_icon")).$this->Html->image('delete.png',array('url' => '/webshop/remove/'.$product['Product']['id'], 'class' => "webshop_cart_icon")).'</td>';
 			echo '</tr>';
 		}
 	
