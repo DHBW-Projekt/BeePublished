@@ -5,7 +5,12 @@
     			<?php echo $this->Form->label('Produktanzahl:'); ?>
     		</td>
     		<td>
-    			<?php echo $this->Form->input('NumberOfEntries', array('label' => false, 'value' => $numberOfEntries)); ?>
+    			<?php
+    				if (!isset($numberOfEntries)) {
+    					$numberOfEntries = "";
+    				} 
+    				echo $this->Form->input('NumberOfEntries', array('label' => false, 'value' => $numberOfEntries)); 
+    			?>
     		</td>
     	</tr>
     	<tr>
