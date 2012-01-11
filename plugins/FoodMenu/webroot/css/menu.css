@@ -13,8 +13,25 @@
 
  div.buttonlink {
  	float:none;
+ 	height:5em;
  }
- .buttonlink a {
+ 
+#buttonlink {
+	float:none;
+    margin-left:5px;
+    margin-right:5px;
+	}
+
+#buttonlink ul {
+	list-style:none;
+	}
+
+#buttonlink li {
+        display:inline;
+        float:none;
+}
+
+#buttonlink a {
     border-radius:4px;
     background:none repeat scroll 0 0 #eee;
     border:1px solid #999;
@@ -22,19 +39,4 @@
     padding:4px;
     color:#000;
     text-decoration:none;
-    float:left;
   }
-ul.buttonlink li span{
-    display:inline;
-    float:left;
-    }
- 
-ul.buttonlink li{
-	list-style: none outside none;
-    display:inline;
-    float:left;
-    }
-    
-ul.buttonlink {
-    list-style: none outside none;
-    }

@@ -3,10 +3,10 @@
     $this->Html->css('/food_menu/css/menu');
 	echo $this->element('admin_menu');
 	echo $this->Form->create('FoodMenuMenu', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenu', 'action' => 'deleteMultiple')));
-	echo '<div>';
-	echo '<ul id="buttonlink" class="buttonlink">';
-	echo '<li class="buttonlink">'.$this->Html->link((__('New Menu')), array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenu', 'action' => 'create'), array('class' => 'buttonlink')).'</li>
-		  <li class="buttonlink">'.$this->Html->link((__('Delete Selection')), '#', array('onClick' => 'document.forms["FoodMenuMenuIndexForm"].submit()', 'class' => 'buttonlink')).'</li>';
+	echo '<div width="100%" id="buttonlink" class="buttonlink">';
+	echo '<ul class="buttonlink">';
+	echo '<li>'.$this->Html->link((__('New Menu')), array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenu', 'action' => 'create'), array('class' => 'buttonlink')).'</li>
+		  <li>'.$this->Html->link((__('Delete Selection')), '#', array('onClick' => 'document.forms["FoodMenuMenuIndexForm"].submit()', 'class' => 'buttonlink')).'</li>';
 	echo '</ul><br />';
 	echo '</div>';
 	?>

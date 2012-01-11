@@ -13,10 +13,7 @@
 	if(!(isset($categories))) $categories = '';
 	if(!(isset($entries))) $entries = '';
 	
-	//echo $this->element('MenuLinks', array('data' => $data, 'categories' => $categories, 'entries' => $entries));
-	
 	/* initial call, $data is set by component */
-    //debug($data);
 	if (isset($data)) {
 		echo '<div id="foodMenuMenu" style="width:100%; height:30px">';
 		echo '<ul id="FoodMenuMenu">';
