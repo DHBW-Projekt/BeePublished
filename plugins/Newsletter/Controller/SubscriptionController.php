@@ -129,7 +129,7 @@ class SubscriptionController extends AppController {
 	public function deleteNewsletter($id){
 		$this->NewsletterLetter->delete($id);
 		$this->redirect($this->referer());
-	}
+	} 
 	
 	public function sendNewsletter($newsletter_id) {
 		//debug($newsletter['NewsletterLetter']['content']);
