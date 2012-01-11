@@ -30,35 +30,36 @@
 			echo '<div class="writeNewsContainer">';
 			
 			//create form
-			echo $this->Form->create('NewsEntry', array('url' => array('plugin' => 'Newsblog', 'controller' => 'ShowNews', 'action' => 'saveNewsData')));
+			echo $this->Form->create('NewsEntry', array('url' => array('plugin' => 'Newsblog', 'controller' => 'NewsEntries', 'action' => 'create')));
 			//create title input
 			echo $this->Form->input('NewsEntry.title', array(
 				'div' => 'writeNewsTitle',
-				'label' => false,
+				'label' => 'Title',
 				'name' => 'title'
 			));
 			//create entrytext textarea
-			echo $this->Form->textarea('NewsEntry.text', array(
+			echo $this->Form->input('NewsEntry.text', array(
 				'div' => 'writeNewsBody',
 				'label' => false,
 				'id' => 'writeNewsTextEditor',
 				'name' => 'text'
 			));
 			//create validFrom input
-			echo $this->Form->text(null, array(
+			echo $this->Form->text('NewsEntry.validFrom', array(
 				'div' => 'writeValidConfiguration',
 				'id' => 'nbValidFromDatepicker',
+				'label' => 'Valid from:',
 				'name' => 'validFrom',
-				'class' => 'datepicker',
-				'label' => 'Valid from:'
+				'class' => 'datepicker'
 			));
 			//create validTo input
-			echo $this->Form->text(null, array(
+			echo $this->Form->text('NewsEntry.validTo', array(
 				'div' => 'writeValidConfiguration',
 				'id' => 'nbValidToDatepicker',
+				'label' => 'Valid to:',
 				'name' => 'validTo',
-				'class' => 'datepicker',
-				'label' => 'Valid to:'
+				'class' => 'datepicker'
+				
 			));
 			//hidden fields
 			//contentid
@@ -101,7 +102,7 @@
 						echo '<div class="newsentry_publish_buttons">';
 							echo $this->Html->link(
 								$this->Html->image('check.png', array('class' => 'newsentry_publish_icon', 'alt' => 'Publish')),
-								array('plugin' => 'Newsblog', 'controller' => 'ShowNews', 'action' => 'publishNews', $id),
+								array('plugin' => 'Newsblog', 'controller' => 'NewsEntries', 'action' => 'publish', $id),
 								array('class' => 'newsentry_publish_link', 'escape' => false)
 							);
 						echo '</div>';

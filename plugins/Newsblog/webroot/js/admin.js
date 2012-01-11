@@ -14,7 +14,10 @@ $(document).ready(function () {
 	$('#nbValidFromDatepicker').datepicker(
 		{
 			autoSize: true,
-			altFormat: 'yyyy-mm-dd',
+			formatDate: 'yyyy-mm-dd',
+			showOn: "button",
+			buttonImage: "calendar.png",
+			buttonImageOnly: true,
 			showOptions: {direction: 'down'}
 		}
 	);
@@ -22,7 +25,10 @@ $(document).ready(function () {
 	$('#nbValidToDatepicker').datepicker(
 		{
 			autoSize: true,
-			altFormat: 'yyyy-mm-dd',
+			formatDate: 'yyyy-mm-dd',
+			showOn: "button",
+			buttonImage: "calendar.png",
+			buttonImageOnly: true,
 			showOptions: {direction: 'down'}
 		}
 	);

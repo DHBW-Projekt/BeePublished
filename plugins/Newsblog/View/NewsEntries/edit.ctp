@@ -17,14 +17,11 @@
 	$validToYear = $validToPieces[0];
 	$validToMonth = $validToPieces[1];
 	$validToDay = $validToPieces[2];
-	
-	$this->Js->set('newsentryid', $newsentry['NewsEntry']['id']);
-	$this->Js->set('contentid', $newsentry['NewsEntry']['content_id']);
 ?>
 <div class="nbEntryContainer">
 	<?php 
 	//create form
-	echo $this->Form->create('NewsEntry', array('url' => array('plugin' => 'Newsblog', 'controller' => 'ShowNews', 'action' => 'saveNewsData')));
+	echo $this->Form->create('NewsEntry', array('url' => array('plugin' => 'Newsblog', 'controller' => 'NewsEntries', 'action' => 'edit')));
 	//create title input
 	echo $this->Form->input('NewsEntry.title', array(
 		'div' => 'editNewsTitle',
@@ -59,11 +56,6 @@
 		'value'=> $newsentry['NewsEntry']['validTo']
 	));
 	//hidden fields
-	//contentid
-	echo $this->Form->hidden(null,array(
-		'name' => 'contentId',
-		'value' => $newsentry['NewsEntry']['content_id']
-	));
 	//action set to editNews
 	echo $this->Form->hidden(null,array(
 		'name' => 'action',

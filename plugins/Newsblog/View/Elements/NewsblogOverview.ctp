@@ -60,14 +60,14 @@
 			if($editAllowed){
 				echo $this->Html->link(
 					$this->Html->image('edit.png', array('class' => 'newsentry_edit_button_icon', 'alt' => 'Edit')),
-					array('plugin' => 'Newsblog', 'controller' => 'ShowNews', 'action' => 'editNews', $newsEntryId),
+					array('plugin' => 'Newsblog', 'controller' => 'NewsEntries', 'action' => 'edit', $newsEntryId),
 					array('escape' => false, 'class' => 'overlay')
 				);
 			}
 			if($deleteAllowed){
 				echo $this->Html->link(
 					$this->Html->image('delete.png', array('class' => 'newsentry_delete_button_icon', 'alt' => 'Delete')),
-					array('plugin' => 'Newsblog', 'controller' => 'ShowNews', 'action' => 'deleteNews', $newsEntryId),
+					array('plugin' => 'Newsblog', 'controller' => 'NewsEntries', 'action' => 'delete', $newsEntryId),
 					array('escape' => false),
 					"Do you really would like to delete this entry?"
 				);
