@@ -8,6 +8,8 @@
 	
 	$writeAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Write');
 	$publishAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Publish');
+	
+	$this->Js->set('webroot', $this->request->webroot);
 ?>
 
 <div id="admin_newsblog" class="admin_newsblog_container">
@@ -34,6 +36,7 @@
 			//create title input
 			echo $this->Form->input('NewsEntry.title', array(
 				'div' => 'writeNewsTitle',
+				'label' => false,
 				'label' => 'Title',
 				'name' => 'title'
 			));
@@ -45,23 +48,34 @@
 				'name' => 'text'
 			));
 			//create validFrom input
-			echo $this->Form->text('NewsEntry.validFrom', array(
+			echo $this->Form->text(null, array(
 				'div' => 'writeValidConfiguration',
 				'id' => 'nbValidFromDatepicker',
 				'label' => 'Valid from:',
-				'name' => 'validFrom',
-				'class' => 'datepicker'
+				'name' => 'validFromUI',
+				'class' => 'datepicker',
+				'disabled' => true
 			));
 			//create validTo input
-			echo $this->Form->text('NewsEntry.validTo', array(
+			echo $this->Form->text(null, array(
 				'div' => 'writeValidConfiguration',
 				'id' => 'nbValidToDatepicker',
 				'label' => 'Valid to:',
-				'name' => 'validTo',
-				'class' => 'datepicker'
+				'name' => 'validToUI',
+				'class' => 'datepicker',
+				'disabled' => true
 				
 			));
 			//hidden fields
+			echo $this->Form->hidden(null,array(
+				'id' => 'validFromDB',
+				'name' => 'validFrom'
+			));
+			echo $this->Form->hidden(null,array(
+				'id' => 'validToDB',
+				'name' => 'validTo'
+			));
+			
 			//contentid
 			echo $this->Form->hidden(null,array(
 				'name' => 'contentId',

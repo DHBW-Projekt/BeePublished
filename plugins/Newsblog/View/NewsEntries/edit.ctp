@@ -17,6 +17,8 @@
 	$validToYear = $validToPieces[0];
 	$validToMonth = $validToPieces[1];
 	$validToDay = $validToPieces[2];
+	
+	$this->Js->set('webroot', $this->request->webroot);
 ?>
 <div class="nbEntryContainer">
 	<?php 
@@ -30,7 +32,7 @@
 		'value'=> $newsentry['NewsEntry']['title']
 	));
 	//create entrytext textarea
-	echo $this->Form->textarea('NewsEntry.text', array(
+	echo $this->Form->input('NewsEntry.text', array(
 		'div' => 'editNewsBody',
 		'label' => false,
 		'id' => 'editNewsTextEditor',
@@ -41,7 +43,7 @@
 	echo $this->Form->text(null, array(
 		'div' => 'editNewsValidConfig',
 		'id' => 'nbValidFromDatepicker',
-		'name' => 'validFrom',
+		'name' => 'validFromUI',
 		'class' => 'datepicker',
 		'label' => 'Valid from:',
 		'value'=> $newsentry['NewsEntry']['validFrom']
@@ -50,12 +52,20 @@
 	echo $this->Form->text(null, array(
 		'div' => 'editNewsValidConfig',
 		'id' => 'nbValidToDatepicker',
-		'name' => 'validTo',
+		'name' => 'validToUI',
 		'class' => 'datepicker',
 		'label' => 'Valid to:',
 		'value'=> $newsentry['NewsEntry']['validTo']
 	));
 	//hidden fields
+	echo $this->Form->hidden(null,array(
+		'id' => 'validFromDB',
+		'name' => 'validFrom'
+	));
+	echo $this->Form->hidden(null,array(
+		'id' => 'validToDB',
+		'name' => 'validTo'
+	));
 	//action set to editNews
 	echo $this->Form->hidden(null,array(
 		'name' => 'action',

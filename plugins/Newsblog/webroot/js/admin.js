@@ -14,9 +14,12 @@ $(document).ready(function () {
 	$('#nbValidFromDatepicker').datepicker(
 		{
 			autoSize: true,
-			formatDate: 'yyyy-mm-dd',
-			showOn: "button",
-			buttonImage: "calendar.png",
+			altField: '#validFromDB',
+			altFormat: 'yy-mm-dd',
+			showOn: 'button',
+			defaultDate: new Date(),
+			minDate: new Date(),
+			buttonImage: window.app.webroot+"img/calendar.png",
 			buttonImageOnly: true,
 			showOptions: {direction: 'down'}
 		}
@@ -25,9 +28,11 @@ $(document).ready(function () {
 	$('#nbValidToDatepicker').datepicker(
 		{
 			autoSize: true,
-			formatDate: 'yyyy-mm-dd',
+			altField: '#validToDB',
+			altFormat: 'yy-mm-dd',
+			minDate: new Date(),
 			showOn: "button",
-			buttonImage: "calendar.png",
+			buttonImage: window.app.webroot+"img/calendar.png",
 			buttonImageOnly: true,
 			showOptions: {direction: 'down'}
 		}

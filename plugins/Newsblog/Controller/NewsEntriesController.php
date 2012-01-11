@@ -9,7 +9,6 @@ class NewsEntriesController extends NewsblogAppController {
 	public $uses = array('Newsblog.NewsEntry');
 	
 	public function create(){
-		var_dump($this->request->data);
 		$pluginId = $this->getPluginId();
 		$writeAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Write');
 		$userId = $this->Auth->user('id');
