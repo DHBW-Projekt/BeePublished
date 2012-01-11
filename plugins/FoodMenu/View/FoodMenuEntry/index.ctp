@@ -7,7 +7,7 @@
 		echo '<div id="buttonlink" class="buttonlink">';
 		echo '<ul class="buttonlink">';
 		echo '<li class="buttonlink">'.$this->Html->link((__('New Entry')), array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuEntry', 'action' => 'create'), array('class' => 'buttonlink')).'</li>
-			  <li class="buttonlink">'.$this->Html->link((__('Delete Selection')), '#', array('onClick' => 'document.forms["FoodMenuEntryViewEntryForm"].submit()', 'class' => 'buttonlink')).'</li>';
+			  <li class="buttonlink">'.$this->Html->link((__('Delete Selection')), '#', array('onClick' => 'document.forms["FoodMenuEntryIndexForm"].submit()', 'class' => 'buttonlink')).'</li>';
 		echo '</ul><br />';
 		echo '</div>';
 		?>
