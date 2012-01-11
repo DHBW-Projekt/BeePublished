@@ -19,7 +19,7 @@
 // 	echo $this->Html->scriptBlock('$( ".selector" ).tabs({ cookie: { expires: 1 } });');
 ?>
 <?php
-	echo $this->element('PluginMenu');
+	echo $this->element('admin_menu');
 ?>
 <div class="content">
 

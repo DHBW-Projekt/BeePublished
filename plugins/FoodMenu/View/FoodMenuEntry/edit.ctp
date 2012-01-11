@@ -1,6 +1,6 @@
 <?php
-	echo $this->element('PluginMenu');
-	echo $this->Form->create('FoodMenuEntry', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'View', 'action' => 'editEntry')));
+	echo $this->element('admin_menu');
+	echo $this->Form->create('FoodMenuEntry', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuEntry', 'action' => 'edit')));
 	echo $this->Form->hidden('id', array('value' => $entry['FoodMenuEntry']['id']));
 	echo '<table>';
 	echo '<tr>';

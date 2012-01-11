@@ -1,6 +1,6 @@
 <?php
-	echo $this->element('PluginMenu');
-	echo $this->Form->create('FoodMenuCategory', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'View', 'action' => 'editCategory')));
+	echo $this->element('admin_menu');
+	echo $this->Form->create('FoodMenuCategory', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuCategory', 'action' => 'edit')));
 	echo $this->Form->hidden('id', array('value' => $category['FoodMenuCategory']['id']));
 	echo $this->Session->flash();
 	echo '<table>';
