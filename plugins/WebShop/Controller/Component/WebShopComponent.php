@@ -26,7 +26,7 @@ class WebShopComponent extends Component {
 		
 		//CALL corresponding comp. method
 		if (method_exists($this, $data['Element'])){
-			$func_data = call_user_method($data['Element'], $this, $controller, $func_params);
+			$func_data = $this->{$data['Element']}($controller, $func_params);
 			if (isset($func_data['data'])) {
 				$data['data'] = $func_data['data'];
 			}
