@@ -1,11 +1,12 @@
 <div style="float:none; width:100%">
 <?php
+    $this->Html->css('/food_menu/css/menu');
 	echo $this->element('PluginMenu');
 	echo $this->Form->create('FoodMenuMenu', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'View', 'action' => 'deleteMenus')));
-	echo '<div id="buttonlink" class="buttonlink">';
-	echo '<ul class="buttonlink">';
+	echo '<div>';
+	echo '<ul id="buttonlink" class="buttonlink">';
 	echo '<li class="buttonlink">'.$this->Html->link((__('New Menu')), array('plugin' => 'FoodMenu', 'controller' => 'View', 'action' => 'addMenu'), array('class' => 'buttonlink')).'</li>
-			<li class="buttonlink">'.$this->Html->link((__('Delete Selection')), '#', array('onClick' => 'document.forms["FoodMenuMenuViewMenusForm"].submit()', 'class' => 'buttonlink')).'</li>';
+		  <li class="buttonlink">'.$this->Html->link((__('Delete Selection')), '#', array('onClick' => 'document.forms["FoodMenuMenuViewMenusForm"].submit()', 'class' => 'buttonlink')).'</li>';
 	echo '</ul><br />';
 	echo '</div>';
 	?>

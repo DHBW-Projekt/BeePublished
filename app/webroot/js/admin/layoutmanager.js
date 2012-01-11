@@ -303,8 +303,6 @@ function setSettingOptions(container, id) {
         $(".setting_button", this).css("display", "none");
     });
     $("a#overlay").fancybox({
-    	'height':'90%',
-    	'width':'90%',
         'type':'iframe',
         width:'90%',
         height:'90%',

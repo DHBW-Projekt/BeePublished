@@ -15,14 +15,17 @@ class ViewController extends AppController {
     }
 
 	public function admin( $contentID ) {
+//		$menus = $this->FoodMenuMenu->find('all');
+//		$this->set('menus', $menus);
+//		
+//		$categories = $this->FoodMenuCategory->find('all');
+//		$this->set('categories', $categories);
+//		
+//		$entries = $this->FoodMenuEntry->find('all');
+//		$this->set('entries', $entries);
 		$menus = $this->FoodMenuMenu->find('all');
 		$this->set('menus', $menus);
-		
-		$categories = $this->FoodMenuCategory->find('all');
-		$this->set('categories', $categories);
-		
-		$entries = $this->FoodMenuEntry->find('all');
-		$this->set('entries', $entries);
+		$this->render('/Admin/ViewMenus');
 	}
 	
 	public function viewMenus() {

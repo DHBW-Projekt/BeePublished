@@ -1,6 +1,6 @@
 <?php
 	echo $this->Html->css('/css/jquery-ui/jquery-ui-1.8.16.custom');
-	echo $this->Html->css('food_menu/css/menu');
+    $this->Html->css('/food_menu/css/menu', NULL, array('inline' => false));
 	echo $this->Html->script('/food_menu/js/foodmenu', true); 
 	echo $this->Html->script('/food_menu/js/jquery.cookie', true);
 	echo $this->Html->script('/js/jquery-1.6.2.min.js', true); 

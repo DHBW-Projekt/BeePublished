@@ -1,9 +1,19 @@
-<?php
-?>
-<div id="pluginMenu">
-	<ul id="menu">
+<?php $this->Html->css('menu-design', NULL, array('inline' => false));?> 
+
+<?php $this->Html->css('menu-template', NULL, array('inline' => false));?> 
+
+<?php $this->Html->css('/food_menu/webroot/css/menu', NULL, array('inline' => false)); ?>
+<div id="menu" class="overlay"> 
+
+    <ol class="nav"> 
+
 		<li><?php echo $this->Html->link((__('Menus')), array('plugin' => 'FoodMenu', 'controller' => 'View', 'action' => 'viewMenus')); ?></li>
 		<li><?php echo $this->Html->link((__('Categories')), array('plugin' => 'FoodMenu', 'controller' => 'View', 'action' => 'viewCategories')); ?></li>
 		<li><?php echo $this->Html->link((__('Entries')), array('plugin' => 'FoodMenu', 'controller' => 'View', 'action' => 'viewEntries')); ?></li>
-	</ul>
+	
+
+    </ol> 
+
+    <div style="clear:both;"></div> 
+
 </div>

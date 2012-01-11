@@ -11,12 +11,10 @@
     text-decoration: none;
   }
 
-.buttonlink {
-  }
  div.buttonlink {
  	float:none;
  }
- a.buttonlink {
+ .buttonlink a {
     border-radius:4px;
     background:none repeat scroll 0 0 #eee;
     border:1px solid #999;
@@ -26,6 +24,17 @@
     text-decoration:none;
     float:left;
   }
-li.buttonlink {
+ul.buttonlink li span{
     display:inline;
     float:left;
+    }
+ 
+ul.buttonlink li{
+	list-style: none outside none;
+    display:inline;
+    float:left;
+    }
+    
+ul.buttonlink {
+    list-style: none outside none;
+    }
