@@ -7,6 +7,8 @@
  */
 class WebShopComponent extends Component {
    
+	var $helpers = array('BBCode');
+	
    /**
 	* Method to transfer data from plugin to CMS.
 	*/
