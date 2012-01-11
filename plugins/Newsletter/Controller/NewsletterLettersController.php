@@ -3,8 +3,9 @@ App::uses('CakeEmail', 'Network/Email');
 class NewsletterLettersController extends AppController {
 	var $layout = 'overlay';
 	public $helpers = array('Fck');
+	public $name = 'newsletterLetters';
 	
-	public $uses = array('Newsletter.NewsletterLetter');
+	public $uses = array('Newsletter.NewsletterLetter','Newsletter.NewsletterRecipient');
 	
 	public $paginate = array(
 			'NewsletterLetter' => array(
@@ -38,8 +39,13 @@ class NewsletterLettersController extends AppController {
 			$newsletter['NewsletterLetter']['date'] = $date;
 			$this->NewsletterLetter->set($newsletter);
 			$newsletter = $this->NewsletterLetter->save();
-			$link = '/NewsletterLetters/edit'.$newsletter['NewsletterLetter']['id'];
+// 			debug($newsletter);
+// 			$link = '/NewsletterLetters/edit'.$newsletter['NewsletterLetter']['id'];
 			$this->redirect($this->referer($newsletter['NewsletterLetter']['id']));
+// 			echo 'test';
+// 			$this->set('newsletter', $newsletter);
+// 			$this->render('/NewsletterLetter/edit');
+			
 			// hier noch save aus create auf editor mit entsprechendem Newsletter implementieren
 		}
 	}
@@ -56,7 +62,6 @@ class NewsletterLettersController extends AppController {
 	
 	public function preview($id){
 		$newsletter = $this->NewsletterLetter->findById($id);
-// 		$newsletter = $newsletterToPreview['NewsletterLetter'];
 		$this->set('newsletter', $newsletter);
 		$this->layout = 'overlay';
 	}
@@ -68,15 +73,22 @@ class NewsletterLettersController extends AppController {
 	
 	public function send($id){
 		$newsletter = $this->NewsletterLetter->findById($id);
-		$email = new CakeEmail();
-		$email->emailFormat('html')
-		->template('Newsletter.newsletter', 'email')
-		->subject($newsletter['NewsletterLetter']['subject'])
-		->to('marcuslieberenz@googlemail.com')
-		->from('noreply@DualonCMS.de', 'DualonCMS')
-		->viewVars(array('text' => $newsletter['NewsletterLetter']['content']
-		))
-		->send();
+		$recipients = $this->NewsletterRecipient->find('all', array(
+			'fields' => array(
+				'NewsletterRecipient.email'),
+			'conditions' => array(
+				'active' => 1)));
+		foreach ($recipients as $recipient){
+			$email = new CakeEmail();
+			$email->emailFormat('html')
+			->template('Newsletter.newsletter', 'email')
+			->subject($newsletter['NewsletterLetter']['subject'])
+			->to($recipient['NewsletterRecipient']['email'])
+			->from('marcuslieberenz@googlemail.com', 'DualonCMS')
+			->viewVars(array(
+				'text' => $newsletter['NewsletterLetter']['content']))
+			->send();
+		} //foreach
 		$this->redirect($this->referer());
 	}
 	

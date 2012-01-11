@@ -1,9 +1,6 @@
 <?php
 echo $this->element('admin_menu');
 echo 'Newsletters';
-
-
-
 echo '<table>';
 echo	'<colgroup>';
 echo		'<col/>';
@@ -31,7 +28,7 @@ if (isset($newsletters)){
 		echo		$newsletter['NewsletterLetter']['date'];
 		echo	'</td>';
 		echo 	'<td>';
-		echo 		$this->Html->image('/app/webroot/img/arrow_right.png',
+		echo 		$this->Html->image('/app/webroot/img/preview.png',
 		array(
 								'style' => 'float: left', 
 								'width' => '20px', 

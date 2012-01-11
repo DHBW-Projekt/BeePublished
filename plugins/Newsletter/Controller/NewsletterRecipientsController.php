@@ -4,6 +4,7 @@ class NewsletterRecipientsController extends AppController {
 	var $layout = 'overlay';
 	public $uses = array('Newsletter.NewsletterRecipient', 'User');
 	
+	
 	public $paginate = array(
 			 'NewsletterRecipient' => array(
 				'limit' => 10,
@@ -82,7 +83,8 @@ class NewsletterRecipientsController extends AppController {
 		if ($this->request->is('post')){
 			// check if recipient exists
 // 			debug($this->request->data);
-			if($recipient = $this->getRecipientByEmail($this->request->data['NewsletterRecipient']['email'])){
+			if($recipient = $this->NewsletterRecipient->findByEmail($this->request->data['NewsletterRecipient']['email'])){
+// 			if($recipient = $this->getRecipientByEmail($this->request->data['NewsletterRecipient']['email'])){
 				// check if recipient is active
 				if($recipient['NewsletterRecipient']['active'] == 1){
 // 				if($this->checkRecipientIsActive($recipient)){

@@ -1,6 +1,12 @@
 <?php
 
+echo $this->element('admin_menu');
 
+?>
+
+Welcome to the Newsletter administration...
+
+<?php
 
 // 	echo $this->Html->css('/css/jquery-ui/jquery-ui-1.8.16.custom');
 // 	echo $this->Html->css('/css/design');

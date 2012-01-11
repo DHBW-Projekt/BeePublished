@@ -16,7 +16,7 @@ class SubscriptionController extends AppController {
  		// 		print_r($isRecipient);
  		// 		$this->set('isRecipient', $isRecipient);
  		$this->layout = 'overlay';
- 		$this->render('/NewsletterRecipients/index');
+//  		$this->render('/NewsletterLetters/index');
  		// 		$this->getAndSetData();
  	}
  	
