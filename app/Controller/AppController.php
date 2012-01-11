@@ -12,7 +12,7 @@ class AppController extends Controller
         'PermissionValidation'
     );
     
-    public $helpers = array('Html', 'Form', 'Session', 'Js', 'PermissionValidation','Fck');
+    public $helpers = array('Html', 'Form', 'Session', 'Js', 'PermissionValidation');
 
     function afterFilter(){
     	$this->_deleteValidation();
