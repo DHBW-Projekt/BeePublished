@@ -1,11 +1,20 @@
 <?php
-
+/**
+ * WebShopController
+ * 
+ * @author Maximilian Stueber and Patrick Zamzow
+ *
+ */
 class WebShopController extends AppController {
-
+	
+	//Attributes
 	var $components = array('ContentValueManager');
 	var $uses = array('Product'); 
 	var $layout = 'overlay';
 	
+   /**
+	* Function for admin view.
+	*/
 	public function admin($contentID){
 		$this->setContentVar($contentID);
 		$this->set('products', $this->Product->find('all'));
@@ -13,39 +22,112 @@ class WebShopController extends AppController {
 		$this->set('contentID', $contentID);
 	}
 	
+   /**
+	* Function to create product.
+	*/
 	public function create($contentID){
+		
+		//Attributes
+		$create_error = false;
+		
+		//CHECK request
 		if (empty($this->data)) {
 			$this->setContentVar($contentID);
 			$this->set('productAdminView', "create");
 			$this->set('contentID', $contentID);
 			$this->render("admin");
-		} else {
-			if (isset($this->params['data']['save'])) {
-				$this->createProduct($this);
-			}
-			$this->redirect(array('action' => 'admin', $contentID));
+			
+			return;
 		}
+		
+		//PROCESS request
+		if (isset($this->params['data']['save'])) {
+			//CHECK request
+			if (!$this->request->is('post'))
+				$create_error = true;
+				
+			//VALIDATE data
+			if(!$this->Product->validates())
+				$create_error = true;
+				
+			//UPLOAD image
+			if(!$create_error){
+				$result = $this->uploadImage($this->request->data['Product']['submittedfile'], null, true);
+				$create_error = $result['error'];
+				$file_name = $result['file_name'];
+			}
+				
+			//SAVE on DB
+			if(!$create_error){
+				$data['Product']['name'] = $this->data['Product']['name'];
+				$data['Product']['description'] = $this->data['Product']['description'];
+				$data['Product']['price'] = $this->data['Product']['price'];
+				$data['Product']['picture'] = $file_name;
+				
+				//SAVE on db
+				$create_error = !$this->Product->save($data);
+			}
+		}
+
+		//REDIRECT
+		$this->redirect(array('action' => 'admin', $contentID));
 	}
 	
+	/**
+	* Function to edit product.
+	*/
 	public function edit($contentID, $productID=null){
+		
+		//Attributes
+		$update_error = false;
+		
+		//SET id
 		$this->Product->id = $productID;
-
-		if (!empty($this->data)) {
-			if (isset($this->params['data']['save'])) {
-				$this->Product->set($this->Product->read());
-				$this->Product->set($this->data);
-				$this->Product->save();
-			}
-			$this->redirect(array('action' => 'admin', $contentID));
-		} else {
+		
+		//CHECK request
+		if (empty($this->data)) {
 			$this->setContentVar($contentID);
 			$this->data = $this->Product->read();
 			$this->set('productAdminView', "edit");
 			$this->set('contentID', $contentID);
 			$this->render("admin");
+				
+			return;
 		}
+	
+		//EDIT product
+		if (isset($this->params['data']['save'])) {
+	
+			//UPDATE db info
+			$data_old = $this->Product->read();
+			$data_new = $this->data;
+			
+			//UPLOAD new file (if necessary)
+			if (!empty($data_new['Products']['submittedfile'])){
+				$result = $this->uploadImage($data_new['Products']['submittedfile'], $data_old['Product']['picture'], true);
+				
+				$data_new['Product']['picture'] = $result['file_name'];
+				$update_error = $result['error'];
+			}
+			
+			//SET new data
+			if(!$update_error){
+				$this->Product->set($data_old);
+				$this->Product->set($data_new);
+			
+				//SAVE
+				$update_error = !$this->Product->save();
+			}
+		}
+		
+		//REDIRECT
+		$this->redirect(array('action' => 'admin', $contentID));
 	}
 	
+	
+   /**
+	* Function to remove product.
+	*/
 	public function remove($contentID, $productID){
 		
 		//REMOVE picture
@@ -60,39 +142,14 @@ class WebShopController extends AppController {
 		$this->redirect(array('action' => 'admin', $contentID));
 	}
 	
-	public function setContentValues($contentID) {
-		if (!empty($this->data)) {
-			if (isset($this->data['ContentValues']['NumberOfEntries'])) {
-				$this->ContentValueManager->saveContentValues($contentID, $this->data['ContentValues']['NumberOfEntries']);
-			}
-			
-			$this->redirect(array('action' => 'admin', $contentID));
-		}
-	}
+  
 	
-	function setContentVar($contentID) {
-		$contentVars = $this->ContentValueManager->getContentValues($contentID);
-		
-		if (isset($contentVars['NumberOfEntries'])) {
-			$this->set('numberOfEntries', $contentVars['NumberOfEntries']);
-		}
-	}
-	
-	/**
-	* Create new products.
+   /**
+	* Function to upload image.
 	*/
-	function createProduct($controller){
-		
-		//CHECK request
-		if (!$controller->request->is('post'))
-			return;
-	
-		//VALIDATE data
-		if(!$controller->Product->validates())
-			return;
+	function uploadImage($file, $file_old, $init_creation){
 		
 		/* FILE */
-		$file = $controller->request->data['Product']['submittedfile'];
 		$file_path = WWW_ROOT.'../../plugins/WebShop/webroot/img/products/';
 		$file_name = str_replace(' ', '_', $file['name']);
 		$upload_error = true;
@@ -110,6 +167,11 @@ class WebShopController extends AppController {
 				break;
 			}
 		}
+		
+		//REMOVE old image
+		if(!$init_creation){
+			unlink($file_path.$file_old);
+		}
 	
 		//CHECK filename
 		if(file_exists($file_path.'/'.$file_name)) {
@@ -126,27 +188,41 @@ class WebShopController extends AppController {
 		if(!$upload_error){
 			$upload_error = !move_uploaded_file($file['tmp_name'], $file_path.$file_name);
 		}
-	
-		//SAVE on DB
-		if(!$upload_error){
-			//GET all data
-			$data['Product']['name'] = $controller->data['Product']['name'];
-			$data['Product']['description'] = $controller->data['Product']['description'];
-			$data['Product']['price'] = $controller->data['Product']['price'];
-			$data['Product']['picture'] = $file_name;
-	
-			//SAVE on db
-			$upload_error = !$controller->Product->save($data);
-		}
-	
-		//PRINT message
-		/*if(!$upload_error){
-			$controller->Session->setFlash('Artikel wurde angelegt.', 'default', array('class' => 'flash_success'), 'Product');
-		} else {
-			$controller->Session->setFlash('Fehler bei der Anlage.', 'default', array('class' => 'flash_failure'), 'Product');
-		}*/
+		
+		//RESULT data
+		$result['error'] = $upload_error;
+		$result['file_name'] = $file_name;
+		
+		return $result;
 	}
-
+	
+   /**
+	* Function to set content values.
+	*/
+	public function setContentValues($contentID) {
+		if (!empty($this->data)) {
+			if (isset($this->data['ContentValues']['NumberOfEntries'])) {
+				$this->ContentValueManager->saveContentValues($contentID, $this->data['ContentValues']['NumberOfEntries']);
+			}
+				
+			$this->redirect(array('action' => 'admin', $contentID));
+		}
+	}
+	
+	/**
+	 * Function to set content values.
+	 */
+	function setContentVar($contentID) {
+		$contentVars = $this->ContentValueManager->getContentValues($contentID);
+	
+		if (isset($contentVars['NumberOfEntries'])) {
+			$this->set('numberOfEntries', $contentVars['NumberOfEntries']);
+		}
+	}
+	
+	/**
+	 * Function BeforeFilter.
+	 */
 	public function beforeFilter(){
 		$this->Auth->allow('*');
 	}
