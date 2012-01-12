@@ -27,14 +27,14 @@
 	//create title input
 	echo $this->Form->input('NewsEntry.title', array(
 		'div' => 'editNewsTitle',
-		'label' => false,
+		'label' => 'Title:',
 		'name' => 'title',
 		'value'=> $newsentry['NewsEntry']['title']
 	));
 	//create entrytext textarea
 	echo $this->Form->input('NewsEntry.text', array(
 		'div' => 'editNewsBody',
-		'label' => false,
+		'label' => 'Text:',
 		'id' => 'editNewsTextEditor',
 		'name' => 'text',
 		'value' => $newsentry['NewsEntry']['text']
@@ -78,9 +78,6 @@
 	));
 	
 	//create submit button
-	echo $this->Form->submit("Save Changes", array(
-		'div' => 'editNewsButtons',
-		'class' => 'button'
-	));
+	echo $this->Form->button("Save Changes");
 	?>
 </div>

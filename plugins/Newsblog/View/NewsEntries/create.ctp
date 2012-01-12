@@ -20,13 +20,13 @@ if($writeAllowed){
 		echo $this->Form->input('NewsEntry.title', array(
 			'div' => 'writeNewsTitle',
 			'label' => false,
-			'label' => 'Title',
+			'label' => 'Title:',
 			'name' => 'title'
 		));
 		//create entrytext textarea
 		echo $this->Form->input('NewsEntry.text', array(
 			'div' => 'writeNewsBody',
-			'label' => false,
+			'label' => 'Text:',
 			'id' => 'writeNewsTextEditor',
 			'name' => 'text'
 		));
@@ -71,10 +71,7 @@ if($writeAllowed){
 		));
 		
 		//create submit button
-		echo $this->Form->submit("Create News", array(
-			'div' => 'writeNewsButtons',
-			'class' => 'button'
-		));
+		echo $this->Form->button("Create News");
 		
 	echo '</div>';
 	echo '</div>';
