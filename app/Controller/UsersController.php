@@ -167,16 +167,23 @@ class UsersController extends AppController
             }
             //if user isn't already logged in
             else {
-                if ($this->Auth->login()) {
-                    //update "last_login"
-                    $this->User->id = $this->Auth->user('id');
-                    $now = date('Y-m-d H:i:s');
-                    $this->User->saveField('last_login', $now);
-
-                    $this->redirect($this->Auth->redirect());
-                } else {
-                    $this->Session->setFlash('Your username or password was incorrect.');
-                }
+            	$userDB = $this->User->findByUsername($this->request->data['User']['username']);
+            	if($userDB['User']['status']){
+            		if ($this->Auth->login()) {
+            			//update "last_login"
+            			$this->User->id = $this->Auth->user('id');
+            			$now = date('Y-m-d H:i:s');
+            			$this->User->saveField('last_login', $now);
+            			$this->Session->setFlash('Welcome');
+            			$this->redirect($this->Auth->redirect());
+            		} else {
+            			$this->Session->setFlash('Your username or password was incorrect.');
+            			$this->redirect($this->referer());
+            		}
+            	} else{
+            		$this->Session->setFlash('Login not possible! Your user either hasn\'t been activated yet or has been locked!');
+            		$this->redirect($this->referer());
+            	}
             }
         }
         $this->set('menu', $this->Menu->buildMenu($this, NULL));
