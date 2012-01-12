@@ -4,3 +4,12 @@
 	width:50%;
 	overflow:scroll;
 }
+
+.newsletter {
+	background-color: #ffffff;
+	font-size: 12px;
+	padding: 10px 20px;
+	padding-bottom: 30px;
+	margin-bottom: 30px;
+	color: #cccccc;
+}

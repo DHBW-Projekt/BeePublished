@@ -82,7 +82,7 @@ class NewsletterLettersController extends AppController {
 		foreach ($recipients as $recipient){
 			$email = new CakeEmail();
 			$email->emailFormat('html')
-			->template('Newsletter.newsletter', 'email')
+			->template('Newsletter.newsletter', 'Newsletter.newsletter')
 			->subject($newsletter['NewsletterLetter']['subject'])
 			->to($recipient['NewsletterRecipient']['email'])
 			->from('noreply@'.$server, 'DualonCMS')
