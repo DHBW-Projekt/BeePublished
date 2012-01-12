@@ -2,7 +2,6 @@
 App::uses('CakeEmail', 'Network/Email');
 class NewsletterLettersController extends AppController {
 	var $layout = 'overlay';
-	public $helpers = array('Fck');
 	public $name = 'newsletterLetters';
 	
 	public $uses = array('Newsletter.NewsletterLetter','Newsletter.NewsletterRecipient');

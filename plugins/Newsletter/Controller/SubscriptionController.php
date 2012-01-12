@@ -4,7 +4,6 @@ class SubscriptionController extends AppController {
 		
 	public $name = 'Subscription';
 	public $uses = array('Newsletter.NewsletterRecipient', 'User');
- 	public $helpers = array('Fck');
 //  	public $layout = 'overlay';
 
 //  	public $paginate = array(
