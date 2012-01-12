@@ -1,4 +1,7 @@
 <?php
+
+echo $this->element('admin_menu');
+
 if (isset($newsletter)){
 	
 	$this->Html->script('/ckeditor/ckeditor', false);;

@@ -39,14 +39,8 @@ class NewsletterLettersController extends AppController {
 			$newsletter['NewsletterLetter']['date'] = $date;
 			$this->NewsletterLetter->set($newsletter);
 			$newsletter = $this->NewsletterLetter->save();
-// 			debug($newsletter);
-// 			$link = '/NewsletterLetters/edit'.$newsletter['NewsletterLetter']['id'];
-			$this->redirect($this->referer($newsletter['NewsletterLetter']['id']));
-// 			echo 'test';
-// 			$this->set('newsletter', $newsletter);
-// 			$this->render('/NewsletterLetter/edit');
-			
-			// hier noch save aus create auf editor mit entsprechendem Newsletter implementieren
+			$this->redirect(array(
+				'action' => 'edit', $newsletter['NewsletterLetter']['id']));
 		}
 	}
 	

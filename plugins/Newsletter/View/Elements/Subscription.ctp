@@ -11,7 +11,7 @@
 			echo $this->Form->create('Subscription',array(
 				'url' => array(
 					'plugin' => 'Newsletter',
-					'controller' => 'NewsletterRecipients',
+					'controller' => 'Subscription',
 					'action' => 'guestUnSubscribe')));
 			echo $this->Form->input('NewsletterRecipient.email', array('label' => 'E-Mail:'));
 			echo $this->Html->div('validation_error',$validationErrors['email'][0]);
@@ -25,7 +25,7 @@
 	    	echo $this->Form->create('UserSubscription', array(
 	    		'url' => array(
 	    			'plugin' => 'Newsletter',
-	    			'controller' => 'NewsletterRecipients',
+	    			'controller' => 'Subscription',
 	    			'action' => 'userUnSubscribe')));
 			if ((isset($userAsRecipient)) and ($userAsRecipient['NewsletterRecipient']['active'] == 1)){
 				echo 'You subscribed for the newsletter';
