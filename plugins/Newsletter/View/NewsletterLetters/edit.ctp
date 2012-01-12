@@ -21,9 +21,9 @@ if (isset($newsletter)){
 	echo $this->Form->button('Save', array(
 		'type' => 'submit', 
 		'value' => 'save'));
-	echo $this->Form->button('Back', array(
-		'type' => 'button',
-	'onClick' => 'window.history.back()'));
+// 	echo $this->Form->button('Back', array(
+// 		'type' => 'button',
+// 	'onClick' => 'window.history.back()'));
 // 		'onClick' => 'document.location.href=\'/plugin/Newsletter/NewsletterLetters/index/\';'));
 	echo $this->Form->end();
 	echo $this->Fck->load('NewsletterLetter.content');
