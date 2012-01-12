@@ -1,0 +1,134 @@
+.small_calendar {
+    font-size: 10px;
+}
+
+.small_calendar_name {
+    text-align: center;
+    font-size: 13px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.calendar_name {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.small_calendar table, .calendar table {
+    width: 100%;
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-color: #3292DD;
+    margin-bottom: 10px;
+    table-layout: fixed;
+}
+
+.small_calendar td, .small_calendar th, .calendar td, .calendar th {
+    padding: 2px;
+    border-width: 1px 1px 0 0;
+    border-style: solid;
+    border-color: #3292DD;
+    text-align: center;
+}
+
+.small_calendar td.has-date {
+    background-color: #cccccc;
+}
+
+.calendar th {
+    background-color: #3292DD;
+}
+
+.calendar_content {
+    min-height: 80px;
+}
+
+.small_week, .week {
+    background-color: #3292DD;
+    font-style: italic;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.small_no_date, .no_date {
+    background-color: #eeeeee;
+}
+
+.month_minus {
+    float: left;
+}
+
+.month_plus {
+    float: right;
+}
+
+.calendar_date {
+    text-align: right;
+    margin-bottom: 5px;
+}
+
+.calendar_entry {
+    font-size: 12px;
+    height: 15px;
+    margin-bottom: 2px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.calendar_entry.notime {
+    border: 1px solid #5CB3FF;
+    background-color: #CFECEC;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin-bottom: 2px;
+}
+
+.calendar_entry_time_start {
+    margin-right: 2px;
+    color: #888888;
+    vertical-align: top;
+    float: left;
+}
+
+col.week {
+    width: 25px;
+}
+
+.calendar_entry_content {
+    text-align: left;
+    overflow: hidden;
+}
+
+.notime .calendar_entry_content {
+    text-align: center;
+}
+
+td.full_hour, td.half_hour {
+    border-color: #eeeeee;
+    border-right: 1px solid #3292DD;
+
+}
+
+td.full_hour {
+    border-top: 1px solid #3292DD;
+}
+
+td.half_hour {
+}
+
+td.calendar_time {
+    font-size: 12px;
+    vertical-align: middle;
+    background-color: #5CB3FF;
+}
+
+td.calendar_time.half_hour {
+    border-top: 0;
+}
+
+td.calendar_time.half_hour {
+    color: transparent;
+}

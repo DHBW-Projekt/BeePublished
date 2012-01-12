@@ -4,7 +4,7 @@ App::uses('AppModel', 'Model');
  * Content Model
  *
  * @property Container $Container
- * @property Plugin $Plugin
+ * @property PluginView $PluginView
  * @property ContentValue $ContentValue
  */
 class Content extends AppModel {
@@ -24,9 +24,9 @@ class Content extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Plugin' => array(
-			'className' => 'Plugin',
-			'foreignKey' => 'plugin_id',
+		'PluginView' => array(
+			'className' => 'PluginView',
+			'foreignKey' => 'plugin_view_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

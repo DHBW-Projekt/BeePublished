@@ -7,14 +7,15 @@ App::uses('AppController', 'Controller');
 class PluginsController extends AppController
 {
     public $components = array('CMSPlugin');
-    public $uses = array('Plugin', 'Permission', 'Role');
+    public $uses = array('Plugin', 'Permission', 'Role', 'PluginView');
 
     function beforeFilter()
     {
         parent::beforeFilter();
-
-        //Actions which don't require authorization
-        $this->Auth->allow('index', 'install', 'uninstall');
+        $role = $this->PermissionValidation->getUserRoleId();
+        if ($role != 6 && $role != 7) {
+            $this->redirect($this->request->webroot);
+        }
     }
 
     function index()
@@ -28,6 +29,9 @@ class PluginsController extends AppController
         $available = $this->CMSPlugin->getPluginList();
         $this->set('installed', $installed);
         $this->set('available', $available);
+        $this->set('systemPage', false);
+        $this->set('adminMode', true);
+        $this->set('menu', array());
     }
 
     function install($plugin)
@@ -69,7 +73,7 @@ class PluginsController extends AppController
                 if (in_array($permission['action'], $existingPermissions)) {
                     continue;
                 }
-                $role = $this->Role->find('first', array('conditions' => array('Role.name' => $permission['role'])));
+                $role = $this->Role->findByName($permission['role']);
                 $this->Permission->create();
                 $permissionObject = array(
                     'plugin_id' => $pluginObject['id'],
@@ -77,6 +81,27 @@ class PluginsController extends AppController
                     'action' => $permission['action']
                 );
                 $this->Permission->save($permissionObject);
+            }
+        }
+
+        $views = $this->CMSPlugin->getViews($plugin);
+        $viewsInDB = $this->PluginView->find('all', array('conditions' => array('plugin_id' => $pluginObject['id'])));
+        $existingViews = array();
+        foreach ($viewsInDB as $view) {
+            $existingViews[] = $view['PluginView']['name'];
+        }
+
+        if ($views != null) {
+            foreach ($views['view'] as $view) {
+                if (in_array($view['name'], $existingViews)) {
+                    continue;
+                }
+                $this->PluginView->create();
+                $viewObject = array(
+                    'plugin_id' => $pluginObject['id'],
+                    'name' => $view['name']
+                );
+                $this->PluginView->save($viewObject);
             }
         }
 
@@ -126,6 +151,7 @@ class PluginsController extends AppController
         if ($existingPlugin != null) {
             $this->Plugin->delete($existingPlugin['Plugin']['id']);
             $this->Permission->deleteAll(array('plugin_id' => $existingPlugin['Plugin']['id']));
+            $this->PluginView->deleteAll(array('plugin_id' => $existingPlugin['Plugin']['id']));
         }
 
 
@@ -146,4 +172,5 @@ class PluginsController extends AppController
         $this->Session->setFlash(__('Plugin successfully uninstalled.'));
         $this->redirect(array('action' => 'index'));
     }
+
 }

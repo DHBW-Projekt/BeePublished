@@ -1,5 +1,5 @@
 <?php
-/* Content Fixture generated on: 2011-12-19 09:25:07 : 1324283107 */
+/* Content Fixture generated on: 2012-01-01 17:20:54 : 1325434854 */
 
 /**
  * ContentFixture
@@ -17,9 +17,8 @@ class ContentFixture extends CakeTestFixture {
 		'container_id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'key' => 'index', 'collate' => NULL, 'comment' => ''),
 		'column' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'collate' => NULL, 'comment' => ''),
 		'order' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'collate' => NULL, 'comment' => ''),
-		'plugin_id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'collate' => NULL, 'comment' => ''),
-		'view_name' => array('type' => 'string', 'null' => false, 'default' => NULL, 'length' => 150, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'charset' => 'latin1'),
-		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1), 'container_id' => array('column' => 'container_id', 'unique' => 0)),
+		'plugin_view_id' => array('type' => 'integer', 'null' => true, 'default' => NULL, 'key' => 'index', 'collate' => NULL, 'comment' => ''),
+		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1), 'container_id' => array('column' => 'container_id', 'unique' => 0), 'plugin_id' => array('column' => 'plugin_view_id', 'unique' => 0)),
 		'tableParameters' => array('charset' => 'latin1', 'collate' => 'latin1_swedish_ci', 'engine' => 'InnoDB')
 	);
 
@@ -34,8 +33,7 @@ class ContentFixture extends CakeTestFixture {
 			'container_id' => 1,
 			'column' => 1,
 			'order' => 1,
-			'plugin_id' => 1,
-			'view_name' => 'Lorem ipsum dolor sit amet'
+			'plugin_view_id' => 1
 		),
 	);
 }
