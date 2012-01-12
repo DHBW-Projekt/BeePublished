@@ -1,0 +1,21 @@
+.editNewsButtons{
+	text-align: right;
+}
+
+.button {
+	background-color: #0F73A6;
+	border: 1px solid #095B85;
+	box-shadow: 0 0 8px #095B85 inset;
+	color: #FFFFFF;
+	font-size: 15px;
+}
+
+#NewsEntryTitle{
+	border:1px solid black;
+	font-size: 16px;
+	padding: 6px;
+}
+
+.ui-datepicker-trigger{
+	height:35px;
+}

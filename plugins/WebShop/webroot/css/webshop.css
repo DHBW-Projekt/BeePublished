@@ -1,0 +1,117 @@
+@CHARSET "UTF-8";
+
+#webshop_content{
+	margin-top:10px;
+	margin-bottom: 5px;
+}
+
+#websop_searchbar{
+	width: 100%;
+	margin-bottom:10px;
+	background-color:#146EB4;
+	-moz-border-radius:15px;
+	-khtml-border-radius:15px;
+}
+
+#webshop_cart p{
+	margin-top:5px;
+}
+
+#webshop_cart table{
+	width:100%;
+	margin-top: 5px;
+	margin-bottom: 20px;
+}
+
+#websop_productcatalog li{
+	color: #000000;
+}
+
+#websop_productcatalog img{
+	float: left;
+	width: 200px;
+	margin-right: 10px;
+}
+
+#webshop_create form{
+	margin-top: 10px;
+}
+
+#webshop_create td{
+	vertical-align: top;
+}
+
+#webshop_create input, textarea{
+	margin-bottom: 3px;
+	margin-left: 3px;
+}
+
+#webshop_product_administration table{
+	margin-top:10px;
+	margin-bottom:20px;
+}
+
+#webshop_product_administration td{
+	padding-right:25px;
+}
+
+.webshop_detailview_image{
+	float: left;
+	width: 275px;
+	margin-bottom: 10px;
+}
+
+.websop_price{
+	color: #666666;
+	font-weight: bold;
+	margin-top:5px;
+	margin-bottom: 5px;
+}
+
+.websop_separator{
+	color:#E8E8E8;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.webshop_searchfield{
+	padding: 2px 10px 2px 10px;
+	margin-top: 6px;
+	float: left;
+}
+
+.webshop_cartfield{
+	float: right;
+	margin-top: 1px;
+	padding: 2px 10px 2px 10px;
+}
+
+.webshop_searchfield label{
+	margin-right: 5px;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+.webshop_cart_product_img{
+	width:100px;
+}
+
+.webshop_cart_icon{
+	width: 20px;
+}
+
+.webshop_search_result{
+	margin-top:5px;
+	margin-bottom:5px;
+	font-style:italic;
+}
+
+.webshop_infobox{
+	background-color: #EEEEEE;
+	border: 1px solid #CCCCCC;
+	margin-top: 10px;
+}
+
+.webshop_infobox td{
+	padding: 5px 10px 5px 10px;
+}

@@ -11,6 +11,7 @@ class PermissionValidationHelper extends AppHelper {
 	}
 	
 	public function getPermissions($pluginId = null){
+		$this->Permission = ClassRegistry::init('Permission');
 		//get currently logged in user and his role
 		$userRoleId = (int)$this->Session->read('Auth.User.role_id');
 		$allPermissionsOfPlugin = $this->Permission->find('all', array('conditions' => array('plugin_id' => $pluginId)));
@@ -60,6 +61,7 @@ class PermissionValidationHelper extends AppHelper {
 	}
 	
 	private function internalActionAllowed($userRoleId = null, $permissionEntry = null){
+		$this->Role = ClassRegistry::init('Role');
 		$actionAllowed = false;
 		//read currentRoleId -- initial value equals minimum required role id
 		$currentRoleId = (int)$permissionEntry['Permission']['role_id'];

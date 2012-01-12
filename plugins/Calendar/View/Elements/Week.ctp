@@ -29,7 +29,10 @@ for ($i = 0; $i < 7; $i++) {
         <tr>
             <th></th>
             <?php foreach ($dayTimes as $day): ?>
-            <th><?php echo date('d.m.', $day);?></th>
+            <th>
+                <?php echo date('d.m.', $day);?>
+                <?php echo $this->Html->link($this->Html->image('add.png', array('width' => 18, 'height' => 18)), array('plugin' => 'Calendar', 'controller' => 'CalendarEntries', 'action' => 'add', date('Y-m-d', $day)), array('escape' => false, 'class' => 'calendar_add_entry')); ?>
+            </th>
             <?php endforeach; ?>
         </tr>
         </thead>

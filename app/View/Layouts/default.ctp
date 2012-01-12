@@ -91,8 +91,7 @@
         <?php echo $content_for_layout ?>
     </div>
     <div id="footer">
-        Powered by BeePublished - All rights reserved - &copy; Copyright 2011-2012<br/><br/>
-        <?php echo $this->element('sql_dump'); ?>
+        Powered by BeePublished - All rights reserved - &copy; Copyright 2011-2012
     </div>
 </div>
 <? if ($adminMode) {
