@@ -11,7 +11,8 @@ class NewsletterLettersController extends AppController {
 			'NewsletterLetter' => array(
 				'limit' => 5, 
 				'order' => array(
-					'NewsletterLetter.date' => 'desc')));
+					'NewsletterLetter.date' => 'desc',
+					'NewsletterLetter.id' => 'desc')));
 	
 	public function index(){
 		$newsletters = $this->paginate('NewsletterLetter');
