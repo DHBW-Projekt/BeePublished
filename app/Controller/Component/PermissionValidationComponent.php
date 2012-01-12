@@ -10,6 +10,7 @@ class PermissionValidationComponent extends Component {
 	}
 	
 	public function getPermissions($pluginId = null){
+		$this->Permission = ClassRegistry::init('Permission');
 		//get currently logged in user and his role
 		$userRoleId = (int)$this->Auth->user('role_id');
 		
@@ -62,6 +63,7 @@ class PermissionValidationComponent extends Component {
 	}
 	
 	private function internalActionAllowed($userRoleId = null, $permissionEntry = null){
+		$this->Role = ClassRegistry::init('Role');
 		$actionAllowed = false;
 		//read currentRoleId -- initial value equals minimum required role id
 		$currentRoleId = (int)$permissionEntry['Permission']['role_id'];
