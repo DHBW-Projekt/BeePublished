@@ -38,12 +38,23 @@
 		$createdOnDate = $DateTimeHelper->format('m-d-Y', $NewsEntry['NewsEntry']['createdOn']);
 		$createdOnTime = $DateTimeHelper->format('H:i', $NewsEntry['NewsEntry']['createdOn']);
 		$createdBy = $NewsEntry['Author']['username'];
+		if($NewsEntry['NewsEntry']['lastModifiedOn'] != null){
+			$modifiedOnDate = $DateTimeHelper->format('m-d-Y', $NewsEntry['NewsEntry']['lastModifiedOn']);
+			$modifiedOnTime = $DateTimeHelper->format('H:i', $NewsEntry['NewsEntry']['lastModifiedOn']);
+		}
 	?>
 	
 	<div class="newsblog_entry" id="<?php echo $newsblogEntryDivId?>">
 		<div class="newsblog_entry_container">
 			<div class="newsblog_entry_title"><?php echo $title?></div>
-			<div class="newsblog_entry_info">by <?php echo $createdBy?> on <?php echo $createdOnDate?> at <?php echo $createdOnTime?></div>
+			<div class="newsblog_entry_info">
+				by <?php echo $createdBy?> on <?php echo $createdOnDate?> at <?php echo $createdOnTime;?>
+				<?php 
+					if(isset($modifiedOnDate) & isset($modifiedOnTime)){
+						echo "&nbsp;&nbsp;(modified on ".$modifiedOnDate." at ".$modifiedOnTime.")";
+					}
+				?>
+			</div>
 			<div class="newsblog_entry_content"><?php echo $text?></div>
 			<div class="newsblog_entry_footer">
 				<?php 

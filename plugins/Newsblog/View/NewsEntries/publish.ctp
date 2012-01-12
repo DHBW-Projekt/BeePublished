@@ -1,5 +1,5 @@
 <?php 
-$this->Html->script('/newsblog/js/admin', false);
+$this->Html->script('/newsblog/js/admin_publish', false);
 $this->Html->css('/newsblog/css/admin', null, array('inline' => false));
 
 $DateTimeHelper = $this->Helpers->load('Time');
@@ -29,7 +29,7 @@ if($publishAllowed){
 				echo '<div class="newsentry_publish_buttons">';
 					echo $this->Html->link(
 						$this->Html->image('check.png', array('class' => 'newsentry_publish_icon', 'alt' => 'Publish')),
-						array('plugin' => 'Newsblog', 'controller' => 'NewsEntries', 'action' => 'publish', $id),
+						array('plugin' => 'Newsblog', 'controller' => 'NewsEntries', 'action' => 'publish', $contentId, $id),
 						array('class' => 'newsentry_publish_link', 'escape' => false)
 					);
 				echo '</div>';

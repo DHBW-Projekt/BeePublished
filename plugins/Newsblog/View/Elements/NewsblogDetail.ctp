@@ -25,8 +25,8 @@
 		on
 		<?php echo $createdOnDate;?>
 		at
-		<?php echo $createdOnTime;?>
-		<?php
+		<?php echo $createdOnTime;
+			
 			if(isset($modifiedOnDate) & isset($modifiedOnTime)){
 				echo "&nbsp;&nbsp;(modified on ".$modifiedOnDate." at ".$modifiedOnTime.")";
 			}

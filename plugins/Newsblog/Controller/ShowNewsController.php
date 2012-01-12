@@ -11,4 +11,15 @@ class ShowNewsController extends NewsblogAppController{
 		$this->set('pluginId', $pluginId);
 		$this->set('contentId', $contentId);*/
 	}
+	
+	public function general($contentId = null){
+		$this->layout = 'overlay';
+		$pluginId = $this->getPluginId();
+		$this->set('pluginId', $pluginId);
+		$this->set('contentId', $contentId);
+		//bei get session auslesen
+		
+		//bei post oder put session mit Ÿbergebenen Werten fŸttern
+		
+	}
 }
