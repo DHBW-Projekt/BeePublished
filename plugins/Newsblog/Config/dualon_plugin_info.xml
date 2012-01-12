@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dualon>
+	<plugin>
+		<name>Newsblog</name>
+		<author>Philipp Scholl</author>
+		<version>0.9b</version>
+		<permissions>
+			<permission>
+				<role>Registered</role>
+				<action>Read</action>
+			</permission>
+			<permission>
+				<role>Author</role>
+				<action>Write</action>
+			</permission>
+			<permission>
+				<role>Editor</role>
+				<action>Delete</action>
+			</permission>
+			<permission>
+				<role>Editor</role>
+				<action>Edit</action>
+			</permission>
+			<permission>
+				<role>Administrator</role>
+				<action>Publish</action>
+			</permission>
+		</permissions>
+		<views>
+			<view>
+				<name>ShowNews</name>
+			</view>
+		</views>
+	</plugin>
+</dualon>
