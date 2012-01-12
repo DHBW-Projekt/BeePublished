@@ -2,6 +2,7 @@
 	$this->Html->script('/newsblog/js/displayFullNews', false);
 	$this->Html->css('/newsblog/css/displayFullNews', null, array('inline' => false));
 	$DateTimeHelper = $this->Helpers->load('Time');
+	$this->Helpers->load('BBCode');
 	
 	$this->set('title_for_layout', $data['NewsEntry']['title']);
 ?>

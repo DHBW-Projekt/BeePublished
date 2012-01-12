@@ -1,6 +1,7 @@
 <?php
 	$DateTimeHelper = $this->Helpers->load('Time');
 	$this->Helpers->load('Slug');
+	$this->Helpers->load('BBCode');
 	
 	$this->Html->script('/newsblog/js/showNews', false);
 	$this->Html->css('/newsblog/css/showNews', null, array('inline' => false));
