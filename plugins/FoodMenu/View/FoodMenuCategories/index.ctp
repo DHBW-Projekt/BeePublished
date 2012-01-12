@@ -1,12 +1,11 @@
 <?php
 	echo $this->element('admin_menu');
 	echo $this->Form->create('FoodMenuCategory', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuCategories', 'action' => 'deleteMultiple')));
-//	echo $this->Form->button((__('New Category')), array('type' => 'button'));
-//	echo $this->Form->button((__('Delete Selection')), array('type' => 'submit'));
+	
 	echo '<div id="buttonlink" class="buttonlink">';
 	echo '<ul class="buttonlink">';
 	echo '<li class="buttonlink">'.$this->Html->link((__('New Category')), array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuCategories', 'action' => 'create'), array('class' => 'buttonlink')).'</li>
-		  <li class="buttonlink">'.$this->Html->link((__('Delete Selection')), '#', array('onClick' => 'document.forms["FoodMenuCategoriesIndexForm"].submit()', 'class' => 'buttonlink')).'</li>';
+		  <li class="buttonlink">'.$this->Html->link((__('Delete Selection')), '#', array('onClick' => 'confirmDelete();', 'class' => 'buttonlink')).'</li>';
 	echo '</ul><br />';
 	echo '</div>';
 	?>

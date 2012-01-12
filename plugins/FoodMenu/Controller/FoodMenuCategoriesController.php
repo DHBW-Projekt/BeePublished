@@ -22,10 +22,10 @@ class FoodMenuCategoriesController extends AppController {
 	function create() {
 		if ($this->request->is('post')) {			
             if ($this->FoodMenuCategory->save($this->request->data)) {
-                $this->Session->setFlash(__('Die Kategorie wurde gespeichert.'));
+                $this->Session->setFlash(__('The category has been saved.'));
                 $this->redirect($this->referer());
             } else {
-                $this->Session->setFlash(__('Die Kategorie konnte nicht gespeichert werden.'));
+                $this->Session->setFlash(__('The category couldn\'t be saved.'));
             }//else
         }//if
 	}//create
@@ -37,7 +37,7 @@ class FoodMenuCategoriesController extends AppController {
         	$save = $this->request->data;
         	if ($this->FoodMenuCategory->save($save)) {
             	// Set a session flash message and redirect.
-            	$this->Session->setFlash("Kategorie geändert");
+            	$this->Session->setFlash(__('The category has been changed.'));
             	$this->set('mode', 'edit');
             	$this->redirect($this->referer());
             	//$this->render('/View/admin');
@@ -64,7 +64,7 @@ class FoodMenuCategoriesController extends AppController {
 			$this->request->data = $this->FoodMenuCategory->read('deleted', $id);
 			$this->request->data['FoodMenuCategory']['deleted'] = date("Y-m-d H:i:s");
 			if($this->FoodMenuCategory->save($this->request->data)) {
-				$this->Session->setFlash(__('Die Kategorie wurde entfernt.'));
+				$this->Session->setFlash(__('The category has been deleted.'));
 				$this->redirect($this->referer());
 			}//if
 		}//if
@@ -82,11 +82,11 @@ class FoodMenuCategoriesController extends AppController {
 						continue;
 					}//if
 					else {
-						$this->Session->setFlash(__('Fehler beim Löschen.'));
+						$this->Session->setFlash(__('Errors occured during deleting.'));
 						return;
 					}	
 			}
-			$this->Session->setFlash(__('Die Kategorien wurden entfernt.'));
+			$this->Session->setFlash(__('The categories have been deleted.'));
 			$this->redirect($this->referer());
 		}
 	}

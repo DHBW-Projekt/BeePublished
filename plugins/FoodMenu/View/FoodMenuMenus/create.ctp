@@ -23,7 +23,6 @@
 		echo 'So: '.$this->Form->checkbox('su', array('value' => 64, 'checked' => true, 'hiddenField' => true));
 	echo '</td></tr>';
 	echo '</table>';
-		echo $this->Form->button(__('Save'), array('type' => 'submit'));
-		echo $this->Form->button(__('Back'), array('type' => 'button', 'onClick' => 'window.history.back()'));
+	echo $this->Form->button(__('Save'), array('type' => 'submit'));
 	echo $this->Form->end();
 ?>

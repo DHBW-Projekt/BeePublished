@@ -22,10 +22,10 @@ class FoodMenuEntriesController extends AppController {
 	function create() {
 			if ($this->request->is('post')) {			
             if ($this->FoodMenuEntry->save($this->request->data)) {
-                $this->Session->setFlash(__('Der Eintrag wurde gespeichert.'));
+                $this->Session->setFlash(__('The entry has been saved successfully.'));
                 $this->redirect($this->referer());
             } else {
-                $this->Session->setFlash(__('Der Eintrag konnte nicht gespeichert werden.'));
+                $this->Session->setFlash(__('The entry couldn\'t be saved.'));
             }//else
         }//if
 	}//create
@@ -37,7 +37,7 @@ class FoodMenuEntriesController extends AppController {
         	$save = $this->request->data;
         	if ($this->FoodMenuEntry->save($save)) {
             	// Set a session flash message and redirect.
-            	$this->Session->setFlash("Kategorie geändert");
+            	$this->Session->setFlash((__('The entry has been changed successfully')));
             	$this->set('mode', 'edit');
             	$this->redirect($this->referer());
             	//$this->render('/View/admin');
@@ -65,7 +65,7 @@ class FoodMenuEntriesController extends AppController {
 			$this->request->data = $this->FoodMenuEntry->read('deleted', $id);
 			$this->request->data['FoodMenuEntry']['deleted'] = date("Y-m-d H:i:s");
 			if($this->FoodMenuEntry->save($this->request->data)) {
-				$this->Session->setFlash(__('Der Speiseplan wurde entfernt.'));
+				$this->Session->setFlash(__('The entry has been deleted.'));
 				$this->redirect($this->referer());
 			}//if
 		}//if	
@@ -83,11 +83,11 @@ class FoodMenuEntriesController extends AppController {
 						continue;
 					}//if
 					else {
-						$this->Session->setFlash(__('Fehler beim Löschen.'));
+						$this->Session->setFlash(__('Errors occured during deleting.'));
 						return;
 					}	
 			}
-			$this->Session->setFlash(__('Die Einträge wurden entfernt.'));
+			$this->Session->setFlash(__('The entries have been deleted.'));
 			$this->redirect($this->referer());
 		}
 	}//deleteMultiple

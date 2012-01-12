@@ -3,6 +3,8 @@
 <?php $this->Html->css('menu-template', NULL, array('inline' => false));?> 
 
 <?php $this->Html->css('/food_menu/css/menu', NULL, array('inline' => false)); ?>
+
+<?php $this->Html->script('/food_menu/js/confirmbox', array('inline' => false)); ?>
 <div id="menu" class="overlay"> 
 
     <ol class="nav"> 

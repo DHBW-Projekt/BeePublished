@@ -1,14 +1,3 @@
-$(document).ready(function () {
-	$(".foodmenu-overlay").fancybox({
-        'type':'iframe',
-        'width':'90%',
-        'height':'90%',
-        'onClosed':function () {
-            window.location.reload(true);
-        }
-    });
-}); 
-
 function setToday() {
 	// Make sure browser supports getElementById  
 	 if(!document.getElementById ) return; 
@@ -45,3 +34,14 @@ function setTomorrow() {
 		 inputObj.value = month + "/" + day + "/" + year; 
 	 } 
 }
+$(document).ready(function () {
+	$(".foodmenu-overlay").fancybox({
+        'type':'iframe',
+        'width':'90%',
+        'height':'90%',
+        'onClosed':function () {
+            window.location.reload(true);
+        }
+	}
+}
+		
