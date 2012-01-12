@@ -5,11 +5,17 @@
 	
 	//CREATE product details
 	echo '<div id="webshop_detailview">';
-	echo '<h2>'.$data['Product']['name'].'</h2>';
-	echo '<p class="websop_price">'.$data['Product']['price'].' '.$data['Product']['currency'].'</p>';
-	echo '<p>'.$this->Html->image('/WebShop/img/Cart-Add-32.png', array('url' => $url.'/webshop/add/'.$data['Product']['id'], 'class' => "webshop_cart_icon")).'</p>';
 	echo $this->Html->image('/WebShop/img/products/'.$data['Product']['picture'], array('class' => "webshop_detailview_image", 'style' => "margin-right: 10px"));
-	echo $data['Product']['description'];
+	echo '<h2>'.$data['Product']['name'].'</h2>';
+	
+	echo '<table class="webshop_infobox">';
+	echo '<tr>';
+		echo '<td class="websop_price" style="float: left">Preis: '.$data['Product']['price'].' '.$data['Product']['currency'].'</td>';
+		echo '<td style="padding-left:20px">'.$this->Html->image('/WebShop/img/Cart-Add-32.png', array('url' => $url.'/webshop/add/'.$data['Product']['id'], 'class' => "webshop_cart_icon")).'</td>';
+	echo '</tr>';
+	echo '</table>';
+	
 	echo '<br style="clear:left">';
-
+	//echo $this->BBCode->transformBBCode($product['Product']['description']);
+	echo $data['Product']['description'];
 	echo '</div>';

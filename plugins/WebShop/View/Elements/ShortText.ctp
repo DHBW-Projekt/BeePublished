@@ -1,7 +1,7 @@
 <!-- Creates short text based on long text -->
 <?php
 	//Attributes
-	$word_limit = 30;
+	$word_limit = 18;
 	$short_text = '';
 	
 	//COUNT text

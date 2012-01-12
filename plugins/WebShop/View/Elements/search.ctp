@@ -17,7 +17,7 @@
 	if ($result_count > 1 || $result_count == 0) {
 		$count_lbl = 'Suchergebnisse';
 	}else{
-		$count_lbl = 'Suchergebniss';
+		$count_lbl = 'Suchergebnis';
 	}
 
 	echo '<p class="webshop_search_result">';	
@@ -27,8 +27,13 @@
 	//CREATE serch catalog
 	$last_element = (!isset($data)) ? null : end($data);
 	
+	if (isset($this->Paginator) && $this->Paginator->counter('{:pages}') > 1)
+		$start_value = ($this->Paginator->counter('{:page}') - 1) * 10 + 1;
+	else
+		$start_value = 1;
+	
 	//PRINT products
-	echo '<ol>';
+	echo '<ol start="'.$start_value.'">';
 	foreach ((!isset($data)) ? array() : $data as $product){
 		echo '<li>';
 		
