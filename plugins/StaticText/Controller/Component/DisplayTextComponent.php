@@ -11,7 +11,7 @@ class DisplayTextComponent extends Component
 	     	$pub = $params['Published'];
 	     	// not published
 	     	if (!$pub){
-	     		return __(''); //or 'no Text' ?
+	     		return __(''); 
 	     	}	
             return $params['Text']; //exists and published
         }
