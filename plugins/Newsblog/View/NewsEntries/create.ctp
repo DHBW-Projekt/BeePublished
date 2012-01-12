@@ -19,9 +19,14 @@ if($writeAllowed){
 		//create title input
 		echo $this->Form->input('NewsEntry.title', array(
 			'div' => 'writeNewsTitle',
-			'label' => false,
 			'label' => 'Title:',
 			'name' => 'title'
+		));
+		//create subtitle input
+		echo $this->Form->input('NewsEntry.subtitle', array(
+			'div' => 'writeNewsSubtitle',
+			'label' => 'Subtitle:',
+			'name' => 'subtitle'
 		));
 		//create entrytext textarea
 		echo $this->Form->input('NewsEntry.text', array(

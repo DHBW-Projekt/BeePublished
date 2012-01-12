@@ -31,6 +31,13 @@
 		'name' => 'title',
 		'value'=> $newsentry['NewsEntry']['title']
 	));
+	//create subtitle input
+	echo $this->Form->input('NewsEntry.subtitle', array(
+		'div' => 'writeNewsSubtitle',
+		'label' => 'Subtitle:',
+		'name' => 'subtitle',
+		'value'=> $newsentry['NewsEntry']['subtitle']
+	));
 	//create entrytext textarea
 	echo $this->Form->input('NewsEntry.text', array(
 		'div' => 'editNewsBody',
