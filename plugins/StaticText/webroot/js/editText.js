@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('#editTextEditor').ckeditor(function () {
+    $('#nullText').ckeditor(function () {
         },
         {
 

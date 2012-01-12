@@ -3,11 +3,12 @@
  * Controller for editing text
  */
 class DisplayTextController extends StaticTextAppController {
+	public $components = array('ContentValueManager');
+	
 	//main-function
-	public function admin($contentID){
+	public function admin($contentId){
 		$this->layout = 'overlay';
-		//Load datatables
-		$this->loadModel("ContentValues");
+		//Load datatable
 		$this->loadModel('Plugin');
 		//find plugin
 		$textPlugin = $this->Plugin->findByName($this->plugin);
@@ -17,54 +18,36 @@ class DisplayTextController extends StaticTextAppController {
 		//If you are in the requiered role
 		if ($editAllowed){	
 			//Load and save data
-			if (!(empty($this->data))) {
-				//Checks if the text exists
-				$textID = $this->_checkIfTextExists($contentID);
-					//New ContentValue
-				if (!$textID) {
-				 	$cv = $this->data['ContentValues'];
-				 	$cv['content_id'] = $contentID;
-					$textID = $this->ContentValues->create($cv);
-				}
-				//Saves the ContentValue
-				$contentValue = $this->_getContentValue($contentID);
-				$this->ContentValues->set($contentValue);
-				$this->ContentValues->set('key', 'Text');
-				$this->ContentValues->set('value',$this->data['editTextEditor']); //$this->data['ContentValues']['value'] ); //$this->data['editTextEditor']) ;//['textarea']);
-				$this->ContentValues->save();
-				
+			//save data
+			if ($this->request->is('post')) {
+				$this->ContentValueManager->saveContentValues($contentId, $this->request->data['null']);
+				$this->Session->setFlash('Successfully saved');
+			}
+			//load data with contentId
+			$contentValues = $this->ContentValueManager->getContentValues($contentId);
+			if (array_key_exists('Text', $contentValues)) {
+				$text = $contentValues['Text'];
+			} else {
+				$text = "Leer"; //"Leer" or '' ?
+			} 
+			
+			if (array_key_exists('Published', $contentValues)) {
+				$pub = $contentValues['Published'];
+			} else {
+				$pub = false;
+			}
+			if (empty($this->request->data)) {
+				$this->request->data = array(
+			                'null' => array(
+			                    'Text' => $text,
+			                    'Published' => $pub
+				)
+				);
 			}
 		} else    { //If you are not aloowed to
 		   $this->Session->setFlash(__('You are not authenticated to enter these page!'));
 		   //Go to mainpage
 			$this->redirect($this->referer());
 		}
-		$contentValue = $this->_getContentValue($contentID);
-		//shows the saved data
-		if ($contentValue['ContentValues']['key'] == 'Text') {
-			//Get Data from table content_values
-			$tmpContent =  $this->ContentValues->find('first', array('conditions' => array('ContentValues.content_id' => $contentID)));
-			//set the data for the view
-			$this->set('contentValue', $tmpContent);
-			$this->data =  $tmpContent;
-		}
 	}
-	
-	//checks if the text exists
-	function _checkIfTextExists($contentID) {
-		$this->loadModel("ContentValues");
-		$text = $this->_getContentValue($contentID); 
-		if (isset($text)) {
-			return $text;
-		} else {
-			return false;
-		}
-	}
-	
-	//muss noch geändert werden
-	function _getContentValue($contentID) {
-		//'ContentValues.content_id' =>
-		return $this->ContentValues->find('first', array('conditions' => array('ContentValues.content_id' => $contentID)));
-	}
-		
 }
