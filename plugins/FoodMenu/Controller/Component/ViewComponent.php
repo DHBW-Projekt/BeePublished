@@ -96,6 +96,7 @@ class ViewComponent extends Component {
             		}
             	break;
         }
+        $controller->set('webroot', $this->webroot);
         return $data;
 	}
 	

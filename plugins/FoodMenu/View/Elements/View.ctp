@@ -1,6 +1,6 @@
 <?php 
     echo $this->Html->script('/food_menu/js/foodmenu', false);
-    echo $this->Html->css('/food_menu/css/menu'); 
+    $this->Html->css('/food_menu/css/menu', NULL, array('inline' => false)); 
 ?>
 <?php 
 	$user = $this->Session->read('Auth.User');

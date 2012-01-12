@@ -15,7 +15,7 @@ class FoodMenuMenusController extends AppController {
     }
 
 	public function index() {
-		$menus = $this->FoodMenuMenu->find('all');
+		$menus = $this->FoodMenuMenu->find('all', array('order' => array('valid_until ASC')));
 		$this->set('menus', $menus);	
 	}
 	

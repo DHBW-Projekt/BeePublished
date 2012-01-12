@@ -40,3 +40,5 @@
     color:#000;
     text-decoration:none;
   }
+
+ .ui-datepicker-trigger { height: 20px; }
