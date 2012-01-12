@@ -18,22 +18,18 @@ echo $this->Session->flash('NewsletterRecipient');
 echo '</div>';
 
 ?>
-<!-- <form>Search Users: <input type="text" id="search-users"/></form> -->
-<!-- <div id='scrolltable'> -->
-<dic id='recipients'>
-<table>
-	<colgroup>
-		<col/>
-		<col/>
-		<col/>
-	</colgroup>
+<form>Search Recipient: <input type="text" id="search_recipient"/></form>
+<table id='recipients'>
+	<thead>
 	<tr>
 		<th>Email</th>
 		<th>Username</th>
 	</tr>
+	</thead>
+	<tbody>
 
 <?php
-
+// 	echo '<tbody>';
 		if (isset($recipients)){
 				foreach($recipients as $recipient){
 					echo '<tr>';
@@ -72,9 +68,10 @@ echo '</div>';
 // 			}
 		}	
 
-	
+		
 
 	?>
+	</tbody>
 </table>
-</div>
+<!-- </div> -->
 

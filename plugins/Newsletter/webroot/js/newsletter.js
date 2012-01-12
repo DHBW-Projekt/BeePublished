@@ -1,1 +1,3 @@
-$('input#search-users').quicksearch('table#recipients');
+$(document).ready(function () {
+	$('input#search_recipient').quicksearch('table#recipients tbody tr');
+});

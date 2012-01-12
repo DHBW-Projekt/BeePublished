@@ -19,7 +19,9 @@ class NewsletterRecipientsController extends AppController {
 // 		$recipients = $this->paginate('NewsletterRecipient');
 		$recipients = $this->NewsletterRecipient->find('all', array(
 			'order' => array(
-				'NewsletterRecipient.email' => 'asc')));
+				'NewsletterRecipient.email' => 'asc'),
+			'conditions' => array(
+				'NewsletterRecipient.active' => 1)));
 		$this->set('recipients', $recipients);
 	}
 	
