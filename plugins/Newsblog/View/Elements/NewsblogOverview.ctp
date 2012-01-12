@@ -31,7 +31,7 @@
 		$newsblogEntryDivId = "newsblogEntry".$newsEntryId;
 		$title = $NewsEntry['NewsEntry']['title'];
 		$titleForUrl = $this->Slug->generateSlug($title);
-		$text = $NewsEntry['NewsEntry']['text'];
+		$text = $this->BBCode->transformBBCode($NewsEntry['NewsEntry']['text']);
 		if(strlen($text) > $shorttextLength){
 			$substrEnd = $shorttextLength - 3;
 			$text = substr($text, 0, $substrEnd)."...";
@@ -39,6 +39,8 @@
 		$createdOnDate = $DateTimeHelper->format('m-d-Y', $NewsEntry['NewsEntry']['createdOn']);
 		$createdOnTime = $DateTimeHelper->format('H:i', $NewsEntry['NewsEntry']['createdOn']);
 		$createdBy = $NewsEntry['Author']['username'];
+		$modifiedOnDate = null;
+		$modifiedOnTime = null;
 		if($NewsEntry['NewsEntry']['lastModifiedOn'] != null){
 			$modifiedOnDate = $DateTimeHelper->format('m-d-Y', $NewsEntry['NewsEntry']['lastModifiedOn']);
 			$modifiedOnTime = $DateTimeHelper->format('H:i', $NewsEntry['NewsEntry']['lastModifiedOn']);

@@ -34,7 +34,7 @@
 		?>
 	</div>
 	<div class='showFullNewsBody'>
-		<?php echo $data['NewsEntry']['text'];?>
+		<?php echo $this->BBCode->transformBBCode($data['NewsEntry']['text']);?>
 	</div>
 	<div class='showFullNewsSocial'>
 	
