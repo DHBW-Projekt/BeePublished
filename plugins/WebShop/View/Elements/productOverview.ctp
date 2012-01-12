@@ -4,16 +4,16 @@
 	echo $this->element('SearchBar', array('url' => $url));
 	
 	//CREATE catalog
-	$last_element = (!isset($data)) ? null : end($data);
+	$last_element = (!isset($data['Product'])) ? null : end($data['Product']);
 	
 	if (isset($this->Paginator) && $this->Paginator->counter('{:pages}') > 1)
-		$start_value = ($this->Paginator->counter('{:page}') - 1) * 5 + 1;
+		$start_value = ($this->Paginator->counter('{:page}') - 1) * $data['Limit'] + 1;
 	else
 		$start_value = 1;
 	
 	echo '<ol start="'.$start_value.'" id="websop_productcatalog">';
 	
-	foreach ((!isset($data)) ? array() : $data as $product){
+	foreach ((!isset($data['Product'])) ? array() : $data['Product'] as $product){
 		echo '<li>';
 		
 		echo $this->Html->image('/WebShop/img/products/'.$product['Product']['picture'], array('url' => $url.'/webshop/view/'.$product['Product']['id'], 'escape' => False));

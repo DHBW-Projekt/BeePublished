@@ -6,8 +6,6 @@
  * @version 26.12.2011
  */
 class WebShopComponent extends Component {
-   
-	var $helpers = array('BBCode');
 	
    /**
 	* Method to transfer data from plugin to CMS.
@@ -62,10 +60,14 @@ class WebShopComponent extends Component {
 			
 		//PAGINATION options
 		$controller->paginate = array('order' => array( 'Product.created' => 'desc'),
-							       	  'limit' => $params['NumberOfEntries']);
-	
+						       	  'limit' => $params['NumberOfEntries']);
+		
+		//Result data
+		$result['Product'] = $controller->paginate('Product');
+		$result['Limit'] = $params['NumberOfEntries'];
+		
 		//RETURN results for view
-		return array('data' => $controller->paginate('Product'));
+		return array('data' => $result);
 	}
 	
    /**
@@ -233,14 +235,14 @@ class WebShopComponent extends Component {
 		//BUILD mail
 		App::uses('CakeEmail', 'Network/Email');
 		$email = new CakeEmail();
-		$email->template('order', 'email')
+		$email->template('WebShop.order', 'email')
 			  ->emailFormat('html')
 			  ->to('maximilian.stueber@me.com')
-	          ->from('noreply@'.env('SERVER_NAME'), env('SERVER_NAME'))
+	          ->from('maximilian.stueber@me.com'/*'noreply@'.env('SERVER_NAME'), env('SERVER_NAME')*/)
 			  ->subject('Order')
 			  ->viewVars(array(
 		        	'order' => $productIDs,
-					'url' => env('SERVER_NAME'),
+					'url' => 'localhost'/*env('SERVER_NAME')*/,
 		))
 		->send();
 		

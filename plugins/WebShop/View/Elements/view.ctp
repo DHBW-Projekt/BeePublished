@@ -16,6 +16,6 @@
 	echo '</table>';
 	
 	echo '<br style="clear:left">';
-	//echo $this->BBCode->transformBBCode($product['Product']['description']);
-	echo $data['Product']['description'];
+	$this->Helpers->load('BBCode');
+	echo $this->BBCode->transformBBCode($data['Product']['description']);
 	echo '</div>';

@@ -134,7 +134,7 @@ class WebShopController extends AppController {
 		$data = $this->Product->findById($productID);
 		$file_path = WWW_ROOT.'../../plugins/WebShop/webroot//img/products/';
 		
-		unlink($file_path.$data['Product']['picture']);
+		@unlink($file_path.$data['Product']['picture']);
 		
 		//REMOVE db entry
 		$this->Product->delete($productID);
@@ -170,7 +170,7 @@ class WebShopController extends AppController {
 		
 		//REMOVE old image
 		if(!$init_creation){
-			unlink($file_path.$file_old);
+			@unlink($file_path.$file_old);
 		}
 	
 		//CHECK filename
@@ -186,7 +186,7 @@ class WebShopController extends AppController {
 	
 		//MOVE file
 		if(!$upload_error){
-			$upload_error = !move_uploaded_file($file['tmp_name'], $file_path.$file_name);
+			$upload_error = !@move_uploaded_file($file['tmp_name'], $file_path.$file_name);
 		}
 		
 		//RESULT data
