@@ -10,6 +10,13 @@
     height: 100px;
 }
 
+#overlay-header {
+    position: relative;
+    padding: 5px;
+    padding-bottom: 10px;
+    height: 45px;
+}
+
 #pagelogo {
     position: absolute;
     left: 10px;
@@ -68,6 +75,10 @@
     text-transform: uppercase;
 }
 
+#menu.overlay {
+    margin: -10px -20px 20px;
+}
+
 .button {
     display: block;
     line-height: 30px;
@@ -113,4 +124,42 @@
 .flash_success, .flash_failure, #flashMessage {
     padding: 10px;
     margin: 15px 0;
+}
+
+#users_search_bar {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: right;
+}
+
+.role {
+    clear: both;
+    margin-bottom: 10px;
+}
+
+.users_role {
+    padding: 2px;
+}
+
+.users {
+    padding: 10px;
+    min-height: 85px;
+}
+
+.user_detail, .users-placeholder {
+    width: 125px;
+    height: 75px;
+    margin: 5px;
+    float: left;
+    padding: 5px;
+}
+
+.user_pic {
+    text-align: center;
+}
+
+.user_name {
+    text-align: center;
+    font-weight: bold;
+    float:left;
 }

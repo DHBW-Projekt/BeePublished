@@ -3,7 +3,7 @@ $(document).ready(function () {
     callMenu();
     callLayouts();
     callPlugins();
-    $("#sidebar-menu").accordion({ autoHeight:true });
+    $("#sidebar-menu").accordion();
     callPages();
     $('.sort a').fancybox({
         'onClosed':function () {

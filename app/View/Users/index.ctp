@@ -1,65 +1,25 @@
-<div class="users index">
-	<h2><?php echo __('Users');?></h2>
-	<table cellpadding="0" cellspacing="0">
-	<tr>
-			<th><?php echo $this->Paginator->sort('id');?></th>
-			<th><?php echo $this->Paginator->sort('role_id');?></th>
-			<th><?php echo $this->Paginator->sort('username');?></th>
-			<th><?php echo $this->Paginator->sort('password');?></th>
-			<th><?php echo $this->Paginator->sort('email');?></th>
-			<th><?php echo $this->Paginator->sort('last_login');?></th>
-			<th><?php echo $this->Paginator->sort('registered');?></th>
-			<th><?php echo $this->Paginator->sort('confirmation_token');?></th>
-			<th><?php echo $this->Paginator->sort('status');?></th>
-			<th class="actions"><?php echo __('Actions');?></th>
-	</tr>
-	<?php
-	$i = 0;
-	foreach ($users as $user): ?>
-	<tr>
-		<td><?php echo h($user['User']['id']); ?>&nbsp;</td>
-		<td>
-			<?php echo $this->Html->link($user['Role']['name'], array('controller' => 'roles', 'action' => 'view', $user['Role']['id'])); ?>
-		</td>
-		<td><?php echo h($user['User']['username']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['password']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['email']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['last_login']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['registered']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['confirmation_token']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['status']); ?>&nbsp;</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $user['User']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $user['User']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $user['User']['id']), null, __('Are you sure you want to delete # %s?', $user['User']['id'])); ?>
-		</td>
-	</tr>
-<?php endforeach; ?>
-	</table>
-	<p>
-	<?php
-	echo $this->Paginator->counter(array(
-	'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
-	));
-	?>	</p>
-
-	<div class="paging">
-	<?php
-		echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
-		echo $this->Paginator->numbers(array('separator' => ''));
-		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
-	?>
-	</div>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New User'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Roles'), array('controller' => 'roles', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Role'), array('controller' => 'roles', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Log Entries'), array('controller' => 'log_entries', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Log Entry'), array('controller' => 'log_entries', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Pages'), array('controller' => 'pages', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Page'), array('controller' => 'pages', 'action' => 'add')); ?> </li>
-	</ul>
+<?php $this->Html->script('jquery.quicksearch', false); ?>
+<?php $this->Html->script('admin/users', false); ?>
+<div id="users_overview">
+    <div id="users_search_bar">
+    <form>Search Users: <input type="text" id="search-users"/></form>
+    </div>
+    <?php foreach ($roles as $role): ?>
+    <div class="role">
+        <div class="users_role"><?php echo $role['Role']['name'];?></div>
+        <div rel="<?php echo $role['Role']['id'];?>" class="users">
+            <?php foreach ($role['User'] as $user): ?>
+            <div class="user_detail" rel="<?php echo $user['id']; ?>">
+                <div class="user_pic"><?php echo $this->Html->image('group.png', array('width' => '55', 'height' => '55')); ?></div>
+                <div class="user_name"><?php echo $user['username']; ?></div>
+                <div>
+                    <?php echo $this->Html->link($this->Html->image('edit.png', array('width' => '20', 'height' => '20')),array('controller' => 'users', 'action' => 'edit', $user['id']),array('escape' => false, 'class' => 'user_edit')); ?>
+                    <?php echo $this->Html->link($this->Html->image('delete.png', array('width' => '20', 'height' => '20')),array('controller' => 'users', 'action' => 'delete', $user['id']),array('escape' => false)); ?>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+    <?php endforeach; ?>
 </div>
