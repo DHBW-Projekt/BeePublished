@@ -11,7 +11,6 @@
 												   		  	'controller' 	  => 'Subscription',
 												   		  	'action'  	      => 'addRecipient')));
 		echo $this->Form->input('NewsletterRecipient.email', array('label' => 'E-Mail:'));
-//		echo $this->Fck->load('NewsletterRecipient.email');
 		echo $this->Html->div('validation_error',$validationErrors['email'][0]);
     	echo $this->Form->end('Add');
     	echo $this->Session->flash('NewsletterRecipient');
