@@ -67,9 +67,15 @@ class UsersController extends AppController
             //save data to database
             if ($this->User->save($user)) {
             	//create email and set header fields and viewVars
+            	$port = env('SERVER_PORT');
+            	$activationUrl = 'http://'.env('SERVER_NAME');
+            	if($port != 80){
+            		$activationUrl = $activationUrl.':'.$port;
+            	}
+            	$activationUrl = $activationUrl.$this->webroot.'activateUser/'.$this->User->getLastInsertID().'/'.$user['confirmation_token'];
             	$viewVars = array(
             		'username' => $user['username'],
-            		'activationUrl' => 'http://'.env('SERVER_NAME').':'.env('SERVER_PORT').$this->webroot.'users/activateUser/'.$this->User->getLastInsertID().'/'.$user['confirmation_token'],
+            		'activationUrl' => $activationUrl,
             		'url' => env('SERVER_NAME'),
             		'confirmationToken' => $user['confirmation_token']
             	);
@@ -98,10 +104,11 @@ class UsersController extends AppController
     				'url' => env('SERVER_NAME')
     			);
     			$this->BeeEmail->sendHtmlEmail($userDB['User']['email'], 'User activated', $viewVars, 'user_activated');
+    			$this->Session->setFlash('Your user has been activated.');
     			$this->redirect(array('action' => 'login'));
     		} else{
-    			
-    			//token incorrect exception
+    			$this->Session->setFlash('Token invalid! Your user hasn\'t been activated.');
+    			$this->redirect(array('controller' => 'pages', 'action' => 'display'));
     		}
     	} else{
     		//user not exists exception
