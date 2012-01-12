@@ -1,4 +1,7 @@
 <?php
+
+echo $this->element('admin_menu');
+
 if (isset($newsletter)){
 	
 	$this->Html->script('/ckeditor/ckeditor', false);
@@ -20,7 +23,8 @@ if (isset($newsletter)){
 				'value' => 'save'));
 	echo $this->Form->button('Back', array(
 				'type' => 'button',
-				'onClick' => 'location.href=\'/plugin/Newsletter/Subscription/newsletteradmin/\';'));
+				'onClick' => 'window.history.back()'));
+// 				'onClick' => 'location.href=\'/plugin/Newsletter/Subscription/newsletteradmin/\';'));
 	echo $this->Form->end();
 		
 		
@@ -32,13 +36,6 @@ if (isset($newsletter)){
 				'
 	, array('inline' => true));
 
-	echo $this->Html->image('/app/webroot/img/remove.png',array(
-			'style' => 'float: left', 
-			'width' => '20px', 
-			'alt' => '[]Preview', 
-			'url' => array(
-				'plugin' => 'Newsletter', 
-				'controller' => 'NewsletterLetters', 
-				'action' => 'index')));
+
 	
 };

@@ -1,4 +1,7 @@
 <?php
+
+echo $this->element('admin_menu');
+
 if (isset($newsletter)){
 	
 	$this->Html->script('/ckeditor/ckeditor', false);
@@ -20,16 +23,8 @@ if (isset($newsletter)){
 		'value' => 'save'));
 	echo $this->Form->button('Back', array(
 		'type' => 'button',
-		'onClick' => 'location.href=\'/plugin/Newsletter/NewsletterLetters/index/\';'));
+	'onClick' => 'window.history.back()'));
+// 		'onClick' => 'document.location.href=\'/plugin/Newsletter/NewsletterLetters/index/\';'));
 	echo $this->Form->end();
 	echo $this->Fck->load('NewsletterLetter.content');
-	
-	echo $this->Html->image('/app/webroot/img/remove.png',array(
-		'style' => 'float: left', 
-		'width' => '20px', 
-		'alt' => '[]Preview', 
-		'url' => array(
-			'plugin' => 'Newsletter', 
-			'controller' => 'NewsletterLetters', 
-			'action' => 'index')));
 }
