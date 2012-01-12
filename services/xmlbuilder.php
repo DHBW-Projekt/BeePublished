@@ -2,18 +2,27 @@
 
 
 function getRC0Xml(){
-
-	$header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n";
-	$content = "<RC>0</RC>";
-	$xml = $header.$content;
-	return utf8_decode($xml);
+	$content = "<RC>0</RC> \n\r";
+	return $content;
 }
 
 function getRC1Xml(){
-	$header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>";
-	$content = "<RC>1</RC>";
-	$xml = $header.$content;
+	$content = "<RC>1</RC> \n\r ";
+	return $content;
+}
+
+function getAnswer($answer_content){
+	$header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> \n\r ";
+	$start = "<ServiceAnswer>";
+	$end ="</ServiceAnswer>";
+	$xml = $header.$start.$answer_content.$end;
 	return $xml;
+}
+
+function getbackupServiceAnswer($sqldump_url, $zip_url){
+	$sql = "<SqlUrl>".$sqldump_url."</SqlUrl>  \n\r";
+	$zip = "<ZipUrl>".$zip_url."</ZipUrl>   \n\r";
+	return $sql.$zip;
 }
 
 ?>
