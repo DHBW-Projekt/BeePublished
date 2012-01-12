@@ -90,7 +90,7 @@
     margin-right: 2px;
     color: #888888;
     vertical-align: top;
-    float:left;
+    float: left;
 }
 
 col.week {
@@ -104,4 +104,31 @@ col.week {
 
 .notime .calendar_entry_content {
     text-align: center;
+}
+
+td.full_hour, td.half_hour {
+    border-color: #eeeeee;
+    border-right: 1px solid #3292DD;
+
+}
+
+td.full_hour {
+    border-top: 1px solid #3292DD;
+}
+
+td.half_hour {
+}
+
+td.calendar_time {
+    font-size: 12px;
+    vertical-align: middle;
+    background-color: #5CB3FF;
+}
+
+td.calendar_time.half_hour {
+    border-top: 0;
+}
+
+td.calendar_time.half_hour {
+    color: transparent;
 }
