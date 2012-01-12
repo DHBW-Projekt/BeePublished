@@ -102,8 +102,8 @@ class WebShopController extends AppController {
 			$data_old = $this->Product->read();
 			$data_new = $this->data;
 			
-			//UPLOAD new file (if necessary)
-			if (!empty($data_new['Products']['submittedfile'])){
+			//UPLOAD new file (if necessary)			
+			if (!empty($data_new['Products']['submittedfile']['name'])){
 				$result = $this->uploadImage($data_new['Products']['submittedfile'], $data_old['Product']['picture'], true);
 				
 				$data_new['Product']['picture'] = $result['file_name'];
