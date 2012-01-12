@@ -1,6 +1,6 @@
 @CHARSET "ISO-8859-1";
 
-div #guestbook_write label{
+div.guestbook_write td.guestbook_label{
 	font-weight: bold;
 }
 

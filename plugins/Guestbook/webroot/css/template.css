@@ -1,28 +1,34 @@
 @CHARSET "ISO-8859-1";
 
-div #guestbook_write {
-	padding: 20px;
+div.guestbook_write {
+	padding: 2em;
 }
 
-div #guestbook_write td.label{
+/* from here - to be changed by UX Team */ 
+div.guestbook_write label{
+	width: 3em;
+	margin-right: 1em;
+}
+
+div.guestbook_write td.guestbook_label{
 	text-align: right;
 }
 
-div #guestbook_write label{
-	padding: 10px;
-	margin: 10px;
+div.guestbook_write .submit input{
+	margin-top: 1em;
+	margin-left: 5em;
 }
+/* to here - to be changed by UX Team */
 
-div.guestbook_navigation {
-	text-align: right;
-	padding: 5px;
+div #guestbook_display{
+	padding: 1em;
 }
 
 div.guestbook_post {
 	border-style: solid;
 	border-width: 1px;
-	padding: 5px;
-	margin: 5px;
+	padding: 0.5em;
+	margin: 0.5em;
 }
 
 div.guestbook_post_title {
@@ -38,4 +44,34 @@ div.guestbook_post_author {
 
 div.guestbook_post_text{
 	clear: both;
+}
+
+div.guestbook_navigation {
+	text-align: right;
+	padding: 0.5em;
+	margin: 0.5em;
+}
+
+div #guestbook_release{
+	padding: 1em;
+}
+
+div #guestbook_release table{
+	width: 100%;
+}
+
+div #guestbook_release td.check{
+	width: 2em;
+}
+
+div #guestbook_release td.author{
+	width: 10em;
+}
+
+div #guestbook_release td.title{
+	width: 10em;
+}
+
+div #guestbook_release td.date{
+	width: 10em;
 }
