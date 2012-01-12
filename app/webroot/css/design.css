@@ -3,6 +3,15 @@ body {
     background-image: url(../img/bg.jpg);
 }
 
+body.overlay {
+    background-color: #ffffff;
+    background-image: none;
+}
+
+#overlay-header {
+    background-image: url(../img/bg.jpg);
+}
+
 a {
     color: #000000;
 }
@@ -47,42 +56,6 @@ a {
     border-bottom: 5px solid #3292DD;
 }
 
-ol.nav {
-    font-size: 13px;
-}
-
-ol.nav li ol.subnav {
-    background: #363A41;
-    border: 1px solid #2A2F37;
-    color: #ffffff;
-}
-
-ol.nav li {
-    border-right: 1px solid #cccccc;
-    font-size: 14px;
-}
-
-ol.nav li a {
-    color: #2A2F37;
-    text-decoration: none;
-}
-
-ol.subnav li a {
-    color: #ffffff;
-}
-
-ol.nav li a:hover {
-    color: #3292DD;
-}
-
-ol.nav li span {
-    background: url(../img/arrow_down.png) no-repeat center center;
-}
-
-ol.subnav li span {
-    background: url(../img/arrow_right.png) no-repeat center center;
-}
-
 #content {
     background-color: #ffffff;
     padding: 10px 20px;
@@ -116,7 +89,7 @@ ol.subnav li span {
 	color:#A00000;
 }
 
-.flash_success {
+.flash_success, #flashMessage.message {
 	border:3px solid #bedf5d;
 	background:#e2f1a8;
 	font-weight:bold;
@@ -126,4 +99,26 @@ ol.subnav li span {
 	border:3px solid #990000;
 	background:#f97d88;
 	font-weight:bold;
+}
+
+.plugin_administration {
+    background-image: url(../img/nav.gif);
+    background-position: bottom;
+    border: 1px solid #3292DD;
+}
+
+
+.role {
+    border: 1px solid #3292DD;
+}
+
+.users_role {
+    background-color: #3292DD;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.user_detail, .users-placeholder {
+    border: 1px dotted #3292DD;
+    background-color: #ffffff;
 }
