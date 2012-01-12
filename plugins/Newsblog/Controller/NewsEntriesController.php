@@ -21,6 +21,7 @@ class NewsEntriesController extends NewsblogAppController {
 			$data = $this->request->data;
 			$now = date('Y-m-d H:i:s');
 			$title = $data['title'];
+			$subtitle = $data['subtitle'];
 			$text = $data['text'];
 			$validFrom = $data['validFrom'];
 			if($validFrom == "" || $validFrom == null){
@@ -37,6 +38,7 @@ class NewsEntriesController extends NewsblogAppController {
 				$this->NewsEntry->create();
 				//set data in array
 				$newNews['title'] = $title;
+				$newNews['subtitle'] = $subtitle;
 				$newNews['text'] = $text;
 				$newNews['content_id'] = $contentId;
 				$newNews['author_id'] = $userId;
@@ -78,6 +80,7 @@ class NewsEntriesController extends NewsblogAppController {
 			$data = $this->request->data;
 			$now = date('Y-m-d H:i:s');
 			$title = $data['title'];
+			$subtitle = $data['subtitle'];
 			$text = $data['text'];
 			$validFrom = $data['validFrom'];
 			if($validFrom == "" || $validFrom == null){
@@ -95,6 +98,7 @@ class NewsEntriesController extends NewsblogAppController {
 				//set data in array
 				$changedNews['title'] = $title;
 				$changedNews['text'] = $text;
+				$changedNews['subtitle'] = $subtitle;
 				$changedNews['lastModifiedBy'] = $userId;
 				$changedNews['lastModifiedOn'] = $now;
 				$changedNews['validFrom'] = $validFrom;
