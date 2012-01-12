@@ -1,5 +1,5 @@
-HOMEURL#localhost/Dualon
+HOMEURL#http://localhost/DualonCMS
 DBHOST#localhost
-DBNAME#cake
-DBLOGIN#alex
-DBPW#alex
+DBNAME#cake2
+DBLOGIN#root
+DBPW#

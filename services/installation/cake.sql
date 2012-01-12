@@ -41,10 +41,11 @@ CREATE TABLE `containers` (
   CONSTRAINT `containers_ibfk_3` FOREIGN KEY (`page_id`) REFERENCES `pages` (`id`) ON DELETE CASCADE,
   CONSTRAINT `containers_ibfk_1` FOREIGN KEY (`layout_type_id`) REFERENCES `layout_types` (`id`),
   CONSTRAINT `containers_ibfk_2` FOREIGN KEY (`parent_id`) REFERENCES `containers` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=latin1;
 
-INSERT INTO containers VALUES("71","0","22","0","0","0");
-INSERT INTO containers VALUES("72","71","0","1","1","1");
+INSERT INTO containers VALUES("71","","22","","0","0");
+INSERT INTO containers VALUES("72","","23","","0","0");
+INSERT INTO containers VALUES("73","72","","1","1","1");
 
 
 
@@ -77,9 +78,35 @@ CREATE TABLE `contents` (
   KEY `plugin_id` (`plugin_view_id`),
   CONSTRAINT `contents_ibfk_4` FOREIGN KEY (`plugin_view_id`) REFERENCES `plugin_views` (`id`) ON DELETE CASCADE,
   CONSTRAINT `contents_ibfk_3` FOREIGN KEY (`container_id`) REFERENCES `containers` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
-INSERT INTO contents VALUES("27","72","1","1","6");
+INSERT INTO contents VALUES("26","73","1","1","5");
+
+
+
+DROP TABLE IF EXISTS gallery_entries ;
+
+CREATE TABLE `gallery_entries` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `gallery_picture_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+
+DROP TABLE IF EXISTS gallery_pictures ;
+
+CREATE TABLE `gallery_pictures` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `path_to_pic` varchar(255) NOT NULL,
+  `gallery_entry_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 
 
@@ -94,8 +121,39 @@ CREATE TABLE `google_maps_locations` (
   `street` varchar(50) DEFAULT NULL,
   `street_number` varchar(11) NOT NULL,
   PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+INSERT INTO google_maps_locations VALUES("1","0","Deutschland","65451","Kelsterbach","Karlsbader Str.","11");
+
+
+
+DROP TABLE IF EXISTS guestbook_entries ;
+
+CREATE TABLE `guestbook_entries` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `author` int(11) NOT NULL,
+  `created` datetime NOT NULL,
+  `text` text NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
+
+
+DROP TABLE IF EXISTS guestbook_posts ;
+
+CREATE TABLE `guestbook_posts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `author` varchar(60) NOT NULL,
+  `title` varchar(90) NOT NULL,
+  `text` text NOT NULL,
+  `created` datetime NOT NULL,
+  `released` datetime NOT NULL,
+  `deleted` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+INSERT INTO guestbook_posts VALUES("1","horido","Horido","Fuck you!","2012-01-12 09:36:35","0000-00-00 00:00:00","0000-00-00 00:00:00");
 
 
 
@@ -178,9 +236,10 @@ CREATE TABLE `menu_entries` (
   CONSTRAINT `menu_entries_ibfk_5` FOREIGN KEY (`page_id`) REFERENCES `pages` (`id`) ON DELETE CASCADE,
   CONSTRAINT `menu_entries_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`),
   CONSTRAINT `menu_entries_ibfk_4` FOREIGN KEY (`parent_id`) REFERENCES `menu_entries` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=latin1;
 
-INSERT INTO menu_entries VALUES("63","0","2","22","home","0","0000-00-00 00:00:00","0000-00-00 00:00:00","0");
+INSERT INTO menu_entries VALUES("63","","2","22","Home","0","0000-00-00 00:00:00","0000-00-00 00:00:00","0");
+INSERT INTO menu_entries VALUES("64","63","2","23","guestbook","0","0000-00-00 00:00:00","0000-00-00 00:00:00","0");
 
 
 
@@ -202,9 +261,10 @@ CREATE TABLE `pages` (
   UNIQUE KEY `name` (`name`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `pages_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
-INSERT INTO pages VALUES("22","4","home","/","0000-00-00 00:00:00","0000-00-00 00:00:00","0","","0000-00-00 00:00:00","0000-00-00 00:00:00","");
+INSERT INTO pages VALUES("22","4","Home","/home","0000-00-00 00:00:00","0000-00-00 00:00:00","0","","0000-00-00 00:00:00","0000-00-00 00:00:00","");
+INSERT INTO pages VALUES("23","4","guestbook","/gb","0000-00-00 00:00:00","0000-00-00 00:00:00","0","","0000-00-00 00:00:00","0000-00-00 00:00:00","");
 
 
 
@@ -220,8 +280,13 @@ CREATE TABLE `permissions` (
   KEY `role_id` (`role_id`),
   CONSTRAINT `permissions_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`),
   CONSTRAINT `permissions_ibfk_3` FOREIGN KEY (`plugin_id`) REFERENCES `plugins` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
+INSERT INTO permissions VALUES("10","20","4","Write");
+INSERT INTO permissions VALUES("11","20","6","Publish");
+INSERT INTO permissions VALUES("12","20","2","save");
+INSERT INTO permissions VALUES("13","20","5","release");
+INSERT INTO permissions VALUES("14","20","6","delete");
 
 
 
@@ -234,10 +299,11 @@ CREATE TABLE `plugin_views` (
   PRIMARY KEY (`id`),
   KEY `plugin_id` (`plugin_id`),
   CONSTRAINT `plugin_views_ibfk_1` FOREIGN KEY (`plugin_id`) REFERENCES `plugins` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
-INSERT INTO plugin_views VALUES("5","22","Location");
-INSERT INTO plugin_views VALUES("6","22","Route");
+INSERT INTO plugin_views VALUES("1","19","Location");
+INSERT INTO plugin_views VALUES("2","19","Route");
+INSERT INTO plugin_views VALUES("5","20","Guestbook");
 
 
 
@@ -251,10 +317,11 @@ CREATE TABLE `plugins` (
   `version` varchar(10) NOT NULL,
   `author` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
-INSERT INTO plugins VALUES("22","GoogleMaps","1","1","1.0","Patrick Zamzow");
-INSERT INTO plugins VALUES("23","StaticText","0","1","1.0","Christoph Krämer");
+INSERT INTO plugins VALUES("19","GoogleMaps","1","1","1.0","Patrick Zamzow");
+INSERT INTO plugins VALUES("20","Guestbook","1","0","1.0","Sebastian Haase");
+INSERT INTO plugins VALUES("21","StaticText","0","1","1.0","Christoph Krämer");
 
 
 
@@ -274,7 +341,7 @@ INSERT INTO roles VALUES("3","4","Registered");
 INSERT INTO roles VALUES("4","5","Author");
 INSERT INTO roles VALUES("5","6","Editor");
 INSERT INTO roles VALUES("6","7","Administrator");
-INSERT INTO roles VALUES("7","0","Super-Adminsitrator");
+INSERT INTO roles VALUES("7","","Super-Adminsitrator");
 
 
 
@@ -299,7 +366,7 @@ CREATE TABLE `users` (
 INSERT INTO users VALUES("1","2","christoph","9617b34607ee4ef23ee07b341de5a7ca26ede8c7","christoph@christophkraemer.de","2012-01-02 11:32:57","0000-00-00 00:00:00","","1");
 INSERT INTO users VALUES("2","7","test123","e84f100d33cda3f881fe00a334e9dd941dfe2d15","christoph@christophkraemer.de","0000-00-00 00:00:00","2011-12-08 12:26:59","aaaf13160053ec8e18083ecfeb79a2ed34f7f32b","0");
 INSERT INTO users VALUES("3","3","blubb","39bd73dac29aa4190d929fc2ce056dcd31bb4585","test@test.de","2011-12-08 12:44:50","2011-12-08 12:44:38","064acc795ba7d0834d6cafad0ff2b65fbf42e676","0");
-INSERT INTO users VALUES("4","7","alex_m","b9c66d0192cca90fbc63ccb596b6f35b1b78ae91","alexan.chr.mueller@googlemail.com","2012-01-04 17:29:28","2012-01-04 17:28:46","467af5d818717500bf93cd87ed86e72fee934c85","0");
+INSERT INTO users VALUES("4","7","alex_m","b9c66d0192cca90fbc63ccb596b6f35b1b78ae91","alexan.chr.mueller@googlemail.com","2012-01-12 09:34:25","2012-01-12 09:31:08","e92df69e53f0c0dbf8016d8dc2bf3638eaa89094","0");
 
 
 
