@@ -1,7 +1,9 @@
 <?php
 if (isset($newsletter)){
 	
-	$this->Html->script('/ckeditor/ckeditor', false);
+	$this->Html->script('/ckeditor/ckeditor', false);;
+	$this->Html->script('/ckeditor/adapters/jquery',false);
+	$this->Html->script('/newsletter/js/admin',false);
 	
 	echo $this->Form->create('preview', array(
 				'url' => array(
@@ -11,7 +13,7 @@ if (isset($newsletter)){
 	echo $this->Form->input('NewsletterLetter.subject', array(
 				'label' => 'Betreff:', 
 				'value' => $newsletter['NewsletterLetter']['subject']));
-	echo $this->Form->textarea('NewsletterLetter.content', array(
+	echo $this->Form->textarea('NewsletterLetter.contentPreview', array(
 				'label' => '', 
 				'value' => $newsletter['NewsletterLetter']['content'],
 				'rows' => '30'));
@@ -20,19 +22,6 @@ if (isset($newsletter)){
 				'value' => 'save'));
 	echo $this->Form->button('Back', array(
 				'type' => 'button',
-				'onClick' => 'window.history.back()'));
-// 				'onClick' => 'location.href=\'/plugin/Newsletter/Subscription/newsletteradmin/\';'));
-	echo $this->Form->end();
-		
-		
-	echo $this->Html->scriptBlock('
-				CKEDITOR.replace( \'NewsletterLetterContent\',
-									{
-       									readOnly : \'true\',
-    								});
-				'
-	, array('inline' => true));
-
-
-	
+ 				'onClick' => 'window.location.href=\'/plugin/Newsletter/NewsletterLetters/index/\';'));
+	echo $this->Form->end();	
 };
