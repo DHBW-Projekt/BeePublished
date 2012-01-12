@@ -121,7 +121,6 @@ class SubscriptionController extends AppController {
  	
  	public function add(){
  		if ($this->request->is('post')){
- 			// 			debug($this->data);
  			$email = $this->data['NewsletterRecipient']['email'];
  			// check, if recipient already exists, but is inactive
  			$recipient = $this->NewsletterRecipient->findByEmail($email);

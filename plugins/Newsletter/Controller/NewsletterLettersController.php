@@ -1,5 +1,5 @@
 <?php
-App::uses('CakeEmail', 'Network/Email');
+App::uses('CakeEmail', 'Network/Email', 'AppController', 'Controller');
 class NewsletterLettersController extends AppController {
 	var $layout = 'overlay';
 	public $name = 'newsletterLetters';
@@ -72,13 +72,20 @@ class NewsletterLettersController extends AppController {
 				'NewsletterRecipient.email'),
 			'conditions' => array(
 				'active' => 1)));
+		$server = env('SERVER_NAME');
+		$port = env('SERVER_PORT');
+		
+		if($server == 'localhost') {
+			$server = $server.'.de';
+		}
+		echo $server;
 		foreach ($recipients as $recipient){
 			$email = new CakeEmail();
 			$email->emailFormat('html')
 			->template('Newsletter.newsletter', 'email')
 			->subject($newsletter['NewsletterLetter']['subject'])
 			->to($recipient['NewsletterRecipient']['email'])
-			->from('marcuslieberenz@googlemail.com', 'DualonCMS')
+			->from('noreply@'.$server, 'DualonCMS')
 			->viewVars(array(
 				'text' => $newsletter['NewsletterLetter']['content']))
 			->send();

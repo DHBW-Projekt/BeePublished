@@ -5,10 +5,12 @@ $(document).ready(function () {
          readOnly : 'true',
          toolbar : [],
          resize_enabled : false,
-         toolbarCanCollapse : false
+         toolbarCanCollapse : false,
+         height : 250
         });
     $('#NewsletterLetterContentEdit').ckeditor(function () {
     	},
     	{
+    		height : 250
     });
 });
