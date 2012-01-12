@@ -80,7 +80,7 @@
 					$this->Html->image('delete.png', array('class' => 'newsentry_delete_button_icon', 'alt' => 'Delete')),
 					array('plugin' => 'Newsblog', 'controller' => 'NewsEntries', 'action' => 'delete', $newsEntryId),
 					array('escape' => false),
-					"Do you really would like to delete this entry?"
+					"Would you really like to delete this entry?"
 				);
 			}
 			?>
