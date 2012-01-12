@@ -18,7 +18,7 @@
 		// no legend
 		'legend' 	=> false,
 		// Values for the radiobuttons
-		'options'	=> array(1 => ' publish ', 0 => ' unpublish ')
+		'options'	=> array(1 => ' published ', 0 => ' unpublished ')
 	);
 	echo $this->Form->input('Published', $options);?>
 </div>
