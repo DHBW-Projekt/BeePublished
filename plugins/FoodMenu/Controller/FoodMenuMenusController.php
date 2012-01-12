@@ -1,8 +1,8 @@
 <?php
 
-class FoodMenuMenuController extends AppController {
+class FoodMenuMenusController extends AppController {
 	
-	public $name = 'FoodMenuMenu';
+	public $name = 'FoodMenuMenus';
 	public $uses = array('FoodMenu.FoodMenuMenu', 'FoodMenu.FoodMenuCategory', 'FoodMenu.FoodMenuEntry');
 	var $layout = 'overlay';
 
@@ -28,11 +28,10 @@ class FoodMenuMenuController extends AppController {
 			$save = array('FoodMenuMenu' => array('name' => $saveData['FoodMenuMenu']['name'], 'valid_from' => $saveData['FoodMenuMenu']['valid_from'], 'valid_until' =>$saveData['FoodMenuMenu']['valid_until'], 'food_menu_series_id' => $series_id));
 			
             if ($this->FoodMenuMenu->save($save)) {
-                //$this->Session->setFlash(__('Der Speiseplan wurde gespeichert.'));
-                $this->Session->setFlash('Der Speiseplan wurde gespeichert.');
+                $this->Session->setFlash(__('The menu was saved successfully.'));
                 $this->redirect($this->referer());
             } else {
-                $this->Session->setFlash(__('Der Speiseplan konnte nicht gespeichert werden.'));
+                $this->Session->setFlash(__('The menu couldn\'t be saved'));
             }//else
         }//if
 	}//create
@@ -48,7 +47,7 @@ class FoodMenuMenuController extends AppController {
 			$save = array('FoodMenuMenu' => array('id' => $saveData['FoodMenuMenu']['id'], 'name' => $saveData['FoodMenuMenu']['name'], 'valid_from' => $saveData['FoodMenuMenu']['valid_from'], 'valid_until' =>$saveData['FoodMenuMenu']['valid_until'], 'food_menu_series_id' => $series_id));
         	if ($this->FoodMenuMenu->save($save)) {
             	// Set a session flash message and redirect.
-            	$this->Session->setFlash("Speiseplan geändert");
+            	$this->Session->setFlash(__('The menu was edited successfully'));
             	$this->set('mode', 'edit');
             	$this->redirect($this->referer());
         	}
@@ -75,7 +74,7 @@ class FoodMenuMenuController extends AppController {
 			$this->request->data = $this->FoodMenuMenu->read('deleted', $id);
 			$this->request->data['FoodMenuMenu']['deleted'] = date("Y-m-d H:i:s");
 			if($this->FoodMenuMenu->save($this->request->data)) {
-				$this->Session->setFlash(__('Der Speiseplan wurde entfernt.'));
+				$this->Session->setFlash(__('The menu was deleted successfully.'));
 				$this->redirect($this->referer());
 			}//if
 		}//if
@@ -93,11 +92,11 @@ class FoodMenuMenuController extends AppController {
 						continue;
 					}//if
 					else {
-						$this->Session->setFlash(__('Fehler beim Löschen.'));
+						$this->Session->setFlash(__('The menus couldn\'t be deleted'));
 						return;
 					}	
 			}
-			$this->Session->setFlash(__('Die Speisepläne wurden entfernt.'));
+			$this->Session->setFlash(__('The menus were deleted.'));
 			$this->redirect($this->referer());
 		}
 	}//deleteMultiple

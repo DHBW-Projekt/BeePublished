@@ -8,8 +8,8 @@
 <div id="foodMenuMain" style="width:100%; height:450px">
 <?php
 	echo $this->Session->flash();
-	
-	echo $this->element('SelectDate');
+	if(!(isset($url))) $url = '';
+	echo $this->element('SelectDate', array('url', $url));
 	if(!(isset($categories))) $categories = '';
 	if(!(isset($entries))) $entries = '';
 	
@@ -30,7 +30,7 @@
 			echo '</ul>';
 			echo '</div>';			
 		}//if
-		if(array_key_exists('FoodMenuMenu', $data['show'])) {
+		if(array_key_exists('FoodMenuCategory', $data['show']) && isset($data['show']['FoodMenuCategory'][0])) {
 			echo '<div id="foodMenuCategory">';
 			if(array_key_exists('SelectedMenu', $data['show'])) {
 				echo '<h2>' . $data['show']['SelectedMenu']['name'] . '</h2>';
@@ -44,6 +44,37 @@
 					}//else
 				}//foreach
 				echo '</ul>';
+			}//if
+			echo '</div>';
+
+		}//if
+		if(array_key_exists('FoodMenuEntry', $data['show'])  && isset($data['show']['FoodMenuEntry'][0])) {
+			echo '<div id="foodMenuEntry">';
+			if(array_key_exists('SelectedCategory', $data['show'])) {
+				?>
+				<table>
+				<thead>
+				<tr>
+					<th><?php echo $data['show']['SelectedCategory']['name']; ?></th>
+					<th><?php echo (__('price')); ?>
+				</tr>
+				<?php
+				$entryItems = $data['show']['FoodMenuEntry'];
+				foreach ($entryItems as $dataItem){
+					if ( $dataItem['deleted'] != NULL ) continue;
+					else {
+						echo '<tr>';
+						$entry = $dataItem;
+						echo '<td>' . $entry['name'] . '</td>';
+						echo '<td>' . $this->Number->currency($entry['price'], $entry['currency']) . '</td>';
+						if((isset($entry['description'])) && $entry['description'] != '') {
+							echo '</tr><tr>';
+							echo '<td colspan="2">' . $entry['description'] . '</td>';
+						}//if
+						echo '</tr>';
+					}//else
+				}//foreach
+				echo '</table>';				
 			}//if
 			echo '</div>';
 

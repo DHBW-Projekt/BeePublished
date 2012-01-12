@@ -5,6 +5,7 @@ class ViewController extends AppController {
 	public $name = 'View';
 	public $uses = array('FoodMenu.FoodMenuMenu', 'FoodMenu.FoodMenuCategory', 'FoodMenu.FoodMenuEntry');
 	var $layout = 'overlay';
+	var $autoRender = false;
 
 	function beforeFilter()
     {
@@ -15,17 +16,9 @@ class ViewController extends AppController {
     }
 
 	public function admin( $contentID ) {
-//		$menus = $this->FoodMenuMenu->find('all');
-//		$this->set('menus', $menus);
-//		
-//		$categories = $this->FoodMenuCategory->find('all');
-//		$this->set('categories', $categories);
-//		
-//		$entries = $this->FoodMenuEntry->find('all');
-//		$this->set('entries', $entries);
 		$menus = $this->FoodMenuMenu->find('all');
 		$this->set('menus', $menus);
-		$this->render('/FoodMenuMenu/index');
+		$this->render('/FoodMenuMenus/index');
 	}
 	
 	 function addCategoriesToMenu() {
@@ -56,8 +49,15 @@ class ViewController extends AppController {
 		$this->set('entries', $entries);
 		
     	$this->render('/FoodMenuMenu/index');
-    	//$this->redirect($this->referer());
 		
+	}
+	
+	function selectDate() {
+//		if ($this->request->is('post')) {
+//        	$date = $this->request->data;
+//        	$suffix = substr (strrchr ($date['refererurl'], $this->referer()), 1);
+//        	$this->referer($date['refererurl'] . $date['datepicker'] . $suffix);
+//		}
 	}
 }
 ?>

@@ -1,8 +1,9 @@
 <?php
 class ViewComponent extends Component {
 	public $components = array('FoodMenu.FetchFoodMenuEntries');
-	
+		
 	public function getData($controller, $params, $url, $id)	{
+		$controller->helpers[] = 'Number';
 		
 		/*   $url
 		 *     [0] => 'menu'
@@ -13,11 +14,9 @@ class ViewComponent extends Component {
                [5] => id of the category
 		 * 
 		 */
-		
-		debug($params);
-		debug($url);
  		$data = array();
 		if (sizeof($url) != 0) {
+			if (strtotime($url[0])) $selectedDate = array_shift($url);
             if ($url[0] == 'menu') {
                     $data['Page'] = 'View';
                     $data['Action'] = 'showCategories';
@@ -45,7 +44,6 @@ class ViewComponent extends Component {
         	$data['Page'] = 'View';
         	$data['Action'] = 'showMenus';
         	}
-        debug($data);
         switch ($data['Page']) {
             case 'View':
             	if(isset($data['datepicker'])) {
@@ -62,20 +60,40 @@ class ViewComponent extends Component {
         	case 'showMenus':
 		        if(!(isset($selectedDate))) {
 //		        	$selectedDate = date('Y-m-d');
-					$data['show'] = $this->FetchFoodMenuEntries->getMenus($controller);
+					$data['show']['FoodMenuMenu'] = $this->FetchFoodMenuEntries->getMenus($controller);
 		        } else { $data['show'] = $this->FetchFoodMenuEntries->getMenus($controller, $selectedDate); }
                 break;
             case 'showCategories':
             	if(!(isset($selectedDate))) {
-            		$data['show']['FoodMenuCategory'] = $this->FetchFoodMenuEntries->getCategories($controller, $menuId);
+            		$categories = $this->FetchFoodMenuEntries->getCategories($controller, $menuId);
+            		$data['show']['FoodMenuCategory'] =  $categories['FoodMenuCategory'];
+            		$data['show']['SelectedMenu'] = $categories['SelectedMenu'];
             		$data['show']['FoodMenuMenu'] = $this->FetchFoodMenuEntries->getMenus($controller);
-           			debug($data['show']);
-            	} else {$data['show'] = $this->FetchFoodMenuEntries->getCategories($controller, $menuId, $selectedDate);}
+            	} else {
+            		$categories = $this->FetchFoodMenuEntries->getCategories($controller, $menuId);
+            		$data['show']['FoodMenuCategory'] =  $categories['FoodMenuCategory'];
+            		$data['show']['SelectedMenu'] = $categories['SelectedMenu'];
+            		$data['show']['FoodMenuMenu'] = $this->FetchFoodMenuEntries->getMenus($controller, $selectedDate);
+            		}
                 break;
             case 'showEntries':
             	if(!(isset($selectedDate))) {
-                	$data['show'] = $this->FetchFoodMenuEntries->getEntries($controller, $menuId, $categoryId);
-            	} else {$data['show'] = $this->FetchFoodMenuEntries->getEntries($controller, $menuId, $categoryId, $selectedDate);}
+            		$entries = $this->FetchFoodMenuEntries->getEntries($controller, $menuId, $categoryId);
+            		$data['show']['FoodMenuEntry'] = $entries['FoodMenuEntry'];
+            		$data['show']['SelectedCategory'] = $entries['SelectedCategory'];
+            		$categories = $this->FetchFoodMenuEntries->getCategories($controller, $menuId);
+            		$data['show']['FoodMenuCategory'] =  $categories['FoodMenuCategory'];
+            		$data['show']['SelectedMenu'] = $categories['SelectedMenu'];
+            		$data['show']['FoodMenuMenu'] = $this->FetchFoodMenuEntries->getMenus($controller);
+            	} else {
+            		$entries = $this->FetchFoodMenuEntries->getEntries($controller, $menuId, $categoryId);
+            		$data['show']['FoodMenuEntry'] = $entries['FoodMenuEntry'];
+            		$data['show']['SelectedCategory'] = $entries['SelectedCategory'];
+            		$categories = $this->FetchFoodMenuEntries->getCategories($controller, $menuId);
+            		$data['show']['FoodMenuCategory'] =  $categories['FoodMenuCategory'];
+            		$data['show']['SelectedMenu'] = $categories['SelectedMenu'];
+            		$data['show']['FoodMenuMenu'] = $this->FetchFoodMenuEntries->getMenus($controller, $selectedDate);
+            		}
             	break;
         }
         return $data;

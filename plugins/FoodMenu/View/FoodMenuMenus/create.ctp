@@ -1,6 +1,6 @@
 <?php
 	echo $this->element('admin_menu');
-	echo $this->Form->create('FoodMenuMenu', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenu', 'action' => 'create')));
+	echo $this->Form->create('FoodMenuMenu', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenus', 'action' => 'create')));
 	echo $this->Session->flash();
 	echo '<table>';
 	echo '<tr>';

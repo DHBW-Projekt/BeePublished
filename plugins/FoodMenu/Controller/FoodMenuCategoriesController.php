@@ -1,8 +1,8 @@
 <?php
 
-class FoodMenuEntryController extends AppController {
+class FoodMenuCategoriesController extends AppController {
 	
-	public $name = 'FoodMenuEntry';
+	public $name = 'FoodMenuCategories';
 	public $uses = array('FoodMenu.FoodMenuMenu', 'FoodMenu.FoodMenuCategory', 'FoodMenu.FoodMenuEntry');
 	var $layout = 'overlay';
 
@@ -13,19 +13,19 @@ class FoodMenuEntryController extends AppController {
         //Actions which don't require authorization
         $this->Auth->allow('*');
     }
-    
-    public function index() {
-		$entries = $this->FoodMenuEntry->find('all');
-		$this->set('entries', $entries);	
-	}
 
+	public function index() {
+		$categories = $this->FoodMenuCategory->find('all');
+		$this->set('categories', $categories);
+	}//index
+	
 	function create() {
-			if ($this->request->is('post')) {			
-            if ($this->FoodMenuEntry->save($this->request->data)) {
-                $this->Session->setFlash(__('Der Eintrag wurde gespeichert.'));
+		if ($this->request->is('post')) {			
+            if ($this->FoodMenuCategory->save($this->request->data)) {
+                $this->Session->setFlash(__('Die Kategorie wurde gespeichert.'));
                 $this->redirect($this->referer());
             } else {
-                $this->Session->setFlash(__('Der Eintrag konnte nicht gespeichert werden.'));
+                $this->Session->setFlash(__('Die Kategorie konnte nicht gespeichert werden.'));
             }//else
         }//if
 	}//create
@@ -35,7 +35,7 @@ class FoodMenuEntryController extends AppController {
     	if ($this->request->is('post')) {
         	// If the form data can be validated and saved...
         	$save = $this->request->data;
-        	if ($this->FoodMenuEntry->save($save)) {
+        	if ($this->FoodMenuCategory->save($save)) {
             	// Set a session flash message and redirect.
             	$this->Session->setFlash("Kategorie geändert");
             	$this->set('mode', 'edit');
@@ -45,8 +45,8 @@ class FoodMenuEntryController extends AppController {
     	}
 	    // If no form data, find the recipe to be edited
     	// and hand it to the view.
-    	$entry = $this->FoodMenuEntry->findById($id);
-    	$this->set('entry', $entry);
+    	$category = $this->FoodMenuCategory->findById($id);
+    	$this->set('category', $category);
     	$this->set('mode', 'edit');
     	
     	//Submit variables of admin method to make back-button work
@@ -56,30 +56,29 @@ class FoodMenuEntryController extends AppController {
 		$this->set('categories', $categories);
 		$entries = $this->FoodMenuEntry->find('all');
 		$this->set('entries', $entries);
-			
 	}//edit
-
+	
 	function delete($name = null, $id = null) {
-		$this->FoodMenuEntry->id = $id;
+		$this->FoodMenuCategory->id = $id;
 		if ($this->request->is('get')) {
-			$this->request->data = $this->FoodMenuEntry->read('deleted', $id);
-			$this->request->data['FoodMenuEntry']['deleted'] = date("Y-m-d H:i:s");
-			if($this->FoodMenuEntry->save($this->request->data)) {
-				$this->Session->setFlash(__('Der Speiseplan wurde entfernt.'));
+			$this->request->data = $this->FoodMenuCategory->read('deleted', $id);
+			$this->request->data['FoodMenuCategory']['deleted'] = date("Y-m-d H:i:s");
+			if($this->FoodMenuCategory->save($this->request->data)) {
+				$this->Session->setFlash(__('Die Kategorie wurde entfernt.'));
 				$this->redirect($this->referer());
 			}//if
-		}//if	
+		}//if
 	}//delete
 	
 	function deleteMultiple() {
-		if(array_key_exists('FoodMenuEntry', $this->request->data)) {
-			$ids = array_keys($this->request->data['FoodMenuEntry']);
+		if(array_key_exists('FoodMenuCategory', $this->request->data)) {
+			$ids = array_keys($this->request->data['FoodMenuCategory']);
 			echo print_r($ids);
 			foreach ($ids as $id) {
 					echo $id;
-					$this->request->data = $this->FoodMenuEntry->read('deleted', $id);
-					$this->request->data['FoodMenuEntry']['deleted'] = date("Y-m-d H:i:s");
-					if($this->FoodMenuEntry->save($this->request->data)) {
+					$this->request->data = $this->FoodMenuCategory->read('deleted', $id);
+					$this->request->data['FoodMenuCategory']['deleted'] = date("Y-m-d H:i:s");
+					if($this->FoodMenuCategory->save($this->request->data)) {
 						continue;
 					}//if
 					else {
@@ -87,9 +86,10 @@ class FoodMenuEntryController extends AppController {
 						return;
 					}	
 			}
-			$this->Session->setFlash(__('Die Einträge wurden entfernt.'));
+			$this->Session->setFlash(__('Die Kategorien wurden entfernt.'));
 			$this->redirect($this->referer());
 		}
-	}//deleteMultiple
+	}
+	
 }
 ?>
