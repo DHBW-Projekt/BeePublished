@@ -2,7 +2,6 @@
 App::uses('CakeEmail', 'Network/Email');
 class NewsletterLettersController extends AppController {
 	var $layout = 'overlay';
-	public $helpers = array('Fck');
 	public $name = 'newsletterLetters';
 	
 	public $uses = array('Newsletter.NewsletterLetter','Newsletter.NewsletterRecipient');
@@ -11,7 +10,8 @@ class NewsletterLettersController extends AppController {
 			'NewsletterLetter' => array(
 				'limit' => 5, 
 				'order' => array(
-					'NewsletterLetter.date' => 'desc')));
+					'NewsletterLetter.date' => 'desc',
+					'NewsletterLetter.id' => 'desc')));
 	
 	public function index(){
 		$newsletters = $this->paginate('NewsletterLetter');
@@ -39,14 +39,8 @@ class NewsletterLettersController extends AppController {
 			$newsletter['NewsletterLetter']['date'] = $date;
 			$this->NewsletterLetter->set($newsletter);
 			$newsletter = $this->NewsletterLetter->save();
-// 			debug($newsletter);
-// 			$link = '/NewsletterLetters/edit'.$newsletter['NewsletterLetter']['id'];
-			$this->redirect($this->referer($newsletter['NewsletterLetter']['id']));
-// 			echo 'test';
-// 			$this->set('newsletter', $newsletter);
-// 			$this->render('/NewsletterLetter/edit');
-			
-			// hier noch save aus create auf editor mit entsprechendem Newsletter implementieren
+			$this->redirect(array(
+				'action' => 'edit', $newsletter['NewsletterLetter']['id']));
 		}
 	}
 	
