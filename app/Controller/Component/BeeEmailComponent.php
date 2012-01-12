@@ -1,17 +1,20 @@
 <?php
 App::uses('CakeEmail', 'Network/Email');
 
-class EmailComponent extends Component{
+class BeeEmailComponent extends Component{
 	
 	public function sendHtmlEmail($to = null, $subject = null, $viewVars = null, $viewName = null){
 		//get active config with email layout and email from
-		$emailLayout;
+		$emailLayout = null;
 		if($emailLayout == null || $emailLayout == ''){
 			$emailLayout = 'email';
 		}
-		$emailFrom;
+		$emailFrom = null;
 		if($emailFrom == null || $emailFrom == ''){
-			$emailFrom = "noreplay@".env('SERVER_NAME');
+			$emailFrom = "noreply@".env('SERVER_NAME');
+			if(env('SERVER_NAME') == 'localhost'){
+				$emailFrom = $emailFrom.'.de';
+			}
 		}
 		
 		$email = new CakeEmail();
@@ -21,6 +24,7 @@ class EmailComponent extends Component{
 		$email->from($emailFrom);
 		$email->subject($subject);
 		$email->viewVars($viewVars);
+		$email->transport('Mail');
 		$email->send();
 	}
 	
@@ -28,6 +32,9 @@ class EmailComponent extends Component{
 		$emailFrom;
 		if($emailFrom == null || $emailFrom == ''){
 			$emailFrom = "noreplay@".env('SERVER_NAME');
+			if(env('SERVER_NAME') == 'localhost'){
+				$emailFrom = $emailFrom.'.de';
+			}
 		}
 		
 		$email = new CakeEmail();
