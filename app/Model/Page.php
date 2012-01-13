@@ -3,7 +3,6 @@ App::uses('AppModel', 'Model');
 /**
  * Page Model
  *
- * @property User $User
  * @property Container $Container
  * @property MenuEntry $MenuEntry
  */
