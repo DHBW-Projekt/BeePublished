@@ -65,7 +65,7 @@
                         echo $this->Html->link('User Mode', $link);
                     }
                 }
-                echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout'), array('class' => 'signout'));
+                echo $this->Html->link('Logout', array('controller' => 'Users', 'action' => 'logout'), array('class' => 'signout'));
             }
             ?>
         </div>

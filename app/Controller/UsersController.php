@@ -81,7 +81,7 @@ class UsersController extends AppController
                     'confirmationToken' => $user['confirmation_token']
                 );
                 $this->BeeEmail->sendHtmlEmail($user['email'], 'Registration complete - Please confirm your account', $viewVars, 'user_confirmation');
-                $this->redirect(array('action' => 'index'));
+                $this->redirect(array('controller' => 'Users', 'action' => 'index'));
             } else {
 
             }
@@ -110,7 +110,7 @@ class UsersController extends AppController
                 $this->redirect(array('action' => 'login'));
             } else {
                 $this->Session->setFlash('Token invalid! Your user hasn\'t been activated.');
-                $this->redirect(array('controller' => 'pages', 'action' => 'display'));
+                $this->redirect(array('controller' => 'Pages', 'action' => 'display'));
             }
         } else {
             //user not exists exception
@@ -223,7 +223,7 @@ class UsersController extends AppController
     function beforeFilter()
     {
         parent::beforeFilter();
-        $this->Auth->allow('register', 'logout', 'activateUser', 'resetPassword');
+        $this->Auth->allow('register', 'activateUser', 'resetPassword','login');
         $this->Auth->autoRedirect = false;
     }
 
