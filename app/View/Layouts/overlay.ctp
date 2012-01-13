@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title><?php echo $title_for_layout?></title>
     <?php
+    $this->Js->set('webroot', $this->request->webroot);
     echo $this->Html->css('/yaml/core/base');
     echo $this->Html->css('jquery-ui/jquery-ui-1.8.16.custom');
     echo $this->Html->css('design');
