@@ -108,7 +108,6 @@
 			'type' => 'submit', 
 			'value' => 'save'));
 		echo $this->Form->end();
-		echo $this->Fck->load('NewsletterLetter.content');
  	};
  	echo '</div>';
  ?>	

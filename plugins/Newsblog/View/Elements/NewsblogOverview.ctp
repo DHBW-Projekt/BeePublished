@@ -26,10 +26,13 @@
 
 <div class='newsblogcontainer'>
 
-<?php foreach($data['publishedNewsEntries'] as $NewsEntry):
+<?php 
+if( count($data['publishedNewsEntries']) > 0){
+	foreach($data['publishedNewsEntries'] as $NewsEntry):
 		$newsEntryId = $NewsEntry['NewsEntry']['id'];
 		$newsblogEntryDivId = "newsblogEntry".$newsEntryId;
 		$title = $NewsEntry['NewsEntry']['title'];
+		$subtitle = $NewsEntry['NewsEntry']['subtitle'];
 		$titleForUrl = $this->Slug->generateSlug($title);
 		$text = $this->BBCode->transformBBCode($NewsEntry['NewsEntry']['text']);
 		if(strlen($text) > $shorttextLength){
@@ -50,6 +53,9 @@
 	<div class="newsblog_entry" id="<?php echo $newsblogEntryDivId?>">
 		<div class="newsblog_entry_container">
 			<div class="newsblog_entry_title"><?php echo $title?></div>
+			<?php if($subtitle != null & $subtitle != ''){?>
+			<div class="newsblog_entry_subtitle"><?php echo $subtitle?></div>
+			<?php }?>
 			<div class="newsblog_entry_info">
 				by <?php echo $createdBy?> on <?php echo $createdOnDate?> at <?php echo $createdOnTime;?>
 				<?php 
@@ -90,7 +96,10 @@
 		</div>
 		<hr>
 	</div>
-<?php endforeach;?>
+<?php endforeach;
+} else{
+	//echo "<div>There are currently no published news entries in this newsblog.</div>";
+}?>
 
 </div>
 <?php

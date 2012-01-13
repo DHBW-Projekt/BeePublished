@@ -79,7 +79,7 @@
 /**
  * Application wide charset encoding
  */
-	Configure::write('App.encoding', 'ISO-8859-1');
+	Configure::write('App.encoding', 'UTF-8');
 
 /**
  * To configure CakePHP *not* to use mod_rewrite and to
