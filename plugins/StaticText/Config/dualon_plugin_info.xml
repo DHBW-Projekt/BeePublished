@@ -4,7 +4,9 @@
         <author>Viene Sülzer</author>
         <version>2.0</version>
         <views>
-        	<view>DisplayText</view>
+            <view>
+                <name>DisplayText</name>
+            </view>
         </views>
         <permissions>
             <permission>
