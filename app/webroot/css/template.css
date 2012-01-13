@@ -1,5 +1,5 @@
 #main {
-    width: 800px;
+    width: 1000px;
     height: 600px;
     margin: 0 auto;
 }
@@ -161,5 +161,5 @@
 .user_name {
     text-align: center;
     font-weight: bold;
-    float:left;
+    float: left;
 }

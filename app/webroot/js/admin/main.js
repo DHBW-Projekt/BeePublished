@@ -16,13 +16,18 @@ $(document).ready(function () {
 $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
 
 function initSidebar() {
+    $('.button-bar a').fancybox({
+        type:'iframe',
+        width:'90%',
+        height:'90%'
+    });
     if ($.cookie("beeSidebar") == "opened") {
         $('body').attr('class', 'sidebar-open');
         $('#sidebar, #sidebar-opener').attr('class', 'opened');
     }
     $('#sidebar-opener').click(function () {
             if ($(this).attr('class') == 'closed') {
-                $.cookie("beeSidebar", "opened", { path: '/' });
+                $.cookie("beeSidebar", "opened", { path:'/' });
                 $('#sidebar').stop(true, true).animate({
                     left:'0'
                 }, {
@@ -43,7 +48,7 @@ function initSidebar() {
                 });
                 $(this).attr('class', 'opened');
             } else {
-                $.cookie("beeSidebar", null, { path: '/' });
+                $.cookie("beeSidebar", null, { path:'/' });
                 $('#sidebar').stop(true, true).animate({
                     left:'-200'
                 }, {

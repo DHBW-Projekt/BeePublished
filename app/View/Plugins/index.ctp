@@ -1,3 +1,4 @@
+<?php echo $this->element('config-menu'); ?>
 <h2><?php echo __('Installed');?></h2>
 <table>
     <thead>

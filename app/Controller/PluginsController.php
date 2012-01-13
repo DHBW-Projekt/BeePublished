@@ -20,6 +20,7 @@ class PluginsController extends AppController
 
     function index()
     {
+        $this->layout = 'overlay';
         $this->loadModel('CakeSchema');
         $installed = $this->Plugin->find('all');
         foreach ($installed as $idx => $plugin) {
