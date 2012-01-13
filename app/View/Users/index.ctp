@@ -1,5 +1,6 @@
 <?php $this->Html->script('jquery.quicksearch', false); ?>
 <?php $this->Html->script('admin/users', false); ?>
+<?php echo $this->element('config-menu'); ?>
 <div id="users_overview">
     <div id="users_search_bar">
     <form>Search Users: <input type="text" id="search-users"/></form>

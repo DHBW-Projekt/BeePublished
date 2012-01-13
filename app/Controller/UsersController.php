@@ -18,6 +18,7 @@ class UsersController extends AppController
      */
     public function index()
     {
+        $this->layout = 'overlay';
         $roles = $this->Role->find('all');
         $this->set('roles', $roles);
         $this->set('systemPage', false);

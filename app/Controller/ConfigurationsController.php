@@ -3,78 +3,36 @@
 class ConfigurationsController extends AppController
 {
 
-    public $uses = array('Configuration');
-
-// 	public $helpers = array('');
-// 	public $components = array('');
-
-    function beforeFilter()
-    {
-        //Actions which don't require authorization
-        parent::beforeFilter();
-        $this->Auth->allow('index');
-    }
-
     public function index()
     {
+        $this->layout = 'overlay';
 
-        $this->set('title_for_layout', __('Current configuration'));
+        $config = $this->Configuration->find('first');
 
-        // after creating database it has no entry -> prepare for entering values
-        $allConfigurations = $this->Configuration->find('all');
-        if (!array_key_exists('0', $allConfigurations)) {
-            $this->Configuration->save($this->Configuration->create());
+        if (!$config) {
+            $config = $this->Configuration->create();
+            $config['config_name'] = 'default';
+            $config['page_name'] = 'BeePublish';
+            $config['status'] = true;
+            $config['config_name'] = 'default';
+            $config['active_design'] = 'default';
+            $config['active_template'] = 'default';
+            $this->Configuration->save($config);
+            $this->redirect(array('action' => 'index'));
         }
 
-        //Only one configuration is possible - set id
-        $this->Configuration->id = $allConfigurations[0]['Configuration']['id'];
-
-        // find all Templates and Designs -> see function
-        $files = $this->findFiles();
-        $designs = $files['designs'];
-        $templates = $files['templates'];
-
-        // set variables for display
-        $this->set('designs', $designs);
-        $this->set('templates', $templates);
-        if ($this->request->is('get')) {
-
-            // read data
-            $this->request->data = $this->Configuration->read();
-
-            // check whether design and template is set
-            // change request data so select boxes work correctly (name to id)
-            if (!empty($this->request->data['Configuration']['activeDesign'])) {
-                $design_name = $this->request->data['Configuration']['activeDesign'];
-                $design_keys = array_keys($designs, $design_name);
-                $this->request->data['Configuration']['activeDesign'] = $design_keys[0];
-            }
-            if (!empty($this->request->data['Configuration']['activeTemplate'])) {
-                $template_name = $this->request->data['Configuration']['activeTemplate'];
-                $template_keys = array_keys($templates, $template_name);
-                $this->request->data['Configuration']['activeTemplate'] = $template_keys[0];
-            }
-
-        } //if
-        else
-        {
-            // 			die(debug($this->request->data));
-            // change request data for save (id to name)
-            if (!empty($this->request->data['Configuration']['activeDesign'])) {
-                $design_id = $this->request->data['Configuration']['activeDesign'];
-                $this->request->data['Configuration']['activeDesign'] = $designs[$design_id];
-            }
-            if (!empty($this->request->data['Configuration']['activeTemplate'])) {
-                $template_id = $this->request->data['Configuration']['activeTemplate'];
-                $this->request->data['Configuration']['activeTemplate'] = $templates[$template_id];
-            }
-
-            // save data
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $this->Configuration->id = $config['Configuration']['id'];
             if ($this->Configuration->save($this->request->data)) {
-                $this->Session->setFlash('Your data has been updated.');
-                $this->redirect(array('action' => 'index'));
+                $this->Session->setFlash('Successfully saved');
+            } else {
+                $this->Session->setFlash('Saving failed');
             }
-        } //else
+            $this->redirect(array('action' => 'index'));
+        } else {
+            $this->request->data = $config;
+        }
+
     } //index()
 
     private function findFiles()
