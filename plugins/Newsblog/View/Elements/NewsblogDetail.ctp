@@ -11,7 +11,7 @@
 	<div class='showFullNewsTitle'>
 		<?php echo $data['NewsEntry']['title'];?>
 	</div>
-	<?php if($data['NewsEntry']['subtitle'] != null & $subtitle != ''){?><div class="showFullNewsSubtitle"><?php echo $data['NewsEntry']['subtitle']?></div><?php }?>
+	<?php if($data['NewsEntry']['subtitle'] != null & $data['NewsEntry']['subtitle'] != ''){?><div class="showFullNewsSubtitle"><?php echo $data['NewsEntry']['subtitle']?></div><?php }?>
 	<div class='showFullNewsInfo'>
 		<?php 
 			$createdOnDate = $DateTimeHelper->format('m-d-Y', $data['NewsEntry']['createdOn']);
