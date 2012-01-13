@@ -6,7 +6,7 @@
         <version>1.0</version>
         <permissions>
             <permission>
-                <role>Autor</role>
+                <role>Author</role>
                 <action>CreateEvent</action>
             </permission>
         </permissions>
