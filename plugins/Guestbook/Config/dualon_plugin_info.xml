@@ -20,10 +20,7 @@
 		</permissions>	
 		<views>
 			<view>
-				<name>WritePost</name>
-			</view>
-			<view>
-				<name>DisplayPosts</name>
+				<name>Guestbook</name>
 			</view>
 		</views>
 	</plugin>

@@ -1,6 +1,6 @@
 <?php
 
-class DisplayPostsController extends AppController {
+class GuestbookController extends AppController {
 
 	public $uses = array('Guestbook.GuestbookPost');
 
@@ -30,7 +30,7 @@ class DisplayPostsController extends AppController {
 		}		
 		// save changed posts and set positive message (text is depending on number of posts)
 		if ($this->GuestbookPost->saveMany($toRelease)) {
-			if ($index = 1){
+			if ($index == 1){
 				$this->Session->setFlash(__('Post released.'), 'default', array('class' => 'flash_success'), 'Guestbook.Admin');
 				$this->redirect($this->referer());
 			} else {

@@ -35,23 +35,6 @@ class GuestbookPostController extends GuestbookAppController {
 		}
 	}
 
-// 	function release($id){
-// 		// get id from link
-// 		$this->GuestbookPost->id = $id;
-// 		// read data into model
-// 		$this->request->data = $this->GuestbookPost->read();
-// 		// set released with current date and time
-// 		$this->request->data['GuestbookPost']['released'] = date("Y-m-d H:i:s");
-// 		// save changed model and set positive message
-// 		if ($this->GuestbookPost->save($this->request->data)) {
-// 			$this->Session->setFlash(__('Post released.'), 'default', array('class' => 'flash_success'), 'Guestbook');
-// 			$this->redirect($this->referer());
-// 		}
-// 		// if errors occur set error message
-// 		$this->Session->setFlash(__('An error has occured.'), 'default', array('class' => 'flash_failure'), 'Guestbook');
-// 		$this->redirect($this->referer());
-// 	}
-
 	function delete($id){
 		// get id from link
 		$this->GuestbookPost->id = $id;
@@ -62,11 +45,11 @@ class GuestbookPostController extends GuestbookAppController {
 		else{
 			//delete post from database and set positive message
 			if ($this->GuestbookPost->delete($id)) {
-				$this->Session->setFlash(__('Post deleted.'), 'default', array('class' => 'flash_success'), 'Guestbook.DisplayPosts');
+				$this->Session->setFlash(__('Post deleted.'), 'default', array('class' => 'flash_success'), 'Guestbook.Main');
 				$this->redirect($this->referer());
 			}
 			// if errors occur set error message
-			$this->Session->setFlash(__('An error has occured.'), 'default', array('class' => 'flash_failure'), 'Guestbook.DisplayPosts');
+			$this->Session->setFlash(__('An error has occured.'), 'default', array('class' => 'flash_failure'), 'Guestbook.Main');
 			$this->redirect($this->referer());
 		}
 	}

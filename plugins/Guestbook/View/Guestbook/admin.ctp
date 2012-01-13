@@ -8,7 +8,7 @@
 
 <div id='guestbook_release'>
 
-<?php echo $this->Form->create('releasePosts', array('url' => array('plugin' => 'Guestbook', 'controller' => 'DisplayPosts','action' => 'release')));?>
+<?php echo $this->Form->create('releasePosts', array('url' => array('plugin' => 'Guestbook', 'controller' => 'Guestbook','action' => 'release')));?>
 
 <table>
 	<tr>
