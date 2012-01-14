@@ -14,10 +14,7 @@ class MenuEntriesController extends AppController
     function beforeFilter()
     {
         parent::beforeFilter();
-        $role = $this->PermissionValidation->getUserRoleId();
-        if ($role != 6 && $role != 7) {
-            $this->redirect($this->request->webroot);
-        }
+        $this->PermissionValidation->actionAllowed(null, 'LayoutManager',true);
     }
 
     function add($parent)

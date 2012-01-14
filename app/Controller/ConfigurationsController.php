@@ -3,6 +3,12 @@
 class ConfigurationsController extends AppController
 {
 
+    function beforeFilter()
+    {
+        parent::beforeFilter();
+        $this->PermissionValidation->actionAllowed(null, 'GeneralConfiguration', true);
+    }
+
     public function index()
     {
         $this->layout = 'overlay';

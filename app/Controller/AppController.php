@@ -7,7 +7,8 @@ class AppController extends Controller
         'Session',
         'Auth' => array(
             'loginRedirect' => '/',
-            'logoutRedirect' => '/'
+            'logoutRedirect' => '/',
+            'loginAction' => array('controller' => 'Users', 'action' => 'login')
         ),
         'PermissionValidation'
     );
