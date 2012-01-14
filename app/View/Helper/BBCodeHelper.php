@@ -13,7 +13,7 @@ class BBCodeHelper extends AppHelper
         $string = preg_replace("/\[color=(.*)\](.*)\[\/color\]/Usi", "<span color=\"\\1\">\\2</span>", $string);
         $string = preg_replace("/\[url=(.*)\](.*)\[\/url\]/Usi", "<a href=\"\\1\">\\2</a>", $string);
         $string = preg_replace("/\[img\](.*)\[\/img\]/Usi", "<img src=\"\\1\"/>", $string);
-        $string = nl2br($string,true);
+        $string = nl2br($string);
         return $string;
     }
 }

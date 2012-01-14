@@ -41,7 +41,7 @@ class PagesController extends AppController
         $page = $this->findPage($url);
 
         if (!$page) {
-            echo "NO PAGE IN DATABASE!!!";
+            //echo "NO PAGE IN DATABASE!!!";
             $this->set('elements', array());
             $this->myUrl = null;
         } else {
