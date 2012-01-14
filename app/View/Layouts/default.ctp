@@ -79,7 +79,7 @@
             if ($adminMode) {
                 echo $this->Html->link(
                     $this->Html->image('sort.png'),
-                    array('controller' => 'menuentries', 'action' => 'sort'),
+                    array('controller' => 'MenuEntries', 'action' => 'sort'),
                     array('escape' => false, 'class' => 'iframe')
                 );
             }
