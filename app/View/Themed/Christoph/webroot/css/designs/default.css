@@ -1,6 +1,6 @@
 body {
     font-family: Arial, Tahoma, sans-serif;
-    background-image: url(../img/bg.jpg);
+    background-image: url(../../img/bg.jpg);
 }
 
 body.overlay {
@@ -9,7 +9,7 @@ body.overlay {
 }
 
 #overlay-header {
-    background-image: url(../img/bg.jpg);
+    background-image: url(../../img/bg.jpg);
 }
 
 a {
@@ -51,7 +51,7 @@ a {
 }
 
 #menu {
-    background-image: url(../img/nav.gif);
+    background-image: url(../../img/nav.gif);
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-bottom: 5px solid #3292DD;
 }
@@ -102,7 +102,7 @@ a {
 }
 
 .plugin_administration {
-    background-image: url(../img/nav.gif);
+    background-image: url(../../img/nav.gif);
     background-position: bottom;
     border: 1px solid #3292DD;
 }

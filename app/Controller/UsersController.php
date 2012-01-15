@@ -18,25 +18,13 @@ class UsersController extends AppController
      */
     public function index()
     {
+        $this->PermissionValidation->actionAllowed(null, 'UserManagement', true);
+
+        $this->layout = 'overlay';
         $roles = $this->Role->find('all');
         $this->set('roles', $roles);
         $this->set('systemPage', false);
-        $this->set('adminMode',true);
-    }
-
-    /**
-     * view method
-     *
-     * @param string $id
-     * @return void
-     */
-    public function view($id = null)
-    {
-        $this->User->id = $id;
-        if (!$this->User->exists()) {
-            throw new NotFoundException(__('Invalid user'));
-        }
-        $this->set('user', $this->User->read(null, $id));
+        $this->set('adminMode', true);
     }
 
     /**
@@ -66,54 +54,55 @@ class UsersController extends AppController
             $this->request->data['User'] = $user;
             //save data to database
             if ($this->User->save($user)) {
-            	//create email and set header fields and viewVars
-            	$port = env('SERVER_PORT');
-            	$activationUrl = 'http://'.env('SERVER_NAME');
-            	if($port != 80){
-            		$activationUrl = $activationUrl.':'.$port;
-            	}
-            	$activationUrl = $activationUrl.$this->webroot.'activateUser/'.$this->User->getLastInsertID().'/'.$user['confirmation_token'];
-            	$viewVars = array(
-            		'username' => $user['username'],
-            		'activationUrl' => $activationUrl,
-            		'url' => env('SERVER_NAME'),
-            		'confirmationToken' => $user['confirmation_token']
-            	);
-            	$this->BeeEmail->sendHtmlEmail($user['email'], 'Registration complete - Please confirm your account', $viewVars, 'user_confirmation');
-            	$this->redirect(array('action' => 'index'));
+                //create email and set header fields and viewVars
+                $port = env('SERVER_PORT');
+                $activationUrl = 'http://' . env('SERVER_NAME');
+                if ($port != 80) {
+                    $activationUrl = $activationUrl . ':' . $port;
+                }
+                $activationUrl = $activationUrl . $this->webroot . 'activateUser/' . $this->User->getLastInsertID() . '/' . $user['confirmation_token'];
+                $viewVars = array(
+                    'username' => $user['username'],
+                    'activationUrl' => $activationUrl,
+                    'url' => env('SERVER_NAME'),
+                    'confirmationToken' => $user['confirmation_token']
+                );
+                $this->BeeEmail->sendHtmlEmail($user['email'], 'Registration complete - Please confirm your account', $viewVars, 'user_confirmation');
+                $this->redirect(array('controller' => 'Users', 'action' => 'index'));
             } else {
-                
+
             }
         }
         $this->set('adminMode', false);
         $this->set('menu', $this->Menu->buildMenu($this, NULL));
         $this->set('systemPage', true);
     }
-    
-    public function activateUser($userId = null, $tokenIn = null){
-    	$this->User->id = $userId;
-    	if ($this->User->exists()){
-    		$this->User->id = $userId;
-    		$userDB = $this->User->findById($userId);
-    		$tokenDB = $userDB['User']['confirmation_token'];
-    		if ($tokenIn == $tokenDB){
-    			// Update the status flag to active
-    			$this->User->saveField('status', true);
-    			$viewVars = array(
-    				'username' => $userDB['User']['username'],
-    				'url' => env('SERVER_NAME')
-    			);
-    			$this->BeeEmail->sendHtmlEmail($userDB['User']['email'], 'User activated', $viewVars, 'user_activated');
-    			$this->Session->setFlash('Your user has been activated.');
-    			$this->redirect(array('action' => 'login'));
-    		} else{
-    			$this->Session->setFlash('Token invalid! Your user hasn\'t been activated.');
-    			$this->redirect(array('controller' => 'pages', 'action' => 'display'));
-    		}
-    	} else{
-    		//user not exists exception
-    		throw new NotFoundException(__('Invalid user'));
-    	}
+
+    public function activateUser($userId = null, $tokenIn = null)
+    {
+        $this->User->id = $userId;
+        if ($this->User->exists()) {
+            $this->User->id = $userId;
+            $userDB = $this->User->findById($userId);
+            $tokenDB = $userDB['User']['confirmation_token'];
+            if ($tokenIn == $tokenDB) {
+                // Update the status flag to active
+                $this->User->saveField('status', true);
+                $viewVars = array(
+                    'username' => $userDB['User']['username'],
+                    'url' => env('SERVER_NAME')
+                );
+                $this->BeeEmail->sendHtmlEmail($userDB['User']['email'], 'User activated', $viewVars, 'user_activated');
+                $this->Session->setFlash('Your user has been activated.');
+                $this->redirect(array('action' => 'login'));
+            } else {
+                $this->Session->setFlash('Token invalid! Your user hasn\'t been activated.');
+                $this->redirect(array('controller' => 'Pages', 'action' => 'display'));
+            }
+        } else {
+            //user not exists exception
+            throw new NotFoundException(__('Invalid user'));
+        }
     }
 
     /**
@@ -124,6 +113,8 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
+        $this->PermissionValidation->actionAllowed(null, 'UserManagement', true);
+
         $this->layout = 'overlay';
         $this->User->id = $id;
         if (!$this->User->exists()) {
@@ -148,9 +139,15 @@ class UsersController extends AppController
      */
     public function delete($id = null)
     {
+        $this->PermissionValidation->actionAllowed(null, 'UserManagement', true);
+
         $this->User->id = $id;
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));
+        }
+        if ($this->User->id == $this->Auth->user('id')) {
+            $this->Session->setFlash(__('You cannot delete your own user.'));
+            $this->redirect(array('action' => 'index'));
         }
         if ($this->User->delete()) {
             $this->Session->setFlash(__('User deleted'));
@@ -174,23 +171,23 @@ class UsersController extends AppController
             }
             //if user isn't already logged in
             else {
-            	$userDB = $this->User->findByUsername($this->request->data['User']['username']);
-            	if($userDB['User']['status']){
-            		if ($this->Auth->login()) {
-            			//update "last_login"
-            			$this->User->id = $this->Auth->user('id');
-            			$now = date('Y-m-d H:i:s');
-            			$this->User->saveField('last_login', $now);
-            			$this->Session->setFlash('Welcome');
-            			$this->redirect($this->Auth->redirect());
-            		} else {
-            			$this->Session->setFlash('Your username or password was incorrect.');
-            			$this->redirect($this->referer());
-            		}
-            	} else{
-            		$this->Session->setFlash('Login not possible! Your user either hasn\'t been activated yet or has been locked!');
-            		$this->redirect($this->referer());
-            	}
+                $userDB = $this->User->findByUsername($this->request->data['User']['username']);
+                if ($userDB['User']['status']) {
+                    if ($this->Auth->login()) {
+                        //update "last_login"
+                        $this->User->id = $this->Auth->user('id');
+                        $now = date('Y-m-d H:i:s');
+                        $this->User->saveField('last_login', $now);
+                        $this->Session->setFlash('Welcome');
+                        $this->redirect($this->Auth->redirect());
+                    } else {
+                        $this->Session->setFlash('Your username or password was incorrect.');
+                        $this->redirect($this->referer());
+                    }
+                } else {
+                    $this->Session->setFlash('Login not possible! Your user either hasn\'t been activated yet or has been locked!');
+                    $this->redirect($this->referer());
+                }
             }
         }
         $this->set('menu', $this->Menu->buildMenu($this, NULL));
@@ -217,8 +214,7 @@ class UsersController extends AppController
     function beforeFilter()
     {
         parent::beforeFilter();
-        $this->Auth->allow('register', 'logout', 'activateUser', 'resetPassword');
-        $this->Auth->autoRedirect = false;
+        $this->Auth->allow('register', 'activateUser', 'resetPassword', 'login');
     }
 
     /**
@@ -229,35 +225,35 @@ class UsersController extends AppController
      */
     function resetPassword($username = null, $email = null)
     {
-    	if ($this->request->is('post') || $this->request->is('put')){
-    		$username = $this->request->data['User']['username'];
-    		$email = $this->request->data['User']['email'];
-    		
-    		$conditions = array('username' => $username, 'email' => $email);
-    		$userDB = $this->User->find('first',array('conditions' => $conditions));
-    		
-    		if($userDB){
-    			// Generates a new password (10 characters)
-    			$newpw = $this->Password->generatePassword(10);
-    			//Set new password
-    			$this->User->id = $userDB['User']['id'];
-    			if($this->User->saveField('password', $newpw)){
-    				$viewVars = array(
-    					'username' => $username,
-    					'url' => env('SERVER_NAME'),
-    					'newPassword' => $newpw
-    				);
-    				
-    				$this->BeeEmail->sendHtmlEmail($userDB['User']['email'], 'Your new password', $viewVars, 'user_new_password');
-    				$this->redirect(array('action' => 'login'));
-    			}
-    		} else{
-    			throw new NotFoundException('Invalid user');
-    		}
-    	}
-    	$this->set('adminMode', false);
-    	$this->set('menu', $this->Menu->buildMenu($this, NULL));
-    	$this->set('systemPage', true);
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $username = $this->request->data['User']['username'];
+            $email = $this->request->data['User']['email'];
+
+            $conditions = array('username' => $username, 'email' => $email);
+            $userDB = $this->User->find('first', array('conditions' => $conditions));
+
+            if ($userDB) {
+                // Generates a new password (10 characters)
+                $newpw = $this->Password->generatePassword(10);
+                //Set new password
+                $this->User->id = $userDB['User']['id'];
+                if ($this->User->saveField('password', $newpw)) {
+                    $viewVars = array(
+                        'username' => $username,
+                        'url' => env('SERVER_NAME'),
+                        'newPassword' => $newpw
+                    );
+
+                    $this->BeeEmail->sendHtmlEmail($userDB['User']['email'], 'Your new password', $viewVars, 'user_new_password');
+                    $this->redirect(array('action' => 'login'));
+                }
+            } else {
+                throw new NotFoundException('Invalid user');
+            }
+        }
+        $this->set('adminMode', false);
+        $this->set('menu', $this->Menu->buildMenu($this, NULL));
+        $this->set('systemPage', true);
     }
 
     /**
@@ -268,13 +264,15 @@ class UsersController extends AppController
      */
     function changeRole($id = null, $newRole = null)
     {
+        $this->PermissionValidation->actionAllowed(null, 'UserManagement', true);
+
         $this->User->id = $id;
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));
         }
 
         if ($this->request->is('post')) {
-            $this->User->set('role_id',$newRole);
+            $this->User->set('role_id', $newRole);
             $this->User->save();
         }
     }

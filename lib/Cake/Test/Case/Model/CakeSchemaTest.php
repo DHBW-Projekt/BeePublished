@@ -806,7 +806,7 @@ class CakeSchemaTest extends CakeTestCase {
 					'modified' => array('type' => 'datetime', 'null' => false, 'default' => NULL),
 					'name' => array('type' => 'string', 'null' => false, 'default' => NULL, 'length' => 100),
 					'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1)),
-					'tableParameters' => array('charset' => 'latin1', 'collate' => 'latin1_swedish_ci', 'engine' => 'MyISAM')
+					'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'MyISAM')
 				)
 			),
 			'ratings' => array(
@@ -817,7 +817,7 @@ class CakeSchemaTest extends CakeTestCase {
 				'created' => array('type' => 'datetime', 'null' => false, 'default' => NULL),
 				'modified' => array('type' => 'datetime', 'null' => false, 'default' => NULL),
 				'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1)),
-				'tableParameters' => array('charset' => 'latin1', 'collate' => 'latin1_swedish_ci', 'engine' => 'MyISAM')
+				'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'MyISAM')
 			)
 		);
 		$compare = $New->compare($this->Schema, $tables);
@@ -831,7 +831,7 @@ class CakeSchemaTest extends CakeTestCase {
 					'created' => array('type' => 'datetime', 'null' => false, 'default' => NULL, 'after' => 'value'),
 					'modified' => array('type' => 'datetime', 'null' => false, 'default' => NULL, 'after' => 'created'),
 					'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1)),
-					'tableParameters' => array('charset' => 'latin1', 'collate' => 'latin1_swedish_ci', 'engine' => 'MyISAM')
+					'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'MyISAM')
 				)
 			)
 		);
@@ -882,7 +882,7 @@ class CakeSchemaTest extends CakeTestCase {
 					'PRIMARY' => array('column' => 'id', 'unique' => true)
 				),
 				'tableParameters' => array(
-					'charset' => 'latin1',
+					'charset' => 'utf8',
 					'collate' => 'latin1_general_ci'
 				)
 			),
@@ -896,7 +896,7 @@ class CakeSchemaTest extends CakeTestCase {
 				),
 				'tableParameters' => array(
 					'engine' => 'InnoDB',
-					'charset' => 'latin1',
+					'charset' => 'utf8',
 					'collate' => 'latin1_general_ci'
 				)
 			)

@@ -2,7 +2,7 @@
 /**
  * This file is loaded automatically by the app/webroot/index.php file after core.php
  *
- * This file should load/create any application wide configuration settings, such as 
+ * This file should load/create any application wide configuration settings, such as
  * Caching, Logging, loading additional configuration files.
  *
  * You should also use this file to include any files that provide global functions/constants
@@ -63,5 +63,11 @@ Cache::config('default', array('engine' => 'File'));
  * CakePlugin::load('DebugKit'); //Loads a single plugin named DebugKit
  *
  */
-
 CakePlugin::loadAll();
+foreach (CakePlugin::loaded() as $plugin) {
+    $path = CakePlugin::path($plugin) . 'Config' . DS . 'routes.php';
+    if (file_exists($path)) {
+        CakePlugin::unload($plugin);
+        CakePlugin::load($plugin, array('routes' => true));
+    }
+}

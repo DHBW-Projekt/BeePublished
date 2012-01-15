@@ -25,7 +25,7 @@ class PermissionValidationComponent extends Component {
 		return $allActions;
 	}
 	
-	public function actionAllowed($pluginId = null, $action = null){
+	public function actionAllowed($pluginId = null, $action = null, $throwException = false){
 		$this->Permission = ClassRegistry::init('Permission');
 		$this->Role = ClassRegistry::init('Role');
 		
@@ -59,6 +59,9 @@ class PermissionValidationComponent extends Component {
 				}
 			}
 		}
+        if ($throwException && !$actionAllowed) {
+            throw new ForbiddenException('You are not allowed to access this page.',401);
+        }
 		return $actionAllowed;
 	}
 	
