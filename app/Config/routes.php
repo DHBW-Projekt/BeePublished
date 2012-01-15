@@ -36,6 +36,7 @@ Router::connect('/plugins/:action/*', array('controller' => 'Plugins'));
 Router::connect('/plugins', array('controller' => 'Plugins', 'action' => 'index'));
 Router::connect('/configuration', array('controller' => 'Configurations', 'action' => 'index'));
 Router::connect('/configuration/designs', array('controller' => 'Configurations', 'action' => 'designs'));
+Router::connect('/permissions', array('controller' => 'Permissions', 'action' => 'index'));
 Router::connect('/users', array('controller' => 'Users', 'action' => 'index'));
 Router::connect('/pluginviews/:action/*', array('controller' => 'PluginViews'));
 Router::connect('/plugin/:plugin/:controller/:action/*');
