@@ -79,7 +79,7 @@
 /**
  * Application wide charset encoding
  */
-	Configure::write('App.encoding', 'ISO-8859-1');
+	Configure::write('App.encoding', 'UTF-8');
 
 /**
  * To configure CakePHP *not* to use mod_rewrite and to
@@ -221,8 +221,8 @@ Configure::write('Routing.prefixes', array('user'));
  * The classname and database used in CakePHP's
  * access control lists.
  */
-	Configure::write('Acl.classname', 'DbAcl');
-	Configure::write('Acl.database', 'default');
+	//Configure::write('Acl.classname', 'DbAcl');
+	//Configure::write('Acl.database', 'default');
 
 /**
  * Uncomment this line and correct your server timezone to fix 

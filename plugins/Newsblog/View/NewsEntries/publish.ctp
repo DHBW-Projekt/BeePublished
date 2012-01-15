@@ -15,6 +15,7 @@ if($publishAllowed){
 			$id = $entryToPublish['NewsEntry']['id'];
 			$username = $entryToPublish['Author']['username'];
 			$title = $entryToPublish['NewsEntry']['title'];
+			$subtitle = $entryToPublish['NewsEntry']['subtitle'];
 			$text = $entryToPublish['NewsEntry']['text'];
 			$createdOn = $entryToPublish['NewsEntry']['createdOn'];
 			$createdOnDate = $DateTimeHelper->format('m-d-Y', $entryToPublish['NewsEntry']['createdOn']);
@@ -23,6 +24,9 @@ if($publishAllowed){
 			echo '<div class="unpublished_newsentry" id="'.$id.'">';
 				echo '<div class="newsentry_publish_container">';
 					echo '<div class="newsentry_publish_title">'.$title.'</div>';
+					if($subtitle != null & $subtitle != ''){
+						echo '<div class="newsentry_publish_subtitle">'.$subtitle.'</div>';
+					}
 					echo '<div class="newsentry_publish_info">by '.$username.' on '.$createdOnDate.' at '.$createdOnTime.'</div>';
 					echo '<div class="newsentry_publish_content">'.$text.'</div>';
 				echo '</div>';

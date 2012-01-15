@@ -1,23 +1,14 @@
-
-<?php echo $this->Form->create('Configuration'); ?>
-<?php echo $this->Form->input('lastName') ?> 
-<?php echo $this->Form->input('firstName') ?>
-<?php echo $this->Form->input('eMail') ?>
-<?php echo $this->Form->input('street') ?>
-<?php echo $this->Form->input('houseNumber') ?>
-<?php echo $this->Form->input('postCode') ?>
-<?php echo $this->Form->input('city') ?>
-<?php echo $this->Form->input('phone') ?>
-<?php echo $this->Form->input('fax') ?>
-<?php echo $this->Form->input('companyName') ?>
-<?php echo $this->Form->input('legalForm') ?>
-<?php echo $this->Form->input('vatId') ?>
-<?php echo $this->Form->input('registerNumber') ?>
-<?php echo $this->Form->input('status') ?>
-<?php echo $this->Form->select('activeDesign', $designs) ?>
-<!-- In order to get the error message displayed -->
-<?php echo $this->Form->error('Configuration.activeDesign'); ?>
-<?php echo $this->Form->select('activeTemplate', $templates) ?>
-<!-- In order to get the error message displayed -->
-<?php echo $this->Form->error('Configuration.activeTemplate'); ?>
-<?php echo $this->Form->end(__('Save Configuration')); ?>	
+<?php
+$this->Html->script('jquery.relatedselects.min',false);
+$this->Html->script('admin/configuration',false);
+echo $this->element('config-menu');
+echo $this->Form->create('Configuration');
+echo $this->Form->input('config_name');
+echo $this->Form->input('page_name');
+echo $this->Form->input('email');
+echo $this->Form->input('active_template', array('options' => $themes));
+echo $this->Form->input('active_design', array('options' => $designs));
+echo $this->Form->input('status');
+echo $this->Form->input('status-text');
+echo $this->Form->end(__('Save Configuration'));
+?>

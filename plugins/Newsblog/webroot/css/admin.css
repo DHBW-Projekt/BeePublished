@@ -20,12 +20,16 @@
 }
 
 .newsentry_publish_title{
-	font-size: 16px;
+	font-size: 20px;
 	font-weight: bold;
 }
 
+.newsentry_publish_subtitle{
+	font-size: 16px;
+	font-style: italic;
+}
+
 .newsentry_publish_info{
-	color: #8F8F8F;
 	font-size: 11px;
 	font-weight: bold;
 }
@@ -36,12 +40,6 @@
 
 .unpublished_newsentry{
 	position:relative;
-}
-
-#NewsEntryTitle{
-	border:1px solid black;
-	font-size: 16px;
-	padding: 6px;
 }
 
 .ui-datepicker-trigger{

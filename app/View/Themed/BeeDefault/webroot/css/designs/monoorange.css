@@ -1,0 +1,191 @@
+body {
+    font-family: arial, tahoma, sans-serif; /*muss evtl noch in template.css*/
+    background-color: #f5862b;
+}
+
+#main {
+    border: 1px solid #e46c0a;
+    background-color: #fff;
+}
+
+a {
+    color: #e46c0a;
+}
+
+#topnav {
+    font-size: 11px; /*????*/
+}
+
+#topnav a.signin, #topnav a.signout {
+    background: #eeeeee;
+    color: #000000;
+    font-weight: bold;
+}
+
+#topnav a.signin:hover, #topnav a.signout:hover {
+    background: #bbbbbb;
+}
+
+#topnav a.menu-open {
+    background: #cccccc;
+    outline: none;
+}
+
+form {
+}
+
+form>div {
+    text-align: left; /*??????*/
+}
+
+#header {
+    background: #ffffff; /* old browsers */
+    background: -moz-linear-gradient(top, #ffffff 0%, #fdce95 100%); /* ff3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #fdce95)); /* chrome,safari4+ */
+    background: -webkit-linear-gradient(top, #ffffff 0%, #fdce95 100%); /* chrome10+,safari5.1+ */
+    background: -o-linear-gradient(top, #ffffff 0%, #fdce95 100%); /* opera 11.10+ */
+    background: -ms-linear-gradient(top, #ffffff 0%, #fdce95 100%); /* ie10+ */
+    background: linear-gradient(top, #ffffff 0%, #fdce95 100%); /* w3c */
+    filter: progid:dximagetransform.microsoft.gradient(startcolorstr = '#ffffff', endcolorstr = '#fdce95', gradienttype = 0 ); /* ie6-9 */
+}
+
+#signin_menu {
+    background-color: #cccccc;
+    border: 0;
+    color: #000000;
+    font-size: 11px;
+}
+
+#signin_menu input[type=text], #signin_menu input[type=password] {
+    border: 1px solid #999999;
+    -webkit-box-shadow: inset 0px 0px 8px #bbbbbb;
+    -moz-box-shadow: inset 0px 0px 8px #bbbbbb;
+    box-shadow: inset 0px 0px 8px #bbbbbb;
+    font-size: 13px;
+}
+
+#menu {
+    background: #ffffff; /* old browsers */
+    background: -moz-linear-gradient(top, #ffffff 0%, #fdce95 19%, #ffb965 86%, #e46c0a 100%); /* ff3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(19%, #fdce95), color-stop(86%, #ffb965), color-stop(100%, #e46c0a)); /* chrome,safari4+ */
+    background: -webkit-linear-gradient(top, #ffffff 0%, #fdce95 19%, #ffb965 86%, #e46c0a 100%); /* chrome10+,safari5.1+ */
+    background: -o-linear-gradient(top, #ffffff 0%, #fdce95 19%, #ffb965 86%, #e46c0a 100%); /* opera 11.10+ */
+    background: -ms-linear-gradient(top, #ffffff 0%, #fdce95 19%, #ffb965 86%, #e46c0a 100%); /* ie10+ */
+    background: linear-gradient(top, #ffffff 0%, #fdce95 19%, #ffb965 86%, #e46c0a 100%); /* w3c */
+    filter: progid:dximagetransform.microsoft.gradient(startcolorstr = '#ffffff', endcolorstr = '#e46c0a', gradienttype = 0 ); /* ie6-9 */
+    font-family: "trebuchet ms", arial, helvetica, sans-serif;
+    border-bottom: 2px solid #e46c0a;
+    border-top: 2px solid #e46c0a;
+}
+
+#content {
+    background-color: #ffffff;
+}
+
+#footer {
+    background-color: #ffffff;
+    font-size: 12px;
+    color: #cccccc;
+}
+
+input[type=text], input[type=password] {
+    border: 1px solid #fdce95;
+    -webkit-box-shadow: inset 1px 1px 5px 1px #e46c0a;
+    -moz-box-shadow: inset 1px 1px 5px 1px #e46c0a;
+    box-shadow: inset 1px 1px 5px 1px #e46c0a;
+}
+
+form label {
+    font-size: 13px;
+}
+
+ol.nav li a:hover {
+    color: #e46c0a !important;
+}
+
+input[type=submit], button, input[type=button] {
+    /*???????????*/
+    border: 1px solid #e46c0a;
+    color: #ffffff;
+    text-shadow: 0px 0px 3px #e46c0a;
+    background: #fdce95; /* old browsers */
+    background: -moz-linear-gradient(top, #fdce95 0%, #f5862b 100%); /* ff3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fdce95), color-stop(100%, #f5862b)); /* chrome,safari4+ */
+    background: -webkit-linear-gradient(top, #fdce95 0%, #f5862b 100%); /* chrome10+,safari5.1+ */
+    background: -o-linear-gradient(top, #fdce95 0%, #f5862b 100%); /* opera 11.10+ */
+    background: -ms-linear-gradient(top, #fdce95 0%, #f5862b 100%); /* ie10+ */
+    background: linear-gradient(top, #fdce95 0%, #f5862b 100%); /* w3c */
+    filter: progid:dximagetransform.microsoft.gradient(startcolorstr = '#fdce95', endcolorstr = '#f5862b', gradienttype = 0 ); /* ie6-9 */
+}
+
+h2, h1, h3, h4, h5, h6 {
+    border: 1px solid #ffa12f;
+    filter: dropshadow(color = #e46c0a, offx = 0, offy = 0);
+    color: #000;
+    font-weight: bold;
+    background: #fdce95; /* old browsers */
+    background: -moz-linear-gradient(top, #fdce95 0%, #ffffff 100%); /* ff3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fdce95), color-stop(100%, #ffffff)); /* chrome,safari4+ */
+    background: -webkit-linear-gradient(top, #fdce95 0%, #ffffff 100%); /* chrome10+,safari5.1+ */
+    background: -o-linear-gradient(top, #fdce95 0%, #ffffff 100%); /* opera 11.10+ */
+    background: -ms-linear-gradient(top, #fdce95 0%, #ffffff 100%); /* ie10+ */
+    background: linear-gradient(top, #fdce95 0%, #ffffff 100%); /* w3c */
+    filter: progid:dximagetransform.microsoft.gradient(startcolorstr = '#fdce95', endcolorstr = '#ffffff', gradienttype = 0 ); /* ie6-9 */
+}
+
+h1 {
+}
+
+h3 {
+}
+
+h4 {
+}
+
+h5 {
+}
+
+h6 {
+}
+
+.button:hover {
+    background-color: #3292dd;
+}
+
+.validation_error {
+    font-weight: bold;
+    color: #a00000;
+}
+
+.flash_success {
+    border: 3px solid #bedf5d;
+    background: #e2f1a8;
+    font-weight: bold;
+}
+
+.flash_failure {
+    border: 3px solid #990000;
+    background-color: #f97d88;
+    font-weight: bold;
+}
+
+table {
+    border-spacing: 0px;
+    margin: 1em 0;
+}
+
+th {
+    background-color: #fdce95;
+    border: none;
+    border-right: 1px solid #e46c0a;
+    border-bottom: 1px solid #e46c0a;
+}
+
+td {
+    border: none;
+    border-right: 1px solid #e46c0a;
+}
+
+tr:nth-child(2n) {
+    background-color: #eee;
+}
