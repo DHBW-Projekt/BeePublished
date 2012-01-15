@@ -30,6 +30,14 @@
             'height' => 20
         ));
             ?>
+            <?php echo $this->Html->image("lock.png", array(
+            'alt' => __('Permission Management'),
+            'url' => array('controller' => 'Permissions', 'action' => 'index'),
+            'class' => 'small-button',
+            'width' => 20,
+            'height' => 20
+        ));
+            ?>
         </div>
         <hr/>
     </div>
