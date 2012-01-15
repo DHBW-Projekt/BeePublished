@@ -9,6 +9,14 @@ input[type=text], input[type=password] {
     height: 18px;
 }
 
+input[type=text], input[type=password] {
+    width: 300px;
+}
+
+select {
+    width: 305px;
+}
+
 label, .input input[type=checkbox] {
     display: block;
     height: 25px;
