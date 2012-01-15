@@ -2,6 +2,27 @@ body,
 #overlay-header {
     font-family: Arial, Tahoma, sans-serif;
     background-image: url(../../img/bg.jpg);
+    font-size: 14px;
+}
+
+h1 {
+    font-size: 18px;
+}
+
+h2 {
+    font-size: 16px;
+}
+
+h3 {
+    font-size: 14px;
+}
+
+h4 {
+    font-size: 12px;
+}
+
+h5 {
+    font-size: 10px;
 }
 
 input, textarea {
@@ -19,10 +40,11 @@ input[type=submit] {
 
 input[type=text],
 input[type=password],
-textarea {
-    -webkit-box-shadow: inset 0px 0px 8px #bbbbbb;
-    -moz-box-shadow: inset 0px 0px 8px #bbbbbb;
-    box-shadow: inset 0px 0px 8px #bbbbbb;
+textarea,
+select {
+    -webkit-box-shadow: inset 0px 0px 4px #dddddd;
+    -moz-box-shadow: inset 0px 0px 4px #dddddd;
+    box-shadow: inset 0px 0px 4px #dddddd;
     border: 1px solid #999999;
 }
 
@@ -35,12 +57,20 @@ input[type=submit]:hover,
     color: #ffffff;
 }
 
+.border-color1 {
+    border-color: #3292DD;
+}
+
 .color2,
 input[type=button],
 input[type=submit] {
     background-color: #0F73A6;
     background-image: none;
     color: #ffffff;
+}
+
+.border-color2 {
+    border-color: #0F73A6;
 }
 
 .color3,
@@ -51,12 +81,20 @@ input[type=submit] {
     color: #000000;
 }
 
+.border-color3 {
+    border-color: #bbbbbb;
+}
+
 .color4,
 #topnav a.menu-open,
 #signin_menu {
     background-color: #cccccc;
     background-image: none;
     color: #000000;
+}
+
+.border-color4 {
+    border-color: #cccccc;
 }
 
 .color5,
@@ -68,15 +106,19 @@ body.overlay,
     color: #000000;
 }
 
+.border-color5 {
+    border-color: #ffffff;
+}
+
 a {
     color: #000000;
 }
 
 #topnav,
 #signin_menu,
-#footer {
+#footer,
+.small_font {
     font-size: 11px;
-    border: 0;
 }
 
 #topnav a.signin,
