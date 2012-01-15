@@ -1,8 +1,9 @@
+<?php header("Content-Type: text/html; charset=utf-8"); ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <?php echo $this->Html->charset('UTF-8'); ?>
     <title><?php echo $title_for_layout?></title>
     <?php
     $this->Js->set('webroot', $this->request->webroot);
@@ -64,7 +65,7 @@
                         echo $this->Html->link('User Mode', $link);
                     }
                 }
-                echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout'), array('class' => 'signout'));
+                echo $this->Html->link('Logout', array('controller' => 'Users', 'action' => 'logout'), array('class' => 'signout'));
             }
             ?>
         </div>
@@ -91,8 +92,7 @@
         <?php echo $content_for_layout ?>
     </div>
     <div id="footer">
-        Powered by BeePublished - All rights reserved - &copy; Copyright 2011-2012<br/><br/>
-        <?php echo $this->element('sql_dump'); ?>
+        Powered by BeePublished - All rights reserved - &copy; Copyright 2011-2012
     </div>
 </div>
 <? if ($adminMode) {

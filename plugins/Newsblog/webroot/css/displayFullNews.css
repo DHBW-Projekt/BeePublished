@@ -1,0 +1,18 @@
+.showFullNewsTitle{
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.showFullNewsSubtitle{
+	font-size:16px;
+	font-style:italic;
+}
+
+.showFullNewsInfo{
+	font-size: 11px;
+	font-weight: bold;
+}
+
+.showFullNewsBody{
+	font-size: 12px;
+}
