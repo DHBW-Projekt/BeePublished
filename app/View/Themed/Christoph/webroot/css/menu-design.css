@@ -27,9 +27,9 @@ ol.nav li a:hover {
 }
 
 ol.nav li span {
-    background: url(../img/arrow_down.png) no-repeat center center;
+    background: url(../../../../../webroot/img/arrow_down.png) no-repeat center center;
 }
 
 ol.subnav li span {
-    background: url(../img/arrow_right.png) no-repeat center center;
+    background: url(../../../../../webroot/img/arrow_right.png) no-repeat center center;
 }

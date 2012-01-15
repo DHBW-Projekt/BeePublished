@@ -1,4 +1,6 @@
 #main {
+    position: relative;
+    top: -1px;
     width: 800px;
     height: 600px;
     margin: 0 auto;
@@ -8,13 +10,6 @@
     position: relative;
     margin-top: 15px;
     height: 100px;
-}
-
-#overlay-header {
-    position: relative;
-    padding: 5px;
-    padding-bottom: 10px;
-    height: 45px;
 }
 
 #pagelogo {
@@ -50,7 +45,6 @@
     -webkit-border-bottom-right-radius: 5px;
     display: none;
     position: absolute;
-    width: 210px;
     z-index: 100;
     padding: 10px;
     top: 15px;
@@ -75,8 +69,26 @@
     text-transform: uppercase;
 }
 
-#menu.overlay {
-    margin: -10px -20px 20px;
+#content {
+    padding: 10px 20px;
+}
+
+#footer {
+    padding: 10px 20px;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+}
+
+h2, h1, h3, h4, h5, h6 {
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-topright: 3px;
+    -moz-border-radius-bottomright: 0px;
+    -moz-border-radius-bottomleft: 0px;
+    -webkit-border-radius: 3px 3px 0px 0px;
+    border-radius: 3px 3px 0px 0px;
+    border-bottom: none;
+    padding: 5px 10px;
+    margin: 10px 0px;
 }
 
 .button {
@@ -138,12 +150,13 @@
 }
 
 .users_role {
-    padding: 2px;
+    padding: 5px;
 }
 
 .users {
     padding: 10px;
-    min-height: 85px;
+    overflow: auto;
+    min-height: 97px;
 }
 
 .user_detail, .users-placeholder {
@@ -161,5 +174,72 @@
 .user_name {
     text-align: center;
     font-weight: bold;
-    float:left;
+    float: left;
+}
+
+form {
+    text-align: left;
+    margin: 0.5em;
+    overflow: auto;
+}
+
+form>div {
+    margin: 1em;
+    text-align: left;
+}
+
+label {
+    display: inline-block;
+    margin-right: 2em;
+    text-align: right;
+    width: 25%;
+}
+
+input[type=text], input[type=password], input[type=textarea] {
+    margin: 0;
+    width: 50%;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 0.5em !important;
+}
+
+form>div * {
+    vertical-align: middle !important;
+}
+
+/*
+input[type=submit]:before {
+    width:2em;
+    content:' ';
+    display:block;
+}*/
+input[type=submit], button, input[type=button] {
+    cursor: pointer;
+    font-weight: bold;
+    line-height: normal !important;
+    min-width: 25%;
+    outline: medium none;
+    padding: 0.5em 1em;
+    vertical-align: middle;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    display: display-block;
+}
+
+th {
+    padding: 0.5em;
+}
+
+td {
+    padding: 0.5em;
+}
+
+td:last-of-type {
+    border-right: none;
+}
+
+th:last-of-type {
+    border-right: none;
 }
