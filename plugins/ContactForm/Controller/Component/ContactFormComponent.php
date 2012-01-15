@@ -45,47 +45,58 @@ class ContactFormComponent extends Component {
    /**
     * Function sendForm.
     */
-    public function sendform($controller, $url=null) {
+    public function sendForm($controller, $url=null) {
     	
     	//Attributes
     	$data_error = false;
     	
     	//LOAD model
     	$controller->loadModel("ContactRequest");
-    	
+
     	//CHECK request and data
-    	if (!$controller->request->is('post') || !isset($controller->data))
-    		return;
-    	
-    	//SET data
-    	$controller->ContactForm->set($controller->data);
-    	
-    	//VALIDATE data
-    	if(!$controller->ContactForm->validates())
+    	if (!$controller->request->is('post') || !isset($controller->data['ContactForm']))
     		$data_error = true;
     	
     	//CHECK recaptcha
     	/*if(!$this->Recaptcha->valid($controller->params['form'])){
-    		$data_error = true;
-    		$controller->Session->setFlash('Please fill out all mandatory fields.');
+    	 $data_error = true;
+
     	}*/
-    	
+
+    	//VALIDATE data
+    	if(!$data_error){
+    		$controller->ContactRequest->set(array('last_name' => $controller->data['ContactForm']['last_name'],
+    											   'first_name' => $controller->data['ContactForm']['first_name'],
+    											   'email' => $controller->data['ContactForm']['email'],
+    											   'subject' => $controller->data['ContactForm']['subject'],
+    											   'body' => $controller->data['ContactForm']['body']
+    										
+    		));
+
+    		if(!$controller->ContactRequest->validates())
+    			$data_error = true;
+    	}
+
     	//SEND email
     	if(!$data_error){
-    		if ($this->BeeEmail->sendHtmlEmail($to = 'corinna.knick@yahoo.de',
+    		$this->BeeEmail->sendHtmlEmail($to = 'corinna.knick@yahoo.de',
     												 $subject = 'Request through contact form',
-    												 $viewVars = array('name'=>$this->data['ContactForm']['firstname'].' '.$this->data['ContactForm']['lastname'],
+    												 $viewVars = array('name'=>$this->data['ContactForm']['first_name'].' '.$this->data['ContactForm']['last_name'],
 																	   'email'=>$this->data['ContactForm']['email'],
 																	   'subject'=>$this->data['ContactForm']['subject'],
 																	   'body'=>$this->data['ContactForm']['body']
 																	  ),
-													 $viewName = 'ContactForm.contact'
-			)){
-    			$controller->Session->setFlash('Thank you for your interest. Your request has been sent.');
-    		} else {
-    			$controller->Session->setFlash('An error occured. Your request could not be sent. Please contact an administrator.');
-    		}
+													 $viewName = 'ContactForm.contact');
     	}
+    	
+    	//PRINT error messages
+    	if(!$data_error)
+    		$controller->Session->setFlash('Thank you for your interest. Your request has been sent.');
+    	else
+    		$controller->Session->setFlash('Please fill out all mandatory fields.');
+    	
+    	//REDIRECT
+    	$controller->redirect('/contact');
     }
     
     /**
@@ -93,19 +104,11 @@ class ContactFormComponent extends Component {
      */
     public function beforeFilter() {
     	//Recaptcha
-    	$this->Recaptcha->publickey = "6LcWs8oSAAAAAITDX__bcN9xqCxRruyGFoJuh2w1";
-    	$this->Recaptcha->privatekey = "6LcWs8oSAAAAAKmeuaoHU5IVY3KjOzeiMsmYqe02";
+    	$this->Recaptcha->publickey = "6LeXXMwSAAAAAATYW9zan7IB7yaIKmx1VPMjqeXX";
+    	$this->Recaptcha->privatekey = "6LeXXMwSAAAAALTEji2U_qC9lp4W38_QxC0zfhgX";
     	
     	//Permissions
     	$this->Auth->allow('*');
     }
-    
-    /*  public function getData($controller, $params){
-    	
-    	$controller->loadModel('ContactForm.MailAddress');
-    	$mailaddress = $controller->MailAddress->find('first', array('conditions' => array('Mailaddress.id' => 1)));
-        return $mailaddress;
-        echo $mailaddress;
-    }*/
    
 } 

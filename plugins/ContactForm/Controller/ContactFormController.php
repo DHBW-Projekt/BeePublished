@@ -35,6 +35,11 @@ class ContactFormController extends AppController {
 	* Before-Filter function
 	*/
 	function beforeFilter(){
-		$this->Auth->allow('*');
+		//Recaptcha
+    	$this->Recaptcha->publickey = "6LeXXMwSAAAAAATYW9zan7IB7yaIKmx1VPMjqeXX";
+    	$this->Recaptcha->privatekey = "6LeXXMwSAAAAALTEji2U_qC9lp4W38_QxC0zfhgX";
+    	
+    	//Permissions
+    	$this->Auth->allow('*');
 	}	
 }
