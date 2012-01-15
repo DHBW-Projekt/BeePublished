@@ -20,7 +20,7 @@ class ContactFormComponent extends Component {
     	if (isset($url)){
     		$data['Element'] = array_shift($url);
     	} else {
-    		$data['Element'] = 'sendForm';
+    		$data['Element'] = 'request';
     	}
     
     	//CALL corresponding comp. method
@@ -51,7 +51,7 @@ class ContactFormComponent extends Component {
     	$data_error = false;
     	
     	//LOAD model
-    	$controller->loadModel("ContactForm");
+    	$controller->loadModel("ContactRequest");
     	
     	//CHECK request and data
     	if (!$controller->request->is('post') || !isset($controller->data))
@@ -65,10 +65,10 @@ class ContactFormComponent extends Component {
     		$data_error = true;
     	
     	//CHECK recaptcha
-    	if(!$this->Recaptcha->valid($controller->params['form'])){
+    	/*if(!$this->Recaptcha->valid($controller->params['form'])){
     		$data_error = true;
     		$controller->Session->setFlash('Please fill out all mandatory fields.');
-    	}
+    	}*/
     	
     	//SEND email
     	if(!$data_error){
@@ -92,6 +92,11 @@ class ContactFormComponent extends Component {
      * Before-Filter
      */
     public function beforeFilter() {
+    	//Recaptcha
+    	$this->Recaptcha->publickey = "6LcWs8oSAAAAAITDX__bcN9xqCxRruyGFoJuh2w1";
+    	$this->Recaptcha->privatekey = "6LcWs8oSAAAAAKmeuaoHU5IVY3KjOzeiMsmYqe02";
+    	
+    	//Permissions
     	$this->Auth->allow('*');
     }
     
