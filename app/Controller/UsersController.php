@@ -72,8 +72,7 @@ class UsersController extends AppController
         			$this->redirect(array('controller' => 'Users', 'action' => 'index'));
         		}
         	} else{
-        		$this->Session->setFlash('The two given passwords aren\'t equal.');
-        		$this->redirect($this->referer());
+        		$this->Session->setFlash('The two given passwords missmatch.');
         	}
         }
     }
