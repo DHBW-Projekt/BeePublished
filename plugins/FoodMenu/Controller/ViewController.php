@@ -16,7 +16,7 @@ class ViewController extends AppController {
     }
 
 	public function admin( $contentID ) {
-		$menus = $this->FoodMenuMenu->find('all');
+		$menus = $this->FoodMenuMenu->find('all', array('order' => array('valid_until ASC')));
 		$this->set('menus', $menus);
 		$this->render('/FoodMenuMenus/index');
 	}

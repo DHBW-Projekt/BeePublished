@@ -3,7 +3,7 @@
 class FoodMenuCategoriesController extends AppController {
 	
 	public $name = 'FoodMenuCategories';
-	public $uses = array('FoodMenu.FoodMenuMenu', 'FoodMenu.FoodMenuCategory', 'FoodMenu.FoodMenuEntry');
+	public $uses = array('FoodMenu.FoodMenuMenu', 'FoodMenu.FoodMenuCategory', 'FoodMenu.FoodMenuEntry', 'FoodMenu.FoodMenuMenusFoodMenuCategory', 'FoodMenu.FoodMenuCategoriesFoodMenuEntry');
 	var $layout = 'overlay';
 
 	function beforeFilter()
@@ -15,7 +15,7 @@ class FoodMenuCategoriesController extends AppController {
     }
 
 	public function index() {
-		$categories = $this->FoodMenuCategory->find('all');
+		$categories = $this->FoodMenuCategory->find('all', array('conditions' => array('deleted' => null)));
 		$this->set('categories', $categories);
 	}//index
 	
@@ -64,6 +64,8 @@ class FoodMenuCategoriesController extends AppController {
 			$this->request->data = $this->FoodMenuCategory->read('deleted', $id);
 			$this->request->data['FoodMenuCategory']['deleted'] = date("Y-m-d H:i:s");
 			if($this->FoodMenuCategory->save($this->request->data)) {
+				$this->FoodMenuMenusFoodMenuCategory->deleteAll(array('FoodMenuMenusFoodMenuCategory.food_menu_category_id' => $id), false);
+				$this->FoodMenuCategoriesFoodMenuEntry->deleteAll(array('FoodMenuCategoriesFoodMenuEntry.food_menu_category_id' => $id), false);
 				$this->Session->setFlash(__('The category has been deleted.'));
 				$this->redirect($this->referer());
 			}//if
@@ -75,10 +77,11 @@ class FoodMenuCategoriesController extends AppController {
 			$ids = array_keys($this->request->data['FoodMenuCategory']);
 			echo print_r($ids);
 			foreach ($ids as $id) {
-					echo $id;
 					$this->request->data = $this->FoodMenuCategory->read('deleted', $id);
 					$this->request->data['FoodMenuCategory']['deleted'] = date("Y-m-d H:i:s");
 					if($this->FoodMenuCategory->save($this->request->data)) {
+						$this->FoodMenuMenusFoodMenuCategory->deleteAll(array('FoodMenuMenusFoodMenuCategory.food_menu_category_id' => $id), false);
+						$this->FoodMenuCategoriesFoodMenuEntry->deleteAll(array('FoodMenuCategoriesFoodMenuEntry.food_menu_category_id' => $id), false);
 						continue;
 					}//if
 					else {

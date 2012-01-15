@@ -17,7 +17,7 @@
 	if (isset($data['show'])) {
 		//debug($data['show']);
 		if(array_key_exists('FoodMenuMenu', $data['show'])) {
-			echo '<div id="foodMenuMenu" style="width:100%;">';
+			echo '<div id="foodMenuMenu">';
 			echo '<ul class="FoodMenuMenu">';
 			$menuItems = $data['show']['FoodMenuMenu'];
 			foreach ($menuItems as $dataItem){
@@ -52,12 +52,14 @@
 			echo '<div id="foodMenuEntry">';
 			if(array_key_exists('SelectedCategory', $data['show'])) {
 				?>
-				<table>
+				<table id="userMenuEntries">
 				<thead>
 				<tr>
 					<th><?php echo $data['show']['SelectedCategory']['name']; ?></th>
 					<th><?php echo (__('price')); ?>
 				</tr>
+				</thead>
+				<tbody>
 				<?php
 				$entryItems = $data['show']['FoodMenuEntry'];
 				foreach ($entryItems as $dataItem){
@@ -65,15 +67,16 @@
 					else {
 						echo '<tr>';
 						$entry = $dataItem;
-						echo '<td>' . $entry['name'] . '</td>';
-						echo '<td>' . $this->Number->currency($entry['price'], $entry['currency']) . '</td>';
+						echo '<td class="entryName">' . $entry['name'] . '</td>';
+						echo '<td class="entryPrice">' . $this->Number->currency($entry['price'], $entry['currency']) . '</td>';
 						if((isset($entry['description'])) && $entry['description'] != '') {
 							echo '</tr><tr>';
-							echo '<td colspan="2">' . $entry['description'] . '</td>';
+							echo '<td colspan="2" class="entryDescription">' . $entry['description'] . '</td>';
 						}//if
 						echo '</tr>';
 					}//else
 				}//foreach
+				echo '</tbody>';
 				echo '</table>';				
 			}//if
 			echo '</div>';

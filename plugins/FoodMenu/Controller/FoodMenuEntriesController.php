@@ -15,7 +15,7 @@ class FoodMenuEntriesController extends AppController {
     }
     
     public function index() {
-		$entries = $this->FoodMenuEntry->find('all');
+		$entries = $this->FoodMenuEntry->find('all', array('conditions' => array('deleted' => null)));
 		$this->set('entries', $entries);	
 	}
 
@@ -65,6 +65,7 @@ class FoodMenuEntriesController extends AppController {
 			$this->request->data = $this->FoodMenuEntry->read('deleted', $id);
 			$this->request->data['FoodMenuEntry']['deleted'] = date("Y-m-d H:i:s");
 			if($this->FoodMenuEntry->save($this->request->data)) {
+				$this->FoodMenuCategoriesFoodMenuEntry->deleteAll(array('FoodMenuCategoriesFoodMenuEntry.food_menu_entry_id' => $id), false);
 				$this->Session->setFlash(__('The entry has been deleted.'));
 				$this->redirect($this->referer());
 			}//if
@@ -80,6 +81,7 @@ class FoodMenuEntriesController extends AppController {
 					$this->request->data = $this->FoodMenuEntry->read('deleted', $id);
 					$this->request->data['FoodMenuEntry']['deleted'] = date("Y-m-d H:i:s");
 					if($this->FoodMenuEntry->save($this->request->data)) {
+						$this->FoodMenuCategoriesFoodMenuEntry->deleteAll(array('FoodMenuCategoriesFoodMenuEntry.food_menu_entry_id' => $id), false);
 						continue;
 					}//if
 					else {

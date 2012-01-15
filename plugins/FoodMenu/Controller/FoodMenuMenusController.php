@@ -3,7 +3,7 @@
 class FoodMenuMenusController extends AppController {
 	
 	public $name = 'FoodMenuMenus';
-	public $uses = array('FoodMenu.FoodMenuMenu', 'FoodMenu.FoodMenuCategory', 'FoodMenu.FoodMenuEntry');
+	public $uses = array('FoodMenu.FoodMenuMenu', 'FoodMenu.FoodMenuCategory', 'FoodMenu.FoodMenuEntry', 'FoodMenu.FoodMenuMenusFoodMenuCategory');
 	var $layout = 'overlay';
 
 	function beforeFilter()
@@ -15,7 +15,7 @@ class FoodMenuMenusController extends AppController {
     }
 
 	public function index() {
-		$menus = $this->FoodMenuMenu->find('all', array('order' => array('valid_until ASC')));
+		$menus = $this->FoodMenuMenu->find('all', array('order' => array('valid_until ASC'), 'conditions' => array('deleted' => null)));
 		$this->set('menus', $menus);	
 	}
 	
@@ -74,6 +74,7 @@ class FoodMenuMenusController extends AppController {
 			$this->request->data = $this->FoodMenuMenu->read('deleted', $id);
 			$this->request->data['FoodMenuMenu']['deleted'] = date("Y-m-d H:i:s");
 			if($this->FoodMenuMenu->save($this->request->data)) {
+				$this->FoodMenuMenusFoodMenuCategory->deleteAll(array('FoodMenuMenusFoodMenuCategory.food_menu_menu_id' => $id), false);
 				$this->Session->setFlash(__('The menu was deleted successfully.'));
 				$this->redirect($this->referer());
 			}//if
@@ -85,10 +86,10 @@ class FoodMenuMenusController extends AppController {
 			$ids = array_keys($this->request->data['FoodMenuMenu']);
 			echo print_r($ids);
 			foreach ($ids as $id) {
-					echo $id;
 					$this->request->data = $this->FoodMenuMenu->read('deleted', $id);
 					$this->request->data['FoodMenuMenu']['deleted'] = date("Y-m-d H:i:s");
 					if($this->FoodMenuMenu->save($this->request->data)) {
+						$this->FoodMenuMenusFoodMenuCategory->deleteAll(array('FoodMenuMenusFoodMenuCategory.food_menu_menu_id' => $id), false);
 						continue;
 					}//if
 					else {

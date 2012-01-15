@@ -35,14 +35,9 @@ function setTomorrow() {
 	 } 
 }
 $(document).ready(function () {
-	/*$(".foodmenu-overlay").fancybox({
-        'type':'iframe',
-        'width':'90%',
-        'height':'90%',
-        'onClosed':function () {
-            window.location.reload(true);
-        }
-	}*/
+	
+	$('input#search').quicksearch('table#tableEntries tbody tr');
+	
 	
 });
 		

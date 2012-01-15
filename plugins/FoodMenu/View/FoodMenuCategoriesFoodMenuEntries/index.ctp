@@ -1,0 +1,50 @@
+<?php
+	echo $this->element('admin_menu');
+	
+	echo $this->Form->create('FoodMenuCategoriesFoodMenuEntries');
+	echo $this->Form->hidden($categoryID);
+	echo $this->Session->flash();
+	if (sizeof($entries['used']) > 0) {
+	?>
+
+<table>
+	<thead>
+	<tr>
+		<th colspan="2"><?php echo __('Remove existing entries from category'); ?></th>
+	</tr>
+	</thead>
+	<tbody>
+	<?php
+	foreach ($entries['used'] as $usedEntry) {
+		echo '<tr>';
+		echo '<td>' . $usedEntry['FoodMenuEntry']['name'] . '</td>';
+		echo '<td>' . $this->Html->image('/app/webroot/img/delete.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[+]Add', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuCategoriesFoodMenuEntries', 'action' => 'delete', $usedEntry['FoodMenuCategoriesFoodMenuEntry']['ID']))) . '</td>';
+		echo '</tr>';
+	}?>
+</tbody>
+</table>
+<?php
+ 	}//if sizeof
+
+ 	if (sizeof($entries['notUsed']) > 0) {
+	?>
+<table>
+	<thead>
+	<tr>
+		<th colspan="2"><?php echo __('Add entries to category'); ?></th>
+	</tr>
+	</thead>
+	<tbody>
+	<?php
+	foreach ($entries['notUsed'] as $notUsedEntry) {
+		echo '<tr>';
+		echo '<td>' . $notUsedEntry['FoodMenuEntry']['name'] . '</td>';
+		echo '<td>' . $this->Html->image('/app/webroot/img/add.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[+]Add', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuCategoriesFoodMenuEntries', 'action' => 'add', $notUsedEntry['FoodMenuEntry']['name'], $notUsedEntry['FoodMenuEntry']['id'], $categoryID))) . '</td>';
+		echo '</tr>';
+	}?>
+</tbody>
+</table>
+<?php 	
+ 	} //if sizeof
+	echo $this->Form->end();
+?>

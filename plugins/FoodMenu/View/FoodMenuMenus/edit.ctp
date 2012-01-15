@@ -3,6 +3,9 @@
 	echo $this->Form->create('FoodMenuMenu', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenus', 'action' => 'edit')));
 	echo $this->Form->hidden('id', array('value' => $menu['FoodMenuMenu']['id']));
 	echo $this->Session->flash();
+	echo '<ul class="buttonlink">';
+	echo '<li>'.$this->Html->link((__('Add Categories')), array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenusFoodMenuCategories', 'action' => 'index', $menu['FoodMenuMenu']['name'], $menu['FoodMenuMenu']['id']), array('class' => 'buttonlink')).'</li>';
+	echo '</ul>';
 	echo '<table>';
 	echo '<tr>';
 		echo '<td>'.$this->Form->input('name', array('value' => $menu['FoodMenuMenu']['name'])).'</td>';
