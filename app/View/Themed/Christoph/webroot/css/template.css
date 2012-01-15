@@ -48,6 +48,10 @@ form div {
     display: none;
 }
 
+#signin_menu input, #signin_menu label {
+    float: none;
+}
+
 #main {
     width: 1000px;
     height: 600px;
