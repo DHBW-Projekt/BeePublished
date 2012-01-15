@@ -1,3 +1,10 @@
+input, textarea {
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    padding: 5px;
+}
+
 #main {
     width: 1000px;
     height: 600px;
@@ -63,11 +70,7 @@
 #signin_menu input[type=text], #signin_menu input[type=password] {
     display: block;
     margin: 0 0 5px;
-    padding: 5px;
     width: 203px;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
 }
 
 #menu {
@@ -79,19 +82,14 @@
     margin: -10px -20px 20px;
 }
 
-.button {
-    display: block;
-    line-height: 30px;
-    height: 30px;
-    width: 100%;
-    padding: 5px;
-    margin-top: 10px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    vertical-align: middle;
-    text-align: center;
-    text-decoration: none;
+#content {
+    padding: 10px 20px;
+}
+
+#footer {
+    padding: 10px 20px;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
 }
 
 .plugin_content {
