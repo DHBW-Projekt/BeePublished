@@ -5,9 +5,6 @@ App::uses('AppModel', 'Model');
  * ContactRequest Model.
  */
 class ContactRequest extends AppModel {
-
-	/*Name*/
-	public $name = 'ContactRequest';
 	
 	/*No DB*/
 	public $useTable = false;
