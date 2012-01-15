@@ -1,5 +1,5 @@
 <?php 
-/* App schema generated on: 2012-01-13 08:13:02 : 1326438782*/
+/* App schema generated on: 2012-01-15 12:27:18 : 1326626838*/
 class AppSchema extends CakeSchema {
 	function before($event = array()) {
 		return true;
@@ -107,7 +107,7 @@ class AppSchema extends CakeSchema {
 	);
 	var $permissions = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'key' => 'primary', 'collate' => NULL, 'comment' => ''),
-		'plugin_id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'key' => 'index', 'collate' => NULL, 'comment' => ''),
+		'plugin_id' => array('type' => 'integer', 'null' => true, 'default' => NULL, 'key' => 'index', 'collate' => NULL, 'comment' => ''),
 		'role_id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'key' => 'index', 'collate' => NULL, 'comment' => ''),
 		'action' => array('type' => 'string', 'null' => false, 'default' => NULL, 'collate' => 'utf8_general_ci', 'comment' => '', 'charset' => 'utf8'),
 		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1), 'plugin_id' => array('column' => 'plugin_id', 'unique' => 0), 'role_id' => array('column' => 'role_id', 'unique' => 0)),
