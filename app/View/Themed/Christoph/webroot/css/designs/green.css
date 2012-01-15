@@ -31,10 +31,10 @@ input, textarea {
 
 input[type=button],
 input[type=submit] {
-    -webkit-box-shadow: inset 0px 0px 8px #095B85;
-    -moz-box-shadow: inset 0px 0px 8px #095B85;
-    box-shadow: inset 0px 0px 8px #095B85;
-    border: 1px solid #095B85;
+    -webkit-box-shadow: inset 0px 0px 8px #005A03;
+    -moz-box-shadow: inset 0px 0px 8px #005A03;
+    box-shadow: inset 0px 0px 8px #005A03;
+    border: 1px solid #005A03;
     color: #ffffff;
 }
 
@@ -52,25 +52,26 @@ select {
 input[type=button]:hover,
 input[type=submit]:hover,
 .users_role {
-    background-color: #3292DD;
+    background-color: #005A03;
     background-image: none;
     color: #ffffff;
 }
 
-.border-color1 {
-    border-color: #3292DD;
+.border-color1,
+.role {
+    border-color: #005A03;
 }
 
 .color2,
 input[type=button],
 input[type=submit] {
-    background-color: #0F73A6;
+    background-color: #179A1B;
     background-image: none;
     color: #ffffff;
 }
 
 .border-color2 {
-    border-color: #0F73A6;
+    border-color: #179A1B;
 }
 
 .color3,
@@ -134,7 +135,7 @@ a {
 #menu {
     background-image: url(../../img/nav.gif);
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    border-bottom: 5px solid #3292DD;
+    border-bottom: 5px solid #179A1B;
 }
 
 #footer {
@@ -162,11 +163,12 @@ a {
 }
 
 .role {
-    border: 1px solid #3292DD;
+    border-width: 1px;
+    border-style: solid;
 }
 
 .user_detail,
 .users-placeholder {
-    border: 1px dotted #3292DD;
+    border: 1px dotted #179A1B;
     background-color: #ffffff;
 }

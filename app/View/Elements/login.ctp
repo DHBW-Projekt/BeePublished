@@ -8,8 +8,7 @@ Have an account? <a href="login" class="signin">Login</a>
     <?php
     $options = array(
         'label' => 'Login',
-        'id' => 'signin_submit',
-        'class' => 'button'
+        'id' => 'signin_submit'
     );
     echo $this->Form->end($options);
     ?>
