@@ -2,7 +2,7 @@
 <dualon>
     <plugin>
         <name>Gallery</name>
-        <author>Alex</author>
+        <author>Alex, Fabian</author>
         <version>1.0</version>
         <permissions>
         </permissions>
@@ -10,6 +10,9 @@
             <view>
                 <name>gallery</name>
             </view>
+			<view>
+				<name>SimpleImageDisplay</name>
+			</view>
         </views>
     </plugin>
 </dualon>

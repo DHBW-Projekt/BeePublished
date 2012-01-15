@@ -8,6 +8,6 @@ class GalleryController extends GalleryAppController {
     public function admin($contentId)
     {
         $this->layout = 'overlay';
-        
     }
+
 }
