@@ -10,10 +10,19 @@ class AppController extends Controller
             'logoutRedirect' => '/',
             'loginAction' => array('controller' => 'Users', 'action' => 'login')
         ),
-        'PermissionValidation'
+        'PermissionValidation',
+        'Config'
     );
 
     public $helpers = array('Html', 'Form', 'Session', 'Js', 'PermissionValidation');
+
+    public $viewClass = 'Theme';
+
+    function beforeFilter()
+    {
+        $this->theme = $this->Config->getValue('active_template');
+        $this->set('design',$this->Config->getValue('active_design'));
+    }
 
     function afterFilter()
     {

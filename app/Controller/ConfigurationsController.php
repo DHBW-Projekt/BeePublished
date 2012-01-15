@@ -1,4 +1,5 @@
 <?php
+App::uses('Folder', 'Utility');
 
 class ConfigurationsController extends AppController
 {
@@ -22,7 +23,7 @@ class ConfigurationsController extends AppController
             $config['status'] = true;
             $config['config_name'] = 'default';
             $config['active_design'] = 'default';
-            $config['active_template'] = 'default';
+            $config['active_template'] = 'BeeDefault';
             $this->Configuration->save($config);
             $this->redirect(array('action' => 'index'));
         }
@@ -39,29 +40,38 @@ class ConfigurationsController extends AppController
             $this->request->data = $config;
         }
 
+        $themeFolder = new Folder(APP . 'View' . DS . 'themed');
+        list($themes, $files) = $themeFolder->read();
+        $themesSelect = array();
+        foreach ($themes as $theme) {
+            $themesSelect[$theme] = $theme;
+        }
+
+        $designs = $this->getDesignsForTemplate($config['Configuration']['active_template']);
+
+        $this->set('themes', $themesSelect);
+        $this->set('designs', $designs);
+
     } //index()
 
-    private function findFiles()
+    public function designs()
     {
-        $designs = array();
-        $templates = array();
-        $allFiles = scandir('../webroot/css'); // directory where css files are located, lists all files
-        foreach ($allFiles as $file) {
-            if (($file == '.') || ($file == '..')) {
-                // these entries are not files -> don't list them
-            }
-            else if (strpos($file, 'design') !== false) {
-                // change for other naming conventions
-                $designs[] = $file;
-            }
-            else if (strpos($file, 'template') !== false) {
-                // change for other naming conventions
-                $templates[] = $file;
-            }
-        } //foreach
-        // return an array with designs and templates
-        return array('designs' => $designs, 'templates' => $templates);
-    } //findFiles()
+        $name = $_GET['data']['Configuration']['active_template'];
+        $this->layout = null;
+        $this->set('designs', json_encode($this->getDesignsForTemplate($name)));
+    }
+
+    private function getDesignsForTemplate($template)
+    {
+        $designFolder = new Folder(APP . 'View' . DS . 'themed' . DS . $template . DS . 'webroot' . DS . 'css' . DS . 'designs');
+        list($folders, $designs) = $designFolder->read();
+        $designsSelect = array();
+        foreach ($designs as $design) {
+            $design = substr($design, 0, -4);
+            $designsSelect[$design] = $design;
+        }
+        return $designsSelect;
+    }
 }
 
 ?>
