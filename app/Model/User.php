@@ -16,19 +16,34 @@ class User extends AppModel
             'required' => array(
                 'rule' => array('notEmpty'),
                 'message' => 'A username is required.'
-            )
+            ),
+		    'notUnique' => array(
+				'rule' => 'isUnique',
+				'message' => 'This username has already been taken. Please choose another username.'
+		    ),
+		    'alphanumeric' => array(
+    			'rule' => 'alphaNumeric',
+    			'message' => 'Usernames must only contain letters and numbers.'
+		    )
         ),
         'password' => array(
             'required' => array(
-                //'rule' => array('notEmpty'),
                 'message' => 'A password is required',
-                'rule' => array('minLength', '8')
+                'rule' => array('notEmpty')
+            ),
+            'minLength' => array(
+            	'message' => 'Password is too short. Please choose a password with at least 8 characters.',
+    			'rule' => array('minLength', '8')
             )
         ),
         'email' => array(
             'required' => array(
-                'rule' => array('email'),
+                'rule' => array('email', true),
                 'message' => 'An email is required.'
+            ),
+            'notUnique' => array(
+    			'rule' => 'isUnique',
+    			'message' => 'This email has already been taken. If you forgor your password, please reset it.'
             )
         )
     );

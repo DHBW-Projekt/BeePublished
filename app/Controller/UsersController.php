@@ -35,47 +35,47 @@ class UsersController extends AppController
     public function register()
     {
         if ($this->request->is('post')) {
-            $user = $this->request->data['User'];
-            $this->User->create();
-            //modify value of 'registered' attribute to current date!
-            $now = date('Y-m-d H:i:s');
-            $user['registered'] = $now;
-            //generate confirmation token
-            $token = sha1($user['username'] . rand(0, 100));
-            //modify value of 'confirmation_token' attribute to generated token!
-            $user['confirmation_token'] = $token;
-            //set status to "new"
-            $user['status'] = false;
-            //set role to "registered"
-            $role = $this->Role->findByName('Registered');
-            $roleId = $role['Role']['id'];
-            $user['role_id'] = $roleId;
-
-            $this->request->data['User'] = $user;
-            //save data to database
-            if ($this->User->save($user)) {
-                //create email and set header fields and viewVars
-                $port = env('SERVER_PORT');
-                $activationUrl = 'http://' . env('SERVER_NAME');
-                if ($port != 80) {
-                    $activationUrl = $activationUrl . ':' . $port;
-                }
-                $activationUrl = $activationUrl . $this->webroot . 'activateUser/' . $this->User->getLastInsertID() . '/' . $user['confirmation_token'];
-                $viewVars = array(
-                    'username' => $user['username'],
-                    'activationUrl' => $activationUrl,
-                    'url' => env('SERVER_NAME'),
-                    'confirmationToken' => $user['confirmation_token']
-                );
-                $this->BeeEmail->sendHtmlEmail($user['email'], 'Registration complete - Please confirm your account', $viewVars, 'user_confirmation');
-                $this->redirect(array('controller' => 'Users', 'action' => 'index'));
-            } else {
-
-            }
+        	if ($this->request->data['User']['password'] == $this->Auth->password($this->data['User']['password_confirm'])) {
+        		$user = $this->request->data['User'];
+        		$this->User->create();
+        		//modify value of 'registered' attribute to current date!
+        		$now = date('Y-m-d H:i:s');
+        		$user['registered'] = $now;
+        		//generate confirmation token
+        		$token = sha1($user['username'] . rand(0, 100));
+        		//modify value of 'confirmation_token' attribute to generated token!
+        		$user['confirmation_token'] = $token;
+        		//set status to "new"
+        		$user['status'] = false;
+        		//set role to "registered"
+        		$role = $this->Role->findByName('Registered');
+        		$roleId = $role['Role']['id'];
+        		$user['role_id'] = $roleId;
+        		
+        		$this->request->data['User'] = $user;
+        		//save data to database
+        		if ($this->User->save($user)) {
+        			//create email and set header fields and viewVars
+        			$port = env('SERVER_PORT');
+        			$activationUrl = 'http://' . env('SERVER_NAME');
+        			if ($port != 80) {
+        				$activationUrl = $activationUrl . ':' . $port;
+        			}
+        			$activationUrl = $activationUrl . $this->webroot . 'activateUser/' . $this->User->getLastInsertID() . '/' . $user['confirmation_token'];
+        			$viewVars = array(
+        		                    'username' => $user['username'],
+        		                    'activationUrl' => $activationUrl,
+        		                    'url' => env('SERVER_NAME'),
+        		                    'confirmationToken' => $user['confirmation_token']
+        			);
+        			$this->BeeEmail->sendHtmlEmail($user['email'], 'Registration complete - Please confirm your account', $viewVars, 'user_confirmation');
+        			$this->redirect(array('controller' => 'Users', 'action' => 'index'));
+        		}
+        	} else{
+        		$this->Session->setFlash('The two given passwords aren\'t equal.');
+        		$this->redirect($this->referer());
+        	}
         }
-        $this->set('adminMode', false);
-        $this->set('menu', $this->Menu->buildMenu($this, NULL));
-        $this->set('systemPage', true);
     }
 
     public function activateUser($userId = null, $tokenIn = null)
