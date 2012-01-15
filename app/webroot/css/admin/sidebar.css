@@ -53,7 +53,7 @@ body.sidebar-open {
     position: absolute;
     margin: 5px;
     top: 175px;
-    bottom: 5px;
+    bottom: 15px;
     width: 190px;
     background-color: #888888;
 }

@@ -4,6 +4,9 @@
     cursor: pointer;
     display: block;
     position: relative;
+    background-color: #3292DD;
+    color: #ffffff;
+    font-weight: bold;
 }
 
 .subcl, .subcr, .subc {
