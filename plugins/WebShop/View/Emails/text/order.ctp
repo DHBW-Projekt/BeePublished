@@ -10,16 +10,15 @@ $pricePerProd = 0;
 $totalPrice = 0;
 
 //GET products
-foreach($order as $product){
-	
-	$pricePerProd = Product.price * $productID['count'];
+foreach ($order as $product){
+
+	$pricePerProd = $product['WebshopProduct']['price'] * $product['count'];
 	$totalPrice = $totalPrice + $pricePerProd;
-	
-	echo $product['Product']['name'].' ('.$product['Product']['id'].'): Einzelpreis: '.Product.price.' Menge '.$productID['count'].' Preis: '.$pricePerProd;
-	echo '<br>';
+
+	echo '<p>'.$product['WebshopProduct']['name'].' ('.$product['WebshopProduct']['id'].'): '.$product['count'].' * '.$product['WebshopProduct']['price'].'</p>';
 }
 ?>
-
+<p style="margin-top:10px"><strong>Bestellwert: <?php echo $totalPrice; ?></strong></p>
 
 Yours sincerly,
 <?php echo $url?>

@@ -1,9 +1,17 @@
 <!-- Create new products for the catalog -->
+<?php
+	//LOAD menu
+	echo $this->element('admin_menu', array('contentID' => $contentID));
+?>
+
 <?php 
 	//LOAD js
 	$this->Html->script('ckeditor/ckeditor',false);
 	$this->Html->script('ckeditor/adapters/jquery',false);
 	$this->Html->script('/web_shop/js/admin',false);
+	
+	//LOAD style-sheet
+	echo $this->Html->css('/web_shop/css/webshop');
 	
 	//DIV
 	echo '<div id="webshop_create">';
@@ -12,11 +20,10 @@
 	echo '<h2>Artikel erstellen</h2>';
 	
 	//PRINT error/success messages
-	$validationErrors = $this->Session->read('Validation.Product.validationErrors');
-	//echo $this->Html->div('validation_error',$validationErrors);
-	echo $this->Session->flash('Product');
+	$validationErrors = $this->Session->read('Validation.WebshopProduct.validationErrors');
+	echo $this->Session->flash('WebshopProduct');
 
-	echo $this->Form->create('Product', array('enctype' => 'multipart/form-data', 'url' => array('controller' => 'WebShop', 'action' => 'create', $contentID))); ?>
+	echo $this->Form->create('WebshopProduct', array('enctype' => 'multipart/form-data', 'url' => array('controller' => 'WebShop', 'action' => 'create', $contentID))); ?>
 	<table>
 		<tr>
 			<td><?php echo $this->Form->label('Name:'); ?></td>
@@ -32,7 +39,7 @@
 		</tr>
 		<tr>
 			<td><?php echo $this->Form->label('Bild:');?></td>
-			<td><?php echo $this->Form->file('Product.submittedfile', array('label' => false, 'div' => ''));?></td>
+			<td><?php echo $this->Form->file('WebshopProduct.submittedfile', array('label' => false, 'div' => ''));?></td>
 		</tr>
 	</table>
 	<?php echo $this->Form->submit(__('Speichern', true), array('name' => 'save', 'div' => false)); ?>

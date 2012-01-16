@@ -3,31 +3,7 @@ App::uses('AppModel', 'Model');
 /**
  * Product Model.
  */
-class Product extends AppModel {
-	
-   /**
-	* Model name
-	*/
-	public $name = 'Product';
-	
-	
-	/**
-	 *  Display field
-	 */
-	public $displayField = 'name';
-	
-	
-	/**
-	 * 
-	 * Pagination
-	 */
-	public $paginate = array(
-	        'limit' => 10,
-	        'order' => array(
-	            'Product.id' => 'asc'
-	)
-	);
-	
+class WebshopProduct extends AppModel {
 	
 	/**
 	 *  Validation
@@ -46,10 +22,21 @@ class Product extends AppModel {
 		        ),
 		        
 				'price' => array(
-					'rule' => array('decimal', 2),
+					'rule' => 'numeric',
 				    'required' => true,
 					'allowEmpty' => false,
-				    'message'  => 'Preis ist eine Zahl.'
+				    'message'  => '"Preis" ist eine Zahl.'
 				)
+	);
+	
+   /**
+	*  DB-Relationship
+	*/
+	public $hasMany = array(
+		        'WebshopPosition' => array(
+		            'className'     => 'WebshopPosition',
+		            'foreignKey'    => 'product_id',
+		            'dependent'     => true
+	)
 	);
 }

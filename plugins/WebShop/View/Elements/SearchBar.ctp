@@ -1,10 +1,10 @@
 <!-- Web-Shop Searchbar -->
-<div id="websop_searchbar">   
+<div id="websop_searchbar" class="color1">   
     <?php    	    
     	//CREATE search-fields
     	echo '<div class="webshop_searchfield">';
 		    echo $this->Form->create('Search', array('url' => $url.'/webshop/search'));
-		    echo $this->Form->input('Suche', array('div' => false, 'style' => 'width: 275px'));
+		    echo $this->Form->input('Suche:', array('div' => false, 'style' => 'width: 275px'));
 		    echo $this->Form->submit('Los', array('div' => false,));
 		    echo $this->Form->end();
 	    echo '</div>';
