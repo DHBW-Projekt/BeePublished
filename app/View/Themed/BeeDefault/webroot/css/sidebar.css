@@ -24,6 +24,13 @@ body.sidebar-open {
     border-top: 1px solid #999999;
     border-bottom: 1px solid #999999;
     border-right: 1px solid #999999;
+    padding: 5px;
+    -webkit-border-top-right-radius: 15px;
+    -webkit-border-bottom-right-radius: 15px;
+    -moz-border-radius-topright: 15px;
+    -moz-border-radius-bottomright: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 #sidebar-opener.opened {
@@ -32,13 +39,15 @@ body.sidebar-open {
 
 #sidebar, #sidebar-opener {
     position: fixed;
-    background-color: #dddddd;
-    box-shadow: 0px 0px 20px #dddddd;
-    -webkit-box-shadow: 0px 0px 20px #dddddd;
-    -moz-box-shadow: 0px 0px 20px #dddddd;
+    background-color: #181818;
+    /*box-shadow: 0px 0px 20px #dddddd;
+-webkit-box-shadow: 0px 0px 20px #dddddd;
+-moz-box-shadow: 0px 0px 20px #dddddd;*/
 }
+
 #sidebar-top {
     margin: 5px;
+    margin-right: 0px;
 }
 
 #sidebar-content {
@@ -46,7 +55,9 @@ body.sidebar-open {
     margin: 5px;
     top: 140px;
     bottom: 5px;
-    width: 190px;
+    margin-right: 0px;
+    width: 199px;
+
 }
 
 #logo {
