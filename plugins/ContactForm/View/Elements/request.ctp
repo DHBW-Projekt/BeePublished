@@ -11,12 +11,8 @@
 		?>
 			<table>
 				<tr>
-					<td><?php echo $this->Form->label('last_name', __('Last Name: '));?></td>
-					<td><?php echo $this->Form->input('last_name', array('label' => ''));?></td>
-				</tr>
-				<tr>
-					<td><?php echo $this->Form->label('first_name', __('First Name: '));?></td>
-					<td><?php echo $this->Form->input('first_name', array('label' => ''));?></td>
+					<td><?php echo $this->Form->label('name', __('Name: '));?></td>
+					<td><?php echo $this->Form->input('name', array('label' => ''));?></td>
 				</tr>
 				<tr>
 					<td><?php echo $this->Form->label('email', __('E-Mail: '));?></td>
@@ -32,7 +28,8 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td><?php /*echo $this->Recaptcha->display_form();*/ ?></td>
+					<td><?php /*echo $this->Recaptcha->display_form('');*/?></td>
+ 
 				</tr>
 				<tr width="100%">
 					<td colspan="2"><?php echo $this->Form->end('Send');?></td>

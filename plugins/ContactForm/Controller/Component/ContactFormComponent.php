@@ -33,6 +33,13 @@ class ContactFormComponent extends Component {
     			$data['Element'] = $func_data['Element'];
     		}
     	}
+    	
+    	//Recaptcha
+    	$data['Recaptcha']['publickey'] = "6LeXXMwSAAAAAATYW9zan7IB7yaIKmx1VPMjqeXX";
+    	$data['Recaptcha']['privatekey'] = "6LeXXMwSAAAAALTEji2U_qC9lp4W38_QxC0zfhgX";
+    	
+    	//$this->Recaptcha->publickey = "6LeXXMwSAAAAAATYW9zan7IB7yaIKmx1VPMjqeXX";
+    	//$this->Recaptcha->privatekey = "6LeXXMwSAAAAALTEji2U_qC9lp4W38_QxC0zfhgX";
     
     	//RETURN data
     	if (!isset($data['data'])) {
@@ -60,13 +67,11 @@ class ContactFormComponent extends Component {
     	//CHECK recaptcha
     	/*if(!$this->Recaptcha->valid($controller->params['form'])){
     	 $data_error = true;
-
     	}*/
 
     	//VALIDATE data
     	if(!$data_error){
-    		$controller->ContactRequest->set(array('last_name' => $controller->data['ContactForm']['last_name'],
-    											   'first_name' => $controller->data['ContactForm']['first_name'],
+    		$controller->ContactRequest->set(array('name' => $controller->data['ContactForm']['name'],
     											   'email' => $controller->data['ContactForm']['email'],
     											   'subject' => $controller->data['ContactForm']['subject'],
     											   'body' => $controller->data['ContactForm']['body']
@@ -79,14 +84,14 @@ class ContactFormComponent extends Component {
 
     	//SEND email
     	if(!$data_error){
-    		$this->BeeEmail->sendHtmlEmail($to = 'corinna.knick@yahoo.de',
-    												 $subject = 'Request through contact form',
-    												 $viewVars = array('name'=>$this->data['ContactForm']['first_name'].' '.$this->data['ContactForm']['last_name'],
-																	   'email'=>$this->data['ContactForm']['email'],
-																	   'subject'=>$this->data['ContactForm']['subject'],
-																	   'body'=>$this->data['ContactForm']['body']
-																	  ),
-													 $viewName = 'ContactForm.contact');
+    		$this->BeeEmail->sendHtmlEmail($to = 'maximilian.stueber@me.com',
+    									   $subject = 'Request through contact form',
+    									   $viewVars = array('name' => $controller->data['ContactForm']['name'],
+																	   'email' => $controller->data['ContactForm']['email'],
+																	   'subject' => $controller->data['ContactForm']['subject'],
+																	   'body' => $controller->data['ContactForm']['body']
+														     ),
+										   $viewName = 'ContactForm.contact');
     	}
     	
     	//PRINT error messages
