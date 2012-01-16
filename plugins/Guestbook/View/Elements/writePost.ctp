@@ -38,9 +38,9 @@ if (($errors != NULL) && array_key_exists('text', $errors) && array_key_exists('
 }
 
 //CAPTCHA
-// App::import('Vendor','recaptcha/recaptchalib');
-// $publickey = "6LfzYcwSAAAAAN3vRDzZKXkC0rYkwaKQTi8hMkj6"; 
-// echo recaptcha_get_html($publickey);
+App::import('Vendor','recaptcha/recaptchalib');
+$publickey = "6LfzYcwSAAAAAN3vRDzZKXkC0rYkwaKQTi8hMkj6"; 
+echo recaptcha_get_html($publickey);
 
 // end of form
 echo $this->Form->end('Save Post');

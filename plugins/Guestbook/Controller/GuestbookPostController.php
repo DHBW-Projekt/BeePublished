@@ -1,12 +1,13 @@
 <?php
 
 App::uses('Sanitize','Utility');
+App::import('Vendor','recaptcha/recaptchalib');
 
 class GuestbookPostController extends GuestbookAppController {
 
 	public $name = 'Guestbook';
 	public $uses = array('Guestbook.GuestbookPost');
-	public $components = array('BeeEmail', 'ConfigComponent');
+	public $components = array('BeeEmail', 'Config');
 	public $helpers = array('Time', 'Form');
 
 	function beforeFilter()
@@ -19,62 +20,58 @@ class GuestbookPostController extends GuestbookAppController {
 	function save(){
 		// get is not allowed
 		if ($this->request->is('post')){
-			// check captcha
-			require_once('/Guestbook/recaptcha/recaptchalib.php');
-			$privatekey = "6LfzYcwSAAAAAEH-Nr-u6qaFaNdIc6h9nlbm0i76";
-			$resp = recaptcha_check_answer ($privatekey,
-											$_SERVER["REMOTE_ADDR"],
-											$_POST["recaptcha_challenge_field"],
-											$_POST["recaptcha_response_field"]);
-			if (!$resp->is_valid) {
-				// error in captcha -> set error message and redirect back to form
-				$this->Session->setFlash(__('The reCAPTCHA wasn\'t entered correctly. Please try again.'), 'default', array('class' => 'flash_failure'), 'Guestbook.Main');
-				$this->_persistValidation('GuestbookPost');
-// 				$this->Session->write('input', $this->request->data);
-				$this->redirect($this->referer());
-				// 				die ("The reCAPTCHA wasn't entered correctly. Go back and try it again." .
-				// 			         "(reCAPTCHA said: " . $resp->error . ")");
-			} else {
-				// captcha was succesfull
-				// prevent harmful code
-				$newPost = Sanitize::clean($this->request->data);
-				// generate acivation token for mail
-				$salt = rand(0, 100);
-				$newPost['GuestbookPost']['token'] = md5($salt . $newPost['GuestbookPost']['author'] . $salt . $newPost['GuestbookPost']['title'] . $salt);
-				// call save for model with entered values
-				// if no errors occur delete validation data saved in session, send email and set positive message
-				if ($this->GuestbookPost->save($newPost)) {
-// 					$this->Session->delete('input');
-					$this->_deleteValidation();
-					die(debug($newPost));
+			// prevent harmful code
+			$newPost = Sanitize::clean($this->request->data);
+			// generate acivation token for mail
+			$salt = rand(0, 100);
+			$newPost['GuestbookPost']['token'] = md5($salt . $newPost['GuestbookPost']['author'] . $salt . $newPost['GuestbookPost']['title'] . $salt);
+			// call save for model with entered values
+			if ($this->GuestbookPost->save($newPost)) {
+				// there are no errors -> check captcha
+				$privatekey = "6LfzYcwSAAAAAEH-Nr-u6qaFaNdIc6h9nlbm0i76";
+				$resp = recaptcha_check_answer($privatekey,
+													$_SERVER["REMOTE_ADDR"],
+													$_POST["recaptcha_challenge_field"],
+													$_POST["recaptcha_response_field"]);
+				if (!$resp->is_valid) {
+					// error in captcha -> set error message and redirect back to form
+					$this->Session->setFlash(__('The reCAPTCHA wasn\'t entered correctly. Please try again.'), 'default', array('class' => 'flash_failure'), 'Guestbook.Main');
 					
-					// prepare and send email to specified email with values and links
-					$to = $this->ConfigComponent->getValue('email');
-					$subject = __('There is a new post for your guestbook!');
-					$viewVars = array('author' => $newPost['author'],
-										'title' => $newPost['title'],
-										'text' => $newPost['text'],
-										'submitDate' => $this->Time->format('d.m.Y', $newPost['created']) . ' ' . $this->Time->format('H:i:s',$newPost['created']),
-										'url_release' => $this->Form->postLink('here', 
-																				array('plugin' => 'Guestbook', 'controller' => 'GuestbookPost', 'action' => 'release_noAuth', $newPost['id'], $newPost['token']),
-																				array('title' => __('Release post'))),
-										'url_delete' => $this->Form->postLink('here', 
-																				array('plugin' => 'Guestbook', 'controller' => 'GuestbookPost', 'action' => 'delete_noAuth', $newPost['id'], $newPost['token']),
-																				array('title' => __('Delete post')),
-																				__('Do you really want to delete this post?')),
-										'page_name' => $this->ConfigComponent->getValue('page_name'));
-					$viewName = 'Guestbook.notification';
-					$this->BeeEmail->sendHtmlEmail($to, $subject, $viewVars, $viewName);
-
+					debug('hier');
+					$this->_persistValidation('GuestbookPost');
+					debug($this->Session->read('Validation.GuestbookPost.data'));
+										die('danach');
+					$this->redirect($this->referer());
+				} else {
+					// captcha was succesfull
+					// delete validation from session
+					$this->_deleteValidation();	
+// 					// prepare and send email to specified email with values and links
+// 					$to = $this->ConfigComponent->getValue('email');
+// 					$subject = __('There is a new post for your guestbook!');
+// 					$viewVars = array('author' => $newPost['author'],
+// 										'title' => $newPost['title'],
+// 										'text' => $newPost['text'],
+// 										'submitDate' => $this->Time->format('d.m.Y', $newPost['created']) . ' ' . $this->Time->format('H:i:s',$newPost['created']),
+// 										'url_release' => $this->Form->postLink('here', 
+// 																			array('plugin' => 'Guestbook', 'controller' => 'GuestbookPost', 'action' => 'release_noAuth', $newPost['id'], $newPost['token']),
+// 																			array('title' => __('Release post'))),
+// 										'url_delete' => $this->Form->postLink('here', 
+// 																			array('plugin' => 'Guestbook', 'controller' => 'GuestbookPost', 'action' => 'delete_noAuth', $newPost['id'], $newPost['token']),
+// 																			array('title' => __('Delete post')),
+// 																			__('Do you really want to delete this post?')),
+// 										'page_name' => $this->ConfigComponent->getValue('page_name'));
+// 					$viewName = 'Guestbook.notification';
+// 					$this->BeeEmail->sendHtmlEmail($to, $subject, $viewVars, $viewName);
+					// set positive message and redirect to page
 					$this->Session->setFlash(__('Your post was saved. It will be released by an administrator.'), 'default', array('class' => 'flash_success'), 'Guestbook.Main');
 					$this->redirect($this->referer());
 				}
-				// if errors occur set error message, save validation and input data in session
-				$this->Session->setFlash(__('An error has occured.'), 'default', array('class' => 'flash_failure'), 'Guestbook.Main');
-				$this->_persistValidation('GuestbookPost');
-// 				$this->Session->write('input', $this->request->data);
-				$this->redirect($this->referer());
 			}
+			// if errors occur set error message, save validation and data in session
+			$this->Session->setFlash(__('An error has occured.'), 'default', array('class' => 'flash_failure'), 'Guestbook.Main');
+			$this->_persistValidation('GuestbookPost');
+			$this->redirect($this->referer());	
 		}
 	}
 
