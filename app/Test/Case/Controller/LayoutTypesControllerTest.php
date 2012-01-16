@@ -6,21 +6,21 @@ App::uses('LayoutTypesController', 'Controller');
  * TestLayoutTypesController *
  */
 class TestLayoutTypesController extends LayoutTypesController {
-/**
- * Auto render
- *
- * @var boolean
- */
+	/**
+	 * Auto render
+	 *
+	 * @var boolean
+	 */
 	public $autoRender = false;
 
-/**
- * Redirect action
- *
- * @param mixed $url
- * @param mixed $status
- * @param boolean $exit
- * @return void
- */
+	/**
+	 * Redirect action
+	 *
+	 * @param mixed $url
+	 * @param mixed $status
+	 * @param boolean $exit
+	 * @return void
+	 */
 	public function redirect($url, $status = null, $exit = true) {
 		$this->redirectUrl = $url;
 	}
@@ -31,18 +31,18 @@ class TestLayoutTypesController extends LayoutTypesController {
  *
  */
 class LayoutTypesControllerTestCase extends CakeTestCase {
-/**
- * Fixtures
- *
- * @var array
- */
+	/**
+	 * Fixtures
+	 *
+	 * @var array
+	 */
 	public $fixtures = array('app.layout_type', 'app.container', 'app.page', 'app.user', 'app.role', 'app.menu_entry', 'app.log_entry', 'app.content', 'app.plugin', 'app.permission', 'app.content_value');
 
-/**
- * setUp method
- *
- * @return void
- */
+	/**
+	 * setUp method
+	 *
+	 * @return void
+	 */
 	public function setUp() {
 		parent::setUp();
 
@@ -50,11 +50,11 @@ class LayoutTypesControllerTestCase extends CakeTestCase {
 		$this->LayoutTypes->constructClasses();
 	}
 
-/**
- * tearDown method
- *
- * @return void
- */
+	/**
+	 * tearDown method
+	 *
+	 * @return void
+	 */
 	public function tearDown() {
 		unset($this->LayoutTypes);
 

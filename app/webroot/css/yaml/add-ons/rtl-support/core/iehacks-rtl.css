@@ -18,10 +18,7 @@
  * @revision        $Revision: 501 $
  * @lastmodified    $Date: 2011-06-18 17:27:44 +0200 (Sa, 18 Jun 2011) $
  */
-
-@media all
-{
- /**
+@media all { /**
   * (en) Workaround for misplaced floating navigation lists
   * (de) Workaround behebt deplatzierte floatende Navigationselemente
   *
@@ -30,13 +27,14 @@
   * @css-for    IE 5.x/Win, IE6, IE7
   * @valid      yes
   */
-
-  #nav { direction:ltr; }
-  #nav * { direction:rtl; }
-
-  /*------------------------------------------------------------------------------------------------------*/
-
-  /**
+	#nav {
+		direction: ltr;
+	}
+	#nav * {
+		direction: rtl;
+	}
+	/*------------------------------------------------------------------------------------------------------*/
+	/**
    * (en) Optional: Forces right vertical scroll bars
    * (de) Optional: Erzwingt rechte vertikale Scrollbalken
    *
@@ -44,9 +42,7 @@
    * @affected   IE 5.x/Win, IE6, IE7
    * @css-for    IE 5.x/Win, IE6, IE7
    * @valid      yes
-   */
-
-  /*
+   */ /*
   html { direction: ltr; }
   body { direction: rtl; }
   */

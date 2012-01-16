@@ -1,15 +1,15 @@
 <?php
 
 /** Dutch localization file for KCFinder
-  * author: Lars Anderson <lars16anderson@users.sourceforge.net>
-  */
+ * author: Lars Anderson <lars16anderson@users.sourceforge.net>
+ */
 
 $lang = array(
 
     '_locale' => "nl_NL.UTF-8",  // UNIX localization code
     '_charset' => "utf-8",       // Browser charset
 
-    // Date time formats. See http://www.php.net/manual/en/function.strftime.php
+// Date time formats. See http://www.php.net/manual/en/function.strftime.php
     '_dateTimeFull' => "%A, %e.%B.%Y %H:%M",
     '_dateTimeMid' => "%a %e %b %Y %H:%M",
     '_dateTimeSmall' => "%d/%m/%Y %H:%M",
@@ -188,7 +188,7 @@ $lang = array(
     "Download" => "Download",
     'Clipboard' => "Klembord",
 
-    // VERSION 2 NEW LABELS
+// VERSION 2 NEW LABELS
 
     "Cannot rename the folder." =>
     "De folder kan niet hernoemd worden.",

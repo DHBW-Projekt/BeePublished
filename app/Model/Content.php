@@ -11,11 +11,11 @@ class Content extends AppModel {
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-/**
- * belongsTo associations
- *
- * @var array
- */
+	/**
+	 * belongsTo associations
+	 *
+	 * @var array
+	 */
 	public $belongsTo = array(
 		'Container' => array(
 			'className' => 'Container',
@@ -23,22 +23,22 @@ class Content extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		),
+			),
 		'PluginView' => array(
 			'className' => 'PluginView',
 			'foreignKey' => 'plugin_view_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		)
-	);
+			)
+			);
 
-/**
- * hasMany associations
- *
- * @var array
- */
-	public $hasMany = array(
+			/**
+			 * hasMany associations
+			 *
+			 * @var array
+			 */
+			public $hasMany = array(
 		'ContentValue' => array(
 			'className' => 'ContentValue',
 			'foreignKey' => 'content_id',
@@ -51,7 +51,7 @@ class Content extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
-		)
-	);
+			)
+			);
 
 }

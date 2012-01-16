@@ -1,8 +1,8 @@
 <?php
 /*
-* Copyright (c) 2003-2011, CKSource - Frederico Knabben. All rights reserved.
-* For licensing, see LICENSE.html or http://ckeditor.com/license
-*/
+ * Copyright (c) 2003-2011, CKSource - Frederico Knabben. All rights reserved.
+ * For licensing, see LICENSE.html or http://ckeditor.com/license
+ */
 
 /**
  * \brief CKEditor class that can be used to create editor
@@ -143,9 +143,9 @@ class CKEditor
 
 		$js = $this->returnGlobalEvents();
 		if (!empty($_config))
-			$js .= "CKEDITOR.replace('".$name."', ".$this->jsEncode($_config).");";
+		$js .= "CKEDITOR.replace('".$name."', ".$this->jsEncode($_config).");";
 		else
-			$js .= "CKEDITOR.replace('".$name."');";
+		$js .= "CKEDITOR.replace('".$name."');";
 
 		$out .= $this->script($js);
 
@@ -547,9 +547,9 @@ class CKEditor
 		}
 		// String otherwise
 		if (strpos($val, '@@') === 0)
-			return substr($val, 2);
+		return substr($val, 2);
 		if (strtoupper(substr($val, 0, 9)) == 'CKEDITOR.')
-			return $val;
+		return $val;
 
 		return '"' . str_replace(array("\\", "/", "\n", "\t", "\r", "\x08", "\x0c", '"'), array('\\\\', '\\/', '\\n', '\\t', '\\r', '\\b', '\\f', '\"'), $val) . '"';
 	}

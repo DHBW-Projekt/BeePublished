@@ -7,29 +7,29 @@ App::uses('NewsblogTitle', 'Model');
  *
  */
 class NewsblogTitleTestCase extends CakeTestCase {
-/**
- * Fixtures
- *
- * @var array
- */
+	/**
+	 * Fixtures
+	 *
+	 * @var array
+	 */
 	public $fixtures = array('app.newsblog_title');
 
-/**
- * setUp method
- *
- * @return void
- */
+	/**
+	 * setUp method
+	 *
+	 * @return void
+	 */
 	public function setUp() {
 		parent::setUp();
 
 		$this->NewsblogTitle = ClassRegistry::init('NewsblogTitle');
 	}
 
-/**
- * tearDown method
- *
- * @return void
- */
+	/**
+	 * tearDown method
+	 *
+	 * @return void
+	 */
 	public function tearDown() {
 		unset($this->NewsblogTitle);
 

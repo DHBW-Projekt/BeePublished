@@ -7,29 +7,29 @@ App::uses('Role', 'Model');
  *
  */
 class RoleTestCase extends CakeTestCase {
-/**
- * Fixtures
- *
- * @var array
- */
+	/**
+	 * Fixtures
+	 *
+	 * @var array
+	 */
 	public $fixtures = array('app.role', 'app.menu_entry', 'app.page', 'app.container', 'app.layout', 'app.layout_type', 'app.content', 'app.user');
 
-/**
- * setUp method
- *
- * @return void
- */
+	/**
+	 * setUp method
+	 *
+	 * @return void
+	 */
 	public function setUp() {
 		parent::setUp();
 
 		$this->Role = ClassRegistry::init('Role');
 	}
 
-/**
- * tearDown method
- *
- * @return void
- */
+	/**
+	 * tearDown method
+	 *
+	 * @return void
+	 */
 	public function tearDown() {
 		unset($this->Role);
 

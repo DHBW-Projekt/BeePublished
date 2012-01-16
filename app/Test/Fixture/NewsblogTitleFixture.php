@@ -7,11 +7,11 @@
  */
 class NewsblogTitleFixture extends CakeTestFixture {
 
-/**
- * Fields
- *
- * @var array
- */
+	/**
+	 * Fields
+	 *
+	 * @var array
+	 */
 	public $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10, 'key' => 'primary', 'collate' => NULL, 'comment' => ''),
 		'content_id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10, 'collate' => NULL, 'comment' => ''),
@@ -20,16 +20,16 @@ class NewsblogTitleFixture extends CakeTestFixture {
 		'tableParameters' => array('charset' => 'latin1', 'collate' => 'latin1_swedish_ci', 'engine' => 'InnoDB')
 	);
 
-/**
- * Records
- *
- * @var array
- */
+	/**
+	 * Records
+	 *
+	 * @var array
+	 */
 	public $records = array(
-		array(
+	array(
 			'id' => 1,
 			'content_id' => 1,
 			'title' => 'Lorem ipsum dolor sit amet'
-		),
-	);
+			),
+			);
 }

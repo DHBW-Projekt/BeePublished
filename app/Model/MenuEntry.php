@@ -9,20 +9,20 @@ App::uses('AppModel', 'Model');
  * @property MenuEntry $ChildMenuEntry
  */
 class MenuEntry extends AppModel {
-/**
- * Display field
- *
- * @var string
- */
+	/**
+	 * Display field
+	 *
+	 * @var string
+	 */
 	public $displayField = 'name';
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-/**
- * belongsTo associations
- *
- * @var array
- */
+	/**
+	 * belongsTo associations
+	 *
+	 * @var array
+	 */
 	public $belongsTo = array(
 		'ParentMenuEntry' => array(
 			'className' => 'MenuEntry',
@@ -30,29 +30,29 @@ class MenuEntry extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		),
+			),
 		'Role' => array(
 			'className' => 'Role',
 			'foreignKey' => 'role_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		),
+			),
 		'Page' => array(
 			'className' => 'Page',
 			'foreignKey' => 'page_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		)
-	);
+			)
+			);
 
-/**
- * hasMany associations
- *
- * @var array
- */
-	public $hasMany = array(
+			/**
+			 * hasMany associations
+			 *
+			 * @var array
+			 */
+			public $hasMany = array(
 		'ChildMenuEntry' => array(
 			'className' => 'MenuEntry',
 			'foreignKey' => 'parent_id',
@@ -65,7 +65,7 @@ class MenuEntry extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
-		)
-	);
+			)
+			);
 
 }

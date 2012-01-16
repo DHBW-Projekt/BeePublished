@@ -10,38 +10,38 @@ App::uses('AppModel', 'Model');
  */
 class Role extends AppModel
 {
-    public $actsAs = array('Acl' => array('type' => 'requester'));
+	public $actsAs = array('Acl' => array('type' => 'requester'));
 
-    /**
-     * Display field
-     *
-     * @var string
-     */
-    public $displayField = 'name';
+	/**
+	 * Display field
+	 *
+	 * @var string
+	 */
+	public $displayField = 'name';
 
-    //The Associations below have been created with all possible keys, those that are not needed can be removed
+	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-    /**
-     * belongsTo associations
-     *
-     * @var array
-     */
-    public $belongsTo = array(
+	/**
+	 * belongsTo associations
+	 *
+	 * @var array
+	 */
+	public $belongsTo = array(
         'ParentRole' => array(
             'className' => 'Role',
             'foreignKey' => 'parent_id',
             'conditions' => '',
             'fields' => '',
             'order' => ''
-        )
-    );
+            )
+            );
 
-    /**
-     * hasMany associations
-     *
-     * @var array
-     */
-    public $hasMany = array(
+            /**
+             * hasMany associations
+             *
+             * @var array
+             */
+            public $hasMany = array(
         'MenuEntry' => array(
             'className' => 'MenuEntry',
             'foreignKey' => 'role_id',
@@ -54,7 +54,7 @@ class Role extends AppModel
             'exclusive' => '',
             'finderQuery' => '',
             'counterQuery' => ''
-        ),
+            ),
         'ChildRole' => array(
             'className' => 'Role',
             'foreignKey' => 'parent_id',
@@ -67,7 +67,7 @@ class Role extends AppModel
             'exclusive' => '',
             'finderQuery' => '',
             'counterQuery' => ''
-        ),
+            ),
         'User' => array(
             'className' => 'User',
             'foreignKey' => 'role_id',
@@ -80,16 +80,16 @@ class Role extends AppModel
             'exclusive' => '',
             'finderQuery' => '',
             'counterQuery' => ''
-        )
-    );
+            )
+            );
 
-    /**
-     * parentNode function
-     *
-     * @return array
-     */
-    function parentNode()
-    {
-        return null;
-    }
+            /**
+             * parentNode function
+             *
+             * @return array
+             */
+            function parentNode()
+            {
+            	return null;
+            }
 }

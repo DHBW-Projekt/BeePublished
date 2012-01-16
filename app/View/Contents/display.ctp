@@ -1,12 +1,12 @@
 <?php
 if (isset($error)) {
-    echo 'Unknown module';
+	echo 'Unknown module';
 } else {
-    echo $this->Html->link(
-        $this->Html->image('tools.png', array('class' => 'setting_image')),
-        array('plugin' => $plugin, 'controller' => $view, 'action' => 'admin', $id),
-        array('escape' => False, 'id' => 'overlay', 'class' => 'setting_button')
-    );
-    echo $this->element($view, array('data' => $data), array('plugin' => $plugin));
+	echo $this->Html->link(
+	$this->Html->image('tools.png', array('class' => 'setting_image')),
+	array('plugin' => $plugin, 'controller' => $view, 'action' => 'admin', $id),
+	array('escape' => False, 'id' => 'overlay', 'class' => 'setting_button')
+	);
+	echo $this->element($view, array('data' => $data), array('plugin' => $plugin));
 }
 ?>

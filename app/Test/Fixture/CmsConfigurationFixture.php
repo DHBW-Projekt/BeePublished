@@ -7,11 +7,11 @@
  */
 class CmsConfigurationFixture extends CakeTestFixture {
 
-/**
- * Fields
- *
- * @var array
- */
+	/**
+	 * Fields
+	 *
+	 * @var array
+	 */
 	public $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'key' => 'primary', 'collate' => NULL, 'comment' => ''),
 		'key' => array('type' => 'string', 'null' => false, 'default' => NULL, 'length' => 30, 'key' => 'unique', 'collate' => 'utf8_general_ci', 'comment' => '', 'charset' => 'utf8'),
@@ -20,16 +20,16 @@ class CmsConfigurationFixture extends CakeTestFixture {
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 	);
 
-/**
- * Records
- *
- * @var array
- */
+	/**
+	 * Records
+	 *
+	 * @var array
+	 */
 	public $records = array(
-		array(
+	array(
 			'id' => 1,
 			'key' => 'Lorem ipsum dolor sit amet',
 			'value' => 'Lorem ipsum dolor sit amet'
-		),
-	);
+			),
+			);
 }

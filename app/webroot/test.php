@@ -21,9 +21,9 @@ ini_set('display_errors', 1);
 /**
  * Use the DS to separate the directories in other defines
  */
-	if (!defined('DS')) {
-		define('DS', DIRECTORY_SEPARATOR);
-	}
+if (!defined('DS')) {
+	define('DS', DIRECTORY_SEPARATOR);
+}
 /**
  * These defines should only be edited if you have cake installed in
  * a directory layout other than the way it is distributed.
@@ -34,16 +34,16 @@ ini_set('display_errors', 1);
  * The full path to the directory which holds "app", WITHOUT a trailing DS.
  *
  */
-	if (!defined('ROOT')) {
-		define('ROOT', dirname(dirname(dirname(__FILE__))));
-	}
+if (!defined('ROOT')) {
+	define('ROOT', dirname(dirname(dirname(__FILE__))));
+}
 /**
  * The actual directory name for the "app".
  *
  */
-	if (!defined('APP_DIR')) {
-		define('APP_DIR', basename(dirname(dirname(__FILE__))));
-	}
+if (!defined('APP_DIR')) {
+	define('APP_DIR', basename(dirname(dirname(__FILE__))));
+}
 
 /**
  * The absolute path to the "Cake" directory, WITHOUT a trailing DS.
@@ -53,7 +53,7 @@ ini_set('display_errors', 1);
  *
  * Leaving this constant undefined will result in it being defined in Cake/bootstrap.php
  */
-	//define('CAKE_CORE_INCLUDE_PATH', ROOT . DS . 'lib');
+//define('CAKE_CORE_INCLUDE_PATH', ROOT . DS . 'lib');
 
 /**
  * Editing below this line should not be necessary.

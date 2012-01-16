@@ -1,13 +1,13 @@
 ol.nav {
-    list-style: none;
-    padding: 0;
+	list-style: none;
+	padding: 0;
 }
 
 ol.nav li ol.subnav {
-    list-style: none;
-    padding: 0;
+	list-style: none;
+	padding: 0;
 }
 
 .editIconContainer {
-    display: inline;
+	display: inline;
 }

@@ -6,21 +6,21 @@ App::uses('PagesController', 'Controller');
  * TestPagesController *
  */
 class TestPagesController extends PagesController {
-/**
- * Auto render
- *
- * @var boolean
- */
+	/**
+	 * Auto render
+	 *
+	 * @var boolean
+	 */
 	public $autoRender = false;
 
-/**
- * Redirect action
- *
- * @param mixed $url
- * @param mixed $status
- * @param boolean $exit
- * @return void
- */
+	/**
+	 * Redirect action
+	 *
+	 * @param mixed $url
+	 * @param mixed $status
+	 * @param boolean $exit
+	 * @return void
+	 */
 	public function redirect($url, $status = null, $exit = true) {
 		$this->redirectUrl = $url;
 	}
@@ -31,18 +31,18 @@ class TestPagesController extends PagesController {
  *
  */
 class PagesControllerTestCase extends CakeTestCase {
-/**
- * Fixtures
- *
- * @var array
- */
+	/**
+	 * Fixtures
+	 *
+	 * @var array
+	 */
 	public $fixtures = array('app.page', 'app.container', 'app.layout_type', 'app.content', 'app.user', 'app.role', 'app.menu_entry', 'app.log_entry');
 
-/**
- * setUp method
- *
- * @return void
- */
+	/**
+	 * setUp method
+	 *
+	 * @return void
+	 */
 	public function setUp() {
 		parent::setUp();
 
@@ -50,22 +50,22 @@ class PagesControllerTestCase extends CakeTestCase {
 		$this->Pages->constructClasses();
 	}
 
-/**
- * tearDown method
- *
- * @return void
- */
+	/**
+	 * tearDown method
+	 *
+	 * @return void
+	 */
 	public function tearDown() {
 		unset($this->Pages);
 
 		parent::tearDown();
 	}
 
-/**
- * testDisplay method
- *
- * @return void
- */
+	/**
+	 * testDisplay method
+	 *
+	 * @return void
+	 */
 	public function testDisplay() {
 
 	}

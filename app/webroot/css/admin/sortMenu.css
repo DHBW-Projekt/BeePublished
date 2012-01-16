@@ -1,27 +1,27 @@
 ol {
-    margin: 0;
-    padding: 0;
-    padding-left: 30px;
+	margin: 0;
+	padding: 0;
+	padding-left: 30px;
 }
 
-ol.nav, ol.nav ol {
-    margin: 0 0 0 25px;
-    padding: 0;
-    list-style-type: none;
+ol.nav,ol.nav ol {
+	margin: 0 0 0 25px;
+	padding: 0;
+	list-style-type: none;
 }
 
 ol.nav {
-    margin: 0;
+	margin: 0;
 }
 
 .nav li {
-    margin: 7px 0 0 0;
-    padding: 0;
+	margin: 7px 0 0 0;
+	padding: 0;
 }
 
 .nav li div {
-    border: 1px solid black;
-    padding: 3px;
-    margin: 0;
-    cursor: move;
+	border: 1px solid black;
+	padding: 3px;
+	margin: 0;
+	cursor: move;
 }

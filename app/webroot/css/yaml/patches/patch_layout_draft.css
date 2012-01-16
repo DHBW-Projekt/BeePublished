@@ -13,16 +13,12 @@
  * @revision        $Revision: 501 $
  * @lastmodified    $Date: 2011-06-18 17:27:44 +0200 (Sa, 18 Jun 2011) $
  */
-
-/* Layout independent adjustments | Layout-unabhängige Anpassungen ----------------------------------- */
+	/* Layout independent adjustments | Layout-unabhängige Anpassungen ----------------------------------- */
 @import url(/yaml/core/iehacks.css);
 
 /* Box model adjustments for vlist navigation | Box-Modell-Anpassungen für vlist-Navigation */
-/* @import url(/yaml/patches/patch_nav_vlist.css); */
-
-/* Layout-dependent adjustments | Layout-abhängige Anpassungen --------------------------------------- */
-@media screen, projection
-{
-  /* add your adjustments here | Fügen Sie Ihre Anpassungen hier ein */
-
+	/* @import url(/yaml/patches/patch_nav_vlist.css); */
+	/* Layout-dependent adjustments | Layout-abhängige Anpassungen --------------------------------------- */
+@media screen , projection {
+	/* add your adjustments here | Fügen Sie Ihre Anpassungen hier ein */
 }

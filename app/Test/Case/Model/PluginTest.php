@@ -7,29 +7,29 @@ App::uses('Plugin', 'Model');
  *
  */
 class PluginTestCase extends CakeTestCase {
-/**
- * Fixtures
- *
- * @var array
- */
+	/**
+	 * Fixtures
+	 *
+	 * @var array
+	 */
 	public $fixtures = array('app.plugin', 'app.permission', 'app.role', 'app.menu_entry', 'app.page', 'app.user', 'app.log_entry', 'app.container', 'app.layout_type', 'app.content', 'app.content_value', 'app.plugin_view');
 
-/**
- * setUp method
- *
- * @return void
- */
+	/**
+	 * setUp method
+	 *
+	 * @return void
+	 */
 	public function setUp() {
 		parent::setUp();
 
 		$this->Plugin = ClassRegistry::init('Plugin');
 	}
 
-/**
- * tearDown method
- *
- * @return void
- */
+	/**
+	 * tearDown method
+	 *
+	 * @return void
+	 */
 	public function tearDown() {
 		unset($this->Plugin);
 
