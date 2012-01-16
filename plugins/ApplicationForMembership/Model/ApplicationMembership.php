@@ -1,22 +1,11 @@
 <?php
 App::uses('AppModel', 'Model');
 
-class ApplicationForMembershipModel extends AppModel{
+class ApplicationMembership extends AppModel{
 	
-	public $name = 'ApplicationForMembership';
-	
-	/*public $formOfMembership = true;
-	public $title = '';
-	public $name = '';
-	public $firstname = '';
-	public $dateOfBirth = '';
-	public $email = '';
-	public $telephone = '';
-	public $street = '';
-	public $zip = '';
-	public $city = '';
-	public $comment = '';*/
-	
+	/**
+	 * Validation
+	 */
 	public $validate = array(
 			'name' => array(
 			        'rule' => 'notEmpty',
@@ -43,5 +32,4 @@ class ApplicationForMembershipModel extends AppModel{
 					'message' => 'Please enter your city.'
 			)
 	);
-
 }

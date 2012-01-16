@@ -46,7 +46,7 @@ class ApplicationForMembershipComponent extends Component {
 		$data_error = false;
 		 
 		//LOAD model
-		$controller->loadModel("ApplicationForMembership");
+		$controller->loadModel("ApplicationMembership");
 		
 		//CHECK request and data
 		if (!$controller->request->is('post') || !isset($controller->data['ApplicationForMembership']))
@@ -59,9 +59,9 @@ class ApplicationForMembershipComponent extends Component {
 		
 		//VALIDATE data
 		if(!$data_error){
-			$controller->ApplicationForMembership->set($controller->data['ApplicationForMembership']);
+			$controller->ApplicationMembership->set($controller->data['ApplicationForMembership']);
 		
-			if(!$controller->ContactRequest->validates())
+			if(!$controller->ApplicationMembership->validates())
 				$data_error = true;
 		}
 		
@@ -78,7 +78,7 @@ class ApplicationForMembershipComponent extends Component {
 		 
 		//SAVE in db
 		if(!$data_error){
-			$data_error = !$controller->ApplicationForMembership->save($controller->data['ApplicationForMembership']);
+			$data_error = !$controller->ApplicationMembership->save($controller->data['ApplicationForMembership']);
 		}
 		
 		//PRINT error messages
@@ -88,6 +88,6 @@ class ApplicationForMembershipComponent extends Component {
 			$controller->Session->setFlash('Please fill out all mandatory fields.');
 		 
 		//REDIRECT
-		$controller->redirect('/application_for_membership');
+		$controller->redirect('/member-application');
 	}
 }
