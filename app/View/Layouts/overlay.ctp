@@ -6,7 +6,7 @@
     <title><?php echo $title_for_layout?></title>
     <?php
     $this->Js->set('webroot', $this->request->webroot);
-    echo $this->Html->css('/yaml/core/base');
+    echo $this->Html->css('yaml/core/base');
     echo $this->Html->css('designs/'.$design);
     echo $this->Html->css('template');
     echo $this->Html->script('jquery-1.6.2.min');
