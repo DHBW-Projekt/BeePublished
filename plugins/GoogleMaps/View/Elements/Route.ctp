@@ -9,21 +9,22 @@ if ($data <> __('no location') and isset($this->data['Ort']['Adresse'])) {
 }
 
 if (isset($this->data['Ort']) && isset($data['GoogleMapsLocation'])) {
-	$this->Html->scriptBlock('
+    $this->Html->scriptBlock('
             $(document).ready(function () {
                 initializeGoogleMaps(\'map\');'.
-	$route.'
+    			$route.'
             });
             ', array('inline' => false)
-	);
+    );
 }
 
 ?>
-<div id="directions"><?php
-echo $this->Form->create('Ort');
-echo $this->Form->input('Adresse');
-echo $this->Form->end('Route Berechnen');
-?>
+<div id="directions">
+    <?php
+    echo $this->Form->create('Ort');
+    echo $this->Form->input('Adresse');
+    echo $this->Form->end('Route Berechnen');
+    ?>
 
-<div id="routing"></div>
+    <div id="routing"></div>
 </div>

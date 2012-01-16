@@ -6,21 +6,21 @@ App::uses('NewsEntriesController', 'Newsblog.Controller');
  * TestNewsEntriesController *
  */
 class TestNewsEntriesController extends NewsEntriesController {
-	/**
-	 * Auto render
-	 *
-	 * @var boolean
-	 */
+/**
+ * Auto render
+ *
+ * @var boolean
+ */
 	public $autoRender = false;
 
-	/**
-	 * Redirect action
-	 *
-	 * @param mixed $url
-	 * @param mixed $status
-	 * @param boolean $exit
-	 * @return void
-	 */
+/**
+ * Redirect action
+ *
+ * @param mixed $url
+ * @param mixed $status
+ * @param boolean $exit
+ * @return void
+ */
 	public function redirect($url, $status = null, $exit = true) {
 		$this->redirectUrl = $url;
 	}
@@ -31,18 +31,18 @@ class TestNewsEntriesController extends NewsEntriesController {
  *
  */
 class NewsEntriesControllerTestCase extends CakeTestCase {
-	/**
-	 * Fixtures
-	 *
-	 * @var array
-	 */
+/**
+ * Fixtures
+ *
+ * @var array
+ */
 	public $fixtures = array('app.news_entry');
 
-	/**
-	 * setUp method
-	 *
-	 * @return void
-	 */
+/**
+ * setUp method
+ *
+ * @return void
+ */
 	public function setUp() {
 		parent::setUp();
 
@@ -50,11 +50,11 @@ class NewsEntriesControllerTestCase extends CakeTestCase {
 		$this->NewsEntries->constructClasses();
 	}
 
-	/**
-	 * tearDown method
-	 *
-	 * @return void
-	 */
+/**
+ * tearDown method
+ *
+ * @return void
+ */
 	public function tearDown() {
 		unset($this->NewsEntries);
 

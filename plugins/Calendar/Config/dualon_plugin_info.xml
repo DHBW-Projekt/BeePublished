@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dualon>
-	<plugin>
-		<name>Calendar</name>
-		<author>Christoph Krämer</author>
-		<version>1.0</version>
-		<permissions>
-			<permission>
-				<role>Author</role>
-				<action>CreateEvent</action>
-			</permission>
-		</permissions>
-		<views>
-			<view>
-				<name>SmallCalendar</name>
-			</view>
-			<view>
-				<name>LargeCalendar</name>
-			</view>
-		</views>
-	</plugin>
+    <plugin>
+        <name>Calendar</name>
+        <author>Christoph Krämer</author>
+        <version>1.0</version>
+        <permissions>
+            <permission>
+                <role>Author</role>
+                <action>CreateEvent</action>
+            </permission>
+        </permissions>
+        <views>
+            <view>
+                <name>SmallCalendar</name>
+            </view>
+            <view>
+                <name>LargeCalendar</name>
+            </view>
+        </views>
+    </plugin>
 </dualon>

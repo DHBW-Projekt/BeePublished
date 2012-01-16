@@ -1,4 +1,4 @@
-<?php
+<?php 
 /* Guestbook schema generated on: 2011-12-11 13:41:45 : 1323607305*/
 class GuestbookSchema extends CakeSchema {
 	function before($event = array()) {

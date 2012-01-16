@@ -6,7 +6,7 @@ class GoogleMapsComponent extends Component {
 	{
 		if (!array_key_exists('LocationID',$params)) {
 			return __('no location');
-		} else {
+		} else {					
 			$controller->loadModel("GoogleMapsLocation");
 			$location = $controller->GoogleMapsLocation->find('first', array('conditions' => array('GoogleMapsLocation.id' => $params['LocationID'])));
 			if ($location != null) {
@@ -16,12 +16,12 @@ class GoogleMapsComponent extends Component {
 			}
 		}
 	}
-
+	
 	public function beforeFilter() {
 		parent::beforeFilter();
-
+		
 		//Actions which don't require authorization
 		$this->Auth->allow('*');
 	}
-
+	
 }

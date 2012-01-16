@@ -11,11 +11,11 @@ class EmailTemplate extends AppModel {
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-	/**
-	 * belongsTo associations
-	 *
-	 * @var array
-	 */
+/**
+ * belongsTo associations
+ *
+ * @var array
+ */
 	public $belongsTo = array(
 		'EmailTemplateHeader' => array(
 			'className' => 'EmailTemplateHeader',
@@ -23,22 +23,22 @@ class EmailTemplate extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-			),
+		),
 		'EmailTemplateFooter' => array(
 			'className' => 'EmailTemplateFooter',
 			'foreignKey' => 'email_template_footer_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-			)
-			);
+		)
+	);
 
-			/**
-			 * hasMany associations
-			 *
-			 * @var array
-			 */
-			public $hasMany = array(
+/**
+ * hasMany associations
+ *
+ * @var array
+ */
+	public $hasMany = array(
 		'NewsletterLetter' => array(
 			'className' => 'NewsletterLetter',
 			'foreignKey' => 'email_template_id',
@@ -51,7 +51,7 @@ class EmailTemplate extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
-			)
-			);
+		)
+	);
 
 }

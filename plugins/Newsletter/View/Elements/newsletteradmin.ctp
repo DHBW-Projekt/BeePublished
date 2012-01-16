@@ -1,5 +1,4 @@
-//
-<?php
+// <?php
 // 	$this->Html->css('/newsletter/css/newsletter', NULL, array('inline' => true));
 // 	$this->Html->script('/ckeditor/ckeditor', false);
 // 	echo $this->Html->scriptBlock('function showDiv(idOn,idOff){
@@ -36,7 +35,7 @@
 // 	if (isset($newsletters)){
 // 		foreach($newsletters as $newsletter){
 // 			echo '<tr>';
-// 			echo 	'<td>';
+// 			echo 	'<td>';				
 // 			echo 		$newsletter['NewsletterLetter']['subject'];
 // 			echo 	'</td>';
 // 			echo 	'<td>';
@@ -45,46 +44,46 @@
 // 			echo 	'<td>';
 // 			echo 		$this->Html->image('/app/webroot/img/arrow_right.png',
 // 							array(
-// 								'style' => 'float: left',
-// 								'width' => '20px',
-// 								'alt' => '[]Preview',
+// 								'style' => 'float: left', 
+// 								'width' => '20px', 
+// 								'alt' => '[]Preview', 
 // 								'url' => array(
-// 									'plugin' => 'Newsletter',
-// 									'controller' => 'Subscription',
+// 									'plugin' => 'Newsletter', 
+// 									'controller' => 'Subscription', 
 // 									'action' => 'previewNewsletter', $newsletter['NewsletterLetter']['id'])));
 // 			echo 	'</td>';
 // 			if ($newsletter['NewsletterLetter']['draft'] == 1){
 // 				echo 	'<td>';
-// 				echo 		$this->Html->image('/app/webroot/img/edit.png',
+// 				echo 		$this->Html->image('/app/webroot/img/edit.png', 
 // 								array(
-// 									'style' => 'float: left',
-// 									'width' => '20px',
-// 									'alt' => '[]Edit',
+// 									'style' => 'float: left', 
+// 									'width' => '20px', 
+// 									'alt' => '[]Edit', 
 // 									'url' => array(
-// 										'plugin' => 'Newsletter',
-// 										'controller' => 'Subscription',
+// 										'plugin' => 'Newsletter', 
+// 										'controller' => 'Subscription', 
 // 										'action' => 'editNewsletter', $newsletter['NewsletterLetter']['id'])));
 // 				echo 	'</td>';
-// 				echo 	'<td>';
+// 				echo 	'<td>';				
 // 				echo $this->Html->link($this->Html->image('/app/webroot/img/delete.png', array(
-// 					'height' => 20,
-// 					'width' => 20,
+// 					'height' => 20, 
+// 					'width' => 20, 
 // 					'alt' => __('[x]Delete'))),
 // 					array(
-// 						'plugin' => 'Newsletter',
-// 						'controller' => 'Subscription',
+// 						'plugin' => 'Newsletter', 
+// 						'controller' => 'Subscription', 
 // 						'action' => 'deleteNewsletter', $newsletter['NewsletterLetter']['id']),
 // 						array(
-// 							'escape' => false,
+// 							'escape' => false, 
 // 							'title' => __('Delete newsletter')),
 // 							__('Do you really want to delete this newsletter?'));
 // 				echo 	'</td>';
 // 				};
 // 			echo 	'</tr>';
-// 		} //foreach
+// 		} //foreach	
 // 		$paging_params = $this->Paginator->params('NewsletterLetter');
-// 		if ($paging_params['count'] > 0){
-// 			echo $this->Paginator->counter(array(
+// 		if ($paging_params['count'] > 0){ 
+// 			echo $this->Paginator->counter(array( 
 // 				'format' => 'Entrys {:start} to {:end} of {:count}, page {:page} of {:pages}  ',
 // 				'model' => 'NewsletterLetter'));
 // 			if ($this->Paginator->hasPrev('NewsletterLetter')){
@@ -110,14 +109,14 @@
 // 		    		'controller' => 'Subscription',
 // 		    		'action' => 'saveNewsletter' , $newsletterToEdit['id'])));
 // 			echo $this->Form->input('NewsletterLetter.subject', array(
-// 				'label' => 'Betreff:',
+// 				'label' => 'Betreff:', 
 // 				'value' => $newsletterToEdit['subject']));
 // 			echo $this->Form->textarea('NewsletterLetter.content', array(
-// 				'label' => '',
+// 				'label' => '', 
 // 				'value' => $newsletterToEdit['content'],
 // 				'rows' => '30'));
 // 			echo $this->Form->button('Save', array(
-// 				'type' => 'submit',
+// 				'type' => 'submit', 
 // 				'value' => 'save'));
 // 			echo $this->Form->button('Back', array(
 // 				'type' => 'button',
@@ -130,7 +129,7 @@
 // 		echo '<div id="editor" style="display:none">';
 // 		echo '</div>';
 // 	}
-
+	
 // 	if ($mode == 'preview'){
 // 		echo '<div id="editor" style="display:block">';
 // 		if (isset($newsletterToPreview)){
@@ -141,22 +140,22 @@
 // 		    		'action' => 'sendNewsletter' , $newsletterToPreview['id'])));
 // 	// 		debug($newsletterToEdit);
 // 			echo $this->Form->input('NewsletterLetter.subject', array(
-// 				'label' => 'Betreff:',
+// 				'label' => 'Betreff:', 
 // 				'value' => $newsletterToPreview['subject']));
 // 			echo $this->Form->textarea('NewsletterLetter.content', array(
-// 				'label' => '',
+// 				'label' => '', 
 // 				'value' => $newsletterToPreview['content'],
 // 				'rows' => '30'));
 // 			echo $this->Form->button('Send', array(
-// 				'type' => 'submit',
+// 				'type' => 'submit', 
 // 				'value' => 'save'));
 // 			echo $this->Form->button('Back', array(
 // 				'type' => 'button',
 // 				'onClick' => 'location.href=\'/plugin/Newsletter/Subscription/newsletteradmin/\';'));
 // 			echo $this->Form->end();
-	
+			
 // //			echo $this->Fck->load('NewsletterLetter.content');
-	
+			
 // 			echo $this->Html->scriptBlock('
 // 				CKEDITOR.replace( \'NewsletterLetterContent\',
 // 									{
@@ -164,11 +163,11 @@
 //     								});
 // 				'
 // 			, array('inline' => true));
-
+				
 //  		};
 // 	} else {
 // 		echo '<div id="editor" style="display:none">';
 // 	}
 // 	echo '</div>';
-?>
+ ?>	
 

@@ -1,8 +1,8 @@
 <?php
 
 class SubscriptionComponent extends Component {
-
-
+	
+	
 	public function getData($controller, $params, $url)
 	{
 		$controller->loadModel('NewsletterRecipient');
@@ -28,9 +28,9 @@ class SubscriptionComponent extends Component {
 		};
 		$data = array('NewsletterRecipient' => $recipients,
 					'userAsRecipient' => $userAsRecipient);
-		if ($data != null)
-		return $data;
-		else
-		return __('no entries');
+		if ($data != null) 
+			return $data;
+		else 
+			return __('no entries');
 	}
 }

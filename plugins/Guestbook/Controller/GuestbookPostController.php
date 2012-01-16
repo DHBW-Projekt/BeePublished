@@ -3,11 +3,11 @@
 App::uses('Sanitize','Utility');
 
 class GuestbookPostController extends GuestbookAppController {
-
+	
 	public $name = 'Guestbook';
 	public $uses = array('Guestbook.GuestbookPost');
 	public $components = array('PermissionValidation');
-
+	
 	function beforeFilter()
 	{
 		//Actions which don't require authorization
@@ -15,7 +15,7 @@ class GuestbookPostController extends GuestbookAppController {
 		//TODO change to save
 		$this->Auth->allow('save');
 	}
-
+	
 	function save(){
 		if ($this->request->is('post')){
 			$this->request->data = Sanitize::clean($this->request->data);
@@ -31,7 +31,7 @@ class GuestbookPostController extends GuestbookAppController {
 			$this->redirect($this->referer());
 		}
 	}
-
+	
 	function release($id = null){
 		$this->GuestbookPost->id = $id;
 		if ($this->request->is('get')){
@@ -43,7 +43,7 @@ class GuestbookPostController extends GuestbookAppController {
 			}
 		}
 	}
-
+	
 	function delete($id = null){
 		$this->GuestbookPost->id = $id;
 		if ($this->request->is('get')){

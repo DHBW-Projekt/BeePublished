@@ -7,29 +7,29 @@ App::uses('CalendarEntry', 'Calendar.Model');
  *
  */
 class CalendarEntryTestCase extends CakeTestCase {
-	/**
-	 * Fixtures
-	 *
-	 * @var array
-	 */
+/**
+ * Fixtures
+ *
+ * @var array
+ */
 	public $fixtures = array('plugin.calendar.calendar_entry', 'app.user', 'app.role', 'app.menu_entry', 'app.page', 'app.container', 'app.layout_type', 'app.content', 'app.plugin_view', 'app.plugin', 'app.permission', 'app.content_value', 'app.log_entry');
 
-	/**
-	 * setUp method
-	 *
-	 * @return void
-	 */
+/**
+ * setUp method
+ *
+ * @return void
+ */
 	public function setUp() {
 		parent::setUp();
 
 		$this->CalendarEntry = ClassRegistry::init('CalendarEntry');
 	}
 
-	/**
-	 * tearDown method
-	 *
-	 * @return void
-	 */
+/**
+ * tearDown method
+ *
+ * @return void
+ */
 	public function tearDown() {
 		unset($this->CalendarEntry);
 

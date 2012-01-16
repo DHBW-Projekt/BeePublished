@@ -6,21 +6,21 @@ App::uses('CalendarEntriesController', 'Calendar.Controller');
  * TestCalendarEntriesController *
  */
 class TestCalendarEntriesController extends CalendarEntriesController {
-	/**
-	 * Auto render
-	 *
-	 * @var boolean
-	 */
+/**
+ * Auto render
+ *
+ * @var boolean
+ */
 	public $autoRender = false;
 
-	/**
-	 * Redirect action
-	 *
-	 * @param mixed $url
-	 * @param mixed $status
-	 * @param boolean $exit
-	 * @return void
-	 */
+/**
+ * Redirect action
+ *
+ * @param mixed $url
+ * @param mixed $status
+ * @param boolean $exit
+ * @return void
+ */
 	public function redirect($url, $status = null, $exit = true) {
 		$this->redirectUrl = $url;
 	}
@@ -31,18 +31,18 @@ class TestCalendarEntriesController extends CalendarEntriesController {
  *
  */
 class CalendarEntriesControllerTestCase extends CakeTestCase {
-	/**
-	 * Fixtures
-	 *
-	 * @var array
-	 */
+/**
+ * Fixtures
+ *
+ * @var array
+ */
 	public $fixtures = array('plugin.calendar.calendar_entry', 'app.user', 'app.role', 'app.menu_entry', 'app.page', 'app.container', 'app.layout_type', 'app.content', 'app.plugin_view', 'app.plugin', 'app.permission', 'app.content_value', 'app.log_entry');
 
-	/**
-	 * setUp method
-	 *
-	 * @return void
-	 */
+/**
+ * setUp method
+ *
+ * @return void
+ */
 	public function setUp() {
 		parent::setUp();
 
@@ -50,58 +50,58 @@ class CalendarEntriesControllerTestCase extends CakeTestCase {
 		$this->CalendarEntries->constructClasses();
 	}
 
-	/**
-	 * tearDown method
-	 *
-	 * @return void
-	 */
+/**
+ * tearDown method
+ *
+ * @return void
+ */
 	public function tearDown() {
 		unset($this->CalendarEntries);
 
 		parent::tearDown();
 	}
 
-	/**
-	 * testIndex method
-	 *
-	 * @return void
-	 */
+/**
+ * testIndex method
+ *
+ * @return void
+ */
 	public function testIndex() {
 
 	}
 
-	/**
-	 * testView method
-	 *
-	 * @return void
-	 */
+/**
+ * testView method
+ *
+ * @return void
+ */
 	public function testView() {
 
 	}
 
-	/**
-	 * testAdd method
-	 *
-	 * @return void
-	 */
+/**
+ * testAdd method
+ *
+ * @return void
+ */
 	public function testAdd() {
 
 	}
 
-	/**
-	 * testEdit method
-	 *
-	 * @return void
-	 */
+/**
+ * testEdit method
+ *
+ * @return void
+ */
 	public function testEdit() {
 
 	}
 
-	/**
-	 * testDelete method
-	 *
-	 * @return void
-	 */
+/**
+ * testDelete method
+ *
+ * @return void
+ */
 	public function testDelete() {
 
 	}

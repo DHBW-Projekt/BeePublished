@@ -5,10 +5,10 @@ App::uses('AppModel', 'Model');
  *
  */
 class NewsblogTitle extends AppModel {
-	/**
-	 * Display field
-	 *
-	 * @var string
-	 */
+/**
+ * Display field
+ *
+ * @var string
+ */
 	public $displayField = 'title';
 }

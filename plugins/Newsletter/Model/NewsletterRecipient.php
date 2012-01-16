@@ -14,25 +14,25 @@ class NewsletterRecipient extends AppModel {
 	        'email_isunique' => array(
             	'rule'    => 'isUnique',
             	'message' => 'This e-mail address is already registered.',
-	),
+         	),
         	'email_address_verification' => array(
             	'rule'    => array('email'),
             	'message' => 'The e-mail address was not entered correctly.'
-            	)
-            	)
-            	);
-            	/**
-            	 * belongsTo associations
-            	 *
-            	 * @var array
-            	 */
-            	public $belongsTo = array(
+        	)
+        )
+    );
+/**
+ * belongsTo associations
+ *
+ * @var array
+ */
+	public $belongsTo = array(
 		'User' => array(
 			'className' => 'User',
 			'foreignKey' => 'user_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-			)
-			);
+		)
+	);
 }
