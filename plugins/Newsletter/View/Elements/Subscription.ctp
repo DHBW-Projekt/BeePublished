@@ -2,7 +2,7 @@
 	$user = $this->Session->read('Auth.User'); // get data for current user
 	$validationErrors = $this->Session->read('Validation.NewsletterRecipient.validationErrors');
 	$this->Html->script('/newsletter/js/newsletter', false);
-	$this->Html->script('/ckeditor/ckeditor', false);
+	$this->Html->script('ckeditor/ckeditor', false);
 	$this->Html->css('/newsletter/css/newsletter', NULL, array('inline' => false));
 ?>
 <div id="subscription">

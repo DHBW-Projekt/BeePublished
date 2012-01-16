@@ -18,26 +18,13 @@ class UsersController extends AppController
      */
     public function index()
     {
+        $this->PermissionValidation->actionAllowed(null, 'UserManagement', true);
+
         $this->layout = 'overlay';
         $roles = $this->Role->find('all');
         $this->set('roles', $roles);
         $this->set('systemPage', false);
         $this->set('adminMode', true);
-    }
-
-    /**
-     * view method
-     *
-     * @param string $id
-     * @return void
-     */
-    public function view($id = null)
-    {
-        $this->User->id = $id;
-        if (!$this->User->exists()) {
-            throw new NotFoundException(__('Invalid user'));
-        }
-        $this->set('user', $this->User->read(null, $id));
     }
 
     /**
@@ -126,6 +113,8 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
+        $this->PermissionValidation->actionAllowed(null, 'UserManagement', true);
+
         $this->layout = 'overlay';
         $this->User->id = $id;
         if (!$this->User->exists()) {
@@ -150,6 +139,8 @@ class UsersController extends AppController
      */
     public function delete($id = null)
     {
+        $this->PermissionValidation->actionAllowed(null, 'UserManagement', true);
+
         $this->User->id = $id;
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));
@@ -223,8 +214,7 @@ class UsersController extends AppController
     function beforeFilter()
     {
         parent::beforeFilter();
-        $this->Auth->allow('register', 'activateUser', 'resetPassword','login');
-        $this->Auth->autoRedirect = false;
+        $this->Auth->allow('register', 'activateUser', 'resetPassword', 'login');
     }
 
     /**
@@ -274,6 +264,8 @@ class UsersController extends AppController
      */
     function changeRole($id = null, $newRole = null)
     {
+        $this->PermissionValidation->actionAllowed(null, 'UserManagement', true);
+
         $this->User->id = $id;
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));

@@ -1,5 +1,6 @@
 <div id="sidebar">
-    <div id="sidebar-opener" class="closed"><?php echo $this->Html->image("tools.png", array('width' => 32, 'height' => 32)); ?></div>
+    <div id="sidebar-opener"
+         class="closed"><?php echo $this->Html->image("tools.png", array('width' => 32, 'height' => 32)); ?></div>
     <div id="sidebar-shadow"></div>
     <div id="sidebar-top">
         <div id="logo"><?php echo $this->Html->image("beelogo.png", array('width' => 180)); ?></div>
@@ -29,16 +30,25 @@
             'height' => 20
         ));
             ?>
+            <?php echo $this->Html->image("lock.png", array(
+            'alt' => __('Permission Management'),
+            'url' => array('controller' => 'Permissions', 'action' => 'index'),
+            'class' => 'small-button',
+            'width' => 20,
+            'height' => 20
+        ));
+            ?>
         </div>
         <hr/>
     </div>
+    <div id="sidebar-tabs">
+        <ul>
+            <li><a href="#layouts" title="layouts" class="tab selected-tab">Layouts</a></li>
+            <li><a href="#plugins" title="plugins" class="tab">Plugins</a></li>
+        </ul>
+    </div>
     <div id="sidebar-content">
-        <div id="sidebar-menu" class="ui-state-default" style="height:100%">
-            <h3><a href="#">Plugin</a></h3>
-            <div id="plugins">
-            </div>
-            <h3><a href="#">Layout</a></h3>
-            <div id="layouts"></div>
-        </div>
+        <div id="layouts" class="tab-content"></div>
+        <div id="plugins" class="tab-content" style="display:none"></div>
     </div>
 </div>

@@ -4,6 +4,9 @@
     cursor: pointer;
     display: block;
     position: relative;
+    background-color: #3292DD;
+    color: #ffffff;
+    font-weight: bold;
 }
 
 .subcl, .subcr, .subc {
@@ -25,10 +28,6 @@
 	background-color: #999;
 	line-height: 7;
     list-style: none;
-}
-
-#plugins {
-    padding: 5px;
 }
 
 .placeholder {
