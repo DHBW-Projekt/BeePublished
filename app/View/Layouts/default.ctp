@@ -13,11 +13,11 @@
     echo $this->Html->css('template');
     echo $this->Html->css('menu-design');
     echo $this->Html->css('menu-template');
-    echo $this->Html->script('jquery-1.6.2.min');
-    echo $this->Html->script('jquery-ui-1.8.16.custom.min');
-    echo $this->Html->script('jquery.fancybox-1.3.4.pack');
-    echo $this->Html->script('jquery.blockUI');
-    echo $this->Html->script('jquery.cookie');
+    echo $this->Html->script('jquery/jquery-1.6.2.min');
+    echo $this->Html->script('jquery/jquery-ui-1.8.16.custom.min');
+    echo $this->Html->script('jquery/jquery.fancybox-1.3.4.pack');
+    echo $this->Html->script('jquery/jquery.blockUI');
+    echo $this->Html->script('jquery/jquery.cookie');
     echo $this->Html->script('dualon');
     echo $this->Html->script('menu');
     if ($adminMode) {

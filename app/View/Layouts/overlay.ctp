@@ -9,10 +9,10 @@
     echo $this->Html->css('yaml/core/base');
     echo $this->Html->css('designs/'.$design);
     echo $this->Html->css('template');
-    echo $this->Html->script('jquery-1.6.2.min');
-    echo $this->Html->script('jquery-ui-1.8.16.custom.min');
-    echo $this->Html->script('jquery.blockUI');
-    echo $this->Html->script('jquery.cookie');
+    echo $this->Html->script('jquery/jquery-1.6.2.min');
+    echo $this->Html->script('jquery/jquery-ui-1.8.16.custom.min');
+    echo $this->Html->script('jquery/jquery.blockUI');
+    echo $this->Html->script('jquery/jquery.cookie');
     echo $scripts_for_layout;
     ?>
 </head>
