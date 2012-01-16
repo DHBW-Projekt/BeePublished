@@ -41,6 +41,9 @@ class CMSPluginComponent extends Component
         $xmlData = Xml::toArray($xml);
         if (array_key_exists('permissions', $xmlData['dualon']['plugin'])) {
             $permissions = $xmlData['dualon']['plugin']['permissions'];
+            if ($permissions == "") {
+                return array();
+            }
             if (array_key_exists('action', $permissions['permission'])) {
                 $permissionsArray = array();
                 $permissionsArray['permission'][0]['role'] = $permissions['permission']['role'];
@@ -49,7 +52,7 @@ class CMSPluginComponent extends Component
             }
             return $permissions;
         } else {
-            return null;
+            return array();
         }
     }
 
@@ -59,6 +62,9 @@ class CMSPluginComponent extends Component
         $xmlData = Xml::toArray($xml);
         if (array_key_exists('views', $xmlData['dualon']['plugin'])) {
             $views = $xmlData['dualon']['plugin']['views'];
+            if ($views == "") {
+                return array();
+            }
             if (array_key_exists('name', $views['view'])) {
                 $viewsArray = array();
                 $viewsArray['view'][0]['name'] = $views['view']['name'];
@@ -66,7 +72,7 @@ class CMSPluginComponent extends Component
             }
             return $views;
         } else {
-            return null;
+            return array();
         }
     }
 

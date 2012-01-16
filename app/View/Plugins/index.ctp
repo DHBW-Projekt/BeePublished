@@ -1,3 +1,4 @@
+<?php echo $this->element('config-menu'); ?>
 <h2><?php echo __('Installed');?></h2>
 <table>
     <thead>
@@ -19,7 +20,7 @@
             <?php if ($plugin['status'] == 0): ?>
             <?php echo __('No Database tables'); ?>
             <?php elseif ($plugin['status'] == 2): ?>
-            <?php echo $this->Html->link(__('Update plugin'), array('action' => 'install', $plugin['name'])); ?>
+            <?php echo $this->Html->link(__('Update plugin'), array('action' => 'install', $plugin['Plugin']['name'])); ?>
             <?php elseif ($plugin['status'] == 3): ?>
             <?php echo __('Up to date'); ?>
             <?php endif; ?>

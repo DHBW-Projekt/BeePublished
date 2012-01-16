@@ -14,10 +14,7 @@ class MenuEntriesController extends AppController
     function beforeFilter()
     {
         parent::beforeFilter();
-        $role = $this->PermissionValidation->getUserRoleId();
-        if ($role != 6 && $role != 7) {
-            $this->redirect($this->request->webroot);
-        }
+        $this->PermissionValidation->actionAllowed(null, 'LayoutManager',true);
     }
 
     function add($parent)
@@ -74,7 +71,6 @@ class MenuEntriesController extends AppController
             throw new NotFoundException(__('Invalid Menu Entry'));
         }
         if ($this->request->is('post') || $this->request->is('put')) {
-            var_dump('test');
             if ($this->MenuEntry->save($this->request->data)) {
                 $this->render('close');
                 return;

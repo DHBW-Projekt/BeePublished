@@ -10,6 +10,7 @@ class PermissionValidationComponent extends Component {
 	}
 	
 	public function getPermissions($pluginId = null){
+		$this->Permission = ClassRegistry::init('Permission');
 		//get currently logged in user and his role
 		$userRoleId = (int)$this->Auth->user('role_id');
 		
@@ -24,7 +25,7 @@ class PermissionValidationComponent extends Component {
 		return $allActions;
 	}
 	
-	public function actionAllowed($pluginId = null, $action = null){
+	public function actionAllowed($pluginId = null, $action = null, $throwException = false){
 		$this->Permission = ClassRegistry::init('Permission');
 		$this->Role = ClassRegistry::init('Role');
 		
@@ -58,10 +59,14 @@ class PermissionValidationComponent extends Component {
 				}
 			}
 		}
+        if ($throwException && !$actionAllowed) {
+            throw new ForbiddenException('You are not allowed to access this page.',401);
+        }
 		return $actionAllowed;
 	}
 	
 	private function internalActionAllowed($userRoleId = null, $permissionEntry = null){
+		$this->Role = ClassRegistry::init('Role');
 		$actionAllowed = false;
 		//read currentRoleId -- initial value equals minimum required role id
 		$currentRoleId = (int)$permissionEntry['Permission']['role_id'];

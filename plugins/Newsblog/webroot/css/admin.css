@@ -1,0 +1,47 @@
+.admin_newsblog_container{
+	width:100%;
+}
+
+.newsentry_publish_icon{
+	heigth:20px;
+	width:20px;
+}
+
+.newsentry_publish_buttons{
+	position:absolute;
+	bottom:5px;
+	right:0px;
+	height: 20px;
+	line-height:20px;
+	vertical-align:middle;
+	text-align:center;
+	display:none;
+}
+
+.newsentry_publish_title{
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.newsentry_publish_subtitle{
+	font-size: 16px;
+	font-style: italic;
+}
+
+.newsentry_publish_info{
+	font-size: 11px;
+	font-weight: bold;
+}
+
+.newsentry_publish_content{
+	font-size: 12px;
+}
+
+.unpublished_newsentry{
+	position:relative;
+}
+
+.ui-datepicker-trigger{
+	heigth:20px;
+	width:20px;
+}
