@@ -3,17 +3,16 @@
 }
 
 .newsentry_publish_icon{
-	display:inline;
-	width:30px;
-	height:30px;
+	heigth:20px;
+	width:20px;
 }
 
 .newsentry_publish_buttons{
 	position:absolute;
 	bottom:5px;
 	right:0px;
-	height: 30px;
-	line-height:30px;
+	height: 20px;
+	line-height:20px;
 	vertical-align:middle;
 	text-align:center;
 	display:none;
@@ -43,5 +42,6 @@
 }
 
 .ui-datepicker-trigger{
-	height:35px;
+	heigth:20px;
+	width:20px;
 }

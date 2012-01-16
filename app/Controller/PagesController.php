@@ -28,7 +28,7 @@ class PagesController extends AppController
         if (sizeof($path) > 0 && $path[0] == 'admin') {
             array_shift($path);
             //Check Admin rights
-            if ($this->PermissionValidation->getUserRoleId() == 6 || $this->PermissionValidation->getUserRoleId() == 7) {
+            if ($this->PermissionValidation->actionAllowed(null, 'AdminMode')) {
                 $this->set('adminMode', true);
             } else {
                 $url = $this->request->webroot . implode('/', $path);
@@ -41,11 +41,9 @@ class PagesController extends AppController
         $page = $this->findPage($url);
 
         if (!$page) {
-            echo "NO PAGE IN DATABASE!!!";
             $this->set('elements', array());
             $this->myUrl = null;
         } else {
-
             $pageUrl = $page['Page']['name'];
             $this->myUrl = $pageUrl;
             $url = '/' . $url;
@@ -172,6 +170,8 @@ class PagesController extends AppController
 
     public function delete($id = null)
     {
+        $this->PermissionValidation->actionAllowed(null, 'LayoutManager',true);
+
         if (!$this->request->is('post')) {
             throw new MethodNotAllowedException();
         }
@@ -184,6 +184,8 @@ class PagesController extends AppController
 
     function json($id)
     {
+        $this->PermissionValidation->actionAllowed(null, 'LayoutManager',true);
+
         $data = $this->Page->findById($id);
         $page['Page'] = $data['Page'];
         $page['Page']['id'] = $page['Page']['id'];
