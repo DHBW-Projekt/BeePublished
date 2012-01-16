@@ -15,6 +15,28 @@ class FoodMenuEntry extends AppModel {
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
+	public $validate = array(
+		'name' => array(
+	        	'name_isUnique' => array(
+            		'rule'    => 'isUnique',
+            		'message' => 'This entry already exists.',
+         		),
+         		'name_notEmpty' => array(
+         			'rule'    => 'notEmpty',
+					'required' => true,
+            		'message' => 'This field name has to be filled.'
+         		)
+		),
+		'currency' => array(
+				'rule' => array('inList', array('EUR', 'USD', 'CAD')),
+				'message' => 'Please enter a valid currency.'
+		),
+		'price' => array(
+				'rule' => array('decimal', 2),
+				'message' => 'Please enter a decimal value with two digits.'
+		)
+	);
+	
 /**
  * hasMany associations
  *

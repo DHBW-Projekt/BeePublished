@@ -20,6 +20,28 @@ class FoodMenuMenu extends AppModel {
  *
  * @var array
  */
+	public $validate = array(
+		'name' => array(
+	        	'name_isUnique' => array(
+            		'rule'    => 'isUnique',
+            		'message' => 'This entry already exists.',
+         		),
+         		'name_notEmpty' => array(
+         			'rule'    => 'notEmpty',
+					'required' => true,
+            		'message' => 'This field name has to be filled.'
+         		)
+		),
+		'valid_from' => array(
+				'rule' => 'date',
+				'message' => 'Please enter a date.'
+		),
+		'valid_until' => array(
+				'rule' => 'date',
+				'message' => 'Please enter a date.'
+		)
+	);
+	
 	public $hasMany = array(
 		'FoodMenuMenusFoodMenuCategory' => array(
 			'className' => 'FoodMenuMenusFoodMenuCategory',
