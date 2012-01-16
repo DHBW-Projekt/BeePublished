@@ -15,8 +15,15 @@ class ViewComponent extends Component {
 		 * 
 		 */
  		$data = array();
+ 		$regex = '/^\d{2}\-\d{2}\-(\d{2}|\d{4})$/';
 		if (sizeof($url) != 0) {
-			if (strtotime($url[0])) $selectedDate = array_shift($url);
+			if (preg_match($regex, $url[0]))  {
+				$selectedDate = array_shift($url);
+				$selectedDate = split('-', $selectedDate);
+				$selectedDate = $selectedDate[2] . '-' . $selectedDate[0] . '-' .$selectedDate[1];
+				$weekday = date('N', strtotime($selectedDate));
+			}
+			debug($url);
             if ($url[0] == 'menu') {
                     $data['Page'] = 'View';
                     $data['Action'] = 'showCategories';
@@ -95,6 +102,10 @@ class ViewComponent extends Component {
             		$data['show']['FoodMenuMenu'] = $this->FetchFoodMenuEntries->getMenus($controller, $selectedDate);
             		}
             	break;
+        }
+        if(sizeof($url)>0) {
+	        $url = implode('/', $url);
+	        $controller->set('url', $url);
         }
         $controller->set('webroot', $this->webroot);
         return $data;
