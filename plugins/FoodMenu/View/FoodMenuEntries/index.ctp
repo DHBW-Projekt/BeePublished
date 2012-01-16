@@ -1,6 +1,6 @@
 <div id="adminEntryOverview">
 	<?php 
-		$this->Html->script('jquery.quicksearch', false);
+		$this->Html->script('jquery/jquery.quicksearch', false);
 		$this->Html->script('/food_menu/js/foodmenu', false);
 		echo $this->element('admin_menu');
 		echo $this->Form->create('FoodMenuEntry', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuEntries', 'action' => 'deleteMultiple')));

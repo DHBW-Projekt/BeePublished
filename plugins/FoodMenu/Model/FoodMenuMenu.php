@@ -29,7 +29,11 @@ class FoodMenuMenu extends AppModel {
          		'name_notEmpty' => array(
          			'rule'    => 'notEmpty',
 					'required' => true,
-            		'message' => 'This field name has to be filled.'
+            		'message' => 'This field has to be filled.'
+         		),
+         		'name_isalphanumeric' => array(
+         			'rule' => 'alphaNumeric',
+					'message' => 'You have to enter numbers or letters.'
          		)
 		),
 		'valid_from' => array(

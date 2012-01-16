@@ -1,6 +1,6 @@
 <div style="float:none; width:100%">
 <?php
-	$this->Html->script('jquery.quicksearch', false);
+	$this->Html->script('jquery/jquery.quicksearch', false);
 	$this->Html->script('/food_menu/js/foodmenu', false);
 	echo $this->element('admin_menu');
 	echo $this->Form->create('FoodMenuMenu', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenus', 'action' => 'deleteMultiple')));
@@ -17,8 +17,8 @@
 	<tr>
 		<th> </th>
 		<th>Name</th>
-		<th>Gültig von</th>
-		<th>Gültig bis</th>
+		<th>G&uuml;ltig von</th>
+		<th>G&uuml;ltig bis</th>
 		<th> </th>
 		<th> </th>
 	</tr>

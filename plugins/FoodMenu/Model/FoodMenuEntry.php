@@ -25,6 +25,10 @@ class FoodMenuEntry extends AppModel {
          			'rule'    => 'notEmpty',
 					'required' => true,
             		'message' => 'This field name has to be filled.'
+         		),
+         		'name_isalphanumeric' => array(
+         			'rule' => 'alphaNumeric',
+					'message' => 'You have to enter numbers or letters.'
          		)
 		),
 		'currency' => array(

@@ -1,5 +1,5 @@
 <?php
-	$this->Html->script('jquery.quicksearch', false);
+	$this->Html->script('jquery/jquery.quicksearch', false);
 	$this->Html->script('/food_menu/js/foodmenu', false);
 	echo $this->element('admin_menu');
 	echo $this->Form->create('FoodMenuCategory', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuCategories', 'action' => 'deleteMultiple')));

@@ -14,7 +14,23 @@ class FoodMenuCategory extends AppModel {
  */
 	public $displayField = 'name';
 
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
+	public $validate = array(
+		'name' => array(
+	        	'name_isUnique' => array(
+            		'rule'    => 'isUnique',
+            		'message' => 'This entry already exists.',
+         		),
+         		'name_notEmpty' => array(
+         			'rule'    => 'notEmpty',
+					'required' => true,
+            		'message' => 'This field name has to be filled.'
+         		),
+         		'name_isalphanumeric' => array(
+         			'rule' => 'alphaNumeric',
+					'message' => 'You have to enter numbers or letters.'
+         		)
+         )
+	);
 
 /**
  * hasMany associations

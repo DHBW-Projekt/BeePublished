@@ -6,7 +6,7 @@
 	echo '<tr>';
 	echo '<td>'.$this->Form->input('name', array('value' => $entry['FoodMenuEntry']['name'], 'label' => (__('Name:')))).'</td>';
 	echo '</tr><tr>';
-	echo '<td>'.$this->Form->input('description', array('type' => 'textarea', 'value' => $entry['FoodMenuEntry']['description'], 'label' => (__('Description:')))).'</td>';
+	echo '<td>'.$this->Form->input('description', array('div' => 'mandatory', 'type' => 'textarea', 'value' => $entry['FoodMenuEntry']['description'], 'label' => (__('Description:')))).'</td>';
 	echo '</tr><tr>';
 	echo '<td>'.$this->Form->input('price', array('value' => $entry['FoodMenuEntry']['price'], 'label' => (__('Price:')))).'</td>';
 	echo '</tr><tr>';
