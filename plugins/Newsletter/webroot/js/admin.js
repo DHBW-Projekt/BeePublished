@@ -12,5 +12,10 @@ $(document).ready(function () {
     	},
     	{
     		height : 250
-    });
+    	});
+    $('#PluginTextText').ckeditor(function () {
+		},
+		{
+			height : 100
+		});
 });

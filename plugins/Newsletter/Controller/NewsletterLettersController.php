@@ -1,9 +1,12 @@
 <?php
+
 App::uses('CakeEmail', 'Network/Email', 'AppController', 'Controller');
+
 class NewsletterLettersController extends AppController {
-	var $layout = 'overlay';
-	public $name = 'newsletterLetters';
 	
+	var $layout = 'overlay';
+	
+	public $name = 'newsletterLetters';	
 	public $uses = array('Newsletter.NewsletterLetter','Newsletter.NewsletterRecipient');
 	
 	public $paginate = array(
@@ -13,9 +16,10 @@ class NewsletterLettersController extends AppController {
 					'NewsletterLetter.date' => 'desc',
 					'NewsletterLetter.id' => 'desc')));
 	
-	public function index(){
+	public function index($contentID){
 		$newsletters = $this->paginate('NewsletterLetter');
 		$this->set('newsletters', $newsletters);
+		$this->set('contentID', $contentID);
 	}
 	
 	public function edit($id){
@@ -33,7 +37,7 @@ class NewsletterLettersController extends AppController {
 				$newsletter = array();
 			};
 			$newsletter['NewsletterLetter']['subject'] = $newsletter2['subject'];
-			$newsletter['NewsletterLetter']['content'] = $newsletter2['content'];
+			$newsletter['NewsletterLetter']['content'] = $newsletter2['contentEdit'];
 			$newsletter['NewsletterLetter']['draft'] = 1;
 			$date = date('Y-m-d', time());
 			$newsletter['NewsletterLetter']['date'] = $date;
@@ -50,7 +54,6 @@ class NewsletterLettersController extends AppController {
 						'content' => NULL,
 						'id' => 'new');
 		$this->set('newsletter', $newsletter);
-// 		$this->layout = 'overlay';
 		$this->render('/NewsletterLetters/edit');
 	}
 	
@@ -90,6 +93,9 @@ class NewsletterLettersController extends AppController {
 				'text' => $newsletter['NewsletterLetter']['content']))
 			->send();
 		} //foreach
+		$newsletter['NewsletterLetter']['draft'] = 0;
+		$this->NewsletterLetter->set($newsletter);
+		$this->NewsletterLetter->save();
 		$this->redirect($this->referer());
 	}
 	

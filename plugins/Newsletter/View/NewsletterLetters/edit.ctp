@@ -1,9 +1,8 @@
 <?php
 
-echo $this->element('admin_menu');
+echo $this->element('admin_menu', array('contentID' => $contentID));
 
 if (isset($newsletter)){
-	
 	$this->Html->script('/ckeditor/ckeditor', false);;
 	$this->Html->script('/ckeditor/adapters/jquery',false);
 	$this->Html->script('/newsletter/js/admin',false);
@@ -23,8 +22,5 @@ if (isset($newsletter)){
 	echo $this->Form->button('Save', array(
 		'type' => 'submit', 
 		'value' => 'save'));
-//	echo $this->Form->button('Back', array(
-//		'type' => 'button',
-//		'onClick' => 'window.location.href=\'/plugin/Newsletter/NewsletterLetters/index/\';'));
 	echo $this->Form->end();
 }
