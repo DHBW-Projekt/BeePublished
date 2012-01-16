@@ -1,53 +1,134 @@
-body {
+body,
+#overlay-header {
     font-family: Arial, Tahoma, sans-serif;
     background-image: url(../../img/bg.jpg);
+    font-size: 14px;
 }
 
-body.overlay {
+h1 {
+    font-size: 18px;
+}
+
+h2 {
+    font-size: 16px;
+}
+
+h3 {
+    font-size: 14px;
+}
+
+h4 {
+    font-size: 12px;
+}
+
+h5 {
+    font-size: 10px;
+}
+
+input, textarea {
+    font-size: 13px;
+}
+
+input[type=button],
+input[type=submit] {
+    -webkit-box-shadow: inset 0px 0px 8px #095B85;
+    -moz-box-shadow: inset 0px 0px 8px #095B85;
+    box-shadow: inset 0px 0px 8px #095B85;
+    border: 1px solid #095B85;
+    color: #ffffff;
+}
+
+input[type=text],
+input[type=password],
+textarea,
+select {
+    -webkit-box-shadow: inset 0px 0px 4px #dddddd;
+    -moz-box-shadow: inset 0px 0px 4px #dddddd;
+    box-shadow: inset 0px 0px 4px #dddddd;
+    border: 1px solid #999999;
+}
+
+.color1,
+input[type=button]:hover,
+input[type=submit]:hover,
+.users_role {
+    background-color: #3292DD;
+    background-image: none;
+    color: #ffffff;
+}
+
+.border-color1 {
+    border-color: #3292DD;
+}
+
+.color2,
+input[type=button],
+input[type=submit] {
+    background-color: #0F73A6;
+    background-image: none;
+    color: #ffffff;
+}
+
+.border-color2 {
+    border-color: #0F73A6;
+}
+
+.color3,
+#topnav a.signin:hover,
+#topnav a.signout:hover {
+    background-color: #bbbbbb;
+    background-image: none;
+    color: #000000;
+}
+
+.border-color3 {
+    border-color: #bbbbbb;
+}
+
+.color4,
+#topnav a.menu-open,
+#signin_menu {
+    background-color: #cccccc;
+    background-image: none;
+    color: #000000;
+}
+
+.border-color4 {
+    border-color: #cccccc;
+}
+
+.color5,
+body.overlay,
+#content,
+#footer {
     background-color: #ffffff;
     background-image: none;
+    color: #000000;
 }
 
-#overlay-header {
-    background-image: url(../../img/bg.jpg);
+.border-color5 {
+    border-color: #ffffff;
 }
 
 a {
     color: #000000;
 }
 
-#topnav {
+#topnav,
+#signin_menu,
+#footer,
+.small_font {
     font-size: 11px;
 }
 
-#topnav a.signin, #topnav a.signout {
-    background: #eeeeee;
-    color: #000000;
+#topnav a.signin,
+#topnav a.signout,
+.validation_error,
+.flash_success,
+.flash_failure,
+#flashMessage.message,
+.users_role {
     font-weight: bold;
-}
-
-#topnav a.signin:hover, #topnav a.signout:hover {
-    background: #bbbbbb;
-}
-
-#topnav a.menu-open {
-    background: #cccccc;
-    outline: none;
-}
-
-#signin_menu {
-    background-color: #cccccc;
-    border: 0;
-    color: #000000;
-    font-size: 11px;
-}
-
-#signin_menu input[type=text], #signin_menu input[type=password] {
-    border: 1px solid #999999;
-    -webkit-box-shadow: inset 0px 0px 8px #bbbbbb;
-    -moz-box-shadow: inset 0px 0px 8px #bbbbbb;
-    box-shadow: inset 0px 0px 8px #bbbbbb;
-    font-size: 13px;
 }
 
 #menu {
@@ -56,49 +137,22 @@ a {
     border-bottom: 5px solid #3292DD;
 }
 
-#content {
-    background-color: #ffffff;
-    padding: 10px 20px;
-}
-
 #footer {
-    background-color: #ffffff;
-    font-size: 12px;
-    padding: 10px 20px;
-    padding-bottom: 30px;
-    margin-bottom: 30px;
     color: #cccccc;
 }
 
-.button {
-    font-size: 15px;
-    color: #ffffff;
-    border: 1px solid #095B85;
-    background-color: #0F73A6;
-    -webkit-box-shadow: inset 0px 0px 8px #095B85;
-    -moz-box-shadow: inset 0px 0px 8px #095B85;
-    box-shadow: inset 0px 0px 8px #095B85;
-}
-
-.button:hover {
-    background-color: #3292DD;
-}
-
 .validation_error {
-	font-weight:bold;
-	color:#A00000;
+    color: #A00000;
 }
 
 .flash_success, #flashMessage.message {
-	border:3px solid #bedf5d;
-	background:#e2f1a8;
-	font-weight:bold;
+    border: 3px solid #bedf5d;
+    background: #e2f1a8;
 }
 
 .flash_failure {
-	border:3px solid #990000;
-	background:#f97d88;
-	font-weight:bold;
+    border: 3px solid #990000;
+    background: #f97d88;
 }
 
 .plugin_administration {
@@ -107,18 +161,12 @@ a {
     border: 1px solid #3292DD;
 }
 
-
 .role {
     border: 1px solid #3292DD;
 }
 
-.users_role {
-    background-color: #3292DD;
-    color: #ffffff;
-    font-weight: bold;
-}
-
-.user_detail, .users-placeholder {
+.user_detail,
+.users-placeholder {
     border: 1px dotted #3292DD;
     background-color: #ffffff;
 }
