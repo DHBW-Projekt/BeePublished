@@ -9,8 +9,7 @@
     $this->Js->set('webroot', $this->request->webroot);
     echo $this->Html->css('/yaml/core/base');
     echo $this->Html->css('/fancybox/jquery.fancybox-1.3.4');
-    echo $this->Html->css('jquery-ui/jquery-ui-1.8.16.custom');
-    echo $this->Html->css('design');
+    echo $this->Html->css('designs/'.$design);
     echo $this->Html->css('template');
     echo $this->Html->css('menu-design');
     echo $this->Html->css('menu-template');
@@ -24,7 +23,7 @@
         if (isset($pageid)) {
             $this->Js->set('pageid', $pageid);
         }
-        echo $this->Html->css('sidebar');
+        echo $this->Html->css('admin/sidebar');
         echo $this->Html->css('admin/layoutmanager');
         echo $this->Html->script('admin/layoutmanager');
         echo $this->Html->script('admin/main');
@@ -79,7 +78,7 @@
             if ($adminMode) {
                 echo $this->Html->link(
                     $this->Html->image('sort.png'),
-                    array('controller' => 'menuentries', 'action' => 'sort'),
+                    array('controller' => 'MenuEntries', 'action' => 'sort'),
                     array('escape' => false, 'class' => 'iframe')
                 );
             }

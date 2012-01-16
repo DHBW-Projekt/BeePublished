@@ -37,16 +37,25 @@ body.sidebar-open {
     -webkit-box-shadow: 0px 0px 20px #dddddd;
     -moz-box-shadow: 0px 0px 20px #dddddd;
 }
+
 #sidebar-top {
     margin: 5px;
+}
+
+#sidebar-tabs {
+    position: absolute;
+    margin: 5px;
+    top: 130px;
+    width: 190px;
 }
 
 #sidebar-content {
     position: absolute;
     margin: 5px;
-    top: 140px;
-    bottom: 5px;
+    top: 175px;
+    bottom: 15px;
     width: 190px;
+    background-color: #888888;
 }
 
 #logo {
@@ -86,6 +95,54 @@ body.sidebar-open {
     background-color: #329CD1;
 }
 
-.ui-widget {
+#sidebar-tabs ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
 
+#sidebar-tabs li {
+    display: block;
+    float: left;
+    text-align: center;
+    height: 45px;
+    line-height: 45px;
+    vertical-align: middle;
+    font-size: 15px;
+    font-weight: bold;
+    margin-right: 2px;
+    margin-left: 0px;
+    background-color: #cccccc;
+}
+
+#sidebar-tabs li a {
+    display: block;
+    color: #666666;
+    padding: 0px 10px;
+    text-decoration: none;
+}
+
+#sidebar-tabs li a.selected-tab {
+    color: #ffffff;
+}
+
+.tab-content {
+    height: 100%;
+    background-color: #ffffff;
+    border: 1px solid #3292DD;
+    overflow: auto;
+    padding: 5px;
+}
+
+.selected-tab {
+    background-color: #3292DD;
+}
+
+.sidebar-object {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.layout5050 {
+    background-image: url(../../img/layouts/5050.png);
 }
