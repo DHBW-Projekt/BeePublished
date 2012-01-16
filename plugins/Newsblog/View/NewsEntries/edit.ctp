@@ -41,7 +41,7 @@
 	//create entrytext textarea
 	echo $this->Form->input('NewsEntry.text', array(
 		'div' => 'editNewsBody',
-		'label' => 'Text:',
+		'label' => false,
 		'id' => 'editNewsTextEditor',
 		'name' => 'text',
 		'value' => $newsentry['NewsEntry']['text']
