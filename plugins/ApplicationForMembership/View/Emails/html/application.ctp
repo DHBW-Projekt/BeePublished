@@ -11,17 +11,17 @@
 	</tr>
 	<tr>
 		<td>Active:</td>
-		<td><?php echo $data['ApplicationForMembership']['formOfMembership']; ?></td>
-		<td><?php echo $data['ApplicationForMembership']['title']; ?></td>
-		<td><?php echo $data['ApplicationForMembership']['name']; ?></td>
-		<td><?php echo $data['ApplicationForMembership']['firstname']; ?></td>
-		<td><?php echo $data['ApplicationForMembership']['dateOfBirth']; ?></td>
-		<td><?php echo $data['ApplicationForMembership']['email']; ?></td>
-		<td><?php echo $data['ApplicationForMembership']['telephone']; ?></td>
-		<td><?php echo $data['ApplicationForMembership']['street']; ?></td>
-		<td><?php echo $data['ApplicationForMembership']['zip']; ?></td>
-		<td><?php echo $data['ApplicationForMembership']['city']; ?></td>
-		<td><?php echo $data['ApplicationForMembership']['comment']; ?></td>
+		<td><?php echo $data['ApplicationMembership']['formOfMembership']; ?></td>
+		<td><?php echo $data['ApplicationMembership']['title']; ?></td>
+		<td><?php echo $data['ApplicationMembership']['name']; ?></td>
+		<td><?php echo $data['ApplicationMembership']['firstname']; ?></td>
+		<td><?php echo $data['ApplicationMembership']['dateOfBirth']; ?></td>
+		<td><?php echo $data['ApplicationMembership']['email']; ?></td>
+		<td><?php echo $data['ApplicationMembership']['telephone']; ?></td>
+		<td><?php echo $data['ApplicationMembership']['street']; ?></td>
+		<td><?php echo $data['ApplicationMembership']['zip']; ?></td>
+		<td><?php echo $data['ApplicationMembership']['city']; ?></td>
+		<td><?php echo $data['ApplicationMembership']['comment']; ?></td>
 	</tr>
 </table>
 

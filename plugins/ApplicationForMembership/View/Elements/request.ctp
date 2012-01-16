@@ -1,10 +1,14 @@
 <?php echo $this->Session->flash('ApplicationForMembership');?>
 
 <div id='application_for_membership_form'>
-
-	<h1>Application for membership</h1>
-
-	<?php echo $this->Form->create('ApplicationForMembership', array('url' => $url.'/applicationformembership/send'));?>
+	<h2>Application for membership</h2>
+	
+	<?php
+		$validationError = $this->Session->read('Validation.ApplicationMembership.validationErrors');
+		echo $this->Session->flash('ApplicationMembership');
+		
+	 	echo $this->Form->create('ApplicationMembership', array('url' => $url.'/applicationformembership/send'));	
+	 ?>
 	<table>
 		<tr>
 			<td colspan="2">I hereby apply for membership in this association:</td>

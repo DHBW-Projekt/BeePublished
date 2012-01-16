@@ -16,7 +16,7 @@ class ApplicationMembership extends AppModel{
 			        'message' => 'Please enter your firstname.'
 			),
 		    'email' => array(
-		     	   'rule' => 'notEmpty',
+		     	   'rule' => 'email',
 		           'message' => 'Please enter your email.'
 			),
 			'street' => array(

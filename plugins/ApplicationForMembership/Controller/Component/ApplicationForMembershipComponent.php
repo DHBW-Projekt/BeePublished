@@ -46,47 +46,39 @@ class ApplicationForMembershipComponent extends Component {
 		$data_error = false;
 		 
 		//LOAD model
-		$controller->loadModel("ApplicationMembership");
+		$controller->loadModel("ApplicationForMembership.ApplicationMembership");
 		
 		//CHECK request and data
-		if (!$controller->request->is('post') || !isset($controller->data['ApplicationForMembership']))
+		if (!$controller->request->is('post') || !isset($controller->data['ApplicationMembership']))
 			$data_error = true;
-		 
-		//CHECK recaptcha
-		/*if(!$this->Recaptcha->valid($controller->params['form'])){
-		 $data_error = true;
-		}*/
-		
+
 		//VALIDATE data
 		if(!$data_error){
-			$controller->ApplicationMembership->set($controller->data['ApplicationForMembership']);
+			$controller->ApplicationMembership->set($controller->data['ApplicationMembership']);
 		
 			if(!$controller->ApplicationMembership->validates())
 				$data_error = true;
 		}
 		
-		//App::uses('Sanitize','Utility');
-		//$data = Sanitize::clean($data);
-		
 		//SEND email
 		if(!$data_error){
 			$this->BeeEmail->sendHtmlEmail($to = 'maximilian.stueber@me.com',
 			$subject = 'New Application for Membership',
-			$viewVars = array('data' => $controller->data['ApplicationForMembership'], 'url' => 'localhost'),
+			$viewVars = array('data' => $controller->data['ApplicationMembership'], 'url' => 'localhost'),
 			$viewName = 'ApplicationForMembership.application');
 		}
 		 
 		//SAVE in db
 		if(!$data_error){
-			$data_error = !$controller->ApplicationMembership->save($controller->data['ApplicationForMembership']);
+			$data_error = !$controller->ApplicationMembership->save($controller->data['ApplicationMembership']);
 		}
-		
+
 		//PRINT error messages
 		if(!$data_error)
 			$controller->Session->setFlash('Thank you for your interest. Your request has been sent.');
 		else
 			$controller->Session->setFlash('Please fill out all mandatory fields.');
-		 
+		
 		//REDIRECT
 		$controller->redirect('/member-application');
 	}
