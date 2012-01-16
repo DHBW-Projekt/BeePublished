@@ -1,7 +1,18 @@
 <dualon>
     <plugin>
         <name>StaticText</name>
-        <author>Christoph Krämer</author>
-        <version>1.0</version>
+        <author>Viene Sülzer</author>
+        <version>2.0</version>
+        <views>
+            <view>
+                <name>DisplayText</name>
+            </view>
+        </views>
+        <permissions>
+            <permission>
+                <role>Author</role>
+                <action>edit</action>
+            </permission>
+        </permissions>
     </plugin>
 </dualon>

@@ -9,12 +9,16 @@ class NewsletterRecipient extends AppModel {
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-	    public $validate = array(
+	public $validate = array(
         'email' => array(
-            'required' => array(
-                'rule' => array('email','isUnique'),
-                'message' => 'The e-mail address was not entered correctly.'
-            )
+	        'email_isunique' => array(
+            	'rule'    => 'isUnique',
+            	'message' => 'This e-mail address is already registered.',
+         	),
+        	'email_address_verification' => array(
+            	'rule'    => array('email'),
+            	'message' => 'The e-mail address was not entered correctly.'
+        	)
         )
     );
 /**
