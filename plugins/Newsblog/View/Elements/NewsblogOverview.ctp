@@ -22,9 +22,9 @@
 	$editAllowed = $allowedActions['Edit'];
 ?>
 <?php 
-	if(!empty($data['newsblogTitle']['NewsblogTitle']) || $data['newsblogTitle']['NewsblogTitle'] != null || $data['newsblogTitle']['NewsblogTitle']['title'] != ''){
+	if($data['newsblogTitle'] != null || $data['newsblogTitle'] != ''){
 		echo '<div class="newsblogtitle">';
-			echo $data['newsblogTitle']['NewsblogTitle']['title'];
+			echo $data['newsblogTitle'];
 			echo '<hr><hr>';
 		echo '</div>';
 	}
