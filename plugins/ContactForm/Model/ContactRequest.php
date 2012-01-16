@@ -12,7 +12,8 @@ class ContactRequest extends AppModel {
 	/*Validation rules*/
 	public $validate = array(
 				'email' => array(
-		            'rule' => array('notEmpty','email'),
+		            'rule' => 'email',
+		            'required' => true,
 					'message' => 'Please enter a valid e-mail address.'
 	),
 				'subject' => array(

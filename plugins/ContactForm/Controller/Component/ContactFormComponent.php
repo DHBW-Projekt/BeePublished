@@ -58,7 +58,7 @@ class ContactFormComponent extends Component {
     	$data_error = false;
     	
     	//LOAD model
-    	$controller->loadModel("ContactRequest");
+    	$controller->loadModel("ContactForm.ContactRequest");
 
     	//CHECK request and data
     	if (!$controller->request->is('post') || !isset($controller->data['ContactForm']))
