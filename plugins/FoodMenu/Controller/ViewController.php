@@ -49,7 +49,6 @@ class ViewController extends AppController {
 		$this->set('entries', $entries);
 		
     	$this->render('/FoodMenuMenu/index');
-		
 	}
 	
 	function selectDate() {
@@ -57,22 +56,34 @@ class ViewController extends AppController {
 			$data = $this->request->data;
 			if(array_key_exists('datepicker', $data)) {
 				$date = str_replace('/', '-', $this->request->data['datepicker']);
-				if(!(array_key_exists('refererurl', $data))) $refererurl = $this->referer();
-				else $refererurl = str_replace('#', '', $data['refererurl']);
-        		
-				debug($refererurl);
 				
-				$prefix = str_replace($refererurl, '',$this->referer());
-        		$suffix = str_replace($prefix, '', $this->referer());
+				if(!(array_key_exists('refererurl', $data))) {
+					$refererurl = $this->referer();
+					
+					$regex = '/^\d{2}\-\d{2}\-(\d{2}|\d{4})$/'; //regex to check if there could be a date	
+					
+					if (substr($refererurl, -1, 1) != '/') {
+						if (preg_match($regex, substr($refererurl, -10, 10))) {
+							$refererurl = str_replace(substr($refererurl, -10, 10), '', $refererurl . '/view/');
+						} else $refererurl = $refererurl . '/view/';
+					} else {
+						if (preg_match($regex, substr($refererurl, -11, 10))) {
+							$refererurl = str_replace(substr($refererurl, -11, 11), '', $refererurl . '/view/');
+						} else $refererurl = $refererurl . 'view/';
+					}
+					
+				} else $refererurl = str_replace('#', '', $data['refererurl']); // replace # in url
         		
-        		debug($prefix);
-        		debug($suffix);
-
-        		if(!($prefix == '')) {
-        			$this->redirect($prefix . $date . '/' . $suffix);
-        		}
-				else {
-        			$this->redirect($suffix . '/' . $date);
+				if (condition) {
+					;
+				}
+				
+				if(substr($refererurl, -1, 1) != '/') { 
+					$refererurl = $refererurl . '/';
+				}
+				
+        		if($refererurl != '') {
+        			$this->redirect($refererurl . $date);
         		}
         		
 			}

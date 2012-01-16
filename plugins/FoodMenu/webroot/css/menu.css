@@ -91,3 +91,24 @@
  	font-style: italic;
  	font-size: 0.8em;
  }
+ 
+ .create {
+ 	width: 80%;
+ 	}
+ .edit {
+ 	width: 80%;
+ 	}
+ 	
+ .adminCheckbox {
+ 	margin-right: 10px;
+ 	}
+ 	
+ #foodMenuEntry table {
+ 	width: 80%;
+ 	}
+ 
+ .viewEntries {
+ 	width: 80%
+ 	}
+ 	
+ 

@@ -12,18 +12,29 @@ class ViewComponent extends Component {
                [3] => 'category'
                [4] => name of the category
                [5] => id of the category
+               
+               + last index is date
 		 * 
 		 */
  		$data = array();
- 		$regex = '/^\d{2}\-\d{2}\-(\d{2}|\d{4})$/';
+ 		$regex = '/^\d{2}\-\d{2}\-(\d{2}|\d{4})$/'; //regex to check if there could be a date
+ 		
 		if (sizeof($url) != 0) {
-			if (preg_match($regex, $url[0]))  {
-				$selectedDate = array_shift($url);
-				$selectedDate = split('-', $selectedDate);
+			$arrayID = sizeof($url);
+			$possibleDate = $url[$arrayID-1];
+						
+			if (preg_match($regex, $possibleDate))  {				
+				if(sizeof($url)==1) {
+					$data['Page'] = 'View';
+        	    	$data['Action'] = 'showMenus';
+				}//default values
+				
+				//change date format
+				$selectedDate = split('-', $possibleDate);
 				$selectedDate = $selectedDate[2] . '-' . $selectedDate[0] . '-' .$selectedDate[1];
-				$weekday = date('N', strtotime($selectedDate));
+
 			}
-			debug($url);
+
             if ($url[0] == 'menu') {
                     $data['Page'] = 'View';
                     $data['Action'] = 'showCategories';
@@ -43,32 +54,20 @@ class ViewComponent extends Component {
                     	}
                     }
             }
-            else {
-            	$data['Page'] = 'View';
-        	       $data['Action'] = 'showMenus';
-            }
+
         } else {
         	$data['Page'] = 'View';
         	$data['Action'] = 'showMenus';
-        	}
-        switch ($data['Page']) {
-            case 'View':
-            	if(isset($data['datepicker'])) {
-            		$timestamp = strtotime($data['datepicker']);
-                	$selectedDate = date('Y-m-d', $timestamp);
-            	}              
-                break;
-//            case 'showCategories':
-//                $startDate = date('Y-m-d', $data['StartTime']);
-//                $menuId = $data['FoodMenuMenu']['id'];
-//                break;
+        	// default values
         }
+
         switch ($data['Action']) {
         	case 'showMenus':
 		        if(!(isset($selectedDate))) {
-//		        	$selectedDate = date('Y-m-d');
 					$data['show']['FoodMenuMenu'] = $this->FetchFoodMenuEntries->getMenus($controller);
-		        } else { $data['show'] = $this->FetchFoodMenuEntries->getMenus($controller, $selectedDate); }
+		        } else {
+		        	 $data['show']['FoodMenuMenu'] = $this->FetchFoodMenuEntries->getMenus($controller, $selectedDate); 
+		        }
                 break;
             case 'showCategories':
             	if(!(isset($selectedDate))) {
@@ -104,13 +103,15 @@ class ViewComponent extends Component {
             	break;
         }
         if(sizeof($url)>0) {
-	        $url = implode('/', $url);
-	        $controller->set('url', $url);
+        	if (isset($selectedDate)) {
+        		$selectedDate = split('-', $selectedDate);
+        		$selectedDate = $selectedDate[1] . '-' . $selectedDate[2] . '-' .$selectedDate[0];
+        		// change the date format again
+        	}
         }
         $controller->set('webroot', $this->webroot);
         return $data;
 	}
-	
 	
 	public function beforeFilter() {
 		parent::beforeFilter();
