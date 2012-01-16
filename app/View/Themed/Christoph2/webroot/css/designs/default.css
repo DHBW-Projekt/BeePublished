@@ -1,0 +1,190 @@
+body,
+#overlay-header {
+    font-family: Arial, Tahoma, sans-serif;
+    background: url(../../img/bg.jpg) no-repeat scroll 50% 0 #ECECEC;
+    font-size: 14px;
+}
+
+h1 {
+    font-size: 18px;
+}
+
+h2 {
+    font-size: 16px;
+}
+
+h3 {
+    font-size: 14px;
+}
+
+h4 {
+    font-size: 12px;
+}
+
+h5 {
+    font-size: 10px;
+}
+
+input, textarea {
+    font-size: 13px;
+}
+
+input[type=button],
+input[type=submit] {
+    -webkit-box-shadow: inset 0px 0px 8px #095B85;
+    -moz-box-shadow: inset 0px 0px 8px #095B85;
+    box-shadow: inset 0px 0px 8px #095B85;
+    border: 1px solid #000000;
+    color: #ffffff;
+}
+
+input[type=text],
+input[type=password],
+textarea,
+select {
+    -webkit-box-shadow: inset 0px 0px 4px #dddddd;
+    -moz-box-shadow: inset 0px 0px 4px #dddddd;
+    box-shadow: inset 0px 0px 4px #dddddd;
+    border: 1px solid #999999;
+}
+
+.color1,
+input[type=button]:hover,
+input[type=submit]:hover,
+.users_role {
+    background-color: #2E2E2E;
+    background-image: none;
+    color: #ffffff;
+}
+
+.border-color1 {
+    border-color: #2E2E2E;
+}
+
+.color2,
+input[type=button],
+input[type=submit] {
+    background-color: #2E2E2E;
+    background-image: none;
+    color: #ffffff;
+}
+
+.border-color2 {
+    border-color: #2E2E2E;
+}
+
+.color3,
+#topnav a.signin:hover,
+#topnav a.signout:hover {
+    background-color: #f4f4f4;
+    background-image: none;
+    color: #000000;
+}
+
+.border-color3 {
+    border-color: #f4f4f4;
+}
+
+.color4,
+#topnav a.menu-open,
+#signin_menu {
+    background-color: #f4f4f4;
+    background-image: none;
+    color: #000000;
+}
+
+.border-color4 {
+    border-color: #f4f4f4;
+}
+
+.color5,
+body.overlay,
+#content,
+#menu {
+    background-color: #f4f4f4;
+    background-image: none;
+    color: #000000;
+}
+
+.border-color5 {
+    border-color: #f4f4f4;
+}
+
+a {
+    color: #000000;
+}
+
+#topnav,
+#signin_menu,
+#footer,
+.small_font {
+    font-size: 11px;
+}
+
+#topnav a.signin,
+#topnav a.signout,
+.validation_error,
+.flash_success,
+.flash_failure,
+#flashMessage.message,
+.users_role {
+    font-weight: bold;
+}
+
+#menu {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    margin: 30px 0;
+}
+
+#menu.overlay {
+    background-color: #fefefe;
+}
+
+#footer,
+#topnav,
+#topnav a {
+    color: #f4f4f4;
+}
+
+#signin_menu .forgot a {
+    color: #2E2E2E;
+}
+
+.validation_error {
+    color: #A00000;
+}
+
+.flash_success, #flashMessage.message {
+    border: 3px solid #bedf5d;
+    background: #e2f1a8;
+}
+
+.flash_failure {
+    border: 3px solid #990000;
+    background: #f97d88;
+}
+
+.plugin_administration {
+    border: 1px solid #2E2E2E;
+}
+
+.role {
+    border: 1px solid #2E2E2E;
+}
+
+.user_detail,
+.users-placeholder {
+    border: 1px dotted #2E2E2E;
+    background-color: #ffffff;
+}
+
+#topnav,
+#header,
+#footer {
+    background-color: #2E2E2E;
+}
+
+#signin_menu {
+    border: 1px solid #2E2E2E;
+    border-top: 0;
+}

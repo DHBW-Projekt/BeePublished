@@ -20,7 +20,7 @@
 <div id="overlay-header">
     <?php echo $this->Html->image('beelogo_small.png'); ?>
 </div>
-<div id="content">
+<div id="content" class="overlay">
     <?php echo $this->Session->flash(); ?>
     <?php echo $content_for_layout ?>
 </div>
