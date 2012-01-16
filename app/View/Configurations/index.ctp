@@ -1,7 +1,7 @@
 <?php
 $this->Html->script('jquery/jquery.relatedselects.min',false);
-$this->Html->script('/ckeditor/ckeditor',false);
-$this->Html->script('/ckeditor/adapters/jquery',false);
+$this->Html->script('ckeditor/ckeditor',false);
+$this->Html->script('ckeditor/adapters/jquery',false);
 $this->Html->script('admin/configuration',false);
 echo $this->element('config-menu');
 echo $this->Form->create('Configuration');
