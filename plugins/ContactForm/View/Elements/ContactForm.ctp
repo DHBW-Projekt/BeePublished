@@ -1,7 +1,7 @@
 <!-- Frame to integrate the elements -->
 <?php 
 	//CALL stylesheet
-	echo $this->Html->css('/ContactForm/css/webshop');
+	echo $this->Html->css('/ContactForm/css/contactform');
 ?>
 
 <div id="contactform_content">

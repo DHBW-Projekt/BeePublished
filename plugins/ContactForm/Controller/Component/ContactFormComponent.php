@@ -6,7 +6,7 @@ class ContactFormComponent extends Component {
     public $name = 'ContactFormComponent';
     
     //Component
-    var $components = array('BeeEmail', 'Recaptcha');
+    var $components = array('BeeEmail');
 
    /**
     * Method to transfer data from plugin to CMS.
@@ -33,13 +33,6 @@ class ContactFormComponent extends Component {
     			$data['Element'] = $func_data['Element'];
     		}
     	}
-    	
-    	//Recaptcha
-    	$data['Recaptcha']['publickey'] = "6LeXXMwSAAAAAATYW9zan7IB7yaIKmx1VPMjqeXX";
-    	$data['Recaptcha']['privatekey'] = "6LeXXMwSAAAAALTEji2U_qC9lp4W38_QxC0zfhgX";
-    	
-    	//$this->Recaptcha->publickey = "6LeXXMwSAAAAAATYW9zan7IB7yaIKmx1VPMjqeXX";
-    	//$this->Recaptcha->privatekey = "6LeXXMwSAAAAALTEji2U_qC9lp4W38_QxC0zfhgX";
     
     	//RETURN data
     	if (!isset($data['data'])) {
@@ -50,9 +43,9 @@ class ContactFormComponent extends Component {
     }
     
    /**
-    * Function sendForm.
+    * Function send.
     */
-    public function sendForm($controller, $url=null) {
+    public function send($controller, $url=null) {
     	
     	//Attributes
     	$data_error = false;
@@ -64,10 +57,6 @@ class ContactFormComponent extends Component {
     	if (!$controller->request->is('post') || !isset($controller->data['ContactForm']))
     		$data_error = true;
     	
-    	//CHECK recaptcha
-    	/*if(!$this->Recaptcha->valid($controller->params['form'])){
-    	 $data_error = true;
-    	}*/
 
     	//VALIDATE data
     	if(!$data_error){
@@ -84,7 +73,7 @@ class ContactFormComponent extends Component {
 
     	//SEND email
     	if(!$data_error){
-    		$this->BeeEmail->sendHtmlEmail($to = 'maximilian.stueber@me.com',
+    		$this->BeeEmail->sendHtmlEmail($to = 'corinna.knick@yahoo.de',
     									   $subject = 'Request through contact form',
     									   $viewVars = array('name' => $controller->data['ContactForm']['name'],
 																	   'email' => $controller->data['ContactForm']['email'],
@@ -100,7 +89,11 @@ class ContactFormComponent extends Component {
     	else
     		$controller->Session->setFlash('Please fill out all mandatory fields.');
     	
+    	//RETURN data
+    	if($data_error)
+    		return array('data' => $controller->ContactRequest, 'Element' => 'request');
+    	
     	//REDIRECT
-    	$controller->redirect('/contact');
+    	$controller->redirect(/*$url.*/'/contact-form');
     } 
 } 
