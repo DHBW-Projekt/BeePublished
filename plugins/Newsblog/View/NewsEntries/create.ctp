@@ -31,7 +31,7 @@ if($writeAllowed){
 		//create entrytext textarea
 		echo $this->Form->input('NewsEntry.text', array(
 			'div' => 'writeNewsBody',
-			'label' => 'Text:',
+			'label' => false,
 			'id' => 'writeNewsTextEditor',
 			'name' => 'text'
 		));
