@@ -11,7 +11,7 @@
                 <name>gallery</name>
             </view>
 			<view>
-				<name>SimpleImageDisplay</name>
+				<name>DisplayImage</name>
 			</view>
         </views>
     </plugin>
