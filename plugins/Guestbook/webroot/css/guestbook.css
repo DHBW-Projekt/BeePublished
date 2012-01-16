@@ -1,9 +1,8 @@
-
 div #guestbook_write {
 	padding: 20px;
 }
 
-div #guestbook_write label{
+div #guestbook_write label {
 	padding: 10px;
 	margin: 10px;
 	font-weight: bold;
@@ -32,6 +31,6 @@ div.guestbook_post_author {
 	font-size: 75%;
 }
 
-div.guestbook_post_text{
+div.guestbook_post_text {
 	clear: both;
 }

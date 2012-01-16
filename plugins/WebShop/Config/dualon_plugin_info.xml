@@ -5,11 +5,11 @@
 		<author>Maximilian Stueber and Patrick Zamzow</author>
 		<version>1.0</version>
 		<permissions>
-        </permissions>
-        <views>
-            <view>
-                <name>WebShop</name>
-            </view>
-        </views>
+		</permissions>
+		<views>
+			<view>
+				<name>WebShop</name>
+			</view>
+		</views>
 	</plugin>
 </dualon>

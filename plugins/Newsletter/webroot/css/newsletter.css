@@ -1,6 +1,7 @@
 @CHARSET "UTF-8";
-#scrolltable{
-	height:200px;
-	width:50%;
-	overflow:scroll;
+
+#scrolltable {
+	height: 200px;
+	width: 50%;
+	overflow: scroll;
 }

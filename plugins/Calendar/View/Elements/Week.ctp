@@ -1,43 +1,38 @@
 <?php
 $days = array(__('So'), __('Mo'), __('Di'), __('Mi'), __('Do'), __('Fr'), __('Sa'));
 for ($i = 0; $i < $FDOW; $i++) {
-    array_push($days, array_shift($days));
+	array_push($days, array_shift($days));
 }
 $dayTimes = array();
 for ($i = 0; $i < 7; $i++) {
-    $dayTimes[] = $StartTime;
-    $StartTime = strtotime('+1 days', $StartTime);
+	$dayTimes[] = $StartTime;
+	$StartTime = strtotime('+1 days', $StartTime);
 }
 ?>
 <div class="calendar">
-    <div class="calendar_head">
-        <div
-            class="month_minus"><?php echo $this->Html->link('<< KW ' . date('W', strtotime('-1 weeks', $StartTime)), $URL . 'largecalendar/week/' . date('Y-\WW', strtotime('-1 weeks', $StartTime)));?></div>
-        <div
-            class="month_plus"><?php echo $this->Html->link('KW ' . date('W', strtotime('+1 weeks', $StartTime)) . ' >>', $URL . 'largecalendar/week/' . date('Y-\WW', strtotime('+1 weeks', $StartTime)));?></div>
-        <div class="calendar_name">Calendar
-            Week <?php echo date('W: d M Y', $StartTime) . ' - ' . date('d M Y', strtotime('+1 week -1 day', $StartTime));?></div>
-    </div>
-    <table cellspacing="0">
-        <thead>
-        <tr>
-            <th></th>
-            <?php foreach ($days as $day): ?>
-            <th><?php echo $day;?></th>
-            <?php endforeach; ?>
-        </tr>
-        <tr>
-            <th></th>
-            <?php foreach ($dayTimes as $day): ?>
-            <th>
-                <?php echo date('d.m.', $day);?>
-                <?php echo $this->Html->link($this->Html->image('add.png', array('width' => 18, 'height' => 18)), array('plugin' => 'Calendar', 'controller' => 'CalendarEntries', 'action' => 'add', date('Y-m-d', $day)), array('escape' => false, 'class' => 'calendar_add_entry')); ?>
-            </th>
-            <?php endforeach; ?>
-        </tr>
-        </thead>
-        <tbody>
-        <?php
+<div class="calendar_head">
+<div class="month_minus"><?php echo $this->Html->link('<< KW ' . date('W', strtotime('-1 weeks', $StartTime)), $URL . 'largecalendar/week/' . date('Y-\WW', strtotime('-1 weeks', $StartTime)));?></div>
+<div class="month_plus"><?php echo $this->Html->link('KW ' . date('W', strtotime('+1 weeks', $StartTime)) . ' >>', $URL . 'largecalendar/week/' . date('Y-\WW', strtotime('+1 weeks', $StartTime)));?></div>
+<div class="calendar_name">Calendar Week <?php echo date('W: d M Y', $StartTime) . ' - ' . date('d M Y', strtotime('+1 week -1 day', $StartTime));?></div>
+</div>
+<table cellspacing="0">
+	<thead>
+		<tr>
+			<th></th>
+			<?php foreach ($days as $day): ?>
+			<th><?php echo $day;?></th>
+			<?php endforeach; ?>
+		</tr>
+		<tr>
+			<th></th>
+			<?php foreach ($dayTimes as $day): ?>
+			<th><?php echo date('d.m.', $day);?> <?php echo $this->Html->link($this->Html->image('add.png', array('width' => 18, 'height' => 18)), array('plugin' => 'Calendar', 'controller' => 'CalendarEntries', 'action' => 'add', date('Y-m-d', $day)), array('escape' => false, 'class' => 'calendar_add_entry')); ?>
+			</th>
+			<?php endforeach; ?>
+		</tr>
+	</thead>
+	<tbody>
+		<?php
         echo '<tr>';
         echo '<td class="calendar_time"></td>';
         for ($j = 0; $j < 7; $j++) {
@@ -159,6 +154,6 @@ for ($i = 0; $i < 7; $i++) {
             echo '<td colspan="' . (7 - $currentColumn) . '" class="' . $ClassPrefix . 'no_date"></td></tr>';
         }*/
         ?>
-        </tbody>
-    </table>
+	</tbody>
+</table>
 </div>

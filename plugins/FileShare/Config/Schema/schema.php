@@ -1,4 +1,4 @@
-<?php 
+<?php
 /* FileShare schema generated on: 2011-12-15 09:55:46 : 1323939346*/
 class FileShareSchema extends CakeSchema {
 	function before($event = array()) {

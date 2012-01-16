@@ -1,1 +1,1 @@
-<?php echo $this->element("admin"); ?> 
+<?php echo $this->element("admin"); ?>

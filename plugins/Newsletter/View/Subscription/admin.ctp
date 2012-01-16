@@ -37,13 +37,13 @@ Welcome to the Newsletter administration...
 
 <!-- 	</ul> -->
 <!-- 	<div id="tabs-1"> -->
- 		<?php 
+<?php
 // 			echo $this->element('newsletteradmin', array('mode' => $mode));
 // 		?>
 <!-- 	</div> -->
 <!-- 	<div id="tabs-2"> -->
- 		<?php 
-// 			echo $this->element('addRecipient');			
+<?php
+// 			echo $this->element('addRecipient');
 // 			echo $this->element('RecipientsList');
 // 		?>
 <!-- 	</div> -->

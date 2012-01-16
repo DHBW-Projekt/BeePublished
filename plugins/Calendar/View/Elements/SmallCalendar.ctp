@@ -2,14 +2,14 @@
 $this->Html->css('/calendar/css/calendar', NULL, array('inline' => false));
 $this->Html->script('/calendar/js/calendar', false);
 if ($data['page'] == null) {
-    $data['page'] = $url;
+	$data['page'] = $url;
 }
 if (substr($data['page'], -1) != '/') {
-    $data['page'] .= '/';
+	$data['page'] .= '/';
 }
 foreach ($data['Months'] as $month) {
-    echo $this->element('CalendarFactory',
-        array(
+	echo $this->element('CalendarFactory',
+	array(
             'FDOW' => $data['FirstDayOfWeek'],
             'ShowWeeks' => $data['ShowWeeks'],
             'time' => $month,
@@ -19,7 +19,7 @@ foreach ($data['Months'] as $month) {
             'Entries' => $data['Entries'],
             'ShowEntries' => false,
             'PluginId' => $pluginId
-        ),
-        array('plugin' => 'Calendar'));
+	),
+	array('plugin' => 'Calendar'));
 }
 ?>

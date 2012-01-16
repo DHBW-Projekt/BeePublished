@@ -1,4 +1,4 @@
-<?php 
+<?php
 /* Calendar schema generated on: 2012-01-09 16:25:50 : 1326122750*/
 class CalendarSchema extends CakeSchema {
 	function before($event = array()) {

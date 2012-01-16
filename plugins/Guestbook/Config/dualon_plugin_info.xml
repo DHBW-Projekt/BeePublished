@@ -16,8 +16,8 @@
 			<permission>
 				<role>Administrator</role>
 				<action>delete</action>
-			</permission>			
-		</permissions>	
+			</permission>
+		</permissions>
 		<views>
 			<view>
 				<name>Guestbook</name>

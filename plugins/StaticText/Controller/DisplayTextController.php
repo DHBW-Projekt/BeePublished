@@ -4,7 +4,7 @@
  */
 class DisplayTextController extends StaticTextAppController {
 	public $components = array('ContentValueManager');
-	
+
 	//main-function
 	public function admin($contentId){
 		$this->layout = 'overlay';
@@ -16,7 +16,7 @@ class DisplayTextController extends StaticTextAppController {
 		$pluginId = $textPlugin['Plugin']['id'];
 		$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'edit');
 		//If you are in the requiered role
-		if ($editAllowed){	
+		if ($editAllowed){
 			//Load and save data
 			//save data
 			if ($this->request->is('post')) {
@@ -29,8 +29,8 @@ class DisplayTextController extends StaticTextAppController {
 				$text = $contentValues['Text'];
 			} else {
 				$text = "Leer"; //"Leer" or '' ?
-			} 
-			
+			}
+				
 			if (array_key_exists('Published', $contentValues)) {
 				$pub = $contentValues['Published'];
 			} else {
@@ -45,8 +45,8 @@ class DisplayTextController extends StaticTextAppController {
 				);
 			}
 		} else    { //If you are not aloowed to
-		   $this->Session->setFlash(__('You are not authenticated to enter these page!'));
-		   //Go to mainpage
+			$this->Session->setFlash(__('You are not authenticated to enter these page!'));
+			//Go to mainpage
 			$this->redirect($this->referer());
 		}
 	}

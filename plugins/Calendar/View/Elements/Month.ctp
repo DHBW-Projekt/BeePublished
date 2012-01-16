@@ -1,6 +1,6 @@
 <?php
 echo $this->element('CalendarFactory',
-    array(
+array(
         'FDOW' => $FDOW,
         'ShowWeeks' => $ShowWeeks,
         'time' => $StartTime,
@@ -10,6 +10,6 @@ echo $this->element('CalendarFactory',
         'Entries' => $Entries,
         'ShowEntries' => true,
         'PluginId' => $PluginId
-    ),
-    array('plugin' => 'Calendar'));
+),
+array('plugin' => 'Calendar'));
 ?>

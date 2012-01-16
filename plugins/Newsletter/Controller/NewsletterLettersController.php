@@ -3,27 +3,27 @@ App::uses('CakeEmail', 'Network/Email');
 class NewsletterLettersController extends AppController {
 	var $layout = 'overlay';
 	public $name = 'newsletterLetters';
-	
+
 	public $uses = array('Newsletter.NewsletterLetter','Newsletter.NewsletterRecipient');
-	
+
 	public $paginate = array(
 			'NewsletterLetter' => array(
 				'limit' => 5, 
 				'order' => array(
 					'NewsletterLetter.date' => 'desc',
 					'NewsletterLetter.id' => 'desc')));
-	
+
 	public function index(){
 		$newsletters = $this->paginate('NewsletterLetter');
 		$this->set('newsletters', $newsletters);
 	}
-	
+
 	public function edit($id){
 		$newsletter = $this->NewsletterLetter->findById($id);
 		$newsletter = $newsletter['NewsletterLetter'];
 		$this->set('newsletter', $newsletter);
 	}
-	
+
 	public function save($id){
 		if ($this->request->is('post')){
 			$newsletter2 = $this->request->data['NewsletterLetter'];
@@ -43,28 +43,28 @@ class NewsletterLettersController extends AppController {
 				'action' => 'edit', $newsletter['NewsletterLetter']['id']));
 		}
 	}
-	
+
 	public function create(){
 		$newsletter = array(
 						'subject' => NULL,
 						'content' => NULL,
 						'id' => 'new');
 		$this->set('newsletter', $newsletter);
-// 		$this->layout = 'overlay';
+		// 		$this->layout = 'overlay';
 		$this->render('/NewsletterLetters/edit');
 	}
-	
+
 	public function preview($id){
 		$newsletter = $this->NewsletterLetter->findById($id);
 		$this->set('newsletter', $newsletter);
 		$this->layout = 'overlay';
 	}
-	
+
 	public function delete($id){
 		$this->NewsletterLetter->delete($id);
 		$this->redirect($this->referer());
 	}
-	
+
 	public function send($id){
 		$newsletter = $this->NewsletterLetter->findById($id);
 		$recipients = $this->NewsletterRecipient->find('all', array(
@@ -85,6 +85,6 @@ class NewsletterLettersController extends AppController {
 		} //foreach
 		$this->redirect($this->referer());
 	}
-	
+
 }
 

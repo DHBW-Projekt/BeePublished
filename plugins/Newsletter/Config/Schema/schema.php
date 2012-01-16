@@ -1,4 +1,4 @@
-<?php 
+<?php
 /* Newsletter schema generated on: 2012-01-03 15:35:57 : 1325601357*/
 class NewsletterSchema extends CakeSchema {
 	function before($event = array()) {

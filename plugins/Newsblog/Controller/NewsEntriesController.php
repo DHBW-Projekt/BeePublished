@@ -7,7 +7,7 @@ App::uses('NewsblogAppController', 'Newsblog.Controller');
  */
 class NewsEntriesController extends NewsblogAppController {
 	public $uses = array('Newsblog.NewsEntry');
-	
+
 	public function create($contentId = null){
 		$pluginId = $this->getPluginId();
 		$writeAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Write');
@@ -32,7 +32,7 @@ class NewsEntriesController extends NewsblogAppController {
 				$validTo = '9999-12-31 23:59:59';
 			}
 			$contentId = $data['contentId'];
-		
+
 			if($writeAllowed){
 				$newNews = array();
 				$this->NewsEntry->create();
@@ -60,7 +60,7 @@ class NewsEntriesController extends NewsblogAppController {
 			}
 		}
 	}
-	
+
 	public function edit($id = null){
 		$pluginId = $this->getPluginId();
 		$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Edit');
@@ -103,8 +103,8 @@ class NewsEntriesController extends NewsblogAppController {
 				$changedNews['lastModifiedOn'] = $now;
 				$changedNews['validFrom'] = $validFrom;
 				$changedNews['validTo'] = $validTo;
-				
-				
+
+
 				//save array on database
 				if($this->NewsEntry->save($changedNews)){
 					$this->Session->setFlash("The changes have been saved!");
@@ -119,25 +119,25 @@ class NewsEntriesController extends NewsblogAppController {
 			}
 		}
 	}
-	
+
 	public function publish($contentId = null, $newsEntryId = null){
 		if($this->request->is('post')) {
 			$newsEntryId = $this->request->data['id'];
 		}
-		
+
 		if($newsEntryId == null){
 			$this->layout = 'overlay';
-			
+				
 			$pluginId = $this->getPluginId();
 			$publishAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Publish');
-			
+				
 			$this->set('pluginId', $pluginId);
 			$this->set('contentId', $contentId);
 			$this->set('webroot', $this->webroot);
 			$publishAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Publish');
 			if($publishAllowed){
 				$conditions = array("NewsEntry.content_id" => $contentId, "NewsEntry.published !=" => true, "NewsEntry.deleted !=" => true);
-			
+					
 				$options['conditions'] = $conditions;
 				$options['order'] = array("createdOn DESC");
 				$entriesToPublish = $this->NewsEntry->find('all',$options);
@@ -148,28 +148,28 @@ class NewsEntriesController extends NewsblogAppController {
 			$userId = $this->Auth->user('id');
 			$pluginId = $this->getPluginId();
 			$publishAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Publish');
-			
+				
 			if ($publishAllowed){
 				$this->NewsEntry->id = $newsEntryId;
 				$publishNews = array();
 				$publishNews['published'] = true;
 				$publishNews['publishedBy'] = $userId;
 				$publishNews['publishedOn'] = date('Y-m-d');
-			
+					
 				if ($this->NewsEntry->save($publishNews)){
 					$this->Session->setFlash("The selected news has been published.");
 				} else{
 					$this->Session->setFlash("The selected news hasn\'t been published.");
 				}
-			
+					
 			} else{
 				$this->Session->setFlash("Action not allowed!");
 			}
-			
+				
 			$this->redirect(array('action' => 'publish', $contentId));
 		}
 	}
-	
+
 	public function delete($id = null){
 		$userId = $this->Auth->user('id');
 		$pluginId = $this->getPluginId();
@@ -178,7 +178,7 @@ class NewsEntriesController extends NewsblogAppController {
 		if($this->request->is('post')){
 			$id = $this->request->data['id'];
 		}
-		
+
 		if ($deleteAllowed){
 			$this->NewsEntry->id = $id;
 			if($this->NewsEntry->saveField('deleted', true)){
