@@ -18,26 +18,27 @@ if($writeAllowed){
 		echo $this->Form->create('NewsEntry', array('url' => array('plugin' => 'Newsblog', 'controller' => 'NewsEntries', 'action' => 'create')));
 		//create title input
 		echo $this->Form->input('NewsEntry.title', array(
-			'div' => 'writeNewsTitle',
+			//'div' => 'writeNewsTitle',
 			'label' => 'Title:',
 			'name' => 'title'
 		));
 		//create subtitle input
 		echo $this->Form->input('NewsEntry.subtitle', array(
-			'div' => 'writeNewsSubtitle',
+			//'div' => 'writeNewsSubtitle',
 			'label' => 'Subtitle:',
 			'name' => 'subtitle'
 		));
 		//create entrytext textarea
 		echo $this->Form->input('NewsEntry.text', array(
-			'div' => 'writeNewsBody',
+			//'div' => 'writeNewsBody',
 			'label' => false,
 			'id' => 'writeNewsTextEditor',
 			'name' => 'text'
 		));
 		//create validFrom input
-		echo $this->Form->text(null, array(
-			'div' => 'writeValidConfiguration',
+		echo $this->Form->input(null, array(
+			//'div' => 'writeValidConfiguration',
+			'type' => 'text',
 			'id' => 'nbValidFromDatepicker',
 			'label' => 'Valid from:',
 			'name' => 'validFromUI',
@@ -45,8 +46,9 @@ if($writeAllowed){
 			'disabled' => true
 		));
 		//create validTo input
-		echo $this->Form->text(null, array(
-			'div' => 'writeValidConfiguration',
+		echo $this->Form->input(null, array(
+			//'div' => 'writeValidConfiguration',
+			'type' => 'text',
 			'id' => 'nbValidToDatepicker',
 			'label' => 'Valid to:',
 			'name' => 'validToUI',
@@ -75,8 +77,7 @@ if($writeAllowed){
 			'value' => 'createNews'
 		));
 		
-		//create submit button
-		echo $this->Form->button("Create News");
+		echo $this->Form->end("Create news");
 		
 	echo '</div>';
 	echo '</div>';

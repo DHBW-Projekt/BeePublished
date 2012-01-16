@@ -55,8 +55,7 @@ class NewsEntriesController extends NewsblogAppController {
 					$this->redirect(array('action' => 'create', $contentId));
 				}
 			} else{
-				$this->Session->setFlash('Action not allowed!');
-				$this->redirect($this->referer());
+				throw new ForbiddenException('You are not allowed to write news entries.',401);
 			}
 		}
 	}
@@ -114,8 +113,7 @@ class NewsEntriesController extends NewsblogAppController {
 					$this->redirect($this->referer());
 				}
 			} else{
-				$this->Session->setFlash('Action not allowed!');
-				$this->redirect($this->referer());
+				throw new ForbiddenException('You are not allowed to edit news entries.',401);
 			}
 		}
 	}
@@ -163,7 +161,7 @@ class NewsEntriesController extends NewsblogAppController {
 				}
 			
 			} else{
-				$this->Session->setFlash("Action not allowed!");
+				throw new ForbiddenException('You are not allowed to publish news entries.',401);
 			}
 			
 			$this->redirect(array('action' => 'publish', $contentId));
@@ -189,8 +187,7 @@ class NewsEntriesController extends NewsblogAppController {
 				$this->redirect($this->referer());
 			}
 		} else{
-			$this->Session->setFlash('Acton not allowed!');
-			$this->redirect($this->referer());
+			throw new ForbiddenException('You are not allowed to delete news entries.',401);
 		}
 	}
 

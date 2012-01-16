@@ -7,16 +7,8 @@
 	//get configured date format
 	//split valid from
 	$validFrom = $newsentry['NewsEntry']['validFrom'];
-	$validFromPieces = explode("-", $validFrom);
-	$validFromYear = $validFromPieces[0];
-	$validFromMonth = $validFromPieces[1];
-	$validFromDay = $validFromPieces[2];
 	//split valid to
 	$validTo = $newsentry['NewsEntry']['validTo'];
-	$validToPieces = explode("-", $validTo);
-	$validToYear = $validToPieces[0];
-	$validToMonth = $validToPieces[1];
-	$validToDay = $validToPieces[2];
 	
 	$this->Js->set('webroot', $this->request->webroot);
 ?>
@@ -24,31 +16,52 @@
 	<?php 
 	//create form
 	echo $this->Form->create('NewsEntry', array('url' => array('plugin' => 'Newsblog', 'controller' => 'NewsEntries', 'action' => 'edit')));
+	//hidden fields
+	echo $this->Form->hidden(null,array(
+			'id' => 'validFromDB',
+			'name' => 'validFrom'
+	));
+	echo $this->Form->hidden(null,array(
+			'id' => 'validToDB',
+			'name' => 'validTo'
+	));
+	//action set to editNews
+	echo $this->Form->hidden(null,array(
+			'name' => 'action',
+			'value' => 'editNews'
+	));
+	//newsEntryId
+	echo $this->Form->hidden(null,array(
+			'name' => 'id',
+			'value' => $newsentry['NewsEntry']['id']
+	));
+	
 	//create title input
 	echo $this->Form->input('NewsEntry.title', array(
-		'div' => 'editNewsTitle',
+		//'div' => 'editNewsTitle',
 		'label' => 'Title:',
 		'name' => 'title',
 		'value'=> $newsentry['NewsEntry']['title']
 	));
 	//create subtitle input
 	echo $this->Form->input('NewsEntry.subtitle', array(
-		'div' => 'writeNewsSubtitle',
+		//'div' => 'writeNewsSubtitle',
 		'label' => 'Subtitle:',
 		'name' => 'subtitle',
 		'value'=> $newsentry['NewsEntry']['subtitle']
 	));
 	//create entrytext textarea
 	echo $this->Form->input('NewsEntry.text', array(
-		'div' => 'editNewsBody',
+		//'div' => 'editNewsBody',
 		'label' => false,
 		'id' => 'editNewsTextEditor',
 		'name' => 'text',
 		'value' => $newsentry['NewsEntry']['text']
 	));
 	//create validFrom input
-	echo $this->Form->text(null, array(
-		'div' => 'editNewsValidConfig',
+	echo $this->Form->input(null, array(
+		//'div' => 'editNewsValidConfig',
+		'type' => 'text',
 		'id' => 'nbValidFromDatepicker',
 		'name' => 'validFromUI',
 		'class' => 'datepicker',
@@ -56,35 +69,16 @@
 		'value'=> $newsentry['NewsEntry']['validFrom']
 	));
 	//create validTo input
-	echo $this->Form->text(null, array(
-		'div' => 'editNewsValidConfig',
+	echo $this->Form->input(null, array(
+		//'div' => 'editNewsValidConfig',
+		'type' => 'text',
 		'id' => 'nbValidToDatepicker',
 		'name' => 'validToUI',
 		'class' => 'datepicker',
 		'label' => 'Valid to:',
 		'value'=> $newsentry['NewsEntry']['validTo']
 	));
-	//hidden fields
-	echo $this->Form->hidden(null,array(
-		'id' => 'validFromDB',
-		'name' => 'validFrom'
-	));
-	echo $this->Form->hidden(null,array(
-		'id' => 'validToDB',
-		'name' => 'validTo'
-	));
-	//action set to editNews
-	echo $this->Form->hidden(null,array(
-		'name' => 'action',
-		'value' => 'editNews'
-	));
-	//newsEntryId
-	echo $this->Form->hidden(null,array(
-		'name' => 'id',
-		'value' => $newsentry['NewsEntry']['id']
-	));
 	
-	//create submit button
-	echo $this->Form->button("Save Changes");
+	echo $this->Form->end("Save changes");
 	?>
 </div>
