@@ -53,11 +53,31 @@ class ViewController extends AppController {
 	}
 	
 	function selectDate() {
-//		if ($this->request->is('post')) {
-//        	$date = $this->request->data;
-//        	$suffix = substr (strrchr ($date['refererurl'], $this->referer()), 1);
-//        	$this->referer($date['refererurl'] . $date['datepicker'] . $suffix);
-//		}
+		if ($this->request->is('post')) {
+			$data = $this->request->data;
+			if(array_key_exists('datepicker', $data)) {
+				$date = str_replace('/', '-', $this->request->data['datepicker']);
+				if(!(array_key_exists('refererurl', $data))) $refererurl = $this->referer();
+				else $refererurl = str_replace('#', '', $data['refererurl']);
+        		
+				debug($refererurl);
+				
+				$prefix = str_replace($refererurl, '',$this->referer());
+        		$suffix = str_replace($prefix, '', $this->referer());
+        		
+        		debug($prefix);
+        		debug($suffix);
+
+        		if(!($prefix == '')) {
+        			$this->redirect($prefix . $date . '/' . $suffix);
+        		}
+				else {
+        			$this->redirect($suffix . '/' . $date);
+        		}
+        		
+			}
+
+		}
 	}
 }
 ?>
