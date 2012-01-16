@@ -45,7 +45,7 @@ class ApplicationForMembershipComponent extends Component {
 		
 		//Attributes
 		$data_error = false;
-		 
+		
 		//LOAD model
 		$controller->loadModel("ApplicationForMembership.ApplicationMembership");
 		

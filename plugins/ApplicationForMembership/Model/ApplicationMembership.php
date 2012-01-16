@@ -7,11 +7,19 @@ class ApplicationMembership extends AppModel{
 	 * Validation
 	 */
 	public $validate = array(
-			'name' => array(
-			        'rule' => 'notEmpty',
-			        'message' => 'Please enter your name.'
+			'type' => array(
+					'rule' => 'notEmpty',
+					 'message' => 'Please enter the application type.'
 			),
-			'firstname' => array(
+			'title' => array(
+					'rule' => 'notEmpty',
+					 'message' => 'Please enter your title.'
+			),
+			'last_name' => array(
+			        'rule' => 'notEmpty',
+			        'message' => 'Please enter your lastname.'
+			),
+			'first_name' => array(
 			        'rule' => 'notEmpty',
 			        'message' => 'Please enter your firstname.'
 			),
