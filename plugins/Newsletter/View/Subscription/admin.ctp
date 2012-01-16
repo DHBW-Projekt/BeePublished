@@ -8,7 +8,7 @@ Welcome to the Newsletter administration...
 
 <?php
 
-// 	echo $this->Html->css('/css/jquery-ui/jquery-ui-1.8.16.custom');
+// 	echo $this->Html->css('/css/jquery-u$this->Html->script('ji/jquery-ui-1.8.16.custom');
 // 	echo $this->Html->css('/css/design');
 // 	echo $this->Html->css('/css/template');
 // 	echo $this->Html->script('/newsletter/js/newsletter', true);

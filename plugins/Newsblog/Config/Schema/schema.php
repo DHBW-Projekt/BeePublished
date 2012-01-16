@@ -1,5 +1,5 @@
 <?php 
-/* Newsblog schema generated on: 2012-01-12 20:50:32 : 1326397832*/
+/* Newsblog schema generated on: 2012-01-13 08:19:33 : 1326439173*/
 class NewsblogSchema extends CakeSchema {
 	function before($event = array()) {
 		return true;
@@ -7,7 +7,7 @@ class NewsblogSchema extends CakeSchema {
 
 	function after($event = array()) {
 	}
-
+	
 	var $news_entries = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'key' => 'primary', 'collate' => NULL, 'comment' => ''),
 		'author_id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'collate' => NULL, 'comment' => ''),
