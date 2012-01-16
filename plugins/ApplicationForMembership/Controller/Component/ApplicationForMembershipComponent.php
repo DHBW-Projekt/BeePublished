@@ -5,7 +5,6 @@ class ApplicationForMembershipComponent extends Component {
 	public $uses = array('Sanitize');
 	public $components = array('BeeEmail', 'PermissionValidation');
 	
-	
    /**
 	* Method to transfer data from plugin to CMS.
 	*/
