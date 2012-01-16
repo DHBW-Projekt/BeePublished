@@ -6,17 +6,15 @@
 	$this->Html->script('/newsblog/js/showNews', false);
 	$this->Html->css('/newsblog/css/showNews', null, array('inline' => false));
 	
-	$itemsPerPage = null;
 	if($this->Session->check('Newsblog.itemsPerPage')){
 		$itemsPerPage = $this->Session->read('Newsblog.itemsPerPage');
 	} else{
-		$itemsPerPage = 5;
+		$itemsPerPage = 10;
 	}
-	$shorttextLength = null;
 	if($this->Session->check('Newsblog.shorttextLength')){
 		$shorttextLength = $this->Session->read('Newsblog.shorttextLength');
 	} else{
-		$shorttextLength = 250;
+		$shorttextLength = 150;
 	}
 	
 	$allowedActions = $this->PermissionValidation->getPermissions($pluginId);
@@ -24,9 +22,9 @@
 	$editAllowed = $allowedActions['Edit'];
 ?>
 <?php 
-	if(!empty($data['newsblogTitle']['NewsblogTitle']) || $data['newsblogTitle']['NewsblogTitle'] != null || $data['newsblogTitle']['NewsblogTitle']['title'] != ''){
+	if($data['newsblogTitle'] != null || $data['newsblogTitle'] != ''){
 		echo '<div class="newsblogtitle">';
-			echo $data['newsblogTitle']['NewsblogTitle']['title'];
+			echo $data['newsblogTitle'];
 			echo '<hr><hr>';
 		echo '</div>';
 	}
