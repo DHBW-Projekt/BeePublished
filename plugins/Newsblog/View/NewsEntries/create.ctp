@@ -1,6 +1,6 @@
 <?php 
-$this->Html->script('/ckeditor/ckeditor', array('inline' => false));
-$this->Html->script('/ckeditor/adapters/jquery', array('inline' => false));
+$this->Html->script('ckeditor/ckeditor', array('inline' => false));
+$this->Html->script('ckeditor/adapters/jquery', array('inline' => false));
 $this->Html->script('/newsblog/js/admin_write', false);
 $this->Html->css('/newsblog/css/admin', null, array('inline' => false));
 

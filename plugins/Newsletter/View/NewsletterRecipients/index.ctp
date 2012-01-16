@@ -1,4 +1,4 @@
-<?php $this->Html->script('jquery.quicksearch', false); ?>
+<?php $this->Html->script('jquery/jquery.quicksearch', false); ?>
 <?php $this->Html->script('/newsletter/js/newsletter', false); ?>
 <?php
 echo $this->element('admin_menu');
