@@ -4,8 +4,8 @@ echo $this->element('admin_menu');
 
 if (isset($newsletter)){
 	
-	$this->Html->script('/ckeditor/ckeditor', false);;
-	$this->Html->script('/ckeditor/adapters/jquery',false);
+	$this->Html->script('ckeditor/ckeditor', false);;
+	$this->Html->script('ckeditor/adapters/jquery',false);
 	$this->Html->script('/newsletter/js/admin',false);
 	
 	echo $this->Form->create('preview', array(
