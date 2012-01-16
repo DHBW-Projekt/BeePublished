@@ -11,14 +11,15 @@ class FetchFoodMenuEntriesComponent extends Component
         	$menus = array();
         	foreach ($allMenus as $menu) {
         		$series_id = $menu['FoodMenuMenu']['food_menu_series_id'];
-        		$weekdays = $this->getWeekdays($series_id); //
+        		$weekdays = $this->getWeekdays($series_id); //get array with days when menu is availible
         		$weekday = date('N', strtotime($selectedDate)); //weekday for selected date (1=mon, 7=sun)
         		if ($weekdays[$weekday]=='1') {
-        			echo 'Hallo';
         			$menus[] = $menu;
         		}
         	}
-    	} else { $menus = $controller->FoodMenuMenu->find('all', array('conditions' => array('deleted' => null))); }
+    	} else {
+    		$date = date("Y-m-d"); 
+    		$menus = $controller->FoodMenuMenu->find('all', array('conditions' => array('valid_from <=' => $date, 'valid_until >=' => $date, 'deleted' => null))); }
     	foreach($menus as $menu) {
         	$menuItems[] = $menu['FoodMenuMenu']; 
         }

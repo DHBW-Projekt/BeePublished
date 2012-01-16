@@ -52,7 +52,7 @@
 			echo '<div id="foodMenuEntry">';
 			if(array_key_exists('SelectedCategory', $data['show'])) {
 				?>
-				<table id="userMenuEntries">
+				<table id="userMenuEntries" class="viewEntries">
 				<thead>
 				<tr>
 					<th><?php echo $data['show']['SelectedCategory']['name']; ?></th>
