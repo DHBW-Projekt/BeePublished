@@ -36,14 +36,20 @@ class User extends AppModel
     			'rule' => array('minLength', '8')
             )
         ),
+        'password_confirm' => array(
+		    'match' => array(
+    			'rule' => array('confirmPassword'),
+    			'message' => 'Passwords do not match'
+		    )
+        ),
         'email' => array(
             'required' => array(
                 'rule' => array('email', true),
-                'message' => 'An email is required.'
+                'message' => 'Please supply a valid & active email address.'
             ),
             'notUnique' => array(
     			'rule' => 'isUnique',
-    			'message' => 'This email has already been taken. If you forgor your password, please reset it.'
+    			'message' => 'This email has already been taken. If you forgot your password, please reset it.'
             )
         )
     );
@@ -138,5 +144,13 @@ class User extends AppModel
     function bindNode($user)
     {
         return array('model' => 'Role', 'foreign_key' => $user['User']['role_id']);
+    }
+    
+    public function confirmPassword($check, $password) {
+    	var_dump($check);
+    	var_dump($this->data);
+    	if (Security::hash($check['password_confirm'], null, true) == Security::hash($this->data['User']['password'], null, true)) {
+    		return true;
+    	}
     }
 }
