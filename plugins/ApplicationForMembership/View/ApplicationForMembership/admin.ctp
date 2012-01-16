@@ -1,0 +1,1 @@
+<p><?php echo __('There are no configurations available'); ?></p>
