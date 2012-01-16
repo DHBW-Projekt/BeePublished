@@ -22,7 +22,7 @@ if (isset($this->data['Ort']) && isset($data['GoogleMapsLocation'])) {
 <div id="directions">
     <?php
     echo $this->Form->create('Ort');
-    echo $this->Form->input('Adresse');
+    echo $this->Form->input('Adresse', array("style" => "width:100%"));
     echo $this->Form->end('Route Berechnen');
     ?>
 

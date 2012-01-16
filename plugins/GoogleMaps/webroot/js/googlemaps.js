@@ -55,3 +55,12 @@ function printRoute(panel, start, destination) {
     
     lock = true;
 }
+
+$(document).ready(function(){
+	$(".Location_row").mouseenter(function () {
+        $(".set_location_link", this).css("display", "inline");
+    });
+	$(".Location_row").mouseleave(function () {
+	    $(".set_location_link", this).css("display", "none");
+	});
+});

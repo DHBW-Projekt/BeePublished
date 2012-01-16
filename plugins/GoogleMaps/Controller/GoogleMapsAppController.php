@@ -44,5 +44,26 @@ class GoogleMapsAppController extends AppController {
 	
 		$this->set('contentID', $contentID);
 	}
+	
+	function edit($contentID, $locationID) {
+		$this->GoogleMapsLocation->id = $locationID;
+		
+		if (!empty($this->data)) {
+			if (isset($this->params['data']['save'])) {
+				$this->GoogleMapsLocation->save($this->data);
+			}
+			
+			$this->redirect(array('action' => 'admin', $contentID));
+		} else {
+			$this->data = $this->GoogleMapsLocation->read();
+			$this->set('contentID', $contentID);
+			$this->set('locationID', $locationID);
+		}
+	}
+	
+	function beforeFilter() {
+		$this->theme = $this->Config->getValue('active_template');
+		$this->set('design',$this->Config->getValue('active_design'));
+	}
 }
 
