@@ -1,9 +1,23 @@
 @CHARSET "ISO-8859-1";
 
-div.guestbook_write td.guestbook_label{
-	font-weight: bold;
+div.guestbook_post {
+	border-style: solid;
+	border-width: 1px;
 }
 
 div.guestbook_post_title {
 	font-weight: bold;
+	font-size: 125%;
+}
+
+div.guestbook_post_author {
+	font-size: 75%;
+}
+
+div.guestbook_post_text{
+	
+}
+	
+div.guestbook_navigation {
+	
 }

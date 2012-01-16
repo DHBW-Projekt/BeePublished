@@ -1,45 +1,32 @@
 @CHARSET "ISO-8859-1";
 
+div #guestbook_link{
+	padding-top: 1em;
+	padding-left: 1em;
+	margin-left: 1em;
+}
+
 div.guestbook_write {
-	padding: 2em;
+	padding: 1em;
+	margin: 1em;
 }
-
-/* from here - to be changed by UX Team */ 
-div.guestbook_write label{
-	width: 3em;
-	margin-right: 1em;
-}
-
-div.guestbook_write td.guestbook_label{
-	text-align: right;
-}
-
-div.guestbook_write .submit input{
-	margin-top: 1em;
-	margin-left: 5em;
-}
-/* to here - to be changed by UX Team */
 
 div #guestbook_display{
 	padding: 1em;
 }
 
 div.guestbook_post {
-	border-style: solid;
-	border-width: 1px;
 	padding: 0.5em;
 	margin: 0.5em;
 }
 
 div.guestbook_post_title {
 	float: left;
-	font-size: 125%;
 }
 
 div.guestbook_post_author {
 	float: right;
 	text-align: right;
-	font-size: 75%;
 }
 
 div.guestbook_post_text{
@@ -62,6 +49,9 @@ div #guestbook_release table{
 
 div #guestbook_release td.check{
 	width: 2em;
+}
+div #guestbook_release td.check .input input[type="checkbox"] {
+	margin-left: 5px;
 }
 
 div #guestbook_release td.author{

@@ -5,7 +5,7 @@ class GuestbookComponent extends Component {
 	public $name = 'GuestbookComponent';
 	public $components = array('Paginator');
 
-	public function getData($controller, $params, $url_exts){
+	public function getData($controller, $params, $url_exts, $id){
 		
 		$data = array();
 		if ($url_exts != NULL)
