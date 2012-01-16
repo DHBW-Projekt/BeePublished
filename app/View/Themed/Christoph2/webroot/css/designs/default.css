@@ -31,9 +31,9 @@ input, textarea {
 
 input[type=button],
 input[type=submit] {
-    -webkit-box-shadow: inset 0px 0px 8px #095B85;
-    -moz-box-shadow: inset 0px 0px 8px #095B85;
-    box-shadow: inset 0px 0px 8px #095B85;
+    -webkit-box-shadow: inset 0px 0px 8px #999999;
+    -moz-box-shadow: inset 0px 0px 8px #999999;
+    box-shadow: inset 0px 0px 8px #999999;
     border: 1px solid #000000;
     color: #ffffff;
 }

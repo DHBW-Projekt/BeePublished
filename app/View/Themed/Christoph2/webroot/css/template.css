@@ -85,7 +85,7 @@ form div {
     top: 0px;
     left: 0px;
     text-align: right;
-    z-index: 2000;
+    z-index: 998;
 }
 
 #topnav a.signin, #topnav a.signout {

@@ -7,7 +7,7 @@ body.sidebar-open {
     width: 200px;
     top: 0;
     left: -200px;
-    z-index: 10000;
+    z-index: 999;
     border-right: 1px solid #999999;
 }
 
