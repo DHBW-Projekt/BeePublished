@@ -1,6 +1,6 @@
 <?php
 	$this->Html->css('/newsletter/css/newsletter', NULL, array('inline' => true));
-	$this->Html->script('/ckeditor/ckeditor', false);
+	$this->Html->script('ckeditor/ckeditor', false);
 	echo $this->Html->scriptBlock('function showDiv(idOn,idOff){
 		if(document.getElementById(idOn).style.display=="none") {
 			document.getElementById(idOff).style.display="none";

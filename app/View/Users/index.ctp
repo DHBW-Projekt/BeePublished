@@ -1,4 +1,4 @@
-<?php $this->Html->script('jquery.quicksearch', false); ?>
+<?php $this->Html->script('jquery/jquery.quicksearch', false); ?>
 <?php $this->Html->script('admin/users', false); ?>
 <?php echo $this->element('config-menu'); ?>
 <div id="users_overview">
