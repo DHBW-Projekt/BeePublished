@@ -6,4 +6,5 @@ class GalleryComponent extends Component
         $data = array();
         return $data;
     }
+
 }

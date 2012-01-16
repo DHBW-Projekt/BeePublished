@@ -19,6 +19,9 @@ $(document).ready(function () {
         width:'90%',
         height:'90%'
     });
+    $('a.user_delete').click(function () {
+        return confirm('Are you sure?');
+    });
 });
 
 function updateUserRole(userId, roleId) {

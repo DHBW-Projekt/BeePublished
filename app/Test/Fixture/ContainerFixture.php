@@ -19,7 +19,7 @@ class ContainerFixture extends CakeTestFixture {
 		'column' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 1, 'collate' => NULL, 'comment' => ''),
 		'order' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'collate' => NULL, 'comment' => ''),
 		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1), 'layout_id' => array('column' => 'layout_type_id', 'unique' => 0), 'parent_id' => array('column' => 'parent_id', 'unique' => 0)),
-		'tableParameters' => array('charset' => 'latin1', 'collate' => 'latin1_swedish_ci', 'engine' => 'InnoDB')
+		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 	);
 
 /**

@@ -41,7 +41,7 @@ class PagesController extends AppController
         $page = $this->findPage($url);
 
         if (!$page) {
-            echo "NO PAGE IN DATABASE!!!";
+            //echo "NO PAGE IN DATABASE!!!";
             $this->set('elements', array());
             $this->myUrl = null;
         } else {
@@ -128,7 +128,7 @@ class PagesController extends AppController
                     } else {
                         $url = null;
                     }
-                    $contentData['viewData'] = $this->Components->load($contentData['plugin'] . '.' . $contentData['view'])->getData($this, $params, $url, $childContent['id']);
+                    $contentData['viewData'] = $this->Components->load($contentData['plugin'] . '.' . $contentData['view'])->getData($this, $params, $url, $childContent['id'],$this->myUrl);
                     $contentData['id'] = $childContent['id'];
                     $contentData['pageUrl'] = $this->myUrl;
                 }
