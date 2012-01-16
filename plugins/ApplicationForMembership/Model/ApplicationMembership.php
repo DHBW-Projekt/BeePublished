@@ -1,6 +1,8 @@
 <?php
 App::uses('AppModel', 'Model');
-
+/**
+ * Model ApplicationMembership.
+ */
 class ApplicationMembership extends AppModel{
 	
 	/**
