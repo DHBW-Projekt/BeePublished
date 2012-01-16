@@ -7,11 +7,11 @@
  */
 class PermissionFixture extends CakeTestFixture {
 
-	/**
-	 * Fields
-	 *
-	 * @var array
-	 */
+/**
+ * Fields
+ *
+ * @var array
+ */
 	public $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'key' => 'primary', 'collate' => NULL, 'comment' => ''),
 		'plugin_id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'collate' => NULL, 'comment' => ''),
@@ -21,17 +21,17 @@ class PermissionFixture extends CakeTestFixture {
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 	);
 
-	/**
-	 * Records
-	 *
-	 * @var array
-	 */
+/**
+ * Records
+ *
+ * @var array
+ */
 	public $records = array(
-	array(
+		array(
 			'id' => 1,
 			'plugin_id' => 1,
 			'role_id' => 1,
 			'action' => 'Lorem ipsum dolor sit amet'
-			),
-			);
+		),
+	);
 }

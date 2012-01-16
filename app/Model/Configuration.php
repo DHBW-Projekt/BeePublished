@@ -3,7 +3,7 @@
 class Configuration extends AppModel
 {
 
-	public $name = 'Configuration';
+    public $name = 'Configuration';
 
 
 } //class

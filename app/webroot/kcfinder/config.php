@@ -1,16 +1,16 @@
 <?php
 
 /** This file is part of KCFinder project
- *
- *      @desc Base configuration file
- *   @package KCFinder
- *   @version 2.51
- *    @author Pavel Tzonkov <pavelc@users.sourceforge.net>
- * @copyright 2010, 2011 KCFinder Project
- *   @license http://www.opensource.org/licenses/gpl-2.0.php GPLv2
- *   @license http://www.opensource.org/licenses/lgpl-2.1.php LGPLv2
- *      @link http://kcfinder.sunhater.com
- */
+  *
+  *      @desc Base configuration file
+  *   @package KCFinder
+  *   @version 2.51
+  *    @author Pavel Tzonkov <pavelc@users.sourceforge.net>
+  * @copyright 2010, 2011 KCFinder Project
+  *   @license http://www.opensource.org/licenses/gpl-2.0.php GPLv2
+  *   @license http://www.opensource.org/licenses/lgpl-2.1.php LGPLv2
+  *      @link http://kcfinder.sunhater.com
+  */
 
 // IMPORTANT!!! Do not remove uncommented settings in this file even if
 // you are using session configuration.
@@ -39,35 +39,35 @@ $_CONFIG = array(
             'copy' => true,
             'move' => true,
             'rename' => true
-),
+        ),
 
         'dirs' => array(
             'create' => true,
             'delete' => true,
             'rename' => true
-)
-),
+        )
+    ),
 
     'deniedExts' => "exe com msi bat php phps phtml php3 php4 cgi pl",
 
     'types' => array(
 
-// CKEditor & FCKEditor types
+        // CKEditor & FCKEditor types
         'files'   =>  "",
         'flash'   =>  "swf",
         'images'  =>  "*img"
 
-        ),
+    ),
 
     'filenameChangeChars' => array(/*
         ' ' => "_",
         ':' => "."
-        */),
+    */),
 
     'dirnameChangeChars' => array(/*
         ' ' => "_",
         ':' => "."
-        */),
+    */),
 
     'mime_magic' => "",
 
@@ -85,16 +85,16 @@ $_CONFIG = array(
     'cookiePath' => "",
     'cookiePrefix' => 'KCFINDER_',
 
-        // THE FOLLOWING SETTINGS CANNOT BE OVERRIDED WITH SESSION CONFIGURATION
+    // THE FOLLOWING SETTINGS CANNOT BE OVERRIDED WITH SESSION CONFIGURATION
     '_check4htaccess' => true,
-        //'_tinyMCEPath' => "/tiny_mce",
+    //'_tinyMCEPath' => "/tiny_mce",
 
     '_sessionVar' => &$_SESSION['KCFINDER'],
-        //'_sessionLifetime' => 30,
-        //'_sessionDir' => "/full/directory/path",
+    //'_sessionLifetime' => 30,
+    //'_sessionDir' => "/full/directory/path",
 
-        //'_sessionDomain' => ".mysite.com",
-        //'_sessionPath' => "/my/path",
-        );
+    //'_sessionDomain' => ".mysite.com",
+    //'_sessionPath' => "/my/path",
+);
 
-        ?>
+?>

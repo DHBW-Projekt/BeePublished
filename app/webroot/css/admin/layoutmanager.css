@@ -1,24 +1,24 @@
 .handler {
-	width: 100%;
-	height: 20px;
-	cursor: pointer;
-	display: block;
-	position: relative;
-	background-color: #3292DD;
-	color: #ffffff;
-	font-weight: bold;
+    width: 100%;
+    height: 20px;
+    cursor: pointer;
+    display: block;
+    position: relative;
+    background-color: #3292DD;
+    color: #ffffff;
+    font-weight: bold;
 }
 
-.subcl,.subcr,.subc {
-	border: 1px dotted black;
-	padding: 10px;
+.subcl, .subcr, .subc {
+    border:1px dotted black;
+    padding: 10px;
 }
 
-.subcolumns,.plugin_content {
-	padding-top: 10px;
+.subcolumns, .plugin_content {
+    padding-top: 10px;
 }
 
-.layout,.plugin {
+.layout,.plugin{
 	margin: 3px;
 	width: 100%;
 	height: 64px;
@@ -27,12 +27,12 @@
 	cursor: pointer;
 	background-color: #999;
 	line-height: 7;
-	list-style: none;
+    list-style: none;
 }
 
 .placeholder {
-	height: 100px;
-	width: 100%;
-	border: 1px dotted black;
-	background-color: #444444;
+    height: 100px;
+    width: 100%;
+    border:1px dotted black;
+    background-color: #444444;
 }

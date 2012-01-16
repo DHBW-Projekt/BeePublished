@@ -7,11 +7,11 @@
  */
 class UserFixture extends CakeTestFixture {
 
-	/**
-	 * Fields
-	 *
-	 * @var array
-	 */
+/**
+ * Fields
+ *
+ * @var array
+ */
 	public $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'key' => 'primary', 'collate' => NULL, 'comment' => ''),
 		'role_id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'key' => 'index', 'collate' => NULL, 'comment' => ''),
@@ -26,13 +26,13 @@ class UserFixture extends CakeTestFixture {
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 	);
 
-	/**
-	 * Records
-	 *
-	 * @var array
-	 */
+/**
+ * Records
+ *
+ * @var array
+ */
 	public $records = array(
-	array(
+		array(
 			'id' => 1,
 			'role_id' => 1,
 			'username' => 'Lorem ipsum dolor sit amet',
@@ -42,6 +42,6 @@ class UserFixture extends CakeTestFixture {
 			'registered' => '2011-12-02 19:42:27',
 			'confirmation_token' => 'Lorem ipsum dolor sit amet',
 			'status' => 1
-	),
+		),
 	);
 }

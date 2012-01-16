@@ -15,7 +15,10 @@
  * @revision        $Revision: 501 $
  * @lastmodified    $Date: 2011-06-18 17:27:44 +0200 (Sa, 18 Jun 2011) $
  */
-@media all { /**
+
+@media all
+{
+ /**
   * (en) Workaround disappearing list elements on hover
   * (de) Workaround verhindert das Verschwinden der Listenelemente beim Hovern
   *
@@ -24,17 +27,17 @@
   * @css-for    IE 5.x/Win, IE6, IE7
   * @valid      yes
   */
-	.hlist * {
-		direction: ltr !important;
-	}
-	.hlist a,.hlist strong {
-		direction: rtl !important;
-	}
-	/*------------------------------------------------------------------------------------------------------*/
-	.hlist ul {
-		padding: 0 50px 0 0;
-	}
-	.hlist li {
-		float: right;
-	}
+
+  .hlist * { direction:ltr !important; }
+  .hlist a, .hlist strong { direction:rtl !important; }
+
+  /*------------------------------------------------------------------------------------------------------*/
+
+  .hlist ul {
+    padding: 0 50px 0 0;
+  }
+
+  .hlist li {
+    float: right;
+  }
 }

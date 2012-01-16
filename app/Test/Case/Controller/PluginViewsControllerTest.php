@@ -6,21 +6,21 @@ App::uses('PluginViewsController', 'Controller');
  * TestPluginViewsController *
  */
 class TestPluginViewsController extends PluginViewsController {
-	/**
-	 * Auto render
-	 *
-	 * @var boolean
-	 */
+/**
+ * Auto render
+ *
+ * @var boolean
+ */
 	public $autoRender = false;
 
-	/**
-	 * Redirect action
-	 *
-	 * @param mixed $url
-	 * @param mixed $status
-	 * @param boolean $exit
-	 * @return void
-	 */
+/**
+ * Redirect action
+ *
+ * @param mixed $url
+ * @param mixed $status
+ * @param boolean $exit
+ * @return void
+ */
 	public function redirect($url, $status = null, $exit = true) {
 		$this->redirectUrl = $url;
 	}
@@ -31,18 +31,18 @@ class TestPluginViewsController extends PluginViewsController {
  *
  */
 class PluginViewsControllerTestCase extends CakeTestCase {
-	/**
-	 * Fixtures
-	 *
-	 * @var array
-	 */
+/**
+ * Fixtures
+ *
+ * @var array
+ */
 	public $fixtures = array('app.plugin_view', 'app.plugin', 'app.permission', 'app.role', 'app.menu_entry', 'app.page', 'app.user', 'app.log_entry', 'app.container', 'app.layout_type', 'app.content', 'app.content_value');
 
-	/**
-	 * setUp method
-	 *
-	 * @return void
-	 */
+/**
+ * setUp method
+ *
+ * @return void
+ */
 	public function setUp() {
 		parent::setUp();
 
@@ -50,11 +50,11 @@ class PluginViewsControllerTestCase extends CakeTestCase {
 		$this->PluginViews->constructClasses();
 	}
 
-	/**
-	 * tearDown method
-	 *
-	 * @return void
-	 */
+/**
+ * tearDown method
+ *
+ * @return void
+ */
 	public function tearDown() {
 		unset($this->PluginViews);
 

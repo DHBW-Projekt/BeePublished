@@ -1,16 +1,16 @@
 <?php
 
 /** Norwegian localization file for KCFinder
- * author: Robin Helgesen (robin@konsept-it.no)
- * country: Norway
- */
+  * author: Robin Helgesen (robin@konsept-it.no)
+  * country: Norway
+  */
 
 $lang = array(
 
     '_locale' => "nb_NO.UTF-8",  // UNIX localization code
     '_charset' => "utf-8",       // Browser charset
 
-// Date time formats. See http://www.php.net/manual/en/function.strftime.php
+    // Date time formats. See http://www.php.net/manual/en/function.strftime.php
     '_dateTimeFull' => "%A, %e %B, %Y %H:%M",
     '_dateTimeMid' => "%a %e %b %Y %H:%M",
     '_dateTimeSmall' => "%d.%m.%Y %H:%M",
@@ -189,7 +189,7 @@ $lang = array(
     "Download" => "Last ned",
     "Clipboard" => "Utklippstavle",
 
-// VERSION 2 NEW LABELS
+    // VERSION 2 NEW LABELS
 
     "Cannot rename the folder." =>
     "Kan ikke endre navnet på mappen.",

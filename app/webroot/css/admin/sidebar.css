@@ -1,148 +1,148 @@
 body.sidebar-open {
-	margin-left: 200px;
+    margin-left: 200px;
 }
 
 #sidebar {
-	height: 100%;
-	width: 200px;
-	top: 0;
-	left: -200px;
-	z-index: 999;
-	border-right: 1px solid #999999;
+    height: 100%;
+    width: 200px;
+    top: 0;
+    left: -200px;
+    z-index: 999;
+    border-right: 1px solid #999999;
 }
 
 #sidebar.opened {
-	left: 0px;
+    left: 0px;
 }
 
 #sidebar-opener {
-	left: 0px;
-	top: 50px;
-	width: 32px;
-	height: 32px;
-	z-index: 100;
-	border-top: 1px solid #999999;
-	border-bottom: 1px solid #999999;
-	border-right: 1px solid #999999;
+    left: 0px;
+    top: 50px;
+    width: 32px;
+    height: 32px;
+    z-index: 100;
+    border-top: 1px solid #999999;
+    border-bottom: 1px solid #999999;
+    border-right: 1px solid #999999;
 }
 
 #sidebar-opener.opened {
-	left: 200px;
+    left: 200px;
 }
 
-#sidebar,#sidebar-opener {
-	position: fixed;
-	background-color: #dddddd;
-	box-shadow: 0px 0px 20px #dddddd;
-	-webkit-box-shadow: 0px 0px 20px #dddddd;
-	-moz-box-shadow: 0px 0px 20px #dddddd;
+#sidebar, #sidebar-opener {
+    position: fixed;
+    background-color: #dddddd;
+    box-shadow: 0px 0px 20px #dddddd;
+    -webkit-box-shadow: 0px 0px 20px #dddddd;
+    -moz-box-shadow: 0px 0px 20px #dddddd;
 }
 
 #sidebar-top {
-	margin: 5px;
+    margin: 5px;
 }
 
 #sidebar-tabs {
-	position: absolute;
-	margin: 5px;
-	top: 130px;
-	width: 190px;
+    position: absolute;
+    margin: 5px;
+    top: 130px;
+    width: 190px;
 }
 
 #sidebar-content {
-	position: absolute;
-	margin: 5px;
-	top: 175px;
-	bottom: 15px;
-	width: 190px;
-	background-color: #888888;
+    position: absolute;
+    margin: 5px;
+    top: 175px;
+    bottom: 15px;
+    width: 190px;
+    background-color: #888888;
 }
 
 #logo {
-	width: 100%;
-	text-align: center;
+    width: 100%;
+    text-align: center;
 }
 
 #sidebar h1 {
-	font-size: 20px;
+    font-size: 20px;
 }
 
 #sidebar hr {
-	margin-top: 15px;
-	margin-bottom: 15px;
-	color: #cccccc;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: #cccccc;
 }
 
 .button-bar {
-	text-align: center;
-	width: 100%;
+    text-align: center;
+    width: 100%;
 }
 
 .small-button {
-	display: inline;
-	border: 1px solid #095B85;
-	background-color: #0F73A6;
-	padding: 3px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	-webkit-box-shadow: inset 0px 0px 8px #095B85;
-	-moz-box-shadow: inset 0px 0px 8px #095B85;
-	box-shadow: inset 0px 0px 8px #095B85;
+    display: inline;
+    border: 1px solid #095B85;
+    background-color: #0F73A6;
+    padding: 3px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0px 0px 8px #095B85;
+    -moz-box-shadow: inset 0px 0px 8px #095B85;
+    box-shadow: inset 0px 0px 8px #095B85;
 }
 
 .small-button:hover {
-	background-color: #329CD1;
+    background-color: #329CD1;
 }
 
 #sidebar-tabs ul {
-	list-style: none;
-	padding: 0;
-	margin: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 #sidebar-tabs li {
-	display: block;
-	float: left;
-	text-align: center;
-	height: 45px;
-	line-height: 45px;
-	vertical-align: middle;
-	font-size: 15px;
-	font-weight: bold;
-	margin-right: 2px;
-	margin-left: 0px;
-	background-color: #cccccc;
+    display: block;
+    float: left;
+    text-align: center;
+    height: 45px;
+    line-height: 45px;
+    vertical-align: middle;
+    font-size: 15px;
+    font-weight: bold;
+    margin-right: 2px;
+    margin-left: 0px;
+    background-color: #cccccc;
 }
 
 #sidebar-tabs li a {
-	display: block;
-	color: #666666;
-	padding: 0px 10px;
-	text-decoration: none;
+    display: block;
+    color: #666666;
+    padding: 0px 10px;
+    text-decoration: none;
 }
 
 #sidebar-tabs li a.selected-tab {
-	color: #ffffff;
+    color: #ffffff;
 }
 
 .tab-content {
-	height: 100%;
-	background-color: #ffffff;
-	border: 1px solid #3292DD;
-	overflow: auto;
-	padding: 5px;
+    height: 100%;
+    background-color: #ffffff;
+    border: 1px solid #3292DD;
+    overflow: auto;
+    padding: 5px;
 }
 
 .selected-tab {
-	background-color: #3292DD;
+    background-color: #3292DD;
 }
 
 .sidebar-object {
-	width: 100%;
-	margin-bottom: 5px;
+    width: 100%;
+    margin-bottom: 5px;
 }
 
 .layout5050 {
-	background-image: url(../../img/layouts/5050.png);
+    background-image: url(../../img/layouts/5050.png);
 }

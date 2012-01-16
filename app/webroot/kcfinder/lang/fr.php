@@ -1,15 +1,15 @@
 <?php
 
 /** French localization file for KCFinder
- * author: Damien Barrère
- */
+  * author: Damien Barrère
+  */
 
 $lang = array(
 
     '_locale' => "fr_FR.UTF-8",  // UNIX localization code
     '_charset' => "utf-8",       // Browser charset
 
-// Date time formats. See http://www.php.net/manual/en/function.strftime.php
+    // Date time formats. See http://www.php.net/manual/en/function.strftime.php
     '_dateTimeFull' => "%A, %e %B, %Y %H:%M",
     '_dateTimeMid' => "%a %e %b %Y %H:%M",
     '_dateTimeSmall' => "%d.%m.%Y %H:%M",
@@ -188,7 +188,7 @@ $lang = array(
     "Download" => "Télécharger",
     'Clipboard' => "Presse-papier",
 
-// VERSION 2 NEW LABELS
+    // VERSION 2 NEW LABELS
 
     "Cannot rename the folder." =>
     "Impossible de renommer le dossier.",
@@ -237,7 +237,7 @@ $lang = array(
     "Select Thumbnails" => "Sélectionner les miniatures",
     "Download files" => "Télécharger les fichiers",
 
-// SINCE 2.4
+    // SINCE 2.4
 
     "Checking for new version..." => "Vérifier l'existance d'une nouvelle version...",
     "Unable to connect!" => "Connexion impossible!",

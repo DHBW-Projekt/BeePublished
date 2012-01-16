@@ -65,9 +65,9 @@ Cache::config('default', array('engine' => 'File'));
  */
 CakePlugin::loadAll();
 foreach (CakePlugin::loaded() as $plugin) {
-	$path = CakePlugin::path($plugin) . 'Config' . DS . 'routes.php';
-	if (file_exists($path)) {
-		CakePlugin::unload($plugin);
-		CakePlugin::load($plugin, array('routes' => true));
-	}
+    $path = CakePlugin::path($plugin) . 'Config' . DS . 'routes.php';
+    if (file_exists($path)) {
+        CakePlugin::unload($plugin);
+        CakePlugin::load($plugin, array('routes' => true));
+    }
 }

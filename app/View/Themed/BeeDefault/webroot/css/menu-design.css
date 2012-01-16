@@ -1,70 +1,70 @@
 ol.nav {
-	font-size: 13px;
+    font-size: 13px;
 }
 
 ol.nav li ol.subnav {
-	background: #363A41;
-	border: 1px solid #2A2F37;
-	color: #ffffff;
+    background: #363A41;
+    border: 1px solid #2A2F37;
+    color: #ffffff;
 }
 
 ol.nav li {
-	font-size: 14px;
-	border-left: 1px solid #FFFFFF;
-	border-right: 1px solid #000000;
+    font-size: 14px;
+    border-left: 1px solid #FFFFFF;
+    border-right: 1px solid #000000;
 }
 
 ol.nav li:first-of-type {
-	border-left: none;
+    border-left: none;
 }
 
 ol.nav li:last-of-type {
-	border-right: none;
+    border-right: none;
 }
 
 ol.nav li a {
-	color: #2A2F37;
-	text-decoration: none;
-	font-weight: bold;
-	text-shadow: 1px 1px 2px #FFFFFF;
+    color: #2A2F37;
+    text-decoration: none;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #FFFFFF;
 }
 
 ol.subnav li a {
-	color: #ffffff;
-	text-shadow: none;
+    color: #ffffff;
+    text-shadow: none;
 }
 
 ol.nav li span {
-	background: url(../img/arrow_down.png) no-repeat center center;
+    background: url(../img/arrow_down.png) no-repeat center center;
 }
 
 ol.subnav li span {
-	background: url(../img/arrow_right.png) no-repeat center center;
+    background: url(../img/arrow_right.png) no-repeat center center;
 }
 
 .plugin_administration {
-	background-image: url(../img/nav.gif);
-	background-position: bottom;
-	border: 1px solid #333333;
+    background-image: url(../img/nav.gif);
+    background-position: bottom;
+    border: 1px solid #333333;
 }
 
 .role {
-	border: 1px solid #333333;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
+    border: 1px solid #333333;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 
 .users_role {
-	background-color: #333333;
-	color: #ffffff;
-	font-weight: bold;
+    background-color: #333333;
+    color: #ffffff;
+    font-weight: bold;
 }
 
-.user_detail,.users-placeholder {
-	border: 1px dashed #333333;
-	background-color: #ffffff;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
+.user_detail, .users-placeholder {
+    border: 1px dashed #333333;
+    background-color: #ffffff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }

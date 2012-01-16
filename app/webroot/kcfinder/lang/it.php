@@ -1,15 +1,15 @@
 <?php
 
 /** Italian localization file for KCFinder
- * author: Ivano Raffeca
- */
+  * author: Ivano Raffeca
+  */
 
 $lang = array(
 
     '_locale' => "it_IT.UTF-8",  // UNIX localization code
     '_charset' => "utf-8",       // Browser charset
 
-// Date time formats. See http://www.php.net/manual/en/function.strftime.php
+    // Date time formats. See http://www.php.net/manual/en/function.strftime.php
     '_dateTimeFull' => "%A, %e %B, %Y %H:%M",
     '_dateTimeMid' => "%a %e %b %Y %H:%M",
     '_dateTimeSmall' => "%d.%m.%Y %H:%M",
@@ -188,7 +188,7 @@ $lang = array(
     "Download" => "Scarica",
     "Clipboard" => "Clipboard",
 
-// VERSION 2 NEW LABELS
+    // VERSION 2 NEW LABELS
 
     "Cannot rename the folder." =>
     "Non è possibile rinominare la cartella.",
@@ -237,7 +237,7 @@ $lang = array(
     "Select Thumbnails" => "Seleziona miniature",
     "Download files" => "Scarica files",
 
-// SINCE 2.34
+    // SINCE 2.34
 
     "Checking for new version..." => "Controllo nuova versione...",
     "Unable to connect!" => "Connessione impossibile",

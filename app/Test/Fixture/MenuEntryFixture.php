@@ -7,11 +7,11 @@
  */
 class MenuEntryFixture extends CakeTestFixture {
 
-	/**
-	 * Fields
-	 *
-	 * @var array
-	 */
+/**
+ * Fields
+ *
+ * @var array
+ */
 	public $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'key' => 'primary', 'collate' => NULL, 'comment' => ''),
 		'parent_id' => array('type' => 'integer', 'null' => true, 'default' => NULL, 'key' => 'index', 'collate' => NULL, 'comment' => ''),
@@ -26,13 +26,13 @@ class MenuEntryFixture extends CakeTestFixture {
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 	);
 
-	/**
-	 * Records
-	 *
-	 * @var array
-	 */
+/**
+ * Records
+ *
+ * @var array
+ */
 	public $records = array(
-	array(
+		array(
 			'id' => 1,
 			'parent_id' => 1,
 			'role_id' => 1,
@@ -42,6 +42,6 @@ class MenuEntryFixture extends CakeTestFixture {
 			'validFrom' => '2011-12-30 13:34:26',
 			'validTo' => '2011-12-30 13:34:26',
 			'order' => 1
-	),
+		),
 	);
 }

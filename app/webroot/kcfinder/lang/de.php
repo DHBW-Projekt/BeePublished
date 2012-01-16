@@ -1,15 +1,15 @@
 <?php
 
 /** German localization file for KCFinder
- * author: Tim Wahrendorff <wahrendorff@users.sourceforge.net>
- */
+  * author: Tim Wahrendorff <wahrendorff@users.sourceforge.net>
+  */
 
 $lang = array(
 
     '_locale' => "de_DE.UTF-8",  // UNIX localization code
     '_charset' => "utf-8",       // Browser charset
 
-// Date time formats. See http://www.php.net/manual/en/function.strftime.php
+    // Date time formats. See http://www.php.net/manual/en/function.strftime.php
     '_dateTimeFull' => "%A, %e.%B.%Y %I:%M %p",
     '_dateTimeMid' => "%a %e %b %Y %I:%M %p",
     '_dateTimeSmall' => "%d/%m/%Y %I:%M %p",
@@ -188,7 +188,7 @@ $lang = array(
     "Download" => "Download",
     'Clipboard' => "Zwischenablage",
 
-// VERSION 2 NEW LABELS
+    // VERSION 2 NEW LABELS
 
     "Cannot rename the folder." =>
     "Der Ordner kann nicht umbenannt werden.",

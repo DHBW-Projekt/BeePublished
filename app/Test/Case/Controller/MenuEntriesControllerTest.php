@@ -6,21 +6,21 @@ App::uses('MenuEntriesController', 'Controller');
  * TestMenuEntriesController *
  */
 class TestMenuEntriesController extends MenuEntriesController {
-	/**
-	 * Auto render
-	 *
-	 * @var boolean
-	 */
+/**
+ * Auto render
+ *
+ * @var boolean
+ */
 	public $autoRender = false;
 
-	/**
-	 * Redirect action
-	 *
-	 * @param mixed $url
-	 * @param mixed $status
-	 * @param boolean $exit
-	 * @return void
-	 */
+/**
+ * Redirect action
+ *
+ * @param mixed $url
+ * @param mixed $status
+ * @param boolean $exit
+ * @return void
+ */
 	public function redirect($url, $status = null, $exit = true) {
 		$this->redirectUrl = $url;
 	}
@@ -31,18 +31,18 @@ class TestMenuEntriesController extends MenuEntriesController {
  *
  */
 class MenuEntriesControllerTestCase extends CakeTestCase {
-	/**
-	 * Fixtures
-	 *
-	 * @var array
-	 */
+/**
+ * Fixtures
+ *
+ * @var array
+ */
 	public $fixtures = array('app.menu_entry', 'app.role', 'app.user', 'app.log_entry', 'app.page', 'app.container', 'app.layout_type', 'app.content', 'app.content_value');
 
-	/**
-	 * setUp method
-	 *
-	 * @return void
-	 */
+/**
+ * setUp method
+ *
+ * @return void
+ */
 	public function setUp() {
 		parent::setUp();
 
@@ -50,58 +50,58 @@ class MenuEntriesControllerTestCase extends CakeTestCase {
 		$this->MenuEntries->constructClasses();
 	}
 
-	/**
-	 * tearDown method
-	 *
-	 * @return void
-	 */
+/**
+ * tearDown method
+ *
+ * @return void
+ */
 	public function tearDown() {
 		unset($this->MenuEntries);
 
 		parent::tearDown();
 	}
 
-	/**
-	 * testAdminIndex method
-	 *
-	 * @return void
-	 */
+/**
+ * testAdminIndex method
+ *
+ * @return void
+ */
 	public function testAdminIndex() {
 
 	}
 
-	/**
-	 * testAdminView method
-	 *
-	 * @return void
-	 */
+/**
+ * testAdminView method
+ *
+ * @return void
+ */
 	public function testAdminView() {
 
 	}
 
-	/**
-	 * testAdminAdd method
-	 *
-	 * @return void
-	 */
+/**
+ * testAdminAdd method
+ *
+ * @return void
+ */
 	public function testAdminAdd() {
 
 	}
 
-	/**
-	 * testAdminEdit method
-	 *
-	 * @return void
-	 */
+/**
+ * testAdminEdit method
+ *
+ * @return void
+ */
 	public function testAdminEdit() {
 
 	}
 
-	/**
-	 * testAdminDelete method
-	 *
-	 * @return void
-	 */
+/**
+ * testAdminDelete method
+ *
+ * @return void
+ */
 	public function testAdminDelete() {
 
 	}

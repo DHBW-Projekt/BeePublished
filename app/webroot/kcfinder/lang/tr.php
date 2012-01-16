@@ -1,15 +1,15 @@
 <?php
 
 /** Turkish localization file for KCFinder
- * translation by: Kursad Olmez <kursad.olmez@gmail.com>
- **/
+* translation by: Kursad Olmez <kursad.olmez@gmail.com>
+**/
 
 $lang = array(
 
     '_locale' => "en_US.UTF-8",  // UNIX localization code
     '_charset' => "utf-8",       // Browser charset
 
-// Date time formats. See http://www.php.net/manual/en/function.strftime.php
+    // Date time formats. See http://www.php.net/manual/en/function.strftime.php
     '_dateTimeFull' => "%A, %e.%B.%Y %H:%M",
     '_dateTimeMid' => "%a %e %b %Y %H:%M",
     '_dateTimeSmall' => "%d/%m/%Y %H:%M",
@@ -188,7 +188,7 @@ $lang = array(
     "Download" => "İndir",
     "Clipboard" => "Pano",
 
-// VERSION 2 NEW LABELS
+    // VERSION 2 NEW LABELS
 
     "Cannot rename the folder." =>
     "Klasör adı değiştirilemiyor.",
@@ -237,7 +237,7 @@ $lang = array(
     "Select Thumbnails" => "Önizleme Resimlerini Seç",
     "Download files" => "Dosyaları İndir",
 
-// SINCE 2.4
+    // SINCE 2.4
 
     "Checking for new version..." => "Yeni versiyon kontrol ediliyor...",
     "Unable to connect!" => "Bağlantı yapılamıyor!",
@@ -249,7 +249,7 @@ $lang = array(
     "Yes" => "Evet",
     "No" => "Hayır",
 
-// SINCE 2.41
+    // SINCE 2.41
 
     "You cannot rename the extension of files!" => "Dosya uzantılarını değiştiremezsiniz!",
 );

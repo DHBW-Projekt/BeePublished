@@ -6,21 +6,21 @@ App::uses('CmsConfigurationsController', 'Controller');
  * TestCmsConfigurationsController *
  */
 class TestCmsConfigurationsController extends CmsConfigurationsController {
-	/**
-	 * Auto render
-	 *
-	 * @var boolean
-	 */
+/**
+ * Auto render
+ *
+ * @var boolean
+ */
 	public $autoRender = false;
 
-	/**
-	 * Redirect action
-	 *
-	 * @param mixed $url
-	 * @param mixed $status
-	 * @param boolean $exit
-	 * @return void
-	 */
+/**
+ * Redirect action
+ *
+ * @param mixed $url
+ * @param mixed $status
+ * @param boolean $exit
+ * @return void
+ */
 	public function redirect($url, $status = null, $exit = true) {
 		$this->redirectUrl = $url;
 	}
@@ -31,18 +31,18 @@ class TestCmsConfigurationsController extends CmsConfigurationsController {
  *
  */
 class CmsConfigurationsControllerTestCase extends CakeTestCase {
-	/**
-	 * Fixtures
-	 *
-	 * @var array
-	 */
+/**
+ * Fixtures
+ *
+ * @var array
+ */
 	public $fixtures = array('app.cms_configuration');
 
-	/**
-	 * setUp method
-	 *
-	 * @return void
-	 */
+/**
+ * setUp method
+ *
+ * @return void
+ */
 	public function setUp() {
 		parent::setUp();
 
@@ -50,58 +50,58 @@ class CmsConfigurationsControllerTestCase extends CakeTestCase {
 		$this->CmsConfigurations->constructClasses();
 	}
 
-	/**
-	 * tearDown method
-	 *
-	 * @return void
-	 */
+/**
+ * tearDown method
+ *
+ * @return void
+ */
 	public function tearDown() {
 		unset($this->CmsConfigurations);
 
 		parent::tearDown();
 	}
 
-	/**
-	 * testIndex method
-	 *
-	 * @return void
-	 */
+/**
+ * testIndex method
+ *
+ * @return void
+ */
 	public function testIndex() {
 
 	}
 
-	/**
-	 * testView method
-	 *
-	 * @return void
-	 */
+/**
+ * testView method
+ *
+ * @return void
+ */
 	public function testView() {
 
 	}
 
-	/**
-	 * testAdd method
-	 *
-	 * @return void
-	 */
+/**
+ * testAdd method
+ *
+ * @return void
+ */
 	public function testAdd() {
 
 	}
 
-	/**
-	 * testEdit method
-	 *
-	 * @return void
-	 */
+/**
+ * testEdit method
+ *
+ * @return void
+ */
 	public function testEdit() {
 
 	}
 
-	/**
-	 * testDelete method
-	 *
-	 * @return void
-	 */
+/**
+ * testDelete method
+ *
+ * @return void
+ */
 	public function testDelete() {
 
 	}

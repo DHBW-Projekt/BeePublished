@@ -1,15 +1,15 @@
 <?php
 
 /** Spanish localization file for KCFinder
- * Type some credits if you want
- */
+  * Type some credits if you want
+  */
 
 $lang = array(
 
     '_locale' => "es_ES.UTF-8",  // UNIX localization code
     '_charset' => "utf-8",       // Browser charset
 
-// Date time formats. See http://www.php.net/manual/en/function.strftime.php
+    // Date time formats. See http://www.php.net/manual/en/function.strftime.php
     '_dateTimeFull' => "%A, %e %B, %Y %H:%M",
     '_dateTimeMid' => "%a %e %b %Y %H:%M",
     '_dateTimeSmall' => "%d.%m.%Y %H:%M",

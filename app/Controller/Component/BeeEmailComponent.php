@@ -2,7 +2,7 @@
 App::uses('CakeEmail', 'Network/Email');
 
 class BeeEmailComponent extends Component{
-
+	
 	public function sendHtmlEmail($to = null, $subject = null, $viewVars = null, $viewName = null){
 		//get active config with email layout and email from
 		$emailLayout = null;
@@ -16,7 +16,7 @@ class BeeEmailComponent extends Component{
 				$emailFrom = $emailFrom.'.de';
 			}
 		}
-
+		
 		$email = new CakeEmail();
 		$email->template($viewName, $emailLayout);
 		$email->emailFormat('html');
@@ -27,7 +27,7 @@ class BeeEmailComponent extends Component{
 		$email->transport('Mail');
 		$email->send();
 	}
-
+	
 	public function sendTextEmail($to = null, $subject = null, $text = null){
 		$emailFrom;
 		if($emailFrom == null || $emailFrom == ''){
@@ -36,7 +36,7 @@ class BeeEmailComponent extends Component{
 				$emailFrom = $emailFrom.'.de';
 			}
 		}
-
+		
 		$email = new CakeEmail();
 		$email->emailFormat('text');
 		$email->to($to);

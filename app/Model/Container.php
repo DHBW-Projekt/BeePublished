@@ -13,11 +13,11 @@ class Container extends AppModel {
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-	/**
-	 * belongsTo associations
-	 *
-	 * @var array
-	 */
+/**
+ * belongsTo associations
+ *
+ * @var array
+ */
 	public $belongsTo = array(
 		'ParentContainer' => array(
 			'className' => 'Container',
@@ -25,29 +25,29 @@ class Container extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-			),
+		),
 		'Page' => array(
 			'className' => 'Page',
 			'foreignKey' => 'page_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-			),
+		),
 		'LayoutType' => array(
 			'className' => 'LayoutType',
 			'foreignKey' => 'layout_type_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-			)
-			);
+		)
+	);
 
-			/**
-			 * hasMany associations
-			 *
-			 * @var array
-			 */
-			public $hasMany = array(
+/**
+ * hasMany associations
+ *
+ * @var array
+ */
+	public $hasMany = array(
 		'ChildContainer' => array(
 			'className' => 'Container',
 			'foreignKey' => 'parent_id',
@@ -60,7 +60,7 @@ class Container extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
-			),
+		),
 		'Content' => array(
 			'className' => 'Content',
 			'foreignKey' => 'container_id',
@@ -73,7 +73,7 @@ class Container extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
-			)
-			);
+		)
+	);
 
 }

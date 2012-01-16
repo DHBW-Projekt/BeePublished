@@ -1,19 +1,19 @@
-<?php
+<?php 
 
 class PermissionValidationComponent extends Component {
 	var $components = array('Auth');
-
+	
 	public function getUserRoleId(){
 		//get currently logged in user and his role
 		$userRoleId = (int)$this->Auth->user('role_id');
 		return $userRoleId;
 	}
-
+	
 	public function getPermissions($pluginId = null){
 		$this->Permission = ClassRegistry::init('Permission');
 		//get currently logged in user and his role
 		$userRoleId = (int)$this->Auth->user('role_id');
-
+		
 		$allPermissionsOfPlugin = $this->Permission->find('all', array('conditions' => array('plugin_id' => $pluginId)));
 		$allActions = array();
 		foreach ($allPermissionsOfPlugin as $aPermission){
@@ -21,14 +21,14 @@ class PermissionValidationComponent extends Component {
 			$actionAllowed = $this->internalActionAllowed($userRoleId, $aPermission);
 			$allActions[$action] = $actionAllowed;
 		}
-
+		
 		return $allActions;
 	}
-
+	
 	public function actionAllowed($pluginId = null, $action = null, $throwException = false){
 		$this->Permission = ClassRegistry::init('Permission');
 		$this->Role = ClassRegistry::init('Role');
-
+		
 		//get currently logged in user and his role
 		$user = $this->Auth->user();
 		$userRoleId = (int)$user['role_id'];
@@ -36,13 +36,13 @@ class PermissionValidationComponent extends Component {
 		//get required permission for given plugin and action
 		$permissionQueryOptions = array('conditions' => array('plugin_id' => $pluginId, 'action' => $action));
 		$permissionEntry = $this->Permission->find('first', $permissionQueryOptions);
-
+		
 		$actionAllowed = false;
 		//read currentRoleId -- initial value equals minimum required role id
 		$currentRoleId = (int)$permissionEntry['Permission']['role_id'];
 		//read parentRole -- initial value equals minimum required role
 		$parentRole = $this->Role->findById($currentRoleId);
-
+		
 		while (true) {
 			if ($currentRoleId == $userRoleId){
 				//user is allowed to perform the action
@@ -59,12 +59,12 @@ class PermissionValidationComponent extends Component {
 				}
 			}
 		}
-		if ($throwException && !$actionAllowed) {
-			throw new ForbiddenException('You are not allowed to access this page.',401);
-		}
+        if ($throwException && !$actionAllowed) {
+            throw new ForbiddenException('You are not allowed to access this page.',401);
+        }
 		return $actionAllowed;
 	}
-
+	
 	private function internalActionAllowed($userRoleId = null, $permissionEntry = null){
 		$this->Role = ClassRegistry::init('Role');
 		$actionAllowed = false;
@@ -72,7 +72,7 @@ class PermissionValidationComponent extends Component {
 		$currentRoleId = (int)$permissionEntry['Permission']['role_id'];
 		//read parentRole -- initial value equals minimum required role
 		$parentRole = $this->Role->findById($currentRoleId);
-
+		
 		while (true) {
 			if ($currentRoleId == $userRoleId){
 				//user is allowed to perform the action
