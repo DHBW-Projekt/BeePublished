@@ -21,6 +21,7 @@ class ApplicationForMembershipComponent extends Component {
 		//CALL corresponding comp. method
 		if (method_exists($this, $data['Element'])){
 			$func_data = $this->{$data['Element']}($controller, $url, $params, $myUrl);
+			
 			if (isset($func_data['data'])) {
 				$data['data'] = $func_data['data'];
 			}
@@ -78,6 +79,10 @@ class ApplicationForMembershipComponent extends Component {
 			$controller->Session->setFlash('Thank you for your interest. Your request has been sent.');
 		else
 			$controller->Session->setFlash('Please fill out all mandatory fields.');
+		
+		//RETURN DATA
+		if($data_error)
+			return array('data' => $controller->ApplicationMembership, 'Element' => 'request');
 		
 		//REDIRECT
 		$controller->redirect('/member-application');

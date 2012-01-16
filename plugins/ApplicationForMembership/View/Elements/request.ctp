@@ -1,5 +1,3 @@
-<?php echo $this->Session->flash('ApplicationForMembership');?>
-
 <div id='application_for_membership_form'>
 	<h2>Application for membership</h2>
 	
