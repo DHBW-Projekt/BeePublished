@@ -74,7 +74,7 @@ form div {
 }
 
 #pagelogo {
-    position: absolute;
+    padding: 20px 5px;
 }
 
 #topnav {
