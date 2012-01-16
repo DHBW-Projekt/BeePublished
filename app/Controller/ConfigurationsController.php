@@ -40,8 +40,9 @@ class ConfigurationsController extends AppController
             $this->request->data = $config;
         }
 
-        $themeFolder = new Folder(APP . 'View' . DS . 'themed');
+        $themeFolder = new Folder(APP . 'View' . DS . 'Themed');
         list($themes, $files) = $themeFolder->read();
+
         $themesSelect = array();
         foreach ($themes as $theme) {
             $themesSelect[$theme] = $theme;
@@ -63,7 +64,7 @@ class ConfigurationsController extends AppController
 
     private function getDesignsForTemplate($template)
     {
-        $designFolder = new Folder(APP . 'View' . DS . 'themed' . DS . $template . DS . 'webroot' . DS . 'css' . DS . 'designs');
+        $designFolder = new Folder(APP . 'View' . DS . 'Themed' . DS . $template . DS . 'webroot' . DS . 'css' . DS . 'designs');
         list($folders, $designs) = $designFolder->read();
         $designsSelect = array();
         foreach ($designs as $design) {

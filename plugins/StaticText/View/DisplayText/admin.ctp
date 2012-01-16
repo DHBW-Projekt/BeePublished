@@ -1,8 +1,8 @@
 <h1>Set Text</h1>
 <?php
 	//embedding the needed scripts
-	echo $this->Html->script('/ckeditor/ckeditor', false);
-	echo $this->Html->script('/ckeditor/adapters/jquery', false);
+	echo $this->Html->script('ckeditor/ckeditor', false);
+	echo $this->Html->script('ckeditor/adapters/jquery', false);
 ?>
 <div class="texteditor">
 <?php 
