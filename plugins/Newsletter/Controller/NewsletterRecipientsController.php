@@ -11,7 +11,7 @@ class NewsletterRecipientsController extends AppController {
 			'order' => array(
 				'NewsletterRecipient.email' => 'asc'),
 			'conditions' => array(
-				'NewsletterRecipient.active' => 1)));
+				'NewsletterRecipient.active' => 1))); 
 		$this->set('recipients', $recipients);
 		$this->set('contentID', $contentID);
 	}
@@ -22,7 +22,15 @@ class NewsletterRecipientsController extends AppController {
 		$recipient['NewsletterRecipient']['active'] = NULL;
 		// save updated recipient
 		$this->NewsletterRecipient->set($recipient);
-		$this->NewsletterRecipient->save();
+		if($this->NewsletterRecipient->save()){
+			$this->Session->setFlash('The recipient was deleted successfully.', 'default', array(
+				'class' => 'flash_success'), 
+				'RecipientDeleted');
+		} else {
+			$this->Session->setFlash('The recipient couldn\'t be deleted.', 'default', array(
+				'class' => 'flash_failure'), 
+				'RecipientDeleted');
+		}
 		$this->redirect($this->referer());
 	}
 	
@@ -73,5 +81,39 @@ class NewsletterRecipientsController extends AppController {
 		}
 		$this->redirect($this->referer());
 	}
+	
+	public function deleteSelected($contentID){
+		if ($this->request->is('post')){
+			$recipients = $this->NewsletterRecipient->find('all', array(
+			'order' => array(
+				'NewsletterRecipient.email' => 'asc'),
+			'conditions' => array(
+				'NewsletterRecipient.active' => 1))); 
+// 			debug($recipients);
+			$selectedRecipients = $this->data['selectRecipients'];
+// 			debug($selectedRecipients);
+			foreach($recipients as $recipient){
+				$id = $recipient['NewsletterRecipient']['id'];
+				if ($selectedRecipients[$id] == 1){
+					// delete = set recipient inactive
+					$recipient['NewsletterRecipient']['active'] = NULL;
+					// save updated recipient
+					$this->NewsletterRecipient->set($recipient);
+					$this->NewsletterRecipient->save();
+// 					if($this->NewsletterRecipient->save()){
+// 						$this->Session->setFlash('The recipient'.$recipient['NewsletterRecipient']['email'].'was deleted successfully.', 'default', array(
+// 							'class' => 'flash_success'), 
+// 							'RecipientDeleted');
+// 					} else {
+// 						$this->Session->setFlash('The recipient couldn\'t be deleted.', 'default', array(
+// 							'class' => 'flash_failure'), 
+// 							'RecipientDeleted');
+// 					}
+				}
+			}
+			$this->redirect($this->referer());
+		}
+	}
+	
 }
 

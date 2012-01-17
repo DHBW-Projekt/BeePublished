@@ -71,7 +71,6 @@ class MenuEntriesController extends AppController
             throw new NotFoundException(__('Invalid Menu Entry'));
         }
         if ($this->request->is('post') || $this->request->is('put')) {
-            var_dump('test');
             if ($this->MenuEntry->save($this->request->data)) {
                 $this->render('close');
                 return;

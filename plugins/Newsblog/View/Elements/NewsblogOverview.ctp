@@ -23,6 +23,16 @@
 	$deleteAllowed = $allowedActions['Delete'];
 	$editAllowed = $allowedActions['Edit'];
 ?>
+<?php 
+	if(!empty($data['newsblogTitle']['NewsblogTitle']) || $data['newsblogTitle']['NewsblogTitle'] != null || $data['newsblogTitle']['NewsblogTitle']['title'] != ''){
+		echo '<div class="newsblogtitle">';
+			echo $data['newsblogTitle']['NewsblogTitle']['title'];
+			echo '<hr><hr>';
+		echo '</div>';
+	}
+
+?>
+
 
 <div class='newsblogcontainer'>
 
@@ -94,7 +104,7 @@ if( count($data['publishedNewsEntries']) > 0){
 			}
 			?>
 		</div>
-		<hr>
+		<hr class="newsentries_divider">
 	</div>
 <?php endforeach;
 } else{

@@ -22,53 +22,91 @@ class NewsletterLettersController extends AppController {
 		$this->set('contentID', $contentID);
 	}
 	
-	public function edit($id){
+	public function edit($contentID, $id){
 		$newsletter = $this->NewsletterLetter->findById($id);
 		$newsletter = $newsletter['NewsletterLetter'];
 		$this->set('newsletter', $newsletter);
+		$this->set('contentID', $contentID);
 	}
 	
-	public function save($id){
+	public function save($contentID, $id){
 		if ($this->request->is('post')){
 			$newsletter2 = $this->request->data['NewsletterLetter'];
-			if (!($id == 'new')){
-				$newsletter = $this->NewsletterLetter->findById($id);
-			} else {
-				$newsletter = array();
-			};
+			$newsletter = $this->NewsletterLetter->findById($id);
 			$newsletter['NewsletterLetter']['subject'] = $newsletter2['subject'];
 			$newsletter['NewsletterLetter']['content'] = $newsletter2['contentEdit'];
 			$newsletter['NewsletterLetter']['draft'] = 1;
 			$date = date('Y-m-d', time());
 			$newsletter['NewsletterLetter']['date'] = $date;
 			$this->NewsletterLetter->set($newsletter);
-			$newsletter = $this->NewsletterLetter->save();
+			if($newsletter = $this->NewsletterLetter->save()){
+				$this->Session->setFlash('The newsletter was saved successfully.', 'default', array(
+													'class' => 'flash_success'), 
+													'NewsletterSaved');
+			} else {
+				$this->Session->setFlash('The newsletter couldn\'t be saved.', 'default', array(
+																	'class' => 'flash_failure'), 
+																	'NewsletterSaved');
+			}
 			$this->redirect(array(
-				'action' => 'edit', $newsletter['NewsletterLetter']['id']));
+				'action' => 'edit', $contentID, $newsletter['NewsletterLetter']['id']));
 		}
 	}
 	
-	public function create(){
+	public function saveNew($contentID){
+		if ($this->request->is('post')){
+			$newsletter2 = $this->request->data['NewsletterLetter'];
+			$newsletter = array();
+			$newsletter['NewsletterLetter']['subject'] = $newsletter2['subject'];
+			$newsletter['NewsletterLetter']['content'] = $newsletter2['contentEdit'];
+			$newsletter['NewsletterLetter']['draft'] = 1;
+			$date = date('Y-m-d', time());
+			$newsletter['NewsletterLetter']['date'] = $date;
+			$this->NewsletterLetter->set($newsletter);
+			if($newsletter = $this->NewsletterLetter->save()){
+				$this->Session->setFlash('The newsletter was saved successfully.', 'default', array(
+										'class' => 'flash_success'), 
+										'NewsletterSaved');
+			} else {
+				$this->Session->setFlash('The newsletter couldn\'t be saved.', 'default', array(
+														'class' => 'flash_failure'), 
+														'NewsletterSaved');
+			}
+			$this->redirect(array(
+					'action' => 'edit', $contentID, $newsletter['NewsletterLetter']['id']));
+		}
+	}
+	
+	public function create($contentID){
 		$newsletter = array(
 						'subject' => NULL,
 						'content' => NULL,
 						'id' => 'new');
 		$this->set('newsletter', $newsletter);
-		$this->render('/NewsletterLetters/edit');
+		$this->set('contentID', $contentID);
 	}
 	
-	public function preview($id){
+	public function preview($contentID, $id){
 		$newsletter = $this->NewsletterLetter->findById($id);
 		$this->set('newsletter', $newsletter);
 		$this->layout = 'overlay';
+		$this->set('contentID', $contentID);
 	}
 	
-	public function delete($id){
-		$this->NewsletterLetter->delete($id);
+	public function delete($contentID, $id){
+		if($this->NewsletterLetter->delete($id)){
+			$this->Session->setFlash('The newsletter has been deleted', 'default', array(
+										'class' => 'flash_success'), 
+										'NewsletterDeleted');
+		} else {
+			$this->Session->setFlash('The newsletter couldn\'t be deleted', 'default', array(
+													'class' => 'flash_failure'), 
+													'NewsletterDeleted');
+		}
 		$this->redirect($this->referer());
 	}
 	
-	public function send($id){
+	public function send($contentID, $id){
 		$newsletter = $this->NewsletterLetter->findById($id);
 		$recipients = $this->NewsletterRecipient->find('all', array(
 			'fields' => array(
@@ -96,6 +134,33 @@ class NewsletterLettersController extends AppController {
 		$newsletter['NewsletterLetter']['draft'] = 0;
 		$this->NewsletterLetter->set($newsletter);
 		$this->NewsletterLetter->save();
+		$this->redirect($this->referer());
+	}
+	
+	public function deleteSelected($contentID){
+		if ($this->request->is('post')){
+			$newsletters = $this->NewsletterLetter->find('all', array(
+				'order' => array(
+					'NewsletterLetter.date' => 'desc',
+					'NewsletterLetter.id' => 'desc'),
+				'conditions' => array(
+					'NewsletterLetter.draft' => '1')));
+			$selectedNewsletters = $this->data['selectNewsletters'];
+			foreach($newsletters as $newsletter){
+				$id = $newsletter['NewsletterLetter']['id'];
+				if ($selectedNewsletters[$id] == 1){
+					if($this->NewsletterLetter->delete($id)){
+						$this->Session->setFlash('The selected newsletters have been deleted', 'default', array(
+										'class' => 'flash_success'), 
+										'NewsletterDeleted');
+					} else {
+						$this->Session->setFlash('The selected newsletters couldn\'t be deleted', 'default', array(
+																	'class' => 'flash_failure'), 
+																			'NewsletterDeleted');
+					}
+				}
+			}
+		}
 		$this->redirect($this->referer());
 	}
 	

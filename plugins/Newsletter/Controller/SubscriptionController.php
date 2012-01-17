@@ -6,11 +6,21 @@ Configure::write('Config.language', 'ger');
 class SubscriptionController extends AppController {
 	
 	public $name = 'Subscription';
-	public $uses = array('Newsletter.NewsletterRecipient', 'User');
+	public $uses = array('Newsletter.NewsletterRecipient', 'User', 'Newsletter.NewsletterLetter');
  	
+	public $paginate = array(
+				'NewsletterLetter' => array(
+					'limit' => 5, 
+					'order' => array(
+						'NewsletterLetter.date' => 'desc',
+						'NewsletterLetter.id' => 'desc')));
+	
  	public function admin($contentID){
+ 		$newsletters = $this->paginate('NewsletterLetter');
+ 		$this->set('newsletters', $newsletters);
  		$this->layout = 'overlay';
  		$this->set('contentID', $contentID);
+ 		$this->render('/NewsletterLetters/index');
  	}
  	
  	public function guestUnSubscribe(){

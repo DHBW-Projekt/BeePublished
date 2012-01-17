@@ -6,9 +6,9 @@
     <?
     $this->Js->set('webroot', $this->request->webroot);
     echo $this->Html->css('admin/sortMenu');
-    echo $this->Html->script('jquery-1.6.2.min');
-    echo $this->Html->script('jquery-ui-1.8.16.custom.min');
-    echo $this->Html->script('jquery.ui.nestedSortable');
+    echo $this->Html->script('jquery/jquery-1.6.2.min');
+    echo $this->Html->script('jquery/jquery-ui-1.8.16.custom.min');
+    echo $this->Html->script('jquery/jquery.ui.nestedSortable');
     echo $this->Html->script('admin/sortMenu');
     ?>
 </head>

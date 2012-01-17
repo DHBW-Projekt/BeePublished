@@ -20,11 +20,10 @@ class SubscriptionComponent extends Component {
 				$controller->NewsletterRecipient->save();
 			};
 			// check if user changed emailaddress
-			if($user['email'] != $userAsRecipient['NewsletterRecipient']['email']){
-				echo '2';
+			if((isset($user)) && ($user['email'] != $userAsRecipient['NewsletterRecipient']['email'])){
 				$userAsRecipient['NewsletterRecipient']['email'] = $user['email'];
 				$controller->NewsletterRecipient->set($userAsRecipient);
-				$controller->NewsletterRecipient->save();
+				debug($controller->NewsletterRecipient->save());
 			}
 		};
 		if (!array_key_exists('text',$params)) {

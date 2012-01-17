@@ -3,15 +3,15 @@
 echo $this->element('admin_menu', array('contentID' => $contentID));
 
 if (isset($newsletter)){
-	$this->Html->script('/ckeditor/ckeditor', false);;
-	$this->Html->script('/ckeditor/adapters/jquery',false);
+	$this->Html->script('ckeditor/ckeditor', false);;
+	$this->Html->script('ckeditor/adapters/jquery',false);
 	$this->Html->script('/newsletter/js/admin',false);
 	
 	echo $this->Form->create('editor', array(
 		'url' => array(
 			'plugin' => 'Newsletter',
     		'controller' => 'NewsletterLetters',
-    		'action' => 'save' , $newsletter['id'])));
+    		'action' => 'save' , $contentID, $newsletter['id'])));
 	echo $this->Form->input('NewsletterLetter.subject', array(
 		'label' => 'Betreff:', 
 		'value' => $newsletter['subject']));
@@ -19,8 +19,7 @@ if (isset($newsletter)){
 		'label' => '', 
 		'value' => $newsletter['content'],
 		'rows' => '30'));
-	echo $this->Form->button('Save', array(
-		'type' => 'submit', 
-		'value' => 'save'));
+	echo $this->Form->submit('Save');
+	echo $this->Session->flash('NewsletterSaved');
 	echo $this->Form->end();
 }

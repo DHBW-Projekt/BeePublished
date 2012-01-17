@@ -7,7 +7,9 @@ $this->Html->script('/ckeditor/ckeditor', false);
 $this->Html->css('/newsletter/css/newsletter', NULL, array('inline' => false));
 
 echo '<div id="subscription">';
+	echo '<h1> Newsletter </h1>';
 	echo $data['text'];
+	echo '<br><br>';
 	if (!($user)){	
 		echo $this->Form->create('Subscription',array(
 			'url' => array(
