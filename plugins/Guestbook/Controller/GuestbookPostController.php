@@ -64,7 +64,7 @@ class GuestbookPostController extends GuestbookAppController {
 						// get helpers for formatting data and links
 						$view = new View($this);
 						$Time = $view->loadHelper('Time');
-						$Form = $view->loadHelper('Form');
+						$Form = $view->loadHelper('Html');
 						// prepare and send email to specified email with values and links
 						$to = $this->Config->getValue('email');
 						$subject = __('There is a new post for your guestbook!');
@@ -72,10 +72,10 @@ class GuestbookPostController extends GuestbookAppController {
 																'title' => $newPost['GuestbookPost']['title'],
 																'text' => $newPost['GuestbookPost']['text'],
 																'submitDate' => $Time->format('d.m.Y', $newPost['GuestbookPost']['created']) . ' ' . $Time->format('H:i:s',$newPost['GuestbookPost']['created']),
-																'url_release' => $Form->postLink('here', 
+																'url_release' => $Html->link('here', 
 																								array('plugin' => 'Guestbook', 'controller' => 'GuestbookPost', 'action' => 'release_noAuth', $newPost['GuestbookPost']['id'], $newPost['GuestbookPost']['token']),
 																								array('title' => __('Release post'))),
-																'url_delete' => $Form->postLink('here', 
+																'url_delete' => $Html->link('here', 
 																								array('plugin' => 'Guestbook', 'controller' => 'GuestbookPost', 'action' => 'delete_noAuth', $newPost['GuestbookPost']['id'], $newPost['GuestbookPost']['token']),
 																								array('title' => __('Delete post')),
 																								__('Do you really want to delete this post?')),
