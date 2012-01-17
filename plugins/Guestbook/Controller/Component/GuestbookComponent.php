@@ -3,9 +3,9 @@
 class GuestbookComponent extends Component {
 
 	public $name = 'GuestbookComponent';
-	public $components = array('Paginator');
+	public $components = array('Paginator', 'ContentValueManager');
 
-	public function getData($controller, $params, $url_exts, $id){
+	public function getData($controller, $params, $url_exts, $contentId){
 		
 		$data = array();
 		if ($url_exts != NULL)
@@ -15,15 +15,21 @@ class GuestbookComponent extends Component {
 			return $data;
 		}
 		
-		//set page title
+		// set page title
 		$controller->set('title_for_layout', __('Guestbook'));
 		
-		//load the used model in order to receive data
+		// load the used model in order to receive data
 		$controller->loadModel('Guestbook.GuestbookPost');
 		
-		//change default limit of items per page for paginator to 10
+		// set limit of items per page for paginator 
+		// default is 10
+		$posts_per_page = 10;
+		$contentValues = $this->ContentValueManager->getContentValues($contentId);
+		if (array_key_exists('posts_per_page', $contentValues)){
+			$posts_per_page = $contentValues['posts_per_page'];
+		}
 		$this->Paginator->settings = array(
-		 			'limit' => 10,
+		 			'limit' => $posts_per_page,
 		);
 		
 		//get released posts

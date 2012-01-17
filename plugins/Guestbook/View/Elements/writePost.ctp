@@ -4,7 +4,8 @@
 // begin of form
 echo $this->Form->create('GuestbookPost', array('url' => array('plugin' => 'Guestbook',
 															   'controller' => 'GuestbookPost',
-															   'action' => 'save')));
+															   'action' => 'save',
+																$contentId)));
 // label + input area
 // for each input field check whether a value is already present or an error had occured
 // author

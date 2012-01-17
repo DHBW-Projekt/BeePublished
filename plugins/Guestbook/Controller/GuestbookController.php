@@ -3,19 +3,46 @@
 class GuestbookController extends AppController {
 
 	public $uses = array('Guestbook.GuestbookPost');
+	public $components = array ('ContentValueManager');
 
-	public function admin(){
+	public function admin($contentId){
 		$this->layout = 'overlay';
-		$this->set('unreleasedPosts', $this->GuestbookPost->find('all', array('conditions' => array('released' => '0000-00-00 00:00:00'))));
+		$this->set('contentId', $contentId);
+		if($this->request->is('post')){
+			if(array_key_exists('release', $this->request->data)){
+				$this->_release();
+			}
+			if(array_key_exists('delete', $this->request->data)){
+				$this->_delete();
+			}
+		} else {
+			$this->set('unreleasedPosts', $this->GuestbookPost->find('all', array('conditions' => array('released' => '0000-00-00 00:00:00'))));
+		}
 	}
-
-	function maintenance(){
-		if(array_key_exists('release', $this->request->data)){
-			$this->_release();
+	
+	function settings($contentId){
+		$this->layout = 'overlay';
+		$this->set('contentId', $contentId);
+		
+		if($this->request->is('post')){
+			$this->ContentValueManager->saveContentValues($contentId, $this->request->data['settings']);	
+			$this->Session->setFlash(__('Your settings were saved.'), 'default', array('class' => 'flash_success'), 'Guestbook.Admin');
+			$this->redirect($this->referer());
+			
+		} else{
+			$contentValues = $this->ContentValueManager->getContentValues($contentId);
+			if (array_key_exists('posts_per_page', $contentValues)){
+				$this->set('posts_per_page', $contentValues['posts_per_page']);
+			} else {
+				$this->set('posts_per_page', '10');
+			}
+			if (array_key_exists('send_emails', $contentValues)){
+				$this->set('send_emails', $contentValues['send_emails']);
+			} else {
+				$this->set('send_emails', '1');
+			}
 		}
-		if(array_key_exists('delete', $this->request->data)){
-			$this->_delete();
-		}
+		
 	}
 
 	function _release(){
@@ -82,5 +109,5 @@ class GuestbookController extends AppController {
 			$this->Session->setFlash(__('Posts deleted.'), 'default', array('class' => 'flash_success'), 'Guestbook.Admin');
 			$this->redirect($this->referer());
 		}
-	}
+	}	
 }

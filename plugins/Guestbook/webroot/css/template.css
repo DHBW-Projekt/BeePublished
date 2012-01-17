@@ -39,29 +39,25 @@ div.guestbook_navigation {
 	margin: 0.5em;
 }
 
-div #guestbook_release{
-	padding: 1em;
-}
-
-div #guestbook_release table{
+div #guestbook_maintenance table{
 	width: 100%;
 }
 
-div #guestbook_release td.check{
+div #guestbook_maintenance td.check{
 	width: 2em;
 }
-div #guestbook_release td.check .input input[type="checkbox"] {
+div #guestbook_maintenance td.check .input input[type="checkbox"] {
 	margin-left: 5px;
 }
 
-div #guestbook_release td.author{
+div #guestbook_maintenance td.author{
 	width: 10em;
 }
 
-div #guestbook_release td.title{
+div #guestbook_maintenance td.title{
 	width: 10em;
 }
 
-div #guestbook_release td.date{
+div #guestbook_maintenance td.date{
 	width: 10em;
 }
