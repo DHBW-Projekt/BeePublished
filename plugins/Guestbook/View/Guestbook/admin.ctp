@@ -11,7 +11,7 @@ $this->Html->css('/Guestbook/css/design',null,array('inline' => false));
 
 <div id='guestbook_maintenance'>
 
-<?php echo $this->Form->create('maintenance', array('url' => array('plugin' => 'Guestbook', 'controller' => 'Guestbook','action' => 'admin')));?>
+<?php echo $this->Form->create('maintenance', array('url' => array('plugin' => 'Guestbook', 'controller' => 'Guestbook','action' => 'admin', $contentId)));?>
 
 <table>
 	<tr>

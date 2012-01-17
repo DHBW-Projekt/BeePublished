@@ -65,15 +65,15 @@ class GuestbookPostController extends GuestbookAppController {
 						// prepare and send email to specified email with values and links
 						$to = $this->Config->getValue('email');
 						$subject = __('There is a new post for your guestbook!');
-						$viewVars = array('author' => $newPost['author'],
-																'title' => $newPost['title'],
-																'text' => $newPost['text'],
-																'submitDate' => $this->Time->format('d.m.Y', $newPost['created']) . ' ' . $this->Time->format('H:i:s',$newPost['created']),
+						$viewVars = array('author' => $newPost['GuestbookPost']['author'],
+																'title' => $newPost['GuestbookPost']['title'],
+																'text' => $newPost['GuestbookPost']['text'],
+																'submitDate' => $this->Time->format('d.m.Y', $newPost['GuestbookPost']['created']) . ' ' . $this->Time->format('H:i:s',$newPost['GuestbookPost']['created']),
 																'url_release' => $this->Form->postLink('here', 
-																								array('plugin' => 'Guestbook', 'controller' => 'GuestbookPost', 'action' => 'release_noAuth', $newPost['id'], $newPost['token']),
+																								array('plugin' => 'Guestbook', 'controller' => 'GuestbookPost', 'action' => 'release_noAuth', $newPost['GuestbookPost']['id'], $newPost['GuestbookPost']['token']),
 																								array('title' => __('Release post'))),
 																'url_delete' => $this->Form->postLink('here', 
-																								array('plugin' => 'Guestbook', 'controller' => 'GuestbookPost', 'action' => 'delete_noAuth', $newPost['id'], $newPost['token']),
+																								array('plugin' => 'Guestbook', 'controller' => 'GuestbookPost', 'action' => 'delete_noAuth', $newPost['GuestbookPost']['id'], $newPost['GuestbookPost']['token']),
 																								array('title' => __('Delete post')),
 																								__('Do you really want to delete this post?')),
 																'page_name' => $this->ConfigComponent->getValue('page_name'));
