@@ -3,32 +3,38 @@
 class GuestbookComponent extends Component {
 
 	public $name = 'GuestbookComponent';
-	public $components = array('Paginator','PermissionValidation');
+	public $components = array('Paginator', 'ContentValueManager');
 
-	public function getData($controller, $params){
+	public function getData($controller, $params, $url_exts, $contentId){
 		
-		//set page title
-		$controller->set('title_for_layout', __('Guestbook'));
-		
-		//load the used model in order to receive data
-		$controller->loadModel('Guestbook.GuestbookPost');
-		
-		//change default limit of items per page for paginator to 10
-		$this->Paginator->settings = array(
-		 			'limit' => 10,
-		);
-		
-		//check user authorisation and get data
-		//unfortunately query for NOT seems to be not working if NULL is used...
-		if ($this->PermissionValidation->actionAllowed($this->_getPluginId($controller), 'release')){ 
-			//show all posts which are not already deleted
-			$allGuestbookPosts = $controller->paginate('GuestbookPost', array('deleted' => '0000-00-00 00:00:00'));
-		} else {
-			//normal user / guest is only allowed to see released and not deleted posts
-			$allGuestbookPosts = $controller->paginate('GuestbookPost', array('released NOT' => '0000-00-00 00:00:00','deleted' => '0000-00-00 00:00:00'));
+		$data = array();
+		if ($url_exts != NULL)
+		foreach($url_exts as $url_part){
+			$url_part == 'writePost';
+			$data['writePost'] = "true";
+			return $data;
 		}
 		
-		return $allGuestbookPosts;
+		// set page title
+		$controller->set('title_for_layout', __('Guestbook'));
+		
+		// load the used model in order to receive data
+		$controller->loadModel('Guestbook.GuestbookPost');
+		
+		// set limit of items per page for paginator 
+		// default is 10
+		$posts_per_page = 10;
+		$contentValues = $this->ContentValueManager->getContentValues($contentId);
+		if (array_key_exists('posts_per_page', $contentValues)){
+			$posts_per_page = $contentValues['posts_per_page'];
+		}
+		$this->Paginator->settings = array(
+		 			'limit' => $posts_per_page,
+		);
+		
+		//get released posts
+		//unfortunately query for NOT seems to be not working if NULL is used...
+		return $controller->paginate('GuestbookPost', array('released NOT' => '0000-00-00 00:00:00'));
 	}
 	
 	function _getPluginId($controller){
