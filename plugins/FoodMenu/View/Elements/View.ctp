@@ -5,7 +5,7 @@
 <?php 
 	$user = $this->Session->read('Auth.User');
 ?>
-<div id="foodMenuMain" style="width:100%; height:450px">
+<div id="foodMenuMain">
 <?php
 	echo $this->Session->flash();
 	if(!(isset($url))) $url = '';
@@ -15,7 +15,6 @@
 	
 	/* initial call, $data is set by component */
 	if (isset($data['show'])) {
-		//debug($data['show']);
 		if(array_key_exists('FoodMenuMenu', $data['show'])) {
 			echo '<div id="foodMenuMenu">';
 			echo '<ul class="FoodMenuMenu">';

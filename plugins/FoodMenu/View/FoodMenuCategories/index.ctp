@@ -2,14 +2,15 @@
 	$this->Html->script('jquery/jquery.quicksearch', false);
 	$this->Html->script('/food_menu/js/foodmenu', false);
 	echo $this->element('admin_menu');
-	echo $this->Form->create('FoodMenuCategory', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuCategories', 'action' => 'deleteMultiple')));
 	
-	echo '<div id="buttonlink" class="buttonlink">';
-	echo '<ul class="buttonlink">';
-	echo '<li class="buttonlink">'.$this->Html->link((__('New Category')), array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuCategories', 'action' => 'create'), array('class' => 'buttonlink')).'</li>';
-	echo '</ul>';
+	echo $this->Form->create('FoodMenuCreateCategory', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuCategories', 'action' => 'create')));
+	echo '<h1>'.(__('Create new category')).'</h1>';
+	echo $this->Form->end(__('New Category'));
+	echo '<hr>';
+	echo $this->Form->create('FoodMenuCategory', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuCategories', 'action' => 'deleteMultiple')));
+//	echo '<div id="buttonlink" class="buttonlink">';
 	echo '<form>Search category: <input type="text" id="search" /> </form>';
-	echo '</div>';
+//	echo '</div>';
 	?>
 	<table id="tableEntries">
 	<thead>
@@ -40,10 +41,13 @@
 	}//if
 	?>
 	</tbody>
+	<tfoot>
+		<tr>
+			<td><?php echo $this->Html->image('/app/webroot/img/arrow.png', array('alt' => 'arrow')); ?></td>
+			<td colspan="3"><?php echo $this->Form->button(__('Delete'), array('onClick' => 'confirmDelete();')); ?></td>
+		</tr>
+	</tfoot>
 	</table>
 	<br />
 		<?php 
-		echo '<ul class="buttonlink">';
-		echo '<li class="buttonlink">'.$this->Html->link((__('Delete Selection')), '#', array('onClick' => 'confirmDelete();', 'class' => 'buttonlink')).'</li>';
-		echo '</ul>';
 		echo $this->Form->end(); ?>
