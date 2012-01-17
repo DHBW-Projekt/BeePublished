@@ -9,6 +9,7 @@
 		'url' => array(
     		'controller' => 'EmailTemplates',
     		'action' => 'save' , $selectedTemplate['EmailTemplate']['id'])));
+	echo $this->Form->hidden('id', array('value' => $selectedTemplate['EmailTemplate']['id']));
 	echo $this->Form->input('name', array(
 		'label' => 'Name:', 
 		'value' => $selectedTemplate['EmailTemplate']['name']));

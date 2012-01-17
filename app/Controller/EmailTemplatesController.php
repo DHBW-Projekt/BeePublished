@@ -48,6 +48,9 @@ class EmailTemplatesController extends AppController
     
     function save($templateId) {
     	$this->EmailTemplate->set($this->request->data);
+    	$pattern = "/\[img\](.*)\[\/img\]/Usi";
+		$replacement = "<img src=\"\\1\"/>";
+		$string = preg_replace($pattern, $replacement, $string);
     	if(isset($templateId)) {
     		$this->EmailTemplate->set('id',$templateId);
     	}	

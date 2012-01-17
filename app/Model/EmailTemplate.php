@@ -30,6 +30,10 @@ class EmailTemplate extends AppModel {
             	'rule'    => 'isUnique',
             	'message' => 'The name already exists.'
 			),
+			'isalphanumeric' => array(
+            	'rule'    => 'alphaNumeric',
+            	'message' => 'The name already exists.'
+			),
 		),
 		'active' => array(
 			'boolean' => array(
