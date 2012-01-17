@@ -24,7 +24,7 @@ class ManageImagesController  extends AppController{
 		
 		$image = $this->data['addImage']['File'];
 		
-		$dest = realpath("../../app/webroot/img/gallery").'\\'.$image['name'];
+		$dest = realpath("../../app/webroot/img/gallery").'/'.$image['name'];
 		$urlPath = "/app/webroot/img/gallery/".$image['name'];
 		
 		$source = fopen($image['tmp_name'], 'r');
