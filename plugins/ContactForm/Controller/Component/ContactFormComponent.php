@@ -1,5 +1,7 @@
 <?php
 
+App::import('Vendor','recaptcha/recaptchalib');
+
 class ContactFormComponent extends Component {
 	
 	//SET name
@@ -69,6 +71,17 @@ class ContactFormComponent extends Component {
 
     		if(!$controller->ContactRequest->validates())
     			$data_error = true;
+    	}
+    	
+    	//VALIDATE captcha
+    	$privatekey = "6LfzYcwSAAAAAEH-Nr-u6qaFaNdIc6h9nlbm0i76";
+    	$resp = recaptcha_check_answer($privatekey,
+    								   $_SERVER["REMOTE_ADDR"],
+								       $_POST["recaptcha_challenge_field"],
+								       $_POST["recaptcha_response_field"]);
+    	
+    	if ($resp->is_valid) {
+    		$data_error = true;
     	}
 
     	//SEND email

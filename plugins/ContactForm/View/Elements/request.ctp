@@ -1,6 +1,8 @@
 <!-- contact form screen -->
 <?php 
-	$this->Helpers->load('Recaptcha');
+	//CAPTCHA
+	App::import('Vendor','recaptcha/recaptchalib');
+	$publickey = "6LfzYcwSAAAAAN3vRDzZKXkC0rYkwaKQTi8hMkj6";
 ?>
 
 <div id='contactform_form'>
@@ -30,7 +32,7 @@
 		</tr>
 		<tr>
 			<td></td>
-			<td><?php /*echo $this->Recaptcha->display_form('');*/?></td>
+			<td><?php echo recaptcha_get_html($publickey);?></td>
 		</tr>
 	</table>
 	<?php echo $this->Form->end('Send');?>
