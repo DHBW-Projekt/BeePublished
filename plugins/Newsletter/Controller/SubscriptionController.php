@@ -8,15 +8,19 @@ class SubscriptionController extends AppController {
 	public $name = 'Subscription';
 	public $uses = array('Newsletter.NewsletterRecipient', 'User', 'Newsletter.NewsletterLetter');
  	
-	public $paginate = array(
-				'NewsletterLetter' => array(
-					'limit' => 5, 
-					'order' => array(
-						'NewsletterLetter.date' => 'desc',
-						'NewsletterLetter.id' => 'desc')));
+// 	public $paginate = array(
+// 				'NewsletterLetter' => array(
+// 					'limit' => 10, 
+// 					'order' => array(
+// 						'NewsletterLetter.date' => 'desc',
+// 						'NewsletterLetter.id' => 'desc')));
 	
  	public function admin($contentID){
- 		$newsletters = $this->paginate('NewsletterLetter');
+//  		$newsletters = $this->paginate('NewsletterLetter');
+ 		$newsletters = $this->NewsletterLetter->find('all', array(
+ 			'order' => array(
+ 									'NewsletterLetter.date' => 'desc',
+ 									'NewsletterLetter.id' => 'desc')));
  		$this->set('newsletters', $newsletters);
  		$this->layout = 'overlay';
  		$this->set('contentID', $contentID);

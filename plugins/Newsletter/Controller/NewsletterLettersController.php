@@ -9,15 +9,19 @@ class NewsletterLettersController extends AppController {
 	public $name = 'newsletterLetters';	
 	public $uses = array('Newsletter.NewsletterLetter','Newsletter.NewsletterRecipient');
 	
-	public $paginate = array(
-			'NewsletterLetter' => array(
-				'limit' => 5, 
-				'order' => array(
-					'NewsletterLetter.date' => 'desc',
-					'NewsletterLetter.id' => 'desc')));
+// 	public $paginate = array(
+// 			'NewsletterLetter' => array(
+// 				'limit' => 10, 
+// 				'order' => array(
+// 					'NewsletterLetter.date' => 'desc',
+// 					'NewsletterLetter.id' => 'desc')));
 	
 	public function index($contentID){
-		$newsletters = $this->paginate('NewsletterLetter');
+// 		$newsletters = $this->paginate('NewsletterLetter');
+		$newsletters = $this->NewsletterLetter->find('all', array(
+			'order' => array(
+		 		'NewsletterLetter.date' => 'desc',
+		 		'NewsletterLetter.id' => 'desc')));
 		$this->set('newsletters', $newsletters);
 		$this->set('contentID', $contentID);
 	}
@@ -41,12 +45,12 @@ class NewsletterLettersController extends AppController {
 			$this->NewsletterLetter->set($newsletter);
 			if($newsletter = $this->NewsletterLetter->save()){
 				$this->Session->setFlash('The newsletter was saved successfully.', 'default', array(
-													'class' => 'flash_success'), 
-													'NewsletterSaved');
+					'class' => 'flash_success'), 
+					'NewsletterSaved');
 			} else {
 				$this->Session->setFlash('The newsletter couldn\'t be saved.', 'default', array(
-																	'class' => 'flash_failure'), 
-																	'NewsletterSaved');
+					'class' => 'flash_failure'), 
+					'NewsletterSaved');
 			}
 			$this->redirect(array(
 				'action' => 'edit', $contentID, $newsletter['NewsletterLetter']['id']));
@@ -65,12 +69,12 @@ class NewsletterLettersController extends AppController {
 			$this->NewsletterLetter->set($newsletter);
 			if($newsletter = $this->NewsletterLetter->save()){
 				$this->Session->setFlash('The newsletter was saved successfully.', 'default', array(
-										'class' => 'flash_success'), 
-										'NewsletterSaved');
+					'class' => 'flash_success'), 
+					'NewsletterSaved');
 			} else {
 				$this->Session->setFlash('The newsletter couldn\'t be saved.', 'default', array(
-														'class' => 'flash_failure'), 
-														'NewsletterSaved');
+					'class' => 'flash_failure'), 
+					'NewsletterSaved');
 			}
 			$this->redirect(array(
 					'action' => 'edit', $contentID, $newsletter['NewsletterLetter']['id']));
@@ -79,9 +83,9 @@ class NewsletterLettersController extends AppController {
 	
 	public function create($contentID){
 		$newsletter = array(
-						'subject' => NULL,
-						'content' => NULL,
-						'id' => 'new');
+			'subject' => NULL,
+			'content' => NULL,
+			'id' => 'new');
 		$this->set('newsletter', $newsletter);
 		$this->set('contentID', $contentID);
 	}
@@ -96,12 +100,12 @@ class NewsletterLettersController extends AppController {
 	public function delete($contentID, $id){
 		if($this->NewsletterLetter->delete($id)){
 			$this->Session->setFlash('The newsletter has been deleted', 'default', array(
-										'class' => 'flash_success'), 
-										'NewsletterDeleted');
+				'class' => 'flash_success'), 
+				'NewsletterDeleted');
 		} else {
 			$this->Session->setFlash('The newsletter couldn\'t be deleted', 'default', array(
-													'class' => 'flash_failure'), 
-													'NewsletterDeleted');
+				'class' => 'flash_failure'), 
+				'NewsletterDeleted');
 		}
 		$this->redirect($this->referer());
 	}
@@ -119,7 +123,6 @@ class NewsletterLettersController extends AppController {
 		if($server == 'localhost') {
 			$server = $server.'.de';
 		}
-		echo $server;
 		foreach ($recipients as $recipient){
 			$email = new CakeEmail();
 			$email->emailFormat('html')
@@ -134,6 +137,9 @@ class NewsletterLettersController extends AppController {
 		$newsletter['NewsletterLetter']['draft'] = 0;
 		$this->NewsletterLetter->set($newsletter);
 		$this->NewsletterLetter->save();
+		$this->Session->setFlash('The newsletter has been sent successful.', 'default', array(
+										'class' => 'flash_success'), 
+										'NewsletterSent');
 		$this->redirect($this->referer());
 	}
 	
@@ -151,12 +157,12 @@ class NewsletterLettersController extends AppController {
 				if ($selectedNewsletters[$id] == 1){
 					if($this->NewsletterLetter->delete($id)){
 						$this->Session->setFlash('The selected newsletters have been deleted', 'default', array(
-										'class' => 'flash_success'), 
-										'NewsletterDeleted');
+							'class' => 'flash_success'), 
+							'NewsletterDeleted');
 					} else {
 						$this->Session->setFlash('The selected newsletters couldn\'t be deleted', 'default', array(
-																	'class' => 'flash_failure'), 
-																			'NewsletterDeleted');
+							'class' => 'flash_failure'), 
+						'NewsletterDeleted');
 					}
 				}
 			}

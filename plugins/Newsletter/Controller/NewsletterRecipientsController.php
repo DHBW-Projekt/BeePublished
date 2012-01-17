@@ -89,9 +89,7 @@ class NewsletterRecipientsController extends AppController {
 				'NewsletterRecipient.email' => 'asc'),
 			'conditions' => array(
 				'NewsletterRecipient.active' => 1))); 
-// 			debug($recipients);
 			$selectedRecipients = $this->data['selectRecipients'];
-// 			debug($selectedRecipients);
 			foreach($recipients as $recipient){
 				$id = $recipient['NewsletterRecipient']['id'];
 				if ($selectedRecipients[$id] == 1){
@@ -99,16 +97,15 @@ class NewsletterRecipientsController extends AppController {
 					$recipient['NewsletterRecipient']['active'] = NULL;
 					// save updated recipient
 					$this->NewsletterRecipient->set($recipient);
-					$this->NewsletterRecipient->save();
-// 					if($this->NewsletterRecipient->save()){
-// 						$this->Session->setFlash('The recipient'.$recipient['NewsletterRecipient']['email'].'was deleted successfully.', 'default', array(
-// 							'class' => 'flash_success'), 
-// 							'RecipientDeleted');
-// 					} else {
-// 						$this->Session->setFlash('The recipient couldn\'t be deleted.', 'default', array(
-// 							'class' => 'flash_failure'), 
-// 							'RecipientDeleted');
-// 					}
+					if($this->NewsletterRecipient->save()){
+						$this->Session->setFlash('The recipient '.$recipient['NewsletterRecipient']['email'].' was deleted successfully.', 'default', array(
+							'class' => 'flash_success'), 
+							'RecipientDeleted');
+					} else {
+						$this->Session->setFlash('The recipient couldn\'t be deleted.', 'default', array(
+							'class' => 'flash_failure'), 
+							'RecipientDeleted');
+					}
 				}
 			}
 			$this->redirect($this->referer());

@@ -7,6 +7,7 @@ if (isset($newsletter)){
 	$this->Html->script('ckeditor/adapters/jquery',false);
 	$this->Html->script('/newsletter/js/admin',false);
 	
+	echo $this->Session->flash('NewsletterSent');
 	echo $this->Form->create('preview', array(
 		'url' => array(
 			'plugin' => 'Newsletter',

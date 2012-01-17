@@ -1,37 +1,57 @@
 <?php
-echo $this->element('admin_menu', array('contentID' => $contentID));
-echo $this->Session->flash('NewsletterDeleted');
-?>
 
-<table>
-	<tr>
-		<th></th>
-		<th>Subject</th>
-		<th>Date</th>
-		<th></th>
-		<th></th>
-		<th></th>
-	</tr>
-	
-<?php
+$this->Html->script('jquery/jquery.quicksearch', false);
+$this->Html->script('/newsletter/js/newsletter', false);
+echo $this->Html->css('/newsletter/css/newsletter', NULL, array('inline' => false));
+
+echo $this->element('admin_menu', array('contentID' => $contentID));
+
+echo '<h2>Create new newsletter:</h2>';
+
 echo $this->Form->create('createNewsletter', array(
 			'url' => array(
 				'plugin' => 'Newsletter',
 	    		'controller' => 'NewsletterLetters',
 	    		'action' => 'create', $contentID)));
 echo $this->Form->submit('Create newsletter');
-
 echo $this->Form->end();
-echo '<br><br>';
+
+echo '<br><hr><br>';
+echo '<h2>Newsletters:</h2>';
+echo '<br>';
+
+echo $this->Session->flash('NewsletterDeleted');
+
+echo $this->Form->create('search');
+echo $this->Form->input('NewsletterLetter.subject', array(
+	'label' => 'Search Newsletter:',
+	'id' => 'search_newsletter'));
+echo $this->Form->end();
+
+echo '<table id="newsletters">';
+
+echo '<thead>';
+	echo '<tr>';
+		echo '<th></th>';
+		echo '<th>Subject</th>';
+		echo '<th>Date</th>';
+		echo '<th>Status</th>';
+		echo '<th></th>';
+		echo '<th></th>';
+		echo '<th></th>';
+	echo '</tr>';
+echo '</thead>';
+echo '<tbody>';
+
 if (isset($newsletters)){
 	echo $this->Form->create('selectNewsletters', array(
 		'url' => array(
 			'plugin' => 'Newsletter',
 			'controller' => 'NewsletterLetters',
 			'action' => 'deleteSelected', $contentID),
-		'onsubmit'=>'return confirm("Do you really want to delete the selected newsletters?");'));
+		'onsubmit'=>'return confirm(\''.__('Do you really want to delete the selected newsletters?').'\');'));
 	foreach($newsletters as $newsletter){
-		echo '<tr>';
+			echo '<tr>';
 			echo '<td>';
 			if ($newsletter['NewsletterLetter']['draft'] == 1){
 				echo $this->Form->checkbox($newsletter['NewsletterLetter']['id']);
@@ -45,6 +65,13 @@ if (isset($newsletters)){
 			echo '</td>';
 			echo '<td>';
 				echo $newsletter['NewsletterLetter']['date'];
+			echo '</td>';
+			echo '<td>';
+				if ($newsletter['NewsletterLetter']['draft'] == 1){
+					echo 'draft';
+				} else {
+					echo 'sent';
+				}
 			echo '</td>';
 			echo '<td>';
 				echo $this->Html->image('/app/webroot/img/preview.png',array(
@@ -99,14 +126,18 @@ if (isset($newsletters)){
 					'width' => 20, 
 					'alt' => __('[x]Delete')));
 				echo '</td>';
+				echo '<td style="visibility:hidden">';
+					echo $newsletter['NewsletterLetter']['content'];
+				echo '</td>';
 				echo '</div>';
 			};
 			echo 	'</tr>';
-	} //foreach
-	echo '<tfoot>';
+	} //foreach	
+	echo '</tbody>';
+	echo '<tfoot>'; 
 	echo '<tr>';
 	echo '<td>';
-	echo $this->Html->image('/app/webroot/img/selected_arrow.png', array(
+	echo $this->Html->image('/app/webroot/img/arrow.png', array(
 							'height' => 20,
 							'width' => 20));
 	echo '</td>';
@@ -120,23 +151,29 @@ if (isset($newsletters)){
 	echo '</tr>';
 	echo '</tfoot>';
 	
-	$paging_params = $this->Paginator->params('NewsletterLetter');
-	if ($paging_params['count'] > 0){
-		echo $this->Paginator->counter(array(
-			'format' => 'Entrys {:start} to {:end} of {:count}, page {:page} of {:pages}  ',
-			'model' => 'NewsletterLetter'));
-		if ($this->Paginator->hasPrev('NewsletterLetter')){
-			echo $this->Paginator->prev(' << ', array(
-				'model' => 'NewsletterLetter'));
-		};
-		echo $this->Paginator->numbers(array(
-			'model' => 'NewsletterLetter'));
-		if ($this->Paginator->hasNext('NewsletterLetter')){
-			echo $this->Paginator->next(' >> ', array(
-				'model' => 'NewsletterLetter'));
-		};
-	};
+	
 };
+echo '</table>';
 ?>
-</table>
 
+<?php 
+
+// $paging_params = $this->Paginator->params('NewsletterLetter');
+// if ($paging_params['count'] > 0){
+// 	echo $this->Paginator->counter(array(
+// 			'format' => 'Entrys {:start} to {:end} of {:count}, page {:page} of {:pages}  ',
+// 			'model' => 'NewsletterLetter'));
+	
+// 	if ($this->Paginator->hasPrev('NewsletterLetter')){
+// 		echo $this->Paginator->prev(' << ', array(
+// 				'model' => 'NewsletterLetter'));
+// 	};
+// 	echo $this->Paginator->numbers(array(
+// 			'model' => 'NewsletterLetter'));
+// 	if ($this->Paginator->hasNext('NewsletterLetter')){
+// 		echo $this->Paginator->next(' >> ', array(
+// 				'model' => 'NewsletterLetter'));
+// 	};
+// };
+
+?>

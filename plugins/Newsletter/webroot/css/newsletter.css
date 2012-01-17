@@ -1,10 +1,8 @@
 @CHARSET "UTF-8";
-#scrolltable{
-	height:200px;
-	width:50%;
-	overflow:scroll;
+textarea#PluginTextText {
+	height:4em;
+	width:30em;
 }
-
 .newsletter {
 	background-color: #ffffff;
 	font-size: 12px;
@@ -12,4 +10,8 @@
 	padding-bottom: 30px;
 	margin-bottom: 30px;
 	color: #cccccc;
+}
+.scrolltable tbody{
+	height:50px;
+	overflow:scroll;
 }
