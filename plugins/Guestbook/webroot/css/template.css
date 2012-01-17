@@ -1,0 +1,61 @@
+div #guestbook_link{
+	padding-top: 1em;
+	padding-left: 1em;
+	margin-left: 1em;
+}
+
+div.guestbook_write {
+	padding: 1em;
+	margin: 1em;
+}
+
+div #guestbook_display{
+	padding: 1em;
+}
+
+div.guestbook_post {
+	padding: 0.5em;
+	margin: 0.5em;
+}
+
+div.guestbook_post_title {
+	float: left;
+}
+
+div.guestbook_post_author {
+	float: right;
+	text-align: right;
+}
+
+div.guestbook_post_text{
+	clear: both;
+}
+
+div.guestbook_navigation {
+	text-align: right;
+	padding: 0.5em;
+	margin: 0.5em;
+}
+
+div #guestbook_maintenance table{
+	width: 100%;
+}
+
+div #guestbook_maintenance td.check{
+	width: 2em;
+}
+div #guestbook_maintenance td.check .input input[type="checkbox"] {
+	margin-left: 5px;
+}
+
+div #guestbook_maintenance td.author{
+	width: 10em;
+}
+
+div #guestbook_maintenance td.title{
+	width: 10em;
+}
+
+div #guestbook_maintenance td.date{
+	width: 10em;
+}

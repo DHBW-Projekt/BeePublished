@@ -1,7 +1,7 @@
 <?php
 
 class NewsblogOverviewComponent extends Component {
-
+	var $components = array('ContentValueManager');
 	public function getData($controller, $params, $url, $id){
 		$controller->loadModel('Newsblog.NewsEntry');
 		$controller->loadModel('Newsblog.NewsblogTitle');
@@ -11,11 +11,14 @@ class NewsblogOverviewComponent extends Component {
 		$optionsNE['conditions'] = $conditionsNE;
 		$optionsNE['order'] = array('createdOn DESC');
 		
-		$conditionsNT = array("NewsblogTitle.content_id" => $id);
-		$optionsNT['conditions'] = $conditionsNT;
-		
+		$contentValues = $this->ContentValueManager->getContentValues($id);
+		if (array_key_exists('newsblogtitle', $contentValues)) {
+			$newsblogtitle = $contentValues['newsblogtitle'];
+		} else {
+			$newsblogtitle = null;
+		}
 		$data['publishedNewsEntries'] = $controller->NewsEntry->find('all',$optionsNE);
-		$data['newsblogTitle'] = $controller->NewsblogTitle->find('first', $optionsNT);
+		$data['newsblogTitle'] = $newsblogtitle;
 		$data['view'] = 'NewsblogOverview';
 		$data['contentId'] = $id;
 		return $data;
