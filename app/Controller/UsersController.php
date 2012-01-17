@@ -72,7 +72,8 @@ class UsersController extends AppController
 			}
         }
         $this->set('menu', $this->Menu->buildMenu($this, NULL));
-        $this->set('adminMode', true);
+        $this->set('adminMode', false);
+        $this->set('systemPage', true);
     }
 
     public function activateUser($userId = null, $tokenIn = null)
