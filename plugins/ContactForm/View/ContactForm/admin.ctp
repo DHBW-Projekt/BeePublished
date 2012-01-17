@@ -1,3 +1,10 @@
+<?php
+	//LOAD css-file
+	$this->Html->css('/ContactForm/contactform');
+?>
+
+
+
 <p><?php echo __('There are no configuration options avaliable.')?></p>
 
 <!-- 

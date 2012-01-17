@@ -7,7 +7,10 @@ App::uses('CakeEmail', 'Network/Email');
  * @author Corinna Knick
  */
 class ContactFormController extends AppController {
-
+	
+	//Attributes
+	var $layout = 'overlay';
+	
    /**
 	* Admin View
 	*/
