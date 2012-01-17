@@ -51,8 +51,8 @@ class UsersController extends AppController
 			$roleId = $role['Role']['id'];
 			$user['role_id'] = $roleId;
 				
-				$this->request->data['User'] = $user;
-				//save data to database
+			$this->request->data['User'] = $user;
+			//save data to database
 			if ($this->User->save($user)) {
 				//create email and set header fields and viewVars
 				$port = env('SERVER_PORT');
@@ -68,7 +68,9 @@ class UsersController extends AppController
 					'confirmationToken' => $user['confirmation_token']
 				);
 				$this->BeeEmail->sendHtmlEmail($user['email'], 'Registration complete - Please confirm your account', $viewVars, 'user_confirmation');
-				$this->redirect(array('controller' => 'Users', 'action' => 'index'));
+				$this->set('menu', $this->Menu->buildMenu($this, NULL));
+				$this->set('adminMode', true);
+				$this->redirect($this->referer());
 			}
         }
     }
