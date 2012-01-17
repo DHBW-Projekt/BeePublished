@@ -25,13 +25,13 @@ class ShowNewsController extends NewsblogAppController{
 			}
 			$contentValues = $this->ContentValueManager->getContentValues($contentId);
 			if (array_key_exists('newsblogtitle', $contentValues)) {
-				$newblogtitle = $contentValues['newsblogtitle'];
+				$newsblogtitle = $contentValues['newsblogtitle'];
 			} else {
 				$newsblogtitle = null;
 			}
 			$this->set('shorttextLength', $shorttextLength);
 			$this->set('itemsPerPage', $itemsPerPage);
-			$this->set('newsblogTitle', $newblogtitle);
+			$this->set('newsblogTitle', $newsblogtitle);
 		} elseif($this->request->is('post') || $this->request->is('put')){
 			$contentId = $this->request->data['contentId'];
 			$newsblogTitle = $this->request->data['newsblogTitle'];
