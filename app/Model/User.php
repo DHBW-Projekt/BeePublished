@@ -16,19 +16,40 @@ class User extends AppModel
             'required' => array(
                 'rule' => array('notEmpty'),
                 'message' => 'A username is required.'
-            )
+            ),
+		    'notUnique' => array(
+				'rule' => 'isUnique',
+				'message' => 'This username has already been taken. Please choose another username.'
+		    ),
+		    'alphanumeric' => array(
+    			'rule' => 'alphaNumeric',
+    			'message' => 'Usernames must only contain letters and numbers.'
+		    )
         ),
         'password' => array(
             'required' => array(
-                //'rule' => array('notEmpty'),
                 'message' => 'A password is required',
-                'rule' => array('minLength', '8')
+                'rule' => array('notEmpty')
+            ),
+            'minLength' => array(
+            	'message' => 'Password is too short. Please choose a password with at least 8 characters.',
+    			'rule' => array('minLength', '8')
             )
+        ),
+        'password_confirm' => array(
+		    'match' => array(
+    			'rule' => array('confirmPassword'),
+    			'message' => 'Passwords do not match'
+		    )
         ),
         'email' => array(
             'required' => array(
-                'rule' => array('email'),
-                'message' => 'An email is required.'
+                'rule' => array('email', true),
+                'message' => 'Please supply a valid & active email address.'
+            ),
+            'notUnique' => array(
+    			'rule' => 'isUnique',
+    			'message' => 'This email has already been taken. If you forgot your password, please reset it.'
             )
         )
     );
@@ -123,5 +144,13 @@ class User extends AppModel
     function bindNode($user)
     {
         return array('model' => 'Role', 'foreign_key' => $user['User']['role_id']);
+    }
+    
+    public function confirmPassword($check, $password) {
+    	var_dump($check);
+    	var_dump($this->data);
+    	if (Security::hash($check['password_confirm'], null, true) == Security::hash($this->data['User']['password'], null, true)) {
+    		return true;
+    	}
     }
 }
