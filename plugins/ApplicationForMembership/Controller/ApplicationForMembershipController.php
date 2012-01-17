@@ -7,15 +7,14 @@
 class ApplicationForMembershipController extends AppController {
 	
 	//Attributs
-	var $uses = array('ApplcationForMembership.ApplicationMembership');
+	var $uses = array('ApplicationForMembership.ApplicationMembership');
 	var $layout = 'overlay';
 	
 	/**
 	 * Admin-Views
 	 */
-	public function admin($contentId) {
-		$this->set('applications', $this->ApplicationMembership->findAllByStatus('0'));
-		$this->set('contentID', $contentID);
+	public function admin() {	
+		$this->set('applications', $this->ApplicationMembership->findAllByStatus(0));
 	}
 	
 	/**
