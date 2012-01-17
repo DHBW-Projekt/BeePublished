@@ -6,15 +6,9 @@
 	echo '<ul class="buttonlink">';
 	echo '<li>'.$this->Html->link((__('Add Categories')), array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenusFoodMenuCategories', 'action' => 'index', $menu['FoodMenuMenu']['name'], $menu['FoodMenuMenu']['id']), array('class' => 'buttonlink')).'</li>';
 	echo '</ul>';
-	echo '<table class="edit">';
-	echo '<tr>';
-		echo '<td>'.$this->Form->input('name', array('value' => $menu['FoodMenuMenu']['name'], 'label' => (__('Name:')))).'</td>';
-	echo '</tr><tr>';
-		echo '<td>'.$this->Form->input('valid_from', array('value' => $menu['FoodMenuMenu']['valid_from'], 'selected'=>$menu['FoodMenuMenu']['valid_from'], 'label' => (__('Valid From:')))).'</td>';
-	echo '</tr><tr>';
-		echo '<td>'.$this->Form->input('valid_until', array('value' => $menu['FoodMenuMenu']['valid_until'], 'selected'=>$menu['FoodMenuMenu']['valid_until'], 'label' => (__('Valid until:')))).'</td>';
-	echo '</tr><tr>';
-		echo '<td>';
+	echo $this->Form->input('name', array('value' => $menu['FoodMenuMenu']['name'], 'label' => (__('Name:'))));
+	echo $this->Form->input('valid_from', array('value' => $menu['FoodMenuMenu']['valid_from'], 'selected'=>$menu['FoodMenuMenu']['valid_from'], 'label' => (__('Valid From:'))));
+	echo $this->Form->input('valid_until', array('value' => $menu['FoodMenuMenu']['valid_until'], 'selected'=>$menu['FoodMenuMenu']['valid_until'], 'label' => (__('Valid until:'))));
 		echo $this->Form->label(__('Valid on weekday:'));
 			$days = $menu['FoodMenuMenu']['food_menu_series_id'];
 			if ($days >= 64) {
@@ -53,9 +47,5 @@
 		echo __('Fri:').' '.$this->Form->checkbox('fr', array('class' => 'adminCheckbox', 'value' => 16, 'checked' => $fr, 'hiddenField' => true));
 		echo __('Sat:').' '.$this->Form->checkbox('sa', array('class' => 'adminCheckbox', 'value' => 32, 'checked' => $sa, 'hiddenField' => true));
 		echo __('Sun:').' '.$this->Form->checkbox('su', array('class' => 'adminCheckbox', 'value' => 64, 'checked' => $su, 'hiddenField' => true));
-		echo '</td>';
-	echo '</tr>';
-	echo '</table>';
-	echo $this->Form->button(__('Save'), array('type' => 'submit'));
-	echo $this->Form->end();
+	echo $this->Form->end(__('Save'));
 ?>

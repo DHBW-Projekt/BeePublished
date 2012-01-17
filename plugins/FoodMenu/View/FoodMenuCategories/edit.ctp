@@ -6,11 +6,6 @@
 	echo '<ul class="buttonlink">';
 	echo '<li>'.$this->Html->link((__('Add Entries')), array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuCategoriesFoodMenuEntries', 'action' => 'index', $category['FoodMenuCategory']['name'], $category['FoodMenuCategory']['id']), array('class' => 'buttonlink')).'</li>';
 	echo '</ul>';
-	echo '<table class="edit">';
-	echo '<tr>';
-	echo '<td>'.$this->Form->input('name', array('value' => $category['FoodMenuCategory']['name'], 'label' => (__('Name:')))).'</td>';
-	echo '</tr>';
-	echo '</table>';
-	echo $this->Form->button(__('Save'), array('type' => 'submit'));
-	echo $this->Form->end();
+	echo $this->Form->input('name', array('value' => $category['FoodMenuCategory']['name'], 'label' => (__('Name:'))));
+	echo $this->Form->end(__('Save'));
 ?>
