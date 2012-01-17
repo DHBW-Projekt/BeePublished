@@ -1,5 +1,6 @@
 <?php
 
+App::import('Vendor','recaptcha/recaptchalib');
 class ApplicationForMembershipComponent extends Component {
 	
 	public $uses = array('Sanitize');
@@ -58,6 +59,22 @@ class ApplicationForMembershipComponent extends Component {
 		
 			if(!$controller->ApplicationMembership->validates())
 				$data_error = true;
+		}
+		
+		//VALIDATE captcha
+		if(!$data_error){
+		
+			$privatekey = "6LfzYcwSAAAAAEH-Nr-u6qaFaNdIc6h9nlbm0i76";
+		
+			$resp = recaptcha_check_answer(	$privatekey,
+											$_SERVER["REMOTE_ADDR"],
+											$controller->data['recaptcha_challenge_field'],
+											$controller->data['recaptcha_response_field']
+			);
+		
+			if ($resp->is_valid) {
+				$data_error = true;
+			}
 		}
 		
 		//SEND email
