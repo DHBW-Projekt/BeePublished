@@ -33,7 +33,7 @@ class AppController extends Controller
     {
         $args = func_get_args();
         foreach ($args as $modelName) {
-            if (!empty($this->{$modelName}->validationErrors)) {
+            if (!empty($this->{$modelName}->validationErrors) || !empty($this->{$modelName}->data)) {
                 $this->Session->write('Validation.' . $modelName, array(
                     'controller' => $this->name,
                     'data' => $this->{$modelName}->data,
