@@ -25,8 +25,9 @@ class GuestbookPostController extends GuestbookAppController {
 			// generate acivation token for mail
 			$salt = rand(0, 100);
 			$newPost['GuestbookPost']['token'] = md5($salt . $newPost['GuestbookPost']['author'] . $salt . $newPost['GuestbookPost']['title'] . $salt);
-			// call save for model with entered values
-			if ($this->GuestbookPost->save($newPost)) {
+			// call validate for model with entered values
+			$this->GuestbookPost->set($newPost);
+			if ($this->GuestbookPost->validates()) {
 				// there are no errors -> check captcha
 				$privatekey = "6LfzYcwSAAAAAEH-Nr-u6qaFaNdIc6h9nlbm0i76";
 				$resp = recaptcha_check_answer($privatekey,
@@ -36,14 +37,12 @@ class GuestbookPostController extends GuestbookAppController {
 				if (!$resp->is_valid) {
 					// error in captcha -> set error message and redirect back to form
 					$this->Session->setFlash(__('The reCAPTCHA wasn\'t entered correctly. Please try again.'), 'default', array('class' => 'flash_failure'), 'Guestbook.Main');
-					
-					debug('hier');
 					$this->_persistValidation('GuestbookPost');
-					debug($this->Session->read('Validation.GuestbookPost.data'));
-										die('danach');
 					$this->redirect($this->referer());
 				} else {
 					// captcha was succesfull
+					// save post without validating again
+					$this->GuestbookPost->save($newPost, array('validate' => false));
 					// delete validation from session
 					$this->_deleteValidation();	
 // 					// prepare and send email to specified email with values and links
