@@ -1,4 +1,5 @@
 .newsblogcontainer{
+	clear: both;
 	min-height:30px;
 }
 
@@ -62,4 +63,16 @@
 .newsblog_entry{
 	width:100%;
 	position:relative;
+}
+
+#PageDisplayForm div{
+	float:left;
+}
+
+.newsblogreadconfig_form input select{
+	width: 100px;
+}
+
+.newsblogreadconfig_items{
+	display: none;
 }

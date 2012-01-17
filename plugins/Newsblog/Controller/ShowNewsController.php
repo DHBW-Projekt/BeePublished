@@ -33,16 +33,20 @@ class ShowNewsController extends NewsblogAppController{
 			$this->set('itemsPerPage', $itemsPerPage);
 			$this->set('newsblogTitle', $newsblogtitle);
 		} elseif($this->request->is('post') || $this->request->is('put')){
-			$contentId = $this->request->data['contentId'];
-			$newsblogTitle = $this->request->data['newsblogTitle'];
 			$itemsPerPage = $this->request->data['itemsPerPage'];
 			$previewTextLength = $this->request->data['previewTextLength'];
-			
+				
 			$this->Session->write('Newsblog.itemsPerPage', $itemsPerPage);
 			$this->Session->write('Newsblog.shorttextLength', $previewTextLength);
-			$newsblogTitleData = array('newsblogtitle' => $newsblogTitle);
-			$this->ContentValueManager->saveContentValues($contentId, $newsblogTitleData);
-			$this->redirect(array('plugin' => 'Newsblog','controller' => 'ShowNews', 'action' => 'general', $contentId));
+			
+			if(array_key_exists('contentId', $this->request->data) & array_key_exists('newsblogTitle', $this->request->data)){
+				$contentId = $this->request->data['contentId'];
+				$newsblogTitle = $this->request->data['newsblogTitle'];
+				$newsblogTitleData = array('newsblogtitle' => $newsblogTitle);
+				$this->ContentValueManager->saveContentValues($contentId, $newsblogTitleData);
+			}
+			//$this->redirect(array('plugin' => 'Newsblog','controller' => 'ShowNews', 'action' => 'general', $contentId));
+			$this->redirect($this->referer());
 		}
 		
 		

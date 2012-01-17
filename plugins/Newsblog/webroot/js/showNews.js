@@ -18,4 +18,9 @@ $(document).ready(function () {
 			window.location.reload(true);
 		}
 	});
+	
+	$('.newsblogreadconfig_button').click(function(){
+		var items = $('.newsblogreadconfig_items');
+		items.toggle('slow');
+	});
 });

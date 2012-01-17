@@ -20,6 +20,7 @@
 	$allowedActions = $this->PermissionValidation->getPermissions($pluginId);
 	$deleteAllowed = $allowedActions['Delete'];
 	$editAllowed = $allowedActions['Edit'];
+	var_dump($allowedActions['Read']);
 ?>
 <?php 
 	if($data['newsblogTitle'] != null || $data['newsblogTitle'] != ''){
@@ -31,6 +32,36 @@
 
 ?>
 
+<div class='newsblogreadconfig'>
+	<div class='newsblogreadconfig_button'>
+		<?php echo $this->Form->button("Show/Hide Configuration");?>
+	</div>
+	<div class='newsblogreadconfig_items'>
+	<?php
+	echo $this->Form->create(null, array('url' => array('plugin' => 'Newsblog', 'controller' => 'ShowNews', 'action' => 'general'), 'class' => 'newsblogreadconfig_form'));
+	//get current 
+	echo $this->Form->input(null, array(
+		'options' => array(10 => 10, 15 => 15, 20 => 20, 25 => 25),
+		'name' => 'itemsPerPage',
+		'empty' => '(choose one)',
+		'label' => 'Items per page:',
+		'default' => 10,
+		'value' => $itemsPerPage
+	));
+	
+	echo $this->Form->input(null, array(
+		'options' => array(150 => 150, 200 => 200, 250 => 250, 300 => 300, 350 => 350),
+		'name' => 'previewTextLength',
+		'empty' => '(choose one)',
+		'label' => 'Preview text length:',
+		'default' => 150,
+		'value' => $shorttextLength
+	));
+	
+	//create submit button
+	echo $this->Form->end("Save Configuration");?>
+	</div>
+</div>
 
 <div class='newsblogcontainer'>
 
@@ -65,18 +96,19 @@ if( count($data['publishedNewsEntries']) > 0){
 			<div class="newsblog_entry_subtitle"><?php echo $subtitle?></div>
 			<?php }?>
 			<div class="newsblog_entry_info">
-				by <?php echo $createdBy?> on <?php echo $createdOnDate?> at <?php echo $createdOnTime;?>
+				<p>by <?php echo $createdBy?> on <?php echo $createdOnDate?> at <?php echo $createdOnTime;?>
 				<?php 
 					if(isset($modifiedOnDate) & isset($modifiedOnTime)){
 						echo "&nbsp;&nbsp;(modified on ".$modifiedOnDate." at ".$modifiedOnTime.")";
 					}
 				?>
+				<p>
 			</div>
 			<div class="newsblog_entry_content"><?php echo $text?></div>
 			<div class="newsblog_entry_footer">
 				<?php 
 				echo $this->Html->link(
-					'> Weiterlesen',
+					'> Full Article',
 					$url.'/shownews/'.$newsEntryId.'-'.$titleForUrl,
 					array('class' => 'newsblog_entry_read_link', 'escape' => false)
 				);
@@ -111,7 +143,7 @@ if( count($data['publishedNewsEntries']) > 0){
 
 </div>
 <?php
-if($this->PermissionValidation->getUserRole() < 6 && ($allowedActions['Write'] || $allowedActions['Publish'])){
+if($this->PermissionValidation->getUserRole() < 6 && ($allowedActions['Read'] || $allowedActions['Write'] || $allowedActions['Publish'])){
 	echo '<div class="plugin_administration">';
 		echo $this->Html->link($this->Html->image('tools_small.png'),array('plugin' => 'Newsblog', 'controller' => 'ShowNews', 'action' => 'admin', $data['contentId']), array('escape' => false));
 	echo '</div>';
