@@ -68,11 +68,11 @@ class UsersController extends AppController
 					'confirmationToken' => $user['confirmation_token']
 				);
 				$this->BeeEmail->sendHtmlEmail($user['email'], 'Registration complete - Please confirm your account', $viewVars, 'user_confirmation');
-				$this->set('menu', $this->Menu->buildMenu($this, NULL));
-				$this->set('adminMode', true);
 				$this->redirect($this->referer());
 			}
         }
+        $this->set('menu', $this->Menu->buildMenu($this, NULL));
+        $this->set('adminMode', true);
     }
 
     public function activateUser($userId = null, $tokenIn = null)
