@@ -224,13 +224,12 @@ class UsersController extends AppController
     function resetPassword($username = null, $email = null)
     {
         if ($this->request->is('post') || $this->request->is('put')) {
-            $username = $this->request->data['User']['username'];
+        	$username = $this->request->data['User']['username'];
             $email = $this->request->data['User']['email'];
 
             $conditions = array('username' => $username, 'email' => $email);
             $userDB = $this->User->find('first', array('conditions' => $conditions));
-
-            if ($userDB) {
+			if ($userDB) {
                 // Generates a new password (10 characters)
                 $newpw = $this->Password->generatePassword(10);
                 //Set new password
@@ -243,6 +242,10 @@ class UsersController extends AppController
                     );
 
                     $this->BeeEmail->sendHtmlEmail($userDB['User']['email'], 'Your new password', $viewVars, 'user_new_password');
+                    /*$this->set('adminMode', false);
+                    $this->set('menu', $this->Menu->buildMenu($this, NULL));
+                    $this->set('systemPage', true);*/
+                    $this->Session->setFlash('Your password has been resetted. The new password was send to your email-adress.');
                     $this->redirect(array('action' => 'login'));
                 }
             } else {
@@ -252,6 +255,31 @@ class UsersController extends AppController
         $this->set('adminMode', false);
         $this->set('menu', $this->Menu->buildMenu($this, NULL));
         $this->set('systemPage', true);
+    }
+    
+    function changePassword($username = null){
+    	if ($this->request->is('post') || $this->request->is('put')) {
+    		$data = $this->request->data;
+    		$data['User']['id'] = $data['id'];
+    		$userId = $this->Session->read('Auth.User.id');
+    		$this->User->id = $userId;
+    		
+    		if($this->User->exists()){
+    			$userDB = $this->User->findById($this->User->id);
+    		}
+    		
+    		$this->User->set($data);
+    		if($this->User->validates()){
+    			if($this->User->saveField('password', $data['User']['password'])){
+    				$this->Session->setFlash("Your password has been changed!", 'default', array('class' => 'flash_success'));
+    				$this->redirect($this->referer());
+    			}
+    		}
+    		$this->Session->setFlash("Your password hasn't been changed!", 'default', array('class' => 'flash_failure'));
+    	}
+    	$this->set('adminMode', false);
+    	$this->set('menu', $this->Menu->buildMenu($this, NULL));
+    	$this->set('systemPage', true);
     }
 
     /**
