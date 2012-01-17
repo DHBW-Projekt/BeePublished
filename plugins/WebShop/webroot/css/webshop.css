@@ -123,10 +123,18 @@
 	width: 20px;
 }
 
+.webshop_cart_add"{
+	padding-left:20px
+} 
+
 .webshop_search_result{
 	margin-top:5px;
 	margin-bottom:5px;
 	font-style:italic;
+}
+
+.webshop_submit_order{
+	font-weight: bold	
 }
 
 .webshop_infobox{

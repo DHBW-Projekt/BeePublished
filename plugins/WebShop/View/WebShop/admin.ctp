@@ -4,18 +4,18 @@
 	 $this->Html->script('/web_shop/js/admin', false); 
 	
 	//LOAD style-sheet
-	echo $this->Html->css('/web_shop/css/webshop');
+	echo $this->Html->css('/WebShop/css/webshop');
 	
 	//LOAD menu
 	echo $this->element('admin_menu', array('contentID' => $contentID));
 	?>
 	
 	<div id="webshop_product_administration">
-		<h1>Produkt-Administration</h1>	
+		<h1><?php echo __("Product Administration"); ?></h1>	
 		<table>
 			<thead>
 				<tr>
-					<th colspan="3"><p>Produkte</p><?php echo $this->Form->postLink("Hinzufügen", array('controller' => 'WebShop', 'action' => 'create', $contentID), array('style' => 'float: right', 'class' => 'webshop_button')); ?></th>
+					<th colspan="3"><p><?php echo __('Product'); ?></p><?php echo $this->Form->postLink(__("Add"), array('controller' => 'WebShop', 'action' => 'create', $contentID), array('style' => 'float: right', 'class' => 'webshop_button')); ?></th>
 				</tr>
 			</thead>
 			<?php foreach ($products as $product): ?>

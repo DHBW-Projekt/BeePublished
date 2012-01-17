@@ -11,42 +11,42 @@
 	?>
 	
 	<div id="webshop_product_administration">
-		<h1>Offene Bestellungen</h1>	
+		<h1><?php echo __('Open Orders'); ?></h1>	
 		<table>
 			<thead>
 				<tr>
-					<th>Bestellung</th>
-					<th>Datum</th>
-					<th>Status</th>
-					<th>Aktion</th>
+					<th><?php echo __('Order'); ?></th>
+					<th><?php echo __('Date'); ?></th>
+					<th><?php echo __('Status'); ?></th>
+					<th><?php echo __('Action'); ?></th>
 				</tr>
 			</thead>
 			<?php
 				if(empty($orders)){
-					echo '<tr><td colspan="4">Keine offenen Bestellungen.</td></tr>';
+					echo '<tr><td colspan="4">'.__('No open orders.').'</td></tr>';
 				} else {
 						
 				//GET orders
 				 foreach ($orders as $order): 
 					
 					if($order['WebshopOrder']['status'] == 0)
-						$status = 'offen';
+						$status = __('open');
 					else if ($order['WebshopOrder']['status'] == 1)
-						$status = 'bearbeitet';
+						$status = __('edit');
 			
 				    echo '<tr>';
 				    
 				    //GET detailed order info
 					echo '<td>';
-						echo '<p><strong>Bestellung:</strong> '.$order['WebshopOrder']['id'].'</p>';
-						echo '<p style="margin-bottom:10px"><strong>Kunde:</strong> '.$order['User']['username'].' (ID: '.$order['User']['id'].')</p>';
+						echo '<p><strong>'.__('Order').':</strong> '.$order['WebshopOrder']['id'].'</p>';
+						echo '<p style="margin-bottom:10px"><strong>'.__('Customer').':</strong> '.$order['User']['username'].' (ID: '.$order['User']['id'].')</p>';
 
 						echo '<table>';
 						echo '<tr>';
-						echo '<th>Artikel</th>';
-						echo '<th>Menge</th>';
-						echo '<th>Einzelpreis</th>';
-						echo '<th>Gesamtpreis</th>';
+						echo '<th>'.__('Article').'</th>';
+						echo '<th>'.__('Quantity').'</th>';
+						echo '<th>'.__('Unit Price').'</th>';
+						echo '<th>'.__('Price').'</th>';
 						echo '</tr>';
 						
 						//Attributes
@@ -59,14 +59,14 @@
 							
 							echo '<tr>';
 							echo '<td>'.$position['Product']['WebshopProduct']['name'].' (ID: '.$position['Product']['WebshopProduct']['id'].')</td>';
-							echo '<td>'.$position['count'].' Stck.</td>';
+							echo '<td>'.$position['count'].'</td>';
 							echo '<td>'.number_format($position['Product']['WebshopProduct']['price'], 2, ',', '.').' '.$position['Product']['WebshopProduct']['currency'].'</td>';
 							echo '<td>'.number_format($pricePerProd, 2, ',', '.').' '.$position['Product']['WebshopProduct']['currency'].'</td>';
 							echo '</tr>';
 						}
 						
 						echo '<tr>';
-						echo '<td style="text-align: right; padding-top:15px" colspan="4"><strong>Bestellwert: '.number_format($totalPrice, 2, ',', '.').' '.$position['Product']['WebshopProduct']['currency'].'</strong></td>';
+						echo '<td style="text-align: right; padding-top:15px" colspan="4"><strong>'.__('Subtotal').': '.number_format($totalPrice, 2, ',', '.').' '.$position['Product']['WebshopProduct']['currency'].'</strong></td>';
 						echo '</tr>';
 						echo '</table>';
 					echo '</td>';
