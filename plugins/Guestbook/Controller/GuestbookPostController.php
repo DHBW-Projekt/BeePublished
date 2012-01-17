@@ -7,8 +7,7 @@ class GuestbookPostController extends GuestbookAppController {
 
 	public $name = 'Guestbook';
 	public $uses = array('Guestbook.GuestbookPost');
-	public $components = array('BeeEmail', 'Config', 'ContentValueManager');
-	public $helpers = array('Time', 'Form');
+	public $components = array('BeeEmail', 'Config', 'ContentValueManager');	
 
 	function beforeFilter()
 	{
@@ -62,21 +61,25 @@ class GuestbookPostController extends GuestbookAppController {
 					if ($send_emails == '1'){
 						// emails should be send -> get data of post again
 						$newPost = $this->GuestbookPost->read();
+						// get helpers for formatting data and links
+						$view = new View($this);
+						$Time = $view->loadHelper('Time');
+						$Form = $view->loadHelper('Form');
 						// prepare and send email to specified email with values and links
 						$to = $this->Config->getValue('email');
 						$subject = __('There is a new post for your guestbook!');
 						$viewVars = array('author' => $newPost['GuestbookPost']['author'],
 																'title' => $newPost['GuestbookPost']['title'],
 																'text' => $newPost['GuestbookPost']['text'],
-																'submitDate' => $this->Time->format('d.m.Y', $newPost['GuestbookPost']['created']) . ' ' . $this->Time->format('H:i:s',$newPost['GuestbookPost']['created']),
-																'url_release' => $this->Form->postLink('here', 
+																'submitDate' => $Time->format('d.m.Y', $newPost['GuestbookPost']['created']) . ' ' . $Time->format('H:i:s',$newPost['GuestbookPost']['created']),
+																'url_release' => $Form->postLink('here', 
 																								array('plugin' => 'Guestbook', 'controller' => 'GuestbookPost', 'action' => 'release_noAuth', $newPost['GuestbookPost']['id'], $newPost['GuestbookPost']['token']),
 																								array('title' => __('Release post'))),
-																'url_delete' => $this->Form->postLink('here', 
+																'url_delete' => $Form->postLink('here', 
 																								array('plugin' => 'Guestbook', 'controller' => 'GuestbookPost', 'action' => 'delete_noAuth', $newPost['GuestbookPost']['id'], $newPost['GuestbookPost']['token']),
 																								array('title' => __('Delete post')),
 																								__('Do you really want to delete this post?')),
-																'page_name' => $this->ConfigComponent->getValue('page_name'));
+																'page_name' => $this->Config->getValue('page_name'));
 						$viewName = 'Guestbook.notification';
 						$this->BeeEmail->sendHtmlEmail($to, $subject, $viewVars, $viewName);
 					}
