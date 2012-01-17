@@ -54,7 +54,7 @@ class ContactFormComponent extends Component {
     	
     	//LOAD model
     	$controller->loadModel("ContactForm.ContactRequest");
-
+    	
     	//CHECK request and data
     	if (!$controller->request->is('post') || !isset($controller->data['ContactForm']))
     		$data_error = true;
@@ -74,14 +74,19 @@ class ContactFormComponent extends Component {
     	}
     	
     	//VALIDATE captcha
-    	$privatekey = "6LfzYcwSAAAAAEH-Nr-u6qaFaNdIc6h9nlbm0i76";
-    	$resp = recaptcha_check_answer($privatekey,
-    								   $_SERVER["REMOTE_ADDR"],
-								       $_POST["recaptcha_challenge_field"],
-								       $_POST["recaptcha_response_field"]);
-    	
-    	if ($resp->is_valid) {
-    		$data_error = true;
+    	if(!$data_error){
+	    	
+    		$privatekey = "6LfzYcwSAAAAAEH-Nr-u6qaFaNdIc6h9nlbm0i76";
+	    	
+	    	$resp = recaptcha_check_answer($privatekey,
+	    								   $_SERVER["REMOTE_ADDR"],
+									       $controller->data['recaptcha_challenge_field'],
+									       $controller->data['recaptcha_response_field']
+	    	);
+	    	
+	    	if ($resp->is_valid) {
+	    		$data_error = true;
+	    	}
     	}
 
     	//SEND email

@@ -31,8 +31,7 @@
 			<td><?php echo $this->Form->input('body', array('label' => '', 'rows' => '4'));?></td>
 		</tr>
 		<tr>
-			<td></td>
-			<td><?php echo recaptcha_get_html($publickey);?></td>
+			<td colspan="2"><?php echo recaptcha_get_html($publickey);?></td>
 		</tr>
 	</table>
 	<?php echo $this->Form->end('Send');?>
