@@ -6,7 +6,7 @@
 	
 	//TITLE
 	echo '<div id ="websop_productcatalog">';
-	echo '<h2>Suchergebnisse</h2>';
+	echo '<h2>'.__('Search results').'</h2>';
 	
 	//CREATE search results
 	if(isset($this->Paginator))
@@ -15,9 +15,9 @@
 		$result_count = 0;
 	
 	if ($result_count > 1 || $result_count == 0) {
-		$count_lbl = 'Suchergebnisse';
+		$count_lbl = __('Search results');
 	}else{
-		$count_lbl = 'Suchergebnis';
+		$count_lbl = __('Search results');
 	}
 
 	echo '<p class="webshop_search_result">';	

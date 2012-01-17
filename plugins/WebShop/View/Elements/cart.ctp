@@ -5,15 +5,15 @@
 	
 	//CREATE cart
 	echo '<div id ="webshop_cart">';
-	echo '<h2>Einkaufswagen</h2>';
+	echo '<h2>'.__('Cart').'</h2>';
 	
 	//CHECK if cart has products
 	if(empty($data)){
-		echo '<p>Keine Elemente in Ihrem Einkaufswagen.</p>';
+		echo '<p>'.__('No element in your cart.').'</p>';
 	} else {
 		echo '<table>';
 		echo '<tr>';
-		echo '<th colspan="2">Artikel</th><th>Preis</th><th colspan="2">Menge</th>';
+		echo '<th colspan="2">'.__('Article').'</th><th>'.__('Price').'</th><th colspan="2">'.__('Amount').'</th>';
 		echo '</tr>';
 	
 		//GET all products
@@ -32,7 +32,7 @@
 	
 	//ORDER button
 	if(!empty($data)){
-		echo $this->Html->link('Bestellung abschicken', $url.'/webshop/submitOrder/'.$pluginID, array('style' => 'font-weight: bold'));
+		echo $this->Html->link(__('Submit Order'), $url.'/webshop/submitOrder/'.$pluginID, array('class' => 'webshop_submit_order'));
 	}
 		
 	

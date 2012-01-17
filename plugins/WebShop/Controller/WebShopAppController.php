@@ -1,10 +1,12 @@
 <?php
 
 class WebShopAppController extends AppController {
+	public $uses = array('Plugin');
 	
-	function beforeFilter()	{
-		$this->theme = $this->Config->getValue('active_template');
-		$this->set('design',$this->Config->getValue('active_design'));
+	protected function getPluginId(){
+		$WebShop = $this->Plugin->findByName($this->plugin);
+		$pluginId = $WebShop['Plugin']['id'];
+		return $pluginId;
 	}
 }
 

@@ -80,12 +80,12 @@ class WebShopComponent extends Component {
 			
 			//PAGINATION options
 			$controller->paginate = array(
-					        'conditions' => array('MATCH(WebshopProduct.name,WebshopProduct.description) AGAINST("'.$controller->data['Search']['Suche'].'" IN BOOLEAN MODE)'),
+					        'conditions' => array('MATCH(WebshopProduct.name,WebshopProduct.description) AGAINST("'.$controller->data['Search']['SearchInput'].'" IN BOOLEAN MODE)'),
 					        'limit' => $contentValues['NumberOfEntries']
 			);
 			
 			//WRITE search-key to session
-			$controller->Session->write('searchkey', $controller->data['Search']['Suche']);
+			$controller->Session->write('searchkey', $controller->data['Search']['SearchInput']);
 			
 			//RESULT data
 			$result['search'] = $controller->paginate('WebshopProduct');
@@ -230,7 +230,7 @@ class WebShopComponent extends Component {
 	function submitOrder($controller, $pluginID=null, $contentValues=null, $url=null){
 		
 		//Check if user is allowed to submit orders
-		if (!$controller->PermissionValidation->actionAllowed($pluginID, 'submitOrder')) {
+		if (!$controller->PermissionValidation->actionAllowed($pluginID, 'Submit Order')) {
 			$controller->redirect($url.'/webshop/cart');
 		}
 		

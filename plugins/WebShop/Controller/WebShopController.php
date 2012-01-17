@@ -42,6 +42,11 @@ class WebShopController extends WebShopAppController {
 	* Function to edit product.
 	*/
 	public function closeOrder($contentID, $orderID=null){
+		//Check permissions
+		$pluginId = $this->getPluginId();
+		$allowed = $this->PermissionValidation->actionAllowed($pluginId, 'Close Order');
+		if(!$allowed)
+			$this->redirect(array('action' => 'openOrders', $contentID));
 		
 		$this->WebshopOrder->id = $orderID;
 		
@@ -61,6 +66,11 @@ class WebShopController extends WebShopAppController {
 	* Function to create product.
 	*/
 	public function create($contentID){
+		//Check permissions
+		$pluginId = $this->getPluginId();
+		$allowed = $this->PermissionValidation->actionAllowed($pluginId, 'Create Product');
+		if(!$allowed)
+			$this->redirect(array('action' => 'admin', $contentID));
 		
 		//PROCESS cancle
 		if (isset($this->params['data']['cancel']))
@@ -101,6 +111,11 @@ class WebShopController extends WebShopAppController {
 	* Function to edit product.
 	*/
 	public function edit($contentID, $productID=null){
+		//Check permissions
+		$pluginId = $this->getPluginId();
+		$allowed = $this->PermissionValidation->actionAllowed($pluginId, 'Edit Product');
+		if(!$allowed)
+			$this->redirect(array('action' => 'admin', $contentID));
 		
 		//Attributes
 		$update_error = false;
@@ -150,6 +165,11 @@ class WebShopController extends WebShopAppController {
 	* Function to remove product.
 	*/
 	public function remove($contentID, $productID){
+		//Check permissions
+		$pluginId = $this->getPluginId();
+		$allowed = $this->PermissionValidation->actionAllowed($pluginId, 'Delete Product');
+		if(!$allowed)
+			$this->redirect(array('action' => 'admin', $contentID));
 		
 		//REMOVE picture
 		$data = $this->WebshopProduct->findById($productID);
@@ -222,6 +242,12 @@ class WebShopController extends WebShopAppController {
 	* Function to set content values.
 	*/
 	public function setContentValues($contentID) {		
+		//Check permissions
+		$pluginId = $this->getPluginId();
+		$allowed = $this->PermissionValidation->actionAllowed($pluginId, 'Set WebShop Settings');
+		if(!$allowed)
+			$this->redirect(array('action' => 'admin', $contentID));
+		
 		if (!empty($this->data)) {
 			if (isset($this->data['ContentValues']['NumberOfEntries'])) {
 				$this->ContentValueManager->saveContentValues($contentID, array('NumberOfEntries' => $this->data['ContentValues']['NumberOfEntries']));
@@ -236,14 +262,5 @@ class WebShopController extends WebShopAppController {
 		
 		$this->set('contentID', $contentID);
 		$this->render('settings');
-	}
-	
-	/**
-	 * Function BeforeFilter.
-	 */
-	public function beforeFilter(){
-		parent::beforeFilter();
-		
-		$this->Auth->allow('*');
 	}
 }
