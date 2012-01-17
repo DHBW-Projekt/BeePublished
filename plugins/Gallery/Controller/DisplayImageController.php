@@ -23,6 +23,9 @@ class DisplayImageController extends AppController {
 	public function setImage($contentId, $pictureId){
 		//debug("setImage:".$contentId." ".$pictureId);
 		$this->ContentValueManager->saveContentValues($contentId, array('pictureID' => $pictureId));
+		
+		$this->Session->setFlash('Image setted');
+		
 		$this->redirect($this->referer());
 	}
 	
