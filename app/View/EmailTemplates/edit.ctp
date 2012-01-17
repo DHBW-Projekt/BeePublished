@@ -1,26 +1,20 @@
 <?php
-
-echo $this->element('config-menu');
-
-if (isset($newsletter)){
+	echo $this->element('config-menu');
 	
-	$this->Html->script('/ckeditor/ckeditor', false);;
-	$this->Html->script('/ckeditor/adapters/jquery',false);
-	$this->Html->script('/js/ckeditor',false);
+	$this->Html->script('ckeditor/ckeditor', false);;
+	$this->Html->script('ckeditor/adapters/jquery',false);
+	$this->Html->script('/js/admin/ckeditor',false);
 	
-	echo $this->Form->create('editor', array(
+	echo $this->Form->create('EmailTemplate', array(
 		'url' => array(
     		'controller' => 'EmailTemplates',
-    		'action' => 'save' , $newsletter['id'])));
-	echo $this->Form->input('EmailTemplates.Title', array(
-		'label' => 'Betreff:', 
-		'value' => $newsletter['subject']));
-	echo $this->Form->textarea('NewsletterLetter.contentEdit', array(
+    		'action' => 'save' , $selectedTemplate['EmailTemplate']['id'])));
+	echo $this->Form->input('name', array(
+		'label' => 'Name:', 
+		'value' => $selectedTemplate['EmailTemplate']['name']));
+	echo $this->Form->textarea('content', array(
 		'label' => '', 
-		'value' => $newsletter['content'],
+		'value' => $selectedTemplate['EmailTemplate']['content'],
 		'rows' => '30'));
-	echo $this->Form->button('Save', array(
-		'type' => 'submit', 
-		'value' => 'save'));
-	echo $this->Form->end();
-}
+	echo $this->Form->end('Save');
+?>

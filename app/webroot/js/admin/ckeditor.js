@@ -7,7 +7,7 @@ $(document).ready(function () {
          resize_enabled : false,
          toolbarCanCollapse : false
         });
-    $('#EmailTemplatesEdit').ckeditor(function () {
+    $('#EmailTemplateContent').ckeditor(function () {
     	},
     	{
     });
