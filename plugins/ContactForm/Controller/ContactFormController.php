@@ -7,6 +7,13 @@ App::uses('CakeEmail', 'Network/Email');
  * @author Corinna Knick
  */
 class ContactFormController extends AppController {
+
+   /**
+	* Admin View
+	*/
+	public function admin() {
+	
+	}
 	
    /**
 	* Before-Filter
