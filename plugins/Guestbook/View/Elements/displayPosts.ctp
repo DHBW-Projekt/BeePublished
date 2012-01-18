@@ -30,8 +30,6 @@
 			if ($paging_params['count'] > 0){
 				echo 'Page ';
 				$currentPageNumber = $this->Paginator->current();
-// 				$PaginatorParams = $this->Paginator->params();
-// 				$lastPageNumber = $PaginatorParams['pageCount'];
 				if ($this->Paginator->hasPrev()){
 					echo $this->Html->link(__('<<'), $url . '/page:' . ($currentPageNumber - 1));
 					echo '&nbsp';
