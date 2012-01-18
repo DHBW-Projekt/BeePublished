@@ -6,6 +6,7 @@ App::uses('AppController', 'Controller');
  */
 class EmailTemplatesController extends AppController
 {
+	
     function beforeFilter()
     {
         parent::beforeFilter();
@@ -48,22 +49,41 @@ class EmailTemplatesController extends AppController
     
     function save($templateId) {
     	$this->EmailTemplate->set($this->request->data);
-    	$pattern = "/\[img\](.*)\[\/img\]/Usi";
-		$replacement = "<img src=\"\\1\"/>";
-		$string = preg_replace($pattern, $replacement, $string);
     	if(isset($templateId)) {
     		$this->EmailTemplate->set('id',$templateId);
-    	}	
-    	if ($this->EmailTemplate->save()) {
-        	$this->Session->setFlash(__('Successfully saved'));
-        } else {
-            $this->Session->setFlash(__('Saving failed'));
+    	}
+    	if(!($this->checkContent($this->request->data['EmailTemplate']['content']))) {
+    		$this->Session->setFlash(__('Saving failed. You have to include the text "EMAILTEXTCONTENT" once.'));
+    		$this->redirect($this->referer());
+    	} else {
+    		$content = $this->prepareContent($this->request->data['EmailTemplate']['content']);
+    		$this->EmailTemplate->set('content',$content);
+	    	if ($this->EmailTemplate->save()) {
+	        	$this->Session->setFlash(__('Successfully saved'));
+	        } else {
+	            $this->Session->setFlash(__('Saving failed'));
+			}
+			if(isset($templateId)) {
+				$this->redirect($this->referer());			
+			} else {
+				$this->redirect('/email_templates/index/');
+			}    		
+    	}   	
+    }
+    
+	function prepareContent($checkString) {
+    	$pattern = "/src=\"\/uploads\//";
+		$replacement = "src=\"http://".env('SERVER_NAME')."/uploads/";
+		$string = preg_replace($pattern, $replacement, $checkString);
+		return $string;
+    }
+    	
+    function checkContent($checkString) {
+		$pattern = "/EMAILTEXTCONTENT/";
+		if(preg_match($pattern, $checkString) != 0) {
+			return true;
 		}
-		if(isset($templateId)) {
-			$this->redirect($this->referer());			
-		} else {
-			$this->redirect('/email_templates/index/');
-		}
+		return false;
     }
     
     function delete($templateId) {

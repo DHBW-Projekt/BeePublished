@@ -2,6 +2,7 @@ $(document).ready(function () {
     $('#EmailTemplatesPreview').ckeditor(function () {
         },
         {
+         customConfig : '',
          readOnly : 'true',
          toolbar : [],
          resize_enabled : false,
