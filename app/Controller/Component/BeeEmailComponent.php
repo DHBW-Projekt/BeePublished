@@ -43,9 +43,8 @@ class BeeEmailComponent extends Component{
 				$emailFrom = $emailFrom.'.de';
 			}
 		}
-		
 		$preparedText = $this->prepareContent($text);
-		
+				
 		$email = new CakeEmail();
 		$email->template('beepublished', $emailLayout);
 		$email->emailFormat('html');
@@ -76,4 +75,11 @@ class BeeEmailComponent extends Component{
 		$email->subject($subject);
 		$email->send($text);
 	}
+	
+	function prepareContent($checkString) {
+    	$pattern = "/src=\"\/uploads\//";
+		$replacement = "src=\"http://".env('SERVER_NAME')."/uploads/";
+		$string = preg_replace($pattern, $replacement, $checkString);
+		return $string;
+    }
 }
