@@ -11,7 +11,13 @@ textarea#PluginTextText {
 	margin-bottom: 30px;
 	color: #cccccc;
 }
-.scrolltable tbody{
-	height:50px;
-	overflow:scroll;
+table.newsletters{
+	
+}
+table#recipients{
+	width:400px;	
+}
+
+table#newsletters{
+	width:400px;
 }

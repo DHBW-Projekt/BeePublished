@@ -44,16 +44,16 @@ class SubscriptionController extends AppController {
  				$this->NewsletterRecipient->set($recipient);
  				if($this->NewsletterRecipient->save()) {
  					if ($action == 'add'){
- 						$this->Session->setFlash('The user was added successfully.', 'default', array(
+ 						$this->Session->setFlash(__('The recipient was added successfully.'), 'default', array(
  										'class' => 'flash_success'), 
  										'NewsletterRecipient');
  					} else {
- 						$this->Session->setFlash('The user was removed successfully.', 'default', array(
+ 						$this->Session->setFlash(__('The recipient was removed successfully.'), 'default', array(
  									'class' => 'flash_success'), 
  									'NewsletterRecipient');
  					}
  				} else {
- 					$this->Session->setFlash('The user was not added.', 'default', array(
+ 					$this->Session->setFlash(__('The recipient was not added.'), 'default', array(
  								'class' => 'flash_failure'), 
  								'NewsletterRecipient');
  					$this->_persistValidation('NewsletterRecipient');
@@ -95,16 +95,16 @@ class SubscriptionController extends AppController {
  			$this->NewsletterRecipient->set($recipient);
  			if($this->NewsletterRecipient->save()) {
  				if ($action == 'add'){
- 					$this->Session->setFlash('The user was added successfully.', 'default', array(
+ 					$this->Session->setFlash(__('You have subscribed successfully.'), 'default', array(
  										'class' => 'flash_success'), 
  										'NewsletterRecipient');
  				} else {
- 					$this->Session->setFlash('The user was removed successfully.', 'default', array(
+ 					$this->Session->setFlash('You have unsubscribed successfully.', 'default', array(
  									'class' => 'flash_success'), 
  									'NewsletterRecipient');
  				}
  			} else {
- 				$this->Session->setFlash('The user was not added.', 'default', array(
+ 				$this->Session->setFlash('The subscription was not successful.', 'default', array(
  								'class' => 'flash_failure'), 
  								'NewsletterRecipient');
  				$this->_persistValidation('NewsletterRecipient');
@@ -143,16 +143,16 @@ class SubscriptionController extends AppController {
  			$this->NewsletterRecipient->set($recipient);
  			if($this->NewsletterRecipient->save()) {
  				if ($action == 'add'){
- 					$this->Session->setFlash('The user was added successfully.', 'default', array(
+ 					$this->Session->setFlash(__('The user was added successfully.'), 'default', array(
  							'class' => 'flash_success'), 
  							'NewsletterRecipient');
  				} else {
- 					$this->Session->setFlash('The user was removed successfully.', 'default', array(
+ 					$this->Session->setFlash(__('The user was removed successfully.'), 'default', array(
  							'class' => 'flash_success'), 
  						'NewsletterRecipient');
  				}
  			} else {
- 				$this->Session->setFlash('The user was not added.', 'default', array(
+ 				$this->Session->setFlash(__('The user was not added.'), 'default', array(
  						'class' => 'flash_failure'), 
  						'NewsletterRecipient');
  				$this->_persistValidation('NewsletterRecipient');

@@ -15,10 +15,10 @@ class NewsletterRecipient extends AppModel {
             	'rule'    => 'isUnique',
             	'message' => 'This e-mail address is already registered.',
          	),
-		'name_notEmpty' => array(
+		'email_notEmpty' => array(
 	                        'rule'    => 'notEmpty', 
 	                         'required' => true,
-	                      'message' => 'This field name has to be filled.'
+	                      'message' => 'This field email has to be filled.'
 			),
         	'email_address_verification' => array(
             	'rule'    => array('email'),

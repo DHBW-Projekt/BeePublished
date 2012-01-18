@@ -23,11 +23,11 @@ class NewsletterRecipientsController extends AppController {
 		// save updated recipient
 		$this->NewsletterRecipient->set($recipient);
 		if($this->NewsletterRecipient->save()){
-			$this->Session->setFlash('The recipient was deleted successfully.', 'default', array(
+			$this->Session->setFlash(__('The recipient was deleted successfully.'), 'default', array(
 				'class' => 'flash_success'), 
 				'RecipientDeleted');
 		} else {
-			$this->Session->setFlash('The recipient couldn\'t be deleted.', 'default', array(
+			$this->Session->setFlash(__('The recipient couldn\'t be deleted.'), 'default', array(
 				'class' => 'flash_failure'), 
 				'RecipientDeleted');
 		}
@@ -64,16 +64,16 @@ class NewsletterRecipientsController extends AppController {
 			$this->NewsletterRecipient->set($recipient);
 			if($this->NewsletterRecipient->save()) {
 				if ($action == 'add'){
-					$this->Session->setFlash('The user was added successfully.', 'default', array(
+					$this->Session->setFlash(__('The user was added successfully.'), 'default', array(
 						'class' => 'flash_success'), 
 						'NewsletterRecipient');
 				} else {
-					$this->Session->setFlash('The user was removed successfully.', 'default', array(
+					$this->Session->setFlash(__('The user was removed successfully.'), 'default', array(
 						'class' => 'flash_success'), 
 					'NewsletterRecipient');
 				}
 			} else {
-				$this->Session->setFlash('The user was not added.', 'default', array(
+				$this->Session->setFlash(__('The user was not added.'), 'default', array(
 					'class' => 'flash_failure'), 
 					'NewsletterRecipient');
 				$this->_persistValidation('NewsletterRecipient');
@@ -98,11 +98,11 @@ class NewsletterRecipientsController extends AppController {
 					// save updated recipient
 					$this->NewsletterRecipient->set($recipient);
 					if($this->NewsletterRecipient->save()){
-						$this->Session->setFlash('The recipient '.$recipient['NewsletterRecipient']['email'].' was deleted successfully.', 'default', array(
+						$this->Session->setFlash(__('The selected recipients have been deleted successfully.'), 'default', array(
 							'class' => 'flash_success'), 
 							'RecipientDeleted');
 					} else {
-						$this->Session->setFlash('The recipient couldn\'t be deleted.', 'default', array(
+						$this->Session->setFlash(__('The recipients couldn\'t be deleted.'), 'default', array(
 							'class' => 'flash_failure'), 
 							'RecipientDeleted');
 					}

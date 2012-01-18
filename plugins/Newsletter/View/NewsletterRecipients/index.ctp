@@ -7,24 +7,25 @@ echo $this->Html->css('/newsletter/css/newsletter', NULL, array('inline' => fals
 $validationErrors = $this->Session->read('Validation.NewsletterRecipient.validationErrors');
 
 echo $this->element('admin_menu', array('contentID' => $contentID));
-echo '<h2>Add recipient:</h2>';
+echo '<h2>'.__('Add recipient:').'</h2>';
 echo $this->Session->flash('NewsletterRecipient');
 echo $this->Form->create('add',array(
 	'url' => array(
 		'plugin' => 'Newsletter',
 		'controller' => 'NewsletterRecipients',
 		'action' => 'add')));
-echo $this->Form->input('NewsletterRecipient.email', array('label' => 'E-Mail:'));
-if (isset($validationErrors)){
+echo $this->Form->input('NewsletterRecipient.email', array(
+	'label' => __('E-Mail:')));
+if (isset($validationErrors['email'][0])){
 	echo $this->Html->div('validation_error',$validationErrors['email'][0]);
 };
-echo $this->Form->end('Add');
+echo $this->Form->end(__('Add'));
 echo '<br><hr><br>';
-echo '<h2>Subscriptions:</h2>';
+echo '<h2>'.__('Subscriptions:').'</h2>';
 echo $this->Session->flash('RecipientDeleted');
 echo $this->Form->create('search');
 echo $this->Form->input('NewsletterRecipient.email', array(
-	'label' => 'Search Recipient:',
+	'label' => __('Search Recipient:'),
 	'id' => 'search_recipient'));
 echo $this->Form->end();
 
@@ -32,8 +33,8 @@ echo '<table id="recipients">';
 	echo '<thead>';
 		echo '<tr>';
 			echo '<th></th>';
-			echo '<th>Email</th>';
-			echo '<th>Username</th>';
+			echo '<th>'.__('Email').'</th>';
+			echo '<th>'.__('Username').'</th>';
 			echo '<th></th>';
 		echo '</tr>';
 	echo '</thead>';
@@ -77,7 +78,7 @@ echo '<table id="recipients">';
 						'width' => 20));
 					echo '</td>';
 					echo '<td>';
-						echo $this->Form->submit('Delete selection', array(
+						echo $this->Form->submit(__('Delete'), array(
 							'height' => 20,
 							'width' => 20,
 							'alt' => __('[x]Delete')));

@@ -17,6 +17,9 @@ class NewsletterSettingsController extends AppController {
 			$text = $this->data['text'];
 			$contentValue['text'] = $text; 
 			$this->ContentValueManager->saveContentValues($contentID, $contentValue);
+			$this->Session->setFlash(__('The text was saved successfully.'), 'default', array(
+				'class' => 'flash_success'), 
+				'TextSaved');
 			$this->redirect($this->referer());
 		}
 	}

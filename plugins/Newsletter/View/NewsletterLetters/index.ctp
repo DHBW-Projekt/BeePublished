@@ -6,25 +6,25 @@ echo $this->Html->css('/newsletter/css/newsletter', NULL, array('inline' => fals
 
 echo $this->element('admin_menu', array('contentID' => $contentID));
 
-echo '<h2>Create new newsletter:</h2>';
+echo '<h2>'.__('Create new newsletter:').'</h2>';
 
 echo $this->Form->create('createNewsletter', array(
 			'url' => array(
 				'plugin' => 'Newsletter',
 	    		'controller' => 'NewsletterLetters',
-	    		'action' => 'create', $contentID)));
-echo $this->Form->submit('Create newsletter');
+	    		'action' => 'create', $contentID, 'new')));
+echo $this->Form->submit(__('Create newsletter'));
 echo $this->Form->end();
 
 echo '<br><hr><br>';
-echo '<h2>Newsletters:</h2>';
+echo '<h2>'.__('Newsletters:').'</h2>';
 echo '<br>';
 
 echo $this->Session->flash('NewsletterDeleted');
 
 echo $this->Form->create('search');
 echo $this->Form->input('NewsletterLetter.subject', array(
-	'label' => 'Search Newsletter:',
+	'label' => __('Search Newsletter:'),
 	'id' => 'search_newsletter'));
 echo $this->Form->end();
 
@@ -33,9 +33,9 @@ echo '<table id="newsletters">';
 echo '<thead>';
 	echo '<tr>';
 		echo '<th></th>';
-		echo '<th>Subject</th>';
-		echo '<th>Date</th>';
-		echo '<th>Status</th>';
+		echo '<th>'.__('Subject').'</th>';
+		echo '<th>'.__('Date').'</th>';
+		echo '<th>'.__('Status').'</th>';
 		echo '<th></th>';
 		echo '<th></th>';
 		echo '<th></th>';
@@ -68,9 +68,9 @@ if (isset($newsletters)){
 			echo '</td>';
 			echo '<td>';
 				if ($newsletter['NewsletterLetter']['draft'] == 1){
-					echo 'draft';
+					echo __('draft');
 				} else {
-					echo 'sent';
+					echo __('sent');
 				}
 			echo '</td>';
 			echo '<td>';
@@ -109,7 +109,6 @@ if (isset($newsletters)){
 								__('Do you really want to delete this newsletter?'));
 				echo 	'</td>';
 			} else {
-				echo '<div id="disabled" disabled>';
 				echo '<td>';
 				echo $this->Html->image('/app/webroot/img/edit_disabled.png', array(
 					'style' => 'float: left', 
@@ -126,10 +125,6 @@ if (isset($newsletters)){
 					'width' => 20, 
 					'alt' => __('[x]Delete')));
 				echo '</td>';
-				echo '<td style="visibility:hidden">';
-					echo $newsletter['NewsletterLetter']['content'];
-				echo '</td>';
-				echo '</div>';
 			};
 			echo 	'</tr>';
 	} //foreach	
@@ -142,7 +137,7 @@ if (isset($newsletters)){
 							'width' => 20));
 	echo '</td>';
 	echo '<td>';
-	echo $this->Form->submit('Delete selection', array(
+	echo $this->Form->submit(_('Delete'), array(
 								'height' => 20,
 								'width' => 20,
 								'alt' => __('[x]Delete')));

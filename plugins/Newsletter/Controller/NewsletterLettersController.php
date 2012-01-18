@@ -7,7 +7,7 @@ class NewsletterLettersController extends AppController {
 	var $layout = 'overlay';
 	
 	public $name = 'newsletterLetters';	
-	public $uses = array('Newsletter.NewsletterLetter','Newsletter.NewsletterRecipient');
+	public $uses = array('Newsletter.NewsletterLetter','Newsletter.NewsletterRecipient','Newsletter.EmailTemplate', 'Newsletter.EmailTemplateHeader');
 	
 // 	public $paginate = array(
 // 			'NewsletterLetter' => array(
@@ -33,27 +33,67 @@ class NewsletterLettersController extends AppController {
 		$this->set('contentID', $contentID);
 	}
 	
+	public function saveOrPreview($contentID, $id){
+		if (isset($this->params['data']['save'])){
+			$this->save($contentID, $id);
+		} else {
+			// save newsletter to show it in preview
+			if ($this->request->is('post')){
+				$newsletter2 = $this->request->data['NewsletterLetter'];
+				$newsletter = $this->NewsletterLetter->findById($id);
+				if ($newsletter2['subject'] != ''){
+					$newsletter['NewsletterLetter']['subject'] = $newsletter2['subject'];
+				};
+				$newsletter['NewsletterLetter']['content'] = $newsletter2['contentEdit'];
+				$newsletter['NewsletterLetter']['draft'] = 1;
+				$date = date('Y-m-d', time());
+				$newsletter['NewsletterLetter']['date'] = $date;
+				$content = $newsletter['NewsletterLetter']['content'];
+				$id = $newsletter['NewsletterLetter']['id'];
+				$this->NewsletterLetter->set($newsletter);
+				$newsletter = $this->NewsletterLetter->save();
+			}
+			// open preview:
+			$this->redirect('/plugin/Newsletter/NewsletterLetters/preview/'.$contentID.'/'.$id);
+		};
+		$this->redirect($this->referer());
+	}
+	
+	public function sendOrEdit($contentID, $id){
+		if (isset($this->params['data']['send'])){
+			$this->send($contentID, $id);
+		} else {
+			$this->redirect('/plugin/Newsletter/NewsletterLetters/edit/'.$contentID.'/'.$id);
+		};
+		$this->redirect($this->referer());
+	}
+	
 	public function save($contentID, $id){
 		if ($this->request->is('post')){
 			$newsletter2 = $this->request->data['NewsletterLetter'];
 			$newsletter = $this->NewsletterLetter->findById($id);
-			$newsletter['NewsletterLetter']['subject'] = $newsletter2['subject'];
+			if ($newsletter2['subject'] != ''){
+				$newsletter['NewsletterLetter']['subject'] = $newsletter2['subject'];
+			};
 			$newsletter['NewsletterLetter']['content'] = $newsletter2['contentEdit'];
 			$newsletter['NewsletterLetter']['draft'] = 1;
 			$date = date('Y-m-d', time());
 			$newsletter['NewsletterLetter']['date'] = $date;
+			$content = $newsletter['NewsletterLetter']['content'];
+			$id = $newsletter['NewsletterLetter']['id'];
 			$this->NewsletterLetter->set($newsletter);
 			if($newsletter = $this->NewsletterLetter->save()){
-				$this->Session->setFlash('The newsletter was saved successfully.', 'default', array(
+				$this->Session->setFlash(__('The newsletter was saved successfully.'), 'default', array(
 					'class' => 'flash_success'), 
 					'NewsletterSaved');
 			} else {
-				$this->Session->setFlash('The newsletter couldn\'t be saved.', 'default', array(
+				$this->Session->setFlash(__('The newsletter couldn\'t be saved.'), 'default', array(
 					'class' => 'flash_failure'), 
 					'NewsletterSaved');
+				$this->_persistValidation('NewsletterLetter');
 			}
 			$this->redirect(array(
-				'action' => 'edit', $contentID, $newsletter['NewsletterLetter']['id']));
+				'action' => 'edit', $contentID, $id));
 		}
 	}
 	
@@ -66,25 +106,33 @@ class NewsletterLettersController extends AppController {
 			$newsletter['NewsletterLetter']['draft'] = 1;
 			$date = date('Y-m-d', time());
 			$newsletter['NewsletterLetter']['date'] = $date;
+			$content = $newsletter['NewsletterLetter']['content'];
 			$this->NewsletterLetter->set($newsletter);
 			if($newsletter = $this->NewsletterLetter->save()){
-				$this->Session->setFlash('The newsletter was saved successfully.', 'default', array(
+				$this->Session->setFlash(__('The newsletter was saved successfully.'), 'default', array(
 					'class' => 'flash_success'), 
 					'NewsletterSaved');
+				$this->redirect(array(
+					'action' => 'edit', $contentID, $newsletter['NewsletterLetter']['id']));
 			} else {
-				$this->Session->setFlash('The newsletter couldn\'t be saved.', 'default', array(
+				$this->Session->setFlash(__('The newsletter couldn\'t be saved.'), 'default', array(
 					'class' => 'flash_failure'), 
 					'NewsletterSaved');
+				$this->_persistValidation('NewsletterLetter');
+				$this->redirect(array(
+								'action' => 'create', $contentID, $content));
 			}
-			$this->redirect(array(
-					'action' => 'edit', $contentID, $newsletter['NewsletterLetter']['id']));
+			
 		}
 	}
 	
-	public function create($contentID){
+	public function create($contentID, $content){
+		if ($content == 'new'){
+			$content = NULL;
+		};
 		$newsletter = array(
 			'subject' => NULL,
-			'content' => NULL,
+			'content' => $content,
 			'id' => 'new');
 		$this->set('newsletter', $newsletter);
 		$this->set('contentID', $contentID);
@@ -99,11 +147,11 @@ class NewsletterLettersController extends AppController {
 	
 	public function delete($contentID, $id){
 		if($this->NewsletterLetter->delete($id)){
-			$this->Session->setFlash('The newsletter has been deleted', 'default', array(
+			$this->Session->setFlash(__('The newsletter has been deleted'), 'default', array(
 				'class' => 'flash_success'), 
 				'NewsletterDeleted');
 		} else {
-			$this->Session->setFlash('The newsletter couldn\'t be deleted', 'default', array(
+			$this->Session->setFlash(__('The newsletter couldn\'t be deleted'), 'default', array(
 				'class' => 'flash_failure'), 
 				'NewsletterDeleted');
 		}
@@ -137,7 +185,7 @@ class NewsletterLettersController extends AppController {
 		$newsletter['NewsletterLetter']['draft'] = 0;
 		$this->NewsletterLetter->set($newsletter);
 		$this->NewsletterLetter->save();
-		$this->Session->setFlash('The newsletter has been sent successful.', 'default', array(
+		$this->Session->setFlash(__('The newsletter has been sent successful.'), 'default', array(
 										'class' => 'flash_success'), 
 										'NewsletterSent');
 		$this->redirect($this->referer());
@@ -156,11 +204,11 @@ class NewsletterLettersController extends AppController {
 				$id = $newsletter['NewsletterLetter']['id'];
 				if ($selectedNewsletters[$id] == 1){
 					if($this->NewsletterLetter->delete($id)){
-						$this->Session->setFlash('The selected newsletters have been deleted', 'default', array(
+						$this->Session->setFlash(__('The selected newsletters have been deleted'), 'default', array(
 							'class' => 'flash_success'), 
 							'NewsletterDeleted');
 					} else {
-						$this->Session->setFlash('The selected newsletters couldn\'t be deleted', 'default', array(
+						$this->Session->setFlash(__('The selected newsletters couldn\'t be deleted'), 'default', array(
 							'class' => 'flash_failure'), 
 						'NewsletterDeleted');
 					}

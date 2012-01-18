@@ -7,7 +7,7 @@ $this->Html->script('/ckeditor/ckeditor', false);
 $this->Html->css('/newsletter/css/newsletter', NULL, array('inline' => false));
 
 echo '<div id="subscription">';
-	echo '<h1> Newsletter </h1>';
+	echo '<h1>'.__('Newsletter').'</h1>';
 	echo $data['text'];
 	echo '<br><br>';
 	if (!($user)){	
@@ -16,9 +16,9 @@ echo '<div id="subscription">';
 				'plugin' => 'Newsletter',
 				'controller' => 'Subscription',
 				'action' => 'guestUnSubscribe')));
-		echo $this->Form->input('NewsletterRecipient.email', array('label' => 'E-Mail:'));
+		echo $this->Form->input('NewsletterRecipient.email', array('label' => __('E-Mail:')));
 		echo $this->Html->div('validation_error',$validationErrors['email'][0]);
-   		echo $this->Form->end('(Un)subscribe');
+   		echo $this->Form->end(__('(Un)subscribe'));
    		echo $this->Session->flash('NewsletterRecipient');
     } 
 	// 	if current user is registered
@@ -31,11 +31,11 @@ echo '<div id="subscription">';
     			'controller' => 'Subscription',
     			'action' => 'userUnSubscribe')));
 		if ((isset($userAsRecipient)) and ($userAsRecipient['NewsletterRecipient']['active'] == 1)){
-			echo 'You subscribed for the newsletter';
-			echo $this->Form->end('Unsubscribe');
+			echo __('You subscribed for the newsletter');
+			echo $this->Form->end(__('Unsubscribe'));
 		} else {
-			echo 'You didn\'t subscribe for the newsletter';
-			echo $this->Form->end('Subscribe');
+			echo __('You didn\'t subscribe for the newsletter');
+			echo $this->Form->end(__('Subscribe'));
 		};
 		echo $this->Session->flash('NewsletterRecipient');
 	};
