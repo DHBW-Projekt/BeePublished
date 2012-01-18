@@ -74,10 +74,6 @@ class ViewController extends FoodMenuAppController {
 					}
 					
 				} else $refererurl = str_replace('#', '', $data['refererurl']); // replace # in url
-        		
-				if (condition) {
-					;
-				}
 				
 				if(substr($refererurl, -1, 1) != '/') { 
 					$refererurl = $refererurl . '/';
