@@ -20,7 +20,7 @@ class FoodMenuMenusController extends AppController {
 	}
 	
 	function create() {
-		if ($this->request->is('post')) {
+		if ($this->request->is('post') && isset($this->request->data['FoodMenuMenu'])) {
 			
 			$saveData = $this->request->data;
 			$series_id = 0;
@@ -39,7 +39,7 @@ class FoodMenuMenusController extends AppController {
 	function edit($name = null, $id = null) {
 		
 		//Has any form data been POSTed?
-    	if ($this->request->is('post')) {
+    	if ($this->request->is('post') && isset($this->request->data['FoodMenuMenu'])) {
         	// If the form data can be validated and saved...
         	$saveData = $this->request->data;
 			$series_id = 0;

@@ -6,17 +6,19 @@
 	echo $this->Form->create('FoodMenuCreateCategory', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuCategories', 'action' => 'create')));
 	echo '<h1>'.(__('Create new category')).'</h1>';
 	echo $this->Form->end(__('New Category'));
-	echo '<hr>';
-	echo $this->Form->create('FoodMenuCategory', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuCategories', 'action' => 'deleteMultiple')));
-//	echo '<div id="buttonlink" class="buttonlink">';
+	echo '<br /><hr /><br />';
+	echo '<h1>'.(__('Categories')).'</h1>';
 	echo '<form>Search category: <input type="text" id="search" /> </form>';
-//	echo '</div>';
+	echo $this->Form->create('FoodMenuCategory', array(
+								'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuCategories', 'action' => 'deleteMultiple'), 
+								'onsubmit' => 'return confirm(\''. __('Do you really want to delete the selected categories?') .'\');'));
+
 	?>
 	<table id="tableEntries">
 	<thead>
 	<tr>
 		<th> </th>
-		<th>Name</th>
+		<th><?php echo __('Name'); ?></th>
 		<th> </th>
 		<th> </th>
 	</tr>
@@ -44,7 +46,7 @@
 	<tfoot>
 		<tr>
 			<td><?php echo $this->Html->image('/app/webroot/img/arrow.png', array('alt' => 'arrow')); ?></td>
-			<td colspan="3"><?php echo $this->Form->button(__('Delete'), array('onClick' => 'confirmDelete();')); ?></td>
+			<td colspan="3"><?php echo $this->Form->submit(__('Delete')); ?></td>
 		</tr>
 	</tfoot>
 	</table>

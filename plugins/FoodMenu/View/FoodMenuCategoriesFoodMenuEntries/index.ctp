@@ -18,7 +18,7 @@
 	foreach ($entries['used'] as $usedEntry) {
 		echo '<tr>';
 		echo '<td>' . $usedEntry['FoodMenuEntry']['name'] . '</td>';
-		echo '<td>' . $this->Html->image('/app/webroot/img/delete.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[+]Add', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuCategoriesFoodMenuEntries', 'action' => 'delete', $usedEntry['FoodMenuCategoriesFoodMenuEntry']['ID']))) . '</td>';
+		echo '<td>' . $this->Html->image('/app/webroot/img/delete.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[x]Delete', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuCategoriesFoodMenuEntries', 'action' => 'delete', $usedEntry['FoodMenuCategoriesFoodMenuEntry']['ID']))) . '</td>';
 		echo '</tr>';
 	}?>
 </tbody>

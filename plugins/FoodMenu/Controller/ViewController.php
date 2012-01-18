@@ -65,7 +65,7 @@ class ViewController extends AppController {
 					if (substr($refererurl, -1, 1) != '/') {
 						if (preg_match($regex, substr($refererurl, -10, 10))) {
 							$refererurl = str_replace(substr($refererurl, -10, 10), '', $refererurl . '/view/');
-						} else $refererurl = $refererurl . '/view/';
+						} else $refererurl = $refererurl . 'view/';
 					} else {
 						if (preg_match($regex, substr($refererurl, -11, 10))) {
 							$refererurl = str_replace(substr($refererurl, -11, 11), '', $refererurl . '/view/');

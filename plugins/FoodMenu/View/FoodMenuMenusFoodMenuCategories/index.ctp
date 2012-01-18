@@ -18,7 +18,7 @@
 	foreach ($categories['used'] as $usedCategory) {
 		echo '<tr>';
 		echo '<td>' . $usedCategory['FoodMenuCategory']['name'] . '</td>';
-		echo '<td>' . $this->Html->image('/app/webroot/img/delete.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[+]Add', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenusFoodMenuCategories', 'action' => 'delete', $usedCategory['FoodMenuMenusFoodMenuCategory']['ID']))) . '</td>';
+		echo '<td>' . $this->Html->image('/img/delete.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[x]Delete', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenusFoodMenuCategories', 'action' => 'delete', $usedCategory['FoodMenuMenusFoodMenuCategory']['ID']))) . '</td>';
 		echo '</tr>';
 	}?>
 </tbody>

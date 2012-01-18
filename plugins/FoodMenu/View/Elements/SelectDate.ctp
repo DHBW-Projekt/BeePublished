@@ -8,13 +8,11 @@
  }
  echo '<p>';
  echo $this->Html->link((__('today')), '#', array('onClick' => 'setToday()', 'id' => 'today'));
- //echo $this->Form->input('datepicker');
  echo '   <input id="datepicker" value="' . (__('mm-dd-yyyy')) . '" name="data[datepicker]" type="text" size="10"/>   ';     
  echo $this->Html->link((__('tomorrow')), '#', array('onClick' => 'setTomorrow()', 'id' => 'tomorrow'));
- //echo $this->Form->button((__('Select date')), array('type' => 'submit', 'id' => 'selectDate'));
-
+ echo $this->Form->button((__('Select date')), array('type' => 'submit', 'id' => 'selectDate'));
  echo $this->Html->scriptBlock('$(function() {$( "#datepicker" ).datepicker( {showOn: "button", buttonImageOnly: true, buttonImage: window.app.webroot+"img/calendar.png"} );});',array('inline'=>'true'));
- echo $this->Form->end('Select date');
+ echo $this->Form->end();
  echo '</p>';
  ?>          
 </div>

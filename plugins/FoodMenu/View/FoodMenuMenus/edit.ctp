@@ -1,11 +1,13 @@
 <?php
 	echo $this->element('admin_menu');
+	echo $this->Session->flash();
+	echo $this->Form->create('FoodMenuAddCategories', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenusFoodMenuCategories', 'action' => 'index', $menu['FoodMenuMenu']['name'], $menu['FoodMenuMenu']['id'])));
+	echo '<h1>'.(__('Add categories to menu')).'</h1>';
+	echo $this->Form->end(__('Add categories'));
+	echo '<br /><hr /><br />';
+	echo '<h1>'.(__('Edit Menu')).'</h1>';
 	echo $this->Form->create('FoodMenuMenu', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenus', 'action' => 'edit')), array('class' => 'edit'));
 	echo $this->Form->hidden('id', array('value' => $menu['FoodMenuMenu']['id']));
-	echo $this->Session->flash();
-	echo '<ul class="buttonlink">';
-	echo '<li>'.$this->Html->link((__('Add Categories')), array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenusFoodMenuCategories', 'action' => 'index', $menu['FoodMenuMenu']['name'], $menu['FoodMenuMenu']['id']), array('class' => 'buttonlink')).'</li>';
-	echo '</ul>';
 	echo $this->Form->input('name', array('value' => $menu['FoodMenuMenu']['name'], 'label' => (__('Name:'))));
 	echo $this->Form->input('valid_from', array('value' => $menu['FoodMenuMenu']['valid_from'], 'selected'=>$menu['FoodMenuMenu']['valid_from'], 'label' => (__('Valid From:'))));
 	echo $this->Form->input('valid_until', array('value' => $menu['FoodMenuMenu']['valid_until'], 'selected'=>$menu['FoodMenuMenu']['valid_until'], 'label' => (__('Valid until:'))));

@@ -3,22 +3,26 @@
 	$this->Html->script('jquery/jquery.quicksearch', false);
 	$this->Html->script('/food_menu/js/foodmenu', false);
 	echo $this->element('admin_menu');
-	echo $this->Form->create('FoodMenuMenu', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenus', 'action' => 'deleteMultiple')));
-	echo '<div width="100%" id="buttonlink" class="buttonlink">';
-	echo '<ul class="buttonlink">';
-	echo '<li>'.$this->Html->link((__('New Menu')), array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenus', 'action' => 'create'), array('class' => 'buttonlink')).'</li>';  	  
-	echo '</ul>';
+	
+	echo $this->Form->create('FoodMenuCreateMenu', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenus', 'action' => 'create')));
+	echo '<h1>'.(__('Create new menu')).'</h1>';
+	echo $this->Form->end(__('New menu'));
+	echo '<br /><hr /><br />';
+	echo '<h1>'.(__('Menus')).'</h1>';
 	echo '<form>Search menu: <input type="text" id="search" /> </form>';
-	echo '</div>';
+	echo $this->Form->create('FoodMenuMenu', array(
+								'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenus', 'action' => 'deleteMultiple'), 
+								'onsubmit' => 'return confirm(\''. __('Do you really want to delete the selected menus?') .'\');'));
+
 	?>
 </div>
 	<table id="tableEntries">
 	<thead>
 	<tr>
 		<th> </th>
-		<th>Name</th>
-		<th>G&uuml;ltig von</th>
-		<th>G&uuml;ltig bis</th>
+		<th><?php echo __('Name'); ?></th>
+		<th><?php echo __('Valid from'); ?></th>
+		<th><?php echo __('Valid until'); ?></th>
 		<th> </th>
 		<th> </th>
 	</tr>
@@ -45,9 +49,11 @@
 	}
 	?>
 	</tbody>
+	<tfoot>
+	<tr>
+		<td><?php echo $this->Html->image('arrow.png', array('alt' => 'arrow')); ?></td>
+		<td colspan="3"><?php echo $this->Form->submit(__('Delete')); ?></td>
+	</tr>
+	</tfoot>
 	</table>
-	<br />
-	<?php 
-		echo '<ul class="buttonlink">';
-		echo '<li class="buttonlink">'.$this->Html->link((__('Delete Selection')), '#', array('onClick' => 'confirmDelete();', 'class' => 'buttonlink')).'</li>';
-		echo '</ul>';echo $this->Form->end(); ?>
+	<?php echo $this->Form->end(); ?>

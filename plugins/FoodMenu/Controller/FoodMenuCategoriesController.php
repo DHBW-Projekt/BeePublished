@@ -20,7 +20,7 @@ class FoodMenuCategoriesController extends AppController {
 	}//index
 	
 	function create() {
-		if ($this->request->is('post')) {			
+		if ($this->request->is('post') && isset($this->request->data['FoodMenuCategory'])) {			
             if ($this->FoodMenuCategory->save($this->request->data)) {
                 $this->Session->setFlash(__('The category has been saved.'));
                 $this->redirect($this->referer());
@@ -32,7 +32,7 @@ class FoodMenuCategoriesController extends AppController {
 	
 	function edit($name = null, $id = null) {	
 		// Has any form data been POSTed?
-    	if ($this->request->is('post')) {
+    	if ($this->request->is('post') && isset($this->request->data['FoodMenuCategory'])) {
         	// If the form data can be validated and saved...
         	$save = $this->request->data;
         	if ($this->FoodMenuCategory->save($save)) {
