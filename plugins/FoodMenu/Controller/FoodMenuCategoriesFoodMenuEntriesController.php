@@ -1,17 +1,18 @@
 <?php
 
-class FoodMenuCategoriesFoodMenuEntriesController extends AppController {
+class FoodMenuCategoriesFoodMenuEntriesController extends FoodMenuAppController {
 	
 	public $name = 'FoodMenuCategoriesFoodMenuEntries';
 	public $uses = array('FoodMenu.FoodMenuCategoriesFoodMenuEntry', 'FoodMenu.FoodMenuEntry');
 	var $layout = 'overlay';
 
-	function beforeFilter()
+	function beforeRender()
     {
-        parent::beforeFilter();
+        parent::beforeRender();
 
-        //Actions which don't require authorization
-        $this->Auth->allow('*');
+        //Get PluginId for PermissionsValidation Helper
+        $pluginId = $this->getPluginId();
+        $this->set('pluginId', $pluginId);
     }
     
     function index($categoryName = null, $categoryID = null) {
@@ -26,6 +27,8 @@ class FoodMenuCategoriesFoodMenuEntriesController extends AppController {
     }
     
     function add($entryName, $entryID, $categoryID) {
+    	$pluginId = $this->getPluginId();
+		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
 	
 		$data = array();
 		$data['FoodMenuCategoriesFoodMenuEntry']['food_menu_category_id'] = $categoryID;
@@ -40,6 +43,8 @@ class FoodMenuCategoriesFoodMenuEntriesController extends AppController {
     }
     
     function delete($joinID) {
+    	$pluginId = $this->getPluginId();
+		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete', true);
     		if ($this->FoodMenuCategoriesFoodMenuEntry->delete($joinID)) {
                 $this->Session->setFlash(__('The entry has been removed from the category.'));
                 $this->redirect($this->referer());

@@ -1,18 +1,19 @@
 <?php
 
-class ViewController extends AppController {
+class ViewController extends FoodMenuAppController {
 	
 	public $name = 'View';
 	public $uses = array('FoodMenu.FoodMenuMenu', 'FoodMenu.FoodMenuCategory', 'FoodMenu.FoodMenuEntry');
 	var $layout = 'overlay';
 	var $autoRender = false;
 
-	function beforeFilter()
+	function beforeRender()
     {
-        parent::beforeFilter();
+        parent::beforeRender();
 
-        //Actions which don't require authorization
-        $this->Auth->allow('*');
+        //Get PluginId for PermissionsValidation Helper
+        $pluginId = $this->getPluginId();
+        $this->set('pluginId', $pluginId);
     }
 
 	public function admin( $contentID ) {

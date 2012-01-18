@@ -5,6 +5,11 @@
 <?php $this->Html->css('/food_menu/css/menu', NULL, array('inline' => false)); ?>
 
 <?php $this->Html->script('/food_menu/js/confirmbox', array('inline' => false)); ?>
+<?php
+	$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create');
+	$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'edit');
+	$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete');
+?>
 <div id="menu" class="overlay"> 
 
     <ol class="nav"> 

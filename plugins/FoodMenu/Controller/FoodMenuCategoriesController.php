@@ -1,25 +1,30 @@
 <?php
 
-class FoodMenuCategoriesController extends AppController {
+class FoodMenuCategoriesController extends FoodMenuAppController {
 	
 	public $name = 'FoodMenuCategories';
 	public $uses = array('FoodMenu.FoodMenuMenu', 'FoodMenu.FoodMenuCategory', 'FoodMenu.FoodMenuEntry', 'FoodMenu.FoodMenuMenusFoodMenuCategory', 'FoodMenu.FoodMenuCategoriesFoodMenuEntry');
 	var $layout = 'overlay';
 
-	function beforeFilter()
+	function beforeRender()
     {
-        parent::beforeFilter();
+        parent::beforeRender();
 
-        //Actions which don't require authorization
-        $this->Auth->allow('*');
+        //Get PluginId for PermissionsValidation Helper
+        $pluginId = $this->getPluginId();
+        $this->set('pluginId', $pluginId);
     }
 
 	public function index() {
+		$pluginId = $this->getPluginId();
 		$categories = $this->FoodMenuCategory->find('all', array('conditions' => array('deleted' => null)));
 		$this->set('categories', $categories);
 	}//index
 	
 	function create() {
+		$pluginId = $this->getPluginId();
+		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
+		
 		if ($this->request->is('post') && isset($this->request->data['FoodMenuCategory'])) {			
             if ($this->FoodMenuCategory->save($this->request->data)) {
                 $this->Session->setFlash(__('The category has been saved.'));
@@ -31,6 +36,8 @@ class FoodMenuCategoriesController extends AppController {
 	}//create
 	
 	function edit($name = null, $id = null) {	
+		$pluginId = $this->getPluginId();
+		$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'edit', true);
 		// Has any form data been POSTed?
     	if ($this->request->is('post') && isset($this->request->data['FoodMenuCategory'])) {
         	// If the form data can be validated and saved...
@@ -59,6 +66,9 @@ class FoodMenuCategoriesController extends AppController {
 	}//edit
 	
 	function delete($name = null, $id = null) {
+		$pluginId = $this->getPluginId();
+		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete', true);
+		
 		$this->FoodMenuCategory->id = $id;
 		if ($this->request->is('get')) {
 			$this->request->data = $this->FoodMenuCategory->read('deleted', $id);
@@ -73,9 +83,11 @@ class FoodMenuCategoriesController extends AppController {
 	}//delete
 	
 	function deleteMultiple() {
+		$pluginId = $this->getPluginId();
+		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete', true);
+		
 		if(array_key_exists('FoodMenuCategory', $this->request->data)) {
 			$ids = array_keys($this->request->data['FoodMenuCategory']);
-			echo print_r($ids);
 			foreach ($ids as $id) {
 					$this->request->data = $this->FoodMenuCategory->read('deleted', $id);
 					$this->request->data['FoodMenuCategory']['deleted'] = date("Y-m-d H:i:s");

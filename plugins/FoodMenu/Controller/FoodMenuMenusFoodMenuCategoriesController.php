@@ -1,17 +1,18 @@
 <?php
 
-class FoodMenuMenusFoodMenuCategoriesController extends AppController {
+class FoodMenuMenusFoodMenuCategoriesController extends FoodMenuAppController {
 	
 	public $name = 'FoodMenuMenusFoodMenuCategories';
 	public $uses = array('FoodMenu.FoodMenuMenusFoodMenuCategory', 'FoodMenu.FoodMenuCategory');
 	var $layout = 'overlay';
 
-	function beforeFilter()
+	function beforeRender()
     {
-        parent::beforeFilter();
+        parent::beforeRender();
 
-        //Actions which don't require authorization
-        $this->Auth->allow('*');
+        //Get PluginId for PermissionsValidation Helper
+        $pluginId = $this->getPluginId();
+        $this->set('pluginId', $pluginId);
     }
     
     function index($menuName = null, $menuID = null) {
@@ -26,6 +27,8 @@ class FoodMenuMenusFoodMenuCategoriesController extends AppController {
     }
     
     function add($categoryName, $categoryID, $menuID) {
+    	$pluginId = $this->getPluginId();
+		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
 	
 		$data = array();
 		$data['FoodMenuMenusFoodMenuCategory']['food_menu_menu_id'] = $menuID;
@@ -40,13 +43,15 @@ class FoodMenuMenusFoodMenuCategoriesController extends AppController {
     }
     
     function delete($joinID) {
-    		if ($this->FoodMenuMenusFoodMenuCategory->delete($joinID)) {
-                $this->Session->setFlash(__('The category has been removed from the menu.'));
-                $this->redirect($this->referer());
-            } else {
-                $this->Session->setFlash(__('The category couldn\'t be removed.'));
-                $this->redirect($this->referer());
-            }//else
+		$pluginId = $this->getPluginId();
+		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete', true);
+    	if ($this->FoodMenuMenusFoodMenuCategory->delete($joinID)) {
+			$this->Session->setFlash(__('The category has been removed from the menu.'));
+			$this->redirect($this->referer());
+		} else {
+			$this->Session->setFlash(__('The category couldn\'t be removed.'));
+			$this->redirect($this->referer());
+		}//else
     	
     }
 }

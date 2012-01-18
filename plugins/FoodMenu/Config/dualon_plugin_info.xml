@@ -5,6 +5,18 @@
         <author>Benedikt Steffan</author>
         <version>1.0</version>
         <permissions>
+        	<permission>
+        		<role>Editor</role>
+        		<action>create</action>
+        	</permission>
+        	<permission>
+        		<role>Editor</role>
+        		<action>edit</action>	
+        	</permission>
+        	<permission>
+        		<role>Editor</role>
+        		<action>delete</action>
+        	</permission>
         </permissions>
         <views>
             <view>
