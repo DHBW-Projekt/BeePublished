@@ -11,16 +11,13 @@ function callLayouts() {
 } //fertig
 
 function createLayouts(layouts) {
-
-    $('#layouts').append($('<ul></ul>')
-        .attr({id:"layout_container"})
-    );
-
     for (var i = 0; i < layouts.length; i++) {
-        $('#layout_container').append($('<li></li>')
+        $('#layouts').append($('<div></div>')
             .addClass("layout")
             .attr("id", "lt_" + layouts[i].id)
-            .html(layouts[i].weight)
+            .attr('rel',layouts[i].weight)
+            .attr('class', 'sidebar-object sublayout')
+            .html('<img src="'+window.app.webroot+'img/layouts/'+layouts[i].weight.replace(':','').replace(':','')+'.png" width="100%" />')
         );
 
     } // for
@@ -40,18 +37,13 @@ function callPlugins() {
 } //fertig
 
 function createPlugins(plugins) {
-    var pluginlist = $(document.createElement('ul')).attr({
-        "id":"plugin_container"
-    });
-
-    $("#plugins").append(pluginlist);
-
     $(plugins).each(function () {
-        var plugin = $(document.createElement('li')).attr({
-            "id":"pl_" + this.id,
-            "class":"plugin"
-        }).html(this.plugin + ' - ' + this.name);
-        $(pluginlist).append(plugin);
+        $('#plugins').append($('<div></div>')
+                        .attr("id", "pl_" + this.id)
+                        .attr('rel',this.plugin + ' - ' + this.name)
+                        .attr('class', 'sidebar-object plugin')
+                        .html(this.plugin + ' - ' + this.name)
+                    );
     });
     dnd('dropzone');
 } //fertig
@@ -209,21 +201,8 @@ function loadPluginContent(id, container) {
 }
 
 function dnd(dropzoneClass) {
-    //adjust accordion height
-    var sidebarheight = $("#sidebar-menu").height() - 4 * $("h3").height();
 
-    $($("#sidebar-menu > div")).each(function () {
-        $(this).css("height", sidebarheight + "px");
-    });
-
-    // make widgets and layouts draggable + sortable
-    $("#plugin_container").sortable({
-        opacity:0.35,
-        appendTo:'body',
-        helper:'clone'
-    });
-
-    $("#layout_container").sortable({
+    $(".tab-content").sortable({
         opacity:0.35,
         appendTo:'body',
         helper:'clone'
@@ -245,16 +224,16 @@ function dnd(dropzoneClass) {
             }
         })
         .droppable({
-            accept:".layout , .plugin",
+            accept:".sublayout, .plugin",
             hoverClass:"ui-state-active",
             greedy:true,
             drop:function (event, ui) {
                 switch ($(ui.draggable).attr("class")) {
-                    case 'layout':
-                        createLayout(this, $(ui.draggable).html(), $(ui.draggable).attr('id'));
+                    case 'sidebar-object sublayout':
+                        createLayout(this, $(ui.draggable).attr('rel'), $(ui.draggable).attr('id'));
                         break;
-                    case 'plugin':
-                        createPlugin(this, $(ui.draggable).html(), $(ui.draggable).attr('id'));
+                    case 'sidebar-object plugin':
+                        createPlugin(this, $(ui.draggable).attr('rel'), $(ui.draggable).attr('id'));
                         break;
                 }
             }

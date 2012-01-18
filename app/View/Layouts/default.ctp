@@ -1,29 +1,30 @@
+<?php header("Content-Type: text/html; charset=utf-8"); ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <?php echo $this->Html->charset('UTF-8'); ?>
     <title><?php echo $title_for_layout?></title>
     <?php
     $this->Js->set('webroot', $this->request->webroot);
-    echo $this->Html->css('/yaml/core/base');
-    echo $this->Html->css('/fancybox/jquery.fancybox-1.3.4');
-    echo $this->Html->css('jquery-ui/jquery-ui-1.8.16.custom');
-    echo $this->Html->css('design');
+    echo $this->Html->css('yaml/core/base');
+    echo $this->Html->css('fancybox/jquery.fancybox-1.3.4');
+    echo $this->Html->css('designs/' . $design);
     echo $this->Html->css('template');
     echo $this->Html->css('menu-design');
     echo $this->Html->css('menu-template');
-    echo $this->Html->script('jquery-1.6.2.min');
-    echo $this->Html->script('jquery-ui-1.8.16.custom.min');
-    echo $this->Html->script('jquery.fancybox-1.3.4.pack');
-    echo $this->Html->script('jquery.blockUI');
-    echo $this->Html->script('jquery.cookie');
+    echo $this->Html->script('jquery/jquery-1.6.2.min');
+    echo $this->Html->script('jquery/jquery-ui-1.8.16.custom.min');
+    echo $this->Html->script('jquery/jquery.fancybox-1.3.4.pack');
+    echo $this->Html->script('jquery/jquery.blockUI');
+    echo $this->Html->script('jquery/jquery.cookie');
     echo $this->Html->script('dualon');
+    echo $this->Html->script('menu');
     if ($adminMode) {
         if (isset($pageid)) {
             $this->Js->set('pageid', $pageid);
         }
-        echo $this->Html->css('sidebar');
+        echo $this->Html->css('admin/sidebar');
         echo $this->Html->css('admin/layoutmanager');
         echo $this->Html->script('admin/layoutmanager');
         echo $this->Html->script('admin/main');
@@ -46,27 +47,29 @@
             ?>
         </div>
         <div id="topnav" class="topnav">
-            <?php
-            if (AuthComponent::user('id') == null) {
-                echo $this->element('login');
-            } else {
-                $role = $this->PermissionValidation->getUserRole();
-                if ($this->request->webroot != '/') {
-                    $path = str_replace($this->request->webroot, '', $this->request->here);
+            <div id="topnav-content">
+                <?php
+                if (AuthComponent::user('id') == null) {
+                    echo $this->element('login');
                 } else {
-                    $path = substr($this->request->here, 1);
-                }
-                if (!$systemPage && ($role == 6 || $role == 7)) {
-                    if (!$adminMode) {
-                        echo $this->Html->link('Admin Mode', '/admin/' . $path);
+                    $role = $this->PermissionValidation->getUserRole();
+                    if ($this->request->webroot != '/') {
+                        $path = str_replace($this->request->webroot, '', $this->request->here);
                     } else {
-                        $link = '/' . substr($path, 6);
-                        echo $this->Html->link('User Mode', $link);
+                        $path = substr($this->request->here, 1);
                     }
+                    if (!$systemPage && ($role == 6 || $role == 7)) {
+                        if (!$adminMode) {
+                            echo $this->Html->link('Admin Mode', '/admin/' . $path);
+                        } else {
+                            $link = '/' . substr($path, 6);
+                            echo $this->Html->link('User Mode', $link);
+                        }
+                    }
+                    echo $this->Html->link('Logout', array('controller' => 'Users', 'action' => 'logout'), array('class' => 'signout'));
                 }
-                echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout'), array('class' => 'signout'));
-            }
-            ?>
+                ?>
+            </div>
         </div>
     </div>
     <div id="menu">
@@ -78,7 +81,7 @@
             if ($adminMode) {
                 echo $this->Html->link(
                     $this->Html->image('sort.png'),
-                    array('controller' => 'menuentries', 'action' => 'sort'),
+                    array('controller' => 'MenuEntries', 'action' => 'sort'),
                     array('escape' => false, 'class' => 'iframe')
                 );
             }
@@ -91,8 +94,7 @@
         <?php echo $content_for_layout ?>
     </div>
     <div id="footer">
-        Powered by BeePublished - All rights reserved - &copy; Copyright 2011-2012<br/><br/>
-        <?php echo $this->element('sql_dump'); ?>
+        Powered by BeePublished - All rights reserved - &copy; Copyright 2011-2012
     </div>
 </div>
 <? if ($adminMode) {

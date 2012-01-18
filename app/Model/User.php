@@ -16,19 +16,50 @@ class User extends AppModel
             'required' => array(
                 'rule' => array('notEmpty'),
                 'message' => 'A username is required.'
-            )
+            ),
+		    'notUnique' => array(
+				'rule' => 'isUnique',
+				'message' => 'This username has already been taken. Please choose another username.'
+		    ),
+		    'alphanumeric' => array(
+    			'rule' => 'alphaNumeric',
+    			'message' => 'Usernames must only contain letters and numbers.'
+		    )
         ),
         'password' => array(
             'required' => array(
-                //'rule' => array('notEmpty'),
                 'message' => 'A password is required',
-                'rule' => array('minLength', '8')
+                'rule' => array('notEmpty')
+            ),
+            'minLength' => array(
+            	'message' => 'Password is too short. Please choose a password with at least 8 characters.',
+    			'rule' => array('minLength', '8')
             )
+        ),
+    	'current_password' => array(
+    		'required' => array(
+    			'message' => 'Please enter your current password.',
+    			'rule' => array('notEmpty')
+	    	),
+	    	'current_password' => array(
+	    		'rule' => 'verifyCurrentPassword',
+	    		'message' => 'Current password was not entered correctly'
+	    	)
+    	),
+        'password_confirm' => array(
+		    'match' => array(
+    			'rule' => array('confirmPassword', 'password', 'password_confirm'),
+    			'message' => 'Passwords do not match'
+		    )
         ),
         'email' => array(
             'required' => array(
-                'rule' => array('email'),
-                'message' => 'An email is required.'
+                'rule' => array('email', true),
+                'message' => 'Please supply a valid & active email address.'
+            ),
+            'notUnique' => array(
+    			'rule' => 'isUnique',
+    			'message' => 'This email has already been taken. If you forgot your password, please reset it.'
             )
         )
     );
@@ -65,19 +96,6 @@ class User extends AppModel
     public $hasMany = array(
         'LogEntry' => array(
             'className' => 'LogEntry',
-            'foreignKey' => 'user_id',
-            'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
-            'counterQuery' => ''
-        ),
-        'Page' => array(
-            'className' => 'Page',
             'foreignKey' => 'user_id',
             'dependent' => false,
             'conditions' => '',
@@ -136,5 +154,20 @@ class User extends AppModel
     function bindNode($user)
     {
         return array('model' => 'Role', 'foreign_key' => $user['User']['role_id']);
+    }
+    
+    public function confirmPassword($check, $password1, $password2) {
+    	if (Security::hash($this->data['User'][$password1], null, true) == Security::hash($this->data['User'][$password2], null, true)) {
+    		return true;
+    	}
+    }
+    
+    public function verifyCurrentPassword($data){
+    	$id = $this->data[$this->alias]['id'];
+    	$pwd = $this->field('password', array('id' => $id));
+    	if(AuthComponent::password($data['current_password']) != $pwd) {
+    		return false;
+    	}
+    	return true;
     }
 }

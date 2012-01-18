@@ -634,7 +634,7 @@ class MysqlTest extends CakeTestCase {
 				'id' => array('type' => 'integer', 'null' => false, 'default' => 0),
 				'name' => array('type' => 'string', 'null' => false, 'length' => 50),
 				'tableParameters' => array(
-					'charset' => 'latin1',
+					'charset' => 'utf8',
 					'collate' => 'latin1_general_ci',
 					'engine' => 'MyISAM'
 				)
@@ -821,7 +821,7 @@ class MysqlTest extends CakeTestCase {
 				'other_col' => array(
 					'type' => 'string',
 					'null' => false,
-					'charset' => 'latin1',
+					'charset' => 'utf8',
 					'comment' => 'Test Comment'
 				)
 			)
