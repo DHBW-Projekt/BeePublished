@@ -4,7 +4,7 @@ div #guestbook_link{
 	margin-left: 1em;
 }
 
-div.guestbook_write {
+div #guestbook_write {
 	padding: 1em;
 	margin: 1em;
 }
@@ -58,4 +58,9 @@ div #guestbook_maintenance td.title{
 
 div #guestbook_maintenance td.date{
 	width: 10em;
+}
+
+/*textarea formatting */
+div #guestbook_write .input.textarea label {
+	display: block;
 }

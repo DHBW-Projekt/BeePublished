@@ -1,4 +1,4 @@
-<div class='guestbook_write'>
+<div id='guestbook_write'>
 
 <?php
 // begin of form
