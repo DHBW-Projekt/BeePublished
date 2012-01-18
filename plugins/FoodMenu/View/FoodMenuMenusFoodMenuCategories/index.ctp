@@ -23,7 +23,7 @@
 		echo '<tr>';
 		echo '<td>' . $usedCategory['FoodMenuCategory']['name'] . '</td>';
 		echo '<td>';
-		if($deleteAllowed) echo $this->Html->image('/img/delete.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[x]Delete', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenusFoodMenuCategories', 'action' => 'delete', $usedCategory['FoodMenuMenusFoodMenuCategory']['ID'])));
+		if($deleteAllowed) echo $this->Html->image('delete.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[x]Delete', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenusFoodMenuCategories', 'action' => 'delete', $usedCategory['FoodMenuMenusFoodMenuCategory']['ID'])));
 		echo '</td>';
 		echo '</tr>';
 	}?>
@@ -46,7 +46,7 @@
 		echo '<tr>';
 		echo '<td>' . $notUsedCategory['FoodMenuCategory']['name'] . '</td>';
 		echo '<td>';
-		if($createAllowed) echo $this->Html->image('/app/webroot/img/add.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[+]Add', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenusFoodMenuCategories', 'action' => 'add', $notUsedCategory['FoodMenuCategory']['name'], $notUsedCategory['FoodMenuCategory']['id'], $menuID)));
+		if($createAllowed) echo $this->Html->image('add.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[+]Add', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenusFoodMenuCategories', 'action' => 'add', $notUsedCategory['FoodMenuCategory']['name'], $notUsedCategory['FoodMenuCategory']['id'], $menuID)));
 		echo '</td>';
 		echo '</tr>';
 	}?>
