@@ -26,6 +26,7 @@ Router::connect('/logout', array('controller' => 'Users', 'action' => 'logout'))
 Router::connect('/register', array('controller' => 'Users', 'action' => 'register'));
 Router::connect('/activateUser/*', array('controller' => 'Users', 'action' => 'activateUser'));
 Router::connect('/resetPassword/*', array('controller' => 'Users', 'action' => 'resetPassword'));
+Router::connect('/changePassword/*', array('controller' => 'Users', 'action' => 'changePassword'));
 Router::connect('/menuentries/:action/*', array('controller' => 'MenuEntries'));
 Router::connect('/pages/:action/*', array('controller' => 'Pages'));
 Router::connect('/containers/:action/*', array('controller' => 'Containers'));
