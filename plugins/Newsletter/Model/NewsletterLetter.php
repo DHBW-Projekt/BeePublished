@@ -22,18 +22,4 @@ class NewsletterLetter extends AppModel {
 				'message' => 'A subject is missing.'),
 		)
 	);
-/**
- * belongsTo associations
- *
- * @var array
- */
-	public $belongsTo = array(
-		'EmailTemplate' => array(
-			'className' => 'EmailTemplate',
-			'foreignKey' => 'email_template_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		)
-	);
 }
