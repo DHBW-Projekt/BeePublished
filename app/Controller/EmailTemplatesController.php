@@ -29,16 +29,16 @@ class EmailTemplatesController extends AppController
     
     function getAction() {
         if(isset($this->params['data']['CreateTemplate'])) {
-        	$this->redirect('/email_templates/create/');
+        	$this->redirect('/emailtemplates/create/');
         }
         if(isset($this->params['data']['EditTemplate_x'])) {    		
-			$this->redirect('/email_templates/edit/'.$this->request->data['EmailTemplate']['id']);
+			$this->redirect('/emailtemplates/edit/'.$this->request->data['EmailTemplate']['id']);
     	}
         if(isset($this->params['data']['DeleteTemplate_x'])) {
-        	$this->redirect('/email_templates/delete/'.$this->request->data['EmailTemplate']['id']);
+        	$this->redirect('/emailtemplates/delete/'.$this->request->data['EmailTemplate']['id']);
         }
         if(isset($this->params['data']['EmailTemplate']['id'])) {
-        	$this->redirect('/email_templates/activate/'.$this->request->data['EmailTemplate']['id']);
+        	$this->redirect('/emailtemplates/activate/'.$this->request->data['EmailTemplate']['id']);
         }
         $this->redirect($this->referer());
     }
@@ -72,7 +72,7 @@ class EmailTemplatesController extends AppController
 			if(isset($templateId)) {
 				$this->redirect($this->referer());			
 			} else {
-				$this->redirect('/email_templates/index/');
+				$this->redirect('/emailtemplates/index/');
 			}    		
     	}   	
     }
@@ -122,6 +122,6 @@ class EmailTemplatesController extends AppController
         } else {
         	$this->Session->setFlash(__('Saving failed'));
         }
-        $this->redirect($this->referer('/email_templates/index/'));
+        $this->redirect($this->referer('/emailtemplates/index/'));
     }
 }
