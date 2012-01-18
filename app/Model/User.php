@@ -36,9 +36,19 @@ class User extends AppModel
     			'rule' => array('minLength', '8')
             )
         ),
+    	'current_password' => array(
+    		'required' => array(
+    			'message' => 'Please enter your current password.',
+    			'rule' => array('notEmpty')
+	    	),
+	    	'current_password' => array(
+	    		'rule' => 'verifyCurrentPassword',
+	    		'message' => 'Current password was not entered correctly'
+	    	)
+    	),
         'password_confirm' => array(
 		    'match' => array(
-    			'rule' => array('confirmPassword'),
+    			'rule' => array('confirmPassword', 'password', 'password_confirm'),
     			'message' => 'Passwords do not match'
 		    )
         ),
@@ -146,11 +156,18 @@ class User extends AppModel
         return array('model' => 'Role', 'foreign_key' => $user['User']['role_id']);
     }
     
-    public function confirmPassword($check, $password) {
-    	var_dump($check);
-    	var_dump($this->data);
-    	if (Security::hash($check['password_confirm'], null, true) == Security::hash($this->data['User']['password'], null, true)) {
+    public function confirmPassword($check, $password1, $password2) {
+    	if (Security::hash($this->data['User'][$password1], null, true) == Security::hash($this->data['User'][$password2], null, true)) {
     		return true;
     	}
+    }
+    
+    public function verifyCurrentPassword($data){
+    	$id = $this->data[$this->alias]['id'];
+    	$pwd = $this->field('password', array('id' => $id));
+    	if(AuthComponent::password($data['current_password']) != $pwd) {
+    		return false;
+    	}
+    	return true;
     }
 }
