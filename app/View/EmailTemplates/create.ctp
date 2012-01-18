@@ -3,14 +3,14 @@
 	
 	$this->Html->script('ckeditor/ckeditor', false);;
 	$this->Html->script('ckeditor/adapters/jquery',false);
-	$this->Html->script('/js/admin/ckeditor',false);
+	$this->Html->script('/js/admin/emailtemplate',false);
 	
 	echo $this->Form->create('EmailTemplate', array(
 		'url' => array(
-    		'controller' => 'EmailTemplates',
-    		'action' => 'save')));
+    	'controller' => 'EmailTemplates',
+    	'action' => 'save')));
 	echo $this->Form->input('name', array(
-		'label' => 'Name:', 
+		'label' => 'Name', 
 		'value' => ''));
 	echo $this->Form->textarea('content', array(
 		'label' => '', 

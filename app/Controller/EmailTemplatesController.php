@@ -27,12 +27,18 @@ class EmailTemplatesController extends AppController
         $this->set('selectedTemplate', $selectedTemplate);
     }
     
-    function showOrCreate() {
-    	if(isset($this->params['data']['ShowTemplate'])) {    		
-			$this->redirect('/email_templates/index/'.$this->request->data['EmailTemplate']['id']);
-    	}
+    function getAction() {
         if(isset($this->params['data']['CreateTemplate'])) {
         	$this->redirect('/email_templates/create/');
+        }
+        if(isset($this->params['data']['EditTemplate_x'])) {    		
+			$this->redirect('/email_templates/edit/'.$this->request->data['EmailTemplate']['id']);
+    	}
+        if(isset($this->params['data']['DeleteTemplate_x'])) {
+        	$this->redirect('/email_templates/delete/'.$this->request->data['EmailTemplate']['id']);
+        }
+        if(isset($this->params['data']['EmailTemplate']['id'])) {
+        	$this->redirect('/email_templates/activate/'.$this->request->data['EmailTemplate']['id']);
         }
         $this->redirect($this->referer());
     }
@@ -88,32 +94,34 @@ class EmailTemplatesController extends AppController
     
     function delete($templateId) {
     	$selectedTemplate = $this->EmailTemplate->find('first', array('conditions' => array('EmailTemplate.id' => $templateId)));
-    	if($selectedTemplate['EmailTemplate']['active'] == '1') {
-    		$this->Session->setFlash(__('This template is currently active. You cannot delete active templates.'));
-    	} else {
-	    	if ($this->EmailTemplate->delete($templateId)) {
-	        	$this->Session->setFlash(__('Successfully deleted'));
-	        } else {
-	            $this->Session->setFlash(__('Deletion failed'));
-			}    		
-    	}
+//    	if($selectedTemplate['EmailTemplate']['active'] == '1') {
+//    		$this->Session->setFlash(__('This template is currently active. You cannot delete active templates.'));
+//    	} else {
+    	if ($this->EmailTemplate->delete($templateId)) {
+    		$newActiveTemplate = $this->EmailTemplate->find('first');
+    		$newActiveTemplate['EmailTemplate']['active'] = '1';
+    		$this->EmailTemplate->save($newActiveTemplate);
+        	$this->Session->setFlash(__('Successfully deleted'));
+        } else {
+            $this->Session->setFlash(__('Deletion failed'));
+		}    		
+//    	}
 		$this->redirect($this->referer());
     }
     
     function activate($templateId) {
-    	if ($this->request->is('post') || $this->request->is('put')) {
-        	$selectedTemplate = $this->EmailTemplate->find('first', array('conditions' => array('EmailTemplate.active' => '1')));
-        	$selectedTemplate['EmailTemplate']['active'] = '0';        	
-        	$newTemplate = $this->EmailTemplate->find('first', array('conditions' => array('EmailTemplate.id' => $this->request->data['EmailTemplate']['id'])));
-        	$newTemplate['EmailTemplate']['active'] = '1';
-			if ($this->EmailTemplate->save($newTemplate)) {
-				$this->Session->setFlash(__('Successfully saved'));
-	        		if($newTemplate['EmailTemplate']['id'] != $selectedTemplate['EmailTemplate']['id']) {
-						$this->EmailTemplate->save($selectedTemplate);                	
-	        		}
-	        } else {
-	        	$this->Session->setFlash(__('Saving failed'));
-	        }
-    	}
+        $selectedTemplate = $this->EmailTemplate->find('first', array('conditions' => array('EmailTemplate.active' => '1')));
+        $selectedTemplate['EmailTemplate']['active'] = '0';        	
+        $newTemplate = $this->EmailTemplate->find('first', array('conditions' => array('EmailTemplate.id' => $templateId)));
+        $newTemplate['EmailTemplate']['active'] = '1';
+		if ($this->EmailTemplate->save($newTemplate)) {
+			$this->Session->setFlash(__('Successfully saved'));
+        		if($newTemplate['EmailTemplate']['id'] != $selectedTemplate['EmailTemplate']['id']) {
+					$this->EmailTemplate->save($selectedTemplate);                	
+        		}
+        } else {
+        	$this->Session->setFlash(__('Saving failed'));
+        }
+        $this->redirect($this->referer('/email_templates/index/'));
     }
 }
