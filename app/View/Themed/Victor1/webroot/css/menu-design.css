@@ -1,0 +1,36 @@
+ol.nav {
+    font-size: 13px;
+}
+
+ol.nav li ol.subnav {
+    background: #333333;
+ 
+   
+}
+
+ol.nav li {
+    border-right: 1px solid #cccccc;
+    font-size: 12px;
+}
+
+ol.nav li a {
+    color: #ccc;
+    text-decoration: none;
+}
+
+ol.subnav li a {
+    color: #ccc;
+    
+}
+
+ol.nav li a:hover {
+    color: #fff;
+}
+
+ol.nav li span {
+    background: url(../../../../../webroot/img/arrow_down.png) no-repeat center center;
+}
+
+ol.subnav li span {
+    background: url(../../../../../webroot/img/arrow_right.png) no-repeat center center;
+}
