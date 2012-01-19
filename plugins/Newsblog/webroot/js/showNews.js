@@ -23,4 +23,8 @@ $(document).ready(function () {
 		var items = $('.newsblogreadconfig_items');
 		items.toggle('slow');
 	});
+	
+	$('.newsblogcontainer').jPaginate({
+		items: window.app.itemsPerPage
+	});
 });

@@ -3,7 +3,10 @@
 	$this->Helpers->load('Slug');
 	$this->Helpers->load('BBCode');
 	
+	
+	$this->Html->script('jquery/jPaginate', false);
 	$this->Html->script('/newsblog/js/showNews', false);
+	
 	$this->Html->css('/newsblog/css/showNews', null, array('inline' => false));
 	
 	if($this->Session->check('Newsblog.itemsPerPage')){
@@ -11,6 +14,8 @@
 	} else{
 		$itemsPerPage = 10;
 	}
+	$this->Js->set('itemsPerPage', $itemsPerPage);
+	
 	if($this->Session->check('Newsblog.shorttextLength')){
 		$shorttextLength = $this->Session->read('Newsblog.shorttextLength');
 	} else{
@@ -20,13 +25,12 @@
 	$allowedActions = $this->PermissionValidation->getPermissions($pluginId);
 	$deleteAllowed = $allowedActions['Delete'];
 	$editAllowed = $allowedActions['Edit'];
-	var_dump($allowedActions['Read']);
 ?>
 <?php 
 	if($data['newsblogTitle'] != null || $data['newsblogTitle'] != ''){
-		echo '<div class="newsblogtitle">';
+		echo '<div class="newsblogtitle"><h1>';
 			echo $data['newsblogTitle'];
-			echo '<hr><hr>';
+			echo '</h1>';
 		echo '</div>';
 	}
 
@@ -46,7 +50,9 @@
 		'empty' => '(choose one)',
 		'label' => 'Items per page:',
 		'default' => 10,
-		'value' => $itemsPerPage
+		'value' => $itemsPerPage,
+		'class' => 'newsblogreadconfig_select',
+		'div' => 'testdiv'
 	));
 	
 	echo $this->Form->input(null, array(
@@ -55,7 +61,9 @@
 		'empty' => '(choose one)',
 		'label' => 'Preview text length:',
 		'default' => 150,
-		'value' => $shorttextLength
+		'value' => $shorttextLength,
+		'class' => 'newsblogreadconfig_select',
+		'div' => 'testdiv'
 	));
 	
 	//create submit button
@@ -63,7 +71,7 @@
 	</div>
 </div>
 
-<div class='newsblogcontainer'>
+<div class='newsblogcontainer' count='<?php echo count($data['publishedNewsEntries'])?>'>
 
 <?php 
 if( count($data['publishedNewsEntries']) > 0){
@@ -91,9 +99,9 @@ if( count($data['publishedNewsEntries']) > 0){
 	
 	<div class="newsblog_entry" id="<?php echo $newsblogEntryDivId?>">
 		<div class="newsblog_entry_container">
-			<div class="newsblog_entry_title"><?php echo $title?></div>
+			<div class="newsblog_entry_title"><h2><?php echo $title?></h2></div>
 			<?php if($subtitle != null & $subtitle != ''){?>
-			<div class="newsblog_entry_subtitle"><?php echo $subtitle?></div>
+			<div class="newsblog_entry_subtitle"><h3><?php echo $subtitle?></h3></div>
 			<?php }?>
 			<div class="newsblog_entry_info">
 				<p>by <?php echo $createdBy?> on <?php echo $createdOnDate?> at <?php echo $createdOnTime;?>
@@ -136,14 +144,15 @@ if( count($data['publishedNewsEntries']) > 0){
 		</div>
 		<hr class="newsentries_divider">
 	</div>
-<?php endforeach;
+<?php endforeach; ?>
+<?php 
 } else{
 	//echo "<div>There are currently no published news entries in this newsblog.</div>";
 }?>
 
 </div>
 <?php
-if($this->PermissionValidation->getUserRole() < 6 && ($allowedActions['Read'] || $allowedActions['Write'] || $allowedActions['Publish'])){
+if($this->PermissionValidation->getUserRole() < 6 && ($allowedActions['Write'] || $allowedActions['Publish'])){
 	echo '<div class="plugin_administration">';
 		echo $this->Html->link($this->Html->image('tools_small.png'),array('plugin' => 'Newsblog', 'controller' => 'ShowNews', 'action' => 'admin', $data['contentId']), array('escape' => false));
 	echo '</div>';

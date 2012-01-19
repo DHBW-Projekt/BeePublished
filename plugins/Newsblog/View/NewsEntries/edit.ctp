@@ -59,7 +59,7 @@
 		'value' => $newsentry['NewsEntry']['text']
 	));
 	//create validFrom input
-	echo $this->Form->input(null, array(
+	echo $this->Form->input('NewsEntry.validFrom', array(
 		//'div' => 'editNewsValidConfig',
 		'type' => 'text',
 		'id' => 'nbValidFromDatepicker',
@@ -69,7 +69,7 @@
 		'value'=> $newsentry['NewsEntry']['validFrom']
 	));
 	//create validTo input
-	echo $this->Form->input(null, array(
+	echo $this->Form->input('NewsEntry.validTo', array(
 		//'div' => 'editNewsValidConfig',
 		'type' => 'text',
 		'id' => 'nbValidToDatepicker',

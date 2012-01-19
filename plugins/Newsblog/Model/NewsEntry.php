@@ -26,4 +26,19 @@ class NewsEntry extends AppModel {
 			'order' => ''
 		)
 	);
+	
+	public $validate = array(
+		'title' => array(
+			'required' => array(
+				'rule' => array('notEmpty'),
+				'message' => 'Please enter a title.'
+			),
+		),
+		'text' => array(
+			'required' => array(
+				'rule' => array('notEmpty'),
+				'message' => 'Please enter the news entry\'s text.'
+			),
+		)
+	);
 }

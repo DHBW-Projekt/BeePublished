@@ -5,7 +5,7 @@ class ShowNewsController extends NewsblogAppController{
 	public $components = array('ContentValueManager');
 	
 	public function admin($contentId = null){
-		$this->redirect(array('plugin' => 'Newsblog','controller' => 'NewsEntries', 'action' => 'create', $contentId));
+		$this->redirect(array('plugin' => 'Newsblog','controller' => 'ShowNews', 'action' => 'general', $contentId));
 	}
 	
 	public function general($contentId = null){
@@ -51,4 +51,15 @@ class ShowNewsController extends NewsblogAppController{
 		
 		
 	}
+	
+	/**
+     * beforeFilter function
+     *
+     * @return void
+     */
+    function beforeFilter()
+    {
+        parent::beforeFilter();
+        $this->Auth->allow('general');
+    }
 }
