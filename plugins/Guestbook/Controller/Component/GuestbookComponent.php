@@ -34,7 +34,7 @@ class GuestbookComponent extends Component {
 		
 		//get released posts
 		//unfortunately query for NOT seems to be not working if NULL is used...
-		return $controller->paginate('GuestbookPost', array('released NOT' => '0000-00-00 00:00:00'));
+		return $controller->paginate('GuestbookPost', array('released NOT' => '0000-00-00 00:00:00'));		
 	}
 	
 	function _getPluginId($controller){

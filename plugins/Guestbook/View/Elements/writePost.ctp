@@ -1,3 +1,9 @@
+<?php 
+$this->Html->script('ckeditor/ckeditor', array('inline' => false));
+$this->Html->script('ckeditor/adapters/jquery', array('inline' => false));
+$this->Html->script('/guestbook/js/write',false);
+?>
+
 <div id='guestbook_write'>
 
 <?php
