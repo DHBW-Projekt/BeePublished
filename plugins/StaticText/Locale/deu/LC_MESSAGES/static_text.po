@@ -1,4 +1,4 @@
-# LANGUAGE translation of CakePHP Application
+﻿# LANGUAGE translation of CakePHP Application
 # Copyright YEAR NAME <EMAIL@ADDRESS>
 #
 #, fuzzy
@@ -36,11 +36,11 @@ msgstr "Textpflege"
 
 #: \View\DisplayText\admin.ctp:15
 msgid " published "
-msgstr " veroeffentlicht "
+msgstr " veröffentlicht "
 
 #: \View\DisplayText\admin.ctp:16
 msgid " unpublished "
-msgstr " nicht veroeffentlicht "
+msgstr " nicht veröffentlicht "
 
 #: \View\DisplayText\admin.ctp:29
 msgid "Save"
