@@ -7,7 +7,9 @@ App::uses('AppModel', 'Model');
 class GuestbookPost extends AppModel {
 	
 	public $name = 'GuestbookPost';
+	// show last post first
 	public $order = array('created' => 'desc');
+	// raise error if field is empty - Sanitize in GuestbookPostController is used to prevent harmful code injections etc.
 	public $validate = array(
 		'author' => array(
 		        'rule' => 'notEmpty',

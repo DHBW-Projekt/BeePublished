@@ -6,6 +6,7 @@
         <li><?php echo $this->Html->link('General Configuration', array('controller' => 'Configurations', 'action' => 'index'));?></li>
         <li><?php echo $this->Html->link('Plugins', array('controller' => 'Plugins', 'action' => 'index'));?></li>
         <li><?php echo $this->Html->link('Permissions', array('controller' => 'Permissions', 'action' => 'index'));?></li>
+        <li><?php echo $this->Html->link('E-Mail Templates', array('controller' => 'EmailTemplates', 'action' => 'index'));?></li>
     </ol>
     <div style="clear:both;"></div>
 </div>

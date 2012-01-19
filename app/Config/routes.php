@@ -26,15 +26,18 @@ Router::connect('/logout', array('controller' => 'Users', 'action' => 'logout'))
 Router::connect('/register', array('controller' => 'Users', 'action' => 'register'));
 Router::connect('/activateUser/*', array('controller' => 'Users', 'action' => 'activateUser'));
 Router::connect('/resetPassword/*', array('controller' => 'Users', 'action' => 'resetPassword'));
+Router::connect('/changePassword/*', array('controller' => 'Users', 'action' => 'changePassword'));
 Router::connect('/menuentries/:action/*', array('controller' => 'MenuEntries'));
 Router::connect('/pages/:action/*', array('controller' => 'Pages'));
 Router::connect('/containers/:action/*', array('controller' => 'Containers'));
 Router::connect('/layouts/:action/*', array('controller' => 'LayoutTypes'));
 Router::connect('/content/:action/*', array('controller' => 'Contents'));
 Router::connect('/users/:action/*', array('controller' => 'Users'));
+Router::connect('/emailtemplates/:action/*', array('controller' => 'EmailTemplates'));
 Router::connect('/plugins/:action/*', array('controller' => 'Plugins'));
 Router::connect('/plugins', array('controller' => 'Plugins', 'action' => 'index'));
 Router::connect('/configuration', array('controller' => 'Configurations', 'action' => 'index'));
+Router::connect('/emailtemplates', array('controller' => 'EmailTemplates', 'action' => 'index'));
 Router::connect('/configuration/designs', array('controller' => 'Configurations', 'action' => 'designs'));
 Router::connect('/permissions', array('controller' => 'Permissions', 'action' => 'index'));
 Router::connect('/users', array('controller' => 'Users', 'action' => 'index'));

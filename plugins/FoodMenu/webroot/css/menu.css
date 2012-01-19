@@ -1,0 +1,115 @@
+ul.FoodMenuMenu {
+  margin: 0; padding: 0.8em;
+  text-align: center;
+}
+
+ul.FoodMenuMenu li {
+  list-style: none;
+  display: inline;
+  margin: 0.4em; padding: 0;
+}
+
+ul.FoodMenuMenu a:hover, ul#FoodMenuMenu span {
+  text-decoration: underline;
+}
+
+ul.FoodMenuMenu a:link, a:visited {
+  text-decoration: none;
+}
+
+ul.FoodMenuMenu a:active {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#buttonlink div {
+	float:none;
+	height:5em;
+}
+
+.buttonlink {
+	float:none;
+    margin-left:5px;
+    margin-right:5px;
+}
+
+.buttonlink ul {
+	list-style:none;
+}
+
+.buttonlink li {
+        display:inline;
+        float:none;
+}
+
+.buttonlink a {
+    border-radius:4px;
+    background:none repeat scroll 0 0 #eee;
+    border:1px solid #999;
+    width:200px;
+    cursor:pointer;
+    padding:4px;
+    color:#000;
+    text-decoration:none;
+}
+
+.ui-datepicker-trigger { height: 20px; }
+
+.tableicon {
+	width:5%;
+	max-width:25px;
+	min-width:20px;
+	}
+ 	
+#menuEntries table{
+	width:95%;
+}
+
+#datepicker {
+	max-width:100px;
+}
+
+#selectDate {
+	margin:20px;
+}
+
+#foodMenuHeader p{
+	text-align:center;
+}
+
+#userMenuEntries table{
+	width:100%; 
+}
+
+.entryName {
+
+}
+
+.entryPrice {
+
+}
+
+.entryDescription {
+	font-style: italic;
+	font-size: 0.8em;
+}
+
+.create {
+	width: 80%;
+}
+
+.edit {
+	width: 80%;
+}
+	
+.adminCheckbox {
+	margin-right: 10px;
+}
+	
+#foodMenuEntry table {
+	width: 80%;
+}
+
+.viewEntries {
+	width: 80%
+}
