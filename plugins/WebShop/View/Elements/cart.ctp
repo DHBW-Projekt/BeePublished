@@ -5,25 +5,25 @@
 	
 	//CREATE cart
 	echo '<div id ="webshop_cart">';
-	echo '<h2>Einkaufswagen</h2>';
+	echo '<h2>'.__('Cart').'</h2>';
 	
 	//CHECK if cart has products
 	if(empty($data)){
-		echo '<p>Keine Elemente in Ihrem Einkaufswagen.</p>';
+		echo '<p>'.__('No element in your cart.').'</p>';
 	} else {
 		echo '<table>';
 		echo '<tr>';
-		echo '<th colspan="2">Artikel</th><th>Preis</th><th colspan="2">Menge</th>';
+		echo '<th colspan="2">'.__('Article').'</th><th>'.__('Price').'</th><th colspan="2">'.__('Amount').'</th>';
 		echo '</tr>';
 	
 		//GET all products
 		foreach ($data as $product){
 			echo '<tr>';
-			echo '<td>'.$this->Html->image('/WebShop/img/products/'.$product['Product']['picture'], array('class' => "webshop_cart_product_img")).'</td>';
-			echo '<td>'.$this->Html->link($product['Product']['name'], $url.'/webshop/view/'.$product['Product']['id']).'</td>';
-			echo '<td>'.$product['Product']['price'].'</td>';
+			echo '<td>'.$this->Html->image('/WebShop/img/products/'.$product['WebshopProduct']['picture'], array('class' => "webshop_cart_product_img")).'</td>';
+			echo '<td>'.$this->Html->link($product['WebshopProduct']['name'], $url.'/webshop/view/'.$product['WebshopProduct']['id']).'</td>';
+			echo '<td>'.$product['WebshopProduct']['price'].'</td>';
 			echo '<td>'.$product['count'].'</td>';
-			echo '<td>'.$this->Html->image('add2.png', array('url' => $url.'/webshop/add/'.$product['Product']['id'], 'class' => "webshop_cart_icon")).$this->Html->image('remove.png',array('url' => $url.'/webshop/remove/'.$product['Product']['id'], 'class' => "webshop_cart_icon")).'</td>';
+			echo '<td>'.$this->Html->image('add2.png', array('url' => $url.'/webshop/add/'.$product['WebshopProduct']['id'], 'class' => "webshop_cart_icon")).$this->Html->image('remove.png',array('url' => $url.'/webshop/remove/'.$product['WebshopProduct']['id'], 'class' => "webshop_cart_icon")).'</td>';
 			echo '</tr>';
 		}
 	
@@ -31,7 +31,9 @@
 	}
 	
 	//ORDER button
-	if(!empty($data))
-		echo $this->Html->link('Bestellung abschicken', $url.'/webshop/submitOrder', array('style' => 'font-weight: bold'));
+	if(!empty($data)){
+		echo $this->Html->link(__('Submit Order'), $url.'/webshop/submitOrder/'.$pluginID, array('class' => 'webshop_submit_order'));
+	}
+		
 	
 	echo '</div>';

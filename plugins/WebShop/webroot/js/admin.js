@@ -1,7 +1,5 @@
-$(document).ready(function () {
-	$( "#tabs" ).tabs();
-	
-    $('#ProductDescription').ckeditor(function () {
+$(document).ready(function () {	
+    $('#WebshopProductDescription').ckeditor(function () {
         },
         {
 
