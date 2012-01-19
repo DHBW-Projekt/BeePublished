@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: DEU132821
- * Date: 15.12.11
- * Time: 10:55
- * To change this template use File | Settings | File Templates.
- */
 
 class MyFilesComponent extends Component
 {

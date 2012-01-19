@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: DEU132821
- * Date: 15.12.11
- * Time: 10:55
- * To change this template use File | Settings | File Templates.
- */
 
 // app/controllers/my_files_controller.php (Cake 1.2)
 class MyFilesController extends FileShareAppController
@@ -106,10 +99,10 @@ class MyFilesController extends FileShareAppController
         parent::beforeFilter();
 
         //Actions which don't require authorization
-        $this->Auth->allow('*');
+        $this->Auth->allow('download');
     }
 
-    public function admin($contentId)
+    public function admin()
     {
        $this->layout = 'overlay';
 
