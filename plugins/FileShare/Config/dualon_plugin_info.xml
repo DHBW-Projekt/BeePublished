@@ -4,5 +4,12 @@
 		<name>FileShare</name>
 		<author>Philipp Ernst, Peter Baumert</author>
 		<version>1.0</version>
+        <permissions>
+        </permissions>
+        <views>
+            <view>
+                <name>MyFiles</name>
+            </view>
+        </views>
 	</plugin>
 </dualon>

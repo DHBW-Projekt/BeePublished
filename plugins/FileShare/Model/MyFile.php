@@ -4,7 +4,7 @@ App::uses('AppModel', 'Model');
  * File Model
  *
  */
-class MyFile extends AppModel {
+class MyFile extends FileShareAppModel {
 
 	/**
 	 * Primary key field
