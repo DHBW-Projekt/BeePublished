@@ -1,6 +1,9 @@
 <?php 
 echo $this->element('admin_menu',array("ContentId" => $data['ContentId']));
 
+echo $this->Session->flash('Image setted');
+
+
 echo "<table>";
 echo "<tr> <td> Id </td> <td> Title </td> </tr>";
 

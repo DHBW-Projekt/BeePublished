@@ -24,7 +24,7 @@ class ManageImagesController  extends AppController{
 		
 		$image = $this->data['addImage']['File'];
 		
-		$dest = realpath("../../app/webroot/img/gallery").'\\'.$image['name'];
+		$dest = realpath("../../app/webroot/img/gallery").'/'.$image['name'];
 		$urlPath = "/app/webroot/img/gallery/".$image['name'];
 		
 		$source = fopen($image['tmp_name'], 'r');
@@ -35,24 +35,29 @@ class ManageImagesController  extends AppController{
 		
 		// save to db	
 		$dbImage = array(
-			'title' => $this->data['addImage']['ImageTitle'],
+			'title' => $this->data['addImage']['Title'],
 			'path_to_pic' => $urlPath );
 		
 		$this->GalleryPictureComp->save($this,$dbImage);
+		
+		
+		$this->Session->setFlash('Image saved');
+		
+
 		$this->redirect(array(
 						'action' => 'index', $contentId));
 	
 	}
 	
 	public function delete($pictureId, $contentId){
+
 		// TODO remove from ftp
 		$picture = $this->GalleryPictureComp->delete($this,$pictureId);
+
+
 		
-		/*
-		unlink(realpath("../..".$picture['path_to_pic']));
+		$this->Session->setFlash('Image deleted');
 		
-		$this->GalleryPicture->delete($id);
-		*/
 		$this->redirect($this->referer());
 	}
 
