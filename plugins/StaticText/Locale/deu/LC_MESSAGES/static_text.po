@@ -36,11 +36,11 @@ msgstr "Textpflege"
 
 #: \View\DisplayText\admin.ctp:15
 msgid " published "
-msgstr " veröffentlicht "
+msgstr " veroeffentlicht "
 
 #: \View\DisplayText\admin.ctp:16
 msgid " unpublished "
-msgstr " nicht veröffentlicht "
+msgstr " nicht veroeffentlicht "
 
 #: \View\DisplayText\admin.ctp:29
 msgid "Save"
