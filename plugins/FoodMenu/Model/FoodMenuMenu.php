@@ -30,10 +30,10 @@ class FoodMenuMenu extends AppModel {
          			'rule'    => 'notEmpty',
 					'required' => true,
             		'message' => 'This field has to be filled.'
-//         		),
-//         		'name_isalphanumeric' => array(
-//         			'rule' => 'alphaNumeric',
-//					'message' => 'You have to enter numbers or letters.'
+         		),
+         		'name_isalphanumeric' => array(
+         			'rule' => array('custom', '/^[\\w\\s]+$/u'),
+					'message' => 'You have to enter numbers or letters.'
          		)
 		),
 		'valid_from' => array(
