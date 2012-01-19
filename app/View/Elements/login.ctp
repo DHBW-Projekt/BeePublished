@@ -12,5 +12,5 @@ Have an account? <a href="login" class="signin">Login</a>
     );
     echo $this->Form->end($options);
     ?>
-    <div class="forgot"><a href="#" id="resend_password_link">Forgot your password?</a></div>
+    <div class="forgot"><?php echo $this->Html->link('Forgot your password?', array('controller' => 'Users', 'action' => 'resetPassword'), array('id' => 'resend_password_link'))?></div>
 </fieldset>

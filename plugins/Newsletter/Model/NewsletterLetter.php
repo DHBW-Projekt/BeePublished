@@ -14,19 +14,12 @@ class NewsletterLetter extends AppModel {
 	public $displayField = 'id';
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
-
-/**
- * belongsTo associations
- *
- * @var array
- */
-	public $belongsTo = array(
-		'EmailTemplate' => array(
-			'className' => 'EmailTemplate',
-			'foreignKey' => 'email_template_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
+	public $validate = array(
+		'subject' => array(
+			'subject_notEmpty' => array(
+				'rule'    => 'notEmpty', 
+				'required' => true,
+				'message' => 'A subject is missing.'),
 		)
 	);
 }
