@@ -1,11 +1,11 @@
-﻿# LANGUAGE translation of CakePHP Application
+# LANGUAGE translation of CakePHP Application
 # Copyright YEAR NAME <EMAIL@ADDRESS>
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2012-01-19 13:33+0100\n"
+"POT-Creation-Date: 2012-01-19 14:22+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -14,35 +14,39 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: \Controller\DisplayTextController.php:24
+#: \Controller\DisplayTextController.php:25
 msgid "Successfully saved"
-msgstr "Erfolgreisch gespeichert"
+msgstr ""
 
-#: \Controller\DisplayTextController.php:31
+#: \Controller\DisplayTextController.php:32
 msgid "empty"
-msgstr "leer"
+msgstr ""
 
-#: \Controller\DisplayTextController.php:48
+#: \Controller\DisplayTextController.php:49
 msgid "You are not authenticated to enter these page!"
-msgstr "Sie sind nicht berechtigt diese Seite zu betreten!"
+msgstr ""
 
 #: \Controller\Component\DisplayTextComponent.php:9
 msgid "no text"
-msgstr "kein Text"
+msgstr ""
 
 #: \View\DisplayText\admin.ctp:1
 msgid "Set Text"
-msgstr "Textpflege"
+msgstr ""
 
 #: \View\DisplayText\admin.ctp:15
 msgid " published "
-msgstr " veröffentlicht "
+msgstr ""
 
 #: \View\DisplayText\admin.ctp:16
 msgid " unpublished "
-msgstr " nicht veröffentlicht "
+msgstr ""
 
 #: \View\DisplayText\admin.ctp:29
 msgid "Save"
-msgstr "Speichern"
+msgstr ""
+
+#: \View\Elements\admin_menu.ctp:5
+msgid "General"
+msgstr ""
 
