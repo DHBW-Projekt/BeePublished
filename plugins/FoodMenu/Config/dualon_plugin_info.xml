@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dualon>
+    <plugin>
+        <name>FoodMenu</name>
+        <author>Benedikt Steffan</author>
+        <version>1.0</version>
+        <permissions>
+        	<permission>
+        		<role>Editor</role>
+        		<action>create</action>
+        	</permission>
+        	<permission>
+        		<role>Editor</role>
+        		<action>edit</action>	
+        	</permission>
+        	<permission>
+        		<role>Editor</role>
+        		<action>delete</action>
+        	</permission>
+        </permissions>
+        <views>
+            <view>
+                <name>View</name>
+            </view>
+        </views>
+    </plugin>
+</dualon>
