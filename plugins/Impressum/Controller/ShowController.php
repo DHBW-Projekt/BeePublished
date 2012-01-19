@@ -45,6 +45,33 @@ class ShowController extends AppController {
 	}
 
 	/**
+	 * Please call this method when the google plus plugin is added or removed.
+	 * @param add = true, remove = false
+	 */
+	function setGooglePlus($googlePlus) {
+		$data = array('id' => 1, 'google_plus' => $googlePlus);
+		$this->Impressum->save($data);
+	}
+	
+	/**
+	 * Please call this method when the xing plugin is added or removed.
+	 * @param add = true, remove = false
+	 */
+	function setXing($xing) {
+		$data = array('id' => 1, 'xing' => $xing);
+		$this->Impressum->save($data);
+	}
+	
+	/**
+	 * Please call this method when the linkedin plugin is added or removed.
+	 * @param add = true, remove = false
+	 */
+	function setLinkedin($linkedin) {
+		$data = array('id' => 1, 'linkedin' => $linkedin);
+		$this->Impressum->save($data);
+	}
+	
+	/**
 	 * methods for picture management
 	 * origins of pictures not owned by the user must be written in impressum
 	 * these functions are not implemented yet
