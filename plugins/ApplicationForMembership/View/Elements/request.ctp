@@ -1,4 +1,8 @@
-<?php $DateTimeHelper = $this->Helpers->load('Time');?>
+<?php
+	//CAPTCHA
+	App::import('Vendor','recaptcha/recaptchalib');
+	$publickey = "6LfzYcwSAAAAAN3vRDzZKXkC0rYkwaKQTi8hMkj6";
+?>
 
 <div id='application_for_membership_form'>
 	<h2>Application for membership</h2>
@@ -64,6 +68,9 @@
 		<tr>
 			<td><?php echo $this->Form->label('comment', __('Comment'));?></td>
 			<td><?php echo $this->Form->input('comment', array('label' => false, 'rows' => '4')); ?></td>
+		</tr>
+		<tr>
+			<td colspan="2"><?php echo recaptcha_get_html($publickey);?></td>
 		</tr>
 		<tr>
 			<td colspan="2">The marked fields(*) are required.</td>
