@@ -73,10 +73,6 @@ input[type=submit] {
     border-color: #2E2E2E;
 }
 
-.flags {
-	display: inline;
-}
-
 .color3,
 #topnav a.signin:hover,
 #topnav a.signout:hover {

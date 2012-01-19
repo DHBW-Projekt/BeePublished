@@ -48,12 +48,6 @@
         </div>
         <div id="topnav" class="topnav">
             <div id="topnav-content">
-				<div class="flags">
-					<?php
-						echo $this->Html->image('de.png', array('url' => array('controller' => 'Language', 'action' => 'setLanguage', 'deu')));
-						echo $this->Html->image('gb.png', array('url' => array('controller' => 'Language', 'action' => 'setLanguage', 'eng')));
-					?>
-				</div>
                 <?php
                 if (AuthComponent::user('id') == null) {
                     echo $this->element('login');

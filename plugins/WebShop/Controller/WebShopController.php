@@ -235,6 +235,18 @@ class WebShopController extends WebShopAppController {
 		$this->redirect(array('action' => 'admin', $contentID));
 	}
 	
+	public function removeSelected($contentID){
+		//Check permissions
+		$pluginId = $this->getPluginId();
+		$allowed = $this->PermissionValidation->actionAllowed($pluginId, 'Delete Product');
+		if(!$allowed)
+			$this->redirect(array('action' => 'admin', $contentID));
+		
+		foreach ($this->data['selectedProducts'] as $product => $selection) {
+			if ($selection) $this->remove($contentID, $product);
+		}
+	}
+	
   
 	
    /**
