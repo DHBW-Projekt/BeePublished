@@ -40,7 +40,7 @@ class ApplicationMembershipComponent extends Component {
 	/**
 	 * Function send.
 	 */
-	public function send($controller, $url=null){
+	public function send($controller, $url=null, $params=null, $myUrl=null){
 		
 		//Attributes
 		$data_error = false;
@@ -77,13 +77,14 @@ class ApplicationMembershipComponent extends Component {
 		if(!$data_error)
 			$controller->Session->setFlash('Thank you for your interest. Your request has been sent.');
 		else
-			$controller->Session->setFlash('Please fill out all mandatory fields.');
+			$controller->Session->setFlash('Please fill out all mandatory fields.', 'default', array(
+						'class' => 'flash_failure'));
 		
 		//RETURN DATA
 		if($data_error)
 			return array('data' => $controller->ApplicationMembership, 'Element' => 'request');
 		
 		//REDIRECT
-		$controller->redirect('/member-application');
+		$controller->redirect($myUrl);
 	}
 }
