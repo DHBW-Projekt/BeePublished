@@ -29,6 +29,18 @@ class GalleryPictureComponent extends Component
 	public function delete($controller, $pictureId){
 		$picture = $this->getPicture($controller, $pictureId);
 		
+//		debug($picture);
+		
+		
+		
+		// delete thumb
+		
+		$pathInfo = pathinfo(realpath("../..".$picture['path_to_pic']));
+		
+	//	debug($pathInfo);
+		
+		$thumbPath = $pathInfo['dirname']."/thumb/".$pathInfo['basename'];
+		unlink($thumbPath);
 		unlink(realpath("../..".$picture['path_to_pic']));
 		
 		$controller->loadModel('Gallery.GalleryPicture');
@@ -39,5 +51,27 @@ class GalleryPictureComponent extends Component
 		return $picture['GalleryPicture'];
 	}
 	
+	public function generateThumbnail($picture){
+		
+		//debug($picture);
+		
+		$sourceSize = getimagesize(realpath("../..".$picture['path_to_pic']));
+		
+		//debug($sourceSize);
+		
+		$pathInfo = pathinfo(realpath("../..".$picture['path_to_pic']));
+		
+		//debug($pathInfo);
+		
+		$thumbPath = $pathInfo['dirname']."/thumb/".$pathInfo['basename'];
+		                                   
+		// Resample
+		$image_thumb = imagecreatetruecolor(300, 200);
+		$image_source = imagecreatefromjpeg(realpath("../..".$picture['path_to_pic']));
+		imagecopyresampled($image_thumb, $image_source, 0, 0, 0, 0, 300, 200, $sourceSize[0], $sourceSize[1]);
+		
+		// Output
+		imagejpeg($image_thumb, $thumbPath, 100);
+	}
 	
 }
