@@ -10,7 +10,7 @@
 	
 	echo '<table class="webshop_infobox">';
 	echo '<tr>';
-		echo '<td class="websop_price">'.__('Price').': '.$data['WebshopProduct']['price'].' '.$data['WebshopProduct']['currency'].'</td>';
+		echo '<td class="websop_price">'.__d("web_shop", 'Price').': '.$data['WebshopProduct']['price'].' '.$data['WebshopProduct']['currency'].'</td>';
 		echo '<td class="webshop_cart_add">'.$this->Html->image('/WebShop/img/Cart-Add-32.png', array('url' => $url.'/webshop/add/'.$data['WebshopProduct']['id'], 'class' => "webshop_cart_icon")).'</td>';
 	echo '</tr>';
 	echo '</table>';

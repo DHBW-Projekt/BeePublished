@@ -32,6 +32,7 @@ Router::connect('/containers/:action/*', array('controller' => 'Containers'));
 Router::connect('/layouts/:action/*', array('controller' => 'LayoutTypes'));
 Router::connect('/content/:action/*', array('controller' => 'Contents'));
 Router::connect('/users/:action/*', array('controller' => 'Users'));
+Router::connect('/language/:action/*', array('controller' => 'Language'));
 Router::connect('/plugins/:action/*', array('controller' => 'Plugins'));
 Router::connect('/plugins', array('controller' => 'Plugins', 'action' => 'index'));
 Router::connect('/configuration', array('controller' => 'Configurations', 'action' => 'index'));

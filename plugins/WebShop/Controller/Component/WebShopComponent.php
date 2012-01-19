@@ -122,7 +122,7 @@ class WebShopComponent extends Component {
 		
 		//LOAD model
 		$controller->loadModel('WebshopProduct');
-		
+
 		//RETURN product
 		return array('data' => $controller->WebshopProduct->findById($id));
 	}

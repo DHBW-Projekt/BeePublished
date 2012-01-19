@@ -12,20 +12,20 @@ class WebshopProduct extends AppModel {
 		        'name' => array(
 		        	'rule' => 'notEmpty',
 					'required' => true,
-		        	'message' => '"Name" ist ein Pflichtfeld.'
+		        	'message' => '"Name" is mandetory.'
 		        ),
 		        
 		        'description' => array(
 		        	'rule' => 'notEmpty',
 					'required' => true,
-			        'message' => '"Beschreibung" ist ein Pflichtfeld.'
+			        'message' => '"Description" is mandetory.'
 		        ),
 		        
 				'price' => array(
 					'rule' => 'numeric',
 				    'required' => true,
 					'allowEmpty' => false,
-				    'message'  => '"Preis" ist eine Zahl.'
+				    'message'  => '"Price" is mandetory.'
 				)
 	);
 	
@@ -39,4 +39,17 @@ class WebshopProduct extends AppModel {
 		            'dependent'     => true
 	)
 	);
+	
+	/**
+	 * Translation support
+	 */
+	public $actsAs = array(
+		        'Translate' => array(
+		            'name', 'description'
+		)
+	);
+	
+	function invalidate($field, $value = true) {
+		return parent::invalidate($field, __d("web_shop", $value, true));
+	}
 }
