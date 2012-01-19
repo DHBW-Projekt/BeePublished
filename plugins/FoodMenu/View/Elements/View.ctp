@@ -9,7 +9,7 @@
 <?php
 	echo $this->Session->flash();
 	if(!(isset($url))) $url = '';
-	echo $this->element('SelectDate', array('url', $url));
+	echo $this->element('SelectDate', array('url' => $url, 'selectedDate' => $selectedDate));
 	if(!(isset($categories))) $categories = '';
 	if(!(isset($entries))) $entries = '';
 	

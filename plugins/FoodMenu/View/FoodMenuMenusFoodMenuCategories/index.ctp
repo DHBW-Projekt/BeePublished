@@ -11,7 +11,7 @@
 	if (sizeof($categories['used']) > 0) {
 	?>
 
-<table>
+<table class="menuEntries">
 	<thead>
 	<tr>
 		<th colspan="2"><?php echo __('Remove existing categories from menu'); ?></th>
@@ -22,7 +22,7 @@
 	foreach ($categories['used'] as $usedCategory) {
 		echo '<tr>';
 		echo '<td>' . $usedCategory['FoodMenuCategory']['name'] . '</td>';
-		echo '<td>';
+		echo '<td class="tableicon">';
 		if($deleteAllowed) echo $this->Html->image('delete.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[x]Delete', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenusFoodMenuCategories', 'action' => 'delete', $usedCategory['FoodMenuMenusFoodMenuCategory']['ID'])));
 		echo '</td>';
 		echo '</tr>';
@@ -34,7 +34,7 @@
 
  	if (sizeof($categories['notUsed']) > 0) {
 	?>
-<table>
+<table class="menuEntries">
 	<thead>
 	<tr>
 		<th colspan="2"><?php echo __('Add categories to menu'); ?></th>
@@ -45,7 +45,7 @@
 	foreach ($categories['notUsed'] as $notUsedCategory) {
 		echo '<tr>';
 		echo '<td>' . $notUsedCategory['FoodMenuCategory']['name'] . '</td>';
-		echo '<td>';
+		echo '<td class="tableicon">';
 		if($createAllowed) echo $this->Html->image('add.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[+]Add', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenusFoodMenuCategories', 'action' => 'add', $notUsedCategory['FoodMenuCategory']['name'], $notUsedCategory['FoodMenuCategory']['id'], $menuID)));
 		echo '</td>';
 		echo '</tr>';

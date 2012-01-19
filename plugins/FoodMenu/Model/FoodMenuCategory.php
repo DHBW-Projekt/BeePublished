@@ -24,10 +24,10 @@ class FoodMenuCategory extends AppModel {
          			'rule'    => 'notEmpty',
 					'required' => true,
             		'message' => 'This field name has to be filled.'
-         		),
-         		'name_isalphanumeric' => array(
-         			'rule' => 'alphaNumeric',
-					'message' => 'You have to enter numbers or letters.'
+//         		),
+//         		'name_isalphanumeric' => array(
+//         			'rule' => 'alphaNumeric',
+//					'message' => 'You have to enter numbers or letters.'
          		)
          )
 	);
