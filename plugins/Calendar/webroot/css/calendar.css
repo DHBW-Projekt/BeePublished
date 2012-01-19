@@ -132,3 +132,61 @@ td.calendar_time.half_hour {
 td.calendar_time.half_hour {
     color: transparent;
 }
+
+.calendar_day_name {
+    float:left;
+    text-align: center;
+    width: 150px;
+}
+
+.calendar_day_navigation {
+    font-size: 12px;
+}
+
+.calendar_month_overview {
+    float: right;
+    width: 150px;
+}
+
+.calendar_day_number {
+    font-size: 100px;
+}
+
+.calendar_month_year {
+    font-size: 20px;
+}
+
+.calendar_day_content {
+    clear: both;
+    padding-top: 30px;
+}
+.calendar_entries {
+    width: 100%;
+    border: 1px solid #000000;
+}
+
+.calendar_entries .calendar_entry {
+    border: 0;
+    border-bottom: 1px solid #000000;
+    height: 25px;
+    line-height: 25px;
+    vertical-align: middle;
+    border-radius: 0;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    background-color: transparent;
+}
+
+.calendar_entries .calendar_entry_time_start {
+    float:right;
+    margin-right: 5px;
+}
+
+.calendar_entries .calendar_entry_content {
+    float:left;
+    margin-left: 5px;
+}
+
+.calendar_detail {
+    display: none;
+}
