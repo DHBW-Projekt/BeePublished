@@ -1,8 +1,6 @@
-$(document).ready(function () {
-	$('input#search_products').quicksearch('table#products tbody tr');
-    $('#WebshopProductDescription').ckeditor(function () { 
-    	
-    }, {
-    	
-    });
+$(document).ready(function () {	  
+    $('#WebshopProductDescription').ckeditor(function () {
+	},
+	{
+	});    
 });

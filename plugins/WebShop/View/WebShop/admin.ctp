@@ -3,7 +3,7 @@
 	
 	//LOAD js
 	$this->Html->script('jquery/jquery.quicksearch', false);
-	$this->Html->script('/web_shop/js/admin', false); 
+	$this->Html->script('/web_shop/js/webshop', false);
 	
 	//LOAD style-sheet
 	echo $this->Html->css('/WebShop/css/webshop');
