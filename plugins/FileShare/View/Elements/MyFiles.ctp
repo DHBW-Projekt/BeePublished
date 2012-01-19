@@ -1,4 +1,5 @@
 <?php
+$this->Html->css('/FileShare/css/fileshare', NULL, array('inline' => false));
 
 echo $this->Form->create('MyFile', array('url' => array('plugin' => 'file_share', 'action' => 'upload'), 'type' => 'file'));
 echo $this->Form->file('File');

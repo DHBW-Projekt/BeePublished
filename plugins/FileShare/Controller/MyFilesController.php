@@ -3,7 +3,6 @@
 // app/controllers/my_files_controller.php (Cake 1.2)
 class MyFilesController extends FileShareAppController
 {
-    var $autoLayout = false;
     public $components = array('ContentValueManager');
     public $uses = array('FileShare.MyFileConfig', 'FileShare.MyFile');
 
@@ -109,9 +108,11 @@ class MyFilesController extends FileShareAppController
         if ($this->request->is('post')) {
             $this->MyFileConfig->read(null, 'Cryptkey');
             $this->MyFileConfig->set('value', $this->request->data['null']['Cryptkey']);
+            $this->MyFileConfig->set('key', 'Cryptkey');
             $this->MyFileConfig->save();
             $this->MyFileConfig->read(null, 'Expire time');
             $this->MyFileConfig->set('value', $this->request->data['null']['Expire time']);
+            $this->MyFileConfig->set('key', 'Expire time');
             $this->MyFileConfig->save();
             $this->Session->setFlash('Successfully saved');
         }
