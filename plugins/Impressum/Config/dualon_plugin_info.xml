@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dualon>
+	<plugin>
+		<name>
+			Impressum
+        </name>
+		<author>
+			Anne Wendt
+        </author>
+		<version>
+			1.0
+        </version>
+		<views>
+			<view>
+				<name>
+					Show
+                </name>
+			</view>
+		</views>
+	</plugin>
+</dualon>
