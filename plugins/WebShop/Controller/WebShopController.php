@@ -66,11 +66,21 @@ class WebShopController extends WebShopAppController {
 	* Function to create product.
 	*/
 	public function create($contentID){
+		
+		//Attributes
+		$create_error = false;
+		$error_message = __d('web_shop', 'Please fill out all mandatory fields.');
+		
 		//Check permissions
 		$pluginId = $this->getPluginId();
 		$allowed = $this->PermissionValidation->actionAllowed($pluginId, 'Create Product');
-		if(!$allowed)
+		
+		if(!$allowed){
+			$this->Session->setFlash(__d('web_shop', 'Permission denied.'), 'default', array(
+					'class' => 'flash_failure'));
+			
 			$this->redirect(array('action' => 'admin', $contentID));
+		}
 		
 		//PROCESS cancle
 		if (isset($this->params['data']['cancel']))
@@ -79,18 +89,25 @@ class WebShopController extends WebShopAppController {
 		$this->set('contentID', $contentID);
 	
 		//PROCESS save
-		if (isset($this->params['data']['save']) and isset($this->data['WebshopProduct'])){
-			//UPLOAD image
+		if (!isset($this->params['data']['save']) or !isset($this->data['WebshopProduct']))
+			$create_error = true;
+		
+		//UPLOAD image
+		if (!$create_error){
 			if (!empty($this->data['WebshopProduct']['submittedfile']['name']))
 				$result = $this->uploadImage($this->data['WebshopProduct']['submittedfile'], null, true);
 			
 			if (isset($result)) {
 				$file_name = $result['file_name'];
+				$create_error = $result['error'];
+				$error_message = __d('web_shop', 'Errors during picture upload.');
 			} else {
 				$file_name = 'no_image.png';
 			}
-			
-			//SAVE on DB
+		}
+		
+		//SAVE on DB
+		if (!$create_error){
 			$this->WebshopProduct->set(array(
 						'name' => $this->data['WebshopProduct']['name'],
 						'description' => $this->data['WebshopProduct']['description'],
@@ -98,12 +115,21 @@ class WebShopController extends WebShopAppController {
 						'picture' => $file_name
 			));
 			
-			if ($this->WebshopProduct->validates()) {
+			if ($this->WebshopProduct->validates())
 				$this->WebshopProduct->save();
-				
-				//REDIRECT
-				$this->redirect(array('action' => 'admin', $contentID));
-			}
+			else 
+				$create_error = true;
+		}
+		
+		//PRINT messages
+		if (!$create_error){
+			$this->Session->setFlash(__d('web_shop', 'Product created.'));
+			
+			//REDIRECT
+			$this->redirect(array('action' => 'admin', $contentID));
+		}else{
+			$this->Session->setFlash($error_message, 'default', array(
+					'class' => 'flash_failure'));
 		}
 	}
 	
@@ -111,53 +137,78 @@ class WebShopController extends WebShopAppController {
 	* Function to edit product.
 	*/
 	public function edit($contentID, $productID=null){
-		//Check permissions
-		$pluginId = $this->getPluginId();
-		$allowed = $this->PermissionValidation->actionAllowed($pluginId, 'Edit Product');
-		if(!$allowed)
-			$this->redirect(array('action' => 'admin', $contentID));
 		
 		//Attributes
 		$update_error = false;
+		$error_message = __d('web_shop', 'Please fill out all mandatory fields.');
+		$request = null;
 		
-		//SET id
-		$this->WebshopProduct->id = $productID;
+		//Check permissions
+		$pluginId = $this->getPluginId();
+		$allowed = $this->PermissionValidation->actionAllowed($pluginId, 'Edit Product');
 		
-		//CHECK request
-		if (empty($this->data)) {
-			$this->data = $this->WebshopProduct->read();
-			$this->set('contentID', $contentID);
+		if(!$allowed){
+			$this->Session->setFlash(__d('web_shop', 'Permission denied.'), 'default', array(
+							'class' => 'flash_failure'));
 				
-			return;
+			$this->redirect(array('action' => 'admin', $contentID));
 		}
-	
+		
+		//SET data
+		$this->WebshopProduct->id = $productID;
+		$this->set('contentID', $contentID);
+		
 		//EDIT product
 		if (isset($this->params['data']['save'])) {
-	
 			//UPDATE db info
 			$data_old = $this->WebshopProduct->read();
 			$data_new = $this->data;
+			$data_new['WebshopProduct']['picture'] = $data_old['WebshopProduct']['picture'];
+
+			//SET data
+			if(!$update_error){
+				$this->WebshopProduct->set($data_old);
+				$this->WebshopProduct->set($data_new);
+				
+				$update_error = !$this->WebshopProduct->validates();
+			}
 			
 			//UPLOAD new file (if necessary)			
-			if (!empty($data_new['WebshopProduct']['submittedfile']['name'])){
+			if (!$update_error && !empty($data_new['WebshopProduct']['submittedfile']['name'])){
 				$result = $this->uploadImage($data_new['WebshopProduct']['submittedfile'], $data_old['WebshopProduct']['picture'], true);
 				
 				$data_new['WebshopProduct']['picture'] = $result['file_name'];
 				$update_error = $result['error'];
+
+				if($update_error)
+					$error_message = __d('web_shop', 'Errors during picture upload.');
 			}
-			
+
 			//SET new data
 			if(!$update_error){
-				$this->WebshopProduct->set($data_old);
 				$this->WebshopProduct->set($data_new);
-			
+				
 				//SAVE
 				$update_error = !$this->WebshopProduct->save();
 			}
-		}
 		
-		//REDIRECT
-		$this->redirect(array('action' => 'admin', $contentID));
+		
+			//PRINT messages
+			if (!$update_error){
+				$this->Session->setFlash(__d('web_shop', 'Product updated.'));
+				
+				//REDIRECT
+				$this->redirect(array('action' => 'admin', $contentID));
+			}else{
+				$this->Session->setFlash($error_message, 'default', array(
+								'class' => 'flash_failure'));
+			}
+			
+			$data_new['WebshopProduct']['id'] = $productID;
+			$this->data = $data_new;
+		}else{
+			$this->data = $this->WebshopProduct->read();
+		}
 	}
 	
 	

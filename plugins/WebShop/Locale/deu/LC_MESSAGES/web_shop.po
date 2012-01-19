@@ -159,13 +159,13 @@ msgid "Number of Products"
 msgstr "Produktanzahl"
 
 #: Model\WebshopProduct.php:validation for field name
-msgid ""Name" is mandetory."
+msgid ""Name" is mandatory."
 msgstr ""Name" ist ein Pflichtfeld."
 
 #: Model\WebshopProduct.php:validation for field description
-msgid ""Description" is mandetory."
+msgid ""Description" is mandatory."
 msgstr ""Beschreibung" ist ein Pflichtfeld."
 
 #: Model\WebshopProduct.php:validation for field price
-msgid ""Price" is mandetory."
+msgid ""Price" is mandatory."
 msgstr ""Preis" ist ein Pflichtfeld."

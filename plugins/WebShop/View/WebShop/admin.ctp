@@ -13,6 +13,10 @@
 	
 	<div id="webshop_product_administration">
 		<h1><?php echo __d("web_shop", "Product Administration"); ?></h1>	
+		
+		<?php
+			echo $this->Session->flash('WebshopProduct');
+		?>
 		<table>
 			<thead>
 				<tr>

@@ -12,20 +12,20 @@ class WebshopProduct extends AppModel {
 		        'name' => array(
 		        	'rule' => 'notEmpty',
 					'required' => true,
-		        	'message' => '"Name" is mandetory.'
+		        	'message' => '"Name" is mandatory.'
 		        ),
 		        
 		        'description' => array(
 		        	'rule' => 'notEmpty',
 					'required' => true,
-			        'message' => '"Description" is mandetory.'
+			        'message' => '"Description" is mandatory.'
 		        ),
 		        
 				'price' => array(
 					'rule' => 'numeric',
 				    'required' => true,
 					'allowEmpty' => false,
-				    'message'  => '"Price" is mandetory.'
+				    'message'  => '"Price" is mandatory.'
 				)
 	);
 	
