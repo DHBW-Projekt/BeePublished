@@ -7,6 +7,7 @@ class DisplayTextController extends StaticTextAppController {
 	
 	//main-function
 	public function admin($contentId){
+		$this->set('contentId',$contentId );
 		$this->layout = 'overlay';
 		//Load datatable
 		$this->loadModel('Plugin');
@@ -49,5 +50,5 @@ class DisplayTextController extends StaticTextAppController {
 		   //Go to mainpage
 			$this->redirect($this->referer());
 		}
-	}
+	}	
 }
