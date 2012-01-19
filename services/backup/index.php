@@ -169,9 +169,17 @@ function backup_db($host,$user,$pass,$name,$path){
         $return.= 'INSERT INTO '.$table.' VALUES(';
         for($j=0; $j<$num_fields; $j++) 
         {
-          $row[$j] = addslashes($row[$j]);
-          $row[$j] = str_replace("\n","\\n",$row[$j]);
-          if (isset($row[$j])) { $return.= '"'.$row[$j].'"' ; } else { $return.= '""'; }
+			if($row[$j] === NULL){
+				$return.= 'NULL' ; 
+			} else {
+				$row[$j] = addslashes($row[$j]);
+          		$row[$j] = str_replace("\n","\\n",$row[$j]);
+		  		$return.= '"'.$row[$j].'"' ; 
+			}
+         
+          
+		  	
+			
           if ($j<($num_fields-1)) { $return.= ','; }
         }
         $return.= ");\n";
