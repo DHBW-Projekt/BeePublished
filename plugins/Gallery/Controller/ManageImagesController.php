@@ -2,7 +2,7 @@
 class ManageImagesController  extends AppController{
 	var $layout = 'overlay';
 	
-	public $components = array('Gallery.GalleryPicture');
+	public $components = array('Gallery.GalleryPictureComp');
 
 	/**
 	 * Need to pass the content id -> user could switch back to the set set image tab
@@ -10,7 +10,7 @@ class ManageImagesController  extends AppController{
 	 */
 	public function index($contentId){
 		
-		$allPics = $this->GalleryPicture->getAllPictures($this);
+		$allPics = $this->GalleryPictureComp->getAllPictures($this);
 		
 		$data = array(	'AllPictures' => $allPics,
 						'ContentId' => $contentId );
@@ -38,14 +38,15 @@ class ManageImagesController  extends AppController{
 			'title' => $this->data['addImage']['ImageTitle'],
 			'path_to_pic' => $urlPath );
 		
-		$this->GalleryPicture->save($this,$dbImage);
+		$this->GalleryPictureComp->save($this,$dbImage);
 		$this->redirect(array(
 						'action' => 'index', $contentId));
+	
 	}
 	
 	public function delete($pictureId, $contentId){
 		// TODO remove from ftp
-		$picture = $this->GalleryPicture->delete($this,$pictureId);
+		$picture = $this->GalleryPictureComp->delete($this,$pictureId);
 		
 		/*
 		unlink(realpath("../..".$picture['path_to_pic']));
@@ -56,7 +57,7 @@ class ManageImagesController  extends AppController{
 	}
 
 	public function edit($pictureId,$contentId){
-		$picture = $this->GalleryPicture->getPicture($this,$pictureId);
+		$picture = $this->GalleryPictureComp->getPicture($this,$pictureId);
 		
 		$data = array(	'Picture' => $picture,
 						'ContentId' => $contentId );
@@ -68,7 +69,7 @@ class ManageImagesController  extends AppController{
 		//debug($this->data);
 		//debug($contentId);
 		
-		$this->GalleryPicture->save($this,$this->data['GalleryPicture']);
+		$this->GalleryPictureComp->save($this,$this->data['GalleryPicture']);
 		$this->redirect(array('action' => 'index', $contentId));
 	}
 	

@@ -1,12 +1,12 @@
 <?php
 class DisplayImageComponent extends Component
 {
-	public $components = array('Gallery.GalleryPicture');
+	public $components = array('Gallery.GalleryPictureComp');
 	
 	public function getData($controller, $params, $url, $id)
 	{
 		if(isset($params['pictureID']))
-			return $this->GalleryPicture->getPicture($controller,$params['pictureID']);
+			return $this->GalleryPictureComp->getPicture($controller,$params['pictureID']);
 	}
 
 }
