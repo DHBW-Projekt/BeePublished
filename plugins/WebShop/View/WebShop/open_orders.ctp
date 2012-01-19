@@ -11,42 +11,42 @@
 	?>
 	
 	<div id="webshop_product_administration">
-		<h1><?php echo __('Open Orders'); ?></h1>	
+		<h1><?php echo __d("web_shop", 'Open Orders'); ?></h1>	
 		<table>
 			<thead>
 				<tr>
-					<th><?php echo __('Order'); ?></th>
-					<th><?php echo __('Date'); ?></th>
-					<th><?php echo __('Status'); ?></th>
-					<th><?php echo __('Action'); ?></th>
+					<th><?php echo __d("web_shop", 'Order'); ?></th>
+					<th><?php echo __d("web_shop", 'Date'); ?></th>
+					<th><?php echo __d("web_shop", 'Status'); ?></th>
+					<th><?php echo __d("web_shop", 'Action'); ?></th>
 				</tr>
 			</thead>
 			<?php
 				if(empty($orders)){
-					echo '<tr><td colspan="4">'.__('No open orders.').'</td></tr>';
+					echo '<tr><td colspan="4">'.__d("web_shop", 'No open orders.').'</td></tr>';
 				} else {
 						
 				//GET orders
 				 foreach ($orders as $order): 
 					
 					if($order['WebshopOrder']['status'] == 0)
-						$status = __('open');
+						$status = __d("web_shop", 'open');
 					else if ($order['WebshopOrder']['status'] == 1)
-						$status = __('edit');
+						$status = __d("web_shop", 'edit');
 			
 				    echo '<tr>';
 				    
 				    //GET detailed order info
 					echo '<td>';
-						echo '<p><strong>'.__('Order').':</strong> '.$order['WebshopOrder']['id'].'</p>';
-						echo '<p style="margin-bottom:10px"><strong>'.__('Customer').':</strong> '.$order['User']['username'].' (ID: '.$order['User']['id'].')</p>';
+						echo '<p><strong>'.__d("web_shop", 'Order').':</strong> '.$order['WebshopOrder']['id'].'</p>';
+						echo '<p style="margin-bottom:10px"><strong>'.__d("web_shop", 'Customer').':</strong> '.$order['User']['username'].' (ID: '.$order['User']['id'].')</p>';
 
 						echo '<table>';
 						echo '<tr>';
-						echo '<th>'.__('Article').'</th>';
-						echo '<th>'.__('Quantity').'</th>';
-						echo '<th>'.__('Unit Price').'</th>';
-						echo '<th>'.__('Price').'</th>';
+						echo '<th>'.__d("web_shop", 'Article').'</th>';
+						echo '<th>'.__d("web_shop", 'Quantity').'</th>';
+						echo '<th>'.__d("web_shop", 'Unit Price').'</th>';
+						echo '<th>'.__d("web_shop", 'Price').'</th>';
 						echo '</tr>';
 						
 						//Attributes
@@ -66,7 +66,7 @@
 						}
 						
 						echo '<tr>';
-						echo '<td style="text-align: right; padding-top:15px" colspan="4"><strong>'.__('Subtotal').': '.number_format($totalPrice, 2, ',', '.').' '.$position['Product']['WebshopProduct']['currency'].'</strong></td>';
+						echo '<td style="text-align: right; padding-top:15px" colspan="4"><strong>'.__d("web_shop", 'Subtotal').': '.number_format($totalPrice, 2, ',', '.').' '.$position['Product']['WebshopProduct']['currency'].'</strong></td>';
 						echo '</tr>';
 						echo '</table>';
 					echo '</td>';

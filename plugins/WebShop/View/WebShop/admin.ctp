@@ -1,5 +1,6 @@
 <!--  Produkt Administrations View -->
-	<?php
+	<?php	
+	
 	//LOAD js
 	 $this->Html->script('/web_shop/js/admin', false); 
 	
@@ -11,11 +12,11 @@
 	?>
 	
 	<div id="webshop_product_administration">
-		<h1><?php echo __("Product Administration"); ?></h1>	
+		<h1><?php echo __d("web_shop", "Product Administration"); ?></h1>	
 		<table>
 			<thead>
 				<tr>
-					<th colspan="3"><p><?php echo __('Product'); ?></p><?php echo $this->Form->postLink(__("Add"), array('controller' => 'WebShop', 'action' => 'create', $contentID), array('style' => 'float: right', 'class' => 'webshop_button')); ?></th>
+					<th colspan="3"><p><?php echo __d("web_shop", 'Product'); ?></p><?php echo $this->Form->postLink(__d("web_shop", "Add"), array('controller' => 'WebShop', 'action' => 'create', $contentID), array('style' => 'float: right', 'class' => 'webshop_button')); ?></th>
 				</tr>
 			</thead>
 			<?php foreach ($products as $product): ?>

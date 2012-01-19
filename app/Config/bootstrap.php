@@ -26,6 +26,9 @@
 // Setup a 'default' cache configuration for use in the application.
 Cache::config('default', array('engine' => 'File'));
 
+// Set default language
+Configure::write('Config.language', 'en');
+
 /**
  * The settings below can be used to set additional paths to models, views and controllers.
  *
