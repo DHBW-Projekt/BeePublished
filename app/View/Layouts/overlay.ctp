@@ -24,7 +24,7 @@
     <?php echo $this->Session->flash(); ?>
     <?php echo $content_for_layout ?>
 </div>
-<div id="footer">
+<div id="footer" class="overlay">
     Powered by BeePublished - All rights reserved - &copy; Copyright 2011-2012
 </div>
 </div>
