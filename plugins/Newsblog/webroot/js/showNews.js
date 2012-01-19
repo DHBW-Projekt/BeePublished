@@ -25,6 +25,10 @@ $(document).ready(function () {
 	});
 	
 	$('.newsblogcontainer').jPaginate({
-		items: window.app.itemsPerPage
+		items: window.app.itemsPerPage,
+		minimize: 'true',
+		nav_items: 5,
+		next: '>>',
+		previous: '<<'
 	});
 });
