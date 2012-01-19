@@ -1,5 +1,4 @@
 <?php 
-/* ApplicationForMembership schema generated on: 2012-01-16 19:26:04 : 1326738364*/
 class ApplicationMembershipSchema extends CakeSchema {
 	function before($event = array()) {
 		return true;
