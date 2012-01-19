@@ -1,7 +1,6 @@
 <div>
-<p>Hi DualonCMS User,</p>
+<p>'$template header'</p>
 <p></p>
 <p><?php echo $text;?></p>
-<p>Yours sincerly,<br>
-Dualon CMS</p>
+<p>'$template footer'<br>
 </div>
