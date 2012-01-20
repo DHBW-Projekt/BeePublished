@@ -46,9 +46,9 @@
 		echo '<td>'.$entry['FoodMenuEntry']['price'].'</td>';
 		echo '<td>'.$entry['FoodMenuEntry']['currency'].'</td>';
 		echo '<td class="tableicon">';
-		if($editAllowed) echo $this->Html->image('/app/webroot/img/edit.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[e]Edit', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuEntries', 'action' => 'edit', $entry['FoodMenuEntry']['name'], $entry['FoodMenuEntry']['id'])));
+		if($editAllowed) echo $this->Html->image('edit.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[e]Edit', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuEntries', 'action' => 'edit', $entry['FoodMenuEntry']['name'], $entry['FoodMenuEntry']['id'])));
 		echo '</td><td class="tableicon">';
-		if($deleteAllowed) echo $this->Html->image('/app/webroot/img/delete.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[x]Delete', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuEntries', 'action' => 'delete', $entry['FoodMenuEntry']['name'], $entry['FoodMenuEntry']['id'])));
+		if($deleteAllowed) echo $this->Html->image('delete.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[x]Delete', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuEntries', 'action' => 'delete', $entry['FoodMenuEntry']['name'], $entry['FoodMenuEntry']['id'])));
 		echo '</td>';
 	    echo '</tr>';
 		}
@@ -60,7 +60,7 @@
 	if($deleteAllowed) { ?>
 	<tfoot>
 	<tr>
-		<td><?php echo $this->Html->image('/app/webroot/img/arrow.png', array('alt' => 'arrow')); ?></td>
+		<td><?php echo $this->Html->image('arrow.png', array('alt' => 'arrow')); ?></td>
 		<td colspan="3"><?php echo $this->Form->submit(__('Delete')); ?></td>
 	</tr>
 	</tfoot>

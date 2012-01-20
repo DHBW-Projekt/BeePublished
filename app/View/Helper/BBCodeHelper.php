@@ -16,4 +16,17 @@ class BBCodeHelper extends AppHelper
         $string = nl2br($string);
         return $string;
     }
+    
+    public function removeBBCode($string = null)
+    {
+    	$string = preg_replace("/\[b\](.*)\[\/b\]/Usi", "\\1", $string);
+        $string = preg_replace("/\[i\](.*)\[\/i\]/Usi", "\\1", $string);
+        $string = preg_replace("/\[u\](.*)\[\/u\]/Usi", "\\1", $string);
+        $string = preg_replace("/\[quote\](.*)\[\/quote\]/Usi", "\\1", $string);
+        $string = preg_replace("/\[color=(.*)\](.*)\[\/color\]/Usi", "\\2", $string);
+        $string = preg_replace("/\[url=(.*)\](.*)\[\/url\]/Usi", "\\2", $string);
+        $string = preg_replace("/\[img\](.*)\[\/img\]/Usi", "", $string);
+        $string = nl2br($string);
+        return $string;
+    }
 }
