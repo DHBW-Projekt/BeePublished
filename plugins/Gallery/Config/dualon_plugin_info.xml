@@ -13,6 +13,9 @@
 			<view>
 				<name>DisplayImage</name>
 			</view>
+			<view>
+				<name>DisplayGallery</name>
+			</view>
         </views>
     </plugin>
 </dualon>
