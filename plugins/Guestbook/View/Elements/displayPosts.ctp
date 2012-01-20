@@ -1,8 +1,13 @@
+<?php
+App::uses('Sanitize', 'Utility');
+$this->Helpers->load('BBCode');
+?>
+
 <div id='guestbook_display'>
 		
 	<?php foreach($data as $GuestbookPost):?>
 	
-		<div class='guestbook_post'>		
+		<div class='guestbook_post border-color1'>		
 			<div class='guestbook_post_author'>
 				<?php echo $GuestbookPost['GuestbookPost']['author'] . __(' on ') . $this->Time->format('d.m.Y', $GuestbookPost['GuestbookPost']['created']) . __(' at ') . $this->Time->format('H:i:s',$GuestbookPost['GuestbookPost']['created'])?>
 			</div>				
@@ -18,7 +23,7 @@
 				?>	
 			</div>			
 			<div class='guestbook_post_text'>
-				<?php echo $GuestbookPost['GuestbookPost']['text']?>
+				<?php echo $this->BBCode->transformBBCode(Sanitize::html($GuestbookPost['GuestbookPost']['text']));?>
 			</div>			
 		</div>
 		
