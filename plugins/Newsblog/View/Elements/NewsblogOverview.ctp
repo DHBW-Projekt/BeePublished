@@ -2,7 +2,7 @@
 	$DateTimeHelper = $this->Helpers->load('Time');
 	$this->Helpers->load('Slug');
 	$this->Helpers->load('BBCode');
-	
+	$this->Helpers->load('SocialNetwork');
 	
 	$this->Html->script('jquery/jPaginate', false);
 	$this->Html->script('/newsblog/js/showNews', false);
@@ -71,7 +71,7 @@
 	</div>
 </div>
 
-<div class='newsblogcontainer' count='<?php echo count($data['publishedNewsEntries'])?>'>
+<div class='newsblogcontainer'>
 
 <?php 
 if( count($data['publishedNewsEntries']) > 0){
@@ -122,6 +122,13 @@ if( count($data['publishedNewsEntries']) > 0){
 				);
 				?>
 			</div>
+		</div>
+		<div class="newsblog_entry_social">
+			<?php 
+				echo $this->SocialNetwork->insertFacebookShare($url.'/shownews/'.$newsEntryId.'-'.$titleForUrl);
+				echo $this->SocialNetwork->insertGoogleShare($url.'/shownews/'.$newsEntryId.'-'.$titleForUrl);
+				echo $this->SocialNetwork->insertTwitterShare($url.'/shownews/'.$newsEntryId.'-'.$titleForUrl);
+			?>
 		</div>
 		<div class="newsblog_entry_buttons">
 			<?php 
