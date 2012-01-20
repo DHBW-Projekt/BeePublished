@@ -1,5 +1,4 @@
 <?php
-App::uses('CakeEmail', 'Network/Email');
 
 /**
  * ContactFormController
@@ -16,13 +15,5 @@ class ContactFormController extends AppController {
 	*/
 	public function admin($contentID) {
 		$this->set('contentID', $contentID);
-	}
-	
-   /**
-	* Before-Filter
-	*/
-	public function beforeFilter() {		
-		//Permissions
-		$this->Auth->allow('*');
 	}
 }
