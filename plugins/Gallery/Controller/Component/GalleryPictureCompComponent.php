@@ -1,6 +1,8 @@
 <?php
-class GalleryPictureComponent extends Component
+class GalleryPictureCompComponent extends Component
 {
+	public $uses = array ('Gallery.GalleryPicture');
+	
 	public function getPicture($controller, $pictureId){
 		$controller->loadModel('Gallery.GalleryPicture');
 		$picture = $controller->GalleryPicture->findById($pictureId);
@@ -13,6 +15,28 @@ class GalleryPictureComponent extends Component
 	public function getAllPictures($controller){
 		$controller->loadModel('Gallery.GalleryPicture');
 		$pictures = $controller->GalleryPicture->find('all');
+		
+		foreach ($pictures as &$picture){
+			$picture = $this->normalizePicture($picture);
+		}
+		
+		return $pictures;
+	}
+	
+	public function getAllUnAssignedPictures($controller){
+		$controller->loadModel('Gallery.GalleryPicture');
+		$pictures = $controller->GalleryPicture->find('all',  array('conditions' => array( 'gallery_entry_id' => null)));
+		//conditions =
+		foreach ($pictures as &$picture){
+			$picture = $this->normalizePicture($picture);
+		}
+		
+		return $pictures;
+	}
+	
+	public function getAllPicturesGallery($controller, $galleryId){
+		$controller->loadModel('Gallery.GalleryPicture');
+		$pictures = $controller->GalleryPicture->find('all',  array('conditions' => array( 'gallery_entry_id' => $galleryId)));
 		
 		foreach ($pictures as &$picture){
 			$picture = $this->normalizePicture($picture);

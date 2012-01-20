@@ -5,6 +5,7 @@
 	$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'edit');
 	$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete');
 	if($editAllowed){
+		echo '<h1>'.__('Edit entry').'</h1>';
 		echo $this->Form->create('FoodMenuEntry', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuEntries', 'action' => 'edit')));
 		echo $this->Form->hidden('id', array('value' => $entry['FoodMenuEntry']['id']));
 		echo $this->Form->input('name', array('value' => $entry['FoodMenuEntry']['name'], 'label' => (__('Name:'))));
