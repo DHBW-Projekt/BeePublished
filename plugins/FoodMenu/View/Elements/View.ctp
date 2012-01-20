@@ -9,7 +9,10 @@
 <?php
 	echo $this->Session->flash();
 	if(!(isset($url))) $url = '';
-	echo $this->element('SelectDate', array('url', $url));
+	echo $this->element('SelectDate', array('url' => $url, 'selectedDate' => $selectedDate));
+	
+	if ($selectedDate != '') $selectedDate = str_replace('/', '-', $selectedDate);
+	
 	if(!(isset($categories))) $categories = '';
 	if(!(isset($entries))) $entries = '';
 	
@@ -23,7 +26,7 @@
 				if ( $dataItem['deleted'] != NULL ) continue;
 				else {
 					$menu = $dataItem;
-					echo '<li>'.$this->Html->link($menu['name'], $url . '/view/menu/' .  $menu['name'] . '/' . $menu['id']).'</li>';	
+					echo '<li>'.$this->Html->link($menu['name'], $url . '/view/menu/' .  $menu['name'] . '/' . $menu['id'] . '/' . $selectedDate).'</li>';	
 				}//else
 			}//foreach
 			echo '</ul>';
@@ -39,7 +42,7 @@
 					if ( $dataItem['deleted'] != NULL ) continue;
 					else {
 						$category = $dataItem;
-						echo '<li>'.$this->Html->link($category['name'], $url . '/view/menu/' . $data['show']['SelectedMenu']['name'] . '/' . $data['show']['SelectedMenu']['id'] . '/category/' .  $category['name'] . '/' . $category['id']).'</li>';	
+						echo '<li>'.$this->Html->link($category['name'], $url . '/view/menu/' . $data['show']['SelectedMenu']['name'] . '/' . $data['show']['SelectedMenu']['id'] . '/category/' .  $category['name'] . '/' . $category['id'] . '/' . $selectedDate).'</li>';	
 					}//else
 				}//foreach
 				echo '</ul>';

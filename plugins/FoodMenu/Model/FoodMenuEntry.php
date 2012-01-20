@@ -27,12 +27,12 @@ class FoodMenuEntry extends AppModel {
             		'message' => 'This field name has to be filled.'
          		),
          		'name_isalphanumeric' => array(
-         			'rule' => 'alphaNumeric',
+         			'rule' => array('custom', '/^[\\w\\s]+$/u'),
 					'message' => 'You have to enter numbers or letters.'
          		)
 		),
 		'currency' => array(
-				'rule' => array('inList', array('EUR', 'USD', 'CAD')),
+				'rule' => array('inList', array('EUR', 'USD', 'CAD', 'GBP')),
 				'message' => 'Please enter a valid currency.'
 		),
 		'price' => array(
