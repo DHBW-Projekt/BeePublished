@@ -40,15 +40,6 @@ class WebshopProduct extends AppModel {
 	)
 	);
 	
-	/**
-	 * Translation support
-	 */
-	public $actsAs = array(
-		        'Translate' => array(
-		            'name', 'description'
-		)
-	);
-	
 	function invalidate($field, $value = true) {
 		return parent::invalidate($field, __d("web_shop", $value, true));
 	}

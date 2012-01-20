@@ -89,47 +89,47 @@ class WebShopController extends WebShopAppController {
 		$this->set('contentID', $contentID);
 	
 		//PROCESS save
-		if (!isset($this->params['data']['save']) or !isset($this->data['WebshopProduct']))
-			$create_error = true;
+		if (isset($this->params['data']['save']) or isset($this->data['WebshopProduct'])){
 		
-		//UPLOAD image
-		if (!$create_error){
-			if (!empty($this->data['WebshopProduct']['submittedfile']['name']))
-				$result = $this->uploadImage($this->data['WebshopProduct']['submittedfile'], null, true);
-			
-			if (isset($result)) {
-				$file_name = $result['file_name'];
-				$create_error = $result['error'];
-				$error_message = __d('web_shop', 'Errors during picture upload.');
-			} else {
-				$file_name = 'no_image.png';
+			//UPLOAD image
+			if (!$create_error){
+				if (!empty($this->data['WebshopProduct']['submittedfile']['name']))
+					$result = $this->uploadImage($this->data['WebshopProduct']['submittedfile'], null, true);
+				
+				if (isset($result)) {
+					$file_name = $result['file_name'];
+					$create_error = $result['error'];
+					$error_message = __d('web_shop', 'Errors during picture upload.');
+				} else {
+					$file_name = 'no_image.png';
+				}
 			}
-		}
-		
-		//SAVE on DB
-		if (!$create_error){
-			$this->WebshopProduct->set(array(
-						'name' => $this->data['WebshopProduct']['name'],
-						'description' => $this->data['WebshopProduct']['description'],
-						'price' => $this->data['WebshopProduct']['price'],
-						'picture' => $file_name
-			));
 			
-			if ($this->WebshopProduct->validates())
-				$this->WebshopProduct->save();
-			else 
-				$create_error = true;
-		}
-		
-		//PRINT messages
-		if (!$create_error){
-			$this->Session->setFlash(__d('web_shop', 'Product created.'));
+			//SAVE on DB
+			if (!$create_error){
+				$this->WebshopProduct->set(array(
+							'name' => $this->data['WebshopProduct']['name'],
+							'description' => $this->data['WebshopProduct']['description'],
+							'price' => $this->data['WebshopProduct']['price'],
+							'picture' => $file_name
+				));
+				
+				if ($this->WebshopProduct->validates())
+					$this->WebshopProduct->save();
+				else 
+					$create_error = true;
+			}
 			
-			//REDIRECT
-			$this->redirect(array('action' => 'admin', $contentID));
-		}else{
-			$this->Session->setFlash($error_message, 'default', array(
-					'class' => 'flash_failure'));
+			//PRINT messages
+			if (!$create_error){
+				$this->Session->setFlash(__d('web_shop', 'Product created.'));
+				
+				//REDIRECT
+				$this->redirect(array('action' => 'admin', $contentID));
+			}else{
+				$this->Session->setFlash($error_message, 'default', array(
+						'class' => 'flash_failure'));
+			}
 		}
 	}
 	
@@ -153,6 +153,10 @@ class WebShopController extends WebShopAppController {
 				
 			$this->redirect(array('action' => 'admin', $contentID));
 		}
+		
+		//PROCESS cancle
+		if (isset($this->params['data']['cancel']))
+			$this->redirect(array('action' => 'admin', $contentID));
 		
 		//SET data
 		$this->WebshopProduct->id = $productID;
@@ -215,7 +219,7 @@ class WebShopController extends WebShopAppController {
    /**
 	* Function to remove product.
 	*/
-	public function remove($contentID, $productID){
+	public function remove($contentID, $productID, $redirect = true){
 		//Check permissions
 		$pluginId = $this->getPluginId();
 		$allowed = $this->PermissionValidation->actionAllowed($pluginId, 'Delete Product');
@@ -232,7 +236,10 @@ class WebShopController extends WebShopAppController {
 		//REMOVE db entry
 		$this->WebshopProduct->delete($productID);
 		
-		$this->redirect(array('action' => 'admin', $contentID));
+		if ($redirect){
+			$this->Session->setFlash(__d('web_shop', 'Product deleted.'));
+			$this->redirect(array('action' => 'admin', $contentID));
+		}
 	}
 	
 	public function removeSelected($contentID){
@@ -243,8 +250,12 @@ class WebShopController extends WebShopAppController {
 			$this->redirect(array('action' => 'admin', $contentID));
 		
 		foreach ($this->data['selectedProducts'] as $product => $selection) {
-			if ($selection) $this->remove($contentID, $product);
+			if ($selection) 
+				$this->remove($contentID, $product, false);
 		}
+		
+		$this->Session->setFlash(__d('web_shop', 'Products deleted.'));
+		$this->redirect(array('action' => 'admin', $contentID));
 	}
 	
   
