@@ -33,20 +33,23 @@ class GalleryComponent extends Component {
 		//unlink(realpath("../..".$picture['path_to_pic']));
 		
 		$controller->loadModel('Gallery.GalleryEntry');
+		$pictures_to_save = array();
 		$test = $controller->GalleryEntry->findById($galleryId);
-		//$controller->loadModel('Gallery.GalleryPicture');
-	//	for($i = 0; $i < sizeof($test['GalleryPicture']); $i++){
-	//		echo $test['GalleryPicture'][$i];
-	//	}
-		
-		foreach($test['GalleryPicture'] as $galleryPicture){
-			//$galleryPicture['gallery_entry_id'] = null;
-			//echo"test";
-			//$controller->GalleryPicture->save($galleryPicture);
+
+		for($i = 0; $i < sizeof($test['GalleryPicture']); $i++){
+			if(array_key_exists($i, $test['GalleryPicture'])){
+				$pictures_to_save[$i] = $test['GalleryPicture'][$i];
+				$pictures_to_save[$i]['gallery_entry_id'] = null;
+			}
 		}
-		//$controller->GalleryEntry->saveAll($test);
-		debug($test);
-		//$controller->GalleryEntry->delete($galleryId);
+
+		$controller->GalleryEntry->delete($galleryId);
+		$controller->loadModel('Gallery.GalleryPicture');
+		
+		$controller->GalleryPicture->saveAll($pictures_to_save);
+		
+		debug($pictures_to_save);
+		$controller->redirect($controller->referer());
 		
 	}
 	

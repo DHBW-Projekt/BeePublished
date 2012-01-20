@@ -92,8 +92,7 @@ class ManageGalleriesController  extends AppController{
 	}
 	
 	public function assignImages($galleryId,$contentId){
-
-	
+			
 			$this->set('available_pictures',$this->GalleryPictureComp->getAllUnAssignedPictures($this));
 			$this->set('gallery_pictures',$this->GalleryPictureComp->getAllPicturesGallery($this, $galleryId));
 			$this->set('galleryId', $galleryId);
@@ -104,8 +103,12 @@ class ManageGalleriesController  extends AppController{
 	public function assignImage($galleryId,$pictureId){
 		$picture = $this->GalleryPictureComp->getPicture($this, $pictureId);
 		
-		$picture['gallery_entry_id'] = $galleryId;
-		
+		if($picture['gallery_entry_id'] == null){
+			$picture['gallery_entry_id'] = $galleryId;
+		}else{
+			$picture['gallery_entry_id'] = null;
+		}
+
 		$this->GalleryPictureComp->save($this,$picture);
 		$this->redirect($this->referer());
 	}
