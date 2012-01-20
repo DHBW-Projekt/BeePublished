@@ -59,8 +59,3 @@ div #guestbook_maintenance td.title{
 div #guestbook_maintenance td.date{
 	width: 10em;
 }
-
-/*textarea formatting */
-div #guestbook_write .input.textarea label {
-	display: block;
-}

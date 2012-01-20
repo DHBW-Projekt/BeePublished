@@ -8,6 +8,8 @@
 	if($createAllowed) {
 		echo $this->Form->create('FoodMenuMenu', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenus', 'action' => 'create')));
 		echo $this->Session->flash();
+		
+		echo '<h1>'.__('Create menu').'</h1>';
 			echo $this->Form->input('name', array('label' => (__('Name:')))).'<br />';
 			echo $this->Form->input('valid_from', array('label' => (__('Valid from:')))).'<br />';
 			echo $this->Form->input('valid_until', array('label' => (__('Valid until:')))).'<br />';

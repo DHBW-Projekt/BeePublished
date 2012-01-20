@@ -52,7 +52,7 @@ class ShowController extends AppController {
 		$data = array('id' => 1, 'google_plus' => $googlePlus);
 		$this->Impressum->save($data);
 	}
-	
+
 	/**
 	 * Please call this method when the xing plugin is added or removed.
 	 * @param add = true, remove = false
@@ -61,7 +61,7 @@ class ShowController extends AppController {
 		$data = array('id' => 1, 'xing' => $xing);
 		$this->Impressum->save($data);
 	}
-	
+
 	/**
 	 * Please call this method when the linkedin plugin is added or removed.
 	 * @param add = true, remove = false
@@ -70,7 +70,7 @@ class ShowController extends AppController {
 		$data = array('id' => 1, 'linkedin' => $linkedin);
 		$this->Impressum->save($data);
 	}
-	
+
 	/**
 	 * methods for picture management
 	 * origins of pictures not owned by the user must be written in impressum
@@ -104,15 +104,15 @@ class ShowController extends AppController {
 		$this->set('input',$this->Impressum->find('first'));
 		if ($this->request->is('post')) {
 			$data = $this->request->data;
-			$this->Impressum->id = 1;					
+			$this->Impressum->id = 1;
 			switch ($data['Impressum']['type']) {
 				case 'comp':
 					$data['Impressum']['first_name'] = null;
 					$data['Impressum']['last_name'] = null;
 					$data['Impressum']['job_title'] = null;
 					$data['Impressum']['regulations_name'] = null;
-					$data['Impressum']['regulations_link'] = null;	
-									
+					$data['Impressum']['regulations_link'] = null;
+
 					if($this->Impressum->save($data)) {
 						$this->render('compData');
 						break;
@@ -122,8 +122,9 @@ class ShowController extends AppController {
 					$data['Impressum']['last_name'] = null;
 					$data['Impressum']['job_title'] = null;
 					$data['Impressum']['regulations_name'] = null;
-					$data['Impressum']['regulations_link'] = null;	
-									
+					$data['Impressum']['regulations_link'] = null;
+					$data['Impressum']['reg'] = true; //every club must be registered
+
 					if($this->Impressum->save($data)) {
 						$this->render('clubData');
 						break;
@@ -133,7 +134,7 @@ class ShowController extends AppController {
 					$data['Impressum']['legal_form'] = null;
 					$data['Impressum']['auth_rep_first_name'] = null;
 					$data['Impressum']['auth_rep_last_name'] = null;
-					
+
 					if($this->Impressum->save($data)) {
 						$this->render('privJobData');
 						break;
@@ -151,7 +152,7 @@ class ShowController extends AppController {
 					$data['Impressum']['reg_city'] = null;
 					$data['Impressum']['reg_country'] = null;
 					$data['Impressum']['reg_no'] = null;
-					$data['Impressum']['adm_office'] = false;					
+					$data['Impressum']['adm_office'] = false;
 					$data['Impressum']['adm_office_name'] = null;
 					$data['Impressum']['adm_office_street'] = null;
 					$data['Impressum']['adm_office_house_no'] = null;
@@ -163,7 +164,7 @@ class ShowController extends AppController {
 					$data['Impressum']['regulations_link'] = null;
 					$data['Impressum']['vat_no'] = null;
 					$data['Impressum']['eco_no'] = null;
-										
+
 					if($this->Impressum->save($data)) {
 						$this->render('privJobData');
 						break;
@@ -215,7 +216,7 @@ class ShowController extends AppController {
 			if ($this->complete) {
 				$this->Impressum->id = 1;
 				if ($this->Impressum->save($data)) {
-					if ($data['Impressum']['type'] == 'job') { //private person is now finished
+					if ($this->Impressum->find('first',array('fields' => array('type'))) == 'job') { //private person is now finished
 						$this->render('jobData');
 					} else {
 						$this->render('close');
@@ -300,7 +301,7 @@ class ShowController extends AppController {
 		$this->set('input',$this->Impressum->find('first'));
 		if ($this->request->is('post')) {
 			$data = $this->request->data;
-			if ($data['Impressum']['reg']) {
+			if ($this->Impressum->find('first',array('fields' => array('reg')))) {
 				$this->checkRegister($data);
 				if ($this->complete) {
 					$this->Impressum->id = 1;
@@ -332,7 +333,7 @@ class ShowController extends AppController {
 		$this->set('input',$this->Impressum->find('first'));
 		if ($this->request->is('post')) {
 			$data = $this->request->data;
-			if ($data['Impressum']['adm_office']) {
+			if ($this->Impressum->find('first',array('fields' => array('adm_office')))) {
 				$this->checkAdmOffice($data);
 				if ($this->complete) {
 					$this->Impressum->id = 1;
@@ -372,7 +373,6 @@ class ShowController extends AppController {
 			if ($this->complete) {
 				$this->checkAddress($data);
 				if ($this->complete) {
-					$data['Impressum']['reg'] = true; //every club must be registered
 					$this->Impressum->id = 1;
 					if($this->Impressum->save($data)) {
 						$this->render('clubContact');
