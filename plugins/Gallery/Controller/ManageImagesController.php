@@ -39,9 +39,9 @@ class ManageImagesController  extends AppController{
 			'path_to_pic' => $urlPath );
 		
 
-		$this->GalleryPicture->generateThumbnail($dbImage);
+		$this->GalleryPictureComp->generateThumbnail($dbImage);
 		
-		$this->GalleryPicture->save($this,$dbImage);
+		$this->GalleryPictureComp->save($this,$dbImage);
 
 		$this->Session->setFlash('Image saved');
 		
