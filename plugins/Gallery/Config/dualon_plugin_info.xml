@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dualon>
+    <plugin>
+        <name>Gallery</name>
+        <author>Alex, Fabian</author>
+        <version>1.0</version>
+        <permissions>
+        </permissions>
+        <views>
+            <view>
+                <name>gallery</name>
+            </view>
+			<view>
+				<name>DisplayImage</name>
+			</view>
+			<view>
+				<name>DisplayGallery</name>
+			</view>
+        </views>
+    </plugin>
+</dualon>
