@@ -68,7 +68,7 @@ class WebShopController extends WebShopAppController {
 	public function create($contentID){
 		
 		//Attributes
-		$create_error = false;
+		$create_error = null;
 		$error_message = __d('web_shop', 'Please fill out all mandatory fields.');
 		
 		//Check permissions
@@ -89,20 +89,17 @@ class WebShopController extends WebShopAppController {
 		$this->set('contentID', $contentID);
 	
 		//PROCESS save
-		if (isset($this->params['data']['save']) or isset($this->data['WebshopProduct'])){
-		
+		if (isset($this->params['data']['save']) and isset($this->data['WebshopProduct'])){
 			//UPLOAD image
-			if (!$create_error){
-				if (!empty($this->data['WebshopProduct']['submittedfile']['name']))
-					$result = $this->uploadImage($this->data['WebshopProduct']['submittedfile'], null, true);
+			if (!empty($this->data['WebshopProduct']['submittedfile']['name']))
+				$result = $this->uploadImage($this->data['WebshopProduct']['submittedfile'], null, true);
 				
-				if (isset($result)) {
-					$file_name = $result['file_name'];
-					$create_error = $result['error'];
-					$error_message = __d('web_shop', 'Errors during picture upload.');
-				} else {
-					$file_name = 'no_image.png';
-				}
+			if (isset($result)) {
+				$file_name = $result['file_name'];
+				$create_error = $result['error'];
+				$error_message = __d('web_shop', 'Errors during picture upload.');
+			} else {
+				$file_name = 'no_image.png';
 			}
 			
 			//SAVE on DB
@@ -119,17 +116,17 @@ class WebShopController extends WebShopAppController {
 				else 
 					$create_error = true;
 			}
+		}
+		
+		//PRINT messages
+		if (isset($create_error) and !$create_error){
+			$this->Session->setFlash(__d('web_shop', 'Product created.'));
 			
-			//PRINT messages
-			if (!$create_error){
-				$this->Session->setFlash(__d('web_shop', 'Product created.'));
-				
-				//REDIRECT
-				$this->redirect(array('action' => 'admin', $contentID));
-			}else{
-				$this->Session->setFlash($error_message, 'default', array(
-						'class' => 'flash_failure'));
-			}
+			//REDIRECT
+			$this->redirect(array('action' => 'admin', $contentID));
+		}else if (isset($create_error)){
+			$this->Session->setFlash($error_message, 'default', array(
+					'class' => 'flash_failure'));
 		}
 	}
 	
@@ -162,7 +159,7 @@ class WebShopController extends WebShopAppController {
 		$this->WebshopProduct->id = $productID;
 		$this->set('contentID', $contentID);
 		
-		//EDIT product
+		//PROCESS save
 		if (isset($this->params['data']['save'])) {
 			//UPDATE db info
 			$data_old = $this->WebshopProduct->read();
@@ -179,7 +176,7 @@ class WebShopController extends WebShopAppController {
 			
 			//UPLOAD new file (if necessary)			
 			if (!$update_error && !empty($data_new['WebshopProduct']['submittedfile']['name'])){
-				$result = $this->uploadImage($data_new['WebshopProduct']['submittedfile'], $data_old['WebshopProduct']['picture'], true);
+				$result = $this->uploadImage($data_new['WebshopProduct']['submittedfile'], $data_old['WebshopProduct']['picture'], false);
 				
 				$data_new['WebshopProduct']['picture'] = $result['file_name'];
 				$update_error = $result['error'];
