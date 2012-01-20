@@ -36,7 +36,7 @@ if($writeAllowed){
 			'name' => 'text'
 		));
 		//create validFrom input
-		echo $this->Form->input(null, array(
+		echo $this->Form->input('NewsEntry.validFrom', array(
 			//'div' => 'writeValidConfiguration',
 			'type' => 'text',
 			'id' => 'nbValidFromDatepicker',
@@ -46,7 +46,7 @@ if($writeAllowed){
 			'disabled' => true
 		));
 		//create validTo input
-		echo $this->Form->input(null, array(
+		echo $this->Form->input('NewsEntry.validTo', array(
 			//'div' => 'writeValidConfiguration',
 			'type' => 'text',
 			'id' => 'nbValidToDatepicker',
