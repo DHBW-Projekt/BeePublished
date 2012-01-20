@@ -1,7 +1,7 @@
 <!--  Application Adminstration View -->
 <?php 
 	//LOAD css-file
-	$this->Html->css('/ApplicationMembership/applcation_membership');
+	$this->Html->css('/ApplicationMembership/css/application_membership');
 	
 	//LOAD menue
 	echo $this->element('admin_menu', array('contentID' => $contentID));
@@ -15,7 +15,7 @@
 		}
 		else{
 		?>
-		<table>
+		<table >
 		<?php echo $this->Form->create('SelectApplications', array('url' => array('controller' => 'ApplicationMembership', 'action' => 'doneSelection', $contentID))); ?>
 			<tr>
 				<th>Done</th>
@@ -31,7 +31,7 @@
 					$type = 'passive';
 			?>
 			<tr >
-				<td><?php echo $this->Form->checkbox($application['ApplicationMembership']['id']); ?></td>
+				<td name="applicationDoneField"><?php echo $this->Form->checkbox($application['ApplicationMembership']['id']); ?></td>
 				<td>
 					<p>Anschrift:</p>
 					<table>
@@ -40,13 +40,49 @@
 							<td><?php echo $application['ApplicationMembership']['title']; ?></td>
 						</tr>
 						<tr>
-							<td>Last Name</td>
+							<td>Last Name:</td>
 							<td><?php echo $application['ApplicationMembership']['last_name']; ?></td>
 						</tr>
-					</table>
+						<tr>
+							<td>First Name:</td>
+							<td><?php echo $application['ApplicationMembership']['first_name']; ?></td>
+						</tr>
+						<tr>
+							<td>Date of birth:</td>
+							<td><?php echo $application['ApplicationMembership']['date_of_birth']; ?></td>
+						</tr>
+						<tr>
+							<td>Email:</td>
+							<td><?php echo $application['ApplicationMembership']['email']; ?></td>
+						</tr>
+						<tr>
+							<td>Telephone:</td>
+							<td<?php echo $application['ApplicationMembership']['telephone']; ?></td>
+						</tr>
+							<tr>
+							<td>Street:</td>
+							<td><?php echo $application['ApplicationMembership']['street']; ?></td>
+						</tr>
+							<tr>
+							<td>ZIP:</td>
+							<td><?php echo $application['ApplicationMembership']['zip']; ?></td>
+						</tr>
+							<tr>
+							<td>City:</td>
+							<td><?php echo $application['ApplicationMembership']['city']; ?></td>
+						</tr>
+						</tr>
+							<tr>
+							<td>Comment:</td>
+							<td><?php echo $application['ApplicationMembership']['comment']; ?></td>
+						</tr>
+						</tr>
+							<tr>
+							<td>Typ:</td>
+							<td><?php echo $type; ?></td>
+						</tr>						
 						
-					Typ: <?php echo $type; ?>
-				
+					</table>				
 					
 					<?php /*echo $application['ApplicationMembership']['first_name']; ?>
 					<?php echo $application['ApplicationMembership']['date_of_birth']; ?>
@@ -54,9 +90,9 @@
 					<?php echo $application['ApplicationMembership']['telephone']; ?>
 					<?php echo $application['ApplicationMembership']['street']; ?>
 					<?php echo $application['ApplicationMembership']['zip']; ?>
-					<?php echo $application['ApplicationMembership']['city'];*/ ?>
+					<?php echo $application['ApplicationMembership']['city']; ?>
 					</p>
-					<p><?php echo $application['ApplicationMembership']['comment']; ?></p>
+					<p><?php echo $application['ApplicationMembership']['comment']; */?>
 				</td>
 				<td>
 				<?php echo $this->Html->link($this->Html->image("test-pass-icon.png"),
@@ -64,6 +100,11 @@
 						array('escape' => False)
 						);?>
 				</td>
+			</tr>
+			<tr>
+			<td colspan="3">
+			<hr/>
+			</td>
 			</tr>
 			<?php
 		}
