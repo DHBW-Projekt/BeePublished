@@ -47,7 +47,7 @@ class ContactFormComponent extends Component {
 	/**
 	 * Function send.
 	 */
-	public function send($controller, $url=null) {
+	public function send($controller, $url=null, $params=null, $myUrl=null) {
 			
 		//Attributes
 		$data_error = false;
@@ -75,7 +75,7 @@ class ContactFormComponent extends Component {
 			));
 
 			if($controller->ContactRequest->validates()){
-			
+				
 				//VALIDATE captcha
 				$privatekey = "6LfzYcwSAAAAAEH-Nr-u6qaFaNdIc6h9nlbm0i76";
 				$resp = recaptcha_check_answer($privatekey,
@@ -83,7 +83,6 @@ class ContactFormComponent extends Component {
 				$controller->data['recaptcha_challenge_field'],
 				$controller->data['recaptcha_response_field']
 				);
-				
 				if($resp->is_valid){
 					
 					//CHECK recipient
@@ -95,9 +94,10 @@ class ContactFormComponent extends Component {
 																								'name' => $controller->data['ContactForm']['name'],
 																							   'email' => $controller->data['ContactForm']['email'],
 																							   'subject' => $controller->data['ContactForm']['subject'],
-																							   'body' => $controller->data['ContactForm']['body']), 
+																							   'body' => $controller->data['ContactForm']['body'],
+																							   'url' => 'localhost'), 
 															$viewName = 'ContactForm.contact')){
-							$controller->Session->setFlash('Thank you for your interest. Your request has been sent.');
+							$controller->Session->setFlash('Thank you for your interest. Your request has been sent.', 'flash_success');
 						}else{
 							$mail_error = true;
 						} //END send email
@@ -119,19 +119,19 @@ class ContactFormComponent extends Component {
 			
 		//PRINT error messages
 		if($data_error){
-			$controller->Session->setFlash('An Error has occured.Please try again.');
+			$controller->Session->setFlash('You cannot send an empty contact form.', 'flash_failure');
 		}
 		
 		if($input_error){
-			$controller->Session->setFlash('Please fill out all mandatory fields correctly.');
+			$controller->Session->setFlash('Please fill out all mandatory fields correctly.', 'flash_failure');
 		}
 		
 		if($captcha_error){
-			$controller->Session->setFlash('Please fill out the CAPTCHA field.');
+			$controller->Session->setFlash('Please fill out the CAPTCHA field.', 'flash_failure');
 		}
 		
 		if($mail_error){
-			$controller->Session->setFlash('An error occured, your request could not be sent. Please contact an administrator.');
+			$controller->Session->setFlash('An error occurred, your request could not be sent. Please contact an administrator.', 'flash_failure');
 		}
 			
 		//RETURN data
@@ -140,6 +140,6 @@ class ContactFormComponent extends Component {
 		}
 			
 		//REDIRECT
-		$controller->redirect(/*$url.*/'/contact-form');
+		$controller->redirect($myUrl);
 	}
 }

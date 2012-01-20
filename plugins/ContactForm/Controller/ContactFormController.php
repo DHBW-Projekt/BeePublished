@@ -14,8 +14,8 @@ class ContactFormController extends AppController {
    /**
 	* Admin View
 	*/
-	public function admin() {
-	
+	public function admin($contentID) {
+		$this->set('contentID', $contentID);
 	}
 	
    /**

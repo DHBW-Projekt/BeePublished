@@ -7,4 +7,4 @@
 
 </br>
 
-<i>Contact requests are automatically sent to the e-mail address in your general configuration in BeePublished. To change the recipient of contact requests, you must set a new e-mail address in your general configuration.</i>
+<i>Contact requests are automatically sent to the e-mail address in your general configuration in BeePublished. To change the recipient of contact requests, please set a new e-mail address in your general configuration.</i>
