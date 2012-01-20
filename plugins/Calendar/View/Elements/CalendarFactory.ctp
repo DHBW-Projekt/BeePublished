@@ -87,7 +87,8 @@ $currentRow = 0;
                         echo substr($entry['start_time'], 0, 5);
                         echo '</div>';
                     }
-                    echo '<div class="' . $ClassPrefix . 'calendar_entry_content">' . $entry['name'] . '</div>';
+
+                    echo '<div class="' . $ClassPrefix . 'calendar_entry_content">' . $this->Html->link($entry['name'], $url . 'largecalendar/detail/' . $entry['id']) . '</div>';
                     echo '</div>';
                 }
             }
