@@ -23,9 +23,20 @@ class GalleryPictureCompComponent extends Component
 		return $pictures;
 	}
 	
+	public function getAllUnAssignedPictures($controller){
+		$controller->loadModel('Gallery.GalleryPicture');
+		$pictures = $controller->GalleryPicture->find('all',  array('conditions' => array( 'gallery_entry_id' => null)));
+		//conditions =
+		foreach ($pictures as &$picture){
+			$picture = $this->normalizePicture($picture);
+		}
+		
+		return $pictures;
+	}
+	
 	public function getAllPicturesGallery($controller, $galleryId){
 		$controller->loadModel('Gallery.GalleryPicture');
-		$pictures = $controller->GalleryPicture->find('all');
+		$pictures = $controller->GalleryPicture->find('all',  array('conditions' => array( 'gallery_entry_id' => $galleryId)));
 		
 		foreach ($pictures as &$picture){
 			$picture = $this->normalizePicture($picture);

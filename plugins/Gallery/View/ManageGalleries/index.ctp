@@ -4,8 +4,6 @@ echo $this->element('admin_menu',array("ContentId" => $data['ContentId']));
 
 //prepare Values array
 
-
-
 echo "Add new Image";
 
 echo $this->Form->create('GalleryEntry', array('url' => array('plugin' => 'Gallery','controller' => 'ManageGalleries','action' => 'create',$data['ContentId'])));
@@ -37,7 +35,7 @@ foreach ($data['AllGalleries'] as $gallery){
 	echo '</td>';
 	
 	echo '<td>';
-	echo $this->Html->image('/app/webroot/img/delete.png',array('style' => 'float: left', 'width' => '20px', 'alt' => '[]Assign', 'url' => array('plugin' => 'Gallery', 'controller' => 'ManageGalleries', 'action' => 'assignImages',$gallery['GalleryEntry']['id'],$data['ContentId'])));
+	echo $this->Html->image('/app/webroot/img/add2.png',array('style' => 'float: left', 'width' => '20px', 'alt' => '[]Assign', 'url' => array('plugin' => 'Gallery', 'controller' => 'ManageGalleries', 'action' => 'assignImages',$gallery['GalleryEntry']['id'],$data['ContentId'])));
 	echo '</td>';
 	
 	echo "</tr>";

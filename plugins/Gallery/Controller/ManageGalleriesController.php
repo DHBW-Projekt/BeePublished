@@ -29,14 +29,11 @@ class ManageGalleriesController  extends AppController{
 			if ($this->request->is('post')) {
 				if($this->GalleryEntry->save($this->request->data)) {
 					$this->Session->setFlash(__('Your post was saved. It will be released by an administrator.'), 'default', array('class' => 'flash_success'));
-					//redirect zum 
-					
-					//$this->redirect(array(
-			//	'action' => 'index', $contentId));	
+					//redirect 
+					$this->redirect(array('action' => 'index', $contentId));	
 				} else {
-					$this->Session->setFlash(__('FAIL'), 'default', array('class' => 'flash_failure'));
-			//$this->redirect(array(
-			//	'action' => 'index', $contentId));		
+					$this->Session->setFlash(__('Your Gallery was not saved'), 'default', array('class' => 'flash_failure'));
+					$this->redirect(array(	'action' => 'index', $contentId));		
 				}
 				
 			}	
@@ -64,12 +61,22 @@ class ManageGalleriesController  extends AppController{
 	public function delete($galleryId, $contentId){
 		$picture = $this->Gallery->delete($this,$galleryId);
 		
-		$this->redirect($this->referer());
+		//$this->redirect($this->referer());
 	}
 
 	public function edit($galleryId,$contentId){
 		if ($this->request->is('post')) {
+				//debug($this->request->data);
+				if($this->Gallery->save($this,$this->request->data)) {
+					$this->Session->setFlash(__('Your changes were saved!'), 'default', array('class' => 'flash_success'));
+					//redirect 
+					$this->redirect(array('action' => 'index', $contentId));	
+				} else {
+					$this->Session->setFlash(__('Your Gallery was not saved'), 'default', array('class' => 'flash_failure'));
+					$this->redirect(array(	'action' => 'index', $contentId));		
+				}
 				
+				//$this->redirect($this->referer());
 		}
 		//if no post data isset
 		
@@ -85,17 +92,31 @@ class ManageGalleriesController  extends AppController{
 	}
 	
 	public function assignImages($galleryId,$contentId){
-		if ($this->request->is('post')) {
-				
-		} else {
-			debug($galleryId);
-			//$this->GalleryPicture->getAllPicturesGallery($this, $galleryId)
-			//$this->set('gallery_pictures', );
-			$this->set('available_pictures',$this->GalleryPictureComp->getAllPictures($this));
-			$this->set('gallery_pictures',$this->GalleryPictureComp->getAllPictures($this));
+
+	
+			$this->set('available_pictures',$this->GalleryPictureComp->getAllUnAssignedPictures($this));
+			$this->set('gallery_pictures',$this->GalleryPictureComp->getAllPicturesGallery($this, $galleryId));
 			$this->set('galleryId', $galleryId);
-			
-		}
+			$this->set('ContentId',$contentId);
+		
 	}
 	
+	public function assignImage($galleryId,$pictureId){
+		$picture = $this->GalleryPictureComp->getPicture($this, $pictureId);
+		
+		$picture['gallery_entry_id'] = $galleryId;
+		
+		$this->GalleryPictureComp->save($this,$picture);
+		$this->redirect($this->referer());
+	}
+	
+	public function unassignImage($galleryId,$pictureId){
+		$picture = $this->GalleryPictureComp->getPicture($this, $pictureId);
+		
+		$picture['gallery_entry_id'] = null;
+		
+		$this->GalleryPictureComp->save($this,$picture);
+		$this->redirect($this->referer());
+	}
+
 }
