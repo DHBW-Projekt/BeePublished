@@ -31,18 +31,13 @@ class BeeEmailComponent extends Component{
 	public function sendTemplatedHtmlEmail($to = null, $subject = null, $text = null){
 		$this->EmailTemplate = ClassRegistry::init('EmailTemplate');
 		//get active config with email layout and email from
-		$emailLayout = null;
-		if($emailLayout == null || $emailLayout == ''){
-			$emailLayout = 'email';
+		$emailLayout = 'email';
+		
+		$emailFrom = "noreply@".env('SERVER_NAME');
+		if(env('SERVER_NAME') == 'localhost'){
+			$emailFrom = $emailFrom.'.de';
 		}
 		
-		$emailFrom = null;
-		if($emailFrom == null || $emailFrom == ''){
-			$emailFrom = "noreply@".env('SERVER_NAME');
-			if(env('SERVER_NAME') == 'localhost'){
-				$emailFrom = $emailFrom.'.de';
-			}
-		}
 		$preparedText = $this->prepareContent($text);
 				
 		$email = new CakeEmail();
