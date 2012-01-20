@@ -1,3 +1,8 @@
+<?php
+App::uses('Sanitize', 'Utility');
+$this->Helpers->load('BBCode');
+?>
+
 <div id='guestbook_display'>
 		
 	<?php foreach($data as $GuestbookPost):?>
@@ -18,7 +23,7 @@
 				?>	
 			</div>			
 			<div class='guestbook_post_text'>
-				<?php echo $GuestbookPost['GuestbookPost']['text']?>
+				<?php echo $this->BBCode->transformBBCode(Sanitize::html($GuestbookPost['GuestbookPost']['text']));?>
 			</div>			
 		</div>
 		

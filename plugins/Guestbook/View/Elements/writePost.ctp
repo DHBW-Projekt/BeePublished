@@ -36,9 +36,9 @@ if (($errors != NULL) && array_key_exists('title', $errors) && array_key_exists(
 
 // text
 if (($input != NULL) && array_key_exists('text', $input['GuestbookPost'])){
-	echo $this->Form->input('GuestbookPost.text', array('label' => __('Text:'), 'value' => $input['GuestbookPost']['text']));
+	echo $this->Form->textarea('GuestbookPost.text', array('label' => false, 'value' => $input['GuestbookPost']['text']));
 } else{
-	echo $this->Form->input('GuestbookPost.text', array('label' => __('Text:')));
+	echo $this->Form->textarea('GuestbookPost.text', array('label' => false));
 }
 if (($errors != NULL) && array_key_exists('text', $errors) && array_key_exists('0', $errors['text'])){
 	echo $this->Html->div('validation_error',$errors['text']['0']);
