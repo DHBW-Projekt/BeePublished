@@ -41,6 +41,9 @@ class LargeCalendarComponent extends Component
                     $data['Page'] = 'Week';
                     $data['StartTime'] = strtotime($url[1]);
                     break;
+                case 'detail':
+                    $data['Page'] = 'Detail';
+                    break;
             }
         }
         switch ($data['Page']) {
@@ -58,7 +61,19 @@ class LargeCalendarComponent extends Component
                 break;
         }
 
-        $data['Entries'] = $this->FetchCalendarEntries->getEntries($controller, $startDate, $endDate);
+        if ($data['Page'] == 'Detail') {
+            $data['Entry'] = $this->FetchCalendarEntries->getEntry($controller, $url[1]);
+        } else {
+            $data['Entries'] = $this->FetchCalendarEntries->getEntries($controller, $startDate, $endDate);
+        }
+
+        if ($data['Page'] == 'Day' || $data['Page'] == 'Week') {
+            $startDate = date('Y-m-d', strtotime(substr($url[1],0,7)));
+            $endDate = date('Y-m-d', strtotime($startDate . ' +1 months -1 day'));
+            $data['MonthEntries'] = $this->FetchCalendarEntries->getEntries($controller, $startDate, $endDate);
+        } else {
+            $data['MonthEntries'] = array();
+        }
         return $data;
     }
 }

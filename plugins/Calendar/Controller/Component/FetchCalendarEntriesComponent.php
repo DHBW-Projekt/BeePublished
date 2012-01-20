@@ -12,4 +12,12 @@ class FetchCalendarEntriesComponent extends Component
         }
         return $sortedEntries;
     }
+
+    public function getEntry($controller, $id)
+    {
+        $controller->loadModel('Calendar.CalendarEntry');
+        $entry = $controller->CalendarEntry->findById($id);
+        return $entry['CalendarEntry'];
+    }
+
 }
