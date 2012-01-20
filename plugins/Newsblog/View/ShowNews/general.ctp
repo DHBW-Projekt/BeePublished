@@ -1,14 +1,19 @@
 <?php 
+	$publishAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Publish');
+	
 	echo $this->element('admin_menu',array('plugin' => 'Newsblog'), array('contentId' => $contentId));
 
 	//create form
 	echo $this->Form->create(null, array('url' => array('plugin' => 'Newsblog', 'controller' => 'ShowNews', 'action' => 'general')));
-	//create newsblog title input
-	echo $this->Form->input(null, array(
-		'label' => 'Title for Newsblog:',
-		'name' => 'newsblogTitle',
-		'value' => $newsblogTitle
-	));
+	
+	if($publishAllowed){
+		//create newsblog title input
+		echo $this->Form->input(null, array(
+				'label' => 'Title for Newsblog:',
+				'name' => 'newsblogTitle',
+				'value' => $newsblogTitle
+		));
+	}
 	
 	//get current 
 	echo $this->Form->input(null, array(
