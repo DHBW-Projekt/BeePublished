@@ -1,6 +1,7 @@
 <?php
 class GalleryComponent extends Component {
 	public $uses = array ('Gallery.GalleryEntry', 'Gallery.GalleryPicture');
+	public $components = array('Gallery.GalleryPictureComp');
 	
  public function getData($controller, $params, $url, $id)
     {
@@ -11,7 +12,10 @@ class GalleryComponent extends Component {
 	public function getGallery($controller, $galleryId){
 		$controller->loadModel('Gallery.GalleryEntry');
 		$gallery = $controller->GalleryEntry->findById($galleryId);
-		debug($gallery);
+		$this->normalizeGallery($controller, &$gallery);
+		foreach($gallery['GalleryPicture'] as &$picture){
+			$this->GalleryPictureComp->normalizePicture(&$picture);
+		}
 		return $gallery;
 	}
 	
@@ -20,6 +24,10 @@ class GalleryComponent extends Component {
 		$controller->loadModel('Gallery.GalleryEntry');
 		$galleries = $controller->GalleryEntry->find('all');
 		print_r($galleries);
+		
+		foreach ($galleries as $gallery){
+			$this->normalizeGallery($controller, &$gallery);
+		}
 		
 		//foreach ($pictures as &$picture){
 			//$picture = $this->normalizePicture($picture);
@@ -57,6 +65,17 @@ class GalleryComponent extends Component {
 		$controller->loadModel('Gallery.GalleryEntry');
 		$rc = $controller->GalleryEntry->save($gallery);
 		return $rc;
+	}
+	
+	private function normalizeGallery($controller, $gallery){
+		//debug($gallery);
+		//debug($this->GalleryPictureComp);
+		if(isset($gallery['GalleryEntry']['gallery_picture_id']))
+			$gallery['GalleryEntry']['titlepicture'] = $this->GalleryPictureComp->getPicture($controller, $gallery['GalleryEntry']['gallery_picture_id']);
+		unset($gallery['GalleryPicture']['id']);
+		unset($gallery['GalleryPicture']['title']);
+		unset($gallery['GalleryPicture']['path_to_pic']);
+		unset($gallery['GalleryPicture']['gallery_entry_id']);
 	}
 	
 	

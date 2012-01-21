@@ -1,16 +1,23 @@
 <?php 
-foreach ($data['GalleryPicture'] as $pic){
 
-if(isset($pic['path_to_pic'])){
-echo $this->Html->image($pic['path_to_pic'],
+
+foreach ($data['GalleryPicture'] as $pic){
+	
+echo $this->Html->image($pic['thumb'],
 	array(
 		'style' => 'float: left', 
-		'width' => '350px', 
-		'alt' => 'ImagePreview', 
+		'alt' => 'ImagePreview',
+		'url' => array(
+				'plugin' => 'Gallery',
+				'controller' => 'DisplayGallery',
+				'action' => 'displaySingleImage',$data['GalleryEntry']['id'],$pic['id'])
 	)
 );
+
 }
-}
+
+debug($data);
+
 echo '<div style="clear:both;"></div>';
 
 //debug($data);
