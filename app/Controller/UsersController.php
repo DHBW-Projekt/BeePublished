@@ -69,9 +69,9 @@ class UsersController extends AppController
 				);
 				$this->BeeEmail->sendHtmlEmail($user['email'], 'Registration complete - Please confirm your account', $viewVars, 'user_confirmation');
 				$this->Session->setFlash('The user has been created.');
-				$this->redirect($this->referer());
+				$this->redirect(array('action' => 'login'));
 			} else{
-				$this->Session->setFlash('The user couldn\'t be created!', 'default', array('class' => 'flash_success'));
+				$this->Session->setFlash('The user couldn\'t be created!', 'default', array('class' => 'flash_failure'));
 			}
         }
         $this->set('menu', $this->Menu->buildMenu($this, NULL));
@@ -83,7 +83,6 @@ class UsersController extends AppController
     {
         $this->User->id = $userId;
         if ($this->User->exists()) {
-            $this->User->id = $userId;
             $userDB = $this->User->findById($userId);
             $tokenDB = $userDB['User']['confirmation_token'];
             if ($tokenIn == $tokenDB) {
