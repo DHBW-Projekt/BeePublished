@@ -1,6 +1,11 @@
 <?php 
 
-//debug($data);
+
+if(!isset($data)){
+	echo "No gallery selected";
+} else {
+
+
 foreach ($data['GalleryPicture'] as $pic){
 	
 echo $this->Html->image($pic['thumb'],
@@ -22,4 +27,5 @@ echo '<div style="clear:both;"></div>';
 
 //debug($data);
 
+}
 ?>

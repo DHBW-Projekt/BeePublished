@@ -5,9 +5,11 @@ class DisplayGalleryComponent extends Component
 	
 	public function getData($controller, $params, $url, $id)
 	{
-		//debug($params);
 		if(isset($params['galleryID']))
 			return $this->Gallery->getGallery($controller,$params['galleryID']);
+		else {
+			return null;
+		}
 	}
 
 }
