@@ -1,6 +1,6 @@
 <?php 
 
-
+//debug($data);
 foreach ($data['GalleryPicture'] as $pic){
 	
 echo $this->Html->image($pic['thumb'],
@@ -16,7 +16,7 @@ echo $this->Html->image($pic['thumb'],
 
 }
 
-debug($data);
+
 
 echo '<div style="clear:both;"></div>';
 
