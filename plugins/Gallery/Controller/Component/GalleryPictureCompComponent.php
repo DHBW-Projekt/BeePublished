@@ -72,7 +72,7 @@ class GalleryPictureCompComponent extends Component
 	}
 	
 	public function normalizePicture($picture){
-		
+				
 		if(isset($picture['GalleryPicture']))
 			$picture = $picture['GalleryPicture'];
 		
