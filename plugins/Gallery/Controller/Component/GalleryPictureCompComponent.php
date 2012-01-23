@@ -71,8 +71,16 @@ class GalleryPictureCompComponent extends Component
 		$pictures = $controller->GalleryPicture->delete($picture);
 	}
 	
-	private function normalizePicture($picture){
-		return $picture['GalleryPicture'];
+	public function normalizePicture($picture){
+		
+		if(isset($picture['GalleryPicture']))
+			$picture = $picture['GalleryPicture'];
+		
+		$pathInfo = pathinfo($picture['path_to_pic']);
+		
+		$picture['thumb'] = $pathInfo['dirname']."/thumb/".$pathInfo['basename'];
+	//	debug($picture);
+		return $picture;
 	}
 	
 	public function generateThumbnail($picture){
@@ -81,11 +89,9 @@ class GalleryPictureCompComponent extends Component
 		
 		$sourceSize = getimagesize(realpath("../..".$picture['path_to_pic']));
 		
-		//debug($sourceSize);
 		
 		$pathInfo = pathinfo(realpath("../..".$picture['path_to_pic']));
 		
-		//debug($pathInfo);
 		
 		$thumbPath = $pathInfo['dirname']."/thumb/".$pathInfo['basename'];
 		                                   
