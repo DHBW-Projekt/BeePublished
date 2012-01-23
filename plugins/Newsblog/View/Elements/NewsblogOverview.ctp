@@ -2,8 +2,11 @@
 	$DateTimeHelper = $this->Helpers->load('Time');
 	$this->Helpers->load('Slug');
 	$this->Helpers->load('BBCode');
+	$this->Helpers->load('SocialNetwork');
 	
+	$this->Html->script('jquery/jPaginate', false);
 	$this->Html->script('/newsblog/js/showNews', false);
+	
 	$this->Html->css('/newsblog/css/showNews', null, array('inline' => false));
 	
 	if($this->Session->check('Newsblog.itemsPerPage')){
@@ -11,6 +14,8 @@
 	} else{
 		$itemsPerPage = 10;
 	}
+	$this->Js->set('itemsPerPage', $itemsPerPage);
+	
 	if($this->Session->check('Newsblog.shorttextLength')){
 		$shorttextLength = $this->Session->read('Newsblog.shorttextLength');
 	} else{
@@ -23,14 +28,48 @@
 ?>
 <?php 
 	if($data['newsblogTitle'] != null || $data['newsblogTitle'] != ''){
-		echo '<div class="newsblogtitle">';
+		echo '<div class="newsblogtitle"><h1>';
 			echo $data['newsblogTitle'];
-			echo '<hr><hr>';
+			echo '</h1>';
 		echo '</div>';
 	}
 
 ?>
 
+<div class='newsblogreadconfig'>
+	<div class='newsblogreadconfig_button'>
+		<?php echo $this->Form->button("Show/Hide Configuration");?>
+	</div>
+	<div class='newsblogreadconfig_items'>
+	<?php
+	echo $this->Form->create(null, array('url' => array('plugin' => 'Newsblog', 'controller' => 'ShowNews', 'action' => 'general'), 'class' => 'newsblogreadconfig_form'));
+	//get current 
+	echo $this->Form->input(null, array(
+		'options' => array(10 => 10, 15 => 15, 20 => 20, 25 => 25),
+		'name' => 'itemsPerPage',
+		'empty' => '(choose one)',
+		'label' => 'Items per page:',
+		'default' => 10,
+		'value' => $itemsPerPage,
+		'class' => 'newsblogreadconfig_select',
+		'div' => 'testdiv'
+	));
+	
+	echo $this->Form->input(null, array(
+		'options' => array(150 => 150, 200 => 200, 250 => 250, 300 => 300, 350 => 350),
+		'name' => 'previewTextLength',
+		'empty' => '(choose one)',
+		'label' => 'Preview text length:',
+		'default' => 150,
+		'value' => $shorttextLength,
+		'class' => 'newsblogreadconfig_select',
+		'div' => 'testdiv'
+	));
+	
+	//create submit button
+	echo $this->Form->end("Save Configuration");?>
+	</div>
+</div>
 
 <div class='newsblogcontainer'>
 
@@ -60,28 +99,36 @@ if( count($data['publishedNewsEntries']) > 0){
 	
 	<div class="newsblog_entry" id="<?php echo $newsblogEntryDivId?>">
 		<div class="newsblog_entry_container">
-			<div class="newsblog_entry_title"><?php echo $title?></div>
+			<div class="newsblog_entry_title"><h2><?php echo $title?></h2></div>
 			<?php if($subtitle != null & $subtitle != ''){?>
-			<div class="newsblog_entry_subtitle"><?php echo $subtitle?></div>
+			<div class="newsblog_entry_subtitle"><h3><?php echo $subtitle?></h3></div>
 			<?php }?>
 			<div class="newsblog_entry_info">
-				by <?php echo $createdBy?> on <?php echo $createdOnDate?> at <?php echo $createdOnTime;?>
+				<p>by <?php echo $createdBy?> on <?php echo $createdOnDate?> at <?php echo $createdOnTime;?>
 				<?php 
 					if(isset($modifiedOnDate) & isset($modifiedOnTime)){
 						echo "&nbsp;&nbsp;(modified on ".$modifiedOnDate." at ".$modifiedOnTime.")";
 					}
 				?>
+				<p>
 			</div>
 			<div class="newsblog_entry_content"><?php echo $text?></div>
 			<div class="newsblog_entry_footer">
 				<?php 
 				echo $this->Html->link(
-					'> Weiterlesen',
+					'> Full Article',
 					$url.'/shownews/'.$newsEntryId.'-'.$titleForUrl,
 					array('class' => 'newsblog_entry_read_link', 'escape' => false)
 				);
 				?>
 			</div>
+		</div>
+		<div class="newsblog_entry_social">
+			<?php 
+				echo $this->SocialNetwork->insertFacebookShare($url.'/shownews/'.$newsEntryId.'-'.$titleForUrl);
+				echo $this->SocialNetwork->insertGoogleShare($url.'/shownews/'.$newsEntryId.'-'.$titleForUrl);
+				echo $this->SocialNetwork->insertTwitterShare($url.'/shownews/'.$newsEntryId.'-'.$titleForUrl);
+			?>
 		</div>
 		<div class="newsblog_entry_buttons">
 			<?php 
@@ -104,7 +151,8 @@ if( count($data['publishedNewsEntries']) > 0){
 		</div>
 		<hr class="newsentries_divider">
 	</div>
-<?php endforeach;
+<?php endforeach; ?>
+<?php 
 } else{
 	//echo "<div>There are currently no published news entries in this newsblog.</div>";
 }?>

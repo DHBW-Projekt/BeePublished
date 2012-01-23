@@ -11,7 +11,7 @@
 	if (sizeof($entries['used']) > 0) {
 	?>
 <h1><?php echo __('Add entries to categories'); ?></h1>
-<table>
+<table class="menuEntries">
 	<thead>
 	<tr>
 		<th colspan="2"><?php echo __('Remove existing entries from category'); ?></th>
@@ -22,8 +22,8 @@
 	foreach ($entries['used'] as $usedEntry) {
 		echo '<tr>';
 		echo '<td>' . $usedEntry['FoodMenuEntry']['name'] . '</td>';
-		echo '<td>';
-		if ($deleteAllowed) echo $this->Html->image('/app/webroot/img/delete.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[x]Delete', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuCategoriesFoodMenuEntries', 'action' => 'delete', $usedEntry['FoodMenuCategoriesFoodMenuEntry']['ID'])));
+		echo '<td class="tableicon">';
+		if ($deleteAllowed) echo $this->Html->image('delete.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[x]Delete', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuCategoriesFoodMenuEntries', 'action' => 'delete', $usedEntry['FoodMenuCategoriesFoodMenuEntry']['ID'])));
 		echo '</td>';
 		echo '</tr>';
 	}?>
@@ -34,7 +34,7 @@
 
  	if (sizeof($entries['notUsed']) > 0) {
 	?>
-<table>
+<table class="menuEntries">
 	<thead>
 	<tr>
 		<th colspan="2"><?php echo __('Add entries to category'); ?></th>
@@ -45,8 +45,8 @@
 	foreach ($entries['notUsed'] as $notUsedEntry) {
 		echo '<tr>';
 		echo '<td>' . $notUsedEntry['FoodMenuEntry']['name'] . '</td>';
-		echo '<td>';
-		if ($createAllowed) echo $this->Html->image('/app/webroot/img/add.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[+]Add', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuCategoriesFoodMenuEntries', 'action' => 'add', $notUsedEntry['FoodMenuEntry']['name'], $notUsedEntry['FoodMenuEntry']['id'], $categoryID)));
+		echo '<td class="tableicon">';
+		if ($createAllowed) echo $this->Html->image('add.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[+]Add', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuCategoriesFoodMenuEntries', 'action' => 'add', $notUsedEntry['FoodMenuEntry']['name'], $notUsedEntry['FoodMenuEntry']['id'], $categoryID)));
 		echo '</td>';
 		echo '</tr>';
 	}?>

@@ -2,12 +2,10 @@
 
 class ShowComponent extends Component {
 
-	//I just copied this from guestbook
 	public $name = 'ImpressumComponent';
 
 	//here is the getData function as requested in the manual
 	public function getData($controller, $params, $url) {
-		//another copy from guestbook
 		$controller->set('title_for_layout', __('Impressum'));
 		//load the model which is called Impressum
 		$controller->loadModel('Impressum.Impressum');
