@@ -1,5 +1,6 @@
 <?php
 $this->Html->script('/gallery/js/assign', false);
+$this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
 echo $this->Session->flash();
 echo $this->element('admin_menu',array("ContentId" => $ContentId));
 
