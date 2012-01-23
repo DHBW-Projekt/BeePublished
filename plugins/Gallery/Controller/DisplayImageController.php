@@ -2,7 +2,6 @@
 class DisplayImageController extends AppController {
 	
 	var $components = array('ContentValueManager','Gallery.GalleryPictureComp');
-	var $layout = 'overlay';
 	
 	public function admin($contentId){
 		//debug($contentId);
@@ -11,6 +10,8 @@ class DisplayImageController extends AppController {
 	}
 	
 	public function setImageAdminTab($contentId){
+		$this->layout = 'overlay';
+		
 		$allPics = $this->GalleryPictureComp->getAllPictures($this);
 		
 		$data = array(	'AllPictures' => $allPics,
