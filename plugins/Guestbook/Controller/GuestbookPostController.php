@@ -1,6 +1,5 @@
 <?php
 
-App::uses('Utility');
 App::import('Vendor','recaptcha/recaptchalib');
 
 class GuestbookPostController extends GuestbookAppController {
