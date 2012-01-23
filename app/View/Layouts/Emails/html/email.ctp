@@ -3,7 +3,15 @@
 	<body>
 	<div></div>
 	<div>
-		<?php echo $content_for_layout; ?>
+		<?php
+			if (isset($header)) 
+				echo $header;
+			
+			echo $content_for_layout;
+			
+			if (isset($footer))
+				echo $footer; 
+		?>
 	</div>
 	<div style="background-color: #ffffff; font-size: 12px; padding: 10px 20px; padding-bottom: 30px; margin-bottom: 30px; color: #cccccc;">
 		Powered by BeePublished - All rights reserved - &copy; Copyright 2011-2012
