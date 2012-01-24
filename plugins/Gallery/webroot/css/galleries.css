@@ -1,0 +1,30 @@
+@CHARSET "ISO-8859-1";
+
+.picturecollection {
+    clear: both;
+    width:70%;
+    margin-bottom: 10px;
+}
+
+.picture_head {
+    padding: 2px;
+}
+
+.users {
+    padding: 10px;
+    min-height: 85px;
+}
+
+.user_detail, .users-placeholder {
+    width: 125px;
+    height: 75px;
+    margin: 5px;
+    float: left;
+    padding: 5px;
+}
+
+.gallerytitle{
+	font-style: italic;
+	padding:5px;
+	border-bottom: 3px solid #3292DD;
+}
