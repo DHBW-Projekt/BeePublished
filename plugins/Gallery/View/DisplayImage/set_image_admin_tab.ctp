@@ -1,5 +1,5 @@
 <?php 
-echo $this->element('admin_menu',array("ContentId" => $data['ContentId']));
+echo $this->element('admin_menu_images',array("ContentId" => $data['ContentId']));
 
 echo $this->Session->flash('Image setted');
 

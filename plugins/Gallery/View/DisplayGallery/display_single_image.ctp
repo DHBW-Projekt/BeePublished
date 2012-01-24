@@ -23,19 +23,12 @@ if(isset($data['next']))
 
 echo '<div style="clear:both;"></div>';
 
-
-
-
 echo $this->Html->image($data['image']['path_to_pic'],
 array(
 		'style' => 'float: left', 
 		'alt' => 'ImagePreview'
 )
 );
-
-
-
-
 debug($data);
 
 echo '<div style="clear:both;"></div>';
