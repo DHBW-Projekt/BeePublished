@@ -58,7 +58,23 @@ class ManageGalleriesController  extends AppController{
 		$picture = $this->Gallery->delete($this,$galleryId);
 		$this->redirect($this->referer());
 	}
-
+	
+	public function deleteSelected($contentId){
+		if ($this->request->is('post')){
+			$galleries=  $this->Gallery->getAllGalleries($this);
+			
+			$selectedGalleries = $this->data['selectGalleries'];
+			debug ($selectedGalleries);
+			foreach($galleries as $gallery){
+				$id = $gallery['GalleryEntry']['id'];
+				if ($selectedGalleries[$id] == 1){
+					$this->Gallery->delete($this,$id);
+				}
+			}
+			$this->redirect($this->referer());
+		}
+	}//function delete selected
+	
 	public function edit($galleryId,$contentId){
 		if ($this->request->is('post')) {
 				//debug($this->request->data);

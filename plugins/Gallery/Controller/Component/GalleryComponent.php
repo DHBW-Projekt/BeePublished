@@ -28,18 +28,11 @@ class GalleryComponent extends Component {
 		foreach ($galleries as $gallery){
 			$this->normalizeGallery($controller, &$gallery);
 		}
-		
-		//foreach ($pictures as &$picture){
-			//$picture = $this->normalizePicture($picture);
-		//}	
-		
+
 		return $galleries;
 	}
 	
 	public function delete($controller, $galleryId){
-		//debug($galleryId);
-		//unlink(realpath("../..".$picture['path_to_pic']));
-		
 		$controller->loadModel('Gallery.GalleryEntry');
 		$pictures_to_save = array();
 		$test = $controller->GalleryEntry->findById($galleryId);
@@ -55,10 +48,6 @@ class GalleryComponent extends Component {
 		$controller->loadModel('Gallery.GalleryPicture');
 		
 		$controller->GalleryPicture->saveAll($pictures_to_save);
-		
-		debug($pictures_to_save);
-		$controller->redirect($controller->referer());
-		
 	}
 	
 	public function save($controller, $gallery){
@@ -68,8 +57,6 @@ class GalleryComponent extends Component {
 	}
 	
 	private function normalizeGallery($controller, $gallery){
-		//debug($gallery);
-		//debug($this->GalleryPictureComp);
 		if(isset($gallery['GalleryEntry']['gallery_picture_id']))
 			$gallery['GalleryEntry']['titlepicture'] = $this->GalleryPictureComp->getPicture($controller, $gallery['GalleryEntry']['gallery_picture_id']);
 		unset($gallery['GalleryPicture']['id']);

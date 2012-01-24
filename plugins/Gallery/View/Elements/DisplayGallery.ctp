@@ -3,7 +3,7 @@ $this->Html->script('/gallery/js/imageoverlay', false);
 $this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
 
 if(!isset($data)){
-	echo "No gallery selected";
+	echo "No gallery assigned";
 } else {
 	?>	
 	<div class="newsblogtitle">
@@ -12,9 +12,6 @@ if(!isset($data)){
 		</h1>
 	</div> 
 <?php 
-
-
-
 foreach ($data['GalleryPicture'] as $pic){
 
 	echo '<div class="galleryImage">';
@@ -27,25 +24,7 @@ foreach ($data['GalleryPicture'] as $pic){
 	
 	
 	echo '</div>';
-	
-	
-/*echo $this->Html->image($pic['thumb'],
-	array(
-		'style' => 'float: left', 
-		'alt' => 'ImagePreview',
-		'url' => array(
-				'plugin' => 'Gallery',
-				'controller' => 'DisplayGallery',
-				'action' => 'displaySingleImage',$data['GalleryEntry']['id'],$pic['id'])
-	)
-);*/
 }
-
 echo '<div style="clear:both;"></div>';
-
-
-
-//debug($data);
-
 }
 ?>
