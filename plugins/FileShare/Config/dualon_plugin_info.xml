@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dualon>
+    <plugin>
+        <name>FileShare</name>
+        <author>Philipp Ernst, Peter Baumert</author>
+        <version>1.0</version>
+        <permissions>
+            <permission>
+                <role>Registered</role>
+                <action>upload</action>
+            </permission>
+            <permission>
+                <role>Registered</role>
+                <action>delete</action>
+            </permission>
+            <permission>
+                <role>guest</role>
+                <action>download</action>
+            </permission>
+        </permissions>
+        <views>
+            <view>
+                <name>MyFiles</name>
+            </view>
+        </views>
+    </plugin>
+</dualon>
