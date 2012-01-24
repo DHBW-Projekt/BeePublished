@@ -22,6 +22,12 @@ class AppController extends Controller
     {
         $this->theme = $this->Config->getValue('active_template');
         $this->set('design',$this->Config->getValue('active_design'));
+        
+    	if($this->Session->check('Config.language')) {
+            Configure::write('Config.language', $this->Session->read('Config.language'));
+        } else {
+            $this->Session->write('Config.language', Configure::read('Config.language'));
+        }
     }
 
     function afterFilter()
