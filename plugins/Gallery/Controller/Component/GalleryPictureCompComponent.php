@@ -47,7 +47,8 @@ class GalleryPictureCompComponent extends Component
 	
 	public function save($controller, $picture){
 		$controller->loadModel('Gallery.GalleryPicture');
-		$pictures = $controller->GalleryPicture->save($picture);
+		$controller->GalleryPicture->create();
+		$controller->GalleryPicture->save($picture);
 	}
 	
 	public function delete($controller, $pictureId){
@@ -72,11 +73,17 @@ class GalleryPictureCompComponent extends Component
 	}
 	
 	public function normalizePicture($picture){
-				
+		
+		//debug($picture);
+		
 		if(isset($picture['GalleryPicture']))
 			$picture = $picture['GalleryPicture'];
 		
+		//debug($picture['path_to_pic']);
+		
 		$pathInfo = pathinfo($picture['path_to_pic']);
+		
+		//debug($pathInfo);
 		
 		$picture['thumb'] = $pathInfo['dirname']."/thumb/".$pathInfo['basename'];
 	//	debug($picture);

@@ -11,8 +11,7 @@ echo "<h1>Assign Images to your Gallery</h1>";
         <div rel="<?php echo $galleryId ?>" class="users">
             <?php foreach ($available_pictures as $picture): ?>
             <div class="user_detail" rel="<?php echo $picture['id']; ?>">
-            
-                <div class="user_pic"><?php echo $this->Html->image($picture['path_to_pic'], array('width' => '55', 'height' => '55')); ?></div>
+                <div class="user_pic"><?php echo $this->Html->image($picture['thumb'], array('width' => '55', 'height' => '55')); ?></div>
                 <div class="user_name"><?php echo $picture['title']; ?></div>
                 <div>
                     <?php // echo $this->Html->link($this->Html->image('edit.png', array('width' => '20', 'height' => '20')),array('controller' => 'Users', 'action' => 'edit', $user['id']),array('escape' => false, 'class' => 'user_edit')); ?>
@@ -28,7 +27,7 @@ echo "<h1>Assign Images to your Gallery</h1>";
         <div rel="<?php echo $galleryId ?>" class="users">
             <?php foreach ($gallery_pictures as $picture): ?>
             <div class="user_detail" rel="<?php echo $picture['id']; ?>">
-                <div class="user_pic"><?php echo $this->Html->image($picture['path_to_pic'], array('width' => '55', 'height' => '55')); ?></div>
+                <div class="user_pic"><?php echo $this->Html->image($picture['thumb'], array('width' => '55', 'height' => '55')); ?></div>
                 <div class="user_name"><?php echo $picture['title']; ?></div>
                 <div>
                     <?php // echo $this->Html->link($this->Html->image('edit.png', array('width' => '20', 'height' => '20')),array('controller' => 'Users', 'action' => 'edit', $user['id']),array('escape' => false, 'class' => 'user_edit')); ?>
