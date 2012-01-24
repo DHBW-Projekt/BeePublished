@@ -28,3 +28,8 @@
 	padding:5px;
 	border-bottom: 3px solid #3292DD;
 }
+
+.galleryImage {
+	float: left;
+	margin: 7px;
+}

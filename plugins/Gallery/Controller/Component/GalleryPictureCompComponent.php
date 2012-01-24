@@ -92,6 +92,10 @@ class GalleryPictureCompComponent extends Component
 	
 	public function generateThumbnail($picture){
 		
+		// ziel: b: 160 / h: 120
+		
+		
+		
 		//debug($picture);
 		
 		$sourceSize = getimagesize(realpath("../..".$picture['path_to_pic']));
@@ -103,12 +107,12 @@ class GalleryPictureCompComponent extends Component
 		$thumbPath = $pathInfo['dirname']."/thumb/".$pathInfo['basename'];
 		                                   
 		// Resample
-		$image_thumb = imagecreatetruecolor(300, 200);
+		$image_thumb = imagecreatetruecolor(160, 120);
 		$image_source = imagecreatefromjpeg(realpath("../..".$picture['path_to_pic']));
-		imagecopyresampled($image_thumb, $image_source, 0, 0, 0, 0, 300, 200, $sourceSize[0], $sourceSize[1]);
+		imagecopyresampled($image_thumb, $image_source, 0, 0, 0, 0, 160, 120, $sourceSize[0], $sourceSize[1]);
 		
 		// Output
-		imagejpeg($image_thumb, $thumbPath, 100);
+		imagejpeg($image_thumb, $thumbPath, 80);
 	}
 	
 }
