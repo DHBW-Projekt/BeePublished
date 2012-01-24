@@ -16,37 +16,37 @@ msgstr ""
 
 #: \Controller\DisplayTextController.php:25
 msgid "Successfully saved"
-msgstr ""
+msgstr "Erfolgreisch gespeichert"
 
 #: \Controller\DisplayTextController.php:32
 msgid "empty"
-msgstr ""
+msgstr "leer"
 
 #: \Controller\DisplayTextController.php:49
 msgid "You are not authenticated to enter these page!"
-msgstr ""
+msgstr "Sie sind nicht authentifiziert diese Seite zu betreten!"
 
 #: \Controller\Component\DisplayTextComponent.php:9
 msgid "no text"
-msgstr ""
+msgstr "kein Text"
 
 #: \View\DisplayText\admin.ctp:1
 msgid "Set Text"
-msgstr ""
+msgstr "Textbearbeitung"
 
 #: \View\DisplayText\admin.ctp:15
 msgid " published "
-msgstr ""
+msgstr " veroeffentlicht "
 
 #: \View\DisplayText\admin.ctp:16
 msgid " unpublished "
-msgstr ""
+msgstr " nicht veroeffentlicht "
 
 #: \View\DisplayText\admin.ctp:29
 msgid "Save"
-msgstr ""
+msgstr "Speichern"
 
 #: \View\Elements\admin_menu.ctp:5
 msgid "General"
-msgstr ""
+msgstr "Allgemein"
 
