@@ -1,13 +1,12 @@
 <?php
 
-App::uses('Sanitize','Utility');
 App::import('Vendor','recaptcha/recaptchalib');
 
 class GuestbookPostController extends GuestbookAppController {
 
 	public $name = 'Guestbook';
 	public $uses = array('Guestbook.GuestbookPost');
-	public $components = array('BeeEmail', 'Config', 'ContentValueManager');	
+	public $components = array('BeeEmail', 'Config', 'Guestbook.GuestbookContentValues');	
 
 	function beforeFilter()
 	{
@@ -16,11 +15,13 @@ class GuestbookPostController extends GuestbookAppController {
 		$this->Auth->allow('save', 'release_noAuth', 'delete_noAuth');
 	}
 
-	function save($contentId){
+	function save($contentId = null){
 		// get is not allowed
 		if ($this->request->is('post')){
 			// prevent harmful code
-			$newPost = Sanitize::clean($this->request->data);
+			$newPost = $this->request->data;
+			// set contentId for post
+			$newPost['GuestbookPost']['contentId'] = $contentId;
 			// generate acivation token for mail
 			$salt = rand(0, 100);
 			$newPost['GuestbookPost']['token'] = md5($salt . $newPost['GuestbookPost']['author'] . $salt . $newPost['GuestbookPost']['title'] . $salt);
@@ -56,13 +57,8 @@ class GuestbookPostController extends GuestbookAppController {
 			// delete validation from session
 			$this->_deleteValidation();	
 			// check whether emails should be send
-			// default is 1 <=> true
-			$send_emails = '1';
-			$contentValues = $this->ContentValueManager->getContentValues($contentId);
-			if (array_key_exists('send_emails', $contentValues)){
-				$send_emails = $contentValues['send_emails'];
-			}
-			if ($send_emails == '1'){
+			$send_emails = $this->GuestbookContentValues->getValue($contentId, 'send_emails');
+			if ($send_emails == 'yes'){
 				// emails should be send -> get data of post again
 				$newPost = $this->GuestbookPost->read();
 				// get helpers for formatting data and links
@@ -78,17 +74,14 @@ class GuestbookPostController extends GuestbookAppController {
 									  'title' => $newPost['GuestbookPost']['title'],
 									  'text' => $newPost['GuestbookPost']['text'],
 									  'submitDate' => $Time->format('d.m.Y', $newPost['GuestbookPost']['created']) . ' ' . $Time->format('H:i:s',$newPost['GuestbookPost']['created']),
-									  'url_release' => $Html->link('here', 
-									  								array('plugin' => 'Guestbook', 'controller' => 'GuestbookPost', 'action' => 'release_noAuth', $newPost['GuestbookPost']['id'], $newPost['GuestbookPost']['token']),
+									  'url_release' => $Html->link('here', 'http://' . env('SERVER_NAME') . ':' .  env('SERVER_PORT') . $this->webroot . 'plugin/Guestbook/GuestbookPost/release_noAuth/' . $newPost['GuestbookPost']['id'] . '/' . $newPost['GuestbookPost']['token'],
 																	array('title' => __('Release post'))),
-									  'url_delete' => $Html->link('here', 
-																	array('plugin' => 'Guestbook', 'controller' => 'GuestbookPost', 'action' => 'delete_noAuth', $newPost['GuestbookPost']['id'], $newPost['GuestbookPost']['token']),
+									  'url_delete' => $Html->link('here', 'http://' . env('SERVER_NAME') . ':' .  env('SERVER_PORT') . $this->webroot . 'plugin/Guestbook/GuestbookPost/delete_noAuth/' . $newPost['GuestbookPost']['id'] . '/' . $newPost['GuestbookPost']['token'],
 																	array('title' => __('Delete post'))),
 									  'page_name' => $this->Config->getValue('page_name'));
 					$viewName = 'Guestbook.notification';
 					$this->BeeEmail->sendHtmlEmail($to, $subject, $viewVars, $viewName);
 				}
-
 			}
 			// everything fine -> set positive message
 			$this->Session->setFlash(__('Your post was saved. It will be released by an administrator.'), 'default', array('class' => 'flash_success'), 'Guestbook.Main');
@@ -97,13 +90,23 @@ class GuestbookPostController extends GuestbookAppController {
 	}
 
 	function delete($id = null){
-		// get id from link
-		$this->GuestbookPost->id = $id;
 		// get is not allowed for delete function
 		if ($this->request->is('get')){
 			throw new MethodNotAllowedException();
 		}
-		else{
+		// check settings for delete
+		$delete_immediately = $this->GuestbookContentValues->getValue($contentId, 'delete_immediately');
+		if ($delete_immediately == 'no'){
+			$onePost = $this->GuestbookPost->read($id);
+			// set deleted with current date and time
+			$onePost['GuestbookPost']['deleted'] = date("Y-m-d H:i:s");
+			// save changed posts
+			if (!$this->GuestbookPost->save($onePost)) {
+				// errors occured -> set error message
+				$this->Session->setFlash(__('An error has occured.'), 'default', array('class' => 'flash_failure'), 'Guestbook.Main');
+				$this->redirect($this->referer());
+			}
+		} elseif ($delete_immediately == 'yes'){
 			//delete post from database and set positive message
 			if (!$this->GuestbookPost->delete($id)) {
 				// errors occured -> set error message

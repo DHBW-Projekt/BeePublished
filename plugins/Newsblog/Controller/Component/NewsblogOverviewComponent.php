@@ -4,7 +4,6 @@ class NewsblogOverviewComponent extends Component {
 	var $components = array('ContentValueManager');
 	public function getData($controller, $params, $url, $id){
 		$controller->loadModel('Newsblog.NewsEntry');
-		$controller->loadModel('Newsblog.NewsblogTitle');
 		
 		$now = date('Y-m-d H:i:s');
 		$conditionsNE = array("NewsEntry.deleted !=" => true, "NewsEntry.content_id" => $id, "NewsEntry.published" => true, "NewsEntry.validFrom <" => $now, "NewsEntry.validTo >" => $now);
@@ -17,6 +16,7 @@ class NewsblogOverviewComponent extends Component {
 		} else {
 			$newsblogtitle = null;
 		}
+		
 		$data['publishedNewsEntries'] = $controller->NewsEntry->find('all',$optionsNE);
 		$data['newsblogTitle'] = $newsblogtitle;
 		$data['view'] = 'NewsblogOverview';

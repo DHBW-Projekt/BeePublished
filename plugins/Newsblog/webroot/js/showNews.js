@@ -18,4 +18,18 @@ $(document).ready(function () {
 			window.location.reload(true);
 		}
 	});
+	
+	$('.newsblogreadconfig_button').click(function(){
+		var items = $('.newsblogreadconfig_items');
+		items.toggle('slow');
+	});
+	
+	$('.newsblogcontainer').jPaginate({
+		items: window.app.itemsPerPage,
+		minimize: true,
+		nav_items: 5,
+		next: '>>',
+		previous: '<<',
+		equal: false
+	});
 });
