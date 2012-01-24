@@ -4,6 +4,17 @@
 		$this->Helpers->load('SocialNetwork');
 		
 		echo $this->element('SearchBar', array('url' => $url));
+		
+		//Facebook
+		echo $this->Html->meta(null, null, array('property' => 'og:title', 'content' => $data['WebshopProduct']['name'], 'inline' => false));
+		echo $this->Html->meta(null, null, array('property' => 'og:description', 'content' => substr($this->BBCode->removeBBCode($data['WebshopProduct']['description']), 0, 100), 'inline' => false));
+		echo $this->Html->meta(null, null, array('property' => 'og:site_name', 'content' => env('SERVER_NAME'), 'inline' => false));
+		echo $this->Html->meta(null, null, array('property' => 'og:image', 'content' => $this->Html->url('/WebShop/img/products/'.$data['WebshopProduct']['picture'], true), 'inline' => false));
+		
+		//Google+
+		echo $this->Html->meta(null, null, array('itemprop' => 'name', 'content' => $data['WebshopProduct']['name'], 'inline' => false));
+		echo $this->Html->meta(null, null, array('itemprop' => 'description', 'content' => substr($this->BBCode->removeBBCode($data['WebshopProduct']['description']), 0, 100), 'inline' => false));
+		echo $this->Html->meta(null, null, array('itemprop' => 'image', 'content' => $this->Html->url('/WebShop/img/products/'.$data['WebshopProduct']['picture'], true), 'inline' => false));
 	?>
 		
 	<div id="webshop_detailview">'
