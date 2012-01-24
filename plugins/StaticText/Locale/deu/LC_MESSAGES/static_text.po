@@ -16,7 +16,7 @@ msgstr ""
 
 #: \Controller\DisplayTextController.php:25
 msgid "Successfully saved"
-msgstr "Erfolgreisch gespeichert"
+msgstr "Erfolgreich gespeichert"
 
 #: \Controller\DisplayTextController.php:32
 msgid "empty"
