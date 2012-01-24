@@ -1,0 +1,171 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2012-01-18 20:28+0100\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: \View\Elements\SearchBar.ctp:7
+msgid "Search"
+msgstr "Suche"
+
+#: \View\Elements\SearchBar.ctp:8
+msgid "Go"
+msgstr "Los"
+
+#: \View\Elements\admin_menu.ctp:8
+#: \View\WebShop\admin.ctp:15
+msgid "Product Administration"
+msgstr "Produkt-Administration"
+
+#: \View\Elements\admin_menu.ctp:9
+#: \View\WebShop\open_orders.ctp:14
+msgid "Open Orders"
+msgstr "Offene Bestellungen"
+
+#: \View\Elements\admin_menu.ctp:10
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: \View\Elements\cart.ctp:8
+msgid "Cart"
+msgstr "Warenkorb"
+
+#: \View\Elements\cart.ctp:12
+msgid "No element in your cart."
+msgstr "Keine Element im Warenkorb."
+
+#: \View\Elements\cart.ctp:16
+#: \View\WebShop\open_orders.ctp:46
+msgid "Article"
+msgstr "Artikel"
+
+#: \View\Elements\cart.ctp:16
+#: \View\Elements\view.ctp:13
+#: \View\WebShop\create.ctp:29
+#: \View\WebShop\edit.ctp:29
+#: \View\WebShop\open_orders.ctp:49
+msgid "Price"
+msgstr "Preis"
+
+#: \View\Elements\cart.ctp:16
+msgid "Amount"
+msgstr "Menge"
+
+#: \View\Elements\cart.ctp:35
+msgid "Submit Order"
+msgstr "Verschicke Bestellung"
+
+#: \View\Elements\search.ctp:9;18
+msgid "Search results"
+msgstr "Suchergebnisse"
+
+#: \View\Elements\search.ctp:20
+msgid "Search result"
+msgstr "Suchergebniss"
+
+#: \View\WebShop\admin.ctp:19
+msgid "Product"
+msgstr "Produkt"
+
+#: \View\WebShop\admin.ctp:19
+msgid "Add"
+msgstr "Hinzufügen"
+
+#: \View\WebShop\create.ctp:20
+msgid "Create Product"
+msgstr "Erstelle Produkt"
+
+#: \View\WebShop\create.ctp:27
+#: \View\WebShop\edit.ctp:27
+msgid "Name"
+msgstr "Name"
+
+#: \View\WebShop\create.ctp:30
+#: \View\WebShop\edit.ctp:30
+msgid "Picture"
+msgstr "Bild"
+
+#: \View\WebShop\create.ctp:33
+#: \View\WebShop\edit.ctp:35
+#: \View\WebShop\settings.ctp:8
+msgid "Save"
+msgstr "Speichern"
+
+#: \View\WebShop\create.ctp:34
+#: \View\WebShop\edit.ctp:36
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: \View\WebShop\edit.ctp:20
+msgid "Edit Product"
+msgstr "Produkt bearbeiten"
+
+#: \View\WebShop\open_orders.ctp:18;41
+msgid "Order"
+msgstr "Bestellung"
+
+#: \View\WebShop\open_orders.ctp:19
+msgid "Date"
+msgstr "Datum"
+
+#: \View\WebShop\open_orders.ctp:20
+msgid "Status"
+msgstr "Status"
+
+#: \View\WebShop\open_orders.ctp:21
+msgid "Action"
+msgstr "Aktion"
+
+#: \View\WebShop\open_orders.ctp:26
+msgid "No open orders."
+msgstr "Keine offenen Bestellungen."
+
+#: \View\WebShop\open_orders.ctp:33
+msgid "open"
+msgstr "offen"
+
+#: \View\WebShop\open_orders.ctp:35
+msgid "edit"
+msgstr "bearbeiten"
+
+#: \View\WebShop\open_orders.ctp:42
+msgid "Customer"
+msgstr "Kunde"
+
+#: \View\WebShop\open_orders.ctp:47
+msgid "Quantity"
+msgstr "Menge"
+
+#: \View\WebShop\open_orders.ctp:48
+msgid "Unit Price"
+msgstr "Einzelpreis"
+
+#: \View\WebShop\open_orders.ctp:69
+msgid "Subtotal"
+msgstr "Gesamtpreis"
+
+#: \View\WebShop\settings.ctp:7
+msgid "Number of Products"
+msgstr "Produktanzahl"
+
+#: Model\WebshopProduct.php:validation for field name
+msgid ""Name" is mandatory."
+msgstr ""Name" ist ein Pflichtfeld."
+
+#: Model\WebshopProduct.php:validation for field description
+msgid ""Description" is mandatory."
+msgstr ""Beschreibung" ist ein Pflichtfeld."
+
+#: Model\WebshopProduct.php:validation for field price
+msgid ""Price" is mandatory."
+msgstr ""Preis" ist ein Pflichtfeld."

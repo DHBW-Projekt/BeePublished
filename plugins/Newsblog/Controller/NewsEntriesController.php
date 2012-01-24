@@ -10,14 +10,10 @@ class NewsEntriesController extends NewsblogAppController {
 	
 	public function create($contentId = null){
 		$pluginId = $this->getPluginId();
-		$writeAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Write', true);
+		$writeAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Write');
+		
 		$userId = $this->Auth->user('id');
-		if(!($this->request->is('post') || $this->request->is('put'))){
-			$this->layout = 'overlay';
-			$this->set('pluginId', $pluginId);
-			$this->set('contentId', $contentId);
-			$this->set('webroot', $this->webroot);
-		} else{
+		if($this->request->is('post') || $this->request->is('put')){
 			$data = $this->request->data;
 			$now = date('Y-m-d H:i:s');
 			$title = $data['title'];
@@ -50,23 +46,20 @@ class NewsEntriesController extends NewsblogAppController {
 				$this->Session->setFlash("The news has been created! It has to be published!");
 				$this->redirect(array('action' => 'create', $contentId));
 			} else{
-				$this->Session->setFlash("The news hasn\'t been created!");
-				$this->redirect(array('action' => 'create', $contentId));
+				$this->Session->setFlash("The news hasn't been created!", 'default', array('class' => 'flash_success'));
 			}
 		}
+		$this->layout = 'overlay';
+		$this->set('pluginId', $pluginId);
+		$this->set('contentId', $contentId);
+		$this->set('webroot', $this->webroot);
 	}
 	
 	public function edit($id = null){
 		$pluginId = $this->getPluginId();
 		$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Edit', true);
 		$userId = $this->Auth->user('id');
-		if($this->request->is('get')){
-			$this->layout = 'overlay';
-			//load current data of newsentry with id = $newsEntryId
-			$entry = $this->NewsEntry->findById($id);
-			//send data to view
-			$this->set('newsentry', $entry);
-		} elseif($this->request->is('post') || $this->request->is('put')){
+		if($this->request->is('post') || $this->request->is('put')){
 			$data = $this->request->data;
 			$now = date('Y-m-d H:i:s');
 			$title = $data['title'];
@@ -99,10 +92,15 @@ class NewsEntriesController extends NewsblogAppController {
 				$this->Session->setFlash("The changes have been saved!");
 				$this->redirect($this->referer());
 			} else{
-				$this->Session->setFlash("The changes haven\'t been saved!");
+				$this->Session->setFlash("The changes haven't been saved!", 'default', array('class' => 'flash_failure'));
 				$this->redirect($this->referer());
 			}
 		}
+		$this->layout = 'overlay';
+		//load current data of newsentry with id = $newsEntryId
+		$entry = $this->NewsEntry->findById($id);
+		//send data to view
+		$this->set('newsentry', $entry);
 	}
 	
 	public function publish($contentId = null, $newsEntryId = null){

@@ -5,7 +5,7 @@ class ShowNewsController extends NewsblogAppController{
 	public $components = array('ContentValueManager');
 	
 	public function admin($contentId = null){
-		$this->redirect(array('plugin' => 'Newsblog','controller' => 'NewsEntries', 'action' => 'create', $contentId));
+		$this->redirect(array('plugin' => 'Newsblog','controller' => 'ShowNews', 'action' => 'general', $contentId));
 	}
 	
 	public function general($contentId = null){
@@ -25,26 +25,41 @@ class ShowNewsController extends NewsblogAppController{
 			}
 			$contentValues = $this->ContentValueManager->getContentValues($contentId);
 			if (array_key_exists('newsblogtitle', $contentValues)) {
-				$newblogtitle = $contentValues['newsblogtitle'];
+				$newsblogtitle = $contentValues['newsblogtitle'];
 			} else {
 				$newsblogtitle = null;
 			}
 			$this->set('shorttextLength', $shorttextLength);
 			$this->set('itemsPerPage', $itemsPerPage);
-			$this->set('newsblogTitle', $newblogtitle);
+			$this->set('newsblogTitle', $newsblogtitle);
 		} elseif($this->request->is('post') || $this->request->is('put')){
-			$contentId = $this->request->data['contentId'];
-			$newsblogTitle = $this->request->data['newsblogTitle'];
 			$itemsPerPage = $this->request->data['itemsPerPage'];
 			$previewTextLength = $this->request->data['previewTextLength'];
-			
+				
 			$this->Session->write('Newsblog.itemsPerPage', $itemsPerPage);
 			$this->Session->write('Newsblog.shorttextLength', $previewTextLength);
-			$newsblogTitleData = array('newsblogtitle' => $newsblogTitle);
-			$this->ContentValueManager->saveContentValues($contentId, $newsblogTitleData);
-			$this->redirect(array('plugin' => 'Newsblog','controller' => 'ShowNews', 'action' => 'general', $contentId));
+			
+			if(array_key_exists('contentId', $this->request->data) & array_key_exists('newsblogTitle', $this->request->data)){
+				$contentId = $this->request->data['contentId'];
+				$newsblogTitle = $this->request->data['newsblogTitle'];
+				$newsblogTitleData = array('newsblogtitle' => $newsblogTitle);
+				$this->ContentValueManager->saveContentValues($contentId, $newsblogTitleData);
+			}
+			//$this->redirect(array('plugin' => 'Newsblog','controller' => 'ShowNews', 'action' => 'general', $contentId));
+			$this->redirect($this->referer());
 		}
 		
 		
 	}
+	
+	/**
+     * beforeFilter function
+     *
+     * @return void
+     */
+    function beforeFilter()
+    {
+        parent::beforeFilter();
+        $this->Auth->allow('general');
+    }
 }

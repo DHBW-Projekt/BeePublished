@@ -3,6 +3,16 @@
 	$this->Html->css('/newsblog/css/displayFullNews', null, array('inline' => false));
 	$DateTimeHelper = $this->Helpers->load('Time');
 	$this->Helpers->load('BBCode');
+	$this->Helpers->load('SocialNetwork');
+	
+	//set meta tags for social network buttons
+	//Facebook
+	echo $this->Html->meta(null, null, array('property' => 'og:title', 'content' => $data['NewsEntry']['title'], 'inline' => false));
+	echo $this->Html->meta(null, null, array('property' => 'og:description', 'content' => substr($this->BBCode->removeBBCode($data['NewsEntry']['text']), 0, 100), 'inline' => false));
+	echo $this->Html->meta(null, null, array('property' => 'og:site_name', 'content' => env('SERVER_NAME'), 'inline' => false));
+	//Google Plus
+	echo $this->Html->meta(null, null, array('itemprop' => 'description', 'content' => substr($this->BBCode->removeBBCode($data['NewsEntry']['text']), 0, 100), 'inline' => false));
+	echo $this->Html->meta(null, null, array('itemprop' => 'name', 'content' => $data['NewsEntry']['title'], 'inline' => false));
 	
 	$this->set('title_for_layout', $data['NewsEntry']['title']);
 ?>
@@ -40,7 +50,14 @@
 		<?php echo $this->BBCode->transformBBCode($data['NewsEntry']['text']);?>
 	</div>
 	<div class='showFullNewsSocial'>
-	
+		<?php
+			//Facebook
+			echo $this->SocialNetwork->insertFacebookShare();
+			//Google+
+			echo $this->SocialNetwork->insertGoogleShare();
+			//Twitter
+			echo $this->SocialNetwork->insertTwitterShare();
+		?>
 	</div>
 	<div class='showFullNewsOptions'>
 	
