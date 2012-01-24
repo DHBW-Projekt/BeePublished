@@ -43,11 +43,11 @@
 				echo '<td>'.$category['FoodMenuCategory']['name'].'</td>';
 				echo '<td class="tableicon">';
 				if($editAllowed) {
-					echo $this->Html->image('/app/webroot/img/edit.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[e]Edit', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuCategories', 'action' => 'edit', $category['FoodMenuCategory']['name'], $category['FoodMenuCategory']['id'])));
+					echo $this->Html->image('edit.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[e]Edit', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuCategories', 'action' => 'edit', $category['FoodMenuCategory']['name'], $category['FoodMenuCategory']['id'])));
 				}
 				echo '</td><td class="tableicon">';
 				if($deleteAllowed) {
-					echo $this->Html->image('/app/webroot/img/delete.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[x]Delete', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuCategories', 'action' => 'delete', $category['FoodMenuCategory']['name'], $category['FoodMenuCategory']['id'])));
+					echo $this->Html->image('delete.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[x]Delete', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuCategories', 'action' => 'delete', $category['FoodMenuCategory']['name'], $category['FoodMenuCategory']['id'])));
 				}
 				echo '</td>';
 			    echo '</tr>';
@@ -59,7 +59,7 @@
 	if ($deleteAllowed) { ?>
 	<tfoot>
 		<tr>
-			<td><?php echo $this->Html->image('/app/webroot/img/arrow.png', array('alt' => 'arrow')); ?></td>
+			<td><?php echo $this->Html->image('arrow.png', array('alt' => 'arrow')); ?></td>
 			<td colspan="3"><?php echo $this->Form->submit(__('Delete')); ?></td>
 		</tr>
 	</tfoot><?php

@@ -1,2 +1,32 @@
 @CHARSET "UTF-8";
 
+
+#contactform_form{
+	width: 100%;
+}
+
+#contactform_div{
+	vertical-align: middle;
+	padding: 20px;
+	float:left;	
+}
+
+#contactform_div label[type=text]{
+}
+
+#contactform_div input[type=text]{
+	padding: 0px;
+	vertical-align: top;
+	overflow: auto;
+	text-align:left;
+}
+
+#contactform_bottom{
+	padding: 0px;
+	white-space: wrap;
+}
+
+#contactform_bottom input{
+	text-align: left;
+	margin: 0px;
+}

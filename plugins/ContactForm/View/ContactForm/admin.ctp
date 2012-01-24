@@ -1,19 +1,11 @@
 <?php
 	//LOAD css-file
-	$this->Html->css('/ContactForm/contactform');
+	echo $this->Html->css('/ContactForm/css/contact_form');
+	//$this->Form->create('admin', array('controller' => 'ContactForm', 'action' => 'admin', $contentID));
 ?>
 
-
-
-<p><?php echo __('There are no configuration options avaliable.')?></p>
-
-<!-- 
-<div class = 'MailAddress'>
-	<h2>E-mail address for contact</h2>
-	<p>Please enter a valid e-mail address to which contact requests will be sent:</p>
-	<?php
-		echo $this->Form->create('MailAddress', array('action' => 'save', 'controller' => 'MailAddress', 'Model' => 'MailAddress'));
-		echo $this->Form->input('mailaddress', array('default'=>$mailaddress['MailAddress']['mailaddress'],'label'=>'')); //default-Wert soll Wert aus DB anzeigen, aber Zugriff auf Modelvariable $mailaddress geht so nicht
-		echo $this->Form->end('Save')
-	?>
-</div> -->
+<div id="contact_form_admin">
+	<h2><?php echo __('Configuration') ?></h2><br />
+	<p><?php echo __('There are no configuration options available. To change the recipient of contact requests, please set a new e-mail address in your general configuration.')?></p>
+	<div style="clear:both;"></div>
+</div>
