@@ -3,7 +3,7 @@ App::uses('CakeEmail', 'Network/Email');
 
 class BeeEmailComponent extends Component{
 	
-	public function sendEmail($to = null, $subject = null, $viewVars = array(), $viewName = null){		
+	public function sendHtmlEmail($to = null, $subject = null, $viewVars = array(), $viewName = null){		
 		$emailLayout = 'email';
 		
 		$emailFrom = "noreply@".env('SERVER_NAME');
