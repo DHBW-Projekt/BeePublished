@@ -18,10 +18,10 @@ $this->Html->css('/Guestbook/css/design',null,array('inline' => false));
 	<thead>
 		<tr>
 		<th></th>
-		<th><?php echo __('Author')?></th>
-		<th><?php echo __('Title')?></th>
-		<th><?php echo __('Text')?></th>
-		<th><?php echo __('Date')?></th>
+		<th><?php echo __d('Guestbook', 'Author')?></th>
+		<th><?php echo __d('Guestbook', 'Title')?></th>
+		<th><?php echo __d('Guestbook', 'Text')?></th>
+		<th><?php echo __d('Guestbook', 'Date')?></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -37,9 +37,9 @@ $this->Html->css('/Guestbook/css/design',null,array('inline' => false));
 	</tbody>
 </table>	
 <?php
-echo $this->Form->button(__('Clear selection'), array('type' => 'reset', 'div' => false));
-echo $this->Form->submit(__('Release posts'), array('name' => 'release', 'div' => false));
-echo $this->Form->submit(__('Delete posts'), array('name' => 'delete', 'div' => false));
+echo $this->Form->button(__d('Guestbook', 'Clear selection'), array('type' => 'reset', 'div' => false));
+echo $this->Form->submit(__d('Guestbook', 'Release posts'), array('name' => 'release', 'div' => false));
+echo $this->Form->submit(__d('Guestbook', 'Delete posts'), array('name' => 'delete', 'div' => false));
 echo $this->Form->end();
 ?>
 </div>
