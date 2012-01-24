@@ -27,7 +27,7 @@
 Cache::config('default', array('engine' => 'File'));
 
 // Set default language
-Configure::write('Config.language', 'en');
+Configure::write('Config.language', 'eng');
 
 /**
  * The settings below can be used to set additional paths to models, views and controllers.

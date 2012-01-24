@@ -6,7 +6,7 @@
 
 	<ol class="nav">
 	
-		<li><?php echo $this->Html->link('Standorte verwalten',array('controller' => 'Location', 'action' => 'admin', $contentID));?></li>
+		<li><?php echo $this->Html->link(__d('google_maps', 'Location Administration'),array('controller' => 'Location', 'action' => 'admin', $contentID));?></li>
 	
 	</ol>
 	
