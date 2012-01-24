@@ -14,6 +14,7 @@ class GalleryComponent extends Component {
 		$gallery = $controller->GalleryEntry->findById($galleryId);
 		$this->normalizeGallery($controller, &$gallery);
 		foreach($gallery['GalleryPicture'] as &$picture){
+			//debug($picture);
 			$this->GalleryPictureComp->normalizePicture(&$picture);
 		}
 		return $gallery;
