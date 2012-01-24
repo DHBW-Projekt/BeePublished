@@ -76,13 +76,12 @@ class ManageImagesController  extends AppController{
 		
 		$dest = realpath("../../app/webroot/img/gallery").'/'.$image['name'];
 		
-		$source = fopen($image['tmp_name'], 'r');
-		$target = fopen($dest,"w+");
+		$image_source = imagecreatefromjpeg($image['tmp_name']);
 		
-		fwrite($target, fread($source, $image['size']));
+		$exif = exif_read_data($image['tmp_name']);
 		
-		fclose($target);
-		fclose($source);
+		// Output
+		imagejpeg($image_source,$dest, 100);
 		
 		// save to db
 		$dbImage = array(

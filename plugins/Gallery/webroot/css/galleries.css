@@ -29,6 +29,12 @@
 	border-bottom: 3px solid #3292DD;
 }
 
+
 #picturetitle { text-align: left; }
 #picturetitle b { display: block; margin-right: 80px; }
 #picturesocial{ vertical-align:center; padding:10px; margin-top:10px}
+
+.galleryImage {
+	float: left;
+	margin: 5px;
+}

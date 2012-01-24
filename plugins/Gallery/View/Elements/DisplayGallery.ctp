@@ -16,12 +16,19 @@ if(!isset($data)){
 
 
 foreach ($data['GalleryPicture'] as $pic){
+
+	echo '<div class="galleryImage">';
 	echo '<a class="fancybox" ';
 	echo 'title = "'.$this->webroot.'#'.$pic['title'].'#'.$data['GalleryEntry']['id'].'#'.$pic['id'].'" ';
 	echo 'rel="group" href="';
 	echo $this->webroot.$pic['path_to_pic'].'">';
 	echo $this->Html->image($pic['thumb']);
 	echo '</a>';
+	
+	
+	echo '</div>';
+	
+	
 /*echo $this->Html->image($pic['thumb'],
 	array(
 		'style' => 'float: left', 
