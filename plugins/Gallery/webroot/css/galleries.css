@@ -28,3 +28,7 @@
 	padding:5px;
 	border-bottom: 3px solid #3292DD;
 }
+
+#picturetitle { text-align: left; }
+#picturetitle b { display: block; margin-right: 80px; }
+#picturesocial{ vertical-align:center; padding:10px; margin-top:10px}

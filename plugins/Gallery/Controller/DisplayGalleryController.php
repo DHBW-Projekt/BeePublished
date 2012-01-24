@@ -45,11 +45,11 @@ class DisplayGalleryController extends AppController {
 		
 		$data['image'] = $this->GalleryPictureComp->getPicture($this,$imageId);
 		
-		if($next < sizeof($pictures))
-			$data['next'] = $pictures[$next]['id'];
+		//if($next < sizeof($pictures))
+		//	$data['next'] = $pictures[$next]['id'];
 		
-		if($previous >= 0)
-			$data['previous'] = $pictures[$previous]['id'];
+		//if($previous >= 0)
+		//	$data['previous'] = $pictures[$previous]['id'];
 		
 		//debug(array($displayPosition,$previous,$next));
 		

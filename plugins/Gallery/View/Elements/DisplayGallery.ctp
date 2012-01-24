@@ -1,5 +1,7 @@
 <?php 
 $this->Html->script('/gallery/js/imageoverlay', false);
+$this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
+
 if(!isset($data)){
 	echo "No gallery selected";
 } else {
@@ -10,10 +12,14 @@ if(!isset($data)){
 		</h1>
 	</div> 
 <?php 
+
+
+
 foreach ($data['GalleryPicture'] as $pic){
-	echo '<a class="fancybox" rel="gallery1" href="';
+	echo '<a class="fancybox" ';
+	echo 'title = "'.$this->webroot.'#'.$pic['title'].'#'.$data['GalleryEntry']['id'].'#'.$pic['id'].'" ';
+	echo 'rel="group" href="';
 	echo $this->webroot.$pic['path_to_pic'].'">';
-	//echo '"'; //title="'.$pic['title'].'">';
 	echo $this->Html->image($pic['thumb']);
 	echo '</a>';
 /*echo $this->Html->image($pic['thumb'],
@@ -29,6 +35,8 @@ foreach ($data['GalleryPicture'] as $pic){
 }
 
 echo '<div style="clear:both;"></div>';
+
+
 
 //debug($data);
 
