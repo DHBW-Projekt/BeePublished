@@ -125,9 +125,10 @@ if( count($data['publishedNewsEntries']) > 0){
 		</div>
 		<div class="newsblog_entry_social">
 			<?php 
-				echo $this->SocialNetwork->insertFacebookShare($url.'/shownews/'.$newsEntryId.'-'.$titleForUrl);
-				echo $this->SocialNetwork->insertGoogleShare($url.'/shownews/'.$newsEntryId.'-'.$titleForUrl);
-				echo $this->SocialNetwork->insertTwitterShare($url.'/shownews/'.$newsEntryId.'-'.$titleForUrl);
+				$socialURL = $this->Html->url($url.'/shownews/'.$newsEntryId.'-'.$titleForUrl, true);
+				echo $this->SocialNetwork->insertFacebookShare($socialURL);
+				echo $this->SocialNetwork->insertGoogleShare($socialURL);
+				echo $this->SocialNetwork->insertTwitterShare($socialURL);
 			?>
 		</div>
 		<div class="newsblog_entry_buttons">

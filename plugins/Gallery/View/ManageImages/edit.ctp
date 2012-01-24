@@ -1,6 +1,5 @@
 <?php
-
-echo $this->element('admin_menu',array("ContentId" => $data['ContentId']));
+echo $this->element('admin_menu_images',array("ContentId" => $data['ContentId']));
 
 //debug($image);
 echo $this->Html->image($data['Picture']['path_to_pic'],array('style' => 'float: left', 'width' => '150px', 'alt' => 'ImagePreview', ));

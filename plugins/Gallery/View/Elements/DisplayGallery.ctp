@@ -1,14 +1,22 @@
 <?php 
-
-
+$this->Html->script('/gallery/js/imageoverlay', false);
 if(!isset($data)){
 	echo "No gallery selected";
 } else {
-
-
+	?>	
+	<div class="newsblogtitle">
+		<h1>
+	<?php echo "Gallery - ".$data['GalleryEntry'] ['title']?>
+		</h1>
+	</div> 
+<?php 
 foreach ($data['GalleryPicture'] as $pic){
-	
-echo $this->Html->image($pic['thumb'],
+	echo '<a class="fancybox" rel="gallery1" href="';
+	echo $this->webroot.$pic['path_to_pic'].'">';
+	//echo '"'; //title="'.$pic['title'].'">';
+	echo $this->Html->image($pic['thumb']);
+	echo '</a>';
+/*echo $this->Html->image($pic['thumb'],
 	array(
 		'style' => 'float: left', 
 		'alt' => 'ImagePreview',
@@ -17,11 +25,8 @@ echo $this->Html->image($pic['thumb'],
 				'controller' => 'DisplayGallery',
 				'action' => 'displaySingleImage',$data['GalleryEntry']['id'],$pic['id'])
 	)
-);
-
+);*/
 }
-
-
 
 echo '<div style="clear:both;"></div>';
 

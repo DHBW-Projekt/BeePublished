@@ -18,47 +18,6 @@ class ManageImagesController  extends AppController{
 		$this->set('data',$data);
 	}
 	
-	public function create($contentId){
-		/*
-		debug($this);
-		
-		$image = $this->data['addImage']['File'];
-
-		
-		$image = array('name' => $this->data['addImage']['File']['name'],
-						'tmp_name' => $this->data['addImage']['File']['tmp_name'],
-						'size' => $this->data['addImage']['File']['size'],
-						'title' => $this->data['addImage']['Title']);
-		
-		
-		$dest = realpath("../../app/webroot/img/gallery").'/'.$image['name'];
-		$urlPath = "/app/webroot/img/gallery/".$image['name'];
-		
-		$source = fopen($image['tmp_name'], 'r');
-		$target = fopen($dest,"w+");
-		fwrite($target, fread($source, $image['size']));
-		fclose($target);
-		fclose($source);
-		
-		// save to db	
-		$dbImage = array(
-			'title' => $this->data['addImage']['Title'],
-			'path_to_pic' => $urlPath );
-		
-
-		$this->GalleryPictureComp->generateThumbnail($dbImage);
-		
-		$this->GalleryPictureComp->save($this,$dbImage);
-		
-
-		$this->Session->setFlash('Image saved');
-		
-
-		$this->redirect(array(
-						'action' => 'index', $contentId));
-						*/
-	
-	}
 	
 	/**
 	 * Method is called from the add image form

@@ -1,9 +1,9 @@
 <?php
 $this->Html->script('/gallery/js/assign', false);
 $this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
-echo $this->Session->flash();
-echo $this->element('admin_menu',array("ContentId" => $ContentId));
+echo $this->element('admin_menu_galleries',array("ContentId" => $ContentId));
 
+echo "<h1>Assign Images to your Gallery</h1>";
 
 ?>
  <div class="role">

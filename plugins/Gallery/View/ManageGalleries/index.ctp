@@ -1,24 +1,10 @@
 <?php
-echo $this->element('admin_menu',array("ContentId" => $data['ContentId']));
-
-
-//prepare Values array
-
-echo "Add new Image";
-
-echo $this->Form->create('GalleryEntry', array('url' => array('plugin' => 'Gallery','controller' => 'ManageGalleries','action' => 'create',$data['ContentId'])));
-
-echo $this->Form->input('GalleryEntry.title');
-echo $this->Form->input('GalleryEntry.description');
-echo $this->Form->select('GalleryEntry.gallery_picture_id', $pictures);
-//echo $this->Form->input('GalleryEntry.gallery_picture_id', array('type' => 'select', 'options' => $pictures, 'value' => $pictures));
-echo $this->Form->submit('submit');
-echo $this->Form->end();
-
-
+echo $this->Session->flash();
+echo $this->element('admin_menu_galleries',array("ContentId" => $data['ContentId']));
+echo "<h1> ".__('Manage your Galleries')."</h1>";
 
 echo "<table>";
-echo "<tr> <td> Id </td> <td> Title </td> </tr>";
+echo "<tr> <td> Id </td> <td> Title </td>  <td> Assign Pictures</td></tr>";
 
 //debug($data);
 foreach ($data['AllGalleries'] as $gallery){
