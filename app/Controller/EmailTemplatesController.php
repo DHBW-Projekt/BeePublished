@@ -34,7 +34,7 @@ class EmailTemplatesController extends AppController
     	$standardLayout = '
 	<div style="font-family: Arial,Tahoma,sans-serif;
 		font-size:14px;
-	    color: #fff;background-image: url(\'http://test.beepublished.de/theme/Christoph2/img/bg.jpg\');
+	    color: #fff;background-image: url(\'http://'.env('SERVER_NAME').'/theme/Christoph2/img/bg.jpg\');
 	    padding:70px 20px 20px 20px;">
 	<div style="height: 30px;
 	    left: 0;
