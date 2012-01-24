@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dualon>
+	<plugin>
+		<name>ApplicationMembership</name>
+		<author>Yvonne Laier</author>
+		<version>1.0</version>
+		<permissions>
+			<permission>
+				<role>Guest</role>
+				<action>send</action>
+			</permission>		
+		</permissions>	
+		<views>
+			<view>
+				<name>ApplicationMembership</name>
+			</view>
+		</views>
+	</plugin>
+</dualon>
