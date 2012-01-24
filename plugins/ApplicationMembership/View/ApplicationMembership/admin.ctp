@@ -8,19 +8,19 @@
 ?>
 
 <div id="application_membership_admin">
-	<h2>Offene Mitgliedsanträge</h2>
+	<h2><?php echo __d('application_membership','Open Applications'); ?></h2>
 		<?php 
 		if(count($applications) == 0){
-			echo "<h2>There are no applications.</h2>";
+			echo "<h2><?php echo echo __d('application_membership','There are no applications.');</h2>";
 		}
 		else{
 		?>
 		<table >
 		<?php echo $this->Form->create('SelectApplications', array('url' => array('controller' => 'ApplicationMembership', 'action' => 'doneSelection', $contentID))); ?>
 			<tr>
-				<th>Done</th>
-				<th>Application</th>
-				<th>Action</th>
+				<th><?php echo __d('application_membership','Done'); ?></th>
+				<th><?php echo __d('application_membership','Application'); ?></th>
+				<th><?php echo __d('application_membership','Action'); ?></th>
 			</tr>
 		<?php 
 			foreach ((!isset($applications)) ? array() : $applications as $application) { 
@@ -33,52 +33,52 @@
 			<tr >
 				<td name="applicationDoneField"><?php echo $this->Form->checkbox($application['ApplicationMembership']['id']); ?></td>
 				<td>
-					<p>Anschrift:</p>
+					<p><?php echo __d('application_membership','Address:'); ?></p>
 					<table>
 						<tr>
-							<td>Title:</td>
+							<td><?php echo __d('application_membership','Title:'); ?></td>
 							<td><?php echo $application['ApplicationMembership']['title']; ?></td>
 						</tr>
 						<tr>
-							<td>Last Name:</td>
+							<td><?php echo __d('application_membership','Last Name:'); ?></td>
 							<td><?php echo $application['ApplicationMembership']['last_name']; ?></td>
 						</tr>
 						<tr>
-							<td>First Name:</td>
+							<td><?php echo __d('application_membership','First Name:'); ?></td>
 							<td><?php echo $application['ApplicationMembership']['first_name']; ?></td>
 						</tr>
 						<tr>
-							<td>Date of birth:</td>
+							<td><?php echo __d('application_membership','Date of birth:'); ?></td>
 							<td><?php echo $application['ApplicationMembership']['date_of_birth']; ?></td>
 						</tr>
 						<tr>
-							<td>Email:</td>
+							<td><?php echo __d('application_membership','Email:'); ?></td>
 							<td><?php echo $application['ApplicationMembership']['email']; ?></td>
 						</tr>
 						<tr>
-							<td>Telephone:</td>
+							<td><?php echo __d('application_membership','Telephone:'); ?></td>
 							<td<?php echo $application['ApplicationMembership']['telephone']; ?></td>
 						</tr>
 							<tr>
-							<td>Street:</td>
+							<td><?php echo __d('application_membership','Street:'); ?></td>
 							<td><?php echo $application['ApplicationMembership']['street']; ?></td>
 						</tr>
 							<tr>
-							<td>ZIP:</td>
+							<td><?php echo __d('application_membership','ZIP:'); ?></td>
 							<td><?php echo $application['ApplicationMembership']['zip']; ?></td>
 						</tr>
 							<tr>
-							<td>City:</td>
+							<td><?php echo __d('application_membership','City:'); ?></td>
 							<td><?php echo $application['ApplicationMembership']['city']; ?></td>
 						</tr>
 						</tr>
 							<tr>
-							<td>Comment:</td>
+							<td><?php echo __d('application_membership','Comment:'); ?></td>
 							<td><?php echo $application['ApplicationMembership']['comment']; ?></td>
 						</tr>
 						</tr>
 							<tr>
-							<td>Typ:</td>
+							<td><?php echo __d('application_membership','Type:'); ?></td>
 							<td><?php echo $type; ?></td>
 						</tr>						
 						
@@ -112,7 +112,7 @@
 		</table>
 		
 		<?php
-		echo $this->Form->submit("Done");
+		echo $this->Form->submit( __d('application_membership','Done'));
 		echo $this->Form->end();
 		
 	}

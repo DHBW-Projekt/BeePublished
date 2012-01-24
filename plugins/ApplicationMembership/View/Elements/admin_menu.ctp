@@ -3,7 +3,7 @@
 
 <div id="menu" class="overlay">
     <ol class="nav">
-       <li><?php echo $this->Html->link('Open Applications',array('controller' => 'ApplicationMembership', 'action' => 'admin', $contentID));?></li>
+       <li><?php echo $this->Html->link(__d('application_membership','Open Applications'),array('controller' => 'ApplicationMembership', 'action' => 'admin', $contentID));?></li>
     </ol>
 
     <div style="clear:both;"></div>

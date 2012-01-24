@@ -1,16 +1,16 @@
 <div>
-<p>Hi Admin,</p>
-<p>Someone likes to become a member of your association.</p>
+<p><?php echo __d('application_membership','Hi Admin'); ?>,</p>
+<p><?php echo __d('application_membership','Someone likes to become a member of your association.'); ?></p>
 
-<p><strong>Please decide whether you like to accept following person as a member:</strong></p>
+<p><strong><?php echo __d('application_membership','Please decide whether you like to accept following person as a member:'); ?></strong></p>
 
 <table>
 	<tr>
-		<th>Feld</th>
-		<th>Eingabe</th>
+		<th><?php echo __d('application_membership','Feld'); ?></th>
+		<th><?php echo __d('application_membership','Eingabe'); ?></th>
 	</tr>
 	<tr>
-		<td>Active:</td>
+		<td><?php __d('application_membership','Active:'); ?></td>
 		<td><?php echo $data['ApplicationMembership']['formOfMembership']; ?></td>
 		<td><?php echo $data['ApplicationMembership']['title']; ?></td>
 		<td><?php echo $data['ApplicationMembership']['name']; ?></td>
@@ -25,6 +25,6 @@
 	</tr>
 </table>
 
-<p>Yours sincerely,<br>
+<p><?php echo __d('application_membership','Yours sincerely,'); ?><br>
 <?php echo $url?></p>
 </div>
