@@ -1,6 +1,7 @@
 <div id="foodMenuHeader">
 <?php
  $this->Js->set('webroot', $webroot);
+ $this->Html->script('/food_menu/js/datepicker', false);
  if($selectedDate != '') {
  	$date = $selectedDate;
  } else $date = (__('mm/dd/yyyy'));
@@ -14,7 +15,7 @@
  echo '   <input id="datepicker" value="' . $date . '" name="data[datepicker]" type="text" size="10"/>   ';     
  echo $this->Html->link((__('tomorrow')), '#', array('onClick' => 'setTomorrow()', 'id' => 'tomorrow'));
  echo $this->Form->button((__('Select date')), array('type' => 'submit', 'id' => 'selectDate'));
- echo $this->Html->scriptBlock('$(function() {$( "#datepicker" ).datepicker( {showOn: "button", buttonImageOnly: true, buttonImage: window.app.webroot+"img/calendar.png"} );});',array('inline'=>'true'));
+ //echo $this->Html->scriptBlock('$(function() {$( "#datepicker" ).datepicker( {  showOn: "button", buttonImage: window.app.webroot+"calendar.png", buttonImageOnly: true, showOptions: {direction: \'down\'}} );});', array('inline'=>'true'));
  echo $this->Form->end();
  echo '</p>';
  ?>          

@@ -1,5 +1,5 @@
 <?php 
-    echo $this->Html->script('/food_menu/js/foodmenu', false);
+    //$this->Html->script('/food_menu/js/foodmenu', false);
     $this->Html->css('/food_menu/css/menu', NULL, array('inline' => false)); 
 ?>
 <?php 
