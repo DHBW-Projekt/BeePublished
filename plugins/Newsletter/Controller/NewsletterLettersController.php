@@ -167,7 +167,7 @@ class NewsletterLettersController extends AppController {
 			'conditions' => array(
 				'active' => 1)));
 		foreach ($recipients as $recipient){
-			$this->BeeEmail->sendTemplatedHtmlEmail(
+			$this->BeeEmail->sendHtmlEmail(
 				$recipient['NewsletterRecipient']['email'],
 				$newsletter['NewsletterLetter']['subject'],
 				$newsletter['NewsletterLetter']['content']);
