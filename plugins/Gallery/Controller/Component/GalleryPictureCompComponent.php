@@ -109,7 +109,28 @@ class GalleryPictureCompComponent extends Component
 		// Resample
 		$image_thumb = imagecreatetruecolor(160, 120);
 		$image_source = imagecreatefromjpeg(realpath("../..".$picture['path_to_pic']));
-		imagecopyresampled($image_thumb, $image_source, 0, 0, 0, 0, 160, 120, $sourceSize[0], $sourceSize[1]);
+		
+		
+		$width = $sourceSize[0];
+		$heigth = $sourceSize[1];
+		
+		$width_target = 1;
+		$heigth_target = 1;
+		
+		if( $width/$heigth > 160/120){
+			$heigth_target = $heigth;
+			$width_target = $heigth / 120 * 160;
+		} else {
+		//	echo "else";
+			$width_target = $width;
+			$heigth_target = $width / 160 * 120;
+		}
+			
+		
+		//debug($width_target);
+		//debug($heigth_target);
+		
+		imagecopyresampled($image_thumb, $image_source, 0, 0, 0, 0, 160, 120, $width_target, $heigth_target);
 		
 		// Output
 		imagejpeg($image_thumb, $thumbPath, 80);
