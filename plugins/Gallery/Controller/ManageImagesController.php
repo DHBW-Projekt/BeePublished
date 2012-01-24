@@ -22,6 +22,7 @@ class ManageImagesController  extends AppController{
 		
 		//debug($this->data);
 		
+		if ($this->request->is('post')) {
 		$image = $this->data['addImage']['File'];
 		
 		$dest = realpath("../../app/webroot/img/gallery").'/'.$image['name'];
@@ -48,7 +49,11 @@ class ManageImagesController  extends AppController{
 
 		$this->redirect(array(
 						'action' => 'index', $contentId));
-	
+		} else {	
+			$data = array('ContentId' => $contentId );
+			$this->set('ContentId',$contentId);
+			$this->set('data',$data);
+		}
 	}
 	
 	public function delete($pictureId, $contentId){

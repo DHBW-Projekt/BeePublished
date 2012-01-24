@@ -23,8 +23,7 @@ class GalleryComponent extends Component {
 	public function getAllGalleries($controller){
 		$controller->loadModel('Gallery.GalleryEntry');
 		$galleries = $controller->GalleryEntry->find('all');
-		print_r($galleries);
-		
+
 		foreach ($galleries as $gallery){
 			$this->normalizeGallery($controller, &$gallery);
 		}
