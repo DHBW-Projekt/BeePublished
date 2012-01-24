@@ -1,14 +1,15 @@
 <div>
 <p>Hi Admin,</p>
-<p>XXX has submitted a new order.</p>
+<p><?php echo $user['username']; ?> has submitted a new order.</p>
+<p>E-Mail: <?php echo $user['email']; ?></p>
 
 <p><strong>Order Details:</strong></p>
 
 <table>
 <tr>
-	<th>Product</th>
-	<th>Preis</th>
+	<th>Artikel</th>
 	<th>Menge</th>
+	<th>Einzelpreis</th>
 	<th>Gesamtpreis</th>
 </tr>
 
@@ -17,24 +18,24 @@
 $pricePerProd = 0;
 $totalPrice = 0;
 
-
 //GET products
-foreach($order as $product){
+foreach ($order as $product){
 	
-	$pricePerProd = $product['Product']['price'] * $product['Product']['count'];
+	$pricePerProd = $product['WebshopProduct']['price'] * $product['count'];
 	$totalPrice = $totalPrice + $pricePerProd;
 	
 	echo '<tr>';
-		echo '<td>'.$product['Product']['name'].' ('.$product['Product']['id'].')</td>';
-		echo '<td>'.$product['Product']['price'].'</td>';
-		echo '<td>'.$product['Product']['count'].'</td>';
-		echo '<td>'.$pricePerProd.'</td>';
+	echo '<td>'.$product['WebshopProduct']['name'].' ('.$product['WebshopProduct']['id'].')</td>';
+	echo '<td>'.$product['count'].'</td>';
+	echo '<td>'.$product['WebshopProduct']['price'].'</td>';
+	echo '<td>'.$pricePerProd.'</td>';
 	echo '</tr>';
 }
 ?>
+<tr>
+	<td style="text-align: right;" colspan="4"><strong>Bestellwert: <?php echo $totalPrice; ?></strong></td>
+</tr>
 </table>
-
-<p><strong>Gesamt Wert: <?php echo $totalPrice; ?></strong></p>
 
 <p>Yours sincerly,<br>
 <?php echo $url?></p>
