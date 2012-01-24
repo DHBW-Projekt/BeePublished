@@ -7,26 +7,24 @@
  */
 class WebShopComponent extends Component {
 	
+	//Attributes
+	var $components = array('BeeEmail', 'Config');
+	
    /**
 	* Method to transfer data from plugin to CMS.
 	*/
-	public function getData($controller, $params, $url)
+	public function getData($controller, $params, $url, $contentId, $myUrl)
 	{		
 		//CHECK url
 		if (isset($url)){
 			$data['Element'] = array_shift($url);
-			$func_params = $url;
-		} else if (isset($params['DefaultView'])) {
-			$data['Element'] = $params['DefaultView'];
-			$func_params = $params;
 		} else {
 			$data['Element'] = 'productOverview';
-			$func_params = null;
 		}
 		
 		//CALL corresponding comp. method
 		if (method_exists($this, $data['Element'])){
-			$func_data = $this->{$data['Element']}($controller, $func_params);
+			$func_data = $this->{$data['Element']}($controller, $url, $params, $myUrl);
 			if (isset($func_data['data'])) {
 				$data['data'] = $func_data['data'];
 			}
@@ -36,35 +34,30 @@ class WebShopComponent extends Component {
 		}
 		
 		//RETURN data
-		if ($data != null) {
-			if (!isset($data['data'])) { $data['data'] = null; }
-			if (!isset($data['Element'])) { $data['Element'] = null; }
+		if (!isset($data['data'])) { $data['data'] = null; }
 			
-			return $data;
-		} else {
-			return __('no data');
-		}
+		return $data;
 	}
 	
 	/**
 	 * Product-Overview.
 	 */
-	function productOverview($controller, $params){
+	function productOverview($controller, $url_params, $contentValues){
 		
 		//LOAD model
-		$controller->loadModel("Product");
+		$controller->loadModel("WebshopProduct");
 		
 		//Default NumberOfEntries
-		if(!isset($params['NumberOfEntries']))
-			$params['NumberOfEntries'] = 5;
+		if(!isset($contentValues['NumberOfEntries']))
+			$contentValues['NumberOfEntries'] = 5;
 			
 		//PAGINATION options
-		$controller->paginate = array('order' => array( 'Product.created' => 'desc'),
-						       	  'limit' => $params['NumberOfEntries']);
+		$controller->paginate = array('order' => array( 'WebshopProduct.created' => 'desc'),
+						       	  'limit' => $contentValues['NumberOfEntries']);
 		
 		//Result data
-		$result['Product'] = $controller->paginate('Product');
-		$result['Limit'] = $params['NumberOfEntries'];
+		$result['Product'] = $controller->paginate('WebshopProduct');
+		$result['Limit'] = $contentValues['NumberOfEntries'];
 		
 		//RETURN results for view
 		return array('data' => $result);
@@ -73,25 +66,33 @@ class WebShopComponent extends Component {
    /**
 	* Product-Search.
 	*/
-	function search($controller){
+	function search($controller, $url_params, $contentValues){
 		
 		//LOAD model
-		$controller->loadModel('Product');
+		$controller->loadModel('WebshopProduct');
+		
+		//Default NumberOfEntries
+		if(!isset($contentValues['NumberOfEntries']))
+			$contentValues['NumberOfEntries'] = 5;
 		
 		//DATA from request
 		if (!empty($controller->data)) {
 			
 			//PAGINATION options
 			$controller->paginate = array(
-					        'conditions' => array('MATCH(Product.name,Product.description) AGAINST("'.$controller->data['Search']['Suche'].'" IN BOOLEAN MODE)'),
-					        'limit' => 10
+					        'conditions' => array('MATCH(WebshopProduct.name,WebshopProduct.description) AGAINST("'.$controller->data['Search']['SearchInput'].'" IN BOOLEAN MODE)'),
+					        'limit' => $contentValues['NumberOfEntries']
 			);
 			
 			//WRITE search-key to session
-			$controller->Session->write('searchkey', $controller->data['Search']['Suche']);
+			$controller->Session->write('searchkey', $controller->data['Search']['SearchInput']);
+			
+			//RESULT data
+			$result['search'] = $controller->paginate('WebshopProduct');
+			$result['limit'] = $contentValues['NumberOfEntries'];
 			
 			//RETURN results for view
-			return array('data' => $controller->paginate('Product'));
+			return array('data' => $result);
 		}
 		
 		//DATA from session
@@ -101,12 +102,16 @@ class WebShopComponent extends Component {
 			
 			//PAGINATION options
 			$controller->paginate = array(
-								        'conditions' => array('MATCH(Product.name,Product.description) AGAINST("'.$search_key.'" IN BOOLEAN MODE)'),
-								        'limit' => 10
+								        'conditions' => array('MATCH(WebshopProduct.name,WebshopProduct.description) AGAINST("'.$search_key.'" IN BOOLEAN MODE)'),
+								        'limit' => $contentValues['NumberOfEntries']
 			);
 			
+			//RESULT data
+			$result['search'] = $controller->paginate('WebshopProduct');
+			$result['limit'] = $contentValues['NumberOfEntries'];
+			
 			//RETURN results for view
-			return array('data' => $controller->paginate('Product'));
+			return array('data' => $result);
 		}
 	}
 	
@@ -116,10 +121,10 @@ class WebShopComponent extends Component {
 	function view($controller, $id=null) {
 		
 		//LOAD model
-		$controller->loadModel('Product');
-		
+		$controller->loadModel('WebshopProduct');
+
 		//RETURN product
-		return array('data' => $controller->Product->findById($id));
+		return array('data' => $controller->WebshopProduct->findById($id));
 	}
 	
    /**
@@ -131,14 +136,14 @@ class WebShopComponent extends Component {
 		$data = array();
 		
 		//LOAD model
-		$controller->loadModel('Product');
+		$controller->loadModel('WebshopProduct');
 		
 		//GET all IDs (+ amount) from session
-		$productIDs = $controller->Session->read('products');
+		$productIDs = $controller->Session->read('webshop_cart');
 		
 		//COLLECT data
 		foreach ((!isset($productIDs)) ? array() : $productIDs as $productID) {
-			$product = $controller->Product->findById($productID['id'], array('fields' => 'Product.id, Product.name, Product.price, Product.picture'));
+			$product = $controller->WebshopProduct->findById($productID['id'], array('fields' => 'WebshopProduct.id, WebshopProduct.name, WebshopProduct.price, WebshopProduct.picture'));
 			$product['count'] = $productID['count'];
 			array_push($data, $product);
 		}
@@ -150,10 +155,10 @@ class WebShopComponent extends Component {
    /**
 	* Adds product to shopping cart.
 	*/
-	function add($controller, $id=null) {
+	function add($controller, $id=null, $contentValues=null, $url=null) {
 		
 		//ATTRIBUTES
-		$productIDs = $controller->Session->read('products');
+		$productIDs = $controller->Session->read('webshop_cart');
 		$positon = array();
 		$results = false;
 	
@@ -182,20 +187,19 @@ class WebShopComponent extends Component {
 		sort($productIDs);
 			
 		//WRITE to SESSION		
-		$controller->Session->write('products', $productIDs);
+		$controller->Session->write('webshop_cart', $productIDs);
 		
 		//REDIRECT to cart
-		$data = $this->cart($controller);
-		return array('Element' => 'cart', 'data' => $data['data']);
+		$controller->redirect($url.'/webshop/cart');
 	}
 	
    /**
 	* Removes product from shopping cart.
 	*/
-	function remove($controller, $id=null) {
+	function remove($controller, $id=null, $contentValues=null, $url=null) {
 		
 		//GET all IDs (+ amount) from session
-		$productIDs = $controller->Session->read('products');
+		$productIDs = $controller->Session->read('webshop_cart');
 	
 		//REMOVE prod. from cart
 		for($i = 0; $i < count($productIDs); $i++){
@@ -214,43 +218,63 @@ class WebShopComponent extends Component {
 		sort($productIDs);
 	
 		//WRITE to SESSION
-		$controller->Session->write('products', $productIDs);
+		$controller->Session->write('webshop_cart', $productIDs);
 	
 		//REDIRECT to cart
-		$data = $this->cart($controller);
-		return array('Element' => 'cart', 'data' => $data['data']);
+		$controller->redirect($url.'/webshop/cart');
 	}
 	
 	/**
 	 * Submit oder to Administrator.
 	 */
-	function submitOrder($controller){
+	function submitOrder($controller, $pluginID=null, $contentValues=null, $url=null){
+		
+		//Check if user is allowed to submit orders
+		if (!$controller->PermissionValidation->actionAllowed($pluginID, 'Submit Order')) {
+			$controller->redirect($url.'/webshop/cart');
+		}
+		
+		//Attributs
+		$order = array();
+		$pos_data = array();
 		
 		//LOAD model
-		$controller->loadModel('Product');
+		$controller->loadModel('WebshopOrder');
+		$controller->loadModel('WebshopPosition');
+		$controller->loadModel('WebshopProduct');
+
+		//CREATE order on DB
+		$controller->WebshopOrder->set(array('customer_id' => '4',
+											 'status' => '0'
+		));
+		$controller->WebshopOrder->save();
 		
 		//GET all IDs (+ amount) from session
-		$productIDs = $controller->Session->read('products');
+		$productIDs = $controller->Session->read('webshop_cart');
 		
-		//BUILD mail
-		App::uses('CakeEmail', 'Network/Email');
-		$email = new CakeEmail();
-		$email->template('WebShop.order', 'email')
-			  ->emailFormat('html')
-			  ->to('maximilian.stueber@me.com')
-	          ->from('maximilian.stueber@me.com'/*'noreply@'.env('SERVER_NAME'), env('SERVER_NAME')*/)
-			  ->subject('Order')
-			  ->viewVars(array(
-		        	'order' => $productIDs,
-					'url' => 'localhost'/*env('SERVER_NAME')*/,
-		))
-		->send();
+		foreach ((!isset($productIDs)) ? array() : $productIDs as $productID) {
+			$product = $controller->WebshopProduct->findById($productID['id'], array('fields' => 'WebshopProduct.id, WebshopProduct.name, WebshopProduct.price'));
+			$product['count'] = $productID['count'];
+			array_push($order, $product);
+			
+			array_push($pos_data,
+					   array('WebshopPosition' => array(
+									'product_id' => $productID['id'][0],
+									'order_id' => $controller->WebshopOrder->id,
+									'count' => $product['count']))
+			);
+		}
+		
+		//CREATE positions on DB
+		$controller->WebshopPosition->saveMany($pos_data, array('validate' => 'false'));
+		
+		//SEND mail
+		$this->BeeEmail->sendHtmlEmail($to = $this->Config->getValue('email'), $subject = 'DualonCMS: New Order', $viewVars = array('user' => $controller->Auth->user(), 'order' => $order, 'url' => 'localhost'/*env('SERVER_NAME')*/), $viewName = 'WebShop.order');
 		
 		//UNSET cart
-		$controller->Session->write('products', null);
+		$controller->Session->write('webshop_cart', null);
 		
 		//REDIRECT to cart
-		$data = $this->cart($controller);
-		return array('Element' => 'cart', 'data' => $data['data']);
+		$controller->redirect($url.'/webshop/productOverview');
 	}	
 }

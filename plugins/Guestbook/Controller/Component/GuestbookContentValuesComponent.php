@@ -7,7 +7,7 @@ class GuestbookContentValuesComponent extends Component {
 	public $defaults = array(
 		'posts_per_page' => '10',
 		'send_emails' => 'yes',
-		'delete_immediately' => 'yes'
+		'delete_immediately' => 'no'
 		);
 	
 	function getValue($contentId, $key){
@@ -19,10 +19,5 @@ class GuestbookContentValuesComponent extends Component {
 		}
 		throw InternalErrorException('GuestbookContentValuesComponent -> key not found');
 	}
-	
-	
-	
-	
-	
 	
 }
