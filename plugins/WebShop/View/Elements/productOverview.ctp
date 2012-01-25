@@ -16,14 +16,14 @@
 	foreach ((!isset($data['Product'])) ? array() : $data['Product'] as $product){
 		echo '<li>';
 		
-		echo $this->Html->image('/WebShop/img/products/'.$product['Product']['picture'], array('url' => $url.'/webshop/view/'.$product['Product']['id'], 'escape' => False));
+		echo $this->Html->image('/WebShop/img/products/'.$product['WebshopProduct']['picture'], array('url' => $url.'/webshop/view/'.$product['WebshopProduct']['id'], 'escape' => False));
 		
 		echo '<h3>';
-		echo $this->Html->link($product['Product']['name'], $url.'/webshop/view/'.$product['Product']['id']);
+		echo $this->Html->link($product['WebshopProduct']['name'], $url.'/webshop/view/'.$product['WebshopProduct']['id']);
 		echo '</h3>';
 		
-		echo '<p class="websop_price">'.$product['Product']['price'].' '.$product['Product']['currency'].'</p>';
-		echo $this->element('ShortText', array( 'text' => $product['Product']['description'], 'productID' => $product['Product']['id'], 'url' => $url));
+		echo '<p class="websop_price">'.$product['WebshopProduct']['price'].' '.$product['WebshopProduct']['currency'].'</p>';
+		echo $this->element('ShortText', array( 'text' => $product['WebshopProduct']['description'], 'productID' => $product['WebshopProduct']['id'], 'url' => $url));
 		
 		echo '</li>';
 		

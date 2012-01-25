@@ -80,7 +80,7 @@ class ContentsController extends AppController
             $this->set('plugin', $plugin['Plugin']['name']);
             $this->set('pluginId', $plugin['Plugin']['id']);
             $this->set('view', $plugin['PluginView']['name']);
-            $this->set('data', $this->Components->load($plugin['Plugin']['name'] . '.' . $plugin['PluginView']['name'])->getData($this, $params, null, $id));
+            $this->set('data', $this->Components->load($plugin['Plugin']['name'] . '.' . $plugin['PluginView']['name'])->getData($this, $params, null, $id, $page['Page']['name']));
             $this->set('url',$page['Page']['name']);
             $this->set('adminMode', true);
             $this->set('id', $id);
