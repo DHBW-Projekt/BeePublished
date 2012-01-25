@@ -95,15 +95,23 @@ class ManageImagesController  extends AppController{
 	}
 	
 	public function delete($pictureId, $contentId){
-
-		// TODO remove from ftp
-		$picture = $this->GalleryPictureComp->delete($this,$pictureId);
-
-
-		
+		$this->deletePictureInternal($pictureId);
 		$this->Session->setFlash('Image deleted');
-		
 		$this->redirect($this->referer());
+	}
+	
+	public function deleteSelected($contentId){
+		foreach($this->data['selectPictures'] as $imageId => $toBeDeleted){
+			if($toBeDeleted == 1){
+				$this->deletePictureInternal($imageId);
+			}
+		}
+		$this->Session->setFlash('Images deleted');
+		$this->redirect($this->referer());
+	}
+	
+	private function deletePictureInternal($pictureID){
+		$picture = $this->GalleryPictureComp->delete($this,$pictureID);
 	}
 
 	public function edit($pictureId,$contentId){
