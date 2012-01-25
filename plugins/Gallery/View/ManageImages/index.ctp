@@ -30,11 +30,35 @@ echo "<br>";
 
 echo "<h1>existing images</h1>";
 
-echo "<table>";
-echo "<tr> <td> Id </td> <td> Title </td> </tr>";
+
+
+
+
+
+echo '<table>';
+	echo '<thead>';
+		echo '<tr>';
+			echo '<th></th>';
+			echo '<th>'.__('Id').'</th>';
+			echo '<th>'.__('Title').'</th>';
+			echo '<th>'.__('Edit').'</th>';
+			echo '<th>'.__('Delete').'</th>';
+		echo '</tr>';
+	echo '</thead>';
+echo '<tbody>';
+echo $this->Form->create('selectPictures', array(
+				'url' => array(
+				'plugin' => 'Gallery',
+				'controller' => 'ManageImages',
+				'action' => 'deleteSelected',$data['ContentId']),
+				'onsubmit'=>'return confirm(\''.__('Do you really want to delete the selected images?').'\');'));
+
 
 foreach ($data['AllPictures'] as $picture){
 	echo "<tr>";
+	
+	echo "<td>".$this->Form->checkbox($picture['id'])."</td>";
+	
 	echo "<td>".$picture['id']."</td>";
 	echo "<td>".$picture['title']."</td>";
 	
@@ -47,7 +71,23 @@ foreach ($data['AllPictures'] as $picture){
 	echo '</td>';
 	
 	echo "</tr>";
-}
+}echo '</tbody>';
+	echo '<tfoot>';	
+			echo '<tr>';
+				echo '<td>';
+				echo $this->Html->image('/app/webroot/img/arrow.png', array(
+						'height' => 20,
+						'width' => 20));
+				echo '</td>';
+				echo '<td>';
+					echo $this->Form->submit(__('Delete'), array(
+							'height' => 20,
+							'width' => 20,
+							'alt' => __('[x]Delete')));
+					echo $this->Form->end();
+				echo '</td>';
+			echo '</tr>';
+		echo '</tfoot>';
 echo "</table>";
 
 ?>
