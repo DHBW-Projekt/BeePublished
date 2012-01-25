@@ -11,14 +11,12 @@ echo '<div class="galleryinfo">'.__('Create a new gallery to share the newest pi
 echo $this->Form->create('GalleryEntry', array('url' => array('plugin' => 'Gallery','controller' => 'ManageGalleries','action' => 'create',$data['ContentId'])));
 
 echo $this->Form->input('GalleryEntry.title');
-
+echo $this->Form->label(__('Description'));
 echo $this->Form->input('GalleryEntry.description');
-
-echo $this->Form->label(__('Title Picture:'));
-
+echo $this->Form->label(__('Title picture'));
 echo $this->Form->select('GalleryEntry.gallery_picture_id', $pictures);
 
 //echo $this->Form->input('GalleryEntry.gallery_picture_id', array('type' => 'select', 'options' => $pictures, 'value' => $pictures));
-echo $this->Form->submit('submit');
+echo $this->Form->submit(__('Submit'));
 echo $this->Form->end();
 ?>

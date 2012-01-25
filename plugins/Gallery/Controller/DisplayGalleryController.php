@@ -4,6 +4,13 @@ class DisplayGalleryController extends AppController {
 	var $components = array('ContentValueManager','Gallery.Gallery','Gallery.GalleryPictureComp');
 	var $layout = 'overlay';
 	
+	public function index($galleryId){
+		
+		$this->redirect(array('controller' => 'DisplayGallery', 'action' => 'index'));
+		//$this->layout = "default";
+		//$this->render('/elements/DisplayGallery');
+	}
+	
 	public function admin($contentId){
 		
 		$this->redirect(array('action' => 'setGalleryAdminTab', $contentId));
@@ -29,6 +36,7 @@ class DisplayGalleryController extends AppController {
 		$this->redirect($this->referer());
 	}
 	
+	/*
 	public function displaySingleImage($galleryId, $imageId){
 		$gallery = $this->Gallery->getGallery($this,$galleryId);
 		
@@ -56,5 +64,5 @@ class DisplayGalleryController extends AppController {
 		
 		$this->set('data',$data);
 	}
-	
+	*/
 }

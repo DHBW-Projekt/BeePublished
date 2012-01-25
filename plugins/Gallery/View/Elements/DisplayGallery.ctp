@@ -2,8 +2,10 @@
 $this->Html->script('/gallery/js/imageoverlay', false);
 $this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
 
+debug($data);
+
 if(!isset($data)){
-	echo "No gallery assigned";
+	echo __("No gallery assigned");
 } else {
 	?>	
 	<div class="newsblogtitle">

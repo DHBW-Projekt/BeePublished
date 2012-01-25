@@ -3,10 +3,9 @@ $this->Html->script('/gallery/js/assign', false);
 $this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
 echo $this->element('admin_menu_galleries',array("ContentId" => $ContentId));
 
-echo "<h1>Assign Images to your Gallery</h1>";
+echo "<h1>".__("Assign images to your gallery")."</h1>";
 
 echo '<div class="galleryinfo">'.__('Please assign images from your image repository to your gallery').'</div>';
-
 
 ?>
  <div class="role">
@@ -40,43 +39,3 @@ echo '<div class="galleryinfo">'.__('Please assign images from your image reposi
           	<?php endforeach; ?>
         </div>
  </div>
-
-
-<?php 
-
-/*
-
-echo "available pictures";
-echo "<table>";
-echo "<tr> <td> Id </td> <td> Title </td> </tr>";
-
-foreach ($available_pictures as $picture){
-	echo "<tr>";
-	echo "<td>".$picture['id']."</td>";
-	echo "<td>".$picture['title']."</td>";
-	echo "<td>";
-	echo $this->Html->image("add2.png", 
-	array('width' => '32px',
-	'url' => array('plugin' => 'Gallery', 'controller' => 'ManageGalleries', 'action' => 'assignImage',$galleryId,$picture['id'])));
-	echo "</td>";
-	echo "</tr>";
-}
-echo "</table>";
-echo "gallery pictures";
-echo "<table>";
-echo "<tr> <td> Id </td> <td> Title </td> </tr>";
-
-foreach ($gallery_pictures as $picture){
-	echo "<tr>";
-	echo "<td>".$picture['id']."</td>";
-	echo "<td>".$picture['title']."</td>";
-	echo "<td>";
-	echo $this->Html->image("delete.png", 
-	array('width' => '32px',
-	'url' => array('plugin' => 'Gallery', 'controller' => 'ManageGalleries', 'action' => 'unassignImage',$galleryId,$picture['id'])));
-	echo "</td>";
-	echo "</tr>";
-}
-echo "</table>";
-*/
-?>

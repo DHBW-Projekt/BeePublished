@@ -1,6 +1,5 @@
 <?php
 echo $this->element('admin_menu_galleries',array("ContentId" => $data['ContentId']));
-echo '<h1>'.__('Add Images').'</h1>';
 
 echo $this->Session->flash('Image saved');
 echo $this->Session->flash('Image deleted');
