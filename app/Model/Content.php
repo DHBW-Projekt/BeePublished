@@ -42,7 +42,7 @@ class Content extends AppModel {
 		'ContentValue' => array(
 			'className' => 'ContentValue',
 			'foreignKey' => 'content_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
