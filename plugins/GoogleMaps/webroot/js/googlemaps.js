@@ -55,3 +55,18 @@ function printRoute(panel, start, destination) {
     
     lock = true;
 }
+
+$(document).ready(function(){
+	if ($('input#search_locations').length > 0)
+		$('input#search_locations').quicksearch('table#locations tbody tr');
+	
+	if ($(".Location_row").length > 0) {
+		$(".Location_row").mouseenter(function () {
+	        $(".set_location_link", this).css("display", "inline");
+	    });
+	
+		$(".Location_row").mouseleave(function () {
+		    $(".set_location_link", this).css("display", "none");
+		});
+	}
+});
