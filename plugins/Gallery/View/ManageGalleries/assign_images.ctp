@@ -5,6 +5,9 @@ echo $this->element('admin_menu_galleries',array("ContentId" => $ContentId));
 
 echo "<h1>Assign Images to your Gallery</h1>";
 
+echo '<div class="galleryinfo">'.__('Please assign images from your image repository to your gallery').'</div>';
+
+
 ?>
  <div class="role">
         <div class="users_role">Available pictures</div>
