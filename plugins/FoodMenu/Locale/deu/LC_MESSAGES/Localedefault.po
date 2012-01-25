@@ -1,0 +1,417 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2012-01-24 13:44+0100\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: DEUTSCH <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: Controller\FoodMenuCategoriesController.php:30
+msgid "The category has been saved."
+msgstr "Die Kategorie wurde gespeichert."
+
+#: Controller\FoodMenuCategoriesController.php:33
+msgid "The category couldn't be saved."
+msgstr "Die Kategorie konnte nicht gespeichert werden."
+
+#: Controller\FoodMenuCategoriesController.php:47
+msgid "The category has been changed."
+msgstr "Die Kategorie wurde geändert."
+
+#: Controller\FoodMenuCategoriesController.php:79
+msgid "The category has been deleted."
+msgstr "Die Kategorie wurde gelöscht."
+
+#: Controller\FoodMenuCategoriesController.php:100
+#: Controller\FoodMenuEntriesController.php:98
+msgid "Errors occured during deleting."
+msgstr "Es sind Fehler aufgetreten."
+
+#: Controller\FoodMenuCategoriesController.php:104
+msgid "The categories have been deleted."
+msgstr "Die Kategorie wurde gelöscht."
+
+#: Controller\FoodMenuCategoriesFoodMenuEntriesController.php:37
+msgid "The entry has been added."
+msgstr "Der Eintrag wurde hinzugefügt."
+
+#: Controller\FoodMenuCategoriesFoodMenuEntriesController.php:40
+msgid "The entry couldn't be added."
+msgstr "Der Eintrag konnte nicht hinzugefügt werden."
+
+#: Controller\FoodMenuCategoriesFoodMenuEntriesController.php:49
+msgid "The entry has been removed from the category."
+msgstr "Der Eintrag wurde aus der Kategorie entfernt."
+
+#: Controller\FoodMenuCategoriesFoodMenuEntriesController.php:52
+msgid "The entry couldn't be removed."
+msgstr "Der Eintrag konnte nicht entfernt werden."
+
+#: Controller\FoodMenuEntriesController.php:29
+msgid "The entry has been saved successfully."
+msgstr "Der Eintrag wurde gespeichert."
+
+#: Controller\FoodMenuEntriesController.php:32
+msgid "The entry couldn't be saved."
+msgstr "Der Eintrag konnte nicht gespeichert werden."
+
+#: Controller\FoodMenuEntriesController.php:46
+msgid "The entry has been changed successfully"
+msgstr "Der Eintrag wurde geändert."
+
+#: Controller\FoodMenuEntriesController.php:78
+msgid "The entry has been deleted."
+msgstr "Der Eintrag wurde gelöscht."
+
+#: Controller\FoodMenuEntriesController.php:102
+msgid "The entries have been deleted."
+msgstr "Die Einträge wurden gelöscht."
+
+#: Controller\FoodMenuMenusController.php:35
+msgid "The menu was saved successfully."
+msgstr "Der Speiseplan wurde gespeichert."
+
+#: Controller\FoodMenuMenusController.php:38
+msgid "The menu couldn't be saved"
+msgstr "Der Speiseplan konnte nicht gespeichert werden."
+
+#: Controller\FoodMenuMenusController.php:57
+msgid "The menu was edited successfully"
+msgstr "Der Speiseplan wurde geändert."
+
+#: Controller\FoodMenuMenusController.php:88
+msgid "The menu was deleted successfully."
+msgstr "Der Speiseplan wurde gelöscht."
+
+#: Controller\FoodMenuMenusController.php:108
+msgid "The menus couldn't be deleted"
+msgstr "Die Speisepläne konnten nicht gelöscht werden."
+
+#: Controller\FoodMenuMenusController.php:112
+msgid "The menus were deleted."
+msgstr "Die Speisepläne wurden gelöscht."
+
+#: Controller\FoodMenuMenusFoodMenuCategoriesController.php:37
+msgid "The category has been added."
+msgstr "Die Kategorie wurde hinzugefügt."
+
+#: Controller\FoodMenuMenusFoodMenuCategoriesController.php:40
+msgid "The category couldn't be added."
+msgstr "Die Kategorie konnte nicht hinzugefügt werden."
+
+#: Controller\FoodMenuMenusFoodMenuCategoriesController.php:49
+msgid "The category has been removed from the menu."
+msgstr "Die Kategorie wurde aus dem Speiseplan gelöscht."
+
+#: Controller\FoodMenuMenusFoodMenuCategoriesController.php:52
+msgid "The category couldn't be removed."
+msgstr "Die Kategorie konnte nicht gelöscht werden."
+
+#: View\Admin\add_categories_to_menu.ctp:32
+msgid "Speichern"
+msgstr "Speichern"
+
+#: View\Admin\add_categories_to_menu.ctp:33
+msgid "Zur�ck"
+msgstr ""
+
+#: View\Elements\Preferences.ctp:4
+#: View\FoodMenuCategories\edit.ctp:18
+#: View\FoodMenuEntries\create.ctp:11
+#: View\FoodMenuEntries\edit.ctp:11
+#: View\FoodMenuMenus\create.ctp:13
+#: View\FoodMenuMenus\edit.ctp:17
+msgid "Name:"
+msgstr "Name:"
+
+#: View\Elements\Preferences.ctp:9
+msgid "Preis anzeigen"
+msgstr ""
+
+#: View\Elements\SelectDate.ctp:6
+msgid "mm/dd/yyyy"
+msgstr "mm/tt/jjjj"
+
+#: View\Elements\SelectDate.ctp:7
+msgid "Bill of Fare"
+msgstr "Speiseplan"
+
+#: View\Elements\SelectDate.ctp:13
+msgid "today"
+msgstr "heute"
+
+#: View\Elements\SelectDate.ctp:15
+msgid "tomorrow"
+msgstr "morgen"
+
+#: View\Elements\SelectDate.ctp:16
+msgid "Select date"
+msgstr "Datum auswählen"
+
+#: View\Elements\View.ctp:61
+msgid "price"
+msgstr "Preis"
+
+#: View\Elements\admin_menu.ctp:17
+#: View\FoodMenuMenus\index.ctp:17
+msgid "Menus"
+msgstr "Speisepläne"
+
+#: View\Elements\admin_menu.ctp:18
+#: View\FoodMenuCategories\index.ctp:16
+msgid "Categories"
+msgstr "Kategorien"
+
+#: View\Elements\admin_menu.ctp:19
+#: View\FoodMenuEntries\index.ctp:17
+msgid "Entries"
+msgstr "Einträge"
+
+#: View\FoodMenuCategories\create.ctp:11
+msgid "Create category"
+msgstr "Kategorie erstellen"
+
+#: View\FoodMenuCategories\create.ctp:15
+msgid "name:"
+msgstr "Name:"
+
+#: View\FoodMenuCategories\create.ctp:16
+#: View\FoodMenuCategories\edit.ctp:19
+#: View\FoodMenuEntries\create.ctp:15
+#: View\FoodMenuEntries\edit.ctp:15
+#: View\FoodMenuMenus\create.ctp:24
+#: View\FoodMenuMenus\edit.ctp:58
+msgid "Save"
+msgstr "Speichern"
+
+#: View\FoodMenuCategories\edit.ctp:12
+msgid "Add Entries to category"
+msgstr "Einträge zu Kategorien hinzufügen"
+
+#: View\FoodMenuCategories\edit.ctp:13
+msgid "Add entries"
+msgstr "Einträge hinzufügen"
+
+#: View\FoodMenuCategories\edit.ctp:15
+msgid "Edit Category"
+msgstr "Kategorie ändern"
+
+#: View\FoodMenuCategories\index.ctp:12
+msgid "Create new category"
+msgstr "Neue Kategorie erstellen"
+
+#: View\FoodMenuCategories\index.ctp:13
+msgid "New Category"
+msgstr "Neue Kategorie"
+
+#: View\FoodMenuCategories\index.ctp:20
+msgid "Do you really want to delete the selected categories?"
+msgstr "Wollen Sie die ausgewählten Kategorien wirklich löschen?"
+
+#: View\FoodMenuCategories\index.ctp:27
+#: View\FoodMenuEntries\index.ctp:28
+#: View\FoodMenuMenus\index.ctp:29
+msgid "Name"
+msgstr "Name"
+
+#: View\FoodMenuCategories\index.ctp:63
+#: View\FoodMenuEntries\index.ctp:64
+#: View\FoodMenuMenus\index.ctp:64
+msgid "Delete"
+msgstr "Löschen"
+
+#: View\FoodMenuCategoriesFoodMenuEntries\index.ctp:13
+msgid "Add entries to categories"
+msgstr "Einträge zu Kategorien hinzufügen"
+
+#: View\FoodMenuCategoriesFoodMenuEntries\index.ctp:17
+msgid "Remove existing entries from category"
+msgstr "Einträge von Kategorien entfernen"
+
+#: View\FoodMenuCategoriesFoodMenuEntries\index.ctp:40
+msgid "Add entries to category"
+msgstr "Einträge zu Kategorien hinzufügen"
+
+#: View\FoodMenuEntries\create.ctp:9
+msgid "Create entry"
+msgstr "Eintrag erstellen"
+
+#: View\FoodMenuEntries\create.ctp:12
+#: View\FoodMenuEntries\edit.ctp:12
+msgid "Description:"
+msgstr "Beschreibung:"
+
+#: View\FoodMenuEntries\create.ctp:13
+#: View\FoodMenuEntries\edit.ctp:13
+msgid "Price:"
+msgstr "Preis:"
+
+#: View\FoodMenuEntries\create.ctp:14
+#: View\FoodMenuEntries\edit.ctp:14
+msgid "Currency:"
+msgstr "Währung:"
+
+#: View\FoodMenuEntries\edit.ctp:8
+msgid "Edit entry"
+msgstr "Eintrag ändern"
+
+#: View\FoodMenuEntries\index.ctp:13
+msgid "Create new entry"
+msgstr "Neuen Eintrag erstellen"
+
+#: View\FoodMenuEntries\index.ctp:14
+msgid "New entry"
+msgstr "Neuer Eintrag"
+
+#: View\FoodMenuEntries\index.ctp:21
+msgid "Do you really want to delete the selected entries?"
+msgstr "Wollen Sie die ausgewählten Einträge wirklich löschen?"
+
+#: View\FoodMenuEntries\index.ctp:29
+msgid "Price"
+msgstr "Preis"
+
+#: View\FoodMenuEntries\index.ctp:30
+msgid "Currency"
+msgstr "Währung"
+
+#: View\FoodMenuMenus\create.ctp:12
+msgid "Create menu"
+msgstr "Speiseplan erstellen"
+
+#: View\FoodMenuMenus\create.ctp:14
+msgid "Valid from:"
+msgstr "Gültig von:"
+
+#: View\FoodMenuMenus\create.ctp:15
+#: View\FoodMenuMenus\edit.ctp:19
+msgid "Valid until:"
+msgstr "Gültig bis:"
+
+#: View\FoodMenuMenus\create.ctp:16
+#: View\FoodMenuMenus\edit.ctp:20
+msgid "Valid on weekday:"
+msgstr "Gültig an folgenden Wochentagen:"
+
+#: View\FoodMenuMenus\create.ctp:17
+#: View\FoodMenuMenus\edit.ctp:51
+msgid "Mon:"
+msgstr "Mo:"
+
+#: View\FoodMenuMenus\create.ctp:18
+#: View\FoodMenuMenus\edit.ctp:52
+msgid "Tue:"
+msgstr "Di:"
+
+#: View\FoodMenuMenus\create.ctp:19
+#: View\FoodMenuMenus\edit.ctp:53
+msgid "Wed:"
+msgstr "Mi:"
+
+#: View\FoodMenuMenus\create.ctp:20
+#: View\FoodMenuMenus\edit.ctp:54
+msgid "Thu:"
+msgstr "Do:"
+
+#: View\FoodMenuMenus\create.ctp:21
+#: View\FoodMenuMenus\edit.ctp:55
+msgid "Fri:"
+msgstr "Fr:"
+
+#: View\FoodMenuMenus\create.ctp:22
+#: View\FoodMenuMenus\edit.ctp:56
+msgid "Sat:"
+msgstr "Sa:"
+
+#: View\FoodMenuMenus\create.ctp:23
+#: View\FoodMenuMenus\edit.ctp:57
+msgid "Sun:"
+msgstr "So:"
+
+#: View\FoodMenuMenus\edit.ctp:11
+#: View\FoodMenuMenusFoodMenuCategories\index.ctp:40
+msgid "Add categories to menu"
+msgstr "Kategorien zu Speiseplan hinzufügen"
+
+#: View\FoodMenuMenus\edit.ctp:12
+msgid "Add categories"
+msgstr "Kategorien hinzufügen"
+
+#: View\FoodMenuMenus\edit.ctp:14
+msgid "Edit Menu"
+msgstr "Speiseplan ändern"
+
+#: View\FoodMenuMenus\edit.ctp:18
+msgid "Valid From:"
+msgstr "Gültig von:"
+
+#: View\FoodMenuMenus\index.ctp:13
+msgid "Create new menu"
+msgstr "Neuen Speiseplan erstellen"
+
+#: View\FoodMenuMenus\index.ctp:14
+msgid "New menu"
+msgstr "Neuer Speiseplan"
+
+#: View\FoodMenuMenus\index.ctp:21
+msgid "Do you really want to delete the selected menus?"
+msgstr "Wollen Sie die ausgewählten Speisepläne wirklich löschen?"
+
+#: View\FoodMenuMenus\index.ctp:30
+msgid "Valid from"
+msgstr "Gültig von"
+
+#: View\FoodMenuMenus\index.ctp:31
+msgid "Valid until"
+msgstr "Gültig bis"
+
+#: View\FoodMenuMenusFoodMenuCategories\index.ctp:17
+msgid "Remove existing categories from menu"
+msgstr "Kategorien aus Speiseplan entfernen"
+
+#: Model\FoodMenuCategoriesFoodMenuEntry.php:validation for field ID;validation for field food_menu_category_id;validation for field food_menu_entry_id
+#: Model\FoodMenuMenusFoodMenuCategory.php:validation for field ID;validation for field food_menu_menu_id;validation for field food_menu_category_id
+msgid "alphanumeric"
+msgstr ""
+
+#: Model\FoodMenuCategory.php:validation for field name
+#: Model\FoodMenuEntry.php:validation for field name
+#: Model\FoodMenuMenu.php:validation for field name
+msgid "This entry already exists."
+msgstr "Der Eintrag existiert bereits."
+
+#: Model\FoodMenuCategory.php:validation for field name
+#: Model\FoodMenuEntry.php:validation for field name
+msgid "This field name has to be filled."
+msgstr "Bitte füllen Sie das Feld Name aus."
+
+#: Model\FoodMenuCategory.php:validation for field name
+#: Model\FoodMenuEntry.php:validation for field name
+#: Model\FoodMenuMenu.php:validation for field name
+msgid "You have to enter numbers or letters."
+msgstr "Sie dürfen nur Zahlen und Buchstaben verwenden."
+
+#: Model\FoodMenuEntry.php:validation for field currency
+msgid "Please enter a valid currency."
+msgstr "Bitte geben Sie eine gültige Währung ein"
+
+#: Model\FoodMenuEntry.php:validation for field price
+msgid "Please enter a decimal value with two digits."
+msgstr "Bitte geben Sie eine Dezimalzahl mit zwei Nachkommastellen ein."
+
+#: Model\FoodMenuMenu.php:validation for field name
+msgid "This field has to be filled."
+msgstr "Diese Feld muss ausgefüllt werden."
+
+#: Model\FoodMenuMenu.php:validation for field valid_from;validation for field valid_until
+msgid "Please enter a date."
+msgstr "Bitte geben Sie ein Datum ein."
+

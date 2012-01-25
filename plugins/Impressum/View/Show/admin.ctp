@@ -14,9 +14,9 @@
 						 'club' => __('eingetragener Verein'),
 						 'job' => __('Freiberufler'));
 		if (empty($input['Impressum']['type'])) {
-			$attributes = array('separator' => '</p><p>', 'legend' => false, 'value' => 'priv');
+			$attributes = array('legend' => false, 'value' => 'priv');
 		} else {
-			$attributes = array('separator' => '</p><p>', 'legend' => false, 'value' => $input['Impressum']['type']);
+			$attributes = array('legend' => false, 'value' => $input['Impressum']['type']);
 		}
 		echo $this->Form->radio('type', $options, $attributes); 
 	?>

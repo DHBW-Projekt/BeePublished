@@ -5,6 +5,30 @@
 		<author>Maximilian Stueber and Patrick Zamzow</author>
 		<version>1.0</version>
 		<permissions>
+            <permission>
+                <role>Registered</role>
+                <action>Submit Order</action>
+            </permission>
+            <permission>
+                <role>Administrator</role>
+                <action>Create Product</action>
+            </permission>
+            <permission>
+                <role>Administrator</role>
+                <action>Delete Product</action>
+            </permission>
+            <permission>
+                <role>Administrator</role>
+                <action>Edit Product</action>
+            </permission>
+            <permission>
+                <role>Administrator</role>
+                <action>Set WebShop Settings</action>
+            </permission>
+            <permission>
+                <role>Administrator</role>
+                <action>Close Order</action>
+            </permission>
         </permissions>
         <views>
             <view>

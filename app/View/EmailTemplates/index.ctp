@@ -35,7 +35,7 @@
 <br>
 <div>
 	<h1>
-		<?php echo __('Selected Template: ').$selectedTemplate['EmailTemplate']['name'] ?>
+		<?php echo __('Active Template: ').$selectedTemplate['EmailTemplate']['name'] ?>
 	</h1>
 	<?php
 		echo $this->Form->textarea('EmailTemplates.Preview', array(

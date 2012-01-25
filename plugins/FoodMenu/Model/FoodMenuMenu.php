@@ -32,7 +32,7 @@ class FoodMenuMenu extends AppModel {
             		'message' => 'This field has to be filled.'
          		),
          		'name_isalphanumeric' => array(
-         			'rule' => 'alphaNumeric',
+         			'rule' => array('custom', '/^[\\w\\s]+$/u'),
 					'message' => 'You have to enter numbers or letters.'
          		)
 		),
