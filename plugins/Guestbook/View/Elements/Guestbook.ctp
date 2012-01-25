@@ -10,14 +10,14 @@ $this->Html->css('/Guestbook/css/design',null,array('inline' => false));
 echo $this->Session->flash('Guestbook.Main');
 
 if (array_key_exists('writePost', $data)){
-	echo '<div id="guestbook_link">' . $this->Html->link(__('Display posts'), $url . '/') . '</div>';
+	echo '<div id="guestbook_link">' . $this->Html->link(__d('Guestbook','Display posts'), $url . '/', array('title' => __d('Guestbook', 'Display posts'))) . '</div>';
 	echo $this->element('writePost',
 	array('input' => $this->Session->read('Validation.GuestbookPost.data'),
 		  'errors' => $this->Session->read('Validation.GuestbookPost.validationErrors'),
 		  'contentId' => $contentId),
 	array('plugin' => 'Guestbook'));
 } else{
-	echo '<div id="guestbook_link">' . $this->Html->link(__('Write a post'), $url . '/guestbook/writePost') . '</div>';
+	echo '<div id="guestbook_link">' . $this->Html->link(__d('Guestbook','Write a post'), $url . '/guestbook/writePost', array('title' => __d('Guestbook', 'Write a post'))) . '</div>';
 	echo $this->element('displayPosts',
 	array('data' => $data,
 		  'url' => $url,

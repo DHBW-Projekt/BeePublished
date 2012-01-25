@@ -36,13 +36,32 @@ class GuestbookController extends GuestbookAppController {
 		if($this->request->is('post')){
 			// save data
 			$this->ContentValueManager->saveContentValues($contentId, $this->request->data['settings']);	
-			$this->Session->setFlash(__('Your settings were saved.'), 'default', array('class' => 'flash_success'), 'Guestbook.Admin');
+			$this->Session->setFlash(__d('Guestbook', 'Your settings were saved.'), 'default', array('class' => 'flash_success'), 'Guestbook.Admin');
 			$this->redirect($this->referer());
 		} else{
 			// get current values
 			$this->set('posts_per_page', $this->GuestbookContentValues->getValue($contentId, 'posts_per_page'));
 			$this->set('send_emails', $this->GuestbookContentValues->getValue($contentId, 'send_emails'));
 			$this->set('delete_immediately', $this->GuestbookContentValues->getValue($contentId, 'delete_immediately'));
+		}
+	}
+	
+	function clean_db($contentId){
+		$this->layout = 'overlay';
+		// set contentId used for settings
+		$this->set('contentId', $contentId);
+		// check request
+		if($this->request->is('post')){
+			// delete flagged posts from db
+			if ($this->Guestbook->deleteAll(array('contentId' => $contentId,
+												  'deleted NOT' => '0000-00-00 00:00:00'))){
+			$this->Session->setFlash(__d('Guestbook', 'Database cleaned.'), 'default', array('class' => 'flash_success'), 'Guestbook.Admin');
+			$this->redirect($this->referer());
+			}
+			else {
+				$this->Session->setFlash(__d('Guestbook', 'An error has occured.'), 'default', array('class' => 'flash_failure'), 'Guestbook.Admin');
+				$this->redirect($this->referer());
+			}
 		}
 	}
 	
@@ -62,7 +81,7 @@ class GuestbookController extends GuestbookAppController {
 				// save changed posts
 				if (!$this->GuestbookPost->save($onePost)) {
 					// error occured -> abort all remaining and set error message
-					$this->Session->setFlash(__('An error has occured.'), 'default', array('class' => 'flash_failure'), 'Guestbook.Admin');
+					$this->Session->setFlash(__d('Guestbook', 'An error has occured.'), 'default', array('class' => 'flash_failure'), 'Guestbook.Admin');
 					$this->redirect($this->referer());
 				}
 				$index++;
@@ -73,10 +92,10 @@ class GuestbookController extends GuestbookAppController {
 			$this->redirect($this->referer());
 		}
 		else if ($index == 1){
-			$this->Session->setFlash(__('Post released.'), 'default', array('class' => 'flash_success'), 'Guestbook.Admin');
+			$this->Session->setFlash(__d('Guestbook', 'Post released.'), 'default', array('class' => 'flash_success'), 'Guestbook.Admin');
 			$this->redirect($this->referer());
 		} else {
-			$this->Session->setFlash(__('Posts released.'), 'default', array('class' => 'flash_success'), 'Guestbook.Admin');
+			$this->Session->setFlash(__d('Guestbook', 'Posts released.'), 'default', array('class' => 'flash_success'), 'Guestbook.Admin');
 			$this->redirect($this->referer());
 		}
 
@@ -98,7 +117,7 @@ class GuestbookController extends GuestbookAppController {
 				//delete post from database and set positive message
 				if (!$this->GuestbookPost->delete($id)) {
 					// errors occured -> set error message
-					$this->Session->setFlash(__('An error has occured.'), 'default', array('class' => 'flash_failure'), 'Guestbook.Admin');
+					$this->Session->setFlash(__d('Guestbook', 'An error has occured.'), 'default', array('class' => 'flash_failure'), 'Guestbook.Admin');
 					$this->redirect($this->referer());
 				}
 				$index++;
@@ -109,10 +128,10 @@ class GuestbookController extends GuestbookAppController {
 			$this->redirect($this->referer());
 		}
 		else if ($index == 1){
-			$this->Session->setFlash(__('Post deleted.'), 'default', array('class' => 'flash_success'), 'Guestbook.Admin');
+			$this->Session->setFlash(__d('Guestbook', 'Post deleted.'), 'default', array('class' => 'flash_success'), 'Guestbook.Admin');
 			$this->redirect($this->referer());
 		} else {
-			$this->Session->setFlash(__('Posts deleted.'), 'default', array('class' => 'flash_success'), 'Guestbook.Admin');
+			$this->Session->setFlash(__d('Guestbook', 'Posts deleted.'), 'default', array('class' => 'flash_success'), 'Guestbook.Admin');
 			$this->redirect($this->referer());
 		}
 	}	
