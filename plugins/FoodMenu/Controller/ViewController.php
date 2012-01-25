@@ -2,10 +2,17 @@
 
 class ViewController extends FoodMenuAppController {
 	
+	var $components = array('Auth');
+	
 	public $name = 'View';
 	public $uses = array('FoodMenu.FoodMenuMenu', 'FoodMenu.FoodMenuCategory', 'FoodMenu.FoodMenuEntry');
 	var $layout = 'overlay';
 	var $autoRender = false;
+	
+	function beforeFilter() {
+		parent::beforeFilter();
+		$this->Auth->allow('selectDate');
+	}
 
 	function beforeRender()
     {
