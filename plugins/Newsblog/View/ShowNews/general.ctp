@@ -9,7 +9,7 @@
 	if($publishAllowed){
 		//create newsblog title input
 		echo $this->Form->input(null, array(
-				'label' => 'Title for Newsblog:',
+				'label' => __d('newsblog', 'Title for Newsblog:'),
 				'name' => 'newsblogTitle',
 				'value' => $newsblogTitle
 		));
@@ -20,7 +20,7 @@
 		'options' => array(10 => 10, 15 => 15, 20 => 20, 25 => 25),
 		'name' => 'itemsPerPage',
 		'empty' => '(choose one)',
-		'label' => 'Items per page:',
+		'label' => __d('newsblog', 'Items per page:'),
 		'default' => 10,
 		'value' => $itemsPerPage
 	));
@@ -29,7 +29,7 @@
 		'options' => array(150 => 150, 200 => 200, 250 => 250, 300 => 300, 350 => 350),
 		'name' => 'previewTextLength',
 		'empty' => '(choose one)',
-		'label' => 'Preview text length:',
+		'label' => __d('newsblog', 'Preview text length:'),
 		'default' => 150,
 		'value' => $shorttextLength
 	));
@@ -41,5 +41,5 @@
 	));
 	
 	//create submit button
-	echo $this->Form->end("Save Configuration");
+	echo $this->Form->end(__d('newsblog', 'Save Configuration'));
 ?>

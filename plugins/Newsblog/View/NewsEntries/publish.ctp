@@ -40,7 +40,7 @@ if($publishAllowed){
 			echo '<hr></div>';
 		endforeach;
 	} else{
-		echo 'No entries to publish!';
+		echo __d('newsblog', 'No entries to publish!');
 	}
 	echo '</div>';
 }
