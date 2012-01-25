@@ -38,3 +38,8 @@
 	float: left;
 	margin: 5px;
 }
+
+.galleryTitle {
+text-align: center;
+font-weight: bold;
+}

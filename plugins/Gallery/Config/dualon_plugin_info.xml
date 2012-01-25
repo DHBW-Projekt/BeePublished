@@ -7,6 +7,9 @@
         <permissions>
         </permissions>
         <views>
+        	<view>
+        		<name>GalleryOverview</name>
+        	</view>
 			<view>
 				<name>DisplayImage</name>
 			</view>

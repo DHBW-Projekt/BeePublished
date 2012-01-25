@@ -25,8 +25,11 @@ class GalleryComponent extends Component {
 		$controller->loadModel('Gallery.GalleryEntry');
 		$galleries = $controller->GalleryEntry->find('all');
 
-		foreach ($galleries as $gallery){
+		foreach ($galleries as &$gallery){
 			$this->normalizeGallery($controller, &$gallery);
+			foreach($gallery['GalleryPicture'] as &$picture){
+				$this->GalleryPictureComp->normalizePicture(&$picture);
+			}
 		}
 
 		return $galleries;
