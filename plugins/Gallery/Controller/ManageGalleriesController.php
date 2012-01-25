@@ -29,7 +29,7 @@ class ManageGalleriesController  extends AppController{
 		$index = 0;
 		foreach( $this->GalleryPictureComp->getAllPictures($this) as $picture){
 			
-			$pic_array[$index] = array($picture['id'] =>  $picture['id']);
+			$pic_array[$picture['id']] = $picture['title'];
 			$index++;
 		}
 		
@@ -37,17 +37,13 @@ class ManageGalleriesController  extends AppController{
 		$this->set('pictures', $pic_array);
 		
 		} else {
-		
 			$this->loadModel('Gallery.GalleryEntry');
-		
 			if (!empty($this->request->data)) {
-				
 				if($this->GalleryEntry->save($this->request->data)) {
-					$this->Session->setFlash(__('Your post was saved. It will be released by an administrator.'), 'default', array('class' => 'flash_success'));
-					//redirect 
+					$this->Session->setFlash(__('Your Gallery was saved.'), 'default', array('class' => 'flash_success'));
 					$this->redirect(array('action' => 'index', $contentId));	
 				} else {
-					$this->Session->setFlash(__('Your Gallery was not saved'), 'default', array('class' => 'flash_failure'));
+					$this->Session->setFlash(__('Your Gallery was not saved.'), 'default', array('class' => 'flash_failure'));
 					$this->redirect(array(	'action' => 'index', $contentId));		
 				}			
     		}//data empty

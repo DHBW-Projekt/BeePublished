@@ -1,8 +1,10 @@
 <?php
+$this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
 echo $this->Session->flash();
 echo $this->element('admin_menu_galleries',array("ContentId" => $data['ContentId']));
-echo "<h1> ".__('Manage your Galleries')."</h1>";
+echo "<h1> ".__('Manage Your Galleries')."</h1>";
 
+echo '<div class="galleryinfo">'.__('Here you can edit, delete your galleries or assign pictures to them').'</div>';
 
 echo '<table id="recipients">';
 	echo '<thead>';
@@ -32,11 +34,33 @@ foreach ($data['AllGalleries'] as $gallery){
 		echo "<td>".$gallery['GalleryEntry']['description']."</td>";
 	
 		echo '<td>';
-			echo $this->Html->image('/app/webroot/img/edit.png',array('style' => 'float: left', 'width' => '20px', 'alt' => '[]Edit', 'url' => array('plugin' => 'Gallery', 'controller' => 'ManageGalleries', 'action' => 'edit', $gallery['GalleryEntry']['id'],$data['ContentId'])));
+			echo $this->Html->link($this->Html->image('/app/webroot/img/edit.png', array(
+							'height' => 20, 
+							'width' => 20, 
+							'alt' => __('[x]Edit'))),
+							array(
+								'plugin' => 'Gallery', 
+								'controller' => 'ManageGalleries', 
+								'action' => 'edit', $gallery['GalleryEntry']['id'],$data['ContentId']),
+							array(
+								'escape' => false, 
+								'title' => __('Edit Gallery')),
+								__('Do you really want to edit this Gallery?'));
 		echo '</td>';
 	
 		echo '<td>';
-			echo $this->Html->image('/app/webroot/img/delete.png',array('style' => 'float: left', 'width' => '20px', 'alt' => '[]Delete', 'url' => array('plugin' => 'Gallery', 'controller' => 'ManageGalleries', 'action' => 'delete',$gallery['GalleryEntry']['id'],$data['ContentId'])));
+			echo $this->Html->link($this->Html->image('/app/webroot/img/delete.png', array(
+							'height' => 20, 
+							'width' => 20, 
+							'alt' => __('[x]Delete'))),
+							array(
+								'plugin' => 'Gallery', 
+								'controller' => 'ManageGalleries', 
+								'action' => 'delete',$gallery['GalleryEntry']['id'],$data['ContentId']),
+							array(
+								'escape' => false, 
+								'title' => __('Delete Gallery')),
+								__('Do you really want to delete this Gallery?'));
 		echo '</td>';
 	
 		echo '<td>';
