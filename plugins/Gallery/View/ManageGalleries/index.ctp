@@ -6,7 +6,7 @@ echo "<h1> ".__('Manage Your Galleries')."</h1>";
 
 echo '<div class="galleryinfo">'.__('Here you can edit, delete your galleries or assign pictures to them').'</div>';
 
-echo '<table id="recipients">';
+echo '<table>';
 	echo '<thead>';
 		echo '<tr>';
 			echo '<th></th>';
@@ -24,7 +24,6 @@ echo '<table id="recipients">';
 				'controller' => 'ManageGalleries',
 				'action' => 'deleteSelected',$data['ContentId']),
 				'onsubmit'=>'return confirm(\''.__('Do you really want to delete the selected galleries?').'\');'));
-//debug($data);
 foreach ($data['AllGalleries'] as $gallery){
 	echo "<tr>";
 		echo '<td>';

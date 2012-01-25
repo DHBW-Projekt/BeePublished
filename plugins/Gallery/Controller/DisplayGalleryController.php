@@ -5,15 +5,14 @@ class DisplayGalleryController extends AppController {
 	var $layout = 'overlay';
 	
 	public function admin($contentId){
-		//debug($contentId);		
+		
 		$this->redirect(array('action' => 'setGalleryAdminTab', $contentId));
 	}
 	
 	public function setGalleryAdminTab($contentId){
 		$allGalleries = $this->Gallery->getAllGalleries($this);
 		
-		//debug($allGalleries);
-		
+
 		$data = array(	'AllGalleries' => $allGalleries,
 								'ContentId' => $contentId
 		);
@@ -24,7 +23,9 @@ class DisplayGalleryController extends AppController {
 	public function setGallery($contentId, $galleryId){
 		//debug("setImage:".$contentId." ".$pictureId);
 		$this->ContentValueManager->saveContentValues($contentId, array('galleryID' => $galleryId));
-				
+
+		$this->Session->setFlash('Gallery sucessfully assigned');
+		
 		$this->redirect($this->referer());
 	}
 	

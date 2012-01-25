@@ -8,6 +8,4 @@ echo $this->Html->image($data['path_to_pic'],
 );
 echo '<div style="clear:both;"></div>';
 
-//debug($data);
-
 ?>

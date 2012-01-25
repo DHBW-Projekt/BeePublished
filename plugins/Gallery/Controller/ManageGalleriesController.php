@@ -1,10 +1,13 @@
 <?php
-
 class ManageGalleriesController  extends AppController{
 	public $layout = 'overlay';
 	
 	public $components = array('Gallery.Gallery','Gallery.GalleryPictureComp');
 	
+	/**
+	 * Index function, to list all available Galleries
+	 * @param int $contentId
+	 */
 	public function index($contentId){
 		$allGalls= $this->Gallery->getAllGalleries($this);
 		
@@ -21,6 +24,10 @@ class ManageGalleriesController  extends AppController{
 		$this->set('data',$data);
 		$this->set('pictures', $pic_array);
 	}	
+	/**
+	 * Function related the create View (to create a new Gallery)
+	 * @param int $contentId
+	 */
 	public function create($contentId){
 		//debug($this->request->data);
 		if (! $this->request->is('post')) {
@@ -50,11 +57,20 @@ class ManageGalleriesController  extends AppController{
 		}// is post
 	}//function
 	
+	/**
+	 * deletes a gallery
+	 * @param int $galleryId
+	 * @param int $contentId
+	 */
 	public function delete($galleryId, $contentId){
 		$picture = $this->Gallery->delete($this,$galleryId);
 		$this->redirect($this->referer());
 	}
 	
+	/**
+	 * deletes a List of Galleries
+	 * @param int $contentId
+	 */
 	public function deleteSelected($contentId){
 		if ($this->request->is('post')){
 			$galleries=  $this->Gallery->getAllGalleries($this);
@@ -71,6 +87,11 @@ class ManageGalleriesController  extends AppController{
 		}
 	}//function delete selected
 	
+	/**
+	 * Allows to Edit Galleries, related to Edit view
+	 * @param id $galleryId
+	 * @param id $contentId
+	 */
 	public function edit($galleryId,$contentId){
 		if ($this->request->is('post')) {
 				//debug($this->request->data);
@@ -93,10 +114,11 @@ class ManageGalleriesController  extends AppController{
 		
 	}
 	
-	public function save($contentId){
-	
-	}
-	
+	/**
+	 * Method related to the View for assigning images to a gallery
+	 * @param int $galleryId
+	 * @param int $contentId
+	 */
 	public function assignImages($galleryId,$contentId){
 			
 			$this->set('available_pictures',$this->GalleryPictureComp->getAllUnAssignedPictures($this));
@@ -106,6 +128,11 @@ class ManageGalleriesController  extends AppController{
 		
 	}
 	
+	/**
+	 * Assigns an image to the specified Gallery
+	 * @param int $galleryId
+	 * @param int $pictureId
+	 */
 	public function assignImage($galleryId,$pictureId){
 		$picture = $this->GalleryPictureComp->getPicture($this, $pictureId);
 		
@@ -119,6 +146,11 @@ class ManageGalleriesController  extends AppController{
 		$this->redirect($this->referer());
 	}
 	
+	/**
+	 * Ressigns an image to the specified Gallery
+	 * @param int $galleryId
+	 * @param int $pictureId
+	 */
 	public function unassignImage($galleryId,$pictureId){
 		$picture = $this->GalleryPictureComp->getPicture($this, $pictureId);
 		
