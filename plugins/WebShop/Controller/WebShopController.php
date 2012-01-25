@@ -246,12 +246,18 @@ class WebShopController extends WebShopAppController {
 		if(!$allowed)
 			$this->redirect(array('action' => 'admin', $contentID));
 		
-		foreach ($this->data['selectedProducts'] as $product => $selection) {
-			if ($selection) 
-				$this->remove($contentID, $product, false);
-		}
+		$deleted = false;
 		
-		$this->Session->setFlash(__d('web_shop', 'Products deleted.'));
+		if (isset($this->data['selectedProducts']))
+			foreach ($this->data['selectedProducts'] as $product => $selection) {
+				if ($selection) {
+					$this->remove($contentID, $product, false);
+					$deleted = true;
+				}
+			}
+		
+		if ($deleted)
+			$this->Session->setFlash(__d('web_shop', 'Products deleted.'));
 		$this->redirect(array('action' => 'admin', $contentID));
 	}
 	

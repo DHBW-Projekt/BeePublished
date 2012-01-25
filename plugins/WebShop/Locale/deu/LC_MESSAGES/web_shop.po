@@ -1,171 +1,223 @@
 # LANGUAGE translation of CakePHP Application
 # Copyright YEAR NAME <EMAIL@ADDRESS>
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2012-01-18 20:28+0100\n"
-"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
-"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2012-01-24 16:06+0100\n"
+"PO-Revision-Date: 2012-01-24 16:16+0100\n"
+"Last-Translator: Patrick Zamzow <p.zamzow@live.de>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: \View\Elements\SearchBar.ctp:7
+#: Controller\WebShopController.php:72;140
+msgid "Please fill out all mandatory fields."
+msgstr "Bitte füllen Sie alle Pflichtfelder aus."
+
+#: Controller\WebShopController.php:79;148
+msgid "Permission denied."
+msgstr "Zugriff verweigert."
+
+#: Controller\WebShopController.php:100;185
+msgid "Errors during picture upload."
+msgstr "Fehler beim Bild-Upload."
+
+#: Controller\WebShopController.php:123
+msgid "Product created."
+msgstr "Produkt erstellt."
+
+#: Controller\WebShopController.php:199
+msgid "Product updated."
+msgstr "Produkt geändert."
+
+#: Controller\WebShopController.php:237
+msgid "Product deleted."
+msgstr "Produkt gelöscht."
+
+#: Controller\WebShopController.php:260
+msgid "Products deleted."
+msgstr "Produkte gelöscht."
+
+#: View\Elements\SearchBar.ctp:7
 msgid "Search"
 msgstr "Suche"
 
-#: \View\Elements\SearchBar.ctp:8
+#: View\Elements\SearchBar.ctp:8
 msgid "Go"
 msgstr "Los"
 
-#: \View\Elements\admin_menu.ctp:8
-#: \View\WebShop\admin.ctp:15
+#: View\Elements\admin_menu.ctp:8
 msgid "Product Administration"
 msgstr "Produkt-Administration"
 
-#: \View\Elements\admin_menu.ctp:9
-#: \View\WebShop\open_orders.ctp:14
+#: View\Elements\admin_menu.ctp:9
+#: View\WebShop\open_orders.ctp:14
 msgid "Open Orders"
 msgstr "Offene Bestellungen"
 
-#: \View\Elements\admin_menu.ctp:10
+#: View\Elements\admin_menu.ctp:10
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: \View\Elements\cart.ctp:8
+#: View\Elements\cart.ctp:8
 msgid "Cart"
 msgstr "Warenkorb"
 
-#: \View\Elements\cart.ctp:12
+#: View\Elements\cart.ctp:12
 msgid "No element in your cart."
 msgstr "Keine Element im Warenkorb."
 
-#: \View\Elements\cart.ctp:16
-#: \View\WebShop\open_orders.ctp:46
+#: View\Elements\cart.ctp:16
+#: View\WebShop\open_orders.ctp:46
 msgid "Article"
 msgstr "Artikel"
 
-#: \View\Elements\cart.ctp:16
-#: \View\Elements\view.ctp:13
-#: \View\WebShop\create.ctp:29
-#: \View\WebShop\edit.ctp:29
-#: \View\WebShop\open_orders.ctp:49
+#: View\Elements\cart.ctp:16
+#: View\Elements\view.ctp:13
+#: View\WebShop\create.ctp:29
+#: View\WebShop\edit.ctp:29
+#: View\WebShop\open_orders.ctp:49
 msgid "Price"
 msgstr "Preis"
 
-#: \View\Elements\cart.ctp:16
+#: View\Elements\cart.ctp:16
 msgid "Amount"
 msgstr "Menge"
 
-#: \View\Elements\cart.ctp:35
+#: View\Elements\cart.ctp:35
 msgid "Submit Order"
 msgstr "Verschicke Bestellung"
 
-#: \View\Elements\search.ctp:9;18
+#: View\Elements\search.ctp:9;18
 msgid "Search results"
 msgstr "Suchergebnisse"
 
-#: \View\Elements\search.ctp:20
+#: View\Elements\search.ctp:20
 msgid "Search result"
 msgstr "Suchergebniss"
 
-#: \View\WebShop\admin.ctp:19
+#: View\WebShop\admin.ctp:16
+msgid "Create new product"
+msgstr "Erstelle neues Produkt"
+
+#: View\WebShop\admin.ctp:20
+#, fuzzy
+msgid "Create product"
+msgstr "Erstelle Produkt"
+
+#: View\WebShop\admin.ctp:24
+msgid "Products"
+msgstr "Produkte"
+
+#: View\WebShop\admin.ctp:31
+msgid "Search Products"
+msgstr "Suche Produkte"
+
+#: View\WebShop\admin.ctp:39
 msgid "Product"
 msgstr "Produkt"
 
-#: \View\WebShop\admin.ctp:19
-msgid "Add"
-msgstr "Hinzufügen"
-
-#: \View\WebShop\create.ctp:20
-msgid "Create Product"
-msgstr "Erstelle Produkt"
-
-#: \View\WebShop\create.ctp:27
-#: \View\WebShop\edit.ctp:27
-msgid "Name"
-msgstr "Name"
-
-#: \View\WebShop\create.ctp:30
-#: \View\WebShop\edit.ctp:30
-msgid "Picture"
-msgstr "Bild"
-
-#: \View\WebShop\create.ctp:33
-#: \View\WebShop\edit.ctp:35
-#: \View\WebShop\settings.ctp:8
-msgid "Save"
-msgstr "Speichern"
-
-#: \View\WebShop\create.ctp:34
-#: \View\WebShop\edit.ctp:36
-msgid "Cancel"
-msgstr "Abbrechen"
-
-#: \View\WebShop\edit.ctp:20
-msgid "Edit Product"
-msgstr "Produkt bearbeiten"
-
-#: \View\WebShop\open_orders.ctp:18;41
-msgid "Order"
-msgstr "Bestellung"
-
-#: \View\WebShop\open_orders.ctp:19
+#: View\WebShop\admin.ctp:40
+#: View\WebShop\open_orders.ctp:19
 msgid "Date"
 msgstr "Datum"
 
-#: \View\WebShop\open_orders.ctp:20
+#: View\WebShop\admin.ctp:50
+msgid "Do you really want to delete the selected products?"
+msgstr "Möchten Sie die ausgewählten Produkte wirklich löschen?"
+
+#: View\WebShop\admin.ctp:70
+msgid "Do you really want to delete the selected product?"
+msgstr "Möchten Sie das ausgewählte Produkt wirklich löschen?"
+
+#: View\WebShop\admin.ctp:80;80
+msgid "Delete"
+msgstr "Löschen"
+
+#: View\WebShop\create.ctp:20
+msgid "Create Product"
+msgstr "Erstelle Produkt"
+
+#: View\WebShop\create.ctp:27
+#: View\WebShop\edit.ctp:27
+msgid "Name"
+msgstr "Name"
+
+#: View\WebShop\create.ctp:30
+#: View\WebShop\edit.ctp:30
+msgid "Picture"
+msgstr "Bild"
+
+#: View\WebShop\create.ctp:33
+#: View\WebShop\edit.ctp:35
+#: View\WebShop\settings.ctp:8
+msgid "Save"
+msgstr "Speichern"
+
+#: View\WebShop\create.ctp:34
+#: View\WebShop\edit.ctp:36
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: View\WebShop\edit.ctp:20
+msgid "Edit Product"
+msgstr "Produkt bearbeiten"
+
+#: View\WebShop\open_orders.ctp:18;41
+msgid "Order"
+msgstr "Bestellung"
+
+#: View\WebShop\open_orders.ctp:20
 msgid "Status"
 msgstr "Status"
 
-#: \View\WebShop\open_orders.ctp:21
+#: View\WebShop\open_orders.ctp:21
 msgid "Action"
 msgstr "Aktion"
 
-#: \View\WebShop\open_orders.ctp:26
+#: View\WebShop\open_orders.ctp:26
 msgid "No open orders."
 msgstr "Keine offenen Bestellungen."
 
-#: \View\WebShop\open_orders.ctp:33
+#: View\WebShop\open_orders.ctp:33
 msgid "open"
 msgstr "offen"
 
-#: \View\WebShop\open_orders.ctp:35
+#: View\WebShop\open_orders.ctp:35
 msgid "edit"
 msgstr "bearbeiten"
 
-#: \View\WebShop\open_orders.ctp:42
+#: View\WebShop\open_orders.ctp:42
 msgid "Customer"
 msgstr "Kunde"
 
-#: \View\WebShop\open_orders.ctp:47
+#: View\WebShop\open_orders.ctp:47
 msgid "Quantity"
 msgstr "Menge"
 
-#: \View\WebShop\open_orders.ctp:48
+#: View\WebShop\open_orders.ctp:48
 msgid "Unit Price"
 msgstr "Einzelpreis"
 
-#: \View\WebShop\open_orders.ctp:69
+#: View\WebShop\open_orders.ctp:69
 msgid "Subtotal"
 msgstr "Gesamtpreis"
 
-#: \View\WebShop\settings.ctp:7
+#: View\WebShop\settings.ctp:7
 msgid "Number of Products"
 msgstr "Produktanzahl"
 
 #: Model\WebshopProduct.php:validation for field name
 msgid ""Name" is mandatory."
-msgstr ""Name" ist ein Pflichtfeld."
+msgstr "\"Name\" ist ein Pflichtfeld"
 
 #: Model\WebshopProduct.php:validation for field description
 msgid ""Description" is mandatory."
-msgstr ""Beschreibung" ist ein Pflichtfeld."
+msgstr "\"Beschreibung\" ist ein Pflichtfeld"
 
 #: Model\WebshopProduct.php:validation for field price
 msgid ""Price" is mandatory."
-msgstr ""Preis" ist ein Pflichtfeld."
+msgstr "\"Preis\" ist ein Pflichtfeld"
