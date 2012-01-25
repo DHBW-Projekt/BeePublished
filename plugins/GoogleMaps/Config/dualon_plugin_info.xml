@@ -4,7 +4,23 @@
         <name>GoogleMaps</name>
         <author>Patrick Zamzow</author>
         <version>1.0</version>
-        <permissions>
+		<permissions>
+            <permission>
+                <role>Administrator</role>
+                <action>Create Location</action>
+            </permission>
+            <permission>
+                <role>Administrator</role>
+                <action>Delete Location</action>
+            </permission>
+            <permission>
+                <role>Administrator</role>
+                <action>Edit Location</action>
+            </permission>
+            <permission>
+                <role>Administrator</role>
+                <action>Set Location</action>
+            </permission>
         </permissions>
         <views>
             <view>

@@ -8,12 +8,4 @@ class RouteComponent extends Component {
 	{
 		return $this->GoogleMaps->getLocation($controller, $params);
 	}
-	
-	public function beforeFilter() {
-		parent::beforeFilter();
-		
-		//Actions which don't require authorization
-		$this->Auth->allow('*');
-	}
-	
 }

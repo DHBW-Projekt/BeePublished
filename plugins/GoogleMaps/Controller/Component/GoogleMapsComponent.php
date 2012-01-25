@@ -15,13 +15,5 @@ class GoogleMapsComponent extends Component {
 				return __('no location');
 			}
 		}
-	}
-	
-	public function beforeFilter() {
-		parent::beforeFilter();
-		
-		//Actions which don't require authorization
-		$this->Auth->allow('*');
-	}
-	
+	}	
 }
