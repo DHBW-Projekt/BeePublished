@@ -46,8 +46,8 @@
 			<tbody>
 				<?php
 					echo $this->Form->create('selectedProducts', array(
-						'url' => array('controller' => 'WebShop', 'action' => 'removeSelected', $contentID)));
-						//'onsubmit'=>'return confirm(\''.__d('web_shop', 'Do you really want to delete the selected products?').'\');'));
+						'url' => array('controller' => 'WebShop', 'action' => 'removeSelected', $contentID),
+						'onsubmit'=>'return confirm(\''.__d('web_shop', 'Do you really want to delete the selected products?').'\');'));
 				?>
 				<?php foreach ($products as $product): ?>
 				    <tr>
@@ -65,7 +65,10 @@
 					    	<?php echo $this->Html->link(
 					    					$this->Html->image("delete.png"), 
 					    					array('action' => 'remove', $contentID, $product['WebshopProduct']['id']),
-					    					array('escape' => False)
+					    					array(
+					    						'escape' => False,
+					    						'onclick'=>'return confirm(\''.__d('web_shop', 'Do you really want to delete the selected product?').'\');'
+					    					)
 					    				);?>
 					    </td>
 				    </tr>
