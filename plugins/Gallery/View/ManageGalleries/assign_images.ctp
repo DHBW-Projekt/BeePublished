@@ -19,7 +19,11 @@ echo "<h1>Assign Images to your Gallery</h1>";
                 </div>
             </div>
           	<?php endforeach; ?>
+          	
+          	
         </div>
+                  	<div style="clear:both;"></div>
+        
  </div>
  
   <div class="role">
@@ -35,7 +39,10 @@ echo "<h1>Assign Images to your Gallery</h1>";
                 </div>
             </div>
           	<?php endforeach; ?>
+          	
         </div>
+                  	<div style="clear:both;"></div>
+        
  </div>
 
 
