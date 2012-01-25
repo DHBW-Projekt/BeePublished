@@ -25,11 +25,6 @@
 			'id' => 'validToDB',
 			'name' => 'validTo'
 	));
-	//action set to editNews
-	echo $this->Form->hidden(null,array(
-			'name' => 'action',
-			'value' => 'editNews'
-	));
 	//newsEntryId
 	echo $this->Form->hidden(null,array(
 			'name' => 'id',
@@ -39,14 +34,14 @@
 	//create title input
 	echo $this->Form->input('NewsEntry.title', array(
 		//'div' => 'editNewsTitle',
-		'label' => 'Title:',
+		'label' => __d('newsblog','Title:'),
 		'name' => 'title',
 		'value'=> $newsentry['NewsEntry']['title']
 	));
 	//create subtitle input
 	echo $this->Form->input('NewsEntry.subtitle', array(
 		//'div' => 'writeNewsSubtitle',
-		'label' => 'Subtitle:',
+		'label' => __d('newsblog', 'Subtitle:'),
 		'name' => 'subtitle',
 		'value'=> $newsentry['NewsEntry']['subtitle']
 	));
@@ -65,7 +60,7 @@
 		'id' => 'nbValidFromDatepicker',
 		'name' => 'validFromUI',
 		'class' => 'datepicker',
-		'label' => 'Valid from:',
+		'label' => __d('newsblog', 'Valid from:'),
 		'value'=> $newsentry['NewsEntry']['validFrom']
 	));
 	//create validTo input
@@ -75,10 +70,10 @@
 		'id' => 'nbValidToDatepicker',
 		'name' => 'validToUI',
 		'class' => 'datepicker',
-		'label' => 'Valid to:',
+		'label' => __d('newsblog', 'Valid to:'),
 		'value'=> $newsentry['NewsEntry']['validTo']
 	));
 	
-	echo $this->Form->end("Save changes");
+	echo $this->Form->end(__d('newsblog', 'Save changes'));
 	?>
 </div>

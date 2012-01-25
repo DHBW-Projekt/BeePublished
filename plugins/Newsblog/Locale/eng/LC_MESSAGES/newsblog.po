@@ -1,0 +1,42 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright 2012 Philipp Scholl <philippscholl@gmx.de>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2012-01-25 15:00+0100\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: View/Elements/NewsblogDetail.ctp:32
+#: View/Elements/NewsblogOverview.ctp:93
+msgid "infostring"
+msgstr "by <author> on <date> at <time>"
+
+#: View/Elements/NewsblogDetail.ctp:37
+#: View/Elements/NewsblogOverview.ctp:97
+msgid "modifiedstring"
+msgstr "modified by <editor> on <date> at <time>"
+
+#: View/Elements/NewsblogOverview.ctp:41
+msgid "ShowHideConfiguration"
+msgstr "Show/Hide Configuration"
+
+#: View/Elements/NewsblogOverview.ctp:125
+msgid "Full Article"
+msgstr "Full Article"
+
+#: Model/NewsEntry.php:validation for field title
+msgid "Please enter a title."
+msgstr "Please enter a title."
+
+#: Model/NewsEntry.php:validation for field text
+msgid "Please enter the news entry's text."
+msgstr "Please enter the news entry's text."
+
