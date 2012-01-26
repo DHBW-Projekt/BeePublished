@@ -4,8 +4,7 @@ echo $this->element('admin_menu_images',array("ContentId" => $data['ContentId'])
 echo $this->Session->flash('Image saved');
 echo $this->Session->flash('Image deleted');
 
-
-echo "<h1>Add single image</h1>";
+echo "<h2>".__('Add single image')."</h2>";
 
 echo $this->Form->create('addImage', array('url' => array('plugin' => 'Gallery','controller' => 'ManageImages','action' => 'uploadImage',$data['ContentId']),'type' => 'file'));
 
@@ -13,11 +12,10 @@ echo $this->Form->input(__('Title'));
 echo $this->Form->label(__('File'));
 echo $this->Form->file('File');
 
-
 echo $this->Form->submit(__('Add image'));
 echo $this->Form->end();
 
-echo "<h1>Add multiple images</h1>";
+echo "<h2>".__('Add multiple images')."</h2>";
 
 echo $this->Form->create('addImage', array('url' => array('plugin' => 'Gallery','controller' => 'ManageImages','action' => 'uploadImages',$data['ContentId']),'type' => 'file'));
 echo $this->Form->input('data', array('label'=>'File', 'type'=>'file', 'name' => 'files[]', 'multiple'));
@@ -28,12 +26,7 @@ echo "<br>";
 echo "<hr>";
 echo "<br>";
 
-echo "<h1>existing images</h1>";
-
-
-
-
-
+echo "<h1>".__('Existing images')."</h1>";
 
 echo '<table>';
 	echo '<thead>';
@@ -53,7 +46,6 @@ echo $this->Form->create('selectPictures', array(
 				'action' => 'deleteSelected',$data['ContentId']),
 				'onsubmit'=>'return confirm(\''.__('Do you really want to delete the selected images?').'\');'));
 
-
 foreach ($data['AllPictures'] as $picture){
 	echo "<tr>";
 	
@@ -71,7 +63,8 @@ foreach ($data['AllPictures'] as $picture){
 	echo '</td>';
 	
 	echo "</tr>";
-}echo '</tbody>';
+}
+echo '</tbody>';
 	echo '<tfoot>';	
 			echo '<tr>';
 				echo '<td>';

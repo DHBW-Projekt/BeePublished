@@ -34,7 +34,7 @@ class ManageImagesController  extends AppController{
 		$this->addImageInternal($image);
 		$this->Session->setFlash('Image saved');
 		
-		$this->redirect(array('action' => 'index', $contentId));
+		$this->redirect($this->referer());
 	}
 	
 	/**
@@ -56,8 +56,13 @@ class ManageImagesController  extends AppController{
 		
 		$this->Session->setFlash('Images saved');
 		
-		$this->redirect(array('action' => 'index', $contentId));
+		$this->redirect($this->referer());
 		
+	}
+	
+	public function create($contentId){
+		$data = array('ContentId' => $contentId );
+		$this->set('data',$data);
 	}
 	
 	/**
@@ -124,9 +129,7 @@ class ManageImagesController  extends AppController{
 	}
 	
 	public function save($contentId){
-		//debug($this->data);
-		//debug($contentId);
-		
+	
 		$this->GalleryPictureComp->save($this,$this->data['GalleryPicture']);
 		$this->redirect(array('action' => 'index', $contentId));
 	}

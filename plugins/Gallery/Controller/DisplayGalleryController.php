@@ -4,16 +4,22 @@ class DisplayGalleryController extends AppController {
 	var $components = array('ContentValueManager','Gallery.Gallery','Gallery.GalleryPictureComp');
 	var $layout = 'overlay';
 	
+	public function index($galleryId){
+		
+		$this->redirect(array('controller' => 'DisplayGallery', 'action' => 'index'));
+		//$this->layout = "default";
+		//$this->render('/elements/DisplayGallery');
+	}
+	
 	public function admin($contentId){
-		//debug($contentId);		
+		
 		$this->redirect(array('action' => 'setGalleryAdminTab', $contentId));
 	}
 	
 	public function setGalleryAdminTab($contentId){
 		$allGalleries = $this->Gallery->getAllGalleries($this);
 		
-		//debug($allGalleries);
-		
+
 		$data = array(	'AllGalleries' => $allGalleries,
 								'ContentId' => $contentId
 		);
@@ -24,10 +30,13 @@ class DisplayGalleryController extends AppController {
 	public function setGallery($contentId, $galleryId){
 		//debug("setImage:".$contentId." ".$pictureId);
 		$this->ContentValueManager->saveContentValues($contentId, array('galleryID' => $galleryId));
-				
+
+		$this->Session->setFlash('Gallery sucessfully assigned');
+		
 		$this->redirect($this->referer());
 	}
 	
+	/*
 	public function displaySingleImage($galleryId, $imageId){
 		$gallery = $this->Gallery->getGallery($this,$galleryId);
 		
@@ -55,5 +64,5 @@ class DisplayGalleryController extends AppController {
 		
 		$this->set('data',$data);
 	}
-	
+	*/
 }

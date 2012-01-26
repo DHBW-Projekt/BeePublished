@@ -1,10 +1,13 @@
 <?php
-
 class ManageGalleriesController  extends AppController{
 	public $layout = 'overlay';
 	
 	public $components = array('Gallery.Gallery','Gallery.GalleryPictureComp');
 	
+	/**
+	 * Index function, to list all available Galleries
+	 * @param int $contentId
+	 */
 	public function index($contentId){
 		$allGalls= $this->Gallery->getAllGalleries($this);
 		
@@ -21,6 +24,10 @@ class ManageGalleriesController  extends AppController{
 		$this->set('data',$data);
 		$this->set('pictures', $pic_array);
 	}	
+	/**
+	 * Function related the create View (to create a new Gallery)
+	 * @param int $contentId
+	 */
 	public function create($contentId){
 		//debug($this->request->data);
 		if (! $this->request->is('post')) {
@@ -29,7 +36,7 @@ class ManageGalleriesController  extends AppController{
 		$index = 0;
 		foreach( $this->GalleryPictureComp->getAllPictures($this) as $picture){
 			
-			$pic_array[$index] = array($picture['id'] =>  $picture['id']);
+			$pic_array[$picture['id']] = $picture['title'];
 			$index++;
 		}
 		
@@ -37,28 +44,33 @@ class ManageGalleriesController  extends AppController{
 		$this->set('pictures', $pic_array);
 		
 		} else {
-		
 			$this->loadModel('Gallery.GalleryEntry');
-		
 			if (!empty($this->request->data)) {
-				
 				if($this->GalleryEntry->save($this->request->data)) {
-					$this->Session->setFlash(__('Your post was saved. It will be released by an administrator.'), 'default', array('class' => 'flash_success'));
-					//redirect 
+					$this->Session->setFlash(__('Your Gallery was saved.'), 'default', array('class' => 'flash_success'));
 					$this->redirect(array('action' => 'index', $contentId));	
 				} else {
-					$this->Session->setFlash(__('Your Gallery was not saved'), 'default', array('class' => 'flash_failure'));
+					$this->Session->setFlash(__('Your Gallery was not saved.'), 'default', array('class' => 'flash_failure'));
 					$this->redirect(array(	'action' => 'index', $contentId));		
 				}			
     		}//data empty
 		}// is post
 	}//function
 	
+	/**
+	 * deletes a gallery
+	 * @param int $galleryId
+	 * @param int $contentId
+	 */
 	public function delete($galleryId, $contentId){
 		$picture = $this->Gallery->delete($this,$galleryId);
 		$this->redirect($this->referer());
 	}
 	
+	/**
+	 * deletes a List of Galleries
+	 * @param int $contentId
+	 */
 	public function deleteSelected($contentId){
 		if ($this->request->is('post')){
 			$galleries=  $this->Gallery->getAllGalleries($this);
@@ -75,6 +87,11 @@ class ManageGalleriesController  extends AppController{
 		}
 	}//function delete selected
 	
+	/**
+	 * Allows to Edit Galleries, related to Edit view
+	 * @param id $galleryId
+	 * @param id $contentId
+	 */
 	public function edit($galleryId,$contentId){
 		if ($this->request->is('post')) {
 				//debug($this->request->data);
@@ -97,10 +114,11 @@ class ManageGalleriesController  extends AppController{
 		
 	}
 	
-	public function save($contentId){
-	
-	}
-	
+	/**
+	 * Method related to the View for assigning images to a gallery
+	 * @param int $galleryId
+	 * @param int $contentId
+	 */
 	public function assignImages($galleryId,$contentId){
 			
 			$this->set('available_pictures',$this->GalleryPictureComp->getAllUnAssignedPictures($this));
@@ -110,6 +128,11 @@ class ManageGalleriesController  extends AppController{
 		
 	}
 	
+	/**
+	 * Assigns an image to the specified Gallery
+	 * @param int $galleryId
+	 * @param int $pictureId
+	 */
 	public function assignImage($galleryId,$pictureId){
 		$picture = $this->GalleryPictureComp->getPicture($this, $pictureId);
 		
@@ -123,6 +146,11 @@ class ManageGalleriesController  extends AppController{
 		$this->redirect($this->referer());
 	}
 	
+	/**
+	 * Ressigns an image to the specified Gallery
+	 * @param int $galleryId
+	 * @param int $pictureId
+	 */
 	public function unassignImage($galleryId,$pictureId){
 		$picture = $this->GalleryPictureComp->getPicture($this, $pictureId);
 		

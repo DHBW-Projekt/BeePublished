@@ -29,6 +29,10 @@
 	border-bottom: 3px solid #3292DD;
 }
 
+.galleryinfo{
+	margin-top:20px;
+	margin-bottom:10px;
+}
 
 #picturetitle { text-align: left; }
 #picturetitle b { display: block; margin-right: 80px; }
