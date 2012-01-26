@@ -80,7 +80,7 @@ class ContactFormComponent extends Component {
 		
 		//VALIDATE CAPTCHA
 		if(!$resp->is_valid){
-			$controller->Session->setFlash(__d('contact_form','Please fill out the CAPTCHA field.'), 'flash_failure');
+			$controller->Session->setFlash(__d('contact_form','Please fill out the CAPTCHA field correctly.'), 'flash_failure');
 			return array('data' => $controller->ContactRequest, 'Element' => 'request');
 		}
 					
