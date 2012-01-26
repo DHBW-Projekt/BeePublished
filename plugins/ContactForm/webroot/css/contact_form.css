@@ -13,4 +13,5 @@ div #contact_form_admin_content{
 /* FORMATTING contact form */
 div #contactform_between{
 	text-align: right;
+	align: right;
 }

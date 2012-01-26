@@ -28,6 +28,6 @@
 			echo recaptcha_get_html($publickey);
 		?>
 	</div>
-	<div id="contactform_between"><i><?php echo $this->Form->label(__d('contact_form','* - Mandatory fields')); ?></i></div>
-	<?php echo $this->Form->end(__d('contact_form','Send')); ?>
+	<div id='contactform_between'><i><?php echo $this->Form->label(__d('contact_form','* - Mandatory fields')); ?></i></div>
+	<div style="align: left"><br><?php echo $this->Form->end(__d('contact_form','Send')); ?></div>
 </div>
