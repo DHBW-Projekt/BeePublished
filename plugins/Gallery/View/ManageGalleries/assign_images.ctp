@@ -6,7 +6,6 @@ echo $this->element('admin_menu_galleries',array("ContentId" => $ContentId));
 echo "<h1>".__("Assign images to your gallery")."</h1>";
 
 echo '<div class="galleryinfo">'.__('Please assign images from your image repository to your gallery').'</div>';
-
 ?>
  <div class="role">
         <div class="users_role">Available pictures</div>
@@ -15,17 +14,12 @@ echo '<div class="galleryinfo">'.__('Please assign images from your image reposi
             <div class="user_detail" rel="<?php echo $picture['id']; ?>">
                 <div class="user_pic"><?php echo $this->Html->image($picture['thumb'], array('width' => '55', 'height' => '55')); ?></div>
                 <div class="user_name"><?php echo $picture['title']; ?></div>
-                <div>
-                    <?php // echo $this->Html->link($this->Html->image('edit.png', array('width' => '20', 'height' => '20')),array('controller' => 'Users', 'action' => 'edit', $user['id']),array('escape' => false, 'class' => 'user_edit')); ?>
-                    <?php //echo $this->Html->link($this->Html->image('delete.png', array('width' => '20', 'height' => '20')),array('controller' => 'Users', 'action' => 'delete', $user['id']),array('escape' => false, 'class' => 'user_delete')); ?>
-                </div>
             </div>
           	<?php endforeach; ?>
           	
           	
         </div>
-                  	<div style="clear:both;"></div>
-        
+	<div style="clear:both;"></div>        
  </div>
  
   <div class="role">
@@ -35,15 +29,10 @@ echo '<div class="galleryinfo">'.__('Please assign images from your image reposi
             <div class="user_detail" rel="<?php echo $picture['id']; ?>">
                 <div class="user_pic"><?php echo $this->Html->image($picture['thumb'], array('width' => '55', 'height' => '55')); ?></div>
                 <div class="user_name"><?php echo $picture['title']; ?></div>
-                <div>
-                    <?php // echo $this->Html->link($this->Html->image('edit.png', array('width' => '20', 'height' => '20')),array('controller' => 'Users', 'action' => 'edit', $user['id']),array('escape' => false, 'class' => 'user_edit')); ?>
-                    <?php //echo $this->Html->link($this->Html->image('delete.png', array('width' => '20', 'height' => '20')),array('controller' => 'Users', 'action' => 'delete', $user['id']),array('escape' => false, 'class' => 'user_delete')); ?>
-                </div>
             </div>
           	<?php endforeach; ?>
           	
         </div>
-                  	<div style="clear:both;"></div>
-        
+        <div style="clear:both;"></div>
  </div>
 

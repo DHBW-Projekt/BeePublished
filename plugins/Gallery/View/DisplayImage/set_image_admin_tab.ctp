@@ -3,7 +3,6 @@ echo $this->element('admin_menu_images',array("ContentId" => $data['ContentId'])
 
 echo $this->Session->flash('Image assigned');
 
-
 echo '<table>';
 	echo '<thead>';
 		echo '<tr>';
@@ -24,7 +23,5 @@ foreach ($data['AllPictures'] as $picture){
 	echo "</tr>";
 }
 echo "</table>";
-
-//debug($data);
 
 ?>

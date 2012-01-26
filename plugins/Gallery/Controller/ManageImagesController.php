@@ -77,8 +77,6 @@ class ManageImagesController  extends AppController{
 	 */
 	private function addImageInternal($image){
 		
-		//debug($image);
-		
 		$dest = realpath("../../app/webroot/img/gallery").'/'.$image['name'];
 		
 		$image_source = imagecreatefromjpeg($image['tmp_name']);
@@ -92,8 +90,6 @@ class ManageImagesController  extends AppController{
 		$dbImage = array(
 					'title' => $image['title'],
 					'path_to_pic' => "/app/webroot/img/gallery/".$image['name'] );
-		
-		//debug($dbImage);
 		
 		$this->GalleryPictureComp->generateThumbnail($dbImage);
 		$this->GalleryPictureComp->save($this,$dbImage);
@@ -129,7 +125,6 @@ class ManageImagesController  extends AppController{
 	}
 	
 	public function save($contentId){
-	
 		$this->GalleryPictureComp->save($this,$this->data['GalleryPicture']);
 		$this->redirect(array('action' => 'index', $contentId));
 	}

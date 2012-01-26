@@ -59,8 +59,23 @@ foreach ($data['AllPictures'] as $picture){
 	echo '</td>';
 	
 	echo '<td>';
-	echo $this->Html->image('/app/webroot/img/delete.png',array('style' => 'float: left', 'width' => '20px', 'alt' => '[]Delete', 'url' => array('plugin' => 'Gallery', 'controller' => 'ManageImages', 'action' => 'delete', $picture['id'],$data['ContentId'])));
-	echo '</td>';
+	
+	echo $this->Html->link($this->Html->image('/app/webroot/img/delete.png', array(
+								'height' => 20, 
+								'width' => 20, 
+								'alt' => __('[x]Delete'))),
+								array(
+									'plugin' => 'Gallery', 
+									'controller' => 'ManageImages', 
+									'action' => 'delete', 
+									$picture['id'],
+									$data['ContentId']),
+								array(
+									'escape' => false, 
+									'title' => __('Delete Image')),
+	__('Do you really want to delete this image?'));
+
+	echo '</td>';	
 	
 	echo "</tr>";
 }
@@ -76,7 +91,8 @@ echo '</tbody>';
 					echo $this->Form->submit(__('Delete'), array(
 							'height' => 20,
 							'width' => 20,
-							'alt' => __('[x]Delete')));
+							'alt' => __('[x]Delete'),
+							'onsubmit'=>'return confirm(\''.__('Do you really want to delete the selected images?').'\');'));
 					echo $this->Form->end();
 				echo '</td>';
 			echo '</tr>';
