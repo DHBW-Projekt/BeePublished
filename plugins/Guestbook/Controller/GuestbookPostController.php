@@ -89,7 +89,7 @@ class GuestbookPostController extends GuestbookAppController {
 		}
 	}
 
-	function delete($id = null){
+	function delete($contentId = null, $id = null){
 		// get is not allowed for delete function
 		if ($this->request->is('get')){
 			throw new MethodNotAllowedException();

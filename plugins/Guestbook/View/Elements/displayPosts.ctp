@@ -16,7 +16,7 @@ $this->Helpers->load('BBCode');
 				<?php // creates release and delete links for admins/editors						
 					if ($this->PermissionValidation->actionAllowed($pluginId, 'delete')) {
 						echo $this->Form->postLink($this->Html->image('/img/delete.png', array( 'alt' => __d('Guestbook','Delete'))),
-							array('plugin' => 'Guestbook', 'controller' => 'GuestbookPost', 'action' => 'delete', $GuestbookPost['GuestbookPost']['id']),
+							array('plugin' => 'Guestbook', 'controller' => 'GuestbookPost', 'action' => 'delete', $contentId, $GuestbookPost['GuestbookPost']['id']),
 							array('escape' => false, 'title' => __d('Guestbook','Delete')),
 							__d('Guestbook','Do you really want to delete this post?'));
 					}
