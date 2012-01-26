@@ -11,14 +11,19 @@
 	if(!(isset($url))) $url = '';
 	echo $this->element('SelectDate', array('url' => $url, 'selectedDate' => $selectedDate));
 	
-	if ($selectedDate != '') $selectedDate = str_replace('/', '-', $selectedDate);
+//	if ($selectedDate != '') $selectedDate = str_replace('/', '-', $selectedDate);
 	
 	if(!(isset($categories))) $categories = '';
 	if(!(isset($entries))) $entries = '';
 	
 	/* initial call, $data is set by component */
 	if (isset($data['show'])) {
+		debug($data['show']);
 		if(array_key_exists('FoodMenuMenu', $data['show'])) {
+			
+			if (array_key_exists('SelectedMenu', $data['show'])) {
+				$selectedMenuId = $data['show']['SelectedMenu']['id'];
+			} else {$selectedMenuId = -1;}
 			echo '<div id="foodMenuMenu">';
 			echo '<ul class="FoodMenuMenu">';
 			$menuItems = $data['show']['FoodMenuMenu'];
@@ -26,7 +31,11 @@
 				if ( $dataItem['deleted'] != NULL ) continue;
 				else {
 					$menu = $dataItem;
-					echo '<li>'.$this->Html->link($menu['name'], $url . '/view/menu/' .  $menu['name'] . '/' . $menu['id'] . '/' . $selectedDate).'</li>';	
+					if ($menu['id'] == $selectedMenuId) {
+						echo '<li><strong>'.$this->Html->link($menu['name'], $url . '/view/menu/' .  $menu['name'] . '/' . $menu['id'] . '/' . $selectedDate).'</strong></li>';	;
+					} else {
+						echo '<li>'.$this->Html->link($menu['name'], $url . '/view/menu/' .  $menu['name'] . '/' . $menu['id'] . '/' . $selectedDate).'</li>';	
+					}
 				}//else
 			}//foreach
 			echo '</ul>';
@@ -34,7 +43,9 @@
 		}//if
 		if(array_key_exists('FoodMenuCategory', $data['show']) && isset($data['show']['FoodMenuCategory'][0])) {
 			echo '<div id="foodMenuCategory">';
-			if(array_key_exists('SelectedMenu', $data['show'])) {
+				if (array_key_exists('SelectedCategory', $data['show'])) {
+					$selectedCategoryId = $data['show']['SelectedCategory']['id'];
+				} else { $selectedCategoryId = -1; }
 				echo '<h2>' . $data['show']['SelectedMenu']['name'] . '</h2>';
 				echo '<ul class="FoodMenuMenu">';
 				$categoryItems = $data['show']['FoodMenuCategory'];
@@ -42,14 +53,16 @@
 					if ( $dataItem['deleted'] != NULL ) continue;
 					else {
 						$category = $dataItem;
-						echo '<li>'.$this->Html->link($category['name'], $url . '/view/menu/' . $data['show']['SelectedMenu']['name'] . '/' . $data['show']['SelectedMenu']['id'] . '/category/' .  $category['name'] . '/' . $category['id'] . '/' . $selectedDate).'</li>';	
+						if ($category['id'] == $selectedCategoryId) {
+							echo '<li><strong>'.$this->Html->link($category['name'], $url . '/view/menu/' . $data['show']['SelectedMenu']['name'] . '/' . $data['show']['SelectedMenu']['id'] . '/category/' .  $category['name'] . '/' . $category['id'] . '/' . $selectedDate).'</strong></li>';	
+						} else {
+							echo '<li>'.$this->Html->link($category['name'], $url . '/view/menu/' . $data['show']['SelectedMenu']['name'] . '/' . $data['show']['SelectedMenu']['id'] . '/category/' .  $category['name'] . '/' . $category['id'] . '/' . $selectedDate).'</li>';
+						}
 					}//else
 				}//foreach
 				echo '</ul>';
-			}//if
 			echo '</div>';
-
-		}//if
+			}//if
 		if(array_key_exists('FoodMenuEntry', $data['show'])  && isset($data['show']['FoodMenuEntry'][0])) {
 			echo '<div id="foodMenuEntry">';
 			if(array_key_exists('SelectedCategory', $data['show'])) {
@@ -58,7 +71,7 @@
 				<thead>
 				<tr>
 					<th><?php echo $data['show']['SelectedCategory']['name']; ?></th>
-					<th><?php echo (__('price')); ?>
+					<th><?php echo (__d('food_menu', 'Price')); ?>
 				</tr>
 				</thead>
 				<tbody>
@@ -81,6 +94,7 @@
 				echo '</tbody>';
 				echo '</table>';				
 			}//if
+			
 			echo '</div>';
 
 		}//if
