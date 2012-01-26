@@ -75,7 +75,7 @@ class ApplicationMembershipComponent extends Component {
 		
 		//VALIDATE CAPTCHA
 		if(!$resp->is_valid){
-			$error_message = __d('Please fill out the CAPTCHA field.');
+			$error_message = __d('application_membership', 'Please fill out the CAPTCHA field.');
 			$data_error = true;
 		}
 					
@@ -84,7 +84,7 @@ class ApplicationMembershipComponent extends Component {
 					
 		//VALIDATE recipient
 		if (!isset ($mailaddress)){
-			$error_message = __d('An error occurred, your request could not be sent. Please contact an administrator.');
+			$error_message = __d('application_membership', 'An error occurred, your request could not be sent. Please contact an administrator.');
 			$data_error = true;
 		}
 		
@@ -103,7 +103,7 @@ class ApplicationMembershipComponent extends Component {
 
 		//PRINT error messages
 		if(!$data_error)
-			$controller->Session->setFlash(__d('Thank you for your interest. Your request has been sent.'));
+			$controller->Session->setFlash(__d('application_membership', 'Thank you for your interest. Your request has been sent.'));
 		else
 			$controller->Session->setFlash($error_message, 'default', array(
 						'class' => 'flash_failure'));
