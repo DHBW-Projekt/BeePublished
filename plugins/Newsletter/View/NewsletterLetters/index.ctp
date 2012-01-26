@@ -1,55 +1,47 @@
 <?php
-
-$this->Html->script('jquery/jquery.quicksearch', false);
+$this->Html->script('jquery/jquery.dataTables.min', false);
 $this->Html->script('/newsletter/js/newsletter', false);
+$lang = Configure::read("Config.language");
+$path = $this->Html->url("/language/".$lang.".txt", true);
+$this->Js->set('language_path', $path);
+
 echo $this->Html->css('/newsletter/css/newsletter', NULL, array('inline' => false));
+echo $this->element('admin_menu', array('contentID' => $contentID, 'pluginId' => $pluginId));
 
-echo $this->element('admin_menu', array('contentID' => $contentID));
-
-echo '<h2>'.__('Create new newsletter:').'</h2>';
+echo '<h2>'.__d('newsletter','Create new newsletter:').'</h2>';
 
 echo $this->Form->create('createNewsletter', array(
 			'url' => array(
 				'plugin' => 'Newsletter',
 	    		'controller' => 'NewsletterLetters',
-	    		'action' => 'create', $contentID, 'new')));
-echo $this->Form->submit(__('Create newsletter'));
+	    		'action' => 'create', $contentID, $pluginId, 'new')));
+echo $this->Form->submit(__d('newsletter','Create newsletter'));
 echo $this->Form->end();
 
 echo '<br><hr><br>';
-echo '<h2>'.__('Newsletters:').'</h2>';
+echo '<h2>'.__d('newsletter','Newsletters:').'</h2>';
 echo '<br>';
 
 echo $this->Session->flash('NewsletterDeleted');
-
-echo $this->Form->create('search');
-echo $this->Form->input('NewsletterLetter.subject', array(
-	'label' => __('Search Newsletter:'),
-	'id' => 'search_newsletter'));
-echo $this->Form->end();
-
+echo $this->Form->create('selectNewsletters', array(
+		'url' => array(
+			'plugin' => 'Newsletter',
+			'controller' => 'NewsletterLetters',
+			'action' => 'deleteSelected', $contentID, $pluginId),
+			'onsubmit'=>'return confirm(\''.__d('newsletter','Do you really want to delete the selected newsletters?').'\');'));
 echo '<table id="newsletters">';
-
 echo '<thead>';
 	echo '<tr>';
 		echo '<th></th>';
-		echo '<th>'.__('Subject').'</th>';
-		echo '<th>'.__('Date').'</th>';
-		echo '<th>'.__('Status').'</th>';
-		echo '<th></th>';
-		echo '<th></th>';
+		echo '<th>'.__d('newsletter','Subject').'</th>';
+		echo '<th>'.__d('newsletter','Date').'</th>';
+		echo '<th>'.__d('newsletter','Status').'</th>';
 		echo '<th></th>';
 	echo '</tr>';
 echo '</thead>';
 echo '<tbody>';
 
 if (isset($newsletters)){
-	echo $this->Form->create('selectNewsletters', array(
-		'url' => array(
-			'plugin' => 'Newsletter',
-			'controller' => 'NewsletterLetters',
-			'action' => 'deleteSelected', $contentID),
-		'onsubmit'=>'return confirm(\''.__('Do you really want to delete the selected newsletters?').'\');'));
 	foreach($newsletters as $newsletter){
 			echo '<tr>';
 			echo '<td>';
@@ -68,12 +60,12 @@ if (isset($newsletters)){
 			echo '</td>';
 			echo '<td>';
 				if ($newsletter['NewsletterLetter']['draft'] == 1){
-					echo __('draft');
+					echo __d('newsletter','draft');
 				} else {
-					echo __('sent');
+					echo __d('newsletter','sent');
 				}
 			echo '</td>';
-			echo '<td>';
+			echo '<td style="width:60px">';
 				echo $this->Html->image('/app/webroot/img/preview.png',array(
 					'style' => 'float: left', 
 					'width' => '20px', 
@@ -81,10 +73,10 @@ if (isset($newsletters)){
 					'url' => array(
 						'plugin' => 'Newsletter', 
 						'controller' => 'NewsletterLetters', 
-						'action' => 'preview', $contentID, $newsletter['NewsletterLetter']['id'])));
-			echo '</td>';
+						'action' => 'preview', $contentID, $pluginId, $newsletter['NewsletterLetter']['id'])));
+			
 			if ($newsletter['NewsletterLetter']['draft'] == 1){
-				echo '<td>';
+				
 					echo $this->Html->image('/app/webroot/img/edit.png', array(
 						'style' => 'float: left', 
 						'width' => '20px', 
@@ -92,24 +84,24 @@ if (isset($newsletters)){
 						'url' => array(
 							'plugin' => 'Newsletter', 
 							'controller' => 'NewsletterLetters', 
-							'action' => 'edit', $contentID, $newsletter['NewsletterLetter']['id'])));
-				echo '</td>';
-				echo '<td>';
+							'action' => 'edit', $contentID, $pluginId, $newsletter['NewsletterLetter']['id'])));
+				
+				
 					echo $this->Html->link($this->Html->image('/app/webroot/img/delete.png', array(
 						'height' => 20, 
 						'width' => 20, 
-						'alt' => __('[x]Delete'))),
+						'alt' => __d('newsletter','[x]Delete'))),
 						array(
 							'plugin' => 'Newsletter', 
 							'controller' => 'NewsletterLetters', 
-							'action' => 'delete', $contentID, $newsletter['NewsletterLetter']['id']),
+							'action' => 'delete', $contentID, $pluginId, $newsletter['NewsletterLetter']['id']),
 							array(
 								'escape' => false, 
-								'title' => __('Delete newsletter')),
-								__('Do you really want to delete this newsletter?'));
+								'title' => __d('newsletter','Delete newsletter')),
+								__d('newsletter','Do you really want to delete this newsletter?'));
 				echo 	'</td>';
 			} else {
-				echo '<td>';
+				
 				echo $this->Html->image('/app/webroot/img/edit_disabled.png', array(
 					'style' => 'float: left', 
 					'width' => '20px', 
@@ -117,58 +109,37 @@ if (isset($newsletters)){
 					'url' => array(
 						'plugin' => 'Newsletter', 
 						'controller' => 'NewsletterLetters', 
-						'action' => 'edit', $contentID, $newsletter['NewsletterLetter']['id'])));
-				echo '</td>';
-				echo '<td>';
+						'action' => 'edit', $contentID, $pluginId, $newsletter['NewsletterLetter']['id'])));
+				
+				
 				echo $this->Html->image('/app/webroot/img/delete_disabled.png', array(
 					'height' => 20, 
 					'width' => 20, 
-					'alt' => __('[x]Delete')));
+					'alt' => __d('newsletter','[x]Delete')));
 				echo '</td>';
 			};
 			echo 	'</tr>';
 	} //foreach	
 	echo '</tbody>';
-	echo '<tfoot>'; 
-	echo '<tr>';
-	echo '<td>';
-	echo $this->Html->image('/app/webroot/img/arrow.png', array(
+	echo '<tfoot>';
+		echo '<tr>';
+			echo '<td>';
+				echo $this->Html->image('/app/webroot/img/arrow.png', array(
 							'height' => 20,
 							'width' => 20));
-	echo '</td>';
-	echo '<td>';
-	echo $this->Form->submit(_('Delete'), array(
+			echo '</td>';
+			echo '<td>';;
+				echo $this->Form->submit(__d('newsletter','Delete'), array(
 								'height' => 20,
 								'width' => 20,
-								'alt' => __('[x]Delete')));
-	echo $this->Form->end();
-	echo '</td>';
-	echo '</tr>';
+								'alt' => __d('newsletter','[x]Delete')));
+				
+			echo '</td>';
+		echo '</tr>';
 	echo '</tfoot>';
 	
 	
 };
 echo '</table>';
-?>
-
-<?php 
-
-// $paging_params = $this->Paginator->params('NewsletterLetter');
-// if ($paging_params['count'] > 0){
-// 	echo $this->Paginator->counter(array(
-// 			'format' => 'Entrys {:start} to {:end} of {:count}, page {:page} of {:pages}  ',
-// 			'model' => 'NewsletterLetter'));
-	
-// 	if ($this->Paginator->hasPrev('NewsletterLetter')){
-// 		echo $this->Paginator->prev(' << ', array(
-// 				'model' => 'NewsletterLetter'));
-// 	};
-// 	echo $this->Paginator->numbers(array(
-// 			'model' => 'NewsletterLetter'));
-// 	if ($this->Paginator->hasNext('NewsletterLetter')){
-// 		echo $this->Paginator->next(' >> ', array(
-// 				'model' => 'NewsletterLetter'));
-// 	};
-// };
-
+echo $this->Form->end();
 ?>
