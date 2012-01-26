@@ -6,7 +6,6 @@ class ContactFormComponent extends Component {
 
 	//LOAD components
 	var $components = array('BeeEmail', 'Config');
-	var $layout = 'default';
 
 	/**
 	* Method to transfer data from plugin to CMS.
