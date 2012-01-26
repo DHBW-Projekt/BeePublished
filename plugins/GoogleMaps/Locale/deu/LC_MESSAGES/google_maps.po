@@ -1,0 +1,147 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2012-01-24 15:01+0100\n"
+"PO-Revision-Date: 2012-01-24 15:07+0100\n"
+"Last-Translator: Patrick Zamzow <p.zamzow@live.de>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: Controller\GoogleMapsAppController.php:26
+msgid "Location is set."
+msgstr "Standort wurde gesetzt."
+
+#: Controller\GoogleMapsAppController.php:38
+msgid "Location deleted."
+msgstr "Standort gelöscht."
+
+#: Controller\GoogleMapsAppController.php:57
+msgid "Locations deleted."
+msgstr "Standorte gelöscht."
+
+#: Controller\GoogleMapsAppController.php:72;96
+msgid "Please fill out all mandatory fields."
+msgstr "Bitte füllen Sie alle Pflichtfelder aus."
+
+#: Controller\GoogleMapsAppController.php:93
+msgid "Location saved."
+msgstr "Standort gespeichert."
+
+#: Controller\GoogleMapsAppController.php:108
+msgid "Permission denied."
+msgstr "Zugriff verweigert."
+
+#: View\Elements\Route.ctp:25
+#: View\Elements\create.ctp:10
+#: View\Elements\edit.ctp:10
+msgid "Street"
+msgstr "Straße"
+
+#: View\Elements\Route.ctp:26
+msgid "Calculate Route"
+msgstr "Berechne Route"
+
+#: View\Elements\admin.ctp:16
+msgid "Create new location"
+msgstr "Neuen Standort anlegen"
+
+#: View\Elements\admin.ctp:20
+msgid "Create location"
+msgstr "Standort anlegen"
+
+#: View\Elements\admin.ctp:24
+msgid "Locations"
+msgstr "Standorte"
+
+#: View\Elements\admin.ctp:31
+msgid "Search Locations"
+msgstr "Standort suchen"
+
+#: View\Elements\admin.ctp:39
+msgid "Location"
+msgstr "Standort"
+
+#: View\Elements\admin.ctp:49;74
+msgid "Do you really want to delete the selected locations?"
+msgstr "Wollen Sie diesen Standort wirklich löschen?"
+
+#: View\Elements\admin.ctp:102;102
+msgid "Delete"
+msgstr "Löschen"
+
+#: View\Elements\admin_menu.ctp:9
+msgid "Location Administration"
+msgstr "Standortverwaltung"
+
+#: View\Elements\create.ctp:9
+#: View\Elements\edit.ctp:9
+msgid "GoogleMapsLocation"
+msgstr "GoogleMaps Standort"
+
+#: View\Elements\create.ctp:11
+#: View\Elements\edit.ctp:11
+msgid "Street Number"
+msgstr "Hausnummer"
+
+#: View\Elements\create.ctp:12
+#: View\Elements\edit.ctp:12
+msgid "ZIP Code"
+msgstr "Postleitzahl"
+
+#: View\Elements\create.ctp:13
+#: View\Elements\edit.ctp:13
+msgid "City"
+msgstr "Stadt"
+
+#: View\Elements\create.ctp:14
+#: View\Elements\edit.ctp:14
+msgid "Country"
+msgstr "Land"
+
+#: Controller\Component\GoogleMapsComponent.php:8;15
+#: View\Elements\Location.ctp:5
+#: View\Elements\Route.ctp:5
+msgid "no location"
+msgstr "kein Standort"
+
+#: Model\GoogleMapsLocation.php:validation
+#: for field street
+msgid ""Street" is mandatory."
+msgstr "\"Straße\" ist ein Pflichtfeld"
+
+#: Model\GoogleMapsLocation.php:validation
+#: for field street_number
+msgid ""Street number" is mandatory."
+msgstr "\"Hausnummer\" ist ein Pflichtfeld"
+
+#: Model\GoogleMapsLocation.php:validation
+#: for field city
+msgid ""City" is mandatory."
+msgstr "\"Stadt\" ist ein Pflichtfeld"
+
+#: Model\GoogleMapsLocation.php:validation
+#: for field zip_code
+msgid ""Zip code" is mandatory."
+msgstr "\"Postleitzahl\" ist ein Pflichtfeld"
+
+#: Model\GoogleMapsLocation.php:validation
+#: for field country
+msgid ""Country" is mandatory."
+msgstr "\"Land\" ist ein Pflichtfeld"
+
+#: View\Elements\create.ctp:15
+#: View\Elements\edit.ctp:15
+msgid "Save"
+msgstr "Speichern"
+
+#: View\Elements\create.ctp:16
+#: View\Elements\edit.ctp:16
+msgid "Cancel"
+msgstr "Abbrechen"
+

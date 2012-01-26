@@ -18,37 +18,39 @@ if($writeAllowed){
 		echo $this->Form->create('NewsEntry', array('url' => array('plugin' => 'Newsblog', 'controller' => 'NewsEntries', 'action' => 'create')));
 		//create title input
 		echo $this->Form->input('NewsEntry.title', array(
-			'div' => 'writeNewsTitle',
-			'label' => 'Title:',
+			//'div' => 'writeNewsTitle',
+			'label' => __d('newsblog','Title:'),
 			'name' => 'title'
 		));
 		//create subtitle input
 		echo $this->Form->input('NewsEntry.subtitle', array(
-			'div' => 'writeNewsSubtitle',
-			'label' => 'Subtitle:',
+			//'div' => 'writeNewsSubtitle',
+			'label' => __d('newsblog', 'Subtitle:'),
 			'name' => 'subtitle'
 		));
 		//create entrytext textarea
 		echo $this->Form->input('NewsEntry.text', array(
-			'div' => 'writeNewsBody',
+			//'div' => 'writeNewsBody',
 			'label' => false,
 			'id' => 'writeNewsTextEditor',
 			'name' => 'text'
 		));
 		//create validFrom input
-		echo $this->Form->text(null, array(
-			'div' => 'writeValidConfiguration',
+		echo $this->Form->input('NewsEntry.validFrom', array(
+			//'div' => 'writeValidConfiguration',
+			'type' => 'text',
 			'id' => 'nbValidFromDatepicker',
-			'label' => 'Valid from:',
+			'label' => __d('newsblog', 'Valid from:'),
 			'name' => 'validFromUI',
 			'class' => 'datepicker',
 			'disabled' => true
 		));
 		//create validTo input
-		echo $this->Form->text(null, array(
-			'div' => 'writeValidConfiguration',
+		echo $this->Form->input('NewsEntry.validTo', array(
+			//'div' => 'writeValidConfiguration',
+			'type' => 'text',
 			'id' => 'nbValidToDatepicker',
-			'label' => 'Valid to:',
+			'label' => __d('newsblog', 'Valid to:'),
 			'name' => 'validToUI',
 			'class' => 'datepicker',
 			'disabled' => true
@@ -69,14 +71,8 @@ if($writeAllowed){
 			'name' => 'contentId',
 			'value' => $contentId
 		));
-		//action set to editNews
-		echo $this->Form->hidden(null,array(
-			'name' => 'action',
-			'value' => 'createNews'
-		));
 		
-		//create submit button
-		echo $this->Form->button("Create News");
+		echo $this->Form->end(__d('newsblog', 'Create News'));
 		
 	echo '</div>';
 	echo '</div>';

@@ -21,7 +21,11 @@ class PluginsController extends AppController
         $this->loadModel('CakeSchema');
         $installed = $this->Plugin->find('all');
         foreach ($installed as $idx => $plugin) {
-            $plugin['status'] = $this->CMSPlugin->getInstallStatus($plugin['Plugin']['name']);
+            try {
+                $plugin['status'] = $this->CMSPlugin->getInstallStatus($plugin['Plugin']['name']);
+            } catch (Exception $e) {
+                $plugin['status'] = 99;
+            }
             $installed[$idx] = $plugin;
         }
         $allPlugins = $this->CMSPlugin->getPluginList();

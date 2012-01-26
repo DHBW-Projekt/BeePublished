@@ -11,13 +11,9 @@ class NewsEntriesController extends NewsblogAppController {
 	public function create($contentId = null){
 		$pluginId = $this->getPluginId();
 		$writeAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Write');
+		
 		$userId = $this->Auth->user('id');
-		if(!($this->request->is('post') || $this->request->is('put'))){
-			$this->layout = 'overlay';
-			$this->set('pluginId', $pluginId);
-			$this->set('contentId', $contentId);
-			$this->set('webroot', $this->webroot);
-		} else{
+		if($this->request->is('post') || $this->request->is('put')){
 			$data = $this->request->data;
 			$now = date('Y-m-d H:i:s');
 			$title = $data['title'];
@@ -33,50 +29,37 @@ class NewsEntriesController extends NewsblogAppController {
 			}
 			$contentId = $data['contentId'];
 		
-			if($writeAllowed){
-				$newNews = array();
-				$this->NewsEntry->create();
-				//set data in array
-				$newNews['title'] = $title;
-				$newNews['subtitle'] = $subtitle;
-				$newNews['text'] = $text;
-				$newNews['content_id'] = $contentId;
-				$newNews['author_id'] = $userId;
-				$newNews['createdOn'] = $now;
-				$newNews['validFrom'] = $validFrom;
-				$newNews['validTo'] = $validTo;
-				$newNews['published'] = false;
-				//save array on database
-				if($this->NewsEntry->save($newNews)){
-					$this->Session->setFlash("The news has been created! It has to be published!");
-					$this->redirect(array('action' => 'create', $contentId));
-				} else{
-					$this->Session->setFlash("The news hasn\'t been created!");
-					$this->redirect(array('action' => 'create', $contentId));
-				}
+			$newNews = array();
+			$this->NewsEntry->create();
+			//set data in array
+			$newNews['title'] = $title;
+			$newNews['subtitle'] = $subtitle;
+			$newNews['text'] = $text;
+			$newNews['content_id'] = $contentId;
+			$newNews['author_id'] = $userId;
+			$newNews['createdOn'] = $now;
+			$newNews['validFrom'] = $validFrom;
+			$newNews['validTo'] = $validTo;
+			$newNews['published'] = false;
+			//save array on database
+			if($this->NewsEntry->save($newNews)){
+				$this->Session->setFlash("The news has been created! It has to be published!");
+				$this->redirect(array('action' => 'create', $contentId));
 			} else{
-				$this->Session->setFlash('Action not allowed!');
-				$this->redirect($this->referer());
+				$this->Session->setFlash("The news hasn't been created!", 'default', array('class' => 'flash_success'));
 			}
 		}
+		$this->layout = 'overlay';
+		$this->set('pluginId', $pluginId);
+		$this->set('contentId', $contentId);
+		$this->set('webroot', $this->webroot);
 	}
 	
 	public function edit($id = null){
 		$pluginId = $this->getPluginId();
-		$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Edit');
+		$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Edit', true);
 		$userId = $this->Auth->user('id');
-		if($this->request->is('get')){
-			if($editAllowed){
-				$this->layout = 'overlay';
-				//load current data of newsentry with id = $newsEntryId
-				$entry = $this->NewsEntry->findById($id);
-				//send data to view
-				$this->set('newsentry', $entry);
-			} else{
-				$this->Session->setFlash("Action not allowed!");
-				$this->redirect($this->referer());
-			}
-		} elseif($this->request->is('post') || $this->request->is('put')){
+		if($this->request->is('post') || $this->request->is('put')){
 			$data = $this->request->data;
 			$now = date('Y-m-d H:i:s');
 			$title = $data['title'];
@@ -92,78 +75,70 @@ class NewsEntriesController extends NewsblogAppController {
 			}
 			$action = $data['action'];
 			$id = $data['id'];
-			if($editAllowed){
-				$changedNews = array();
-				$this->NewsEntry->id = $id;
-				//set data in array
-				$changedNews['title'] = $title;
-				$changedNews['text'] = $text;
-				$changedNews['subtitle'] = $subtitle;
-				$changedNews['lastModifiedBy'] = $userId;
-				$changedNews['lastModifiedOn'] = $now;
-				$changedNews['validFrom'] = $validFrom;
-				$changedNews['validTo'] = $validTo;
-				
-				
-				//save array on database
-				if($this->NewsEntry->save($changedNews)){
-					$this->Session->setFlash("The changes have been saved!");
-					$this->redirect($this->referer());
-				} else{
-					$this->Session->setFlash("The changes haven\'t been saved!");
-					$this->redirect($this->referer());
-				}
+			$changedNews = array();
+			$this->NewsEntry->id = $id;
+			//set data in array
+			$changedNews['title'] = $title;
+			$changedNews['text'] = $text;
+			$changedNews['subtitle'] = $subtitle;
+			$changedNews['lastModifiedBy'] = $userId;
+			$changedNews['lastModifiedOn'] = $now;
+			$changedNews['validFrom'] = $validFrom;
+			$changedNews['validTo'] = $validTo;
+			
+			
+			//save array on database
+			if($this->NewsEntry->save($changedNews)){
+				$this->Session->setFlash("The changes have been saved!");
+				$this->redirect($this->referer());
 			} else{
-				$this->Session->setFlash('Action not allowed!');
+				$this->Session->setFlash("The changes haven't been saved!", 'default', array('class' => 'flash_failure'));
 				$this->redirect($this->referer());
 			}
 		}
+		$this->layout = 'overlay';
+		//load current data of newsentry with id = $newsEntryId
+		$entry = $this->NewsEntry->findById($id);
+		//send data to view
+		$this->set('newsentry', $entry);
 	}
 	
 	public function publish($contentId = null, $newsEntryId = null){
+		$pluginId = $this->getPluginId();
+		$publishAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Publish', true);
+		
 		if($this->request->is('post')) {
 			$newsEntryId = $this->request->data['id'];
+			$contentId = $this->request->data['contentId'];
 		}
 		
 		if($newsEntryId == null){
 			$this->layout = 'overlay';
 			
-			$pluginId = $this->getPluginId();
-			$publishAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Publish');
 			
 			$this->set('pluginId', $pluginId);
 			$this->set('contentId', $contentId);
 			$this->set('webroot', $this->webroot);
-			$publishAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Publish');
-			if($publishAllowed){
-				$conditions = array("NewsEntry.content_id" => $contentId, "NewsEntry.published !=" => true, "NewsEntry.deleted !=" => true);
+			$conditions = array("NewsEntry.content_id" => $contentId, "NewsEntry.published !=" => true, "NewsEntry.deleted !=" => true);
 			
-				$options['conditions'] = $conditions;
-				$options['order'] = array("createdOn DESC");
-				$entriesToPublish = $this->NewsEntry->find('all',$options);
-				$this->set('entriesToPublish',$entriesToPublish);
-			}
+			$options['conditions'] = $conditions;
+			$options['order'] = array("createdOn DESC");
+			$entriesToPublish = $this->NewsEntry->find('all',$options);
+			$this->set('entriesToPublish',$entriesToPublish);
 		} else{
 			//get plugin and check for required permissions
 			$userId = $this->Auth->user('id');
-			$pluginId = $this->getPluginId();
-			$publishAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Publish');
 			
-			if ($publishAllowed){
-				$this->NewsEntry->id = $newsEntryId;
-				$publishNews = array();
-				$publishNews['published'] = true;
-				$publishNews['publishedBy'] = $userId;
-				$publishNews['publishedOn'] = date('Y-m-d');
+			$this->NewsEntry->id = $newsEntryId;
+			$publishNews = array();
+			$publishNews['published'] = true;
+			$publishNews['publishedBy'] = $userId;
+			$publishNews['publishedOn'] = date('Y-m-d');
 			
-				if ($this->NewsEntry->save($publishNews)){
-					$this->Session->setFlash("The selected news has been published.");
-				} else{
-					$this->Session->setFlash("The selected news hasn\'t been published.");
-				}
-			
+			if ($this->NewsEntry->save($publishNews)){
+				$this->Session->setFlash("The selected news has been published.");
 			} else{
-				$this->Session->setFlash("Action not allowed!");
+				$this->Session->setFlash("The selected news hasn\'t been published.");
 			}
 			
 			$this->redirect(array('action' => 'publish', $contentId));
@@ -171,25 +146,21 @@ class NewsEntriesController extends NewsblogAppController {
 	}
 	
 	public function delete($id = null){
-		$userId = $this->Auth->user('id');
 		$pluginId = $this->getPluginId();
-		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Delete');
+		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Delete', true);
+		
+		$userId = $this->Auth->user('id');
 		//get news entry id if it is a ajax call or post request
 		if($this->request->is('post')){
 			$id = $this->request->data['id'];
 		}
 		
-		if ($deleteAllowed){
-			$this->NewsEntry->id = $id;
-			if($this->NewsEntry->saveField('deleted', true)){
-				$this->Session->setFlash('The selected news has been deleted.');
-				$this->redirect($this->referer());
-			} else{
-				$this->Session->setFlash('The selected news hasn\'t been deleted.');
-				$this->redirect($this->referer());
-			}
+		$this->NewsEntry->id = $id;
+		if($this->NewsEntry->saveField('deleted', true)){
+			$this->Session->setFlash('The selected news has been deleted.');
+			$this->redirect($this->referer());
 		} else{
-			$this->Session->setFlash('Acton not allowed!');
+			$this->Session->setFlash('The selected news hasn\'t been deleted.');
 			$this->redirect($this->referer());
 		}
 	}

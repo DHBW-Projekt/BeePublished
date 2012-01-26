@@ -38,6 +38,14 @@
             'height' => 20
         ));
             ?>
+            <?php echo $this->Html->image("mail-read.png", array(
+            'alt' => __('Email Templates'),
+            'url' => array('controller' => 'EmailTemplates', 'action' => 'index'),
+            'class' => 'small-button',
+            'width' => 20,
+            'height' => 20
+        ));
+            ?>
         </div>
         <hr/>
     </div>
