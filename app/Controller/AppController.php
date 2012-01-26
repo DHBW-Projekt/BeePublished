@@ -11,7 +11,8 @@ class AppController extends Controller
             'loginAction' => array('controller' => 'Users', 'action' => 'login')
         ),
         'PermissionValidation',
-        'Config'
+        'Config',
+        'RequestHandler'
     );
 
     public $helpers = array('Html', 'Form', 'Session', 'Js', 'PermissionValidation');
