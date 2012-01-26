@@ -31,6 +31,10 @@ div.guestbook_post_text{
 	clear: both;
 }
 
+label.recaptcha_input_area_text{
+	float: none;
+}
+
 div.guestbook_navigation {
 	text-align: right;
 	padding: 0.5em;
