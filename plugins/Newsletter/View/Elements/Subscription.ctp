@@ -13,6 +13,7 @@ echo '<div id="subscription">';
 	echo $data['text'];
 	echo '<br><br>';
 	if (!($user)){	
+		echo '<div class = "subscription_form">';
 		echo $this->Form->create('Subscription',array(
 			'url' => array(
 				'plugin' => 'Newsletter',
@@ -21,6 +22,8 @@ echo '<div id="subscription">';
 		echo $this->Form->input('NewsletterRecipient.email', array('label' => __d('newsletter','E-Mail:')));
 		echo $this->Html->div('validation_error',$validationErrors['email'][0]);
    		echo $this->Form->end(__d('newsletter','(Un)subscribe'));
+//    		echo '</div>';
+//    		echo '</div>';
    		echo $this->Session->flash('NewsletterRecipient');
     } 
 	// 	if current user is registered

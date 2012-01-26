@@ -8,5 +8,16 @@ class NewsletterAppController extends AppController {
 		$pluginId = $newsletterPlugin['Plugin']['id'];
 		return $pluginId;
 	}
+	
+/**
+     * beforeFilter function
+     *
+     * @return void
+     */
+    function beforeFilter()
+    {
+        parent::beforeFilter();
+        $this->Auth->allow('unSubscribePerMail');
+    }
 }
 

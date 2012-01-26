@@ -6,14 +6,9 @@ Configure::write('Config.language', 'ger');
 class SubscriptionController extends NewsletterAppController {
 	
 	public $name = 'Subscription';
-	public $uses = array('Newsletter.NewsletterRecipient', 'User', 'Newsletter.NewsletterLetter');
+	public $uses = array('Newsletter.NewsletterRecipient', 'User', 'Newsletter.NewsletterLetter', 'MenuEntry');
+	public $components = array('Menu');
  	
-// 	public $paginate = array(
-// 				'NewsletterLetter' => array(
-// 					'limit' => 10, 
-// 					'order' => array(
-// 						'NewsletterLetter.date' => 'desc',
-// 						'NewsletterLetter.id' => 'desc')));
 
 	function beforeRender(){
 		parent::beforeRender();
@@ -124,6 +119,15 @@ class SubscriptionController extends NewsletterAppController {
  		}
  	}
  	
+ 	public function unSubscribePerMail($email){
+ 		$this->set('email', $email);
+ 		
+ 		
+ 		$this->set('menu', $this->Menu->buildMenu($this, NULL));
+ 		$this->set('adminMode', false);
+ 		$this->set('systemPage', true);
+ 	}
+ 	
  	private function add(){
  		if ($this->request->is('post')){
  			$email = $this->data['NewsletterRecipient']['email'];
@@ -171,11 +175,5 @@ class SubscriptionController extends NewsletterAppController {
  		}
  		$this->redirect($this->referer());
  	}
-	
-//  	function beforeFilter(){
-// 		parent::beforeRender();
-// 		$pluginId = $this->getPluginId();
-// 		$this->set('pluginId', $pluginId);
-//  	}
  	
 }
