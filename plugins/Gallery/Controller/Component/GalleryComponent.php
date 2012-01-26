@@ -88,7 +88,4 @@ class GalleryComponent extends Component {
 		unset($gallery['GalleryPicture']['path_to_pic']);
 		unset($gallery['GalleryPicture']['gallery_entry_id']);
 	}
-	
-	
-
 }
