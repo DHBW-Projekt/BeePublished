@@ -14,7 +14,7 @@ class ContainersController extends AppController
     function beforeFilter()
     {
         parent::beforeFilter();
-        $this->PermissionValidation->actionAllowed(null, 'LayoutManager',true);
+        $this->PermissionValidation->actionAllowed(null, 'LayoutManager', true);
     }
 
     function add($parent, $column, $type, $order)
@@ -40,7 +40,14 @@ class ContainersController extends AppController
         if (!$this->Container->exists()) {
             throw new NotFoundException(__('Invalid container'));
         }
+        $container = $this->Container->findById($id);
+        $oldContainer = $container['Container']['parent_id'];
+        $oldOrder = $container['Container']['order'];
+        $oldColumn = $container['Container']['column'];
         $this->Container->delete();
+        $this->Container->query('UPDATE containers SET `order` = `order`-1 WHERE parent_id=' . $oldContainer . ' AND `column`=' . $oldColumn . ' AND `order`>=' . $oldOrder);
+        $this->Content->query('UPDATE contents SET `order` = `order`-1 WHERE container_id=' . $oldContainer . ' AND `column`=' . $oldColumn . ' AND `order`>=' . $oldOrder);
+
         $this->render('json');
     }
 
