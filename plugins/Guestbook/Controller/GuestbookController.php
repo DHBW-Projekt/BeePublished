@@ -75,7 +75,7 @@ class GuestbookController extends GuestbookAppController {
 		foreach($allPosts['GuestbookPost'] as $id => $post){
 			if ($post['ckecked'] == 1){
 				// post is checked -> get id and read data into model
-				$onePost = $this->GuestbookPost->read($id);
+				$onePost = $this->GuestbookPost->find('first', array('conditions' => array('GuestbookPost.id' => $id)));
 				// set released with current date and time
 				$onePost['GuestbookPost']['released'] = date("Y-m-d H:i:s");
 				// save changed posts

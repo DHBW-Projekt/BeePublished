@@ -97,7 +97,7 @@ class GuestbookPostController extends GuestbookAppController {
 		// check settings for delete
 		$delete_immediately = $this->GuestbookContentValues->getValue($contentId, 'delete_immediately');
 		if ($delete_immediately == 'no'){
-			$onePost = $this->GuestbookPost->read($id);
+			$onePost = $this->GuestbookPost->find('first', array('conditions' => array('GuestbookPost.id' => $id)));
 			// set deleted with current date and time
 			$onePost['GuestbookPost']['deleted'] = date("Y-m-d H:i:s");
 			// save changed posts
@@ -120,10 +120,8 @@ class GuestbookPostController extends GuestbookAppController {
 	}
 
 	function release_noAuth($id = null, $token = null){
-		// get id from link
-		$this->GuestbookPost->id = $id;
 		// get data for post
-		$onePost = $this->GuestbookPost->read();
+		$onePost = $this->GuestbookPost->find('first', array('conditions' => array('GuestbookPost.id' => $id)));
 		// check whether post is still existing
 		if ($onePost == null || $onePost == ''){
 			// set message to notify that post was already deleted
@@ -150,10 +148,8 @@ class GuestbookPostController extends GuestbookAppController {
 	}
 
 	function delete_noAuth($id = null, $token = null){
-		// get id from link
-		$this->GuestbookPost->id = $id;
 		// get data for post
-		$onePost = $this->GuestbookPost->read();
+		$onePost = $this->GuestbookPost->find('first', array('conditions' => array('GuestbookPost.id' => $id)));
 		// check whether post is still existing
 		if ($onePost == null || $onePost == ''){
 			// set message to notify that post was already deleted
