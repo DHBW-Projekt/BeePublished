@@ -3,7 +3,7 @@ $this->Html->css('/FileShare/css/fileshare', NULL, array('inline' => false));
 
 echo $this->Form->create('MyFile', array('url' => array('plugin' => 'file_share', 'action' => 'upload'), 'type' => 'file'));
 echo $this->Form->file('File');
-echo $this->Form->submit('Upload');
+echo $this->Form->submit(__d('file_share','Upload'));
 echo $this->Form->end();
 
 $contentValues = $my_files_config;
@@ -36,15 +36,41 @@ function encrypt($value, $ck)
     return trim(safe_b64encode($crypttext));
 }
 
+function bytesToSize($bytes, $precision = 2)
+{
+    $kilobyte = 1024;
+    $megabyte = $kilobyte * 1024;
+    $gigabyte = $megabyte * 1024;
+    $terabyte = $gigabyte * 1024;
+
+    if (($bytes >= 0) && ($bytes < $kilobyte)) {
+        return $bytes . ' B';
+
+    } elseif (($bytes >= $kilobyte) && ($bytes < $megabyte)) {
+        return round($bytes / $kilobyte, $precision) . ' KB';
+
+    } elseif (($bytes >= $megabyte) && ($bytes < $gigabyte)) {
+        return round($bytes / $megabyte, $precision) . ' MB';
+
+    } elseif (($bytes >= $gigabyte) && ($bytes < $terabyte)) {
+        return round($bytes / $gigabyte, $precision) . ' GB';
+
+    } elseif ($bytes >= $terabyte) {
+        return round($bytes / $terabyte, $precision) . ' TB';
+    } else {
+        return $bytes . ' B';
+    }
+}
+
 ?>
 
-<h1>Your Files</h1>
+<h1><? echo __d('file_share','Your files'); ?></h1>
 
 <table>
     <tr>
-        <th>Filename</th>
-        <th>Size</th>
-        <th>Options</th>
+        <th width="150px"><? echo __d('file_share','Filename'); ?></th>
+        <th width="150px"><? echo __d('file_share','Size'); ?></th>
+        <th width="300px"><? echo __d('file_share','Options'); ?></th>
     </tr>
 
     <?
@@ -52,11 +78,11 @@ function encrypt($value, $ck)
         ?>
         <tr>
             <td><? echo $file['MyFile']['filename'] ?></td>
-            <td><? echo $file['MyFile']['size'] ?></td>
+            <td><? echo bytesToSize($file['MyFile']['size']) ?></td>
             <td>
-                <? echo $this->Html->link('Delete', array('plugin' => 'FileShare', 'controller' => 'MyFiles', 'action' => 'delete', $file['MyFile']['ID'])); ?>
-                <? echo $this->Html->link('Download', array('plugin' => 'FileShare', 'controller' => 'MyFiles', 'action' => 'download', encrypt($file['MyFile']['ID'], $ck))); ?>
-                <? echo $this->Html->link('Download Expiring', array('plugin' => 'FileShare', 'controller' => 'MyFiles', 'action' => 'download', encrypt($file['MyFile']['ID'] . "|" . time(), $ck))); ?>
+                <? echo $this->Html->link($this->Html->image('/img/delete.png', array('height' => 16, 'width' => 16, 'alt' => __d('file_share','Delete file'))), array('plugin' => 'FileShare', 'controller' => 'MyFiles', 'action' => 'delete', $file['MyFile']['ID']),array('escape' => false, 'title' => __d('file_share','Delete file')), __d('file_share','Do you really want to delete this file?')); ?>
+                <? echo $this->Html->link(__d('file_share','Download'), array('plugin' => 'FileShare', 'controller' => 'MyFiles', 'action' => 'download', encrypt($file['MyFile']['ID'], $ck))); ?>
+                <? echo $this->Html->link(__d('file_share','Download Expiring'), array('plugin' => 'FileShare', 'controller' => 'MyFiles', 'action' => 'download', encrypt($file['MyFile']['ID'] . "|" . time(), $ck))); ?>
             </td>
         </tr>
         <?

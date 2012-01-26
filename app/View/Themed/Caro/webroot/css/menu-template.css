@@ -1,0 +1,38 @@
+ol.nav {
+    list-style: none;
+    padding: 0;
+	margin: 0px;
+	width: 100%;
+	
+}
+
+ol.nav li {
+	padding: 0;
+	margin-left: 0px;
+}
+
+ol.nav li a {
+	margin-left: 10px;
+	
+}
+
+
+ol.nav li ol.subnav {
+    list-style: none outside none;
+    padding: 0;
+	margin-left: 0;
+	margin-bottom: 0;
+	
+}
+
+ol.nav li ol.subnav li{
+    list-style: none outside none;
+    padding: 0;
+	margin-left: 10px;
+	
+}
+
+.editIconContainer {
+    display: inline;
+	
+}
