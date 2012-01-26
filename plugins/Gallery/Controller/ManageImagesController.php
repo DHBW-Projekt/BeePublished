@@ -24,9 +24,7 @@ class ManageImagesController  extends AppController{
 	 * transforms the form input for internal procession
 	 * Enter description here ...
 	 */
-	public function uploadImage($contentId){
-		//debug($this->request);
-		
+	public function uploadImage($contentId){		
 		$image = array('name' => $this->data['addImage']['File']['name'],
 								'tmp_name' => $this->data['addImage']['File']['tmp_name'],
 								'size' => $this->data['addImage']['File']['size'],
@@ -41,11 +39,8 @@ class ManageImagesController  extends AppController{
 	 * Method is called from the add images form
 	 * transforms the form input for internal procession
 	 */
-	public function uploadImages($contentId){
-		//debug($this->request);
-		
+	public function uploadImages($contentId){		
 		for($i = 0;$i<count($this->params['form']['files']['name']);$i++){
-			//echo $i;
 			$image = array('name' => $this->params['form']['files']['name'][$i],
 							'tmp_name' => $this->params['form']['files']['tmp_name'][$i],
 							'size' => $this->params['form']['files']['size'][$i],

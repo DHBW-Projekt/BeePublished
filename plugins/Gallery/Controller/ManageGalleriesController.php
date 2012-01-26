@@ -29,7 +29,6 @@ class ManageGalleriesController  extends AppController{
 	 * @param int $contentId
 	 */
 	public function create($contentId){
-		//debug($this->request->data);
 		if (! $this->request->is('post')) {
 		$data = array( 'ContentId' => $contentId );
 		$pic_array = array();
@@ -76,7 +75,6 @@ class ManageGalleriesController  extends AppController{
 			$galleries=  $this->Gallery->getAllGalleries($this);
 			
 			$selectedGalleries = $this->data['selectGalleries'];
-			debug ($selectedGalleries);
 			foreach($galleries as $gallery){
 				$id = $gallery['GalleryEntry']['id'];
 				if ($selectedGalleries[$id] == 1){
@@ -94,7 +92,6 @@ class ManageGalleriesController  extends AppController{
 	 */
 	public function edit($galleryId,$contentId){
 		if ($this->request->is('post')) {
-				//debug($this->request->data);
 				if($this->Gallery->save($this,$this->request->data)) {
 					$this->Session->setFlash(__('Your changes were saved!'), 'default', array('class' => 'flash_success'));
 					//redirect 
@@ -109,9 +106,7 @@ class ManageGalleriesController  extends AppController{
 		
 		$gallery = $this->Gallery->getGallery($this,$galleryId);
 		$this->set('data',$gallery);
-		$this->set('ContentId',$contentId);
-		//debug($gallery);
-		
+		$this->set('ContentId',$contentId);		
 	}
 	
 	/**
