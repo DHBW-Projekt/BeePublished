@@ -11,7 +11,7 @@
 	</tr>
 	<tr>
 		<td><?php echo __d('application_membership','Active:'); ?></td>
-		<td><?php echo $data['formOfMembership']; ?></td>
+		<td><?php echo $data['type']; ?></td>
 	</tr>
 	<tr>
 		<td><?php echo __d('application_membership','Title:'); ?></td>
@@ -27,7 +27,7 @@
 	</tr>
 	<tr>
 		<td><?php echo __d('application_membership','Date of birth:'); ?></td>
-		<td><?php echo $data['dateOfBirth']; ?></td>
+		<td><?php echo $data['date_of_birth']['day'].'.'.$data['date_of_birth']['month'].'.'.$data['date_of_birth']['year']; ?></td>
 	</tr>
 	<tr>
 		<td><?php echo __d('application_membership','E-mail:'); ?></td>
