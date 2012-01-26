@@ -16,12 +16,10 @@ if(isset($_POST['DBPw']) && isset($_POST['DBLogin'])){
 		$c_file = fopen($c_filename, "r");
 		rewind($c_file);
 		
-		
 		$row= true;
 		
 		while($row){
 			$row = fgets($c_file);
-			// = split("#", $row);
 			$data = explode("#", $row);
 			if($data[0] == "DBHOST"){
 				$db_server= trim($data['1']);
@@ -32,47 +30,26 @@ if(isset($_POST['DBPw']) && isset($_POST['DBLogin'])){
 			}
 		}
 		fclose($c_file);
-		//build up good answer xml
-		//start sql dump script
 		
 		$mysql_path = $_SERVER['MYSQL_HOME'];
 		$db_script_path = getcwd() . "/test.sql";
 	
-		
-
-		//replace folder separators
 		$mysql_path = str_replace("\\","/",$mysql_path);
 		$db_script_path = str_replace("\\","/",$db_script_path);
-		//echo $db_server."<br>";
 		
-		//echo $db_name."<br>";
-		
-		//build up script line
-		/*$mysqlDump = $mysql_path.'/mysqldump ';
-    	$mysqlDump .= '--user="' . $db_login . '" ';
-   		$mysqlDump .= '--password="' .$db_pw . '" ';
-   		//$mysqlDump .= '--host="' . $db_server . '" ';
-   		$mysqlDump .= $db_name . ' > ' .$db_script_path;
-   		*/
-   		//echo $mysqlDump."<br>";
-		//execute script call
 		$sqldump_url = date('ljSFYh-i-s')."backup.sql";
 		backup_DB("localhost",$db_login,$db_pw,$db_name, $sqldump_url);
    		
    		$zip_url = $homeurl."/services/backup/archive.zip";
-    	//passthru($mysqlDump);
+
 		$sqldump_url = $homeurl."/services/backup/".$sqldump_url;
 		echo getAnswer(getbackupServiceAnswer($sqldump_url, $zip_url).getRC0Xml());
-		
  	
 	} else {
 		echo getAnswer(getRC1Xml());
-		//build up bad answer xml
 	}
 
 function createConfigFile($dbhost,$dblogin, $dbname, $dbpw){
-	//buildup string for cake File
-
 	$file = "<?php class DATABASE_CONFIG { 
 public \$default = array(
 	'datasource' => 'Database/Mysql',
@@ -87,21 +64,14 @@ public \$default = array(
 	
 	//set up file handle
 	$filename = "../../app/Config/database.php";
-
 	$dbfile = fopen($filename, "w+");
-
 	//put data into file
 	fputs($dbfile, $file);
-	
 	$cake_configtbool = fclose($dbfile);
-	
-	
 	//start building up simple config file 
-	
 	$c_filename = "../config.php";
 	$c_file = fopen($c_filename, "w+");
 	rewind($c_file);
-	
 	//write dbhost
 	$to_write = "DBHOST#".$dbhost."\n";
 	fwrite($c_file, $to_write);
@@ -114,8 +84,6 @@ public \$default = array(
 	//write dbpasswort
 	$to_write = "DBPW#".$dbpw;
 	fwrite($c_file, $to_write);
-	
-	
 	$c_configtbool = fclose($c_file);
 	
 	return ($cake_configtbool && $c_configtbool );
@@ -176,10 +144,6 @@ function backup_db($host,$user,$pass,$name,$path){
           		$row[$j] = str_replace("\n","\\n",$row[$j]);
 		  		$return.= '"'.$row[$j].'"' ; 
 			}
-         
-          
-		  	
-			
           if ($j<($num_fields-1)) { $return.= ','; }
         }
         $return.= ");\n";
@@ -188,9 +152,7 @@ function backup_db($host,$user,$pass,$name,$path){
     if($i != $num_fields-1){
     	  $return.="\n\n\n";
     }
-  
   }
-  
   //save file
   $handle = fopen($path,'w+');
   fwrite($handle,$return);
