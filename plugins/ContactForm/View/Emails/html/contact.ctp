@@ -1,7 +1,11 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <body style = "background-color: #ffffff; font-size: 14px; font-family: Arial; color: #000000">
-	<div style = "margin-bottom: 10px"><?php echo __d('contact_form', 'A user sent you the following contact request:'); ?></div>
+	<div style = "margin-bottom: 10px">
+		<?php echo __d('contact_form', 'Hello Admin.'); ?>
+		<br>
+		<?php echo __d('contact_form', 'A user sent you the following contact request:'); ?>
+	</div>
 	<div style = "border-style: solid; border-width: 1px; padding: 10px 20px">
 		<table style = "font-size: 14px">
 			<tr>
@@ -18,6 +22,10 @@
 			</tr>
 		</table>
 	</div><br>
+	<div style = "margin-bottom: 10px">
+		<?php echo __d('contact_form', 'Yours sincerely,'); ?><br>
+		<?php echo '>>Platzhalter<<'; ?><br>
+	</div>
 	<hr style = "color: #dcdcdc">
 	<i style = "margin-bottom: 10px; color: #cccccc; font-size: 12px"><?php echo __d('contact_form', 'Information: Contact requests are automatically sent to the e-mail address in your general configurations. To change the recipient of contact requests, please set a new e-mail address in your general configurations in BeePublished.') ?></i>
 	<hr style = "color: #dcdcdc">
