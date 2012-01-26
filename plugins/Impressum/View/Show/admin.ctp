@@ -12,7 +12,8 @@
 		$options = array('priv' => __('Privatperson'),
 						 'comp' => __('Unternehmen'),
 						 'club' => __('eingetragener Verein'),
-						 'job' => __('Freiberufler'));
+						 'job' => __('Freiberufler'),
+						 'public' => __('Körperschaft des öffentlichen Rechts'));
 		if (empty($input['Impressum']['type'])) {
 			$attributes = array('legend' => false, 'value' => 'priv');
 		} else {

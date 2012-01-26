@@ -198,6 +198,7 @@ h2, h1, h3, h4, h5, h6 {
     margin: 15px 0;
 }
 
+
 #users_search_bar {
     padding-top: 5px;
     padding-bottom: 5px;
@@ -253,9 +254,16 @@ label {
     margin-right: 2em;
     text-align: right;
     width: 25%;
+	
 }
 
-input[type=text], input[type=password], input[type=textarea] {
+.input.checkbox label{
+	text-align: left;
+} 
+
+
+
+input[type=text], input[type=password], input[type=textarea], select {
     margin: 0;
     width: 50%;
     -webkit-border-radius: 5px;
@@ -274,6 +282,10 @@ input, textarea, select {
     padding: 2px;
 }
 
+select {
+	width: 315px;
+}
+
 
 input[type=submit], button, input[type=button] {
     font-weight: normal;
@@ -284,6 +296,16 @@ input[type=submit], button, input[type=button] {
     vertical-align: middle;
 }
 
+input[type=text], input[type=password] {
+	width: 300px;
+}
+
+
+.input input[type="checkbox"] {
+    float: left;
+    margin-left: 192px;
+    margin-right: 5px;
+}
 
 
 th {

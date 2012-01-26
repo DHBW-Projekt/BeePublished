@@ -29,8 +29,9 @@
 	<div class="input">
 		<?php
 			echo $this->Form->label('title', __d('application_membership','Form of address*'));
-			
+
 			$options = array('Ms/Mrs' => 'Ms/Mrs','Mr' => 'Mr');
+
 			echo $this->Form->select('title', $options, array('label' => __d('application_membership','Form of address*')));
 		?>
 	</div>
@@ -41,6 +42,7 @@
 	<div class="input">
 	<?php 
 		echo $this->Form->label('date_of_birth', __d('application_membership','Date of birth*'));
+
 		echo $this->Form->dateTime(	$fieldName = 'date_of_birth',
 									$dateFormat = 'DMY',
 									$timeFormat = null,

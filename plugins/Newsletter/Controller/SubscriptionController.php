@@ -3,7 +3,7 @@
 App::uses('CakeEmail', 'Network/Email');
 Configure::write('Config.language', 'ger');
 
-class SubscriptionController extends AppController {
+class SubscriptionController extends NewsletterAppController {
 	
 	public $name = 'Subscription';
 	public $uses = array('Newsletter.NewsletterRecipient', 'User', 'Newsletter.NewsletterLetter');
@@ -14,17 +14,26 @@ class SubscriptionController extends AppController {
 // 					'order' => array(
 // 						'NewsletterLetter.date' => 'desc',
 // 						'NewsletterLetter.id' => 'desc')));
+
+	function beforeRender(){
+		parent::beforeRender();
+		
+		$pluginId = $this->getPluginId();
+		$this->set('pluginId', $pluginId);
+	}
 	
  	public function admin($contentID){
-//  		$newsletters = $this->paginate('NewsletterLetter');
+ 		$pluginId = $this->getPluginId();
+ 		$this->PermissionValidation->actionAllowed($pluginId, 'OpenNewsletterOverlay', true);
  		$newsletters = $this->NewsletterLetter->find('all', array(
  			'order' => array(
  									'NewsletterLetter.date' => 'desc',
  									'NewsletterLetter.id' => 'desc')));
  		$this->set('newsletters', $newsletters);
  		$this->layout = 'overlay';
+ 		$this->set('pluginId', $pluginId);
  		$this->set('contentID', $contentID);
- 		$this->render('/NewsletterLetters/index');
+		$this->redirect(array('plugin' => 'Newsletter', 'controller' => 'NewsletterLetters', 'action' => 'index', $contentID, $pluginId));
  	}
  	
  	public function guestUnSubscribe(){
@@ -44,16 +53,16 @@ class SubscriptionController extends AppController {
  				$this->NewsletterRecipient->set($recipient);
  				if($this->NewsletterRecipient->save()) {
  					if ($action == 'add'){
- 						$this->Session->setFlash(__('The recipient was added successfully.'), 'default', array(
+ 						$this->Session->setFlash(__d('newsletter','The recipient was added successfully.'), 'default', array(
  										'class' => 'flash_success'), 
  										'NewsletterRecipient');
  					} else {
- 						$this->Session->setFlash(__('The recipient was removed successfully.'), 'default', array(
+ 						$this->Session->setFlash(__d('newsletter','The recipient was removed successfully.'), 'default', array(
  									'class' => 'flash_success'), 
  									'NewsletterRecipient');
  					}
  				} else {
- 					$this->Session->setFlash(__('The recipient was not added.'), 'default', array(
+ 					$this->Session->setFlash(__d('newsletter','The recipient was not added.'), 'default', array(
  								'class' => 'flash_failure'), 
  								'NewsletterRecipient');
  					$this->_persistValidation('NewsletterRecipient');
@@ -68,6 +77,8 @@ class SubscriptionController extends AppController {
  	}
  	
  	public function userUnSubscribe(){
+ 		$pluginId = $this->getPluginId();
+ 		$this->PermissionValidation->actionAllowed($pluginId, 'UnSubscribeUser', true);
  		if ($this->request->is('post')){
  			$user = $this->Auth->user();
  			// check if user is already recipient (active or inactive)
@@ -95,7 +106,7 @@ class SubscriptionController extends AppController {
  			$this->NewsletterRecipient->set($recipient);
  			if($this->NewsletterRecipient->save()) {
  				if ($action == 'add'){
- 					$this->Session->setFlash(__('You have subscribed successfully.'), 'default', array(
+ 					$this->Session->setFlash(__d('newsletter','You have subscribed successfully.'), 'default', array(
  										'class' => 'flash_success'), 
  										'NewsletterRecipient');
  				} else {
@@ -113,7 +124,7 @@ class SubscriptionController extends AppController {
  		}
  	}
  	
- 	public function add(){
+ 	private function add(){
  		if ($this->request->is('post')){
  			$email = $this->data['NewsletterRecipient']['email'];
  			// check, if recipient already exists, but is inactive
@@ -143,16 +154,16 @@ class SubscriptionController extends AppController {
  			$this->NewsletterRecipient->set($recipient);
  			if($this->NewsletterRecipient->save()) {
  				if ($action == 'add'){
- 					$this->Session->setFlash(__('The user was added successfully.'), 'default', array(
+ 					$this->Session->setFlash(__d('newsletter','The user was added successfully.'), 'default', array(
  							'class' => 'flash_success'), 
  							'NewsletterRecipient');
  				} else {
- 					$this->Session->setFlash(__('The user was removed successfully.'), 'default', array(
+ 					$this->Session->setFlash(__d('newsletter','The user was removed successfully.'), 'default', array(
  							'class' => 'flash_success'), 
  						'NewsletterRecipient');
  				}
  			} else {
- 				$this->Session->setFlash(__('The user was not added.'), 'default', array(
+ 				$this->Session->setFlash(__d('newsletter','The user was not added.'), 'default', array(
  						'class' => 'flash_failure'), 
  						'NewsletterRecipient');
  				$this->_persistValidation('NewsletterRecipient');
@@ -160,12 +171,11 @@ class SubscriptionController extends AppController {
  		}
  		$this->redirect($this->referer());
  	}
-
-	function beforeFilter()
-	{
-		//Actions which don't require authorization
-		parent::beforeFilter();
-		$this->Auth->allow('*');
-	}
 	
+//  	function beforeFilter(){
+// 		parent::beforeRender();
+// 		$pluginId = $this->getPluginId();
+// 		$this->set('pluginId', $pluginId);
+//  	}
+ 	
 }
