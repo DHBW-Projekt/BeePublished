@@ -56,16 +56,11 @@
 	width: 100%;
 }
 
-#webshop_product_administration thead tr{
-	background-color: #EEEEEE;
-}
-
 #webshop_product_administration thead tr th{
 	padding-left:5px;
 	padding-right:20px;
 	padding-top:5px;
 	padding-bottom: 5px;
-	border: 1px solid #CCCCCC;
 }
 
 #webshop_product_administration thead tr th p{

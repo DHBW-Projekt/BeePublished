@@ -1,7 +1,6 @@
-$(document).ready(function () {	
+$(document).ready(function () {	  
     $('#WebshopProductDescription').ckeditor(function () {
-        },
-        {
-
-        });
+	},
+	{
+	});    
 });

@@ -41,7 +41,7 @@ class PluginView extends AppModel {
 		'Content' => array(
 			'className' => 'Content',
 			'foreignKey' => 'plugin_view_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',

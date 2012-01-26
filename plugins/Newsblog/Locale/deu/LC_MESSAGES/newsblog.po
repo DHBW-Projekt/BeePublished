@@ -1,0 +1,101 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright 2012 Philipp Scholl <philippscholl@gmx.de>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2012-01-25 15:00+0100\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: View/Elements/NewsblogDetail.ctp:32
+#: View/Elements/NewsblogOverview.ctp:93
+msgid "infostring"
+msgstr "von :-author-: am :-date-: um :-time-:"
+
+#: View/Elements/NewsblogDetail.ctp:37
+#: View/Elements/NewsblogOverview.ctp:97
+msgid "modifiedstring"
+msgstr "modifiziert am :-date-: um :-time-:"
+
+#: View/Elements/NewsblogOverview.ctp:41
+msgid "ShowHideConfiguration"
+msgstr "Zeige/Verstecke Konfiguration"
+
+#: View/Elements/NewsblogOverview.ctp:125
+msgid "Full Article"
+msgstr "Detailansicht"
+
+#: View/Elements/NewsblogOverview.ctp:51
+msgid "Items per page:"
+msgstr "Einträge pro Seite:"
+
+#: View/Elements/NewsblogOverview.ctp:62
+msgid "Preview text length:"
+msgstr "Vorschautextlänge:"
+
+#: Model/NewsEntry.php:validation for field title
+msgid "Please enter a title."
+msgstr "Bitte geben Sie einen Titel ein."
+
+#: Model/NewsEntry.php:validation for field text
+msgid "Please enter the news entry's text."
+msgstr "Bitte geben Sie einen Text ein."
+
+#: View/Elements/admin_menu.ctp:9
+msgid "General"
+msgstr "Allgemein"
+
+#: View/NewsEntries/create.ctp:22
+msgid "Title:"
+msgstr "Titel:"
+
+#: View/NewsEntries/create.ctp:28
+msgid "Subtitle:"
+msgstr "Untertitel:"
+
+#: View/NewsEntries/create.ctp:43
+msgid "Valid from:"
+msgstr "Gültig von:"
+
+#: View/NewsEntries/create.ctp:53
+msgid "Valid to:"
+msgstr "Gültig bis:"
+
+#: View/Elements/admin_menu.ctp:12
+msgid "Write News"
+msgstr "Eintrag schreiben"
+
+#: View/Elements/admin_menu.ctp:15
+msgid "Publish News"
+msgstr "Eintrag veröffentlichen"
+
+#: View/NewsEntries/publish.ctp:43
+msgid "No entries to publish!"
+msgstr "Keine Einträge zum Veröffentlichen!"
+
+#: View/ShowNews/general.ctp:12
+msgid "Title for Newsblog:"
+msgstr "Titel des Blog:"
+
+#: View/NewsEntries/create.ctp:75
+msgid "Create News"
+msgstr "Eintrag erstellen"
+
+#: View/ShowNews/general.ctp:44
+msgid "Save Configuration"
+msgstr "Konfiguration speichern"
+
+#: View/Elements/NewsblogOverview.ctp:155
+msgid "Would you really like to delete this entry?"
+msgstr "Möchten Sie den Eintrag wirklich löschen?"
+
+#: View/NewsEntries/edit.ctp:77
+msgid "Save changes"
+msgstr "Änderungen speichern"

@@ -1,30 +1,29 @@
 <?php
-$this->Html->script('http://maps.googleapis.com/maps/api/js?sensor=true&amp;language=de&amp;region=DE', false);
-$this->Html->script('/google_maps/js/googlemaps', false);
-
-if ($data <> __('no location') and isset($this->data['Ort']['Adresse'])) {
-	$route = 'printRoute(\'routing\', \'' . $this->data['Ort']['Adresse'] . '\',\'' . implode(",", $data['GoogleMapsLocation']) . '\');';
-} else {
-	$route = '';
-}
-
-if (isset($this->data['Ort']) && isset($data['GoogleMapsLocation'])) {
-    $this->Html->scriptBlock('
-            $(document).ready(function () {
-                initializeGoogleMaps(\'map\');'.
-    			$route.'
-            });
-            ', array('inline' => false)
-    );
-}
-
+	$this->Html->script('http://maps.googleapis.com/maps/api/js?sensor=true&amp;language=de&amp;region=DE', false);
+	$this->Html->script('/google_maps/js/googlemaps', false);
+	
+	if ($data <> __('no location') and isset($this->data['location']['address'])) {
+		$route = 'printRoute(\'routing\', \'' . $this->data['location']['address'] . '\',\'' . implode(",", $data['GoogleMapsLocation']) . '\');';
+	} else {
+		$route = '';
+	}
+	
+	if (isset($this->data['location']) && isset($data['GoogleMapsLocation'])) {
+	    $this->Html->scriptBlock('
+	            $(document).ready(function () {
+	                initializeGoogleMaps(\'map\');'.
+	    			$route.'
+	            });
+	            ', array('inline' => false)
+	    );
+	}
 ?>
+
 <div id="directions">
     <?php
-    echo $this->Form->create('Ort');
-    echo $this->Form->input('Adresse');
-    echo $this->Form->end('Route Berechnen');
+	    echo $this->Form->create('location');
+	    echo $this->Form->input('address', array('label' => (__d("google_maps", 'Street').':'), 'style' => "width:100%"));
+	    echo $this->Form->end(__d("google_maps", "Calculate Route"));
     ?>
-
     <div id="routing"></div>
 </div>

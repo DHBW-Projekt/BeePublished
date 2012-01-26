@@ -66,11 +66,21 @@ class WebShopController extends WebShopAppController {
 	* Function to create product.
 	*/
 	public function create($contentID){
+		
+		//Attributes
+		$create_error = null;
+		$error_message = __d('web_shop', 'Please fill out all mandatory fields.');
+		
 		//Check permissions
 		$pluginId = $this->getPluginId();
 		$allowed = $this->PermissionValidation->actionAllowed($pluginId, 'Create Product');
-		if(!$allowed)
+		
+		if(!$allowed){
+			$this->Session->setFlash(__d('web_shop', 'Permission denied.'), 'default', array(
+					'class' => 'flash_failure'));
+			
 			$this->redirect(array('action' => 'admin', $contentID));
+		}
 		
 		//PROCESS cancle
 		if (isset($this->params['data']['cancel']))
@@ -83,27 +93,40 @@ class WebShopController extends WebShopAppController {
 			//UPLOAD image
 			if (!empty($this->data['WebshopProduct']['submittedfile']['name']))
 				$result = $this->uploadImage($this->data['WebshopProduct']['submittedfile'], null, true);
-			
+				
 			if (isset($result)) {
 				$file_name = $result['file_name'];
+				$create_error = $result['error'];
+				$error_message = __d('web_shop', 'Errors during picture upload.');
 			} else {
 				$file_name = 'no_image.png';
 			}
 			
 			//SAVE on DB
-			$this->WebshopProduct->set(array(
-						'name' => $this->data['WebshopProduct']['name'],
-						'description' => $this->data['WebshopProduct']['description'],
-						'price' => $this->data['WebshopProduct']['price'],
-						'picture' => $file_name
-			));
-			
-			if ($this->WebshopProduct->validates()) {
-				$this->WebshopProduct->save();
+			if (!$create_error){
+				$this->WebshopProduct->set(array(
+							'name' => $this->data['WebshopProduct']['name'],
+							'description' => $this->data['WebshopProduct']['description'],
+							'price' => $this->data['WebshopProduct']['price'],
+							'picture' => $file_name
+				));
 				
-				//REDIRECT
-				$this->redirect(array('action' => 'admin', $contentID));
+				if ($this->WebshopProduct->validates())
+					$this->WebshopProduct->save();
+				else 
+					$create_error = true;
 			}
+		}
+		
+		//PRINT messages
+		if (isset($create_error) and !$create_error){
+			$this->Session->setFlash(__d('web_shop', 'Product created.'));
+			
+			//REDIRECT
+			$this->redirect(array('action' => 'admin', $contentID));
+		}else if (isset($create_error)){
+			$this->Session->setFlash($error_message, 'default', array(
+					'class' => 'flash_failure'));
 		}
 	}
 	
@@ -111,60 +134,89 @@ class WebShopController extends WebShopAppController {
 	* Function to edit product.
 	*/
 	public function edit($contentID, $productID=null){
-		//Check permissions
-		$pluginId = $this->getPluginId();
-		$allowed = $this->PermissionValidation->actionAllowed($pluginId, 'Edit Product');
-		if(!$allowed)
-			$this->redirect(array('action' => 'admin', $contentID));
 		
 		//Attributes
 		$update_error = false;
+		$error_message = __d('web_shop', 'Please fill out all mandatory fields.');
+		$request = null;
 		
-		//SET id
-		$this->WebshopProduct->id = $productID;
+		//Check permissions
+		$pluginId = $this->getPluginId();
+		$allowed = $this->PermissionValidation->actionAllowed($pluginId, 'Edit Product');
 		
-		//CHECK request
-		if (empty($this->data)) {
-			$this->data = $this->WebshopProduct->read();
-			$this->set('contentID', $contentID);
+		if(!$allowed){
+			$this->Session->setFlash(__d('web_shop', 'Permission denied.'), 'default', array(
+							'class' => 'flash_failure'));
 				
-			return;
+			$this->redirect(array('action' => 'admin', $contentID));
 		}
-	
-		//EDIT product
+		
+		//PROCESS cancle
+		if (isset($this->params['data']['cancel']))
+			$this->redirect(array('action' => 'admin', $contentID));
+		
+		//SET data
+		$this->WebshopProduct->id = $productID;
+		$this->set('contentID', $contentID);
+		
+		//PROCESS save
 		if (isset($this->params['data']['save'])) {
-	
 			//UPDATE db info
 			$data_old = $this->WebshopProduct->read();
 			$data_new = $this->data;
-			
-			//UPLOAD new file (if necessary)			
-			if (!empty($data_new['WebshopProduct']['submittedfile']['name'])){
-				$result = $this->uploadImage($data_new['WebshopProduct']['submittedfile'], $data_old['WebshopProduct']['picture'], true);
-				
-				$data_new['WebshopProduct']['picture'] = $result['file_name'];
-				$update_error = $result['error'];
-			}
-			
-			//SET new data
+			$data_new['WebshopProduct']['picture'] = $data_old['WebshopProduct']['picture'];
+
+			//SET data
 			if(!$update_error){
 				$this->WebshopProduct->set($data_old);
 				$this->WebshopProduct->set($data_new);
+				
+				$update_error = !$this->WebshopProduct->validates();
+			}
 			
+			//UPLOAD new file (if necessary)			
+			if (!$update_error && !empty($data_new['WebshopProduct']['submittedfile']['name'])){
+				$result = $this->uploadImage($data_new['WebshopProduct']['submittedfile'], $data_old['WebshopProduct']['picture'], false);
+				
+				$data_new['WebshopProduct']['picture'] = $result['file_name'];
+				$update_error = $result['error'];
+
+				if($update_error)
+					$error_message = __d('web_shop', 'Errors during picture upload.');
+			}
+
+			//SET new data
+			if(!$update_error){
+				$this->WebshopProduct->set($data_new);
+				
 				//SAVE
 				$update_error = !$this->WebshopProduct->save();
 			}
-		}
 		
-		//REDIRECT
-		$this->redirect(array('action' => 'admin', $contentID));
+		
+			//PRINT messages
+			if (!$update_error){
+				$this->Session->setFlash(__d('web_shop', 'Product updated.'));
+				
+				//REDIRECT
+				$this->redirect(array('action' => 'admin', $contentID));
+			}else{
+				$this->Session->setFlash($error_message, 'default', array(
+								'class' => 'flash_failure'));
+			}
+			
+			$data_new['WebshopProduct']['id'] = $productID;
+			$this->data = $data_new;
+		}else{
+			$this->data = $this->WebshopProduct->read();
+		}
 	}
 	
 	
    /**
 	* Function to remove product.
 	*/
-	public function remove($contentID, $productID){
+	public function remove($contentID, $productID, $redirect = true){
 		//Check permissions
 		$pluginId = $this->getPluginId();
 		$allowed = $this->PermissionValidation->actionAllowed($pluginId, 'Delete Product');
@@ -181,6 +233,31 @@ class WebShopController extends WebShopAppController {
 		//REMOVE db entry
 		$this->WebshopProduct->delete($productID);
 		
+		if ($redirect){
+			$this->Session->setFlash(__d('web_shop', 'Product deleted.'));
+			$this->redirect(array('action' => 'admin', $contentID));
+		}
+	}
+	
+	public function removeSelected($contentID){
+		//Check permissions
+		$pluginId = $this->getPluginId();
+		$allowed = $this->PermissionValidation->actionAllowed($pluginId, 'Delete Product');
+		if(!$allowed)
+			$this->redirect(array('action' => 'admin', $contentID));
+		
+		$deleted = false;
+		
+		if (isset($this->data['selectedProducts']))
+			foreach ($this->data['selectedProducts'] as $product => $selection) {
+				if ($selection) {
+					$this->remove($contentID, $product, false);
+					$deleted = true;
+				}
+			}
+		
+		if ($deleted)
+			$this->Session->setFlash(__d('web_shop', 'Products deleted.'));
 		$this->redirect(array('action' => 'admin', $contentID));
 	}
 	

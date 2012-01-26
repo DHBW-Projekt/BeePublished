@@ -1,6 +1,7 @@
 <div>
 <p>Hi Admin,</p>
-<p>XXX has submitted a new order.</p>
+<p><?php echo $user['username']; ?> has submitted a new order.</p>
+<p>E-Mail: <?php echo $user['email']; ?></p>
 
 <p><strong>Order Details:</strong></p>
 
