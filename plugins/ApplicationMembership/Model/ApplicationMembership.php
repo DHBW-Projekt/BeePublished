@@ -30,6 +30,11 @@ class ApplicationMembership extends AppModel{
 			        'rule' => 'notEmpty',
 			        'message' => 'Please enter your firstname.'
 			),
+			'date_of_birth' => array(
+						'rule' => 'date',
+						'allowEmpty'=> false,
+						'message' => 'Please enter your day of birth.'
+			),
 		    'email' => array(
 		     	   'rule' => 'email',
 		           'message' => 'Please enter your email.'
