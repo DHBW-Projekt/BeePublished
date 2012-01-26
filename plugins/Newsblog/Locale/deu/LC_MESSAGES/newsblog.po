@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2012-01-25 15:00+0100\n"
+"POT-Creation-Date: 2012-01-26 13:01+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -14,88 +14,128 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
+#: Controller/NewsEntriesController.php:46
+msgid "The news has been created! It has to be published!"
+msgstr "Der Artikel wurde erzeugt! Er muss noch veröffentlicht werden!"
+
+#: Controller/NewsEntriesController.php:49
+msgid "The news hasn't been created!"
+msgstr "Der Artikel konnte nicht erzeugt werden!"
+
+#: Controller/NewsEntriesController.php:92
+#: Controller/ShowNewsController.php:47
+msgid "The changes have been saved!"
+msgstr "Die Änderungen wurden gespeichert!"
+
+#: Controller/NewsEntriesController.php:95
+msgid "The changes haven't been saved!"
+msgstr "Die Änderungen konnten nicht gespeichert werden!"
+
+#: Controller/NewsEntriesController.php:139
+msgid "The selected news has been published."
+msgstr "Der gewählte Eintrag wurde veröffentlicht!"
+
+#: Controller/NewsEntriesController.php:141
+msgid "The selected news hasn't been published."
+msgstr "Der gewählte Eintrag konnte nicht veröffentlicht werden!"
+
+#: Controller/NewsEntriesController.php:160
+msgid "The selected news has been deleted."
+msgstr "Der gewählte Eintrag wurde gelöscht!"
+
+#: Controller/NewsEntriesController.php:163
+msgid "The selected news hasn't been deleted."
+msgstr "Der gewählte Eintrag konnte nicht gelöscht werden!"
+
 #: View/Elements/NewsblogDetail.ctp:32
-#: View/Elements/NewsblogOverview.ctp:93
+#: View/Elements/NewsblogOverview.ctp:91
 msgid "infostring"
 msgstr "von :-author-: am :-date-: um :-time-:"
 
 #: View/Elements/NewsblogDetail.ctp:37
-#: View/Elements/NewsblogOverview.ctp:97
+#: View/Elements/NewsblogOverview.ctp:96
 msgid "modifiedstring"
-msgstr "modifiziert am :-date-: um :-time-:"
+msgstr "Geändert am :-date-: um :-time-:"
 
-#: View/Elements/NewsblogOverview.ctp:41
+#: View/Elements/NewsblogOverview.ctp:39
 msgid "ShowHideConfiguration"
 msgstr "Zeige/Verstecke Konfiguration"
 
-#: View/Elements/NewsblogOverview.ctp:125
-msgid "Full Article"
-msgstr "Detailansicht"
-
-#: View/Elements/NewsblogOverview.ctp:51
+#: View/Elements/NewsblogOverview.ctp:49
+#: View/ShowNews/general.ctp:23
 msgid "Items per page:"
 msgstr "Einträge pro Seite:"
 
-#: View/Elements/NewsblogOverview.ctp:62
+#: View/Elements/NewsblogOverview.ctp:60
+#: View/ShowNews/general.ctp:32
 msgid "Preview text length:"
 msgstr "Vorschautextlänge:"
 
-#: Model/NewsEntry.php:validation for field title
-msgid "Please enter a title."
-msgstr "Bitte geben Sie einen Titel ein."
+#: View/Elements/NewsblogOverview.ctp:68
+#: View/ShowNews/general.ctp:44
+msgid "Save Configuration"
+msgstr "Konfiguration speichern"
 
-#: Model/NewsEntry.php:validation for field text
-msgid "Please enter the news entry's text."
-msgstr "Bitte geben Sie einen Text ein."
+#: View/Elements/NewsblogOverview.ctp:124
+msgid "Full Article"
+msgstr "Detailansicht"
+
+#: View/Elements/NewsblogOverview.ctp:153
+msgid "Would you really like to delete this entry?"
+msgstr "Möchten Sie den Artikel wirklich löschen?"
 
 #: View/Elements/admin_menu.ctp:9
 msgid "General"
 msgstr "Allgemein"
 
-#: View/NewsEntries/create.ctp:22
-msgid "Title:"
-msgstr "Titel:"
-
-#: View/NewsEntries/create.ctp:28
-msgid "Subtitle:"
-msgstr "Untertitel:"
-
-#: View/NewsEntries/create.ctp:43
-msgid "Valid from:"
-msgstr "Gültig von:"
-
-#: View/NewsEntries/create.ctp:53
-msgid "Valid to:"
-msgstr "Gültig bis:"
-
 #: View/Elements/admin_menu.ctp:12
 msgid "Write News"
-msgstr "Eintrag schreiben"
+msgstr "Eintrag verfassen"
 
 #: View/Elements/admin_menu.ctp:15
 msgid "Publish News"
 msgstr "Eintrag veröffentlichen"
 
-#: View/NewsEntries/publish.ctp:43
-msgid "No entries to publish!"
-msgstr "Keine Einträge zum Veröffentlichen!"
+#: View/NewsEntries/create.ctp:22
+#: View/NewsEntries/edit.ctp:37
+msgid "Title:"
+msgstr "Titel:"
 
-#: View/ShowNews/general.ctp:12
-msgid "Title for Newsblog:"
-msgstr "Titel des Blog:"
+#: View/NewsEntries/create.ctp:28
+#: View/NewsEntries/edit.ctp:44
+msgid "Subtitle:"
+msgstr "Untertitel:"
+
+#: View/NewsEntries/create.ctp:43
+#: View/NewsEntries/edit.ctp:63
+msgid "Valid from:"
+msgstr "Gültig von:"
+
+#: View/NewsEntries/create.ctp:53
+#: View/NewsEntries/edit.ctp:73
+msgid "Valid to:"
+msgstr "Gültig bis:"
 
 #: View/NewsEntries/create.ctp:75
 msgid "Create News"
 msgstr "Eintrag erstellen"
 
-#: View/ShowNews/general.ctp:44
-msgid "Save Configuration"
-msgstr "Konfiguration speichern"
-
-#: View/Elements/NewsblogOverview.ctp:155
-msgid "Would you really like to delete this entry?"
-msgstr "Möchten Sie den Eintrag wirklich löschen?"
-
 #: View/NewsEntries/edit.ctp:77
 msgid "Save changes"
 msgstr "Änderungen speichern"
+
+#: View/NewsEntries/publish.ctp:43
+msgid "No entries to publish!"
+msgstr "Keine Einträge zu veröffentlichen!"
+
+#: View/ShowNews/general.ctp:12
+msgid "Title for Newsblog:"
+msgstr "Titel des Blog:"
+
+#: Model/NewsEntry.php:validation for field title
+msgid "Please enter a title."
+msgstr "Geben Sie bitte Sie einen Titel an."
+
+#: Model/NewsEntry.php:validation for field text
+msgid "Please enter the news entry's text."
+msgstr "Geben Sie bitte einen Nachrichtentext an."

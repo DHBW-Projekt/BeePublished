@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2012-01-25 17:19+0100\n"
+"POT-Creation-Date: 2012-01-26 13:01+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -14,40 +14,73 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
+#: Controller/NewsEntriesController.php:46
+msgid "The news has been created! It has to be published!"
+msgstr ""
+
+#: Controller/NewsEntriesController.php:49
+msgid "The news hasn't been created!"
+msgstr ""
+
+#: Controller/NewsEntriesController.php:92
+#: Controller/ShowNewsController.php:47
+msgid "The changes have been saved!"
+msgstr ""
+
+#: Controller/NewsEntriesController.php:95
+msgid "The changes haven't been saved!"
+msgstr ""
+
+#: Controller/NewsEntriesController.php:139
+msgid "The selected news has been published."
+msgstr ""
+
+#: Controller/NewsEntriesController.php:141
+msgid "The selected news hasn't been published."
+msgstr ""
+
+#: Controller/NewsEntriesController.php:160
+msgid "The selected news has been deleted."
+msgstr ""
+
+#: Controller/NewsEntriesController.php:163
+msgid "The selected news hasn't been deleted."
+msgstr ""
+
 #: View/Elements/NewsblogDetail.ctp:32
-#: View/Elements/NewsblogOverview.ctp:93
+#: View/Elements/NewsblogOverview.ctp:91
 msgid "infostring"
 msgstr ""
 
 #: View/Elements/NewsblogDetail.ctp:37
-#: View/Elements/NewsblogOverview.ctp:98
+#: View/Elements/NewsblogOverview.ctp:96
 msgid "modifiedstring"
 msgstr ""
 
-#: View/Elements/NewsblogOverview.ctp:41
+#: View/Elements/NewsblogOverview.ctp:39
 msgid "ShowHideConfiguration"
 msgstr ""
 
-#: View/Elements/NewsblogOverview.ctp:51
+#: View/Elements/NewsblogOverview.ctp:49
 #: View/ShowNews/general.ctp:23
 msgid "Items per page:"
 msgstr ""
 
-#: View/Elements/NewsblogOverview.ctp:62
+#: View/Elements/NewsblogOverview.ctp:60
 #: View/ShowNews/general.ctp:32
 msgid "Preview text length:"
 msgstr ""
 
-#: View/Elements/NewsblogOverview.ctp:70
+#: View/Elements/NewsblogOverview.ctp:68
 #: View/ShowNews/general.ctp:44
 msgid "Save Configuration"
 msgstr ""
 
-#: View/Elements/NewsblogOverview.ctp:126
+#: View/Elements/NewsblogOverview.ctp:124
 msgid "Full Article"
 msgstr ""
 
-#: View/Elements/NewsblogOverview.ctp:155
+#: View/Elements/NewsblogOverview.ctp:153
 msgid "Would you really like to delete this entry?"
 msgstr ""
 
