@@ -29,12 +29,10 @@
 <?php 
 	if($data['newsblogTitle'] != null || $data['newsblogTitle'] != ''){
 		echo '<div class="newsblogtitle"><h1>';
-			echo $data['newsblogTitle'];
-			echo '</h1>';
+		echo $data['newsblogTitle'];
+		echo '</h1><div class="newsblogtitle_border color1"></div>';
 		echo '</div>';
-	}
-
-?>
+	}?>
 
 <div class='newsblogreadconfig'>
 	<div class='newsblogreadconfig_button'>
@@ -52,7 +50,7 @@
 		'default' => 10,
 		'value' => $itemsPerPage,
 		'class' => 'newsblogreadconfig_select',
-		'div' => 'testdiv'
+		'div' => 'configform_input'
 	));
 	
 	echo $this->Form->input(null, array(
@@ -63,7 +61,7 @@
 		'default' => 150,
 		'value' => $shorttextLength,
 		'class' => 'newsblogreadconfig_select',
-		'div' => 'testdiv'
+		'div' => 'configform_input'
 	));
 	
 	//create submit button
