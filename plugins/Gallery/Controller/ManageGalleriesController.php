@@ -44,6 +44,7 @@ class ManageGalleriesController  extends GalleryAppController{
 		$pluginId = $this->getPluginId();
 		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
 		
+
 		if (! $this->request->is('post')) {
 		$data = array( 'ContentId' => $contentId );
 		$pic_array = array();
@@ -96,7 +97,6 @@ class ManageGalleriesController  extends GalleryAppController{
 			$galleries=  $this->Gallery->getAllGalleries($this);
 			
 			$selectedGalleries = $this->data['selectGalleries'];
-			debug ($selectedGalleries);
 			foreach($galleries as $gallery){
 				$id = $gallery['GalleryEntry']['id'];
 				if ($selectedGalleries[$id] == 1){
@@ -117,7 +117,6 @@ class ManageGalleriesController  extends GalleryAppController{
 		$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'edit', true);
 		
 		if ($this->request->is('post')) {
-				//debug($this->request->data);
 				if($this->Gallery->save($this,$this->request->data)) {
 					$this->Session->setFlash(__('Your changes were saved!'), 'default', array('class' => 'flash_success'));
 					//redirect 
@@ -132,9 +131,7 @@ class ManageGalleriesController  extends GalleryAppController{
 		
 		$gallery = $this->Gallery->getGallery($this,$galleryId);
 		$this->set('data',$gallery);
-		$this->set('ContentId',$contentId);
-		//debug($gallery);
-		
+		$this->set('ContentId',$contentId);		
 	}
 	
 	/**

@@ -3,6 +3,11 @@ class GalleryPictureCompComponent extends Component
 {
 	public $uses = array ('Gallery.GalleryPicture');
 	
+	/**
+	 * loads a picture from db
+	 * @param unknown_type $controller
+	 * @param unknown_type $pictureId
+	 */
 	public function getPicture($controller, $pictureId){
 		$controller->loadModel('Gallery.GalleryPicture');
 		$picture = $controller->GalleryPicture->findById($pictureId);
@@ -12,6 +17,10 @@ class GalleryPictureCompComponent extends Component
 		return $picture;
 	}
 	
+	/**
+	 * loads all pictures from db
+	 * @param unknown_type $controller
+	 */
 	public function getAllPictures($controller){
 		$controller->loadModel('Gallery.GalleryPicture');
 		$pictures = $controller->GalleryPicture->find('all');
@@ -23,10 +32,13 @@ class GalleryPictureCompComponent extends Component
 		return $pictures;
 	}
 	
+	/**
+	 * loads unasigned pictures
+	 * @param unknown_type $controller
+	 */
 	public function getAllUnAssignedPictures($controller){
 		$controller->loadModel('Gallery.GalleryPicture');
 		$pictures = $controller->GalleryPicture->find('all',  array('conditions' => array( 'gallery_entry_id' => null)));
-		//conditions =
 		foreach ($pictures as &$picture){
 			$picture = $this->normalizePicture($picture);
 		}
@@ -34,6 +46,11 @@ class GalleryPictureCompComponent extends Component
 		return $pictures;
 	}
 	
+	/**
+	 * load pictures of gallery
+	 * @param unknown_type $controller
+	 * @param unknown_type $galleryId
+	 */
 	public function getAllPicturesGallery($controller, $galleryId){
 		$controller->loadModel('Gallery.GalleryPicture');
 		$pictures = $controller->GalleryPicture->find('all',  array('conditions' => array( 'gallery_entry_id' => $galleryId)));
@@ -45,24 +62,26 @@ class GalleryPictureCompComponent extends Component
 		return $pictures;
 	}
 	
+	/**
+	 * save the picture to db
+	 * @param unknown_type $controller
+	 * @param unknown_type $picture
+	 */
 	public function save($controller, $picture){
 		$controller->loadModel('Gallery.GalleryPicture');
 		$controller->GalleryPicture->create();
 		$controller->GalleryPicture->save($picture);
 	}
 	
+	/**
+	 * deletes the picture
+	 * @param unknown_type $controller
+	 * @param unknown_type $pictureId
+	 */
 	public function delete($controller, $pictureId){
 		$picture = $this->getPicture($controller, $pictureId);
 		
-//		debug($picture);
-		
-		
-		
-		// delete thumb
-		
 		$pathInfo = pathinfo(realpath("../..".$picture['path_to_pic']));
-		
-	//	debug($pathInfo);
 		
 		$thumbPath = $pathInfo['dirname']."/thumb/".$pathInfo['basename'];
 		unlink($thumbPath);
@@ -72,44 +91,31 @@ class GalleryPictureCompComponent extends Component
 		$pictures = $controller->GalleryPicture->delete($picture);
 	}
 	
+	/**
+	 * normalizes the picture output -> add thumb path
+	 * @param unknown_type $picture
+	 */
 	public function normalizePicture($picture){
-		
-		//debug($picture);
-		
 		if(isset($picture['GalleryPicture']))
 			$picture = $picture['GalleryPicture'];
 		
-		//debug($picture['path_to_pic']);
-		
-		$pathInfo = pathinfo($picture['path_to_pic']);
-		
-		//debug($pathInfo);
-		
+		$pathInfo = pathinfo($picture['path_to_pic']);		
 		$picture['thumb'] = $pathInfo['dirname']."/thumb/".$pathInfo['basename'];
-	//	debug($picture);
 		return $picture;
 	}
 	
+	/**
+	 * gemerates a thumbnail for the picture
+	 * @param unknown_type $picture
+	 */
 	public function generateThumbnail($picture){
-		
-		// ziel: b: 160 / h: 120
-		
-		
-		
-		//debug($picture);
-		
 		$sourceSize = getimagesize(realpath("../..".$picture['path_to_pic']));
-		
-		
 		$pathInfo = pathinfo(realpath("../..".$picture['path_to_pic']));
-		
-		
 		$thumbPath = $pathInfo['dirname']."/thumb/".$pathInfo['basename'];
 		                                   
 		// Resample
 		$image_thumb = imagecreatetruecolor(160, 120);
 		$image_source = imagecreatefromjpeg(realpath("../..".$picture['path_to_pic']));
-		
 		
 		$width = $sourceSize[0];
 		$heigth = $sourceSize[1];
@@ -121,18 +127,10 @@ class GalleryPictureCompComponent extends Component
 			$heigth_target = $heigth;
 			$width_target = $heigth / 120 * 160;
 		} else {
-		//	echo "else";
 			$width_target = $width;
 			$heigth_target = $width / 160 * 120;
 		}
-			
-		
-		//debug($width_target);
-		//debug($heigth_target);
-		
 		imagecopyresampled($image_thumb, $image_source, 0, 0, 0, 0, 160, 120, $width_target, $heigth_target);
-		
-		// Output
 		imagejpeg($image_thumb, $thumbPath, 80);
 	}
 	

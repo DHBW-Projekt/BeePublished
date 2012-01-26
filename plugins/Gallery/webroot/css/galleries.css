@@ -34,9 +34,20 @@
 	margin-bottom:10px;
 }
 
-#picturetitle { text-align: left; }
-#picturetitle b { display: block; margin-right: 80px; }
-#picturesocial{ vertical-align:center; padding:10px; margin-top:10px}
+#picturetitle { 
+	text-align: left;
+}
+
+#picturetitle b { 
+	display: block;
+	margin-right: 80px; 
+}
+
+#picturesocial{ 
+	vertical-align:center;
+	padding:10px;
+	margin-top:10px
+}
 
 .galleryImage {
 	float: left;
@@ -44,6 +55,6 @@
 }
 
 .galleryTitle {
-text-align: center;
-font-weight: bold;
+	text-align: center;
+	font-weight: bold;
 }

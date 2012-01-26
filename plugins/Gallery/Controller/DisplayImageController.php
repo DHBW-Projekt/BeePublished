@@ -3,9 +3,7 @@ class DisplayImageController extends AppController {
 	
 	var $components = array('ContentValueManager','Gallery.GalleryPictureComp');
 	
-	public function admin($contentId){
-		//debug($contentId);
-		
+	public function admin($contentId){		
 		$this->redirect(array('action' => 'setImageAdminTab', $contentId));
 	}
 	
@@ -15,14 +13,12 @@ class DisplayImageController extends AppController {
 		$allPics = $this->GalleryPictureComp->getAllPictures($this);
 		
 		$data = array(	'AllPictures' => $allPics,
-								'ContentId' => $contentId
-		);
+						'ContentId' => $contentId );
 		
 		$this->set('data',$data);
 	}
 	
 	public function setImage($contentId, $pictureId){
-		//debug("setImage:".$contentId." ".$pictureId);
 		$this->ContentValueManager->saveContentValues($contentId, array('pictureID' => $pictureId));
 		
 		$this->Session->setFlash('Image sucessfully assigned');

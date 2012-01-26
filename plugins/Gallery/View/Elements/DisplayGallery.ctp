@@ -3,7 +3,7 @@ $this->Html->script('/gallery/js/imageoverlay', false);
 $this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
 
 if(!isset($data)){
-	echo "No gallery assigned";
+	echo __("No gallery assigned");
 } else {
 	?>	
 	<div class="newsblogtitle">
@@ -11,7 +11,10 @@ if(!isset($data)){
 	<?php echo "Gallery - ".$data['GalleryEntry'] ['title']?>
 		</h1>
 	</div> 
-<?php 
+<?php
+if(!isset($data['GalleryPicture'])){
+	echo __('No pictures in gallery');
+} else {
 foreach ($data['GalleryPicture'] as $pic){
 
 	echo '<div class="galleryImage">';
@@ -26,5 +29,6 @@ foreach ($data['GalleryPicture'] as $pic){
 	echo '</div>';
 }
 echo '<div style="clear:both;"></div>';
+}
 }
 ?>

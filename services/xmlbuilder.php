@@ -1,6 +1,4 @@
 <?php
-
-
 function getRC0Xml(){
 	$content = "<RC>0</RC> \n\r";
 	return $content;

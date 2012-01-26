@@ -35,12 +35,12 @@ class ManageImagesController  extends GalleryAppController{
 	 * transforms the form input for internal procession
 	 * Enter description here ...
 	 */
+
 	public function uploadImage($contentId){
 		
 		$pluginId = $this->getPluginId();
 		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
-		
-		
+
 		$image = array('name' => $this->data['addImage']['File']['name'],
 								'tmp_name' => $this->data['addImage']['File']['tmp_name'],
 								'size' => $this->data['addImage']['File']['size'],
@@ -59,10 +59,8 @@ class ManageImagesController  extends GalleryAppController{
 		
 		$pluginId = $this->getPluginId();
 		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
-		
-		
+
 		for($i = 0;$i<count($this->params['form']['files']['name']);$i++){
-			//echo $i;
 			$image = array('name' => $this->params['form']['files']['name'][$i],
 							'tmp_name' => $this->params['form']['files']['tmp_name'][$i],
 							'size' => $this->params['form']['files']['size'][$i],
@@ -99,8 +97,6 @@ class ManageImagesController  extends GalleryAppController{
 	 */
 	private function addImageInternal($image){
 		
-		//debug($image);
-		
 		$dest = realpath("../../app/webroot/img/gallery").'/'.$image['name'];
 		
 		$image_source = imagecreatefromjpeg($image['tmp_name']);
@@ -114,8 +110,6 @@ class ManageImagesController  extends GalleryAppController{
 		$dbImage = array(
 					'title' => $image['title'],
 					'path_to_pic' => "/app/webroot/img/gallery/".$image['name'] );
-		
-		//debug($dbImage);
 		
 		$this->GalleryPictureComp->generateThumbnail($dbImage);
 		$this->GalleryPictureComp->save($this,$dbImage);
@@ -164,7 +158,6 @@ class ManageImagesController  extends GalleryAppController{
 	}
 	
 	public function save($contentId){
-	
 		$this->GalleryPictureComp->save($this,$this->data['GalleryPicture']);
 		$this->redirect(array('action' => 'index', $contentId));
 	}
