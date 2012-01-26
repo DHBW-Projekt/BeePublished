@@ -3,6 +3,11 @@ class GalleryPictureCompComponent extends Component
 {
 	public $uses = array ('Gallery.GalleryPicture');
 	
+	/**
+	 * loads a picture from db
+	 * @param unknown_type $controller
+	 * @param unknown_type $pictureId
+	 */
 	public function getPicture($controller, $pictureId){
 		$controller->loadModel('Gallery.GalleryPicture');
 		$picture = $controller->GalleryPicture->findById($pictureId);
@@ -12,6 +17,10 @@ class GalleryPictureCompComponent extends Component
 		return $picture;
 	}
 	
+	/**
+	 * loads all pictures from db
+	 * @param unknown_type $controller
+	 */
 	public function getAllPictures($controller){
 		$controller->loadModel('Gallery.GalleryPicture');
 		$pictures = $controller->GalleryPicture->find('all');
@@ -23,6 +32,10 @@ class GalleryPictureCompComponent extends Component
 		return $pictures;
 	}
 	
+	/**
+	 * loads unasigned pictures
+	 * @param unknown_type $controller
+	 */
 	public function getAllUnAssignedPictures($controller){
 		$controller->loadModel('Gallery.GalleryPicture');
 		$pictures = $controller->GalleryPicture->find('all',  array('conditions' => array( 'gallery_entry_id' => null)));
@@ -33,6 +46,11 @@ class GalleryPictureCompComponent extends Component
 		return $pictures;
 	}
 	
+	/**
+	 * load pictures of gallery
+	 * @param unknown_type $controller
+	 * @param unknown_type $galleryId
+	 */
 	public function getAllPicturesGallery($controller, $galleryId){
 		$controller->loadModel('Gallery.GalleryPicture');
 		$pictures = $controller->GalleryPicture->find('all',  array('conditions' => array( 'gallery_entry_id' => $galleryId)));
@@ -44,12 +62,22 @@ class GalleryPictureCompComponent extends Component
 		return $pictures;
 	}
 	
+	/**
+	 * save the picture to db
+	 * @param unknown_type $controller
+	 * @param unknown_type $picture
+	 */
 	public function save($controller, $picture){
 		$controller->loadModel('Gallery.GalleryPicture');
 		$controller->GalleryPicture->create();
 		$controller->GalleryPicture->save($picture);
 	}
 	
+	/**
+	 * deletes the picture
+	 * @param unknown_type $controller
+	 * @param unknown_type $pictureId
+	 */
 	public function delete($controller, $pictureId){
 		$picture = $this->getPicture($controller, $pictureId);
 		
@@ -63,6 +91,10 @@ class GalleryPictureCompComponent extends Component
 		$pictures = $controller->GalleryPicture->delete($picture);
 	}
 	
+	/**
+	 * normalizes the picture output -> add thumb path
+	 * @param unknown_type $picture
+	 */
 	public function normalizePicture($picture){
 		if(isset($picture['GalleryPicture']))
 			$picture = $picture['GalleryPicture'];
@@ -72,6 +104,10 @@ class GalleryPictureCompComponent extends Component
 		return $picture;
 	}
 	
+	/**
+	 * gemerates a thumbnail for the picture
+	 * @param unknown_type $picture
+	 */
 	public function generateThumbnail($picture){
 		$sourceSize = getimagesize(realpath("../..".$picture['path_to_pic']));
 		$pathInfo = pathinfo(realpath("../..".$picture['path_to_pic']));

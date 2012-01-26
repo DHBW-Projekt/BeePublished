@@ -10,11 +10,5 @@ class GalleryOverviewComponent extends Component
 		}
 		return $this->Gallery->getAllGalleries($controller);
 	}
-	
-	public function displaySingleGallery($controller,$galleryId){
-		debug($controller);
-		debug($galleryId);
-		return array();
-	}
 
 }
