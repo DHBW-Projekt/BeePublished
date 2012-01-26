@@ -5,7 +5,8 @@ App::import('Vendor','recaptcha/recaptchalib');
 class ContactFormComponent extends Component {
 
 	//LOAD components
-	var $components = array('BeeEmail', 'Config');
+	public $uses = array('Sanitize');
+	var $components = array('BeeEmail', 'PermissionValidation', 'Config');
 
 	/**
 	* Method to transfer data from plugin to CMS.
@@ -57,11 +58,12 @@ class ContactFormComponent extends Component {
 			
 
 		//SET data
-		$controller->ContactRequest->set(array('name' => $controller->data['ContactForm']['name'],
+		/*$controller->ContactRequest->set(array('name' => $controller->data['ContactForm']['name'],
 												'email' => $controller->data['ContactForm']['email'],
 												'subject' => $controller->data['ContactForm']['subject'],
 												'body' => $controller->data['ContactForm']['body']
-		));
+		)); */
+		$controller->ContactRequest->set($controller->data['ContactForm']);
 		
 		//VALIDATE data
 		if(!$controller->ContactRequest->validates()){
