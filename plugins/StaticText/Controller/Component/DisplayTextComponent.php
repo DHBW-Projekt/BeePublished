@@ -6,7 +6,7 @@ class DisplayTextComponent extends Component
     public function getData($controller,$params)
     {  
        	if (!array_key_exists('Text',$params) || !array_key_exists('Published',$params)) {
-               return __('no text');
+               return __d('static_text', 'no text');
         } else {
 	     	$pub = $params['Published'];
 	     	// not published

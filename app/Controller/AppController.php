@@ -11,7 +11,8 @@ class AppController extends Controller
             'loginAction' => array('controller' => 'Users', 'action' => 'login')
         ),
         'PermissionValidation',
-        'Config'
+        'Config',
+        'RequestHandler'
     );
 
     public $helpers = array('Html', 'Form', 'Session', 'Js', 'PermissionValidation');
@@ -21,7 +22,9 @@ class AppController extends Controller
     function beforeFilter()
     {
         $this->theme = $this->Config->getValue('active_template');
-        $this->set('design',$this->Config->getValue('active_design'));
+        $this->set('mobile',$this->RequestHandler->isMobile());
+        $this->set('design', $this->Config->getValue('active_design'));
+        $this->Session->write('Config.language', Configure::read('Config.language'));
     }
 
     function afterFilter()
@@ -33,7 +36,7 @@ class AppController extends Controller
     {
         $args = func_get_args();
         foreach ($args as $modelName) {
-            if (!empty($this->{$modelName}->validationErrors)) {
+            if (!empty($this->{$modelName}->validationErrors) || !empty($this->{$modelName}->data)) {
                 $this->Session->write('Validation.' . $modelName, array(
                     'controller' => $this->name,
                     'data' => $this->{$modelName}->data,

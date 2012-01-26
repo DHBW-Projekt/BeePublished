@@ -1,0 +1,417 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2012-01-24 13:44+0100\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: Controller\FoodMenuCategoriesController.php:30
+msgid "The category has been saved."
+msgstr ""
+
+#: Controller\FoodMenuCategoriesController.php:33
+msgid "The category couldn't be saved."
+msgstr ""
+
+#: Controller\FoodMenuCategoriesController.php:47
+msgid "The category has been changed."
+msgstr ""
+
+#: Controller\FoodMenuCategoriesController.php:79
+msgid "The category has been deleted."
+msgstr ""
+
+#: Controller\FoodMenuCategoriesController.php:100
+#: Controller\FoodMenuEntriesController.php:98
+msgid "Errors occured during deleting."
+msgstr ""
+
+#: Controller\FoodMenuCategoriesController.php:104
+msgid "The categories have been deleted."
+msgstr ""
+
+#: Controller\FoodMenuCategoriesFoodMenuEntriesController.php:37
+msgid "The entry has been added."
+msgstr ""
+
+#: Controller\FoodMenuCategoriesFoodMenuEntriesController.php:40
+msgid "The entry couldn't be added."
+msgstr ""
+
+#: Controller\FoodMenuCategoriesFoodMenuEntriesController.php:49
+msgid "The entry has been removed from the category."
+msgstr ""
+
+#: Controller\FoodMenuCategoriesFoodMenuEntriesController.php:52
+msgid "The entry couldn't be removed."
+msgstr ""
+
+#: Controller\FoodMenuEntriesController.php:29
+msgid "The entry has been saved successfully."
+msgstr ""
+
+#: Controller\FoodMenuEntriesController.php:32
+msgid "The entry couldn't be saved."
+msgstr ""
+
+#: Controller\FoodMenuEntriesController.php:46
+msgid "The entry has been changed successfully"
+msgstr ""
+
+#: Controller\FoodMenuEntriesController.php:78
+msgid "The entry has been deleted."
+msgstr ""
+
+#: Controller\FoodMenuEntriesController.php:102
+msgid "The entries have been deleted."
+msgstr ""
+
+#: Controller\FoodMenuMenusController.php:35
+msgid "The menu was saved successfully."
+msgstr ""
+
+#: Controller\FoodMenuMenusController.php:38
+msgid "The menu couldn't be saved"
+msgstr ""
+
+#: Controller\FoodMenuMenusController.php:57
+msgid "The menu was edited successfully"
+msgstr ""
+
+#: Controller\FoodMenuMenusController.php:88
+msgid "The menu was deleted successfully."
+msgstr ""
+
+#: Controller\FoodMenuMenusController.php:108
+msgid "The menus couldn't be deleted"
+msgstr ""
+
+#: Controller\FoodMenuMenusController.php:112
+msgid "The menus were deleted."
+msgstr ""
+
+#: Controller\FoodMenuMenusFoodMenuCategoriesController.php:37
+msgid "The category has been added."
+msgstr ""
+
+#: Controller\FoodMenuMenusFoodMenuCategoriesController.php:40
+msgid "The category couldn't be added."
+msgstr ""
+
+#: Controller\FoodMenuMenusFoodMenuCategoriesController.php:49
+msgid "The category has been removed from the menu."
+msgstr ""
+
+#: Controller\FoodMenuMenusFoodMenuCategoriesController.php:52
+msgid "The category couldn't be removed."
+msgstr ""
+
+#: View\Admin\add_categories_to_menu.ctp:32
+msgid "Speichern"
+msgstr ""
+
+#: View\Admin\add_categories_to_menu.ctp:33
+msgid "Zurück"
+msgstr ""
+
+#: View\Elements\Preferences.ctp:4
+#: View\FoodMenuCategories\edit.ctp:18
+#: View\FoodMenuEntries\create.ctp:11
+#: View\FoodMenuEntries\edit.ctp:11
+#: View\FoodMenuMenus\create.ctp:13
+#: View\FoodMenuMenus\edit.ctp:17
+msgid "Name:"
+msgstr ""
+
+#: View\Elements\Preferences.ctp:9
+msgid "Preis anzeigen"
+msgstr ""
+
+#: View\Elements\SelectDate.ctp:6
+msgid "mm/dd/yyyy"
+msgstr ""
+
+#: View\Elements\SelectDate.ctp:7
+msgid "Bill of Fare"
+msgstr ""
+
+#: View\Elements\SelectDate.ctp:13
+msgid "today"
+msgstr ""
+
+#: View\Elements\SelectDate.ctp:15
+msgid "tomorrow"
+msgstr ""
+
+#: View\Elements\SelectDate.ctp:16
+msgid "Select date"
+msgstr ""
+
+#: View\Elements\View.ctp:61
+msgid "price"
+msgstr ""
+
+#: View\Elements\admin_menu.ctp:17
+#: View\FoodMenuMenus\index.ctp:17
+msgid "Menus"
+msgstr ""
+
+#: View\Elements\admin_menu.ctp:18
+#: View\FoodMenuCategories\index.ctp:16
+msgid "Categories"
+msgstr ""
+
+#: View\Elements\admin_menu.ctp:19
+#: View\FoodMenuEntries\index.ctp:17
+msgid "Entries"
+msgstr ""
+
+#: View\FoodMenuCategories\create.ctp:11
+msgid "Create category"
+msgstr ""
+
+#: View\FoodMenuCategories\create.ctp:15
+msgid "name:"
+msgstr ""
+
+#: View\FoodMenuCategories\create.ctp:16
+#: View\FoodMenuCategories\edit.ctp:19
+#: View\FoodMenuEntries\create.ctp:15
+#: View\FoodMenuEntries\edit.ctp:15
+#: View\FoodMenuMenus\create.ctp:24
+#: View\FoodMenuMenus\edit.ctp:58
+msgid "Save"
+msgstr ""
+
+#: View\FoodMenuCategories\edit.ctp:12
+msgid "Add Entries to category"
+msgstr ""
+
+#: View\FoodMenuCategories\edit.ctp:13
+msgid "Add entries"
+msgstr ""
+
+#: View\FoodMenuCategories\edit.ctp:15
+msgid "Edit Category"
+msgstr ""
+
+#: View\FoodMenuCategories\index.ctp:12
+msgid "Create new category"
+msgstr ""
+
+#: View\FoodMenuCategories\index.ctp:13
+msgid "New Category"
+msgstr ""
+
+#: View\FoodMenuCategories\index.ctp:20
+msgid "Do you really want to delete the selected categories?"
+msgstr ""
+
+#: View\FoodMenuCategories\index.ctp:27
+#: View\FoodMenuEntries\index.ctp:28
+#: View\FoodMenuMenus\index.ctp:29
+msgid "Name"
+msgstr ""
+
+#: View\FoodMenuCategories\index.ctp:63
+#: View\FoodMenuEntries\index.ctp:64
+#: View\FoodMenuMenus\index.ctp:64
+msgid "Delete"
+msgstr ""
+
+#: View\FoodMenuCategoriesFoodMenuEntries\index.ctp:13
+msgid "Add entries to categories"
+msgstr ""
+
+#: View\FoodMenuCategoriesFoodMenuEntries\index.ctp:17
+msgid "Remove existing entries from category"
+msgstr ""
+
+#: View\FoodMenuCategoriesFoodMenuEntries\index.ctp:40
+msgid "Add entries to category"
+msgstr ""
+
+#: View\FoodMenuEntries\create.ctp:9
+msgid "Create entry"
+msgstr ""
+
+#: View\FoodMenuEntries\create.ctp:12
+#: View\FoodMenuEntries\edit.ctp:12
+msgid "Description:"
+msgstr ""
+
+#: View\FoodMenuEntries\create.ctp:13
+#: View\FoodMenuEntries\edit.ctp:13
+msgid "Price:"
+msgstr ""
+
+#: View\FoodMenuEntries\create.ctp:14
+#: View\FoodMenuEntries\edit.ctp:14
+msgid "Currency:"
+msgstr ""
+
+#: View\FoodMenuEntries\edit.ctp:8
+msgid "Edit entry"
+msgstr ""
+
+#: View\FoodMenuEntries\index.ctp:13
+msgid "Create new entry"
+msgstr ""
+
+#: View\FoodMenuEntries\index.ctp:14
+msgid "New entry"
+msgstr ""
+
+#: View\FoodMenuEntries\index.ctp:21
+msgid "Do you really want to delete the selected entries?"
+msgstr ""
+
+#: View\FoodMenuEntries\index.ctp:29
+msgid "Price"
+msgstr ""
+
+#: View\FoodMenuEntries\index.ctp:30
+msgid "Currency"
+msgstr ""
+
+#: View\FoodMenuMenus\create.ctp:12
+msgid "Create menu"
+msgstr ""
+
+#: View\FoodMenuMenus\create.ctp:14
+msgid "Valid from:"
+msgstr ""
+
+#: View\FoodMenuMenus\create.ctp:15
+#: View\FoodMenuMenus\edit.ctp:19
+msgid "Valid until:"
+msgstr ""
+
+#: View\FoodMenuMenus\create.ctp:16
+#: View\FoodMenuMenus\edit.ctp:20
+msgid "Valid on weekday:"
+msgstr ""
+
+#: View\FoodMenuMenus\create.ctp:17
+#: View\FoodMenuMenus\edit.ctp:51
+msgid "Mon:"
+msgstr ""
+
+#: View\FoodMenuMenus\create.ctp:18
+#: View\FoodMenuMenus\edit.ctp:52
+msgid "Tue:"
+msgstr ""
+
+#: View\FoodMenuMenus\create.ctp:19
+#: View\FoodMenuMenus\edit.ctp:53
+msgid "Wed:"
+msgstr ""
+
+#: View\FoodMenuMenus\create.ctp:20
+#: View\FoodMenuMenus\edit.ctp:54
+msgid "Thu:"
+msgstr ""
+
+#: View\FoodMenuMenus\create.ctp:21
+#: View\FoodMenuMenus\edit.ctp:55
+msgid "Fri:"
+msgstr ""
+
+#: View\FoodMenuMenus\create.ctp:22
+#: View\FoodMenuMenus\edit.ctp:56
+msgid "Sat:"
+msgstr ""
+
+#: View\FoodMenuMenus\create.ctp:23
+#: View\FoodMenuMenus\edit.ctp:57
+msgid "Sun:"
+msgstr ""
+
+#: View\FoodMenuMenus\edit.ctp:11
+#: View\FoodMenuMenusFoodMenuCategories\index.ctp:40
+msgid "Add categories to menu"
+msgstr ""
+
+#: View\FoodMenuMenus\edit.ctp:12
+msgid "Add categories"
+msgstr ""
+
+#: View\FoodMenuMenus\edit.ctp:14
+msgid "Edit Menu"
+msgstr ""
+
+#: View\FoodMenuMenus\edit.ctp:18
+msgid "Valid From:"
+msgstr ""
+
+#: View\FoodMenuMenus\index.ctp:13
+msgid "Create new menu"
+msgstr ""
+
+#: View\FoodMenuMenus\index.ctp:14
+msgid "New menu"
+msgstr ""
+
+#: View\FoodMenuMenus\index.ctp:21
+msgid "Do you really want to delete the selected menus?"
+msgstr ""
+
+#: View\FoodMenuMenus\index.ctp:30
+msgid "Valid from"
+msgstr ""
+
+#: View\FoodMenuMenus\index.ctp:31
+msgid "Valid until"
+msgstr ""
+
+#: View\FoodMenuMenusFoodMenuCategories\index.ctp:17
+msgid "Remove existing categories from menu"
+msgstr ""
+
+#: Model\FoodMenuCategoriesFoodMenuEntry.php:validation for field ID;validation for field food_menu_category_id;validation for field food_menu_entry_id
+#: Model\FoodMenuMenusFoodMenuCategory.php:validation for field ID;validation for field food_menu_menu_id;validation for field food_menu_category_id
+msgid "alphanumeric"
+msgstr ""
+
+#: Model\FoodMenuCategory.php:validation for field name
+#: Model\FoodMenuEntry.php:validation for field name
+#: Model\FoodMenuMenu.php:validation for field name
+msgid "This entry already exists."
+msgstr ""
+
+#: Model\FoodMenuCategory.php:validation for field name
+#: Model\FoodMenuEntry.php:validation for field name
+msgid "This field name has to be filled."
+msgstr ""
+
+#: Model\FoodMenuCategory.php:validation for field name
+#: Model\FoodMenuEntry.php:validation for field name
+#: Model\FoodMenuMenu.php:validation for field name
+msgid "You have to enter numbers or letters."
+msgstr ""
+
+#: Model\FoodMenuEntry.php:validation for field currency
+msgid "Please enter a valid currency."
+msgstr ""
+
+#: Model\FoodMenuEntry.php:validation for field price
+msgid "Please enter a decimal value with two digits."
+msgstr ""
+
+#: Model\FoodMenuMenu.php:validation for field name
+msgid "This field has to be filled."
+msgstr ""
+
+#: Model\FoodMenuMenu.php:validation for field valid_from;validation for field valid_until
+msgid "Please enter a date."
+msgstr ""
+
