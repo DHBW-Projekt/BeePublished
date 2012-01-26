@@ -18,7 +18,7 @@
 		
 	<div class="newsletter">
 		<?php 
-			$text = __('Please click here if you want to unsubscribe from this newsletter: ');
+			$text = __d('newsletter','Please click here if you want to unsubscribe from this newsletter: ');
 			echo $text; 
 			echo $this->Html->link('Unsubscribe', 'http://'.env('SERVER_NAME', array('class' => 'newsletter')));
 		?>
