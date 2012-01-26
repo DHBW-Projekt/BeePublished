@@ -18,7 +18,7 @@
 </head>
 <body class="overlay">
 <div id="overlay-header">
-    <?php echo $this->Html->image('beelogo_small.png'); ?>
+    <?php echo $this->Html->image('beelogo_b_small.png'); ?>
 </div>
 <div id="content" class="overlay">
     <?php echo $this->Session->flash(); ?>

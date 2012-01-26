@@ -3,7 +3,7 @@
          class="closed"><?php echo $this->Html->image("tools.png", array('width' => 32, 'height' => 32)); ?></div>
     <div id="sidebar-shadow"></div>
     <div id="sidebar-top">
-        <div id="logo"><?php echo $this->Html->image("beelogo.png", array('width' => 180)); ?></div>
+        <div id="logo"><?php echo $this->Html->image("beelogo_w_small.png", array('width' => 180)); ?></div>
         <hr/>
         <div class="button-bar">
             <?php echo $this->Html->image("group.png", array(
