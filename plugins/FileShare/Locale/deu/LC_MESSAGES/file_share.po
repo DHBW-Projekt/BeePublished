@@ -1,0 +1,51 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2012-01-26 11:47+0100\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+msgid "Filename"
+msgstr "Dateiname"
+
+msgid "Size"
+msgstr "Größe"
+
+msgid "Options"
+msgstr "Optionen"
+
+msgid "Delete file"
+msgstr "Datei löschen"
+
+msgid "Do you really want to delete this file?"
+msgstr "Wollen Sie diese Datei wirkich löschen?"
+
+msgid "Download"
+msgstr "Herunterladen"
+
+msgid "Download Expiring"
+msgstr "Herunterladen Verfallend"
+
+msgid "save"
+msgstr "speichern"
+
+msgid "numeric"
+msgstr "numerisch"
+
+msgid "notempty"
+msgstr "nicht leer"
+
+msgid "Your files"
+msgstr "Ihre Dateien"
+
+msgid "Upload"
+msgstr "Hochladen"
