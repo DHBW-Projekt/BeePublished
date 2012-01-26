@@ -111,7 +111,7 @@ class ViewComponent extends Component {
         	} else $selectedDate = '';
         } else $selectedDate = '';
         $controller->set('selectedDate', $selectedDate);
-        $controller->set('webroot', $this->webroot);
+        $controller->set('webroot', $controller->webroot);
         return $data;
 	}
 }

@@ -25,4 +25,8 @@ class GuestbookPost extends AppModel {
 		),
 	);	
 	
+	function invalidate($field, $value = true) {
+		return parent::invalidate($field, __d("Guestbook", $value, true));
+	}
+	
 }
