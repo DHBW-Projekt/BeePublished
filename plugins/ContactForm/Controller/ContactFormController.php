@@ -10,7 +10,7 @@ class ContactFormController extends AppController {
 	//Attributes
 	var $layout = 'overlay';
 	
-   /**
+   	/**
 	* Admin View
 	*/
 	public function admin($contentID) {
