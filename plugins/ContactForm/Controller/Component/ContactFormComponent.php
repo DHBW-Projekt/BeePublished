@@ -6,7 +6,6 @@ class ContactFormComponent extends Component {
 
 	//LOAD components
 	var $components = array('BeeEmail', 'Config');
-	var $layout = 'default';
 
 	/**
 	* Method to transfer data from plugin to CMS.
@@ -105,7 +104,7 @@ class ContactFormComponent extends Component {
 										$viewName = 'ContactForm.contact'
 		);
 		$controller->Session->setFlash(__d('contact_form','Thank you for your interest. Your request has been sent.'), 'flash_success');
-
+		
 		//REDIRECT
 		$controller->redirect($myUrl);
 	}
