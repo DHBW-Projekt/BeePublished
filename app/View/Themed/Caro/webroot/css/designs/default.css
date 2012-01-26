@@ -112,7 +112,7 @@ form>div {
     color: #cccccc;
 }
 
-input[type=text], input[type=password], textarea, select{
+input[type=text], input[type=password],input[type=number], textarea, select{
     border: 1px solid #DCDCDC;
     box-shadow: 0 0 2px #DDDDDD inset;
 	
