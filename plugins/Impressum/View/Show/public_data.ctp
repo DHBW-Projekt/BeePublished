@@ -1,5 +1,5 @@
-﻿<h2>
-	<?php echo __('Bitte geben Sie die Daten Ihres Unternehmens ein.') ?>
+<h2>
+	<?php echo __('Bitte geben Sie die Daten Ihrer Körperschaft ein.') ?>
 </h2>
 <br>
 <?php
@@ -7,19 +7,19 @@
 														   	  'controller' => 'Show',
 															  'action'	   => 'generalData')));
 	
-	echo $this->Form->label('Impressum.comp_name', __('Firma:'));
-	if (!empty($input['Impressum']['comp_name'])) {
-		echo $this->Form->input('Impressum.comp_name', array('label' => false, 'value' => $input['Impressum']['comp_name']));
-	} else {
-		echo $this->Form->input('Impressum.comp_name', array('label' => false));
-	}
-	
-	echo $this->Form->label('Impressum.legal_form', __('Rechtsform:'));
+	echo $this->Form->label('Impressum.legal_form', __('Form:'));
 	if (!empty($input['Impressum']['legal_form'])) {
 		echo $this->Form->input('Impressum.legal_form', array('label' => false, 'value' => $input['Impressum']['legal_form']));
 	} else {
 		echo $this->Form->input('Impressum.legal_form', array('label' => false));
 	}
+	
+	echo $this->Form->label('Impressum.comp_name', __('Bezeichnung:'));
+	if (!empty($input['Impressum']['comp_name'])) {
+		echo $this->Form->input('Impressum.comp_name', array('label' => false, 'value' => $input['Impressum']['comp_name']));
+	} else {
+		echo $this->Form->input('Impressum.comp_name', array('label' => false));
+	}	
 	
 	echo $this->Form->label('Impressum.street', __('Straße:'));
 	if (!empty($input['Impressum']['street'])) {
