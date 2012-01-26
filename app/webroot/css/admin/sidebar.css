@@ -8,7 +8,7 @@ body.sidebar-open {
     top: 0;
     left: -200px;
     z-index: 999;
-    border-right: 1px solid #999999;
+ 
 }
 
 #sidebar.opened {
@@ -17,28 +17,29 @@ body.sidebar-open {
 
 #sidebar-opener {
     left: 0px;
-    top: 50px;
+    top: 76px;
     width: 32px;
     height: 32px;
     z-index: 100;
-    border-top: 1px solid #999999;
-    border-bottom: 1px solid #999999;
-    border-right: 1px solid #999999;
+	padding: 3px;
 	-moz-border-radius: 0 5px 5px 0px;
     -webkit-border-radius: 0 5px 5px 0px;
     border-radius: 0 5px 5px 0px;
+	position: fixed;
+    background-color: #333;
+  
 }
 
 #sidebar-opener.opened {
     left: 200px;
 }
 
-#sidebar, #sidebar-opener {
+#sidebar {
     position: fixed;
     background-color: #666;
-    box-shadow: -10px -10px 20px #333 inset;
-    -webkit-box-shadow: -10px -10px 20px #333 inset;
-    -moz-box-shadow: -10px -10px 20px #333 inset;
+    box-shadow: -10px -10px 10px #333 inset;
+    -webkit-box-shadow: -10px -10px 10px #333 inset;
+    -moz-box-shadow: -10px -10px 10px #333 inset;
 }
 
 
