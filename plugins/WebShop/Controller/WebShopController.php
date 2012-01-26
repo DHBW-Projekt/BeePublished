@@ -112,7 +112,7 @@ class WebShopController extends WebShopAppController {
 				));
 				
 				if ($this->WebshopProduct->validates())
-					$this->WebshopProduct->save();
+					$create_error = !$this->WebshopProduct->save();
 				else 
 					$create_error = true;
 			}
