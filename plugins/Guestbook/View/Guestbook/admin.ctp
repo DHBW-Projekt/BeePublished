@@ -24,6 +24,15 @@ $this->Html->css('/Guestbook/css/design',null,array('inline' => false));
 			<th><?php echo __d('Guestbook', 'Date')?></th>
 		</tr>
 	</thead>
+	<tfoot>
+		<tr>
+			<td colspan="3">
+				<?php echo $this->Html->image('/app/webroot/img/arrow.png', array('height' => 20,'width' => 20));?>
+				<?php echo $this->Form->submit(__d('Guestbook', 'Release'), array('name' => 'release', 'div' => false));?>
+				<?php echo $this->Form->submit(__d('Guestbook', 'Delete'), array('name' => 'delete', 'div' => false));?>
+			</td>
+		</tr>
+	</tfoot>
 	<tbody>
 		<?php foreach($unreleasedPosts as $GuestbookPost):?>
 		<tr>
@@ -35,13 +44,7 @@ $this->Html->css('/Guestbook/css/design',null,array('inline' => false));
 		</tr>
 		<?php endforeach;?>
 	</tbody>
-	<tfoot>
-		<tr>
-			<td><?php echo $this->Html->image('/app/webroot/img/arrow.png', array('height' => 20,'width' => 20));?></td>
-			<td><?php echo $this->Form->submit(__d('Guestbook', 'Release'), array('name' => 'release', 'div' => false));?></td>
-			<td><?php echo $this->Form->submit(__d('Guestbook', 'Delete'), array('name' => 'delete', 'div' => false));?></td>
-		</tr>
-	</tfoot>
+	
 </table>	
 <?php echo $this->Form->end();?>
 </div>
