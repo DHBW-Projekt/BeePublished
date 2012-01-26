@@ -17,12 +17,12 @@ msgstr ""
 #: View/Elements/NewsblogDetail.ctp:32
 #: View/Elements/NewsblogOverview.ctp:93
 msgid "infostring"
-msgstr "by <author> on <date> at <time>"
+msgstr "by :-author-: on :-date-: at :-time-:"
 
 #: View/Elements/NewsblogDetail.ctp:37
 #: View/Elements/NewsblogOverview.ctp:97
 msgid "modifiedstring"
-msgstr "modified by <editor> on <date> at <time>"
+msgstr "modified on :-date-: at :-time-:"
 
 #: View/Elements/NewsblogOverview.ctp:41
 msgid "ShowHideConfiguration"
