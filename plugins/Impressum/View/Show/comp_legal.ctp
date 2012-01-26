@@ -7,18 +7,16 @@
 														   	  'controller' => 'Show',
 															  'action'	   => 'compLegal'))); 
 	
-	echo $this->Form->label('Impressum.vat_no', __('Umsatzsteuer-ID:'));
 	if (!empty($input['Impressum']['vat_no'])) {
-		echo $this->Form->input('Impressum.vat_no', array('label' => false, 'value' => $input['Impressum']['vat_no']));
+		echo $this->Form->input('Impressum.vat_no', array('label' => __('Umsatzsteuer-ID:'), 'value' => $input['Impressum']['vat_no']));
 	} else {
-		echo $this->Form->input('Impressum.vat_no', array('label' => false));
+		echo $this->Form->input('Impressum.vat_no', array('label' => __('Umsatzsteuer-ID:')));
 	}
 	
-	echo $this->Form->label('Impressum.eco_no', __('Wirtschafts-ID:'));
 	if (!empty($input['Impressum']['eco_no'])) {
-		echo $this->Form->input('Impressum.eco_no', array('label' => false, 'value' => $input['Impressum']['eco_no']));
+		echo $this->Form->input('Impressum.eco_no', array('label' => __('Wirtschafts-ID:'), 'value' => $input['Impressum']['eco_no']));
 	} else {
-		echo $this->Form->input('Impressum.eco_no', array('label' => false));
+		echo $this->Form->input('Impressum.eco_no', array('label' => __('Wirtschafts-ID:')));
 	}
 ?>
 <br>
