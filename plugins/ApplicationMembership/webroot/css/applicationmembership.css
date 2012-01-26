@@ -12,7 +12,7 @@ label{
  *  Styling of elements.
  */
 #applicationmembership_admin{
-	width:100%;
+	
 }
 
 .applicationmembership_oath{
@@ -36,4 +36,9 @@ label{
 
 #ApplicationMembershipComment{
 	width:300px;
+	visibility: visible;
+}
+
+.input.textarea label {
+	display: block;
 }
