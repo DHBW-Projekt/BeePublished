@@ -1,7 +1,7 @@
 <!-- Frame to integrate the elements -->
 <?php
 //CALL stylesheet
-echo $this->Html->css('/ApplicationMembership/css/application_membership');
+echo $this->Html->css('/ApplicationMembership/css/applicationmembership');
 ?>
 
 <div id="application_membership_content">
