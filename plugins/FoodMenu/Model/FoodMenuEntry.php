@@ -32,7 +32,7 @@ class FoodMenuEntry extends AppModel {
          		)
 		),
 		'currency' => array(
-				'rule' => array('inList', array('EUR', 'USD', 'CAD', 'GBP')),
+				'rule' => array('inList', array('EUR', 'USD', 'CAD', 'GBP', 'CHF')),
 				'message' => 'Please enter a valid currency.'
 		),
 		'price' => array(

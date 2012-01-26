@@ -11,11 +11,11 @@
  	 echo $this->Form->hidden('refererurl', array('value' => $url, 'name' => 'data[refererurl]'));
  }
  echo '<p>';
- echo $this->Html->link((__('today')), '#', array('onClick' => 'setToday()', 'id' => 'today'));
- echo '   <input id="datepicker" value="' . $date . '" name="data[datepicker]" type="text" size="10"/>   ';     
- echo $this->Html->link((__('tomorrow')), '#', array('onClick' => 'setTomorrow()', 'id' => 'tomorrow'));
- echo $this->Form->button((__('Select date')), array('type' => 'submit', 'id' => 'selectDate'));
- //echo $this->Html->scriptBlock('$(function() {$( "#datepicker" ).datepicker( {  showOn: "button", buttonImage: window.app.webroot+"calendar.png", buttonImageOnly: true, showOptions: {direction: \'down\'}} );});', array('inline'=>'true'));
+ echo $this->Html->link((__('today')), '#', array('onClick' => 'setToday()', 'id' => 'today')).' ';
+ echo $this->Html->link((__('tomorrow')), '#', array('onClick' => 'setTomorrow()', 'id' => 'tomorrow')).' ';
+ echo '   <input id="datepicker" value="' . $date . '" name="data[datepicker]" type="text" size="10"/>';     
+ 
+ echo $this->Form->button((__('Show')), array('type' => 'submit', 'id' => 'selectDate'));
  echo $this->Form->end();
  echo '</p>';
  ?>          

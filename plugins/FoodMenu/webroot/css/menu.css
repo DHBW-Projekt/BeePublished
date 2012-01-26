@@ -113,3 +113,43 @@ ul.FoodMenuMenu a:active {
 .viewEntries {
 	width: 80%
 }
+
+#sortable1, #sortable2 { 
+	list-style-type: none;
+	margin: 0; 
+	padding: 0; 
+	float: left; 
+	margin-right: 10px; 
+	}
+#sortable1 li, #sortable2 li {
+	margin: 0 5px 5px 5px; 
+	padding: 5px; 
+	font-size: 1.2em; 
+	width: 120px; 
+	}
+	
+#sortable-left{
+   position:relative;
+   text-align:left;
+   float: left;
+   width: 40%;
+   height: 30em;
+   margin-right: 10px;
+   background-color: #FFF;
+   border: 1px solid #333;
+   overflow: auto;
+   overflow-x:hidden;
+}
+
+#sortable-right{
+   position:relative;
+   text-align:left;
+   float: left;
+   width: 40%;
+   height: 30em;
+   margin-right: 10px;
+   background-color: #C0C0C0;
+   border: 1px solid #333;
+   overflow: auto;
+   overflow-x:hidden;
+}

@@ -11,7 +11,17 @@
 		echo $this->Form->input('name', array('value' => $entry['FoodMenuEntry']['name'], 'label' => (__('Name:'))));
 		echo $this->Form->input('description', array('div' => 'mandatory', 'type' => 'textarea', 'value' => $entry['FoodMenuEntry']['description'], 'label' => (__('Description:'))));
 		echo $this->Form->input('price', array('value' => $entry['FoodMenuEntry']['price'], 'label' => (__('Price:'))));
-		echo $this->Form->input('currency', array('value' => $entry['FoodMenuEntry']['currency'], 'label' => (__('Currency:'))));
+		//echo $this->Form->input('currency', array('value' => $entry['FoodMenuEntry']['currency'], 'label' => (__('Currency:'))));
+		$options = array(
+					'EUR' => __('Euro'), 
+					'USD' => __('US Dollar'), 
+					'CAD' => __('Canadian Dollar'), 
+					'GBP' => __('Great Britain Pound'), 
+					'CHF' => __('Swiss Frank')
+					);
+		echo $this->Form->label(__('Currency:'));
+		echo $this->Form->select('currency', $options, array('selected' => $entry['FoodMenuEntry']['currency'])) . '<br />';
 		echo $this->Form->end(__('Save'));
+		echo $entry['FoodMenuEntry']['currency'];
 	}
 ?>
