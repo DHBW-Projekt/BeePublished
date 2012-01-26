@@ -21,6 +21,5 @@
 		echo $this->Form->label(__d('food_menu', 'Currency:'));
 		echo $this->Form->select('currency', $options, array('default' => $entry['FoodMenuEntry']['currency'])) . '<br />';
 		echo $this->Form->end(__d('food_menu', 'Save'));
-		echo $entry['FoodMenuEntry']['currency'];
 	}
 ?>

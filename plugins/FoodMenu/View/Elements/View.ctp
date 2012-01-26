@@ -11,14 +11,11 @@
 	if(!(isset($url))) $url = '';
 	echo $this->element('SelectDate', array('url' => $url, 'selectedDate' => $selectedDate));
 	
-//	if ($selectedDate != '') $selectedDate = str_replace('/', '-', $selectedDate);
-	
 	if(!(isset($categories))) $categories = '';
 	if(!(isset($entries))) $entries = '';
 	
 	/* initial call, $data is set by component */
 	if (isset($data['show'])) {
-		debug($data['show']);
 		if(array_key_exists('FoodMenuMenu', $data['show'])) {
 			
 			if (array_key_exists('SelectedMenu', $data['show'])) {
