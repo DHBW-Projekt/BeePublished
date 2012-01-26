@@ -9,7 +9,7 @@ class DisplayGalleryComponent extends Component
 			$data = $this->Gallery->getGallery($controller,$params['galleryID']);
 			$data['view'] = 'Single';
 			return $data;
-		}else {
+		} else {
 			return null;
 		}
 	}
