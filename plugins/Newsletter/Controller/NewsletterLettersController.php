@@ -12,6 +12,7 @@ class NewsletterLettersController extends NewsletterAppController {
 		'Newsletter.NewsletterRecipient',
 		'Newsletter.EmailTemplate', 
 		'Newsletter.EmailTemplateHeader');
+	var $components = array('BeeEmail');
 	
 	public function index($contentID, $pluginId){
 		$newsletters = $this->NewsletterLetter->find('all', array(
@@ -177,22 +178,11 @@ class NewsletterLettersController extends NewsletterAppController {
 				'NewsletterRecipient.email'),
 			'conditions' => array(
 				'active' => 1)));
-		$server = env('SERVER_NAME');
-		$port = env('SERVER_PORT');
-		
-		if($server == 'localhost') {
-			$server = $server.'.de';
-		}
 		foreach ($recipients as $recipient){
-			$email = new CakeEmail();
-			$email->emailFormat('html')
-			->template('Newsletter.newsletter', 'Newsletter.newsletter')
-			->subject($newsletter['NewsletterLetter']['subject'])
-			->to($recipient['NewsletterRecipient']['email'])
-			->from('noreply@'.$server, 'DualonCMS')
-			->viewVars(array(
-				'text' => $newsletter['NewsletterLetter']['content']))
-			->send();
+			$this->BeeEmail->sendHtmlEmail(
+				$recipient['NewsletterRecipient']['email'],
+				$newsletter['NewsletterLetter']['subject'],
+				$newsletter['NewsletterLetter']['content']);
 		} //foreach
 		$newsletter['NewsletterLetter']['draft'] = 0;
 		$this->NewsletterLetter->set($newsletter);

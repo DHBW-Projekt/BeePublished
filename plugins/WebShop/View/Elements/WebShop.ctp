@@ -5,5 +5,5 @@
 ?>
 
 <div id="webshop_content">
-	<?php echo $this->element($data['Element'], array('data' => $data['data'], 'url' => $url) ); ?>
+	<?php echo $this->element($data['Element'], array('data' => $data['data'], 'url' => $url, 'pluginID' => $pluginId) ); ?>
 </div>

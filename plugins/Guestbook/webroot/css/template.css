@@ -4,7 +4,7 @@ div #guestbook_link{
 	margin-left: 1em;
 }
 
-div.guestbook_write {
+div #guestbook_write {
 	padding: 1em;
 	margin: 1em;
 }
@@ -29,6 +29,10 @@ div.guestbook_post_author {
 
 div.guestbook_post_text{
 	clear: both;
+}
+
+label.recaptcha_input_area_text{
+	float: none;
 }
 
 div.guestbook_navigation {
