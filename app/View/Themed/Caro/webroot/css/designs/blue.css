@@ -112,11 +112,12 @@ form>div {
     color: #cccccc;
 }
 
-input[type=text], input[type=password], textarea, select{
+input[type=text], input[type=password], textarea{
     border: 1px solid #DCDCDC;
     box-shadow: 0 0 2px #DDDDDD inset;
 	
 }
+
 
 
 form label {
@@ -165,21 +166,16 @@ h5 {
     color: #a00000;
 }
 
-
-.flash_success, #flashMessage.message {
-    background: none repeat scroll 0 0 #E2F1A8;
-    border: 3px solid #BEDF5D;
-	font-weight: bold;
-	font-size: 14px;
+.flash_success {
+    border: 3px solid #bedf5d;
+    background: #e2f1a8;
+    font-weight: bold;
 }
-
-
 
 .flash_failure {
     border: 3px solid #990000;
     background-color: #f97d88;
     font-weight: bold;
-	font-size: 14px;
 }
 
 table {
