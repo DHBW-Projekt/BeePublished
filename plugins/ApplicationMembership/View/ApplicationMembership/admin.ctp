@@ -57,7 +57,7 @@
 						</tr>
 						<tr>
 							<td><?php echo __d('application_membership','Telephone:'); ?></td>
-							<td<?php echo $application['ApplicationMembership']['telephone']; ?></td>
+							<td><?php echo $application['ApplicationMembership']['telephone']; ?></td>
 						</tr>
 							<tr>
 							<td><?php echo __d('application_membership','Street:'); ?></td>

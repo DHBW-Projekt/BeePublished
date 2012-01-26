@@ -1,7 +1,11 @@
-<?php $DateTimeHelper = $this->Helpers->load('Time');?>
+<?php
+//CAPTCHA
+App::import('Vendor','recaptcha/recaptchalib');
+$publickey = "6LfzYcwSAAAAAN3vRDzZKXkC0rYkwaKQTi8hMkj6";
+?>
 
-<div id='application_membership_form'>
-<h2><?php __d('application_membership','Application for membership'); ?></h2>
+<div id='applicationmembership_form'>
+<h2><?php echo __d('application_membership','Application for membership'); ?></h2>
 <?php
 $validationError = $this->Session->read('Validation.ApplicationMembership.validationErrors');
 echo $this->Session->flash('ApplicationMembership');
@@ -9,9 +13,9 @@ echo $this->Session->flash('ApplicationMembership');
 echo $this->Form->create('ApplicationMembership', array('url' => $url.'/applicationmembership/send'));
 ?>
 
-<br>
-<?php __('application_membership','I hereby apply for membership in this association:'); ?>
-<br>
+<p class="applicationmembership_oath">
+<?php echo __d('application_membership','I hereby apply for membership in this association:'); ?>
+</p>
 
 <div class="input">
 <?php echo $this->Form->label('type', __d('application_membership','Membership*'));?>
@@ -64,8 +68,12 @@ $attributes = array('label' => false, 'dateFormat' => 'DMY', 'minYear' => date("
 
 <!--<?php echo $this->Form->label('comment', __('Comment'));?>-->
 <?php echo $this->Form->input('comment', array('label' => __d('application_membership','Comment'), 'rows' => '4','id'=>'ApplicationMembershipComment')); ?>
+<?php echo recaptcha_get_html($publickey); ?>
 
-<?php __d('application_membership','The marked fields(*) are required.'); ?>
+<p class="applicationmembership_fieldinfo">
+<?php echo __d('application_membership','The marked fields(*) are required.'); ?>
+</p>
+
 
 <?php echo $this->Form->end(__d('application_membership','Send'));?>
 </div>
