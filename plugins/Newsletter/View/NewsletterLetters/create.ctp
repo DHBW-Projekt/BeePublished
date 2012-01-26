@@ -2,7 +2,7 @@
 
 $validationErrors = $this->Session->read('Validation.NewsletterLetter.validationErrors');
 
-echo $this->element('admin_menu', array('contentID' => $contentID));
+echo $this->element('admin_menu', array('contentID' => $contentID, 'pluginId' => $pluginId));
 echo $this->Session->flash('NewsletterSaved');
 if (isset($newsletter)){
 	$this->Html->script('ckeditor/ckeditor', false);;
@@ -12,9 +12,9 @@ if (isset($newsletter)){
 		'url' => array(
 			'plugin' => 'Newsletter',
     		'controller' => 'NewsletterLetters',
-    		'action' => 'saveNew', $contentID)));
+    		'action' => 'saveNew', $contentID, $pluginId)));
 	echo $this->Form->input('NewsletterLetter.subject', array(
-		'label' => __('Subject:')));
+		'label' => __d('newsletter','Subject:')));
 	if (isset($validationErrors['subject'][0])){
 		echo $this->Html->div('validation_error',$validationErrors['subject'][0]);
 	};
@@ -22,6 +22,6 @@ if (isset($newsletter)){
 		'label' => '', 
 		'rows' => '30',
 		'value' => $newsletter['content']));
-	echo $this->Form->submit(__('Save'));
+	echo $this->Form->submit(__d('newsletter','Save'));
 	echo $this->Form->end();
 }

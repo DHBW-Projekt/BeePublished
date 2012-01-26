@@ -188,3 +188,22 @@ a {
     border: 1px solid #2E2E2E;
     border-top: 0;
 }
+
+table {
+    border-spacing: 0px;
+    margin: 1em 0;
+}
+
+
+th {
+    background-color: #DADADA;
+    border: none;
+    border-right: 1px solid #5d5d5d;
+    border-bottom: 1px solid #5d5d5d;
+}
+
+
+td {
+    border: none;
+    border-right: 1px solid #5d5d5d;
+}

@@ -5,7 +5,7 @@
 <?php
 	echo $this->Form->create('Impressum',array('url' => array('plugin'     => 'Impressum',
 														   	  'controller' => 'Show',
-															  'action'	   => 'clubData')));
+															  'action'	   => 'generalData')));
 	
 	echo $this->Form->label('Impressum.comp_name', __('Vereinsbezeichnung:'));
 	if (!empty($input['Impressum']['comp_name'])) {

@@ -225,3 +225,23 @@ form div {
     font-weight: bold;
     float: left;
 }
+
+
+th {
+    padding: 0.5em;
+}
+
+
+td {
+    padding: 0.5em;
+}
+
+
+td:last-of-type {
+    border-right: none;
+}
+
+
+th:last-of-type {
+    border-right: none;
+}

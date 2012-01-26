@@ -1,0 +1,39 @@
+@CHARSET "UTF-8";
+
+td[name=applicationDoneField]{
+	vertical-align:top;
+}
+
+label{
+	width:180px;
+}
+
+/**
+ *  Styling of elements.
+ */
+#applicationmembership_admin{
+	width:100%;
+}
+
+.applicationmembership_oath{
+	margin-top:10px;
+	margin-bottom:10px;
+	font-weight:bold;
+}
+
+.applicationmembership_fieldinfo{
+	margin-top:10px;
+	margin-bottom:10px;
+	font-style:italic;
+}
+
+/**
+ *  Styling of Cake coding
+ */
+ #ApplicationMembershipDateOfBirthDay, #ApplicationMembershipDateOfBirthMonth, #ApplicationMembershipDateOfBirthYear{
+	width:60px;
+}
+
+#ApplicationMembershipComment{
+	width:300px;
+}
