@@ -21,7 +21,8 @@ class AppController extends Controller
     function beforeFilter()
     {
         $this->theme = $this->Config->getValue('active_template');
-        $this->set('design',$this->Config->getValue('active_design'));
+        $this->set('mobile',$this->RequestHandler->isMobile());
+        $this->set('design', $this->Config->getValue('active_design'));
         $this->Session->write('Config.language', Configure::read('Config.language'));
     }
 

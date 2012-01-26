@@ -10,7 +10,11 @@
     echo $this->Html->css('yaml/core/base');
     echo $this->Html->css('fancybox/jquery.fancybox-1.3.4');
     echo $this->Html->css('designs/' . $design);
-    echo $this->Html->css('template');
+    if ($mobile) {
+        echo $this->Html->css('mobile');
+    } else {
+        echo $this->Html->css('template');
+    }
     echo $this->Html->css('menu-design');
     echo $this->Html->css('menu-template');
     echo $this->Html->script('jquery/jquery-1.6.2.min');
