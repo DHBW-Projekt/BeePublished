@@ -2,6 +2,13 @@
 $this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
 echo $this->Session->flash();
 echo $this->element('admin_menu_galleries',array("ContentId" => $data['ContentId']));
+
+
+	$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create');
+	$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'edit');
+	$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete');
+	
+	
 echo "<h1> ".__('Manage Your Galleries')."</h1>";
 
 echo '<div class="galleryinfo">'.__('Here you can edit, delete your galleries or assign pictures to them').'</div>';
@@ -33,6 +40,7 @@ foreach ($data['AllGalleries'] as $gallery){
 		echo "<td>".$gallery['GalleryEntry']['description']."</td>";
 	
 		echo '<td>';
+		if($editAllowed){
 			echo $this->Html->link($this->Html->image('/app/webroot/img/edit.png', array(
 							'height' => 20, 
 							'width' => 20, 
@@ -45,9 +53,12 @@ foreach ($data['AllGalleries'] as $gallery){
 								'escape' => false, 
 								'title' => __('Edit Gallery')),
 								__('Do you really want to edit this Gallery?'));
+		};
 		echo '</td>';
 	
 		echo '<td>';
+		
+			if($deleteAllowed){
 			echo $this->Html->link($this->Html->image('/app/webroot/img/delete.png', array(
 							'height' => 20, 
 							'width' => 20, 
@@ -60,10 +71,13 @@ foreach ($data['AllGalleries'] as $gallery){
 								'escape' => false, 
 								'title' => __('Delete Gallery')),
 								__('Do you really want to delete this Gallery?'));
+			}
 		echo '</td>';
 	
 		echo '<td>';
-			echo $this->Html->image('/app/webroot/img/add2.png',array('style' => 'float: left', 'width' => '20px', 'alt' => '[]Assign', 'url' => array('plugin' => 'Gallery', 'controller' => 'ManageGalleries', 'action' => 'assignImages',$gallery['GalleryEntry']['id'],$data['ContentId'])));
+			if($editAllowed){
+				echo $this->Html->image('/app/webroot/img/add2.png',array('style' => 'float: left', 'width' => '20px', 'alt' => '[]Assign', 'url' => array('plugin' => 'Gallery', 'controller' => 'ManageGalleries', 'action' => 'assignImages',$gallery['GalleryEntry']['id'],$data['ContentId'])));
+			}		
 		echo '</td>';
 		
 	echo "</tr>";

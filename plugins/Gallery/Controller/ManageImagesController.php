@@ -1,9 +1,20 @@
 <?php
-class ManageImagesController  extends AppController{
+class ManageImagesController  extends GalleryAppController{
 	var $layout = 'overlay';
 	
 	public $components = array('Gallery.GalleryPictureComp');
+	
+	
+	function beforeRender()
+    {
+        parent::beforeRender();
 
+        //Get PluginId for PermissionsValidation Helper
+        $pluginId = $this->getPluginId();
+        $this->set('pluginId', $pluginId);
+    }
+	
+    
 	/**
 	 * Need to pass the content id -> user could switch back to the set set image tab
 	 * @param int $contentId
@@ -25,7 +36,10 @@ class ManageImagesController  extends AppController{
 	 * Enter description here ...
 	 */
 	public function uploadImage($contentId){
-		//debug($this->request);
+		
+		$pluginId = $this->getPluginId();
+		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
+		
 		
 		$image = array('name' => $this->data['addImage']['File']['name'],
 								'tmp_name' => $this->data['addImage']['File']['tmp_name'],
@@ -42,7 +56,10 @@ class ManageImagesController  extends AppController{
 	 * transforms the form input for internal procession
 	 */
 	public function uploadImages($contentId){
-		//debug($this->request);
+		
+		$pluginId = $this->getPluginId();
+		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
+		
 		
 		for($i = 0;$i<count($this->params['form']['files']['name']);$i++){
 			//echo $i;
@@ -61,6 +78,11 @@ class ManageImagesController  extends AppController{
 	}
 	
 	public function create($contentId){
+		
+		$pluginId = $this->getPluginId();
+		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
+		
+		
 		$data = array('ContentId' => $contentId );
 		$this->set('data',$data);
 	}
@@ -100,12 +122,20 @@ class ManageImagesController  extends AppController{
 	}
 	
 	public function delete($pictureId, $contentId){
+		
+		$pluginId = $this->getPluginId();
+		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete', true);
+		
 		$this->deletePictureInternal($pictureId);
 		$this->Session->setFlash('Image deleted');
 		$this->redirect($this->referer());
 	}
 	
 	public function deleteSelected($contentId){
+		$pluginId = $this->getPluginId();
+		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete', true);
+		
+		
 		foreach($this->data['selectPictures'] as $imageId => $toBeDeleted){
 			if($toBeDeleted == 1){
 				$this->deletePictureInternal($imageId);
@@ -120,6 +150,11 @@ class ManageImagesController  extends AppController{
 	}
 
 	public function edit($pictureId,$contentId){
+		
+		$pluginId = $this->getPluginId();
+		$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'edit', true);
+		
+		
 		$picture = $this->GalleryPictureComp->getPicture($this,$pictureId);
 		
 		$data = array(	'Picture' => $picture,

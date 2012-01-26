@@ -2,9 +2,21 @@
 <dualon>
     <plugin>
         <name>Gallery</name>
-        <author>Alex, Fabian</author>
+        <author>Alexander Müller, Fabian Kajzar</author>
         <version>1.0</version>
         <permissions>
+        		<permission>
+        		<role>Admin</role>
+        		<action>create</action>
+        	</permission>
+        	<permission>
+        		<role>Admin</role>
+        		<action>edit</action>	
+        	</permission>
+        	<permission>
+        		<role>Admin</role>
+        		<action>delete</action>
+        	</permission>
         </permissions>
         <views>
         	<view>

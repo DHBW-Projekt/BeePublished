@@ -1,8 +1,8 @@
 <?php
 //backup webservice
-header('Content-Type: text/xml');
+//header('Content-Type: text/xml');
 include '../xmlbuilder.php';
-
+print_r($_POST);
 if(isset($_POST['DBPw']) && isset($_POST['DBLogin'])){
 		//variables
 		$db_server;

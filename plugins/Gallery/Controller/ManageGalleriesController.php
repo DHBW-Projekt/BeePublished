@@ -1,14 +1,25 @@
 <?php
-class ManageGalleriesController  extends AppController{
+class ManageGalleriesController  extends GalleryAppController{
 	public $layout = 'overlay';
 	
 	public $components = array('Gallery.Gallery','Gallery.GalleryPictureComp');
+	
+	function beforeRender()
+    {
+        parent::beforeRender();
+
+        //Get PluginId for PermissionsValidation Helper
+        $pluginId = $this->getPluginId();
+        $this->set('pluginId', $pluginId);
+    }
+	
 	
 	/**
 	 * Index function, to list all available Galleries
 	 * @param int $contentId
 	 */
 	public function index($contentId){
+		
 		$allGalls= $this->Gallery->getAllGalleries($this);
 		
 		$data = array(	'AllGalleries' => $allGalls,
@@ -29,7 +40,10 @@ class ManageGalleriesController  extends AppController{
 	 * @param int $contentId
 	 */
 	public function create($contentId){
-		//debug($this->request->data);
+		
+		$pluginId = $this->getPluginId();
+		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
+		
 		if (! $this->request->is('post')) {
 		$data = array( 'ContentId' => $contentId );
 		$pic_array = array();
@@ -63,6 +77,9 @@ class ManageGalleriesController  extends AppController{
 	 * @param int $contentId
 	 */
 	public function delete($galleryId, $contentId){
+		$pluginId = $this->getPluginId();
+		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete', true);
+		
 		$picture = $this->Gallery->delete($this,$galleryId);
 		$this->redirect($this->referer());
 	}
@@ -72,6 +89,9 @@ class ManageGalleriesController  extends AppController{
 	 * @param int $contentId
 	 */
 	public function deleteSelected($contentId){
+		$pluginId = $this->getPluginId();
+		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete', true);
+		
 		if ($this->request->is('post')){
 			$galleries=  $this->Gallery->getAllGalleries($this);
 			
@@ -93,6 +113,9 @@ class ManageGalleriesController  extends AppController{
 	 * @param id $contentId
 	 */
 	public function edit($galleryId,$contentId){
+		$pluginId = $this->getPluginId();
+		$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'edit', true);
+		
 		if ($this->request->is('post')) {
 				//debug($this->request->data);
 				if($this->Gallery->save($this,$this->request->data)) {
@@ -120,7 +143,9 @@ class ManageGalleriesController  extends AppController{
 	 * @param int $contentId
 	 */
 	public function assignImages($galleryId,$contentId){
-			
+			$pluginId = $this->getPluginId();
+			$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete', true);
+		
 			$this->set('available_pictures',$this->GalleryPictureComp->getAllUnAssignedPictures($this));
 			$this->set('gallery_pictures',$this->GalleryPictureComp->getAllPicturesGallery($this, $galleryId));
 			$this->set('galleryId', $galleryId);
