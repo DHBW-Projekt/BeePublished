@@ -1,0 +1,56 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2012-01-26 11:47+0100\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: View\Elements\MyFiles.ctp:71
+msgid "Filename"
+msgstr ""
+
+#: View\Elements\MyFiles.ctp:72
+msgid "Size"
+msgstr ""
+
+#: View\Elements\MyFiles.ctp:73
+msgid "Options"
+msgstr ""
+
+#: View\Elements\MyFiles.ctp:83;83
+msgid "Delete file"
+msgstr ""
+
+#: View\Elements\MyFiles.ctp:83
+msgid "Do you really want to delete this file?"
+msgstr ""
+
+#: View\Elements\MyFiles.ctp:84
+msgid "Download"
+msgstr ""
+
+#: View\Elements\MyFiles.ctp:85
+msgid "Download Expiring"
+msgstr ""
+
+#: View\MyFiles\admin.ctp:5
+msgid "save"
+msgstr ""
+
+#: Model\MyFile.php:validation for field ID;validation for field size;validation for field owner
+msgid "numeric"
+msgstr ""
+
+#: Model\MyFile.php:validation for field filename;validation for field type;validation for field path
+msgid "notempty"
+msgstr ""
+

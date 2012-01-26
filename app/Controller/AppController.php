@@ -11,7 +11,8 @@ class AppController extends Controller
             'loginAction' => array('controller' => 'Users', 'action' => 'login')
         ),
         'PermissionValidation',
-        'Config'
+        'Config',
+        'RequestHandler'
     );
 
     public $helpers = array('Html', 'Form', 'Session', 'Js', 'PermissionValidation');
@@ -21,13 +22,9 @@ class AppController extends Controller
     function beforeFilter()
     {
         $this->theme = $this->Config->getValue('active_template');
-        $this->set('design',$this->Config->getValue('active_design'));
-        
-    	if($this->Session->check('Config.language')) {
-            Configure::write('Config.language', $this->Session->read('Config.language'));
-        } else {
-            $this->Session->write('Config.language', Configure::read('Config.language'));
-        }
+        $this->set('mobile',$this->RequestHandler->isMobile());
+        $this->set('design', $this->Config->getValue('active_design'));
+        $this->Session->write('Config.language', Configure::read('Config.language'));
     }
 
     function afterFilter()

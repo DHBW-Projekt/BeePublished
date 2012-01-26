@@ -16,9 +16,9 @@ echo $this->Form->create('GuestbookPost', array('url' => array('plugin' => 'Gues
 // for each input field check whether a value is already present or an error had occured
 // author
 if (($input != NULL) && array_key_exists('author', $input['GuestbookPost'])){
-	echo $this->Form->input('GuestbookPost.author', array('label' => __('Name:'), 'value' => $input['GuestbookPost']['author']));
+	echo $this->Form->input('GuestbookPost.author', array('label' => __d('Guestbook', 'Name:'), 'value' => $input['GuestbookPost']['author']));
 } else {
-	echo $this->Form->input('GuestbookPost.author', array('label' => __('Name:')));
+	echo $this->Form->input('GuestbookPost.author', array('label' => __d('Guestbook', 'Name:')));
 }
 if (($errors != NULL) && array_key_exists('author', $errors) && array_key_exists('0', $errors['author'])){
 	echo $this->Html->div('validation_error',$errors['author']['0']);
@@ -26,9 +26,9 @@ if (($errors != NULL) && array_key_exists('author', $errors) && array_key_exists
 
 // title
 if (($input != NULL) && array_key_exists('title', $input['GuestbookPost'])){
-	echo $this->Form->input('GuestbookPost.title', array('label' => __('Title:'), 'value' => $input['GuestbookPost']['title']));
+	echo $this->Form->input('GuestbookPost.title', array('label' => __d('Guestbook', 'Title:'), 'value' => $input['GuestbookPost']['title']));
 } else{
-	echo $this->Form->input('GuestbookPost.title', array('label' => __('Title:')));
+	echo $this->Form->input('GuestbookPost.title', array('label' => __d('Guestbook', 'Title:')));
 }
 if (($errors != NULL) && array_key_exists('title', $errors) && array_key_exists('0', $errors['title'])){
 	echo $this->Html->div('validation_error',$errors['title']['0']);

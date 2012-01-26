@@ -5,6 +5,11 @@ App::uses('AppModel', 'Model');
  */
 class ApplicationMembership extends AppModel{
 	
+	function invalidate($field, $value = true) {
+		return parent::invalidate($field, __d("ApplicationMembership", $value, true));
+	}
+	
+	
 	/**
 	 * Validation
 	 */
@@ -24,6 +29,11 @@ class ApplicationMembership extends AppModel{
 			'first_name' => array(
 			        'rule' => 'notEmpty',
 			        'message' => 'Please enter your firstname.'
+			),
+			'date_of_birth' => array(
+						'rule' => 'date',
+						'allowEmpty'=> false,
+						'message' => 'Please enter your day of birth.'
 			),
 		    'email' => array(
 		     	   'rule' => 'email',

@@ -1,28 +1,31 @@
 <!--  Application Adminstration View -->
 <?php 
 	//LOAD css-file
-	$this->Html->css('/ApplicationMembership/css/application_membership');
+	echo $this->Html->css('/ApplicationMembership/css/applicationmembership');
 	
 	//LOAD menue
 	echo $this->element('admin_menu', array('contentID' => $contentID));
 ?>
 
-<div id="application_membership_admin">
+<div id="applicationmembership_admin">
 	<h2><?php echo __d('application_membership','Open Applications'); ?></h2>
 		<?php 
 		if(count($applications) == 0){
-			echo "<h2><?php echo echo __d('application_membership','There are no applications.');</h2>";
+			echo "<p>".__d('application_membership','There are no applications.')."</p>";
 		}
 		else{
+			echo $this->Form->create('SelectApplications', array('url' => array('controller' => 'ApplicationMembership', 'action' => 'doneSelection', $contentID)));
 		?>
-		<table >
-		<?php echo $this->Form->create('SelectApplications', array('url' => array('controller' => 'ApplicationMembership', 'action' => 'doneSelection', $contentID))); ?>
-			<tr>
-				<th><?php echo __d('application_membership','Done'); ?></th>
-				<th><?php echo __d('application_membership','Application'); ?></th>
-				<th><?php echo __d('application_membership','Action'); ?></th>
-			</tr>
-		<?php 
+		<table>
+			<thead>
+				<tr>
+					<th></th>
+					<th><?php echo __d('application_membership','Application'); ?></th>
+					<th><?php echo __d('application_membership','Action'); ?></th>
+				</tr>
+			</thead>
+			<tbody>
+			<?php 
 			foreach ((!isset($applications)) ? array() : $applications as $application) { 
 				
 				if($application['ApplicationMembership']['type'])
@@ -30,12 +33,15 @@
 				else
 					$type = 'passive';
 			?>
-			<tr >
+			<tr>
 				<td name="applicationDoneField"><?php echo $this->Form->checkbox($application['ApplicationMembership']['id']); ?></td>
 				<td>
-					<p><?php echo __d('application_membership','Address:'); ?></p>
 					<table>
 						<tr>
+							<td><?php echo __d('application_membership','Type:'); ?></td>
+							<td><?php echo $type;?></td>
+						</tr>
+						<tr class="applicationmembership_space">
 							<td><?php echo __d('application_membership','Title:'); ?></td>
 							<td><?php echo $application['ApplicationMembership']['title']; ?></td>
 						</tr>
@@ -57,64 +63,46 @@
 						</tr>
 						<tr>
 							<td><?php echo __d('application_membership','Telephone:'); ?></td>
-							<td<?php echo $application['ApplicationMembership']['telephone']; ?></td>
+							<td><?php echo $application['ApplicationMembership']['telephone']; ?></td>
 						</tr>
-							<tr>
+						<tr>
 							<td><?php echo __d('application_membership','Street:'); ?></td>
 							<td><?php echo $application['ApplicationMembership']['street']; ?></td>
 						</tr>
-							<tr>
+						<tr>
 							<td><?php echo __d('application_membership','ZIP:'); ?></td>
 							<td><?php echo $application['ApplicationMembership']['zip']; ?></td>
 						</tr>
-							<tr>
+						<tr>
 							<td><?php echo __d('application_membership','City:'); ?></td>
 							<td><?php echo $application['ApplicationMembership']['city']; ?></td>
 						</tr>
-						</tr>
-							<tr>
+						<tr class="applicationmembership_space">
 							<td><?php echo __d('application_membership','Comment:'); ?></td>
 							<td><?php echo $application['ApplicationMembership']['comment']; ?></td>
 						</tr>
-						</tr>
-							<tr>
-							<td><?php echo __d('application_membership','Type:'); ?></td>
-							<td><?php echo $type; ?></td>
-						</tr>						
-						
 					</table>				
-					
-					<?php /*echo $application['ApplicationMembership']['first_name']; ?>
-					<?php echo $application['ApplicationMembership']['date_of_birth']; ?>
-					<?php echo $application['ApplicationMembership']['email']; ?>
-					<?php echo $application['ApplicationMembership']['telephone']; ?>
-					<?php echo $application['ApplicationMembership']['street']; ?>
-					<?php echo $application['ApplicationMembership']['zip']; ?>
-					<?php echo $application['ApplicationMembership']['city']; ?>
-					</p>
-					<p><?php echo $application['ApplicationMembership']['comment']; */?>
 				</td>
 				<td>
 				<?php echo $this->Html->link($this->Html->image("test-pass-icon.png"),
 						array('action' => 'done', $contentID, $application['ApplicationMembership']['id']),
 						array('escape' => False)
-						);?>
+						);
+				?>
 				</td>
 			</tr>
-			<tr>
-			<td colspan="3">
-			<hr/>
-			</td>
-			</tr>
-			<?php
+		<?php
 		}
 		?>
-		</table>
-		
-		<?php
-		echo $this->Form->submit( __d('application_membership','Done'));
-		echo $this->Form->end();
-		
+		</tbody>
+		<tfoot>
+				<tr>
+					<td><?php echo $this->Html->image('arrow.png', array('height' => 20, 'width' => 20)); ?></td>
+					<td><?php echo $this->Form->end(__d('application_membership', 'Done')); ?></td>
+				</tr>
+		</tfoot>
+	</table>
+	<?php
 	}
 	?>
 </div>
