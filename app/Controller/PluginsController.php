@@ -21,10 +21,27 @@ class PluginsController extends AppController
         $this->loadModel('CakeSchema');
         $installed = $this->Plugin->find('all');
         foreach ($installed as $idx => $plugin) {
-            $plugin['status'] = $this->CMSPlugin->getInstallStatus($plugin['Plugin']['name']);
+            try {
+                $plugin['status'] = $this->CMSPlugin->getInstallStatus($plugin['Plugin']['name']);
+            } catch (Exception $e) {
+                $plugin['status'] = 99;
+            }
             $installed[$idx] = $plugin;
         }
-        $available = $this->CMSPlugin->getPluginList();
+        $allPlugins = $this->CMSPlugin->getPluginList();
+       	$available = array();
+        foreach($allPlugins as $idx => $av_Plugin){
+        	$found = 0;
+        	foreach($installed as $in_Plugin){
+        		if ($in_Plugin['Plugin']['name'] == $av_Plugin['name']){
+        			$found = 1;
+        			break;
+        		}
+        	}
+        	if ($found == 0){
+        		$available[$idx] = $av_Plugin;
+        	}
+        }
         $this->set('installed', $installed);
         $this->set('available', $available);
         $this->set('systemPage', false);

@@ -1,7 +1,11 @@
 .newsblogtitle{
 	font-style: italic;
 	padding:5px;
-	border-bottom: 3px solid #3292DD;
+}
+
+.newsblogtitle_border{
+	height: 3px;
+	line-height: 3px;
 }
 
 .newsblogcontainer{
