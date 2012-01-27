@@ -81,7 +81,7 @@ class MyFilesController extends FileShareAppController
     function delete($id)
     {
         $file = $this->MyFile->findById($id);
-        if ($file['MyFile']['owner'] != $this->Auth->user('id')) {
+        if ($file['MyFile']['owner'] != $this->Auth->user('id') && $this->Auth->user('role_id') < 6) {
             $this->Session->setFlash('You don\'t have permissions to delete ' . $file['MyFile']['filename']);
             $this->redirect($this->referer());
         }

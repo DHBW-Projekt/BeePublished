@@ -1,0 +1,58 @@
+.picturecollection {
+    clear: both;
+    width:70%;
+    margin-bottom: 10px;
+}
+
+.picture_head {
+    padding: 2px;
+}
+
+.users {
+    padding: 10px;
+    min-height: 85px;
+}
+
+.user_detail, .users-placeholder {
+    width: 125px;
+    height: 75px;
+    margin: 5px;
+    float: left;
+    padding: 5px;
+}
+
+.gallerytitle{
+	font-style: italic;
+	padding:5px;
+	border-bottom: 3px solid #3292DD;
+}
+
+.galleryinfo{
+	margin-top:20px;
+	margin-bottom:10px;
+}
+
+#picturetitle { 
+	text-align: left;
+}
+
+#picturetitle b { 
+	display: block;
+	margin-right: 80px; 
+}
+
+#picturesocial{ 
+	vertical-align:center;
+	padding:10px;
+	margin-top:10px
+}
+
+.galleryImage {
+	float: left;
+	margin: 5px;
+}
+
+.galleryTitle {
+	text-align: center;
+	font-weight: bold;
+}
