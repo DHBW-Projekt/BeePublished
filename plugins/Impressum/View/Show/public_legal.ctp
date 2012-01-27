@@ -7,11 +7,10 @@
 														   	  'controller' => 'Show',
 															  'action'	   => 'publicLegal'))); 
 	
-	echo $this->Form->label('Impressum.vat_no', __('Umsatzsteuer-ID:'));
 	if (!empty($input['Impressum']['vat_no'])) {
-		echo $this->Form->input('Impressum.vat_no', array('label' => false, 'value' => $input['Impressum']['vat_no']));
+		echo $this->Form->input('Impressum.vat_no', array('label' => __('Umsatzsteuer-ID:'), 'value' => $input['Impressum']['vat_no']));
 	} else {
-		echo $this->Form->input('Impressum.vat_no', array('label' => false));
+		echo $this->Form->input('Impressum.vat_no', array('label' => __('Umsatzsteuer-ID:')));
 	}
 ?>
 <br>
