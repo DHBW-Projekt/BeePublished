@@ -22,5 +22,4 @@ function getbackupServiceAnswer($sqldump_url, $zip_url){
 	$zip = "<ZipUrl>".$zip_url."</ZipUrl>   \n\r";
 	return $sql.$zip;
 }
-echo "xmlbuilder";
 ?>
