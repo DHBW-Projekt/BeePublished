@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dualon>
+	<plugin>
+		<name>Youtube</name>
+		<author>Sebastian Haase</author>
+		<version>1.0</version>
+		<permissions>
+			<permission>	
+			</permission>
+		</permissions>	
+		<views>
+			<view>
+				<name>Youtube</name>
+			</view>
+		</views>
+	</plugin>
+</dualon>

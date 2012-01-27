@@ -20,25 +20,22 @@
 														   	  'controller' => 'Show',
 															  'action'	   => 'generalContact'))); 
 	
-	echo $this->Form->label('Impressum.phone_no', __('Telefonnummer:'));
 	if (!empty($input['Impressum']['phone_no'])) {
-		echo $this->Form->input('Impressum.phone_no', array('label' => false, 'value' => $input['Impressum']['phone_no']));
+		echo $this->Form->input('Impressum.phone_no', array('label' => __('Telefonnummer:'), 'value' => $input['Impressum']['phone_no']));
 	} else {
-		echo $this->Form->input('Impressum.phone_no', array('label' => false));
+		echo $this->Form->input('Impressum.phone_no', array('label' => __('Telefonnummer:')));
 	}
 	
-	echo $this->Form->label('Impressum.fax_no', __('Faxnummer:'));
 	if (!empty($input['Impressum']['fax_no'])) {
-		echo $this->Form->input('Impressum.fax_no', array('label' => false, 'value' => $input['Impressum']['fax_no']));
+		echo $this->Form->input('Impressum.fax_no', array('label' => __('Faxnummer:'), 'value' => $input['Impressum']['fax_no']));
 	} else {
-		echo $this->Form->input('Impressum.fax_no', array('label' => false));
+		echo $this->Form->input('Impressum.fax_no', array('label' => __('Faxnummer:')));
 	}
 	
-	echo $this->Form->label('Impressum.email', __('E-Mail-Adresse:'));
 	if (!empty($input['Impressum']['email'])) {
-		echo $this->Form->input('Impressum.email', array('label' => false, 'error' => __('Das ist keine gültige E-Mail-Adresse') ,'value' => $input['Impressum']['email']));
+		echo $this->Form->input('Impressum.email', array('label' => __('E-Mail-Adresse:'), 'error' => __('Das ist keine gültige E-Mail-Adresse') ,'value' => $input['Impressum']['email']));
 	} else {
-		echo $this->Form->input('Impressum.email', array('label' => false, 'error' => __('Das ist keine gültige E-Mail-Adresse')));
+		echo $this->Form->input('Impressum.email', array('label' => __('E-Mail-Adresse:'), 'error' => __('Das ist keine gültige E-Mail-Adresse')));
 	} 
 ?>
 <p>
@@ -50,18 +47,16 @@
 </h3>
 <br>
 <?php 
-	echo $this->Form->label('Impressum.auth_rep_first_name', __('Vorname:'));
 	if (!empty($input['Impressum']['auth_rep_first_name'])) {
-		echo $this->Form->input('Impressum.auth_rep_first_name', array('label' => false, 'value' => $input['Impressum']['auth_rep_first_name']));
+		echo $this->Form->input('Impressum.auth_rep_first_name', array('label' => __('Vorname:'), 'value' => $input['Impressum']['auth_rep_first_name']));
 	} else {
-		echo $this->Form->input('Impressum.auth_rep_first_name', array('label' => false));
+		echo $this->Form->input('Impressum.auth_rep_first_name', array('label' => __('Vorname:')));
 	}
 	
-	echo $this->Form->label('Impressum.auth_rep_last_name', __('Name:'));
 	if (!empty($input['Impressum']['auth_rep_last_name'])) {
-		echo $this->Form->input('Impressum.auth_rep_last_name', array('label' => false, 'value' => $input['Impressum']['auth_rep_last_name']));
+		echo $this->Form->input('Impressum.auth_rep_last_name', array('label' => __('Name:'), 'value' => $input['Impressum']['auth_rep_last_name']));
 	} else {
-		echo $this->Form->input('Impressum.auth_rep_last_name', array('label' => false));
+		echo $this->Form->input('Impressum.auth_rep_last_name', array('label' => __('Name:')));
 	}
 ?>
 <br>

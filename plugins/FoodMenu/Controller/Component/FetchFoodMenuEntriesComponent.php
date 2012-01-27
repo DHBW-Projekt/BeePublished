@@ -32,7 +32,12 @@ class FetchFoodMenuEntriesComponent extends Component
     	
     	$controller->loadModel('FoodMenu.FoodMenuMenusFoodMenuCategory');
         $controller->loadModel('FoodMenu.FoodMenuCategory');
-        $categories = $controller->FoodMenuMenusFoodMenuCategory->find('all', array('conditions' => array('FoodMenuMenusFoodMenuCategory.food_menu_menu_id' => $menuID, 'FoodMenuCategory.deleted' => null)));
+        $categories = $controller->FoodMenuMenusFoodMenuCategory->find('all', array(
+        															'conditions' => array(
+        																'FoodMenuMenusFoodMenuCategory.food_menu_menu_id' => $menuID, 
+        																'FoodMenuCategory.deleted' => null),
+        															'order' => array(
+        																'FoodMenuMenusFoodMenuCategory.id ASC')));
         if(!(isset($categories[0]))) return null;
         $categoryItems = array();
         $categoryItems['SelectedMenu'] = $categories[0]['FoodMenuMenu'];
