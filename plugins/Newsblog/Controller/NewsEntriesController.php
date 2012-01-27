@@ -73,7 +73,7 @@ class NewsEntriesController extends NewsblogAppController {
 			if($validTo == "" || $validTo == null){
 				$validTo = '9999-12-31 23:59:59';
 			}
-			$action = $data['action'];
+			
 			$id = $data['id'];
 			$changedNews = array();
 			$this->NewsEntry->id = $id;

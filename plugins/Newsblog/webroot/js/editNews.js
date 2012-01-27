@@ -16,7 +16,7 @@ $(document).ready(function () {
 				buttonImage: window.app.webroot+"img/calendar.png",
 				buttonImageOnly: true,
 				buttonText: window.app.validFromAltText,
-				showOptions: {direction: 'down'}
+				showOptions: {direction: 'up'}
 			}
 	);
 	
@@ -30,7 +30,7 @@ $(document).ready(function () {
 				buttonImage: window.app.webroot+"img/calendar.png",
 				buttonImageOnly: true,
 				buttonText: window.app.validToAltText,
-				showOptions: {direction: 'down'}
+				showOptions: {direction: 'up'}
 			}
 	);
 });
