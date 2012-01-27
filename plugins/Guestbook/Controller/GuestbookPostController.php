@@ -75,9 +75,9 @@ class GuestbookPostController extends GuestbookAppController {
 									  'text' => $newPost['GuestbookPost']['text'],
 									  'submitDate' => $Time->format('d.m.Y', $newPost['GuestbookPost']['created']) . ' ' . $Time->format('H:i:s',$newPost['GuestbookPost']['created']),
 									  'url_release' => $Html->link('here', 'http://' . env('SERVER_NAME') . ':' .  env('SERVER_PORT') . $this->webroot . 'plugin/Guestbook/GuestbookPost/release_noAuth/' . $newPost['GuestbookPost']['id'] . '/' . $newPost['GuestbookPost']['token'],
-																	array('title' => __d('Guestbook', 'Release post'))),
+																	array('title' => __d('Guestbook', 'Release'))),
 									  'url_delete' => $Html->link('here', 'http://' . env('SERVER_NAME') . ':' .  env('SERVER_PORT') . $this->webroot . 'plugin/Guestbook/GuestbookPost/delete_noAuth/' . $newPost['GuestbookPost']['id'] . '/' . $newPost['GuestbookPost']['token'],
-																	array('title' => __d('Guestbook', 'Delete post'))),
+																	array('title' => __d('Guestbook', 'Delete'))),
 									  'page_name' => $this->Config->getValue('page_name'));
 					$viewName = 'Guestbook.notification';
 					$this->BeeEmail->sendHtmlEmail($to, $subject, $viewVars, $viewName);
@@ -89,7 +89,7 @@ class GuestbookPostController extends GuestbookAppController {
 		}
 	}
 
-	function delete($id = null){
+	function delete($contentId = null, $id = null){
 		// get is not allowed for delete function
 		if ($this->request->is('get')){
 			throw new MethodNotAllowedException();
