@@ -1,5 +1,6 @@
 <?php 
 $this->Html->script('/gallery/js/imageoverlay', false);
+$this->Html->script('/gallery/js/fbtest', false);
 $this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
 
 if(!isset($data)){
@@ -22,12 +23,14 @@ foreach ($data['GalleryPicture'] as $pic){
 	echo 'title = "'.$this->webroot.'#'.$pic['title'].'#'.$data['GalleryEntry']['id'].'#'.$pic['id'].'" ';
 	echo 'rel="group" href="';
 	echo $this->webroot.$pic['path_to_pic'].'">';
-	echo $this->Html->image($pic['thumb']);
+	
+	echo '<img src="'.$this->webroot.$pic['thumb'].'" />';
 	echo '</a>';
 	
 	
 	echo '</div>';
 }
+echo '<div id="fb-root"></div>';
 echo '<div style="clear:both;"></div>';
 }
 }
