@@ -46,7 +46,7 @@ class NewsEntriesController extends NewsblogAppController {
 				$this->Session->setFlash(__d('newsblog' ,'The news has been created! It has to be published!'));
 				$this->redirect(array('action' => 'create', $contentId));
 			} else{
-				$this->Session->setFlash(__d('newsblog', "The news hasn't been created!"), 'default', array('class' => 'flash_success'));
+				$this->Session->setFlash(__d('newsblog', "The news hasn't been created!"), 'default', array('class' => 'flash_failure'));
 			}
 		}
 		$this->layout = 'overlay';

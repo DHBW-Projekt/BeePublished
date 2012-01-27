@@ -17,6 +17,7 @@ $(document).ready(function () {
 			showOn: "button",
 			buttonImage: window.app.webroot+"img/calendar.png",
 			buttonImageOnly: true,
+			buttonText: window.app.validFromAltText,
 			showOptions: {direction: 'down'}
 		}
 	);
@@ -31,6 +32,7 @@ $(document).ready(function () {
 			showOn: "button",
 			buttonImage: window.app.webroot+"img/calendar.png",
 			buttonImageOnly: true,
+			button: window.app.validToAltText,
 			showOptions: {direction: 'down'}
 		}
 	);

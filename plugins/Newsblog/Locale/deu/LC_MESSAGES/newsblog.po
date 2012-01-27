@@ -27,6 +27,14 @@ msgstr "Der Artikel konnte nicht erzeugt werden!"
 msgid "The changes have been saved!"
 msgstr "Die Änderungen wurden gespeichert!"
 
+#: View/NewsEntries/create.ctp:11
+msgid "Choose Valid From"
+msgstr "Wähle: Gültig von"
+
+#: View/NewsEntries/create.ctp:12
+msgid "Choose Valid To"
+msgstr "Wähle: Gültig bis"
+
 #: Controller/NewsEntriesController.php:95
 msgid "The changes haven't been saved!"
 msgstr "Die Änderungen konnten nicht gespeichert werden!"
