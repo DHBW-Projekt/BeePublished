@@ -9,22 +9,22 @@
 	echo $this->element('admin_menu');
 	if($createAllowed){
 		echo $this->Form->create('FoodMenuCreateCategory', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuCategories', 'action' => 'create')));
-		echo '<h1>'.(__('Create new category')).'</h1>';
-		echo $this->Form->end(__('New Category'));
+		echo '<h1>'.(__d('food_menu', 'Create new category')).'</h1>';
+		echo $this->Form->end(__d('food_menu', 'New Category'));
 		echo '<br /><hr /><br />';
 	}
-	echo '<h1>'.(__('Categories')).'</h1>';
+	echo '<h1>'.(__d('food_menu', 'Categories')).'</h1>';
 	echo '<form>Search category: <input type="text" id="search" /> </form>';
 	echo $this->Form->create('FoodMenuCategory', array(
 								'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuCategories', 'action' => 'deleteMultiple'), 
-								'onsubmit' => 'return confirm(\''. __('Do you really want to delete the selected categories?') .'\');'));
+								'onsubmit' => 'return confirm(\''. __d('food_menu', 'Do you really want to delete the selected categories?') .'\');'));
 
 	?>
 	<table id="tableEntries">
 	<thead>
 	<tr>
 		<th> </th>
-		<th><?php echo __('Name'); ?></th>
+		<th><?php echo __d('food_menu', 'Name'); ?></th>
 		<th> </th>
 		<th> </th>
 	</tr>
@@ -60,7 +60,7 @@
 	<tfoot>
 		<tr>
 			<td><?php echo $this->Html->image('arrow.png', array('alt' => 'arrow')); ?></td>
-			<td colspan="3"><?php echo $this->Form->submit(__('Delete')); ?></td>
+			<td colspan="3"><?php echo $this->Form->submit(__d('food_menu', 'Delete')); ?></td>
 		</tr>
 	</tfoot><?php
 	} ?>

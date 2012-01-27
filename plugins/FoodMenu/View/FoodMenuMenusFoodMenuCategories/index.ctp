@@ -1,58 +1,37 @@
 <?php
 	echo $this->element('admin_menu');
+	$this->Html->script('jquery/jquery.sortable', false);
+	$this->Html->script('/food_menu/js/sortable_menu_categories', false);
 	
 	$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create');
 	$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'edit');
 	$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete');
 	
 	echo $this->Form->create('FoodMenuMenusFoodMenuCategories');
-	echo $this->Form->hidden($menuID);
+	echo $this->Form->hidden('menuID', array('value' => $menuID));
 	echo $this->Session->flash();
+	?>
+	
+	<div id="sortablelists">
+	<h2><?php echo __d('food_menu', 'Drop categories on the left to add them to the menu'); ?></h2>
+	<ul id="sortable1" class="connectedSortable">
+	<?php
 	if (sizeof($categories['used']) > 0) {
-	?>
-
-<table class="menuEntries">
-	<thead>
-	<tr>
-		<th colspan="2"><?php echo __('Remove existing categories from menu'); ?></th>
-	</tr>
-	</thead>
-	<tbody>
-	<?php
-	foreach ($categories['used'] as $usedCategory) {
-		echo '<tr>';
-		echo '<td>' . $usedCategory['FoodMenuCategory']['name'] . '</td>';
-		echo '<td class="tableicon">';
-		if($deleteAllowed) echo $this->Html->image('delete.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[x]Delete', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenusFoodMenuCategories', 'action' => 'delete', $usedCategory['FoodMenuMenusFoodMenuCategory']['ID'])));
-		echo '</td>';
-		echo '</tr>';
+		foreach ($categories['used'] as $usedCategory) {
+			echo '<li rel="' . $menuID . '" id="' . $usedCategory['FoodMenuCategory']['id'] .'">' . $usedCategory['FoodMenuCategory']['name'] . '</li>';
+		} 
 	}?>
-</tbody>
-</table>
-<?php
- 	}//if sizeof
-
+	</ul>
+ 	<ul id="sortable2" class="connectedSortable">
+	<?php 
  	if (sizeof($categories['notUsed']) > 0) {
-	?>
-<table class="menuEntries">
-	<thead>
-	<tr>
-		<th colspan="2"><?php echo __('Add categories to menu'); ?></th>
-	</tr>
-	</thead>
-	<tbody>
-	<?php
-	foreach ($categories['notUsed'] as $notUsedCategory) {
-		echo '<tr>';
-		echo '<td>' . $notUsedCategory['FoodMenuCategory']['name'] . '</td>';
-		echo '<td class="tableicon">';
-		if($createAllowed) echo $this->Html->image('add.png', array('style' => 'float: left', 'width' => '20px', 'alt' => '[+]Add', 'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenusFoodMenuCategories', 'action' => 'add', $notUsedCategory['FoodMenuCategory']['name'], $notUsedCategory['FoodMenuCategory']['id'], $menuID)));
-		echo '</td>';
-		echo '</tr>';
-	}?>
-</tbody>
-</table>
-<?php 	
- 	} //if sizeof
+		foreach ($categories['notUsed'] as $notUsedCategory) {
+			echo '<li rel="' . $menuID . '" id="' . $notUsedCategory['FoodMenuCategory']['id'] .'">' . $notUsedCategory['FoodMenuCategory']['name'] . '</li>';
+		} 
+ 	}?>
+
+	</ul>
+ 	</div>
+ 	<?php 
 	echo $this->Form->end();
 ?>

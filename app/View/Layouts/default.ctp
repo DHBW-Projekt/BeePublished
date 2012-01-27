@@ -105,7 +105,6 @@
     echo $this->element('sidebar');
 }
 ?>
-</div>
 <?php
 echo $this->Js->writeBuffer(array('inline' => true));
 ?>
