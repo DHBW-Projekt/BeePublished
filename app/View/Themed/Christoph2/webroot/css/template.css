@@ -140,12 +140,11 @@ form div {
     padding: 10px 20px;
     left: 255px;
     top: 0px;
-    width: 710px;
+    width: 720px;
 }
 
 #content.overlay {
     top: 60px;
-    width: auto;
 }
 
 #footer {
@@ -226,22 +225,48 @@ form div {
     float: left;
 }
 
-
+table{
+	width: 100%;
+}
 th {
     padding: 0.5em;
 }
 
+th:last-of-type {
+    border-right: none;
+}
 
 td {
     padding: 0.5em;
 }
 
-
 td:last-of-type {
     border-right: none;
 }
 
+tfoot tr td{
+	border: none;
+}
 
-th:last-of-type {
-    border-right: none;
+div #plugin_config td.name{
+	width:13em;
+}
+
+div #plugin_config td.version{
+	width: 4em;
+	text-align: center;
+}
+
+div #plugin_config td.author{
+	
+}
+
+div #plugin_config td.status{
+	width: 7em;
+	text-align: center;
+}
+
+div #plugin_config td.action{
+	width: 7em;
+	text-align: center;
 }
