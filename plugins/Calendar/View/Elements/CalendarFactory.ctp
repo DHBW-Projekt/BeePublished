@@ -1,5 +1,5 @@
 <?php
-$days = array(__('So'), __('Mo'), __('Di'), __('Mi'), __('Do'), __('Fr'), __('Sa'));
+$days = array(__d('calendar','Sun'), __d('calendar','Mon'), __d('calendar','Tue'), __d('calendar','Wed'), __d('calendar','Thu'), __d('calendar','Fri'), __d('calendar','Sat'));
 for ($i = 0; $i < $FDOW; $i++) {
     array_push($days, array_shift($days));
 }
@@ -10,12 +10,12 @@ $currentRow = 0;
     <div class="<?php echo $ClassPrefix; ?>calendar_head">
         <?php if ($navigation) : ?>
         <div
-            class="<?php echo $ClassPrefix; ?>month_minus"><?php echo $this->Html->link('<< ' . date('M y', strtotime('-1 months', $time)), $url . 'largecalendar/month/' . date('Y-m', strtotime('-1 months', $time)));?></div>
+            class="<?php echo $ClassPrefix; ?>month_minus"><?php echo $this->Html->link('<< ' . __d('calendar', date('M', strtotime('-1 months', $time)))." ".date('y', strtotime('-1 months', $time)), $url . 'largecalendar/month/' . date('Y-m', strtotime('-1 months', $time)));?></div>
         <div
-            class="<?php echo $ClassPrefix; ?>month_plus"><?php echo $this->Html->link(date('M y', strtotime('+1 months', $time)) . ' >>', $url . 'largecalendar/month/' . date('Y-m', strtotime('+1 months', $time)));?></div>
+            class="<?php echo $ClassPrefix; ?>month_plus"><?php echo $this->Html->link(__d('calendar', date('M', strtotime('+1 months', $time)))." ".date('y', strtotime('+1 months', $time)) . ' >>', $url . 'largecalendar/month/' . date('Y-m', strtotime('+1 months', $time)));?></div>
         <?php endif; ?>
         <div
-            class="<?php echo $ClassPrefix; ?>calendar_name"><?php echo $this->Html->link(date('F Y', $time), $url . 'largecalendar/month/' . date('Y-m', $time));?></div>
+            class="<?php echo $ClassPrefix; ?>calendar_name"><?php echo $this->Html->link(__d('calendar',date('F', $time)) . ' ' . date('Y', $time), $url . 'largecalendar/month/' . date('Y-m', $time));?></div>
     </div>
     <table cellspacing="0">
         <colgroup>

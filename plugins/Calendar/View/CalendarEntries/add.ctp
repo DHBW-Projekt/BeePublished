@@ -10,5 +10,5 @@ echo $this->Form->input('start_time');
 echo $this->Form->input('end_date');
 echo $this->Form->input('end_time');
 echo $this->Form->input('description');
-echo $this->Form->end(__('Save'));
+echo $this->Form->end(__d('calendar','Save'));
 ?>

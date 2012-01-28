@@ -1,4 +1,5 @@
 .newsblogtitle{
+	font-size: 24px;
 	font-style: italic;
 	padding:5px;
 }
@@ -35,11 +36,12 @@
 }
 
 .newsblog_entry_title{
-	font-size: 1.85em !important;
+	font-size: 20px !important;
 	margin-top: 5px !important;
 }
 
 .newsblog_entry_subtitle{
+	font-size: 16px !important;
 	font-style:italic;
 }
 
@@ -97,8 +99,6 @@
 	margin-bottom:5px;
 }
 
-
-
 .pagination {
 	font-size:10px;
 	list-style:none;
@@ -108,13 +108,17 @@
 .pagination li{
 	float:left;
 	margin:3px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
 }
 .pagination li a{
 	display:block;
 	padding:3px 5px;
 	color:#fff;
-	background-color:#3292DD;
+	background-color:#DDDDDD;
 	text-decoration:none;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
 }
 .pagination li a.active {
 	border:1px solid #000;
