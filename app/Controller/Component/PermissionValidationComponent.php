@@ -12,7 +12,13 @@ class PermissionValidationComponent extends Component {
 	public function getPermissions($pluginId = null){
 		$this->Permission = ClassRegistry::init('Permission');
 		//get currently logged in user and his role
-		$userRoleId = (int)$this->Auth->user('role_id');
+		$user = $this->Auth->user();
+		if($user == null){
+			$guestRole = $this->Role->findByName('Guest');
+			$userRoleId = $guestRole['Role']['id'];
+		} else{
+			$userRoleId = (int)$user['role_id'];
+		}
 		
 		$allPermissionsOfPlugin = $this->Permission->find('all', array('conditions' => array('plugin_id' => $pluginId)));
 		$allActions = array();
@@ -31,7 +37,13 @@ class PermissionValidationComponent extends Component {
 		
 		//get currently logged in user and his role
 		$user = $this->Auth->user();
-		$userRoleId = (int)$user['role_id'];
+		if($user == null){
+			$guestRole = $this->Role->findByName('Guest');
+			$userRoleId = $guestRole['Role']['id'];
+		} else{
+			$userRoleId = (int)$user['role_id'];
+		}
+		
 
 		//get required permission for given plugin and action
 		$permissionQueryOptions = array('conditions' => array('plugin_id' => $pluginId, 'action' => $action));
