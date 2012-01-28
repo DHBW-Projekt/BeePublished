@@ -8,6 +8,8 @@ $DateTimeHelper = $this->Helpers->load('Time');
 
 echo $this->element('admin_menu',array('plugin' => 'Newsblog'), array('contentId' => $contentId));
 $this->Js->set('webroot', $webroot);
+$this->Js->set('validFromAltText', __d('newsblog','Choose Valid From'));
+$this->Js->set('validToAltText', __d('newsblog','Choose Valid To'));
 $writeAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Write');
 
 if($writeAllowed){
@@ -37,7 +39,7 @@ if($writeAllowed){
 		));
 		//create validFrom input
 		echo $this->Form->input('NewsEntry.validFrom', array(
-			//'div' => 'writeValidConfiguration',
+			'div' => 'writeValidConfiguration',
 			'type' => 'text',
 			'id' => 'nbValidFromDatepicker',
 			'label' => __d('newsblog', 'Valid from:'),
@@ -47,7 +49,7 @@ if($writeAllowed){
 		));
 		//create validTo input
 		echo $this->Form->input('NewsEntry.validTo', array(
-			//'div' => 'writeValidConfiguration',
+			'div' => 'writeValidConfiguration',
 			'type' => 'text',
 			'id' => 'nbValidToDatepicker',
 			'label' => __d('newsblog', 'Valid to:'),
