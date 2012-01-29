@@ -42,6 +42,16 @@
 }
 
 .ui-datepicker-trigger{
-	heigth:20px;
-	width:20px;
+	heigth:25px;
+	width:25px;
+}
+
+.writeValidConfiguration{
+	vertical-align:middle;
+	height: 32px;
+	line-height: 32px;
+}
+
+.writeValidConfiguration input{
+	width:auto;
 }

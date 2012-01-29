@@ -57,14 +57,16 @@ msgstr "Das reCAPTCHA wurde nicht korrekt eingegeben. Bitte versuchen Sie es ern
 msgid "There is a new post for your guestbook!"
 msgstr "Es gibt einen neuen Eintrag für Ihr Gästebuch!"
 
+#: View\Guestbook\admin.ctp:41
 #: Controller\GuestbookPostController.php:78
-msgid "Release post"
-msgstr "Eintrag freigeben"
+msgid "Release"
+msgstr "Freigeben"
 
+#: View\Guestbook\admin.ctp:42
 #: Controller\GuestbookPostController.php:80
 #: View\Elements\displayPosts.ctp:18;20
-msgid "Delete post"
-msgstr "Eintrag löschen"
+msgid "Delete"
+msgstr "Löschen"
 
 #: Controller\GuestbookPostController.php:87
 msgid "Your post was saved. It will be released by an administrator."
@@ -187,14 +189,6 @@ msgstr "Datum"
 #: View\Guestbook\admin.ctp:40
 msgid "Clear selection"
 msgstr "Auswahl aufheben"
-
-#: View\Guestbook\admin.ctp:41
-msgid "Release posts"
-msgstr "Einträge freigeben"
-
-#: View\Guestbook\admin.ctp:42
-msgid "Delete posts"
-msgstr "Einträge löschen"
 
 #: View\Guestbook\settings.ctp:13
 msgid "You can change the number of posts which are displayed on a single pgae here."

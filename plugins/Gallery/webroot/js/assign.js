@@ -11,7 +11,7 @@ $(document).ready(function () {
             receive:function (event, ui) {
                 var roleId = $(ui.item).parent().attr('rel');
                 var userId = $(ui.item).attr('rel');
-                updateUserRole(roleId, userId);
+                updatePicture(roleId, userId);
             }
         });
     $('input#search-users').quicksearch('.user_detail');
@@ -25,7 +25,7 @@ $(document).ready(function () {
     });
 });
 
-function updateUserRole(galleryId, pictureId) {
+function updatePicture(galleryId, pictureId) {
 	var test = window.app.webroot;
 	
     var request = $.ajax({

@@ -19,7 +19,6 @@
 	echo $this->Form->input(null, array(
 		'options' => array(10 => 10, 15 => 15, 20 => 20, 25 => 25),
 		'name' => 'itemsPerPage',
-		'empty' => '(choose one)',
 		'label' => __d('newsblog', 'Items per page:'),
 		'default' => 10,
 		'value' => $itemsPerPage

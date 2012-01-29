@@ -23,10 +23,10 @@ class CalendarEntriesController extends CalendarAppController
         $this->CalendarEntry->set('user_id', $this->Auth->user('id'));
         if ($this->request->is('post')) {
             if ($this->CalendarEntry->save($this->request->data)) {
-                $this->Session->setFlash(__('The calendar entry has been saved'));
+                $this->Session->setFlash(__d('calendar','The calendar entry has been saved'));
                 $this->render('close');
             } else {
-                $this->Session->setFlash(__('The calendar entry could not be saved. Please, try again.'));
+                $this->Session->setFlash(__d('calendar','The calendar entry could not be saved. Please, try again.'),'default', array('class' => 'flash_failure'));
             }
         }
         if (empty($this->request->data)) {
@@ -49,10 +49,10 @@ class CalendarEntriesController extends CalendarAppController
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->CalendarEntry->save($this->request->data)) {
-                $this->Session->setFlash(__('The calendar entry has been saved'));
+                $this->Session->setFlash(__d('calendar','The calendar entry has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The calendar entry could not be saved. Please, try again.'));
+                $this->Session->setFlash(__d('calendar','The calendar entry could not be saved. Please, try again.'),'default', array('class' => 'flash_failure'));
             }
         } else {
             $this->request->data = $this->CalendarEntry->read(null, $id);
@@ -77,10 +77,10 @@ class CalendarEntriesController extends CalendarAppController
             throw new NotFoundException(__('Invalid calendar entry'));
         }
         if ($this->CalendarEntry->delete()) {
-            $this->Session->setFlash(__('Calendar entry deleted'));
+            $this->Session->setFlash(__d('calendar','Calendar entry deleted'));
             $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('Calendar entry was not deleted'));
+        $this->Session->setFlash(__d('calendar','Calendar entry was not deleted'),'default', array('class' => 'flash_failure'));
         $this->redirect(array('action' => 'index'));
     }
 }

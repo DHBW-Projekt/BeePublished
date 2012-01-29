@@ -14,9 +14,9 @@
 
     <ol class="nav"> 
 
-		<li><?php echo $this->Html->link((__('Menus')), array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenus', 'action' => 'index')); ?></li>
-		<li><?php echo $this->Html->link((__('Categories')), array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuCategories', 'action' => 'index')); ?></li>
-		<li><?php echo $this->Html->link((__('Entries')), array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuEntries', 'action' => 'index')); ?></li>
+		<li><?php echo $this->Html->link((__d('food_menu', 'Menus')), array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenus', 'action' => 'index')); ?></li>
+		<li><?php echo $this->Html->link((__d('food_menu', 'Categories')), array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuCategories', 'action' => 'index')); ?></li>
+		<li><?php echo $this->Html->link((__d('food_menu', 'Entries')), array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuEntries', 'action' => 'index')); ?></li>
 	
 
     </ol> 
