@@ -32,6 +32,7 @@ class SubscriptionController extends NewsletterAppController {
  	}
  	
  	public function guestUnSubscribe(){
+//  		echo 'test';
  		if ($this->request->is('post')){
  			// check if recipient exists
  			if($recipient = $this->NewsletterRecipient->findByEmail($this->request->data['NewsletterRecipient']['email'])){
@@ -121,11 +122,43 @@ class SubscriptionController extends NewsletterAppController {
  	
  	public function unSubscribePerMail($email){
  		$this->set('email', $email);
- 		
+ 		echo $email;
  		
  		$this->set('menu', $this->Menu->buildMenu($this, NULL));
  		$this->set('adminMode', false);
  		$this->set('systemPage', true);
+ 	}
+ 	
+ 	public function unsubscribe(){
+ 		if ($this->request->is('post')){
+ 			if($recipient = $this->NewsletterRecipient->findByEmail($this->request->data['NewsletterRecipient']['email'])){
+ 				// check if recipient is active
+ 				if($recipient['NewsletterRecipient']['active'] == 1){
+ 					// inactivate recipient
+ 					$recipient['NewsletterRecipient']['active'] = 0;
+ 					$action = 'delete';
+ 					$this->NewsletterRecipient->set($recipient);
+ 					if($this->NewsletterRecipient->save()) {
+ 						$this->Session->setFlash(__d('newsletter','You have unsubscribed successfully.'), 'default', array(
+ 					 									'class' => 'flash_success'), 
+ 					 									'unsubscribePerMail');
+ 					} else {
+ 						$this->Session->setFlash(__d('newsletter','You couldn\'t be unsubscribed.'), 'default', array(
+ 						 					 			'class' => 'flash_failure'), 
+ 						 					 			'unsubscribePerMail');
+ 					}
+ 				}else {
+ 					$this->Session->setFlash(__d('newsletter','You haven\'t subscribed'), 'default', array(
+ 					 				 						 					 			'class' => 'flash_failure'), 
+ 					 				 						 					 			'unsubscribePerMail');
+ 				}
+ 			} else {
+ 				$this->Session->setFlash(__d('newsletter','You haven\'t subscribed'), 'default', array(
+ 				 				 						 					 			'class' => 'flash_failure'), 
+ 				 				 						 					 			'unsubscribePerMail');
+ 			}
+ 		}
+ 		$this->redirect($this->referer());
  	}
  	
  	private function add(){
