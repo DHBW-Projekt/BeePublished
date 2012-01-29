@@ -28,10 +28,9 @@
 ?>
 <?php 
 	if($data['newsblogTitle'] != null || $data['newsblogTitle'] != ''){
-		echo '<div class="newsblogtitle"><h1>';
+		echo '<h1 class="newsblogtitle">';
 		echo $data['newsblogTitle'];
 		echo '</h1><div class="newsblogtitle_border color1"></div>';
-		echo '</div>';
 	}?>
 
 <div class='newsblogreadconfig'>
@@ -45,7 +44,6 @@
 	echo $this->Form->input(null, array(
 		'options' => array(10 => 10, 15 => 15, 20 => 20, 25 => 25),
 		'name' => 'itemsPerPage',
-		'empty' => '(choose one)',
 		'label' => __d('newsblog', 'Items per page:'),
 		'default' => 10,
 		'value' => $itemsPerPage,

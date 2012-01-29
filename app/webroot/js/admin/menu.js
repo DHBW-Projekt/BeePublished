@@ -36,7 +36,10 @@ function createMenu(menuData, append, parentid) {
 
             var edit = $('<a href="'+window.app.webroot+'menuentries/edit/' + menuData[i]['id'] + '"><img src="'+window.app.webroot+'img/edit.png" width="16" height="16"></a>');
             edit.attr('class', 'iframe');
-            edit.fancybox();
+            edit.fancybox({
+                width:'90%',
+                height:'90%'
+            });
             var del = $('<img src="'+window.app.webroot+'img/delete.png" width="16" height="16">');
             del.click({'id':menuData[i]['id'], 'page':menuData[i]['page']}, deleteEntry);
 
@@ -63,7 +66,10 @@ function createMenu(menuData, append, parentid) {
         .html('Add Entry')
         .attr('href', window.app.webroot+'menuentries/add/' + parentid)
         .attr('class', 'iframe')
-        .fancybox();
+        .fancybox({
+            width:'90%',
+            height:'90%'
+        });
 
     append.append($('<li></li>')
         .html(link)
@@ -77,18 +83,9 @@ function closeAfterSave() {
 }
 
 function deleteEntry(data) {
-    var id = data['data']['id'];
-    var page = data['data']['page'];
-
     if (confirm('Do you really want to delete this entry?')) {
-        var url;
-        if (page != null && confirm('Do you also want to delete the corresponding page?')) {
-            url = window.app.webroot+"pages/delete/" + page;
-        } else {
-            url = window.app.webroot+"menuentries/delete/" + id;
-        }
         var request = $.ajax({
-            url:url,
+            url:window.app.webroot+"menuentries/delete/" + data['data']['id'],
             type:"POST",
             context:document.body,
             error:function () {

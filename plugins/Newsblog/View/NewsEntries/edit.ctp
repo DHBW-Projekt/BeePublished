@@ -11,6 +11,8 @@
 	$validTo = $newsentry['NewsEntry']['validTo'];
 	
 	$this->Js->set('webroot', $this->request->webroot);
+	$this->Js->set('validFromAltText', __d('newsblog','Choose Valid From'));
+	$this->Js->set('validToAltText', __d('newsblog','Choose Valid To'));
 ?>
 <div class="nbEntryContainer">
 	<?php 
