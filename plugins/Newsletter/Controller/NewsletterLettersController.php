@@ -2,41 +2,40 @@
 
 App::uses('CakeEmail', 'Network/Email', 'AppController', 'Controller');
 
-class NewsletterLettersController extends AppController {
+class NewsletterLettersController extends NewsletterAppController {
 	
 	var $layout = 'overlay';
 	
 	public $name = 'newsletterLetters';	
-	public $uses = array('Newsletter.NewsletterLetter','Newsletter.NewsletterRecipient','Newsletter.EmailTemplate', 'Newsletter.EmailTemplateHeader');
+	public $uses = array(
+		'Newsletter.NewsletterLetter',
+		'Newsletter.NewsletterRecipient',
+		'Newsletter.EmailTemplate', 
+		'Newsletter.EmailTemplateHeader');
 	var $components = array('BeeEmail');
 	
-// 	public $paginate = array(
-// 			'NewsletterLetter' => array(
-// 				'limit' => 10, 
-// 				'order' => array(
-// 					'NewsletterLetter.date' => 'desc',
-// 					'NewsletterLetter.id' => 'desc')));
-	
-	public function index($contentID){
-// 		$newsletters = $this->paginate('NewsletterLetter');
+	public function index($contentID, $pluginId){
 		$newsletters = $this->NewsletterLetter->find('all', array(
 			'order' => array(
 		 		'NewsletterLetter.date' => 'desc',
 		 		'NewsletterLetter.id' => 'desc')));
 		$this->set('newsletters', $newsletters);
 		$this->set('contentID', $contentID);
+		$this->set('pluginId', $pluginId);
 	}
 	
-	public function edit($contentID, $id){
+	public function edit($contentID, $pluginId, $id){
+		$this->PermissionValidation->actionAllowed($pluginId, 'EditNewsletter', true);
 		$newsletter = $this->NewsletterLetter->findById($id);
 		$newsletter = $newsletter['NewsletterLetter'];
 		$this->set('newsletter', $newsletter);
 		$this->set('contentID', $contentID);
+		$this->set('pluginId', $pluginId);
 	}
 	
-	public function saveOrPreview($contentID, $id){
+	public function saveOrPreview($contentID, $pluginId, $id){
 		if (isset($this->params['data']['save'])){
-			$this->save($contentID, $id);
+			$this->save($contentID, $pluginId, $id);
 		} else {
 			// save newsletter to show it in preview
 			if ($this->request->is('post')){
@@ -55,21 +54,22 @@ class NewsletterLettersController extends AppController {
 				$newsletter = $this->NewsletterLetter->save();
 			}
 			// open preview:
-			$this->redirect('/plugin/Newsletter/NewsletterLetters/preview/'.$contentID.'/'.$id);
+			$this->redirect('/plugin/Newsletter/NewsletterLetters/preview/'.$contentID.'/'.$pluginId.'/'.$id);
 		};
 		$this->redirect($this->referer());
 	}
 	
-	public function sendOrEdit($contentID, $id){
+	public function sendOrEdit($contentID, $pluginId, $id){
 		if (isset($this->params['data']['send'])){
-			$this->send($contentID, $id);
+			$this->send($contentID, $pluginId, $id);
 		} else {
-			$this->redirect('/plugin/Newsletter/NewsletterLetters/edit/'.$contentID.'/'.$id);
+			$this->redirect('/plugin/Newsletter/NewsletterLetters/edit/'.$contentID.'/'.$pluginId.'/'.$id);
 		};
 		$this->redirect($this->referer());
 	}
 	
-	public function save($contentID, $id){
+	public function save($contentID, $pluginId, $id){
+		$this->PermissionValidation->actionAllowed($pluginId, 'EditNewsletter', true);
 		if ($this->request->is('post')){
 			$newsletter2 = $this->request->data['NewsletterLetter'];
 			$newsletter = $this->NewsletterLetter->findById($id);
@@ -84,21 +84,22 @@ class NewsletterLettersController extends AppController {
 			$id = $newsletter['NewsletterLetter']['id'];
 			$this->NewsletterLetter->set($newsletter);
 			if($newsletter = $this->NewsletterLetter->save()){
-				$this->Session->setFlash(__('The newsletter was saved successfully.'), 'default', array(
+				$this->Session->setFlash(__d('newsletter','The newsletter was saved successfully.'), 'default', array(
 					'class' => 'flash_success'), 
 					'NewsletterSaved');
 			} else {
-				$this->Session->setFlash(__('The newsletter couldn\'t be saved.'), 'default', array(
+				$this->Session->setFlash(__d('newsletter','The newsletter couldn\'t be saved.'), 'default', array(
 					'class' => 'flash_failure'), 
 					'NewsletterSaved');
 				$this->_persistValidation('NewsletterLetter');
 			}
 			$this->redirect(array(
-				'action' => 'edit', $contentID, $id));
+				'action' => 'edit', $contentID, $pluginId, $id));
 		}
 	}
 	
-	public function saveNew($contentID){
+	public function saveNew($contentID, $pluginId){
+		$this->PermissionValidation->actionAllowed($pluginId, 'CreateNewsletter', true);
 		if ($this->request->is('post')){
 			$newsletter2 = $this->request->data['NewsletterLetter'];
 			$newsletter = array();
@@ -108,26 +109,31 @@ class NewsletterLettersController extends AppController {
 			$date = date('Y-m-d', time());
 			$newsletter['NewsletterLetter']['date'] = $date;
 			$content = $newsletter['NewsletterLetter']['content'];
+			if ($content == NULL){
+				$content = ' ';
+			};
 			$this->NewsletterLetter->set($newsletter);
 			if($newsletter = $this->NewsletterLetter->save()){
-				$this->Session->setFlash(__('The newsletter was saved successfully.'), 'default', array(
+				$this->Session->setFlash(__d('newsletter','The newsletter was saved successfully.'), 'default', array(
 					'class' => 'flash_success'), 
 					'NewsletterSaved');
 				$this->redirect(array(
-					'action' => 'edit', $contentID, $newsletter['NewsletterLetter']['id']));
+					'action' => 'edit', $contentID, $pluginId, $newsletter['NewsletterLetter']['id']));
 			} else {
-				$this->Session->setFlash(__('The newsletter couldn\'t be saved.'), 'default', array(
+				$this->Session->setFlash(__d('newsletter','The newsletter couldn\'t be saved.'), 'default', array(
 					'class' => 'flash_failure'), 
 					'NewsletterSaved');
 				$this->_persistValidation('NewsletterLetter');
 				$this->redirect(array(
-								'action' => 'create', $contentID, $content));
+								'action' => 'create', $contentID, $pluginId, $content));
 			}
 			
 		}
 	}
 	
-	public function create($contentID, $content){
+	public function create($contentID, $pluginId, $content){
+		$pluginId = $this->getPluginId();
+		$this->PermissionValidation->actionAllowed($pluginId, 'CreateNewsletter', true);
 		if ($content == 'new'){
 			$content = NULL;
 		};
@@ -137,29 +143,35 @@ class NewsletterLettersController extends AppController {
 			'id' => 'new');
 		$this->set('newsletter', $newsletter);
 		$this->set('contentID', $contentID);
+		$this->set('pluginId', $pluginId);
 	}
 	
-	public function preview($contentID, $id){
+	public function preview($contentID, $pluginId, $id){
+		$pluginId = $this->getPluginId();
+		$this->PermissionValidation->actionAllowed($pluginId, 'PreviewNewsletter', true);
 		$newsletter = $this->NewsletterLetter->findById($id);
 		$this->set('newsletter', $newsletter);
 		$this->layout = 'overlay';
 		$this->set('contentID', $contentID);
+		$this->set('pluginId', $pluginId);
 	}
 	
-	public function delete($contentID, $id){
+	public function delete($contentID, $pluginId, $id){
+		$this->PermissionValidation->actionAllowed($pluginId, 'CreateNewsletter', true);
 		if($this->NewsletterLetter->delete($id)){
-			$this->Session->setFlash(__('The newsletter has been deleted'), 'default', array(
+			$this->Session->setFlash(__d('newsletter','The newsletter has been deleted'), 'default', array(
 				'class' => 'flash_success'), 
 				'NewsletterDeleted');
 		} else {
-			$this->Session->setFlash(__('The newsletter couldn\'t be deleted'), 'default', array(
+			$this->Session->setFlash(__d('newsletter','The newsletter couldn\'t be deleted'), 'default', array(
 				'class' => 'flash_failure'), 
 				'NewsletterDeleted');
 		}
 		$this->redirect($this->referer());
 	}
 	
-	public function send($contentID, $id){
+	public function send($contentID, $pluginId, $id){
+		$this->PermissionValidation->actionAllowed($pluginId, 'SendNewsletter', true);
 		$newsletter = $this->NewsletterLetter->findById($id);
 		$recipients = $this->NewsletterRecipient->find('all', array(
 			'fields' => array(
@@ -167,7 +179,7 @@ class NewsletterLettersController extends AppController {
 			'conditions' => array(
 				'active' => 1)));
 		foreach ($recipients as $recipient){
-			$this->BeeEmail->sendTemplatedHtmlEmail(
+			$this->BeeEmail->sendHtmlEmail(
 				$recipient['NewsletterRecipient']['email'],
 				$newsletter['NewsletterLetter']['subject'],
 				$newsletter['NewsletterLetter']['content']);
@@ -175,13 +187,14 @@ class NewsletterLettersController extends AppController {
 		$newsletter['NewsletterLetter']['draft'] = 0;
 		$this->NewsletterLetter->set($newsletter);
 		$this->NewsletterLetter->save();
-		$this->Session->setFlash(__('The newsletter has been sent successful.'), 'default', array(
+		$this->Session->setFlash(__d('newsletter','The newsletter has been sent successful.'), 'default', array(
 										'class' => 'flash_success'), 
 										'NewsletterSent');
 		$this->redirect($this->referer());
 	}
 	
-	public function deleteSelected($contentID){
+	public function deleteSelected($contentID, $pluginId){
+		$this->PermissionValidation->actionAllowed($pluginId, 'CreateNewsletter', true);
 		if ($this->request->is('post')){
 			$newsletters = $this->NewsletterLetter->find('all', array(
 				'order' => array(
@@ -194,11 +207,11 @@ class NewsletterLettersController extends AppController {
 				$id = $newsletter['NewsletterLetter']['id'];
 				if ($selectedNewsletters[$id] == 1){
 					if($this->NewsletterLetter->delete($id)){
-						$this->Session->setFlash(__('The selected newsletters have been deleted'), 'default', array(
+						$this->Session->setFlash(__d('newsletter','The selected newsletters have been deleted'), 'default', array(
 							'class' => 'flash_success'), 
 							'NewsletterDeleted');
 					} else {
-						$this->Session->setFlash(__('The selected newsletters couldn\'t be deleted'), 'default', array(
+						$this->Session->setFlash(__d('newsletter','The selected newsletters couldn\'t be deleted'), 'default', array(
 							'class' => 'flash_failure'), 
 						'NewsletterDeleted');
 					}

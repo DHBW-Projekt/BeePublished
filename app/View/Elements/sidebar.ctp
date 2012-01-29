@@ -3,7 +3,7 @@
          class="closed"><?php echo $this->Html->image("tools.png", array('width' => 32, 'height' => 32)); ?></div>
     <div id="sidebar-shadow"></div>
     <div id="sidebar-top">
-        <div id="logo"><?php echo $this->Html->image("beelogo.png", array('width' => 180)); ?></div>
+        <div id="logo"><?php echo $this->Html->image("beelogo_w_small.png", array('width' => 180)); ?></div>
         <hr/>
         <div class="button-bar">
             <?php echo $this->Html->image("group.png", array(
@@ -33,6 +33,14 @@
             <?php echo $this->Html->image("lock.png", array(
             'alt' => __('Permission Management'),
             'url' => array('controller' => 'Permissions', 'action' => 'index'),
+            'class' => 'small-button',
+            'width' => 20,
+            'height' => 20
+        ));
+            ?>
+            <?php echo $this->Html->image("mail-read.png", array(
+            'alt' => __('Email Templates'),
+            'url' => array('controller' => 'EmailTemplates', 'action' => 'index'),
             'class' => 'small-button',
             'width' => 20,
             'height' => 20

@@ -105,11 +105,13 @@ class ViewComponent extends Component {
         if(sizeof($url)>0) {
         	if (isset($selectedDate)) {
         		$selectedDate = split('-', $selectedDate);
-        		$selectedDate = $selectedDate[1] . '-' . $selectedDate[2] . '-' .$selectedDate[0];
+        		$selectedDate = $selectedDate[1] . '/' . $selectedDate[2] . '/' .$selectedDate[0];
+        		
         		// change the date format again
-        	}
-        }
-        $controller->set('webroot', $this->webroot);
+        	} else $selectedDate = '';
+        } else $selectedDate = '';
+        $controller->set('selectedDate', $selectedDate);
+        $controller->set('webroot', $controller->webroot);
         return $data;
 	}
 }

@@ -21,7 +21,7 @@ class ShowController extends AppController {
 	 * This method checks whether all necessary data was entered.
 	 * @return boolean complete
 	 */
-	function isComplete() {
+	public function isComplete() {
 		$this->checkDataCompleteness();
 		return $this->complete;
 	}
@@ -30,7 +30,7 @@ class ShowController extends AppController {
 	 * Please call this method when the facebook plugin is added or removed.
 	 * @param add = true, remove = false
 	 */
-	function setFacebook($facebook) {
+	public function setFacebook($facebook) {
 		$data = array('id' => 1, 'facebook' => $facebook);
 		$this->Impressum->save($data);
 	}
@@ -39,33 +39,36 @@ class ShowController extends AppController {
 	 * Please call this method when the twitter plugin is added or removed.
 	 * @param add = true, remove = false
 	 */
-	function setTwitter($twitter) {
+	public function setTwitter($twitter) {
 		$data = array('id' => 1, 'twitter' => $twitter);
 		$this->Impressum->save($data);
 	}
 
 	/**
-	 * methods for picture management
-	 * origins of pictures not owned by the user must be written in impressum
-	 * these functions are not implemented yet
+	 * Please call this method when the google plus plugin is added or removed.
+	 * @param add = true, remove = false
 	 */
-
-	/**
-	 * Please call this method when a picture is added which is not the user's own.
-	 * @param link of the picture's origin or name of creator
-	 * @return id of the origin's table entry
-	 */
-	function addPicture($origin) {
-		return $id;
+	public function setGooglePlus($googlePlus) {
+		$data = array('id' => 1, 'google_plus' => $googlePlus);
+		$this->Impressum->save($data);
 	}
 
 	/**
-	 * Please call this method when a picture is removed which is not the user's own.
-	 * @param id of the origin's table entry. You got that one when adding the picture.
-	 * @return boolean stating success
+	 * Please call this method when the xing plugin is added or removed.
+	 * @param add = true, remove = false
 	 */
-	function removePicture($id) {
-		return true;
+	public function setXing($xing) {
+		$data = array('id' => 1, 'xing' => $xing);
+		$this->Impressum->save($data);
+	}
+
+	/**
+	 * Please call this method when the linkedin plugin is added or removed.
+	 * @param add = true, remove = false
+	 */
+	public function setLinkedin($linkedin) {
+		$data = array('id' => 1, 'linkedin' => $linkedin);
+		$this->Impressum->save($data);
 	}
 
 	/**
@@ -77,15 +80,15 @@ class ShowController extends AppController {
 		$this->set('input',$this->Impressum->find('first'));
 		if ($this->request->is('post')) {
 			$data = $this->request->data;
-			$this->Impressum->id = 1;					
+			$this->Impressum->id = 1;
 			switch ($data['Impressum']['type']) {
 				case 'comp':
 					$data['Impressum']['first_name'] = null;
 					$data['Impressum']['last_name'] = null;
 					$data['Impressum']['job_title'] = null;
 					$data['Impressum']['regulations_name'] = null;
-					$data['Impressum']['regulations_link'] = null;	
-									
+					$data['Impressum']['regulations_link'] = null;
+
 					if($this->Impressum->save($data)) {
 						$this->render('compData');
 						break;
@@ -95,8 +98,9 @@ class ShowController extends AppController {
 					$data['Impressum']['last_name'] = null;
 					$data['Impressum']['job_title'] = null;
 					$data['Impressum']['regulations_name'] = null;
-					$data['Impressum']['regulations_link'] = null;	
-									
+					$data['Impressum']['regulations_link'] = null;
+					$data['Impressum']['reg'] = true; //every club must be registered
+
 					if($this->Impressum->save($data)) {
 						$this->render('clubData');
 						break;
@@ -106,9 +110,21 @@ class ShowController extends AppController {
 					$data['Impressum']['legal_form'] = null;
 					$data['Impressum']['auth_rep_first_name'] = null;
 					$data['Impressum']['auth_rep_last_name'] = null;
-					
+
 					if($this->Impressum->save($data)) {
 						$this->render('privJobData');
+						break;
+					}
+				case 'public':
+					$data['Impressum']['first_name'] = null;
+					$data['Impressum']['last_name'] = null;
+					$data['Impressum']['job_title'] = null;
+					$data['Impressum']['regulations_name'] = null;
+					$data['Impressum']['regulations_link'] = null;
+					$data['Impressum']['adm_office'] = true; //usually it needs an admission office
+
+					if($this->Impressum->save($data)) {
+						$this->render('publicData');
 						break;
 					}
 				default:
@@ -124,7 +140,7 @@ class ShowController extends AppController {
 					$data['Impressum']['reg_city'] = null;
 					$data['Impressum']['reg_country'] = null;
 					$data['Impressum']['reg_no'] = null;
-					$data['Impressum']['adm_office'] = false;					
+					$data['Impressum']['adm_office'] = false;
 					$data['Impressum']['adm_office_name'] = null;
 					$data['Impressum']['adm_office_street'] = null;
 					$data['Impressum']['adm_office_house_no'] = null;
@@ -136,7 +152,7 @@ class ShowController extends AppController {
 					$data['Impressum']['regulations_link'] = null;
 					$data['Impressum']['vat_no'] = null;
 					$data['Impressum']['eco_no'] = null;
-										
+
 					if($this->Impressum->save($data)) {
 						$this->render('privJobData');
 						break;
@@ -150,12 +166,12 @@ class ShowController extends AppController {
 	 */
 
 	/**
-	 * type = private person
+	 * type = priv or job
 	 */
 
 	/**
 	 * this function saves all data that was entered on the general screen of types 'priv' and 'job'
-	 * name and address
+	 * (name and address)
 	 */
 	function privJobData() {
 		$this->layout = 'overlay';
@@ -177,7 +193,7 @@ class ShowController extends AppController {
 
 	/**
 	 * this function saves all data that was entered on the contact screen of types 'priv' and 'job'
-	 * email, phone, fax
+	 * (email, phone, fax)
 	 */
 	function privJobContact() {
 		$this->layout = 'overlay';
@@ -188,7 +204,8 @@ class ShowController extends AppController {
 			if ($this->complete) {
 				$this->Impressum->id = 1;
 				if ($this->Impressum->save($data)) {
-					if ($data['Impressum']['type'] == 'job') { //private person is now finished
+					$entry = $this->Impressum->find('first');
+					if ($entry['Impressum']['type'] == 'job') { //private person is now finished
 						$this->render('jobData');
 					} else {
 						$this->render('close');
@@ -199,36 +216,91 @@ class ShowController extends AppController {
 	}
 
 	/**
-	 * type = company
+	 * type = job
 	 */
 
 	/**
-	 * this function saves all data that was entered on the general screen of type 'comp'
-	 * company name, legal form and address
+	 * This function saves all data that was entered on the job screen
+	 * (job title, administration office, regulations)
 	 */
-	function compData() {
+
+	function jobData() {
 		$this->layout = 'overlay';
 		$this->set('input',$this->Impressum->find('first'));
 		if ($this->request->is('post')) {
 			$data = $this->request->data;
-			$this->checkCompData($data);
+			$this->checkJobData($data);
 			if ($this->complete) {
-				$this->checkAddress($data);
-				if ($this->complete) {
-					$this->Impressum->id = 1;
-					if($this->Impressum->save($data)) {
-						$this->render('compContact');
-					}
+				$this->Impressum->id = 1;
+				if($this->Impressum->save($data)) {
+					$this->render('close');
 				}
 			}
 		}
 	}
 
 	/**
-	 * this function saves all data that was entered on the contact screen of type 'comp'
-	 * email, phone and fax
+	 * type = comp or club or public
 	 */
-	function compContact() {
+
+	/**
+	 * called by 'comp_data', 'club_data' and 'public_data' and
+	 * checks name, legal form and address
+	 */
+	function generalData() {
+		$this->layout = 'overlay';
+		$this->set('input',$this->Impressum->find('first'));
+		if ($this->request->is('post')) {
+			$data = $this->request->data;
+			$entry = $this->Impressum->find('first');
+			if ($entry['Impressum']['type'] == 'club') {
+				$data['Impressum']['legal_form'] = __('e.V.'); //every club must have legal form e.V.
+			}
+			$data['Impressum']['type'] = $entry['Impressum']['type']; //the check method needs the type
+			$this->checkGeneralData($data);
+			if ($this->complete) {
+				$this->checkAddress($data);
+				if ($this->complete) {
+					$this->Impressum->id = 1;
+					if($this->Impressum->save($data)) {
+						$this->render('generalContact');
+					}
+				} else {
+					switch ($data['Impressum']['type']) {
+						case 'comp':
+							$this->render('compData');
+							break;
+						case 'public':
+							$this->render('publicData');
+							break;
+						case 'club':
+							$this->render('clubData');
+							break;
+
+					}
+				}
+			} else {
+				switch ($data['Impressum']['type']) {
+					case 'comp':
+						$this->render('compData');
+						break;
+					case 'public':
+						$this->render('publicData');
+						break;
+					case 'club':
+						$this->render('clubData');
+						break;
+
+				}
+			}
+		}
+	}
+
+	/**
+	 * this function saves all data that was entered on the contact screen of type 'comp', 'club' and 'public'
+	 * (email, phone and fax)
+	 */
+	function generalContact() {
 		$this->layout = 'overlay';
 		$this->set('input',$this->Impressum->find('first'));
 		if ($this->request->is('post')) {
@@ -239,7 +311,18 @@ class ShowController extends AppController {
 				if($this->complete) {
 					$this->Impressum->id = 1;
 					if ($this->Impressum->save($data)) {
-						$this->render('compLegal');
+						$entry = $this->Impressum->find('first');
+						switch ($entry['Impressum']['type']) {
+							case 'comp':
+								$this->render('compLegal');
+								break;
+							case 'club':
+								$this->render('clubReg');
+								break;
+							case 'public':
+								$this->render('publicLegal');
+								break;
+						}
 					}
 				}
 			}
@@ -248,7 +331,7 @@ class ShowController extends AppController {
 
 	/**
 	 * this function saves all data that was entered on the legal screen of type 'comp'
-	 * vat no and eco no
+	 * (vat no and eco no)
 	 */
 	function compLegal() {
 		$this->layout = 'overlay';
@@ -266,19 +349,33 @@ class ShowController extends AppController {
 	}
 
 	/**
-	 * this function saves all data that was entered on the register screen of type 'comp'
+	 * this function saves all data that was entered on the register screen of type 'comp' and 'club'
 	 */
-	function compReg() {
+	function regData() {
 		$this->layout = 'overlay';
 		$this->set('input',$this->Impressum->find('first'));
 		if ($this->request->is('post')) {
 			$data = $this->request->data;
+			$entry = $this->Impressum->find('first');
+			if ($entry['Impressum']['type'] == 'club') {
+				$data['Impressum']['reg'];
+			}
 			if ($data['Impressum']['reg']) {
 				$this->checkRegister($data);
 				if ($this->complete) {
 					$this->Impressum->id = 1;
 					if($this->Impressum->save($data)) {
-						$this->render('admOffice');
+						if ($entry['Impressum']['type'] == 'comp') {
+							$this->render('compAdmOffice');
+						} elseif ($entry['Impressum']['type'] == 'club') {
+							$this->render('close');
+						}
+					}
+				} else {
+					if ($entry['Impressum']['type'] == 'comp') {
+						$this->render('compReg');
+					} elseif ($entry['Impressum']['type'] == 'club') {
+						$this->render('clubReg');
 					}
 				}
 			} else {
@@ -291,26 +388,36 @@ class ShowController extends AppController {
 				$data['Impressum']['reg_country'] = null;
 				$data['Impressum']['reg_no'] = null;
 				if($this->Impressum->save($data)) {
-					$this->render('admOffice');
+					$this->render('compAdmOffice');
 				}
 			}
 		}
 	}
 
 	/**
-	 * this function saves all data that was entered on the admission office screen of type 'comp'
+	 * this function saves all data that was entered on the admission office screen of types 'comp' and 'public'
 	 */
 	function admOffice() {
 		$this->layout = 'overlay';
 		$this->set('input',$this->Impressum->find('first'));
 		if ($this->request->is('post')) {
 			$data = $this->request->data;
+			$entry = $this->Impressum->find('first');
+			if ($entry['Impressum']['type'] == 'public') {
+				$data['Impressum']['adm_office'] = true;
+			}
 			if ($data['Impressum']['adm_office']) {
 				$this->checkAdmOffice($data);
 				if ($this->complete) {
 					$this->Impressum->id = 1;
 					if($this->Impressum->save($data)) {
 						$this->render('close');
+					}
+				} else {
+					if ($entry['Impressum']['type'] == 'comp') {
+						$this->render('compAdmOffice');
+					} elseif ($entry['Impressum']['type'] == 'public') {
+						$this->render('publicAdmOffice');
 					}
 				}
 			} else {
@@ -327,92 +434,23 @@ class ShowController extends AppController {
 			}
 		}
 	}
+
 	/**
-	 * type = club
+	 * type = public
 	 */
 
 	/**
-	 * this function saves all data that was entered on the general screen of type 'club'
-	 * club name and club address
+	 * this function saves all data that was entered on the legal screen of type 'public'
+	 * (vat no if applicable)
 	 */
-	function clubData() {
+	function publicLegal() {
 		$this->layout = 'overlay';
 		$this->set('input',$this->Impressum->find('first'));
 		if ($this->request->is('post')) {
 			$data = $this->request->data;
-			$data['Impressum']['legal_form'] = __('e.V.'); //every club must have legal form e.V.
-			$this->checkClubData($data);
-			if ($this->complete) {
-				$this->checkAddress($data);
-				if ($this->complete) {
-					$data['Impressum']['reg'] = true; //every club must be registered
-					$this->Impressum->id = 1;
-					if($this->Impressum->save($data)) {
-						$this->render('clubContact');
-					}
-				}
-			}
-		}
-	}
-
-	/**
-	 * this function saves all data that was entered on the contact screen of type 'club'
-	 * email, phone and fax
-	 */
-	function clubContact () {
-		$this->layout = 'overlay';
-		$this->set('input',$this->Impressum->find('first'));
-		if ($this->request->is('post')) {
-			$data = $this->request->data;
-			$this->checkContactData($data);
-			if ($this->complete) {
-				$this->Impressum->id = 1;
-				if($this->Impressum->save($data)) {
-					$this->render('clubReg');
-				}
-			}
-		}
-	}
-
-	/**
-	 * this function saves all data that was entered on the register screen of type 'club'
-	 * register's address and number
-	 */
-	function clubReg() {
-		$this->layout = 'overlay';
-		$this->set('input',$this->Impressum->find('first'));
-		if ($this->request->is('post')) {
-			$data = $this->request->data;
-			$this->checkRegister($data);
-			if ($this->complete) {
-				$this->Impressum->id = 1;
-				if($this->Impressum->save($data)) {
-					$this->render('close');
-				}
-			}
-		}
-	}
-
-	/**
-	 * type = job
-	 */
-
-	/**
-	 * This function saves all data that was entered on the job screen
-	 * job title, administration office, regulations
-	 */
-
-	function jobData() {
-		$this->layout = 'overlay';
-		$this->set('input',$this->Impressum->find('first'));
-		if ($this->request->is('post')) {
-			$data = $this->request->data;
-			$this->checkJobData($data);
-			if ($this->complete) {
-				$this->Impressum->id = 1;
-				if($this->Impressum->save($data)) {
-					$this->render('close');
-				}
+			$this->Impressum->id = 1;
+			if($this->Impressum->save($data)) {
+				$this->render('publicAdmOffice');
 			}
 		}
 	}
@@ -440,7 +478,7 @@ class ShowController extends AppController {
 				}
 				break;
 			case 'club':
-				$this->checkClubData($data);
+				$this->checkCompData($data);
 				if ($this->complete) {
 					$this->checkAddress($data);
 					if ($this->complete) {
@@ -501,35 +539,37 @@ class ShowController extends AppController {
 	}
 
 	/**
-	 * checks if company name and legal form are set
+	 * checks name and legal form of 'comp', 'club' and 'public'
 	 * @param $data
 	 */
-	function checkCompData($data) {
+	function checkGeneralData($data) {
 		if (empty($data['Impressum']['comp_name'])) {
 			$this->complete = false;
-			$this->Session->setFlash(__('Firma fehlt'), 'default', array('class' => 'flash_failure'));
-		} else {
-			if (empty($data['Impressum']['legal_form'])) {
-				$this->complete = false;
-				$this->Session->setFlash(__('Rechtsform fehlt'), 'default', array('class' => 'flash_failure'));
-			} else {
-				$this->complete = true;
+			switch ($data['Impressum']['type']) {
+				case 'comp':
+					$this->Session->setFlash(__('Firma fehlt'), 'default', array('class' => 'flash_failure'));
+					break;
+				case 'club':
+					$this->Session->setFlash(__('Vereinsbezeichnung fehlt'), 'default', array('class' => 'flash_failure'));
+					break;
+				case 'public':
+					$this->Session->setFlash(__('Bezeichnung fehlt'), 'default', array('class' => 'flash_failure'));
+					break;
 			}
-		}
-	}
-
-	/**
-	 * checks if club name and legal form are set
-	 * @param $data
-	 */
-	function checkClubData($data) {
-		if (empty($data['Impressum']['comp_name'])) {
-			$this->complete = false;
-			$this->Session->setFlash(__('Vereinsbezeichnung fehlt'), 'default', array('class' => 'flash_failure'));
 		} else {
 			if (empty($data['Impressum']['legal_form'])) {
 				$this->complete = false;
-				$this->Session->setFlash(__('Rechtsform fehlt'), 'default', array('class' => 'flash_failure'));
+				switch ($data['Impressum']['type']) {
+					case 'comp':
+						$this->Session->setFlash(__('Rechtsform fehlt'), 'default', array('class' => 'flash_failure'));
+						break;
+					case 'club':
+						$this->Session->setFlash(__('Rechtsform fehlt'), 'default', array('class' => 'flash_failure'));
+						break;
+					case 'public':
+						$this->Session->setFlash(__('Form fehlt'), 'default', array('class' => 'flash_failure'));
+						break;
+				}
 			} else {
 				$this->complete = true;
 			}

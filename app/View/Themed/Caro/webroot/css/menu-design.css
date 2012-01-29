@@ -1,0 +1,55 @@
+ol.nav {
+    font-size: 13px;
+}
+
+ol.nav li {
+	list-style: none;
+	background-color: #dcdcdc;
+	color: inherit;
+	
+}	
+
+ol.nav li:hover {
+	list-style: none;
+	background-color: #c4c2c2;
+	text-decoration: none;
+	color: #ffffff;
+	
+	}
+	
+	
+
+ol.nav li a {
+    color: #2E2E2E;
+    text-decoration: none; 
+	
+}
+
+
+
+ol.nav li ol.subnav {
+	background-color:  #F4F4F4;
+	color:inherit; 
+}
+
+
+ol.nav li ol.subnav li {
+	background-color: #F4F4F4;
+	color:inherit; 
+}
+
+ ol.nav li ol.subnav li:hover {
+	list-style: none;
+	text-decoration: underline;
+	color: #696969;
+} 
+
+
+
+
+
+
+
+
+
+

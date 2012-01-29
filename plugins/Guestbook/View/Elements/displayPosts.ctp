@@ -1,24 +1,29 @@
+<?php
+App::uses('Sanitize', 'Utility');
+$this->Helpers->load('BBCode');
+?>
+
 <div id='guestbook_display'>
 		
 	<?php foreach($data as $GuestbookPost):?>
 	
-		<div class='guestbook_post'>		
+		<div class='guestbook_post border-color1'>		
 			<div class='guestbook_post_author'>
-				<?php echo $GuestbookPost['GuestbookPost']['author'] . __(' on ') . $this->Time->format('d.m.Y', $GuestbookPost['GuestbookPost']['created']) . __(' at ') . $this->Time->format('H:i:s',$GuestbookPost['GuestbookPost']['created'])?>
+				<?php echo $GuestbookPost['GuestbookPost']['author'] . __d('Guestbook', ' on ') . $this->Time->format('d.m.Y', $GuestbookPost['GuestbookPost']['created']) . __d('Guestbook', ' at ') . $this->Time->format('H:i:s',$GuestbookPost['GuestbookPost']['created'])?>
 			</div>				
 			<div class='guestbook_post_title'>
 				<?php echo $GuestbookPost['GuestbookPost']['title']?>
 				<?php // creates release and delete links for admins/editors						
 					if ($this->PermissionValidation->actionAllowed($pluginId, 'delete')) {
-						echo $this->Form->postLink($this->Html->image('/img/delete.png', array( 'alt' => __('Delete post'))),
+						echo $this->Form->postLink($this->Html->image('/img/delete.png', array( 'alt' => __d('Guestbook','Delete post'))),
 							array('plugin' => 'Guestbook', 'controller' => 'GuestbookPost', 'action' => 'delete', $GuestbookPost['GuestbookPost']['id']),
-							array('escape' => false, 'title' => __('Delete post')),
-							__('Do you really want to delete this post?'));
+							array('escape' => false, 'title' => __d('Guestbook','Delete post')),
+							__d('Guestbook','Do you really want to delete this post?'));
 					}
 				?>	
 			</div>			
 			<div class='guestbook_post_text'>
-				<?php echo $GuestbookPost['GuestbookPost']['text']?>
+				<?php echo $this->BBCode->transformBBCode(Sanitize::html($GuestbookPost['GuestbookPost']['text']));?>
 			</div>			
 		</div>
 		
@@ -31,7 +36,7 @@
 				echo 'Page ';
 				$currentPageNumber = $this->Paginator->current();
 				if ($this->Paginator->hasPrev()){
-					echo $this->Html->link(__('<<'), $url . '/page:' . ($currentPageNumber - 1));
+					echo $this->Html->link('<<', $url . '/page:' . ($currentPageNumber - 1));
 					echo '&nbsp';
 					echo $this->Html->link(($currentPageNumber -1), $url . '/page:' . ($currentPageNumber - 1));
 					echo ' | ';
@@ -41,7 +46,7 @@
 					echo ' | ';
 					echo $this->Html->link(($currentPageNumber +1), $url . '/page:' . ($currentPageNumber + 1));
 					echo '&nbsp';
-					echo $this->Html->link(__('>>'), $url . '/page:' . ($currentPageNumber + 1));
+					echo $this->Html->link('>>', $url . '/page:' . ($currentPageNumber + 1));
 				}
 			}
 		?>

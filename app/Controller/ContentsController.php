@@ -13,7 +13,7 @@ class ContentsController extends AppController
     function beforeFilter()
     {
         parent::beforeFilter();
-        $this->PermissionValidation->actionAllowed(null, 'LayoutManager',true);
+        $this->PermissionValidation->actionAllowed(null, 'LayoutManager', true);
     }
 
     function add($parent, $column, $plugin, $order)
@@ -39,7 +39,13 @@ class ContentsController extends AppController
         if (!$this->Content->exists()) {
             throw new NotFoundException(__('Invalid content'));
         }
+        $content = $this->Content->findById($id);
+        $oldContainer = $content['Content']['container_id'];
+        $oldOrder = $content['Content']['order'];
+        $oldColumn = $content['Content']['column'];
         $this->Content->delete();
+        $this->Container->query('UPDATE containers SET `order` = `order`-1 WHERE parent_id=' . $oldContainer . ' AND `column`=' . $oldColumn . ' AND `order`>=' . $oldOrder);
+        $this->Content->query('UPDATE contents SET `order` = `order`-1 WHERE container_id=' . $oldContainer . ' AND `column`=' . $oldColumn . ' AND `order`>=' . $oldOrder);
     }
 
     public function newPosition($id, $newContainer, $newColumn, $newOrder)
@@ -64,7 +70,7 @@ class ContentsController extends AppController
         }
     }
 
-    public function display($id,$pageid)
+    public function display($id, $pageid)
     {
         $this->layout = 'reload';
         $content = $this->Content->findById($id);
@@ -80,8 +86,8 @@ class ContentsController extends AppController
             $this->set('plugin', $plugin['Plugin']['name']);
             $this->set('pluginId', $plugin['Plugin']['id']);
             $this->set('view', $plugin['PluginView']['name']);
-            $this->set('data', $this->Components->load($plugin['Plugin']['name'] . '.' . $plugin['PluginView']['name'])->getData($this, $params, null, $id));
-            $this->set('url',$page['Page']['name']);
+            $this->set('data', $this->Components->load($plugin['Plugin']['name'] . '.' . $plugin['PluginView']['name'])->getData($this, $params, null, $id, $page['Page']['name']));
+            $this->set('url', $page['Page']['name']);
             $this->set('adminMode', true);
             $this->set('id', $id);
         } else {
