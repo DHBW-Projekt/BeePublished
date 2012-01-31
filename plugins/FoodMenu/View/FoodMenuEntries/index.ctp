@@ -10,24 +10,24 @@
 		
 		if($createAllowed) {
 			echo $this->Form->create('FoodMenuCreateEntry', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuEntries', 'action' => 'create')));
-			echo '<h1>'.(__('Create new entry')).'</h1>';
-			echo $this->Form->end(__('New entry'));
+			echo '<h1>'.(__d('food_menu', 'Create new entry')).'</h1>';
+			echo $this->Form->end(__d('food_menu', 'New entry'));
 			echo '<br /><hr /><br />';
 		}
-		echo '<h1>'.(__('Entries')).'</h1>';
+		echo '<h1>'.(__d('food_menu', 'Entries')).'</h1>';
 		echo '<form>Search entry: <input type="text" id="search" /> </form>';
 		echo $this->Form->create('FoodMenuEntry', array(
 								'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuEntries', 'action' => 'deleteMultiple'), 
-								'onsubmit' => 'return confirm(\''. __('Do you really want to delete the selected entries?') .'\');'));
+								'onsubmit' => 'return confirm(\''. __d('food_menu', 'Do you really want to delete the selected entries?') .'\');'));
 
 	?>
 	<table id="tableEntries">
 	<thead>
 	<tr>
 		<th> </th>
-		<th><?php echo __('Name'); ?></th>
-		<th><?php echo __('Price'); ?></th>
-		<th><?php echo __('Currency'); ?></th>
+		<th><?php echo __d('food_menu', 'Name'); ?></th>
+		<th><?php echo __d('food_menu', 'Price'); ?></th>
+		<th><?php echo __d('food_menu', 'Currency'); ?></th>
 		<th> </th>
 		<th> </th>
 	</tr>
@@ -61,7 +61,7 @@
 	<tfoot>
 	<tr>
 		<td><?php echo $this->Html->image('arrow.png', array('alt' => 'arrow')); ?></td>
-		<td colspan="3"><?php echo $this->Form->submit(__('Delete')); ?></td>
+		<td colspan="3"><?php echo $this->Form->submit(__d('food_menu', 'Delete')); ?></td>
 	</tr>
 	</tfoot>
 	<?php } ?>

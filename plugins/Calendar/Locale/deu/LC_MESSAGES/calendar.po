@@ -1,0 +1,122 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2012-01-27 08:55+0100\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: Controller/CalendarEntriesController.php:26;52
+msgid "The calendar entry has been saved"
+msgstr "Kalendereintrag wurde gespeichert"
+
+#: Controller/CalendarEntriesController.php:29;55
+msgid "The calendar entry could not be saved. Please, try again."
+msgstr "Kalendereintrag konnte nicht gespeichert werden. Bitte versuchen Sie es erneut."
+
+#: Controller/CalendarEntriesController.php:80
+msgid "Calendar entry deleted"
+msgstr "Kalendereintrag wurde gelöscht"
+
+#: Controller/CalendarEntriesController.php:83
+msgid "Calendar entry was not deleted"
+msgstr "Kalendereintrag wurde nicht gelöscht"
+
+#: Controller/LargeCalendarController.php:17
+#: Controller/SmallCalendarController.php:17
+msgid "Successfully saved"
+msgstr "Erfolgreich gespeichert"
+
+#: View/CalendarEntries/add.ctp:13
+#: View/CalendarEntries/edit.ctp:13
+#: View/LargeCalendar/admin.ctp:13
+#: View/SmallCalendar/admin.ctp:15
+msgid "Save"
+msgstr "Speichern"
+
+#: View/Elements/CalendarFactory.ctp:2
+msgid "Sun"
+msgstr "So"
+
+#: View/Elements/CalendarFactory.ctp:2
+msgid "Mon"
+msgstr "Mo"
+
+#: View/Elements/CalendarFactory.ctp:2
+msgid "Tue"
+msgstr "Di"
+
+#: View/Elements/CalendarFactory.ctp:2
+msgid "Wed"
+msgstr "Mi"
+
+#: View/Elements/CalendarFactory.ctp:2
+msgid "Thu"
+msgstr "Do"
+
+#: View/Elements/CalendarFactory.ctp:2
+msgid "Fri"
+msgstr "Fr"
+
+#: View/Elements/CalendarFactory.ctp:2
+msgid "Sat"
+msgstr "Sa"
+
+#: View/Elements/CalendarFactory.ctp:18
+msgid "January"
+msgstr "Januar"
+msgid "February"
+msgstr "Februar"
+msgid "March"
+msgstr "März"
+msgid "May"
+msgstr "Mai"
+msgid "June"
+msgstr "Juni"
+msgid "July"
+msgstr "Juli"
+msgid "October"
+msgstr "Oktober"
+msgid "December"
+msgstr "Dezember"
+
+#: View/Elements/CalendarFactory.ctp:13
+msgid "Mar"
+msgstr "Mär"
+msgid "May"
+msgstr "Mai"
+msgid "Oct"
+msgstr "Okt"
+msgid "Dec"
+msgstr "Dez"
+
+#: View/Elements/Day.ctp:55
+msgid "Add Entry"
+msgstr "Eintrag hinzufügen"
+
+#: View/LargeCalendar/admin.ctp:3
+#: View/SmallCalendar/admin.ctp:3
+msgid "First day of the week"
+msgstr "Wochenbeginn"
+
+#: View/LargeCalendar/admin.ctp:12
+#: View/SmallCalendar/admin.ctp:12
+msgid "Show week number"
+msgstr "Zeige Wochennummer"
+
+#: View/SmallCalendar/admin.ctp:13
+msgid "Months backwards"
+msgstr "Vergangene Monate"
+
+#: View/SmallCalendar/admin.ctp:14
+msgid "Months forward"
+msgstr "Nächste Monate"
+

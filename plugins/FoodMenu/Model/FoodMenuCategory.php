@@ -16,10 +16,6 @@ class FoodMenuCategory extends AppModel {
 
 	public $validate = array(
 		'name' => array(
-	        	'name_isUnique' => array(
-            		'rule'    => 'isUnique',
-            		'message' => 'This entry already exists.',
-         		),
          		'name_notEmpty' => array(
          			'rule'    => 'notEmpty',
 					'required' => true,

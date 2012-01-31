@@ -36,8 +36,7 @@ function setTomorrow() {
 }
 $(document).ready(function () {
 	
-	$('input#search').quicksearch('table#tableEntries tbody tr');
-	
+	$('input#search').quicksearch('table#tableEntries tbody tr');	
 	
 });
 		

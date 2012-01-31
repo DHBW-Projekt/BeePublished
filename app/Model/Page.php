@@ -14,11 +14,11 @@ class Page extends AppModel
      * @var string
      */
     public $displayField = 'name';
-
+    
     public $validate = array(
         'name' => array(
             'custom' => array(
-                'rule' => array('custom', '#^/[a-z0-9\-]*$#'),
+                'rule' => array('custom', '#^/[a-z0-9\-/]*$#'),
                 'message' => 'Not a valid URL. (Starting with / and characters a-z, 0-9 and -)'
             ),
             'isUnique' => array(
@@ -33,28 +33,10 @@ class Page extends AppModel
         'Container' => array(
             'className' => 'Container',
             'dependent' => true
-        )
-    );
-
-    /**
-     * hasMany associations
-     *
-     * @var array
-     */
-    public $hasMany = array(
+        ),
         'MenuEntry' => array(
-            'className' => 'MenuEntry',
-            'foreignKey' => 'page_id',
-            'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
-            'counterQuery' => ''
+        	'className' => 'MenuEntry',
+            'dependent' => false
         )
     );
-
 }
