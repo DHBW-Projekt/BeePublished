@@ -36,7 +36,7 @@ msgid "Please fill out all mandatory fields correctly."
 msgstr "Bitte füllen Sie alle Pflichtfelder korrekt aus."
 
 #: Controller\Component\ContactFormComponent.php:130
-msgid "Please fill out the CAPTCHA field."
+msgid "Please fill out the CAPTCHA field correctly."
 msgstr "Bitte füllen Sie das CAPTCHA-Feld korrekt aus."
 
 #: Controller\Component\ContactFormComponent.php:134
