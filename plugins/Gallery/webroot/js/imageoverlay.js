@@ -16,7 +16,8 @@ $(document).ready(function() {
 		var info = title.split("#");
 		var domain = window.location.href.split("/");
 		title = info[1];
-		var url = 'http://'+ domain[2] + info[0] + 'plugin/Gallery/DisplayGallery/displaySingleImage/'+info[2]+'/'+info[3];
+		http://localhost/DualonCMS/plugin/Gallery/DisplaySingleImage/display/14/25
+		var url = 'http://'+ domain[2] + info[0] + 'plugin/Gallery/DisplaySingleImage/display/'+info[2]+'/'+info[3];
 		var titlestyle = '<div id="picturetitle">' + (title && title.length ? '<b>' + title + '</b>' : '' ) + 'Image ' + (currentIndex + 1) + ' of ' + currentArray.length + '</div>';
 		//var obj = d.getElementById(id); if (d.getElementById(id)){ alert("test"); d.removeChild(obj); }
 		//if (d.getElementById(id)){ var fbtest = d.getElementById(fbcontainertodelete); var children = fbtest.childNodes; fbtest.removeChild(children[0]); d.removeChild(d.getElementById(id));
