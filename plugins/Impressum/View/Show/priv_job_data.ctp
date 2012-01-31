@@ -7,53 +7,46 @@
 														   	  'controller' => 'Show',
 															  'action'	   => 'privJobData')));
 	
-	echo $this->Form->label('Impressum.first_name', __('Vorname:'));
 	if (!empty($input['Impressum']['first_name'])) {
-		echo $this->Form->input('Impressum.first_name', array('label' => false, 'value' => $input['Impressum']['first_name']));
+		echo $this->Form->input('Impressum.first_name', array('label' => __('Vorname:'), 'value' => $input['Impressum']['first_name']));
 	} else {
-		echo $this->Form->input('Impressum.first_name', array('label' => false));
+		echo $this->Form->input('Impressum.first_name', array('label' => __('Vorname:')));
 	}
 	
-	echo $this->Form->label('Impressum.last_name', __('Nachname:'));
 	if (!empty($input['Impressum']['last_name'])) {
-		echo $this->Form->input('Impressum.last_name', array('label' => false, 'value' => $input['Impressum']['last_name']));
+		echo $this->Form->input('Impressum.last_name', array('label' => __('Nachname:'), 'value' => $input['Impressum']['last_name']));
 	} else {
-		echo $this->Form->input('Impressum.last_name', array('label' => false));
+		echo $this->Form->input('Impressum.last_name', array('label' => __('Nachname:')));
 	}
 	
-	echo $this->Form->label('Impressum.street', __('Straße:'));
 	if (!empty($input['Impressum']['street'])) {
-		echo $this->Form->input('Impressum.street', array('label' => false, 'value' => $input['Impressum']['street']));
+		echo $this->Form->input('Impressum.street', array('label' => __('Straße:'), 'value' => $input['Impressum']['street']));
 	} else {
-		echo $this->Form->input('Impressum.street', array('label' => false));
+		echo $this->Form->input('Impressum.street', array('label' => __('Straße:')));
 	}
 	
-	echo $this->Form->label('Impressum.house_no', __('Hausnummer:'));
 	if (!empty($input['Impressum']['house_no'])) {
-		echo $this->Form->input('Impressum.house_no', array('label' => false, 'value' => $input['Impressum']['house_no']));
+		echo $this->Form->input('Impressum.house_no', array('label' => __('Hausnummer:'), 'value' => $input['Impressum']['house_no']));
 	} else {
-		echo $this->Form->input('Impressum.house_no', array('label' => false));
+		echo $this->Form->input('Impressum.house_no', array('label' => __('Hausnummer:')));
 	}
 	
-	echo $this->Form->label('Impressum.post_code', __('Postleitzahl:'));
 	if (!empty($input['Impressum']['post_code'])) {
-		echo $this->Form->input('Impressum.post_code', array('label' => false, 'value' => $input['Impressum']['post_code']));
+		echo $this->Form->input('Impressum.post_code', array('label' => __('Postleitzahl:'), 'value' => $input['Impressum']['post_code']));
 	} else {
-		echo $this->Form->input('Impressum.post_code', array('label' => false));
+		echo $this->Form->input('Impressum.post_code', array('label' => __('Postleitzahl:')));
 	}
 	
-	echo $this->Form->label('Impressum.city', __('Ort:'));
 	if (!empty($input['Impressum']['city'])) {
-		echo $this->Form->input('Impressum.city', array('label' => false, 'value' => $input['Impressum']['city']));
+		echo $this->Form->input('Impressum.city', array('label' => __('Ort:'), 'value' => $input['Impressum']['city']));
 	} else {
-		echo $this->Form->input('Impressum.city', array('label' => false));
+		echo $this->Form->input('Impressum.city', array('label' => __('Ort:')));
 	}
 	
-	echo $this->Form->label('Impressum.country', __('Land:'));
 	if (!empty($input['Impressum']['country'])) {
-		echo $this->Form->input('Impressum.country', array('label' => false, 'value' => $input['Impressum']['country']));
+		echo $this->Form->input('Impressum.country', array('label' => __('Land:'), 'value' => $input['Impressum']['country']));
 	} else {
-		echo $this->Form->input('Impressum.country', array('label' => false));
+		echo $this->Form->input('Impressum.country', array('label' => __('Land:')));
 	}
 ?>
 <br>

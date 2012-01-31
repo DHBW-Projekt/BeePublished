@@ -1,4 +1,5 @@
 <?php echo $this->element('config-menu'); ?>
+<div id="plugin_config">
 <h2><?php echo __('Installed');?></h2>
 <table>
     <thead>
@@ -13,10 +14,10 @@
     <tbody>
     <?php foreach ($installed as $plugin): ?>
     <tr>
-        <td><?php echo $plugin['Plugin']['name']; ?></td>
-        <td><?php echo $plugin['Plugin']['version']; ?></td>
-        <td><?php echo $plugin['Plugin']['author']; ?></td>
-        <td>
+        <td class="name"><?php echo $plugin['Plugin']['name']; ?></td>
+        <td class="version"><?php echo $plugin['Plugin']['version']; ?></td>
+        <td class="author"><?php echo $plugin['Plugin']['author']; ?></td>
+        <td class="status">
             <?php if ($plugin['status'] == 0): ?>
             <?php echo __('No Database tables'); ?>
             <?php elseif ($plugin['status'] == 2): ?>
@@ -27,7 +28,7 @@
             <?php echo __('Unknown Plugin'); ?>
             <?php endif; ?>
         </td>
-        <td><?php echo $this->Html->link(__('Uninstall plugin'), array('action' => 'uninstall', $plugin['Plugin']['name'])); ?></td>
+        <td class="action"><?php echo $this->Html->link(__('Uninstall plugin'), array('action' => 'uninstall', $plugin['Plugin']['name'])); ?></td>
     </tr>
         <?php endforeach; ?>
     </tbody>
@@ -45,11 +46,12 @@
     <tbody>
     <?php foreach ($available as $plugin): ?>
     <tr>
-        <td><?php echo $plugin['name']; ?></td>
-        <td><?php echo $plugin['version']; ?></td>
-        <td><?php echo $plugin['author']; ?></td>
-        <td><?php echo $this->Html->link(__('Install plugin'), array('action' => 'install', $plugin['name'])); ?></td>
+        <td class="name"><?php echo $plugin['name']; ?></td>
+        <td class="version"><?php echo $plugin['version']; ?></td>
+        <td class="author"><?php echo $plugin['author']; ?></td>
+        <td class="action"><?php echo $this->Html->link(__('Install plugin'), array('action' => 'install', $plugin['name'])); ?></td>
     </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
+</div>

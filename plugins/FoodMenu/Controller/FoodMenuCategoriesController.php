@@ -27,10 +27,10 @@ class FoodMenuCategoriesController extends FoodMenuAppController {
 		
 		if ($this->request->is('post') && isset($this->request->data['FoodMenuCategory'])) {			
             if ($this->FoodMenuCategory->save($this->request->data)) {
-                $this->Session->setFlash(__('The category has been saved.'));
+                $this->Session->setFlash(__d('food_menu', 'The category has been saved.'));
                 $this->redirect($this->referer());
             } else {
-                $this->Session->setFlash(__('The category couldn\'t be saved.'));
+                $this->Session->setFlash(__d('food_menu', 'The category couldn\'t be saved.'));
             }//else
         }//if
 	}//create
@@ -44,7 +44,7 @@ class FoodMenuCategoriesController extends FoodMenuAppController {
         	$save = $this->request->data;
         	if ($this->FoodMenuCategory->save($save)) {
             	// Set a session flash message and redirect.
-            	$this->Session->setFlash(__('The category has been changed.'));
+            	$this->Session->setFlash(__d('food_menu', 'The category has been changed.'));
             	$this->set('mode', 'edit');
             	$this->redirect($this->referer());
             	//$this->render('/View/admin');
@@ -71,12 +71,13 @@ class FoodMenuCategoriesController extends FoodMenuAppController {
 		
 		$this->FoodMenuCategory->id = $id;
 		if ($this->request->is('get')) {
-			$this->request->data = $this->FoodMenuCategory->read('deleted', $id);
+			$this->request->data = $this->FoodMenuCategory->read();
 			$this->request->data['FoodMenuCategory']['deleted'] = date("Y-m-d H:i:s");
-			if($this->FoodMenuCategory->save($this->request->data)) {
+			$save['FoodMenuCategory'] = $this->request->data['FoodMenuCategory'];
+			if($this->FoodMenuCategory->save($save)) {
 				$this->FoodMenuMenusFoodMenuCategory->deleteAll(array('FoodMenuMenusFoodMenuCategory.food_menu_category_id' => $id), false);
 				$this->FoodMenuCategoriesFoodMenuEntry->deleteAll(array('FoodMenuCategoriesFoodMenuEntry.food_menu_category_id' => $id), false);
-				$this->Session->setFlash(__('The category has been deleted.'));
+				$this->Session->setFlash(__d('food_menu', 'The category has been deleted.'));
 				$this->redirect($this->referer());
 			}//if
 		}//if
@@ -89,7 +90,8 @@ class FoodMenuCategoriesController extends FoodMenuAppController {
 		if(array_key_exists('FoodMenuCategory', $this->request->data)) {
 			$ids = array_keys($this->request->data['FoodMenuCategory']);
 			foreach ($ids as $id) {
-					$this->request->data = $this->FoodMenuCategory->read('deleted', $id);
+					$this->FoodMenuCategory->id = $id;
+					$this->request->data = $this->FoodMenuCategory->read();
 					$this->request->data['FoodMenuCategory']['deleted'] = date("Y-m-d H:i:s");
 					if($this->FoodMenuCategory->save($this->request->data)) {
 						$this->FoodMenuMenusFoodMenuCategory->deleteAll(array('FoodMenuMenusFoodMenuCategory.food_menu_category_id' => $id), false);
@@ -97,11 +99,11 @@ class FoodMenuCategoriesController extends FoodMenuAppController {
 						continue;
 					}//if
 					else {
-						$this->Session->setFlash(__('Errors occured during deleting.'));
+						$this->Session->setFlash(__d('food_menu', 'Errors occured during deleting.'));
 						return;
 					}	
 			}
-			$this->Session->setFlash(__('The categories have been deleted.'));
+			$this->Session->setFlash(__d('food_menu', 'The categories have been deleted.'));
 			$this->redirect($this->referer());
 		}
 	}

@@ -44,6 +44,7 @@ class ShowNewsController extends NewsblogAppController{
 				$newsblogTitle = $this->request->data['newsblogTitle'];
 				$newsblogTitleData = array('newsblogtitle' => $newsblogTitle);
 				$this->ContentValueManager->saveContentValues($contentId, $newsblogTitleData);
+				$this->Session->setFlash(__d('newsblog', 'The changes have been saved!'));
 			}
 			//$this->redirect(array('plugin' => 'Newsblog','controller' => 'ShowNews', 'action' => 'general', $contentId));
 			$this->redirect($this->referer());
