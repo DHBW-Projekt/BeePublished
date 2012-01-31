@@ -3,7 +3,6 @@
 // app/controllers/my_files_controller.php (Cake 1.2)
 class MyFilesController extends FileShareAppController
 {
-    public $components = array('ContentValueManager');
     public $uses = array('FileShare.MyFileConfig', 'FileShare.MyFile');
 
     function upload()
@@ -24,7 +23,7 @@ class MyFilesController extends FileShareAppController
                 $this->redirect($this->referer());
             }
             // Write file to disk
-            $fh = fopen($this->request->data['MyFile']['path'], 'w');
+            $fh = fopen($this->request->data['MyFile']['path'], 'w') or die();
             fwrite($fh, $fileData);
             fclose($fh);
 

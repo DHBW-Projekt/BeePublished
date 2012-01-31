@@ -61,7 +61,7 @@ class ManageGalleriesController  extends GalleryAppController{
 		} else {
 			$this->loadModel('Gallery.GalleryEntry');
 			if (!empty($this->request->data)) {
-				debug($this->request->data);
+				
 				if($this->request->data['GalleryEntry']['gallery_picture_id'] == null){
 					
 				
