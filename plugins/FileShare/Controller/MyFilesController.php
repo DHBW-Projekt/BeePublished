@@ -23,7 +23,7 @@ class MyFilesController extends FileShareAppController
                 $this->redirect($this->referer());
             }
             // Write file to disk
-            $fh = fopen($this->request->data['MyFile']['path'], 'w');
+            $fh = fopen($this->request->data['MyFile']['path'], 'w') or die();
             fwrite($fh, $fileData);
             fclose($fh);
 
