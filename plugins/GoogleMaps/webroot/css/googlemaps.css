@@ -1,0 +1,41 @@
+@CHARSET "UTF-8";
+
+#googlemaps_content{
+margin-top:10px;
+margin-bottom: 5px;
+}
+
+#googlemaps_administration table{
+margin-top:10px;
+margin-bottom:20px;
+border-spacing: 0px;
+width: 100%;
+}
+
+#googlemaps_administration thead tr th{
+padding-left:5px;
+padding-right:20px;
+padding-top:5px;
+padding-bottom: 5px;
+}
+
+#googlemaps_administration thead tr th p{
+margin-top:2px;
+float:left;
+}
+
+#googlemaps_administration td{
+padding-left:5px;
+padding-right:20px;
+padding-top: 5px;
+}
+
+.googlemaps_button{
+    border-radius:4px;
+    background-color: #cccccc;
+    border:1px solid #999;
+    cursor:pointer;
+    padding:1px 4px 1px 4px;
+    color:#000;
+    text-decoration:none;
+  }

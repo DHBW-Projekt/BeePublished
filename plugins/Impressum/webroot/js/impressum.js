@@ -4,11 +4,11 @@ function newEntrySaved() {
 }
 
 $(document).ready(function(){
-	$('#reg').click(function(){
-		if($("#regdiv").css("display") == "true") {
-			$('#regdiv').hide();
+	$('#box').click(function(){
+		if($("#datadiv").css("display") == "block") {
+			$('#datadiv').hide();
 		} else {
-			$('#regdiv').show();
+			$('#datadiv').show();
 		}
 	});
 });

@@ -26,24 +26,27 @@
 	}?>
 	<div class='showFullNewsInfo'>
 		<?php 
-			$createdOnDate = $DateTimeHelper->format('m-d-Y', $data['NewsEntry']['createdOn']);
-			$createdOnTime = $DateTimeHelper->format('H:i', $data['NewsEntry']['createdOn']);
-			if($data['NewsEntry']['lastModifiedOn'] != null){
-				$modifiedOnDate = $DateTimeHelper->format('m-d-Y', $data['NewsEntry']['lastModifiedOn']);
-				$modifiedOnTime = $DateTimeHelper->format('H:i', $data['NewsEntry']['lastModifiedOn']);
-			}
-			
-			$createdBy = $data['Author'];
-		?>
-		<?php echo $createdBy;?>
-		on
-		<?php echo $createdOnDate;?>
-		at
-		<?php echo $createdOnTime;
-			
-			if(isset($modifiedOnDate) & isset($modifiedOnTime)){
-				echo "&nbsp;&nbsp;(modified on ".$modifiedOnDate." at ".$modifiedOnTime.")";
-			}
+		$createdOnDate = $DateTimeHelper->format('m-d-Y', $data['NewsEntry']['createdOn']);
+		$createdOnTime = $DateTimeHelper->format('H:i', $data['NewsEntry']['createdOn']);
+		
+		$infoString = __d('newsblog', 'infostring');
+		$infoString = str_replace(':-date-:', $createdOnDate, $infoString);
+		$infoString = str_replace(':-time-:', $createdOnTime, $infoString);
+		$infoString = str_replace(':-author-:', $data['Author'], $infoString);
+		
+		$modifiedString = __d('newsblog', 'modifiedstring');
+		if($data['NewsEntry']['lastModifiedOn'] != null){
+			$modifiedOnDate = $DateTimeHelper->format('m-d-Y', $data['NewsEntry']['lastModifiedOn']);
+			$modifiedOnTime = $DateTimeHelper->format('H:i', $data['NewsEntry']['lastModifiedOn']);
+			$modifiedString = str_replace(':-date-:', $modifiedOnDate, $modifiedString);
+			$modifiedString = str_replace(':-time-:', $modifiedOnTime, $modifiedString);
+		}
+		
+		if(isset($modifiedOnDate) & isset($modifiedOnTime)){
+			echo $infoString."&nbsp;&nbsp;(".$modifiedString.")";
+		} else{
+			echo $infoString;
+		}
 		?>
 	</div>
 	<div class='showFullNewsBody'>

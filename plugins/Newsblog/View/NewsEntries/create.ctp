@@ -19,13 +19,13 @@ if($writeAllowed){
 		//create title input
 		echo $this->Form->input('NewsEntry.title', array(
 			//'div' => 'writeNewsTitle',
-			'label' => 'Title:',
+			'label' => __d('newsblog','Title:'),
 			'name' => 'title'
 		));
 		//create subtitle input
 		echo $this->Form->input('NewsEntry.subtitle', array(
 			//'div' => 'writeNewsSubtitle',
-			'label' => 'Subtitle:',
+			'label' => __d('newsblog', 'Subtitle:'),
 			'name' => 'subtitle'
 		));
 		//create entrytext textarea
@@ -40,7 +40,7 @@ if($writeAllowed){
 			//'div' => 'writeValidConfiguration',
 			'type' => 'text',
 			'id' => 'nbValidFromDatepicker',
-			'label' => 'Valid from:',
+			'label' => __d('newsblog', 'Valid from:'),
 			'name' => 'validFromUI',
 			'class' => 'datepicker',
 			'disabled' => true
@@ -50,7 +50,7 @@ if($writeAllowed){
 			//'div' => 'writeValidConfiguration',
 			'type' => 'text',
 			'id' => 'nbValidToDatepicker',
-			'label' => 'Valid to:',
+			'label' => __d('newsblog', 'Valid to:'),
 			'name' => 'validToUI',
 			'class' => 'datepicker',
 			'disabled' => true
@@ -71,13 +71,8 @@ if($writeAllowed){
 			'name' => 'contentId',
 			'value' => $contentId
 		));
-		//action set to editNews
-		echo $this->Form->hidden(null,array(
-			'name' => 'action',
-			'value' => 'createNews'
-		));
 		
-		echo $this->Form->end("Create news");
+		echo $this->Form->end(__d('newsblog', 'Create News'));
 		
 	echo '</div>';
 	echo '</div>';

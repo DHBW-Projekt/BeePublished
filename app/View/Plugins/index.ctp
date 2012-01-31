@@ -23,6 +23,8 @@
             <?php echo $this->Html->link(__('Update plugin'), array('action' => 'install', $plugin['Plugin']['name'])); ?>
             <?php elseif ($plugin['status'] == 3): ?>
             <?php echo __('Up to date'); ?>
+            <?php elseif ($plugin['status'] == 99): ?>
+            <?php echo __('Unknown Plugin'); ?>
             <?php endif; ?>
         </td>
         <td><?php echo $this->Html->link(__('Uninstall plugin'), array('action' => 'uninstall', $plugin['Plugin']['name'])); ?></td>
