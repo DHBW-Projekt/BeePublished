@@ -1,6 +1,8 @@
 <?php 
 $this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
 
+//debug($this);
+
 if(isset($data['view']) && $data['view'] == 'Single'){	
 	echo $this->element('DisplayGallery',array('data' => $data));
 } else {
@@ -8,8 +10,11 @@ if(isset($data['view']) && $data['view'] == 'Single'){
 	foreach ($data as $gallery){
 		echo '<div class="galleryImage">';
 		if(isset($gallery['GalleryEntry']['titlepicture']['thumb'])){
-			echo '<a href="/DualonCMS/galleryoverview/view/'.$gallery['GalleryEntry']['id'].'">';
+			echo '<a href="'.$this->here.'/galleryoverview/view/'.$gallery['GalleryEntry']['id'].'">';
 			echo '<img src="'.$this->webroot.$gallery['GalleryEntry']['titlepicture']['thumb'].'" alt=""></a>';
+		} else {
+			echo '<a href="'.$this->here.'/galleryoverview/view/'.$gallery['GalleryEntry']['id'].'">';
+			echo '<img src="'.$this->webroot.$gallery['GalleryPicture'][0]['thumb'].'" alt=""></a>';
 		}
 		echo '<div class="galleryTitle">'.$gallery['GalleryEntry']['title'].'</div>';
 		echo '</div>';
