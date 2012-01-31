@@ -1,8 +1,6 @@
 <?php 
 $this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
 
-//debug($this);
-
 if(isset($data['view']) && $data['view'] == 'Single'){	
 	echo $this->element('DisplayGallery',array('data' => $data));
 } else {
