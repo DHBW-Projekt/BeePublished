@@ -135,7 +135,7 @@ class ManageImagesController  extends GalleryAppController{
 	 */
 	private function addImageInternal($image){
 		
-		debug($image);
+	
 		
 		$timestamp = time();
 		$day = date("dmY",$timestamp);

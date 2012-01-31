@@ -4,8 +4,16 @@ class PermissionValidationComponent extends Component {
 	var $components = array('Auth');
 	
 	public function getUserRoleId(){
+		$this->Role = ClassRegistry::init('Role');
+		
 		//get currently logged in user and his role
-		$userRoleId = (int)$this->Auth->user('role_id');
+		$user = $this->Auth->user();
+		if($user == null){
+			$guestRole = $this->Role->findByName('Guest');
+			$userRoleId = $guestRole['Role']['id'];
+		} else{
+			$userRoleId = (int)$user['role_id'];
+		}
 		return $userRoleId;
 	}
 	
@@ -13,6 +21,7 @@ class PermissionValidationComponent extends Component {
 		$this->Permission = ClassRegistry::init('Permission');
 		//get currently logged in user and his role
 		$user = $this->Auth->user();
+		var_dump($user);
 		if($user == null){
 			$guestRole = $this->Role->findByName('Guest');
 			$userRoleId = $guestRole['Role']['id'];
