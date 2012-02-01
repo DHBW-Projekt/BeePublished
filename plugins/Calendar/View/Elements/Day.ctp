@@ -52,7 +52,7 @@ $date = date('Y-m-d', $StartTime);
                 echo '</div>';
             }
         }
-        echo $this->Html->link($this->Html->image('add.png', array('width' => 18, 'height' => 18)) . ' Add Entry', array('plugin' => 'Calendar', 'controller' => 'CalendarEntries', 'action' => 'add', $date), array('escape' => false, 'class' => 'calendar_add_entry'));
+        echo $this->Html->link($this->Html->image('add.png', array('width' => 18, 'height' => 18)) . __d('calendar', 'Add Entry'), array('plugin' => 'Calendar', 'controller' => 'CalendarEntries', 'action' => 'add', $date), array('escape' => false, 'class' => 'calendar_add_entry'));
         echo '</div>';
         ?>
     </div>

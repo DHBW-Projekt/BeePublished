@@ -5,6 +5,70 @@
         <author>Marcus Lieberenz, Tobias Hoehmann</author>
         <version>1.0</version>
         <permissions>
+        	<permission>
+        		<action>
+        			OpenNewsletterOverlay
+        		</action>
+        		<role>
+        			Author
+        		</role>
+        	</permission>
+        	<permission>
+        		<action>
+        			UnSubscribeUser
+        		</action>
+        		<role>
+        			Registered
+        		</role>
+        	</permission>
+        	<permission>
+        		<action>
+        			UnSubscribeOtherUsers
+        		</action>
+        		<role>
+        			Administrator
+        		</role>
+        	</permission>
+        	<permission>
+        		<action>
+        			CreateNewsletter
+        		</action>
+        		<role>
+        			Author
+        		</role>
+        	</permission>
+        	<permission>
+        		<action>
+        			EditNewsletter
+        		</action>
+        		<role>
+        			Author
+        		</role>
+        	</permission>
+        	<permission>
+        		<action>
+        			PreviewNewsletter
+        		</action>
+        		<role>
+        			Author
+        		</role>
+        	</permission>
+        	<permission>
+        		<action>
+        			SendNewsletter
+        		</action>
+        		<role>
+        			Author
+        		</role>
+        	</permission>
+			<permission>
+        		<action>
+        			ChangeNewsletterSettings
+        		</action>
+        		<role>
+        			Administrator
+        		</role>
+        	</permission>
         </permissions>
         <views>
             <view>

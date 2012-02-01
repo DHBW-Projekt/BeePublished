@@ -41,6 +41,10 @@ div.guestbook_navigation {
 	margin: 0.5em;
 }
 
+div #guestbook_maintenance{
+	width: 100%;
+}
+
 div #guestbook_maintenance table{
 	width: 100%;
 }

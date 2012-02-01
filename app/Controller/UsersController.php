@@ -68,10 +68,10 @@ class UsersController extends AppController
 					'confirmationToken' => $user['confirmation_token']
 				);
 				$this->BeeEmail->sendHtmlEmail($user['email'], 'Registration complete - Please confirm your account', $viewVars, 'user_confirmation');
-				$this->Session->setFlash('The user has been created.');
+				$this->Session->setFlash(__('The user has been created.'));
 				$this->redirect(array('action' => 'login'));
 			} else{
-				$this->Session->setFlash('The user couldn\'t be created!', 'default', array('class' => 'flash_failure'));
+				$this->Session->setFlash(__('The user couldn\'t be created!'), 'default', array('class' => 'flash_failure'));
 			}
         }
         $this->set('menu', $this->Menu->buildMenu($this, NULL));
@@ -93,10 +93,10 @@ class UsersController extends AppController
                     'url' => env('SERVER_NAME')
                 );
                 $this->BeeEmail->sendHtmlEmail($userDB['User']['email'], 'User activated', $viewVars, 'user_activated');
-                $this->Session->setFlash('Your user has been activated.');
+                $this->Session->setFlash(__('Your user has been activated.'));
                 $this->redirect(array('action' => 'login'));
             } else {
-                $this->Session->setFlash('Token invalid! Your user hasn\'t been activated.', 'default', array('class' => 'flash_failure'));
+                $this->Session->setFlash(__('Token invalid! Your user hasn\'t been activated.'), 'default', array('class' => 'flash_failure'));
                 $this->redirect(array('controller' => 'Pages', 'action' => 'display'));
             }
         } else {
@@ -167,7 +167,7 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             //if user is already logged in
             if ($this->Auth->loggedIn()) {
-                $this->Session->setFlash('You are already logged in!');
+                $this->Session->setFlash(__('You are already logged in!'));
             }
             //if user isn't already logged in
             else {
@@ -178,14 +178,14 @@ class UsersController extends AppController
                         $this->User->id = $this->Auth->user('id');
                         $now = date('Y-m-d H:i:s');
                         $this->User->saveField('last_login', $now);
-                        $this->Session->setFlash('Welcome');
+                        $this->Session->setFlash(__('Welcome').'&nbsp;'.$userDB['User']['username'].'.');
                         $this->redirect($this->Auth->redirect());
                     } else {
-                        $this->Session->setFlash('Your username or password was incorrect.', 'default', array('class' => 'flash_failure'));
+                        $this->Session->setFlash(__('Your username or password was incorrect.'), 'default', array('class' => 'flash_failure'));
                         $this->redirect($this->referer());
                     }
                 } else {
-                    $this->Session->setFlash('Login not possible! Your user either hasn\'t been activated yet or has been locked!', 'default', array('class' => 'flash_failure'));
+                    $this->Session->setFlash(__('Login wasn\'t possible! Your user either hasn\'t been activated yet or has been locked!'), 'default', array('class' => 'flash_failure'));
                     $this->redirect($this->referer());
                 }
             }
@@ -202,7 +202,7 @@ class UsersController extends AppController
      */
     function logout()
     {
-        $this->Session->setFlash('Good-Bye');
+        $this->Session->setFlash(__('Good-Bye').'&nbsp;'.$this->Auth->user('username').'.');
         $this->redirect($this->Auth->logout());
     }
 
@@ -245,11 +245,11 @@ class UsersController extends AppController
 
                     $this->BeeEmail->sendHtmlEmail($userDB['User']['email'], 'Your new password', $viewVars, 'user_new_password');
                     
-                    $this->Session->setFlash('Your password has been resetted. The new password was send to your emailaddress.');
+                    $this->Session->setFlash(__('Your password has been resetted. The new password was send to your emailaddress.'));
                     $this->redirect(array('action' => 'login'));
                 }
 			} else {
-                $this->Session->setFlash('Username and/or Email were wrong!', 'default', array('class' => 'flash_failure'));
+                $this->Session->setFlash(__('Username and/or Email were wrong!'), 'default', array('class' => 'flash_failure'));
             }
         }
         $this->set('adminMode', false);
@@ -271,11 +271,11 @@ class UsersController extends AppController
     		$this->User->set($data);
     		if($this->User->validates()){
     			if($this->User->saveField('password', $data['User']['password'])){
-    				$this->Session->setFlash("Your password has been changed!", 'default', array('class' => 'flash_success'));
+    				$this->Session->setFlash(__('Your password has been changed!'), 'default', array('class' => 'flash_success'));
     				$this->redirect($this->referer());
     			}
     		}
-    		$this->Session->setFlash("Your password hasn't been changed!", 'default', array('class' => 'flash_failure'));
+    		$this->Session->setFlash(__('Your password hasn\'t been changed!'), 'default', array('class' => 'flash_failure'));
     	}
     	$this->set('adminMode', false);
     	$this->set('menu', $this->Menu->buildMenu($this, NULL));

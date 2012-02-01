@@ -1,4 +1,4 @@
-﻿<?php $this->Html->script('/impressum/js/impressum', false); ?>
+﻿﻿<?php $this->Html->script('/impressum/js/impressum', false); ?>
 <!-- so this is the automatically generated impressum, which is dynamically created based on database entries -->
 
 <!-- heading section -->
@@ -15,10 +15,13 @@
 
 <!-- so now here comes some general data like name and address -->
 <p>
-	<!-- when company or club, provide legal entity's title and form, otherwise natural person's name -->
+	<!-- when company, club or public, provide legal entity's title and form, otherwise natural person's name -->
 	<?php
 		if ($data['Impressum']['type']==('comp') or  $data['Impressum']['type']==('club')) {
 			echo $data['Impressum']['comp_name'].' '.$data['Impressum']['legal_form'];
+		} elseif ($data['Impressum']['type']==('public')) {
+			echo $data['Impressum']['legal_form'].' '.$data['Impressum']['comp_name'];
+			echo ('<br>Körperschaft des öffentlichen Rechts');
 		} else {
 			echo $data['Impressum']['first_name'].' '.$data['Impressum']['last_name'];
 		}
@@ -34,21 +37,22 @@
 </p>
 <br>
 
-<!-- authorised representative is only necessary if type is company or club -->
-<?php if ($data['Impressum']['type']==('comp') or  $data['Impressum']['type']==('club')) { ?>
+<!-- authorised representative is only necessary if type is company, club or public -->
+<?php if ($data['Impressum']['type']==('comp') or  $data['Impressum']['type']==('club') or $data['Impressum']['type']==('public')) { ?>
 	<h3>
 		<?php echo __('Vertretungsberechtigt').': '; ?>
 	</h3>
 	<p>
 		<?php echo $data['Impressum']['auth_rep_first_name'].' '.$data['Impressum']['auth_rep_last_name']; ?>
 	</p>
-<?php } //if type = comp or club ?>
+<?php } //if type = comp, club or public ?>
 
 <!-- and here comes the contact data, depending on whether it is set or not -->
 <br>
 <h2>
 	<?php echo __('Kontaktdaten'); ?>
 </h2>
+<br>
 <table>
 	<tbody>
 		<?php 
@@ -159,10 +163,10 @@
 			<!-- job title is only needed if the person has a special job -->
 			<?php 
 				if ($data['Impressum']['type'] == 'job') { 
-					echo "<br>".__('Berufsbezeichnung').': '.$data['Impressum']['job_title']; 
-					echo "<br>".__('Zuständige Kammer:');
+					echo "<br>".__('Berufsbezeichnung: ').$data['Impressum']['job_title']; 
+					echo "<br>".__('Zuständige Kammer: ');
 				} else {
-					echo "<br>".__('Zuständige Behörde:');
+					echo "<br>".__('Zuständige Behörde: ');
 				}
 				echo $data['Impressum']['adm_office_name'];
 			?>
@@ -180,7 +184,7 @@
 			<br>
 			<?php 
 				if ($data['Impressum']['type'] == 'job') {
-					echo __('Es gelten folgende berufsrechtliche Regelungen').': '.
+					echo __('Es gelten folgende berufsrechtliche Regelungen: ').
 					$this->Html->link($data['Impressum']['adm_regulations'],$data['Impressum']['adm_regulations_link']);
 				}
 			?>

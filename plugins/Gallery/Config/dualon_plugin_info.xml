@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dualon>
+    <plugin>
+        <name>Gallery</name>
+        <author>Alexander Müller, Fabian Kajzar</author>
+        <version>1.0</version>
+        <permissions>
+        		<permission>
+        		<role>Editor</role>
+        		<action>create</action>
+        	</permission>
+        	<permission>
+        		<role>Editor</role>
+        		<action>edit</action>	
+        	</permission>
+        	<permission>
+        		<role>Editor</role>
+        		<action>delete</action>
+        	</permission>
+        </permissions>
+        <views>
+        	<view>
+        		<name>GalleryOverview</name>
+        	</view>
+			<view>
+				<name>DisplayImage</name>
+			</view>
+			<view>
+				<name>DisplayGallery</name>
+			</view>
+        </views>
+    </plugin>
+</dualon>

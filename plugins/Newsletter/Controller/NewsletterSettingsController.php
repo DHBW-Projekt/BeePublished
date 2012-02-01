@@ -1,23 +1,24 @@
 <?php
 
-class NewsletterSettingsController extends AppController {
+class NewsletterSettingsController extends NewsletterAppController {
 	
 	var $layout = 'overlay';
 	var $components = array('ContentValueManager');
 	
-	
-	public function index($contentID){
+	public function index($contentID, $pluginId){
 		$pluginText = $this->ContentValueManager->getContentValues($contentID);
 		$this->set('pluginText', $pluginText);
 		$this->set('contentID', $contentID);
+		$this->set('pluginId', $pluginId);
 	}
 	
-	public function save($contentID){
+	public function save($contentID, $pluginId){
+		$this->PermissionValidation->actionAllowed($pluginId, 'ChangeNewsletterSettings', true);
 		if ($this->request->is('post')){
 			$text = $this->data['text'];
 			$contentValue['text'] = $text; 
 			$this->ContentValueManager->saveContentValues($contentID, $contentValue);
-			$this->Session->setFlash(__('The text was saved successfully.'), 'default', array(
+			$this->Session->setFlash(__d('newsletter','The text was saved successfully.'), 'default', array(
 				'class' => 'flash_success'), 
 				'TextSaved');
 			$this->redirect($this->referer());
