@@ -18,10 +18,10 @@ $this->Html->css('/Guestbook/css/design',null,array('inline' => false));
 	<thead>
 		<tr>
 			<th></th>
-			<th><?php echo __d('Guestbook', 'Author')?></th>
-			<th><?php echo __d('Guestbook', 'Title')?></th>
-			<th><?php echo __d('Guestbook', 'Text')?></th>
-			<th><?php echo __d('Guestbook', 'Date')?></th>
+			<th><?php echo __d('Guestbook', 'Author');?></th>
+			<th><?php echo __d('Guestbook', 'Title');?></th>
+			<th><?php echo __d('Guestbook', 'Text');?></th>
+			<th><?php echo __d('Guestbook', 'Date');?></th>
 		</tr>
 	</thead>
 	<tfoot>
@@ -37,8 +37,8 @@ $this->Html->css('/Guestbook/css/design',null,array('inline' => false));
 		<?php foreach($unreleasedPosts as $GuestbookPost):?>
 		<tr>
 			<td class='check'><?php echo $this->Form->checkbox('GuestbookPost.' . $GuestbookPost['GuestbookPost']['id'] . '.ckecked');?></td>
-			<td class='author'><?php echo $GuestbookPost['GuestbookPost']['author'];?></td>
-			<td class='title'><?php echo $GuestbookPost['GuestbookPost']['title'];?></td>
+			<td class='author'><?php echo Sanitize::html($GuestbookPost['GuestbookPost']['author']);?></td>
+			<td class='title'><?php echo Sanitize::html($GuestbookPost['GuestbookPost']['title']);?></td>
 			<td class='text'><?php echo $this->BBCode->transformBBCode(Sanitize::html($GuestbookPost['GuestbookPost']['text']));?></td>
 			<td class='date'><?php echo $this->Time->format('d.m.Y', $GuestbookPost['GuestbookPost']['created']) . ' ' . $this->Time->format('H:i:s',$GuestbookPost['GuestbookPost']['created'])?></td>
 		</tr>
