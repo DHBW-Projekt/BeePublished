@@ -98,7 +98,7 @@ class ApplicationMembershipComponent extends Component {
 		if(!$data_error){
 			$this->BeeEmail->sendHtmlEmail($to = $mailaddress,
 			$subject = 'New Application for Membership',
-			$viewVars = array('data' => $controller->data['ApplicationMembership'], 'url' => 'localhost'),
+			$viewVars = array('data' => $controller->data['ApplicationMembership'], 'url' => $this->Config->getValue('page_name')),
 			$viewName = 'ApplicationMembership.application');
 		}
 		 
