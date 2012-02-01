@@ -48,7 +48,7 @@ class WebShopComponent extends Component {
 	function productOverview($controller, $url_params, $contentValues){
 		
 		//LOAD model
-		$controller->loadModel("WebshopProduct");
+		$controller->loadModel("WebShop.WebshopProduct");
 		
 		//Default NumberOfEntries
 		if(!isset($contentValues['NumberOfEntries']))
@@ -72,7 +72,7 @@ class WebShopComponent extends Component {
 	function search($controller, $url_params, $contentValues){
 		
 		//LOAD model
-		$controller->loadModel('WebshopProduct');
+		$controller->loadModel('WebShop.WebshopProduct');
 		
 		//Default NumberOfEntries
 		if(!isset($contentValues['NumberOfEntries']))
@@ -127,7 +127,7 @@ class WebShopComponent extends Component {
 	function view($controller, $id=null) {
 		
 		//LOAD model
-		$controller->loadModel('WebshopProduct');
+		$controller->loadModel('WebShop.WebshopProduct');
 
 		//RETURN product
 		return array('data' => $controller->WebshopProduct->findById($id));
@@ -142,7 +142,7 @@ class WebShopComponent extends Component {
 		$data = array();
 		
 		//LOAD model
-		$controller->loadModel('WebshopProduct');
+		$controller->loadModel('WebShop.WebshopProduct');
 		
 		//GET all IDs (+ amount) from session
 		$productIDs = $controller->Session->read('webshop_cart');
@@ -254,7 +254,8 @@ class WebShopComponent extends Component {
 		$controller->loadModel('WebshopProduct');
 
 		//CREATE order on DB
-		$controller->WebshopOrder->set(array('customer_id' => '4',
+		$user = $controller->Auth->user();
+		$controller->WebshopOrder->set(array('customer_id' => $user['id'],
 											 'status' => '0'
 		));
 		$controller->WebshopOrder->save();

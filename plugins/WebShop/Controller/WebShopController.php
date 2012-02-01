@@ -12,7 +12,7 @@ class WebShopController extends WebShopAppController {
 	
 	//Attributes
 	var $components = array('ContentValueManager');
-	var $uses = array('WebShop.WebshopProduct', 'WebShop.WebshopOrder', 'WebShop.WebshopPosition'); 
+	var $uses = array('WebShop.WebshopProduct', 'WebShop.WebshopOrder', 'WebShop.WebshopPosition', 'User'); 
 	var $layout = 'overlay';
 	
    /**
@@ -281,7 +281,7 @@ class WebShopController extends WebShopAppController {
 	function uploadImage($file, $file_old, $init_creation){
 		
 		/* FILE */
-		$file_path = WWW_ROOT.'../../plugins/WebShop/webroot/img/products/';
+		$file_path = WWW_ROOT.'uploads/products/';
 		$file_name = str_replace(' ', '_', $file['name']);
 		$upload_error = true;
 		
