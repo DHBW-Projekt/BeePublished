@@ -9,6 +9,7 @@
 	$this->Html->script('/newsblog/js/showNews', false);
 	
 	$this->Html->css('/newsblog/css/showNews', null, array('inline' => false));
+	$this->Html->css('/css/jQueryPagination', null, array('inline' => false));
 	
 	$data = Sanitize::clean($data);
 	
@@ -60,7 +61,6 @@
 	echo $this->Form->input(null, array(
 		'options' => array(150 => 150, 200 => 200, 250 => 250, 300 => 300, 350 => 350),
 		'name' => 'previewTextLength',
-		'empty' => '(choose one)',
 		'label' => __d('newsblog', 'Preview text length:'),
 		'default' => 150,
 		'value' => $shorttextLength,
@@ -170,7 +170,7 @@ if( count($data['publishedNewsEntries']) > 0){
 
 </div>
 <?php
-if($this->PermissionValidation->getUserRole() < 6 && ($allowedActions['Write'] || $allowedActions['Publish'])){
+if($this->PermissionValidation->getUserRole() < 6 & ($allowedActions['Write'] || $allowedActions['Publish'])){
 	echo '<div class="plugin_administration">';
 		echo $this->Html->link($this->Html->image('tools_small.png'),array('plugin' => 'Newsblog', 'controller' => 'ShowNews', 'action' => 'admin', $data['contentId']), array('escape' => false));
 	echo '</div>';
