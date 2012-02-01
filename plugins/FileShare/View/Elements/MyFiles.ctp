@@ -2,6 +2,8 @@
 $this->Html->css('/FileShare/css/fileshare', NULL, array('inline' => false));
 
 echo $this->Form->create('MyFile', array('url' => array('plugin' => 'file_share', 'action' => 'upload'), 'type' => 'file'));
+//echo $this->Form->hidden( 'MAX_FILE_SIZE', array( 'value' => ini_get('post_max_size') ) );
+//echo '<input type="hidden" name="MAX_FILE_SIZE" value="'.ini_get('post_max_size').'" id="MyFileMAXFILESIZE">';
 echo $this->Form->file('File');
 echo $this->Form->submit(__d('file_share','Upload'));
 echo $this->Form->end();
