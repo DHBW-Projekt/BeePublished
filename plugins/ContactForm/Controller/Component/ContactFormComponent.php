@@ -52,7 +52,7 @@ class ContactFormComponent extends Component {
 		$controller->loadModel("ContactForm.ContactRequest");
 			
 		//CHECK request and data
-		if (!$controller->request->is('post') || !isset($controller->data['ContactForm'])){
+		if (!$controller->request->is('post') || !isset($controller->data['ContactRequest'])){
 			$controller->Session->setFlash(__d('contact_form','You cannot send an empty contact form.'), 'flash_failure');
 			return array('data' => $controller->ContactRequest, 'Element' => 'request');
 		}	
@@ -61,7 +61,7 @@ class ContactFormComponent extends Component {
 		$controller->data =  Sanitize::clean($controller->data);
 
 		//SET data
-		$controller->ContactRequest->set($controller->data['ContactForm']);
+		$controller->ContactRequest->set($controller->data['ContactRequest']);
 		
 		//VALIDATE data
 		if(!$controller->ContactRequest->validates()){
@@ -95,10 +95,10 @@ class ContactFormComponent extends Component {
 		//SEND email
 		$this->BeeEmail->sendHtmlEmail( $to = $mailaddress, 
 										$subject = __d('contact_form','Request through contact form'), 
-										$viewVars = array(  'name' => $controller->data['ContactForm']['name'],
-															'email' => $controller->data['ContactForm']['email'],
-															'subject' => $controller->data['ContactForm']['subject'],
-															'body' => $controller->data['ContactForm']['body'],
+										$viewVars = array(  'name' => $controller->data['ContactRequest']['name'],
+															'email' => $controller->data['ContactRequest']['email'],
+															'subject' => $controller->data['ContactRequest']['subject'],
+															'body' => $controller->data['ContactRequest']['body'],
 															'url' => $this->Config->getValue('page_name')
 										), 
 										$viewName = 'ContactForm.contact'
