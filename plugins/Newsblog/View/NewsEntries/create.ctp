@@ -3,7 +3,7 @@ $this->Html->script('ckeditor/ckeditor', array('inline' => false));
 $this->Html->script('ckeditor/adapters/jquery', array('inline' => false));
 $this->Html->script('/newsblog/js/admin_write', false);
 $this->Html->css('/newsblog/css/admin', null, array('inline' => false));
-$this->Html->css('/newsblog/css/customDatepicker', null, array('inline' => false));
+$this->Html->css('/css/jquery-ui-1.8.16.custom', null, array('inline' => false));
 
 $DateTimeHelper = $this->Helpers->load('Time');
 
