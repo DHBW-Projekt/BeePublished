@@ -7,10 +7,13 @@ if(isset($data['view']) && $data['view'] == 'Single'){
 	echo "<h1>".__("Gallery overview")."</h1>";	
 	foreach ($data as $gallery){
 		echo '<div class="galleryImage">';
-		if(isset($gallery['GalleryEntry']['titlepicture']['thumb']))
-			echo $this->Html->image($gallery['GalleryEntry']['titlepicture']['thumb'],array('url' => $url.'/galleryoverview/view/'.$gallery['GalleryEntry']['id']));
-		else
-			echo $this->Html->image($gallery['GalleryPicture'][0]['thumb'],array('url' => $url.'/galleryoverview/view/'.$gallery['GalleryEntry']['id']));
+		if(isset($gallery['GalleryEntry']['titlepicture']['thumb'])){
+			echo '<a href="'.$this->here.'/galleryoverview/view/'.$gallery['GalleryEntry']['id'].'">';
+			echo '<img src="'.$this->webroot.$gallery['GalleryEntry']['titlepicture']['thumb'].'" alt=""></a>';
+		} else {
+			echo '<a href="'.$this->here.'/galleryoverview/view/'.$gallery['GalleryEntry']['id'].'">';
+			echo '<img src="'.$this->webroot.$gallery['GalleryPicture'][0]['thumb'].'" alt=""></a>';
+		}
 		echo '<div class="galleryTitle">'.$gallery['GalleryEntry']['title'].'</div>';
 		echo '</div>';
 	}

@@ -2,8 +2,7 @@
 $this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
 echo $this->Session->flash();
 echo $this->element('admin_menu_galleries',array("ContentId" => $data['ContentId']));
-
-
+	
 	$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create');
 	$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'edit');
 	$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete');
