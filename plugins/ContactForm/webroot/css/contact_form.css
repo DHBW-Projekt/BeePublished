@@ -55,3 +55,7 @@ div #contactform_bottom{
 	margin-left: 5%;
 	text-align: left;
 }
+
+label.recaptcha_input_area_text{
+	float: none;
+}
