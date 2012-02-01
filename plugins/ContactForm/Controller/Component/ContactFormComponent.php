@@ -1,5 +1,6 @@
 <?php
 
+App::uses('Sanitize', 'Utility');
 App::import('Vendor','recaptcha/recaptchalib');
 
 class ContactFormComponent extends Component {
@@ -55,6 +56,9 @@ class ContactFormComponent extends Component {
 			$controller->Session->setFlash(__d('contact_form','You cannot send an empty contact form.'), 'flash_failure');
 			return array('data' => $controller->ContactRequest, 'Element' => 'request');
 		}	
+		
+		//SANITIZE
+		$controller->data =  Sanitize::clean($controller->data);
 
 		//SET data
 		$controller->ContactRequest->set($controller->data['ContactForm']);
