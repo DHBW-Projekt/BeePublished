@@ -185,7 +185,7 @@
 			<?php 
 				if ($data['Impressum']['type'] == 'job') {
 					echo __('Es gelten folgende berufsrechtliche Regelungen: ').
-					$this->Html->link($data['Impressum']['adm_regulations'],$data['Impressum']['adm_regulations_link']);
+					$this->Html->link($data['Impressum']['regulations_name'],$data['Impressum']['regulations_link']);
 				}
 			?>
 		</p>

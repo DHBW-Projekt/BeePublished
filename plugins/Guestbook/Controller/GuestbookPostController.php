@@ -113,10 +113,10 @@ class GuestbookPostController extends GuestbookAppController {
 				$this->Session->setFlash(__d('Guestbook', 'An error has occured.'), 'default', array('class' => 'flash_failure'), 'Guestbook.Main');
 				$this->redirect($this->referer());
 			}
-			// everything fine -> set positive message
-			$this->Session->setFlash(__d('Guestbook', 'Post deleted.'), 'default', array('class' => 'flash_success'), 'Guestbook.Main');
-			$this->redirect($this->referer());
 		}
+		// everything fine -> set positive message
+		$this->Session->setFlash(__d('Guestbook', 'Post deleted.'), 'default', array('class' => 'flash_success'), 'Guestbook.Main');
+		$this->redirect($this->referer());
 	}
 
 	function release_noAuth($id = null, $token = null){

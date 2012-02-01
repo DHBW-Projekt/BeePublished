@@ -1,5 +1,8 @@
 <?php 
+	App::uses('Sanitize', 'Utility');
+	$newsentry = Sanitize::clean($newsentry);
 	$this->Html->css('/newsblog/css/editNews', null, array('inline' => false));
+	$this->Html->css('/newsblog/css/customDatepicker', null, array('inline' => false));
 	$this->Html->script('/newsblog/js/editNews', array('inline' => false));
 	$this->Html->script('ckeditor/ckeditor', array('inline' => false));
 	$this->Html->script('ckeditor/adapters/jquery', array('inline' => false));
@@ -13,6 +16,9 @@
 	$this->Js->set('webroot', $this->request->webroot);
 	$this->Js->set('validFromAltText', __d('newsblog','Choose Valid From'));
 	$this->Js->set('validToAltText', __d('newsblog','Choose Valid To'));
+	
+	$dateFormat = __('m-d-Y');
+	$this->Js->set('dateFormatForPicker', $dateFormat);
 ?>
 <div class="nbEntryContainer">
 	<?php 

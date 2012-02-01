@@ -89,7 +89,7 @@ class ContactFormComponent extends Component {
 		$mailaddress = $this->Config->getValue('email');
 					
 		//VALIDATE recipient
-		if (!isset ($mailaddress)){
+		if (empty ($mailaddress)){
 			$controller->Session->setFlash(__d('contact_form','An error occurred, your request could not be sent. Please contact an administrator.'), 'flash_failure');
 			return array('data' => $controller->ContactRequest, 'Element' => 'request');
 		}
