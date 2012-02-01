@@ -22,7 +22,10 @@ class YoutubeController extends YoutubeAppController{
 			$newLink['YoutubeLink']['contentId'] = $contentId;
 			// work on URL to get an 'embed' version
 			$newLink['YoutubeLink']['url'] = str_replace('watch?v=', 'embed/', $newLink['YoutubeLink']['url']);	
-			$newLink['YoutubeLink']['url'] = substr($newLink['YoutubeLink']['url'], 0, strpos($newLink['YoutubeLink']['url'], '&'));
+			$pos_end = strpos($newLink['YoutubeLink']['url'], '&');
+			if ($pos_end != 0){
+				$newLink['YoutubeLink']['url'] = substr($newLink['YoutubeLink']['url'], 0, $pos_end);
+			}
 			// save and set message
 			if (!$this->YoutubeLink->save($newLink)){
 				$this->_persistValidation('YoutubeLink');
