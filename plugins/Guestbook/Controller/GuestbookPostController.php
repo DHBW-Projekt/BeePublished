@@ -75,9 +75,9 @@ class GuestbookPostController extends GuestbookAppController {
 									  'text' => $newPost['GuestbookPost']['text'],
 									  'submitDate' => $Time->format('d.m.Y', $newPost['GuestbookPost']['created']) . ' ' . $Time->format('H:i:s',$newPost['GuestbookPost']['created']),
 									  'url_release' => $Html->link('here', 'http://' . env('SERVER_NAME') . ':' .  env('SERVER_PORT') . $this->webroot . 'plugin/Guestbook/GuestbookPost/release_noAuth/' . $newPost['GuestbookPost']['id'] . '/' . $newPost['GuestbookPost']['token'],
-																	array('title' => __d('Guestbook', 'Release post'))),
+																	array('title' => __d('Guestbook', 'Release'))),
 									  'url_delete' => $Html->link('here', 'http://' . env('SERVER_NAME') . ':' .  env('SERVER_PORT') . $this->webroot . 'plugin/Guestbook/GuestbookPost/delete_noAuth/' . $newPost['GuestbookPost']['id'] . '/' . $newPost['GuestbookPost']['token'],
-																	array('title' => __d('Guestbook', 'Delete post'))),
+																	array('title' => __d('Guestbook', 'Delete'))),
 									  'page_name' => $this->Config->getValue('page_name'));
 					$viewName = 'Guestbook.notification';
 					$this->BeeEmail->sendHtmlEmail($to, $subject, $viewVars, $viewName);
@@ -89,7 +89,7 @@ class GuestbookPostController extends GuestbookAppController {
 		}
 	}
 
-	function delete($id = null){
+	function delete($contentId = null, $id = null){
 		// get is not allowed for delete function
 		if ($this->request->is('get')){
 			throw new MethodNotAllowedException();
@@ -97,7 +97,7 @@ class GuestbookPostController extends GuestbookAppController {
 		// check settings for delete
 		$delete_immediately = $this->GuestbookContentValues->getValue($contentId, 'delete_immediately');
 		if ($delete_immediately == 'no'){
-			$onePost = $this->GuestbookPost->read($id);
+			$onePost = $this->GuestbookPost->find('first', array('conditions' => array('GuestbookPost.id' => $id)));
 			// set deleted with current date and time
 			$onePost['GuestbookPost']['deleted'] = date("Y-m-d H:i:s");
 			// save changed posts
@@ -120,10 +120,8 @@ class GuestbookPostController extends GuestbookAppController {
 	}
 
 	function release_noAuth($id = null, $token = null){
-		// get id from link
-		$this->GuestbookPost->id = $id;
 		// get data for post
-		$onePost = $this->GuestbookPost->read();
+		$onePost = $this->GuestbookPost->find('first', array('conditions' => array('GuestbookPost.id' => $id)));
 		// check whether post is still existing
 		if ($onePost == null || $onePost == ''){
 			// set message to notify that post was already deleted
@@ -150,10 +148,8 @@ class GuestbookPostController extends GuestbookAppController {
 	}
 
 	function delete_noAuth($id = null, $token = null){
-		// get id from link
-		$this->GuestbookPost->id = $id;
 		// get data for post
-		$onePost = $this->GuestbookPost->read();
+		$onePost = $this->GuestbookPost->find('first', array('conditions' => array('GuestbookPost.id' => $id)));
 		// check whether post is still existing
 		if ($onePost == null || $onePost == ''){
 			// set message to notify that post was already deleted

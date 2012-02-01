@@ -14,7 +14,7 @@ class LargeCalendarController extends CalendarAppController
         $this->layout = 'overlay';
         if ($this->request->is('post')) {
             $this->ContentValueManager->saveContentValues($contentId, $this->request->data['null']);
-            $this->Session->setFlash('Successfully saved');
+            $this->Session->setFlash(__d('calendar','Successfully saved'));
         }
 
         $contentValues = $this->ContentValueManager->getContentValues($contentId);

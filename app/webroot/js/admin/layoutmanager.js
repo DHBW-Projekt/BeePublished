@@ -42,7 +42,7 @@ function createPlugins(plugins) {
                         .attr("id", "pl_" + this.id)
                         .attr('rel',this.plugin + ' - ' + this.name)
                         .attr('class', 'sidebar-object plugin')
-                        .html(this.plugin + ' - ' + this.name)
+                        .html('<img src="'+window.app.webroot+this.img+'" width="100%" />')
                     );
     });
     dnd('dropzone');

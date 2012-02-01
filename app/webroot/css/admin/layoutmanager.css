@@ -1,12 +1,27 @@
 .handler {
-    width: 100%;
+  /*  width: 100%;
     height: 20px;
     cursor: pointer;
     display: block;
     position: relative;
     background-color: #3292DD;
     color: #ffffff;
+    font-weight: bold;*/
+    
+        width: 100%;
+    height: 20px;
+    cursor: pointer;
+    display: block;
+    position: relative;
+    background-color: #333;
+    color: white;
     font-weight: bold;
+     border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-size: 14px;
+    text-indent: 10px;
+    line-height: 20px;
+    
 }
 
 .subcl, .subcr, .subc {
@@ -35,4 +50,8 @@
     width: 100%;
     border:1px dotted black;
     background-color: #444444;
+}
+
+.ui-state-active.ui-droppable {
+	background-color: #DCDCDC;
 }

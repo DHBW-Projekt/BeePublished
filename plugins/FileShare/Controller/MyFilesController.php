@@ -3,7 +3,6 @@
 // app/controllers/my_files_controller.php (Cake 1.2)
 class MyFilesController extends FileShareAppController
 {
-    public $components = array('ContentValueManager');
     public $uses = array('FileShare.MyFileConfig', 'FileShare.MyFile');
 
     function upload()
@@ -24,7 +23,7 @@ class MyFilesController extends FileShareAppController
                 $this->redirect($this->referer());
             }
             // Write file to disk
-            $fh = fopen($this->request->data['MyFile']['path'], 'w');
+            $fh = fopen($this->request->data['MyFile']['path'], 'w') or die();
             fwrite($fh, $fileData);
             fclose($fh);
 
@@ -81,7 +80,7 @@ class MyFilesController extends FileShareAppController
     function delete($id)
     {
         $file = $this->MyFile->findById($id);
-        if ($file['MyFile']['owner'] != $this->Auth->user('id')) {
+        if ($file['MyFile']['owner'] != $this->Auth->user('id') && $this->Auth->user('role_id') < 6) {
             $this->Session->setFlash('You don\'t have permissions to delete ' . $file['MyFile']['filename']);
             $this->redirect($this->referer());
         }
