@@ -107,7 +107,10 @@ class WebShopController extends WebShopAppController {
 			
 			//SAVE on DB
 			if (!$create_error){
+				
+				//SANITIZE
 				$this->data =  Sanitize::clean($this->data);
+				
 				$this->WebshopProduct->set(array(
 							'name' => $this->data['WebshopProduct']['name'],
 							'description' => $this->data['WebshopProduct']['description'],
@@ -115,6 +118,7 @@ class WebShopController extends WebShopAppController {
 							'picture' => $file_name
 				));
 				
+				//VALIDATE
 				if ($this->WebshopProduct->validates())
 					$create_error = !$this->WebshopProduct->save();
 				else 
@@ -167,7 +171,10 @@ class WebShopController extends WebShopAppController {
 		if (isset($this->params['data']['save'])) {
 			//UPDATE db info
 			$data_old = $this->WebshopProduct->read();
+			
+			//SANITIZE
 			$this->data =  Sanitize::clean($this->data);
+
 			$data_new = $this->data;
 			$data_new['WebshopProduct']['picture'] = $data_old['WebshopProduct']['picture'];
 

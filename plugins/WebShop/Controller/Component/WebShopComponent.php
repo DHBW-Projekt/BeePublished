@@ -1,4 +1,7 @@
 <?php
+
+App::uses('Sanitize', 'Utility');
+
 /**
  * Component for WebShopComponent.
  *
@@ -77,6 +80,9 @@ class WebShopComponent extends Component {
 		
 		//DATA from request
 		if (!empty($controller->data)) {
+			
+			//SANITIZE
+			$controller->data =  Sanitize::paranoid($controller->data);
 			
 			//PAGINATION options
 			$controller->paginate = array(
