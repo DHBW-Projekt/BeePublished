@@ -36,7 +36,7 @@ msgid "Please fill out all mandatory fields correctly."
 msgstr "Bitte füllen Sie alle Pflichtfelder korrekt aus."
 
 #: Controller\Component\ContactFormComponent.php:130
-msgid "Please fill out the CAPTCHA field."
+msgid "Please fill out the CAPTCHA field correctly."
 msgstr "Bitte füllen Sie das CAPTCHA-Feld korrekt aus."
 
 #: Controller\Component\ContactFormComponent.php:134
@@ -67,6 +67,10 @@ msgstr "Betreff*:"
 msgid "Message*:"
 msgstr "Nachricht*:"
 
+#: View\Elements\request.ctp:..
+msgid "CAPTCHA*:"
+msgstr "CAPTCHA*:"
+
 #: View\Elements\request.ctp:25
 msgid "* - Mandatory fields"
 msgstr "* - Pflichtfelder"
@@ -76,6 +80,10 @@ msgid "Send"
 msgstr "Absenden"
 
 #: View\Emails\html\contact.ctp:1
+msgid "Hello Admin."
+msgstr "Hallo Administrator."
+
+#: View\Emails\html\contact.ctp:2
 msgid "A user sent you the following contact request:"
 msgstr "Ein Nutzer schickte Ihnen die folgende Kontaktanfrage:"
 
@@ -94,6 +102,10 @@ msgstr "Betreff: "
 #: View\Emails\html\contact.ctp:15
 msgid "Message: "
 msgstr "Nachricht: "
+
+#: View\Emails\html\contact.ctp:..
+msgid "Yours sincerely,"
+msgstr "Mit freundlichen Grüßen,"
 
 #: View\Emails\html\contact.ctp:20
 msgid "Information: Contact requests are automatically sent to the e-mail address in your general configurations. To change the recipient of contact requests, please set a new e-mail address in your general configurations in BeePublished."

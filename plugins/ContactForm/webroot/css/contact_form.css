@@ -2,8 +2,8 @@
 
 /* FORMATTING admin overlay */
 div #contact_form_admin{
-width:100%;
-text-align: left;
+	width:100%;
+	text-align: left;
 }
 
 div #contact_form_admin_content{
@@ -11,42 +11,15 @@ div #contact_form_admin_content{
 }
 
 /* FORMATTING contact form */
-div #contactform_input{
-	vertical-align: top;
-}
-
-div #contactform_input label{
-	margin-top: 5px;
-	margin-left: 5%;
-	align: left;
-	text-align: left;
-	vertical-align: top;
-	width: 20%;	
-}
-
-div #contactform_input input{
-	margin-top: 5px;
-	margin-right: 5%;
-	align: right;
-	width: 58%;
-}
-
-div #contactform_input textarea{
-	margin-top: 5px;
-	margin-right: 5%;
-	align: right;
-	width: 58%;
-}
-
 div #contactform_between{
-	text-align: right;
+	text-align: left;
 	margin-top: 5px;
 	margin-right: 7%;
 }
 
 div #contactform_between label{
 	width: 93%;
-	text-align: right;
+	text-align: left;
 }
 
 div #contactform_bottom{
