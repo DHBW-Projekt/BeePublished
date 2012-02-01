@@ -1,0 +1,124 @@
+# LANGUAGE translation of Contact Form in BeePublished
+# Copyright 2011-2012>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"POT-Creation-Date: 2012-01-21 11:44+0100\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: Corinna Knick\n"
+"Language-Team: German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: Controller\Component\ContactFormComponent.php:19
+#: View\Elements\request.ctp:10
+msgid "Contact Form"
+msgstr "Kontaktformular"
+
+#: Controller\Component\ContactFormComponent.php:93
+msgid "Request through contact form"
+msgstr "Anfrage über Kontaktformular"
+
+#: Controller\Component\ContactFormComponent.php:100
+msgid "Thank you for your interest. Your request has been sent."
+msgstr "Vielen Dank für Ihr Interesse. Ihre Anfrage wurde versandt."
+
+#: Controller\Component\ContactFormComponent.php:122
+msgid "You cannot send an empty contact form."
+msgstr "Sie können kein leeres Kontaktformular abschicken."
+
+#: Controller\Component\ContactFormComponent.php:126
+msgid "Please fill out all mandatory fields correctly."
+msgstr "Bitte füllen Sie alle Pflichtfelder korrekt aus."
+
+#: Controller\Component\ContactFormComponent.php:130
+msgid "Please fill out the CAPTCHA field correctly."
+msgstr "Bitte füllen Sie das CAPTCHA-Feld korrekt aus."
+
+#: Controller\Component\ContactFormComponent.php:134
+msgid "An error occurred, your request could not be sent. Please contact an administrator."
+msgstr "Es ist ein Fehler aufgetreten, Ihre Anfrage konnte nicht gesendet werden. Bitte kontaktieren Sie einen Administrator."
+
+#: View\ContactForm\admin.ctp:9
+msgid "Configuration"
+msgstr "Konfiguration"
+
+#: View\ContactForm\admin.ctp:10
+msgid "There are no configuration options available. Contact requests are automatically sent to the e-mail address in your general configurations. To change the recipient of contact requests, please set a new e-mail address in your general configurations."
+msgstr "Es sind keine Konfigurationsoptionen verfügbar. Kontaktanfragen werden automatisch an die E-Mailadresse in Ihren allgemeinen Konfigurationen gesendet. Wenn Sie den Empfänger von Kontaktanfragen ändern möchten, setzen Sie bitte eine neue E-Mailadresse in Ihren allgemeinen Konfigurationen."
+
+#: View\Elements\request.ctp:17
+msgid "Name:"
+msgstr "Name:"
+
+#: View\Elements\request.ctp:19
+msgid "E-Mail*:"
+msgstr "E-Mail*:"
+
+#: View\Elements\request.ctp:21
+msgid "Subject*:"
+msgstr "Betreff*:"
+
+#: View\Elements\request.ctp:23
+msgid "Message*:"
+msgstr "Nachricht*:"
+
+#: View\Elements\request.ctp:..
+msgid "CAPTCHA*:"
+msgstr "CAPTCHA*:"
+
+#: View\Elements\request.ctp:25
+msgid "* - Mandatory fields"
+msgstr "* - Pflichtfelder"
+
+#: View\Elements\request.ctp:29
+msgid "Send"
+msgstr "Absenden"
+
+#: View\Emails\html\contact.ctp:1
+msgid "Hello Admin."
+msgstr "Hallo Administrator."
+
+#: View\Emails\html\contact.ctp:2
+msgid "A user sent you the following contact request:"
+msgstr "Ein Nutzer schickte Ihnen die folgende Kontaktanfrage:"
+
+#: View\Emails\html\contact.ctp:6
+msgid "Name: "
+msgstr "Name: "
+
+#: View\Emails\html\contact.ctp:9
+msgid "E-Mail: "
+msgstr "E-Mail: "
+
+#: View\Emails\html\contact.ctp:12
+msgid "Subject: "
+msgstr "Betreff: "
+
+#: View\Emails\html\contact.ctp:15
+msgid "Message: "
+msgstr "Nachricht: "
+
+#: View\Emails\html\contact.ctp:..
+msgid "Yours sincerely,"
+msgstr "Mit freundlichen Grüßen,"
+
+#: View\Emails\html\contact.ctp:20
+msgid "Information: Contact requests are automatically sent to the e-mail address in your general configurations. To change the recipient of contact requests, please set a new e-mail address in your general configurations in BeePublished."
+msgstr "Information: Kontaktanfragen werden automatisch an die E-Mailadresse in Ihren allgemeinen Konfigurationen gesendet. Wenn Sie den Empfänger von Kontaktanfragen ändern möchten, setzen Sie bitte eine neue E-Mailadresse in Ihren allgemeinen Konfigurationen in BeePublished."
+
+#: Model\ContactRequest.php:validation for field email
+msgid "Please enter a valid e-mail address."
+msgstr "Bitte geben Sie eine gültige E-Mailadresse ein."
+
+#: Model\ContactRequest.php:validation for field subject
+msgid "Please enter a subject."
+msgstr "Bitte geben Sie einen Betreff ein."
+
+#: Model\ContactRequest.php:validation for field body
+msgid "Please enter your message."
+msgstr "Bitte geben Sie Ihre Nachricht ein."
