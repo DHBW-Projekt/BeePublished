@@ -88,7 +88,7 @@ class ApplicationMembershipComponent extends Component {
 			$mailaddress = $this->Config->getValue('email');
 					
 			//VALIDATE recipient
-			if (!isset ($mailaddress)){
+			if (empty ($mailaddress)){
 				$error_message = __d('application_membership', 'An error occurred, your request could not be sent. Please contact an administrator.');
 				$data_error = true;
 			}
