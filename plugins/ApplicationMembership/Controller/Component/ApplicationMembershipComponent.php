@@ -1,5 +1,6 @@
 <?php
 
+App::uses('Sanitize', 'Utility');
 App::import('Vendor','recaptcha/recaptchalib');
 
 class ApplicationMembershipComponent extends Component {
@@ -54,7 +55,10 @@ class ApplicationMembershipComponent extends Component {
 		//CHECK request and data
 		if (!$controller->request->is('post') || !isset($controller->data['ApplicationMembership']))
 			$data_error = true;
-
+	
+		//SANITIZE
+		$controller->data =  Sanitize::clean($controller->data);
+		
 		//VALIDATE data
 		if(!$data_error){
 			$controller->ApplicationMembership->set($controller->data['ApplicationMembership']);
@@ -98,7 +102,7 @@ class ApplicationMembershipComponent extends Component {
 		if(!$data_error){
 			$this->BeeEmail->sendHtmlEmail($to = $mailaddress,
 			$subject = 'New Application for Membership',
-			$viewVars = array('data' => $controller->data['ApplicationMembership'], 'url' => 'localhost'),
+			$viewVars = array('data' => $controller->data['ApplicationMembership'], 'url' => $this->Config->getValue('page_name')),
 			$viewName = 'ApplicationMembership.application');
 		}
 		 
