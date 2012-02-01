@@ -21,7 +21,8 @@ if (array_key_exists('writePost', $data)){
 	echo $this->element('displayPosts',
 	array('data' => $data,
 		  'url' => $url,
-		  'pluginId' => $pluginId),
+		  'pluginId' => $pluginId,
+		  'contentId' => $contentId),
 	array('plugin' => 'Guestbook'));
 }
 ?>
