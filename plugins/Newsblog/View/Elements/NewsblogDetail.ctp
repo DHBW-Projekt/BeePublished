@@ -1,9 +1,13 @@
 <?php 
+	App::uses('Sanitize', 'Utility');
+
 	$this->Html->script('/newsblog/js/displayFullNews', false);
 	$this->Html->css('/newsblog/css/displayFullNews', null, array('inline' => false));
 	$DateTimeHelper = $this->Helpers->load('Time');
 	$this->Helpers->load('BBCode');
 	$this->Helpers->load('SocialNetwork');
+	
+	$data = Sanitize::clean($data);
 	
 	//set meta tags for social network buttons
 	//Facebook
