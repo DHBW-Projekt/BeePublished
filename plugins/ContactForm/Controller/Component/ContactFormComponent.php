@@ -54,15 +54,9 @@ class ContactFormComponent extends Component {
 		if (!$controller->request->is('post') || !isset($controller->data['ContactForm'])){
 			$controller->Session->setFlash(__d('contact_form','You cannot send an empty contact form.'), 'flash_failure');
 			return array('data' => $controller->ContactRequest, 'Element' => 'request');
-		}
-			
+		}	
 
 		//SET data
-		/*$controller->ContactRequest->set(array('name' => $controller->data['ContactForm']['name'],
-												'email' => $controller->data['ContactForm']['email'],
-												'subject' => $controller->data['ContactForm']['subject'],
-												'body' => $controller->data['ContactForm']['body']
-		)); */
 		$controller->ContactRequest->set($controller->data['ContactForm']);
 		
 		//VALIDATE data
@@ -101,7 +95,7 @@ class ContactFormComponent extends Component {
 															'email' => $controller->data['ContactForm']['email'],
 															'subject' => $controller->data['ContactForm']['subject'],
 															'body' => $controller->data['ContactForm']['body'],
-															'url' => 'localhost'
+															'url' => $this->Config->getValue('page_name')
 										), 
 										$viewName = 'ContactForm.contact'
 		);
