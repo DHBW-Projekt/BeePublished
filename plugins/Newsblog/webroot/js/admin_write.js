@@ -10,7 +10,7 @@ $(document).ready(function () {
 	$('#nbValidFromDatepicker').datepicker(
 		{
 			autoSize: true,
-			formatDate: window.app.webroot.dateFormatForPicker,
+			formatDate: 'ISO_8601',
 			altField: '#validFromDB',
 			altFormat: 'yy-mm-dd',
 			minDate: new Date(),
