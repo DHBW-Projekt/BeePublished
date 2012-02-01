@@ -73,3 +73,7 @@ label{
 .input.textarea label {
 	display: block;
 }
+
+label.recaptcha_input_area_text{
+	float: none;
+}
