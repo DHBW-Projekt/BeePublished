@@ -231,6 +231,10 @@ class WebShopComponent extends Component {
 		
 		//Check if user is allowed to submit orders
 		if (!$controller->PermissionValidation->actionAllowed($pluginID, 'Submit Order')) {
+			
+			$controller->Session->setFlash(__d('web_shop', 'You are not logged in'), 'default', array(
+								'class' => 'flash_failure'));
+			
 			$controller->redirect($url.'/webshop/cart');
 		}
 		
@@ -269,7 +273,10 @@ class WebShopComponent extends Component {
 		$controller->WebshopPosition->saveMany($pos_data, array('validate' => 'false'));
 		
 		//SEND mail
-		$this->BeeEmail->sendHtmlEmail($to = $this->Config->getValue('email'), $subject = 'DualonCMS: New Order', $viewVars = array('user' => $controller->Auth->user(), 'order' => $order, 'url' => $this->Config->getValue('page_name')), $viewName = 'WebShop.order');
+		$mail = $this->Config->getValue('email');
+		
+		if(!empty($mail))
+			$this->BeeEmail->sendHtmlEmail($to = $mail, $subject = 'DualonCMS: New Order', $viewVars = array('user' => $controller->Auth->user(), 'order' => $order, 'url' => $this->Config->getValue('page_name')), $viewName = 'WebShop.order');
 		
 		//UNSET cart
 		$controller->Session->write('webshop_cart', null);
