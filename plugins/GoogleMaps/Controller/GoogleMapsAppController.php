@@ -64,7 +64,7 @@ class GoogleMapsAppController extends AppController {
 		//PROCESS cancle
 		if (isset($this->params['data']['cancel']))
 			$this->redirect(array('action' => 'admin', $contentID));
-		
+		pr($this->data['GoogleMapsLocation']); pr($this->params);
 		if (isset($this->data['GoogleMapsLocation']) && isset($this->params['data']['save'])) {			
 			if ($this->GoogleMapsLocation->save($this->data)) {
 				$this->setLocation($contentID, $this->GoogleMapsLocation->id);
