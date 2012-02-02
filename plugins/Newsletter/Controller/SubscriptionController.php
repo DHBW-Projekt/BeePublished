@@ -1,8 +1,34 @@
 <?php
 
+/*
+* This file is part of BeePublished which is based on CakePHP.
+* BeePublished is free software: you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation, either version 3
+* of the License, or any later version.
+* BeePublished is distributed in the hope that it will be useful, but
+* WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+* You should have received a copy of the GNU General Public
+* License along with BeePublished. If not, see
+* http://www.gnu.org/licenses/.
+*
+* @copyright 2012 Duale Hochschule Baden-W¸rttemberg Mannheim
+* @author Marcus Lieberenz
+*
+* @description Basic Settings for all controllers
+*/
+
 App::uses('CakeEmail', 'Network/Email');
 Configure::write('Config.language', 'ger');
 
+/**
+*
+* This Controller implements the logic for the newsletter plugin standard view
+* @author marcuslieberenz
+*
+*/
 class SubscriptionController extends NewsletterAppController {
 	
 	public $name = 'Subscription';
@@ -17,6 +43,7 @@ class SubscriptionController extends NewsletterAppController {
 		$this->set('pluginId', $pluginId);
 	}
 	
+	// get and set data that is necessary for the admin overlay
  	public function admin($contentID){
  		$pluginId = $this->getPluginId();
  		$this->PermissionValidation->actionAllowed($pluginId, 'OpenNewsletterOverlay', true);
@@ -34,6 +61,7 @@ class SubscriptionController extends NewsletterAppController {
 			'action' => 'index', $contentID, $pluginId));
  	}
  	
+ 	// unSubscribe as guest
  	public function guestUnSubscribe(){
 //  		echo 'test';
  		if ($this->request->is('post')){
@@ -49,6 +77,7 @@ class SubscriptionController extends NewsletterAppController {
  					$recipient['NewsletterRecipient']['active'] = 1;
  					$action = 'add';
  				}
+ 				// save recipient and show flash
  				$this->NewsletterRecipient->set($recipient);
  				if($this->NewsletterRecipient->save()) {
  					if ($action == 'add'){
@@ -75,8 +104,10 @@ class SubscriptionController extends NewsletterAppController {
  		$this->redirect($this->referer());
  	}
  	
+ 	// unSubscribe as user
  	public function userUnSubscribe(){
  		$pluginId = $this->getPluginId();
+ 		// check if user is allowed to unSubscribe
  		$this->PermissionValidation->actionAllowed($pluginId, 'UnSubscribeUser', true);
  		if ($this->request->is('post')){
  			$user = $this->Auth->user();
@@ -101,7 +132,7 @@ class SubscriptionController extends NewsletterAppController {
  												'active' => '1'));
  				$action = 'add';
  			}
- 			// update or save recipient
+ 			// update or save recipient and show flash
  			$this->NewsletterRecipient->set($recipient);
  			if($this->NewsletterRecipient->save()) {
  				if ($action == 'add'){
@@ -123,6 +154,7 @@ class SubscriptionController extends NewsletterAppController {
  		}
  	}
  	
+ 	// set data for unsubscription per mail
  	public function unSubscribePerMail($email){
  		$this->set('email', $email);
  		$this->set('menu', $this->Menu->buildMenu($this, NULL));
@@ -130,6 +162,7 @@ class SubscriptionController extends NewsletterAppController {
  		$this->set('systemPage', true);
  	}
  	
+ 	// unsubscribe per mail
  	public function unsubscribe(){
  		if ($this->request->is('post')){
  			if($recipient = $this->NewsletterRecipient->findByEmail($this->request->data['NewsletterRecipient']['email'])){
@@ -162,6 +195,7 @@ class SubscriptionController extends NewsletterAppController {
  		$this->redirect($this->referer());
  	}
  	
+ 	// add new recipient
  	private function add(){
  		if ($this->request->is('post')){
  			$email = $this->data['NewsletterRecipient']['email'];
@@ -189,6 +223,7 @@ class SubscriptionController extends NewsletterAppController {
  				}
  			}
  			$action = 'add';
+ 			// save recipient and show flash
  			$this->NewsletterRecipient->set($recipient);
  			if($this->NewsletterRecipient->save()) {
  				if ($action == 'add'){
