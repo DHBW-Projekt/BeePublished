@@ -1,3 +1,3 @@
 <?php 
-	echo __('Nothing to do here... nice :)');
+	echo $this->element('admin_menu_overview');
 ?>
