@@ -57,5 +57,9 @@ class FoodMenuMenu extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+	
+	function invalidate($field, $value = true) {
+		return parent::invalidate($field, __d('food_menu', $value, true));
+	} 
 
 }

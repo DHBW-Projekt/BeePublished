@@ -1,10 +1,15 @@
 <?php 
 echo $this->element('admin_menu_galleries',array("ContentId" => $data['ContentId']));
 $this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
-
+$this->Html->script('/gallery/js/gallerytableassign', false);
 echo "<h1> ".__('Assign a Gallery')."</h1>";
 
 echo $this->Session->flash();
+$curr_galleryid=-1;
+if(array_key_exists('galleryID', $data['CurrGallery'])){
+	$curr_galleryid = $data['CurrGallery']['galleryID'];
+}
+
 
 echo '<div class="galleryinfo">'.__('Please assign a gallery to the view.').'</div>';
 
@@ -19,11 +24,23 @@ echo '<table>';
 	echo '<tbody>';
 
 foreach ($data['AllGalleries'] as $gallery){
-	echo '<tr>';
+	echo '<tr class="Gallery_row">';
 		echo '<td>'.$gallery['GalleryEntry']['title'].'</td>';
 		echo '<td style width="30%">'.$gallery['GalleryEntry']['description'].'</td>';
 		echo '<td>';
-			echo $this->Html->link($this->Html->image("test-pass-icon.png", array('width' => '20px')),array('action' => 'setGallery', $data['ContentId'], $gallery['GalleryEntry']['id']),array('escape' => False));
+			
+			if ($gallery['GalleryEntry']['id'] == $curr_galleryid){
+									$class = "";
+									$style = "display:inline";
+			} else {
+									$class = "set_gallery_link";
+									$style = "display:none";
+			}
+			echo $this->Html->link(
+			$this->Html->image("check.png", array('width' => '16px')),
+			array('action' => 'setGallery', $data['ContentId'], $gallery['GalleryEntry']['id']),
+			array('escape' => False, 'class' => $class, "style" => $style)
+			);
 		echo '</td>';
 	echo '</tr>';
 }

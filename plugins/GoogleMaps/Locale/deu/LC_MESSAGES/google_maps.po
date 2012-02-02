@@ -104,6 +104,10 @@ msgstr "Stadt"
 msgid "Country"
 msgstr "Land"
 
+#: View\Elements\edit.ctp:26
+msgid "Edit location"
+msgstr "Standort bearbeiten"
+
 #: Controller\Component\GoogleMapsComponent.php:8;15
 #: View\Elements\Location.ctp:5
 #: View\Elements\Route.ctp:5

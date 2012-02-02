@@ -20,7 +20,7 @@ class DisplayTextController extends StaticTextAppController {
 		$textPlugin = $this->Plugin->findByName($this->plugin);
 		//Get plugin-ID
 		$pluginId = $textPlugin['Plugin']['id'];
-		$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'edittext');
+		$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'edit');
 		//If you are in the requiered role
 		if ($editAllowed){	
 			//Load and save data

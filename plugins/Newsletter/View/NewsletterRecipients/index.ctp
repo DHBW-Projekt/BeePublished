@@ -4,6 +4,7 @@ $this->Html->script('jquery/jquery.quicksearch', false);
 $this->Html->script('/newsletter/js/newsletter', false);
 $this->Html->script('jquery/jquery.dataTables.min', false);
 echo $this->Html->css('/newsletter/css/newsletter', NULL, array('inline' => false));
+echo $this->Html->css('/css/jQueryDataTables.css', NULL, array('inline' => false));
 $lang = Configure::read("Config.language");
 $path = $this->Html->url("/language/".$lang.".txt", true);
 $this->Js->set('language_path', $path);
@@ -25,7 +26,7 @@ if (isset($validationErrors['email'][0])){
 	echo $this->Html->div('validation_error',$validationErrors['email'][0]);
 };
 echo $this->Form->end(__d('newsletter','Add'));
-echo '<br><hr><br>';
+echo '<hr>';
 echo '<h2>'.__d('newsletter','Subscriptions:').'</h2>';
 echo $this->Session->flash('RecipientDeleted');
 echo $this->Form->create('selectRecipients', array(
@@ -54,7 +55,7 @@ echo '<table id="recipients">';
 					echo '<td>'.$recipient['NewsletterRecipient']['email'].'</td>';
 					echo '<td>'.$recipient['User']['username'].'</td>';
 					echo '<td>';
-						echo $this->Html->link($this->Html->image('/app/webroot/img/delete.png', array(
+						echo $this->Html->link($this->Html->image('delete.png', array(
 							'height' => 20, 
 							'width' => 20, 
 							'alt' => __d('newsletter','[x]Delete'))),
@@ -73,7 +74,7 @@ echo '<table id="recipients">';
 			echo '<tfoot>';	
 				echo '<tr>';
 					echo '<td>';
-					echo $this->Html->image('/app/webroot/img/arrow.png', array(
+					echo $this->Html->image('arrow.png', array(
 						'height' => 20,
 						'width' => 20));
 					echo '</td>';

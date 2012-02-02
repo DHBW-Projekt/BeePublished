@@ -18,7 +18,7 @@ echo $this->Form->end();
 echo "<h2>".__('Add multiple images')."</h2>";
 
 echo $this->Form->create('addImage', array('url' => array('plugin' => 'Gallery','controller' => 'ManageImages','action' => 'uploadImages',$data['ContentId']),'type' => 'file'));
-echo $this->Form->input('data', array('label'=>'File', 'type'=>'file', 'name' => 'files[]', 'multiple'));
+echo $this->Form->input('data', array('label'=>'Files', 'type'=>'file', 'name' => 'files[]', 'multiple'));
 echo $this->Form->submit(__('Add images'));
 echo $this->Form->end();
 
@@ -33,6 +33,7 @@ echo '<table>';
 		echo '<tr>';
 			echo '<th></th>';
 			echo '<th>'.__('Id').'</th>';
+			echo '<th>'.__('Preview').'</th>';
 			echo '<th>'.__('Title').'</th>';
 			echo '<th>'.__('Edit').'</th>';
 			echo '<th>'.__('Delete').'</th>';
@@ -52,6 +53,10 @@ foreach ($data['AllPictures'] as $picture){
 	echo "<td>".$this->Form->checkbox($picture['id'])."</td>";
 	
 	echo "<td>".$picture['id']."</td>";
+	
+	echo '<td>'.'<img src="'.$this->webroot.$picture['thumb'].'" width="35px" /></td>';
+	
+	
 	echo "<td>".$picture['title']."</td>";
 	
 	echo '<td>';

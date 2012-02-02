@@ -20,15 +20,15 @@
 	echo $this->Html->meta(null, null, array('itemprop' => 'name', 'content' => $data['NewsEntry']['title'], 'inline' => false));
 	
 	//set title
-	$this->set('title_for_layout', Sanitize::html($data['NewsEntry']['title'], true));
+	$this->set('title_for_layout', $data['NewsEntry']['title']);
 ?>
 
 <div class='showFullNewsContainer'>
 	<h2 class='showFullNewsTitle'>
-		<?php echo Sanitize::html($data['NewsEntry']['title'], true);?>
+		<?php echo Sanitize::html($data['NewsEntry']['title']);?>
 	</h2>
 	<?php if($data['NewsEntry']['subtitle'] != null & $data['NewsEntry']['subtitle'] != ''){
-		echo '<h3 class="showFullNewsSubtitle">'.Sanitize::html($data['NewsEntry']['subtitle'], true).'</h3>';
+		echo '<h3 class="showFullNewsSubtitle">'.Sanitize::html($data['NewsEntry']['subtitle']).'</h3>';
 	}?>
 	<div class='showFullNewsInfo'>
 		<?php 

@@ -1,6 +1,6 @@
 <?php
 $this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
-echo $this->Session->flash();
+
 echo $this->element('admin_menu_galleries',array("ContentId" => $data['ContentId']));
 	
 	$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create');
@@ -8,9 +8,9 @@ echo $this->element('admin_menu_galleries',array("ContentId" => $data['ContentId
 	$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete');
 	
 	
-echo "<h1> ".__('Manage Your Galleries')."</h1>";
-
-echo '<div class="galleryinfo">'.__('Here you can edit, delete your galleries or assign pictures to them').'</div>';
+echo "<h1> ".__('Manage your galleries')."</h1>";
+echo $this->Session->flash('GalleryNotification');
+echo '<div class="galleryinfo">'.__('Here you can edit, delete your galleries or assign pictures to them.').'</div>';
 
 echo '<table>';
 	echo '<thead>';
@@ -40,7 +40,7 @@ foreach ($data['AllGalleries'] as $gallery){
 	
 		echo '<td>';
 		if($editAllowed){
-			echo $this->Html->link($this->Html->image('/app/webroot/img/edit.png', array(
+			echo $this->Html->link($this->Html->image('edit.png', array(
 							'height' => 20, 
 							'width' => 20, 
 							'alt' => __('[x]Edit'))),
@@ -58,7 +58,7 @@ foreach ($data['AllGalleries'] as $gallery){
 		echo '<td>';
 		
 			if($deleteAllowed){
-			echo $this->Html->link($this->Html->image('/app/webroot/img/delete.png', array(
+			echo $this->Html->link($this->Html->image('delete.png', array(
 							'height' => 20, 
 							'width' => 20, 
 							'alt' => __('[x]Delete'))),
@@ -75,7 +75,7 @@ foreach ($data['AllGalleries'] as $gallery){
 	
 		echo '<td>';
 			if($editAllowed){
-				echo $this->Html->image('/app/webroot/img/add2.png',array('style' => 'float: left', 'width' => '20px', 'alt' => '[]Assign', 'url' => array('plugin' => 'Gallery', 'controller' => 'ManageGalleries', 'action' => 'assignImages',$gallery['GalleryEntry']['id'],$data['ContentId'])));
+				echo $this->Html->image('add2.png',array('style' => 'float: left', 'width' => '20px', 'alt' => '[]Assign', 'url' => array('plugin' => 'Gallery', 'controller' => 'ManageGalleries', 'action' => 'assignImages',$gallery['GalleryEntry']['id'],$data['ContentId'])));
 			}		
 		echo '</td>';
 		
@@ -85,7 +85,7 @@ foreach ($data['AllGalleries'] as $gallery){
 	echo '<tfoot>';	
 			echo '<tr>';
 				echo '<td>';
-				echo $this->Html->image('/app/webroot/img/arrow.png', array(
+				echo $this->Html->image('arrow.png', array(
 						'height' => 20,
 						'width' => 20));
 				echo '</td>';
