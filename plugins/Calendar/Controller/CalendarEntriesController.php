@@ -50,15 +50,13 @@ class CalendarEntriesController extends CalendarAppController
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->CalendarEntry->save($this->request->data)) {
                 $this->Session->setFlash(__d('calendar','The calendar entry has been saved'));
-                $this->redirect(array('action' => 'index'));
+                $this->render('close');
             } else {
                 $this->Session->setFlash(__d('calendar','The calendar entry could not be saved. Please, try again.'),'default', array('class' => 'flash_failure'));
             }
         } else {
             $this->request->data = $this->CalendarEntry->read(null, $id);
         }
-        $users = $this->CalendarEntry->User->find('list');
-        $this->set(compact('users'));
     }
 
     /**
@@ -69,18 +67,15 @@ class CalendarEntriesController extends CalendarAppController
      */
     public function delete($id = null)
     {
-        if (!$this->request->is('post')) {
-            throw new MethodNotAllowedException();
-        }
         $this->CalendarEntry->id = $id;
         if (!$this->CalendarEntry->exists()) {
-            throw new NotFoundException(__('Invalid calendar entry'));
+            throw new NotFoundException(__d('calendar','Invalid calendar entry'));
         }
         if ($this->CalendarEntry->delete()) {
             $this->Session->setFlash(__d('calendar','Calendar entry deleted'));
-            $this->redirect(array('action' => 'index'));
+            $this->redirect($this->referer());
         }
         $this->Session->setFlash(__d('calendar','Calendar entry was not deleted'),'default', array('class' => 'flash_failure'));
-        $this->redirect(array('action' => 'index'));
+        $this->redirect($this->referer());
     }
 }

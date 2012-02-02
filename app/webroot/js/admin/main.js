@@ -18,7 +18,10 @@ function initSidebar() {
     $('.button-bar a').fancybox({
         type:'iframe',
         width:'90%',
-        height:'90%'
+        height:'90%',
+        'onClosed':function () {
+        	window.location.reload();
+        }
     });
     $("a.tab").click(function (event) {
         event.preventDefault();
