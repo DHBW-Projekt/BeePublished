@@ -44,7 +44,7 @@
     list-style: none;
 }
 
-.layout:hover,.plugin:hover{
+.sublayout:hover,.plugin:hover{
 	background-color: #999;
 }
 
