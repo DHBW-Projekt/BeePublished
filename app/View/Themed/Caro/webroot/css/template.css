@@ -253,6 +253,7 @@ label {
 input[type="radio"] {
 clear:both;
 float:left;
+margin-right: 5px;
 }
 
 p > label {
