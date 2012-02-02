@@ -6,19 +6,16 @@ $(document).ready(function () {
          toolbar : [],
          resize_enabled : false,
          toolbarCanCollapse : false,
-         height : 250,
-         width: 650
+         height : 250
         });
     $('#NewsletterLetterContentEdit').ckeditor(function () {
     	},
     	{
-    		height : 250,
-    		width: 650
+    		height : 250
     	});
     $('#PluginTextText').ckeditor(function () {
 		},
 		{
-			height : 100,
-			width: 650
+			height : 100
 		});
 });
