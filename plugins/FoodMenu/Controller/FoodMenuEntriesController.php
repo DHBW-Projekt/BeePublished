@@ -1,5 +1,5 @@
 <?php
-
+App::uses('Sanitize', 'Utility');
 class FoodMenuEntriesController extends FoodMenuAppController {
 	
 	public $name = 'FoodMenuEntries';
@@ -24,12 +24,14 @@ class FoodMenuEntriesController extends FoodMenuAppController {
 		$pluginId = $this->getPluginId();
 		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
 		
-			if ($this->request->is('post') && isset($this->request->data['FoodMenuEntry'])) {			
-            if ($this->FoodMenuEntry->save($this->request->data)) {
-                $this->Session->setFlash(__d('food_menu', 'The entry has been saved successfully.'));
+			if ($this->request->is('post') && isset($this->request->data['FoodMenuEntry'])) {
+			$save = $this->request->data;
+			$save['price'] = str_replace(',', '.', $save['price']);				
+            if ($this->FoodMenuEntry->save(Sanitize::clean($save, array('encode' => false)))) {
+                $this->Session->setFlash(__d('food_menu', 'The entry has been saved successfully.', array('class' => 'flash_success')));
                 $this->redirect($this->referer());
             } else {
-                $this->Session->setFlash(__d('food_menu', 'The entry couldn\'t be saved.'));
+                $this->Session->setFlash(__d('food_menu', 'The entry couldn\'t be saved.', array('class' => 'flash_failure')));
             }//else
         }//if
 	}//create
@@ -41,9 +43,10 @@ class FoodMenuEntriesController extends FoodMenuAppController {
     	if ($this->request->is('post') && isset($this->request->data['FoodMenuEntry'])) {
         	// If the form data can be validated and saved...
         	$save = $this->request->data;
-        	if ($this->FoodMenuEntry->save($save)) {
+        	$save['price'] = str_replace(',', '.', $save['price']);
+        	if ($this->FoodMenuEntry->save(Sanitize::clean($save, array('encode' => false)))) {
             	// Set a session flash message and redirect.
-            	$this->Session->setFlash((__d('food_menu', 'The entry has been changed successfully')));
+            	$this->Session->setFlash((__d('food_menu', 'The entry has been changed successfully', array('class' => 'flash_success'))));
             	$this->set('mode', 'edit');
             	$this->redirect($this->referer());
             	//$this->render('/View/admin');
@@ -76,7 +79,7 @@ class FoodMenuEntriesController extends FoodMenuAppController {
 			$save['FoodMenuEntry'] = $this->request->data['FoodMenuEntry'];
 			if($this->FoodMenuEntry->save($save)) {
 				$this->FoodMenuCategoriesFoodMenuEntry->deleteAll(array('FoodMenuCategoriesFoodMenuEntry.food_menu_entry_id' => $id), false);
-				$this->Session->setFlash(__d('food_menu', 'The entry has been deleted.'));
+				$this->Session->setFlash(__d('food_menu', 'The entry has been deleted.', array('class' => 'flash_success')));
 				$this->redirect($this->referer());
 			}//if
 		}//if	
@@ -98,11 +101,15 @@ class FoodMenuEntriesController extends FoodMenuAppController {
 						continue;
 					}//if
 					else {
-						$this->Session->setFlash(__d('food_menu', 'Errors occured during deleting.'));
+						$this->Session->setFlash(__d('food_menu', 'Errors occured during deleting.', array('class' => 'flash_failure')));
 						$this->redirect($this->referer());
 					}	
 			}
-			$this->Session->setFlash(__d('food_menu', 'The entries have been deleted.'));
+			$this->Session->setFlash(__d('food_menu', 'The entries have been deleted.', array('class' => 'flash_success')));
+			$this->redirect($this->referer());
+		}
+		else {
+			$this->Session->setFlash(__d('food_menu', 'No entries were selected.', array('class' => 'flash_failure')));
 			$this->redirect($this->referer());
 		}
 	}//deleteMultiple
