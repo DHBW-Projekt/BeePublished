@@ -52,7 +52,10 @@ ul.FoodMenuMenu a:active {
     text-decoration:none;
 }
 
-.ui-datepicker-trigger { height: 20px; }
+.ui-datepicker-trigger { 
+	height: 25px;
+	width: 25px;
+}
 
 .tableicon {
 	width:5%;
