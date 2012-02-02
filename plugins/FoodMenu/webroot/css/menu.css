@@ -113,3 +113,42 @@ ul.FoodMenuMenu a:active {
 .viewEntries {
 	width: 80%
 }
+
+#sortable1, #sortable2 { 
+	list-style-type: none;
+	margin: 0; 
+	width: 200px;
+	padding: 10px 10px 10px 10px;
+	border: 1px solid #000000;
+	float: left; 
+	margin-right: 10px;
+	min-height: 15em; 
+	z-index: 1000;
+	}
+#sortable1 li, #sortable2 li {
+	margin: 0 5px 5px 5px; 
+	min-height: 25px;
+	max-height: 50px;
+	padding: 5px; 
+	font-size: 1em; 
+	width: 180px; 
+	}
+	
+#sortable1 li {
+	border: 1px solid lightgreen; 
+	background: #e6e6e6 url(images/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x;
+	color: #555555;
+	}
+	
+#sortable2 li {
+	border: 1px solid #fcefa1;
+	background: #F08080 url(images/ui-bg_glass_55_fbf9ee_1x400.png) 50% 50% repeat-x;
+	color: #363636;
+	}
+	
+#sortablelists {
+   text-align:left;
+   margin: 0;
+   background-color: #FFF;
+   z-index: 900;
+}

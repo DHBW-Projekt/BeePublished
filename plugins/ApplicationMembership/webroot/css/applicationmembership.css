@@ -12,7 +12,33 @@ label{
  *  Styling of elements.
  */
 #applicationmembership_admin{
-	width:100%;
+	width: 100%;
+}
+
+#applicationmembership_admin table{
+	width: 100%;
+	margin-top:10px;
+	margin-bottom:20px;
+	border-spacing: 0px;
+}
+
+#applicationmembership_admin table table{
+	width: 100%;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	border-spacing: 0px;
+}
+
+#applicationmembership_admin td{
+	padding-right:10px;
+	vertical-align: top;
+}
+
+#applicationmembership_admin thead tr th{
+	padding-left:5px;
+	padding-right:20px;
+	padding-top:5px;
+	padding-bottom: 5px;
 }
 
 .applicationmembership_oath{
@@ -27,6 +53,11 @@ label{
 	font-style:italic;
 }
 
+.applicationmembership_space td{
+	margin-top:10px;
+	padding-top:10px;
+}
+
 /**
  *  Styling of Cake coding
  */
@@ -36,4 +67,13 @@ label{
 
 #ApplicationMembershipComment{
 	width:300px;
+	visibility: visible;
+}
+
+.input.textarea label {
+	display: block;
+}
+
+label.recaptcha_input_area_text{
+	float: none;
 }

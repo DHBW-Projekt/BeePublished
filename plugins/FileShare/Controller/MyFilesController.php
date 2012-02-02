@@ -1,9 +1,7 @@
 <?php
 
-// app/controllers/my_files_controller.php (Cake 1.2)
 class MyFilesController extends FileShareAppController
 {
-    public $components = array('ContentValueManager');
     public $uses = array('FileShare.MyFileConfig', 'FileShare.MyFile');
 
     function upload()
@@ -20,25 +18,32 @@ class MyFilesController extends FileShareAppController
             $this->request->data['MyFile']['owner'] = $this->Auth->user('id');
             // Check if file exists
             if (file_exists($this->request->data['MyFile']['path'])) {
-                $this->Session->setFlash('A file with the specified name already exists!');
+                $this->Session->setFlash(__d('file_share','A file with the specified name already exists!'), 'default', array(
+                                                                                                           'class' => 'flash_failure'));
                 $this->redirect($this->referer());
             }
             // Write file to disk
-            $fh = fopen($this->request->data['MyFile']['path'], 'w');
+            $fh = fopen($this->request->data['MyFile']['path'], 'w') or die();
             fwrite($fh, $fileData);
             fclose($fh);
 
             if ($this->MyFile->save($this->request->data)) {
-                $this->Session->setFlash('The file with the filename ' . $this->request->data['MyFile']['filename'] . ' has been uploaded.');
+                $this->Session->setFlash(__d('file_share','The file with the filename ' . $this->request->data['MyFile']['filename'] . ' has been uploaded.'));
 
             } else {
-                $this->Session->setFlash('Unable to upload your file');
+                $this->Session->setFlash(__d('file_share','Unable to upload your file'), 'default', array(
+                                                                                       'class' => 'flash_failure'));
             }
-
-            $this->redirect($this->referer());
         }
 
-        $this->Session->setFlash('No file selected!');
+        if ($this->request->data['MyFile']['File']['error'] == 4) {
+            $this->Session->setFlash(__d('file_share','No file selected!'), 'default', array(
+                                                                          'class' => 'flash_failure'));
+        } else {
+        $this->Session->setFlash(__d('file_share','Your file is bigger than ') . ini_get(post_max_size), 'default', array(
+                                                                          'class' => 'flash_failure'));
+        }
+        
         $this->redirect($this->referer());
 
     }
@@ -59,10 +64,10 @@ class MyFilesController extends FileShareAppController
             $et = 0;
         }
 
-        $temp = explode("|",$this->decrypt($id,$ck));
+        $temp = explode("|", $this->decrypt($id, $ck));
         $id = $temp[0];
         $exp = $temp[1];
-        if($exp != "" && (time() - $exp) > $et) {
+        if ($exp != "" && (time() - $exp) > $et) {
             echo time() - $exp;
             exit();
         }
@@ -75,21 +80,23 @@ class MyFilesController extends FileShareAppController
 
         readfile($file['MyFile']['path']);
         exit();
-        
+
     }
 
     function delete($id)
     {
         $file = $this->MyFile->findById($id);
         if ($file['MyFile']['owner'] != $this->Auth->user('id') && $this->Auth->user('role_id') < 6) {
-            $this->Session->setFlash('You don\'t have permissions to delete ' . $file['MyFile']['filename']);
+            $this->Session->setFlash(__d('file_share','You don\'t have permissions to delete ') . $file['MyFile']['filename'], 'default', array(
+                                                                                                                             'class' => 'flash_failure'));
             $this->redirect($this->referer());
         }
         if (unlink($file['MyFile']['path']) && $this->MyFile->delete($id)) {
-            $this->Session->setFlash('The file ' . $file['MyFile']['filename'] . ' has been deleted.');
+            $this->Session->setFlash(__d('file_share','The file ' . $file['MyFile']['filename'] . ' has been deleted.'));
             $this->redirect($this->referer());
         }
-        $this->Session->setFlash('An error occurred while deleting ' . $file['MyFile']['filename']);
+        $this->Session->setFlash(__d('file_share','An error occurred while deleting ') . $file['MyFile']['filename'], 'default', array(
+                                                                                                                    'class' => 'flash_failure'));
         $this->redirect($this->referer());
     }
 
@@ -103,7 +110,7 @@ class MyFilesController extends FileShareAppController
 
     public function admin()
     {
-       $this->layout = 'overlay';
+        $this->layout = 'overlay';
 
         if ($this->request->is('post')) {
             $this->MyFileConfig->read(null, 'Cryptkey');
@@ -114,7 +121,7 @@ class MyFilesController extends FileShareAppController
             $this->MyFileConfig->set('value', $this->request->data['null']['Expire time']);
             $this->MyFileConfig->set('key', 'Expire time');
             $this->MyFileConfig->save();
-            $this->Session->setFlash('Successfully saved');
+            $this->Session->setFlash(__d('file_share','Saved successfully'));
         }
 
         $contentValues = $this->MyFileConfig->find('list');
@@ -139,9 +146,12 @@ class MyFilesController extends FileShareAppController
         }
     }
 
-    public function decrypt($value, $ck){
+    public function decrypt($value, $ck)
+    {
 
-        if(!$value){return false;}
+        if (!$value) {
+            return false;
+        }
         $crypttext = $this->safe_b64decode($value);
         $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
         $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
@@ -149,8 +159,9 @@ class MyFilesController extends FileShareAppController
         return trim($decrypttext);
     }
 
-    public function safe_b64decode($string) {
-        $data = str_replace(array('-','_'),array('+','/'),$string);
+    public function safe_b64decode($string)
+    {
+        $data = str_replace(array('-', '_'), array('+', '/'), $string);
         $mod4 = strlen($data) % 4;
         if ($mod4) {
             $data .= substr('====', $mod4);

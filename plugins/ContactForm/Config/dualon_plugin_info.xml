@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dualon>
+	<plugin>
+		<name>ContactForm</name>
+		<author>Corinna Knick</author>
+		<version>1.0</version>
+		<permissions>
+        </permissions>
+        <views>
+            <view>
+                <name>ContactForm</name>
+            </view>
+        </views>
+	</plugin>
+</dualon>

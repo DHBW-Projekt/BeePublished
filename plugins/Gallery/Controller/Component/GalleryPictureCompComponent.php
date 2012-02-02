@@ -81,11 +81,13 @@ class GalleryPictureCompComponent extends Component
 	public function delete($controller, $pictureId){
 		$picture = $this->getPicture($controller, $pictureId);
 		
-		$pathInfo = pathinfo(realpath("../..".$picture['path_to_pic']));
-		
+		$pathInfo = pathinfo(realpath($picture['path_to_pic']));
+	
 		$thumbPath = $pathInfo['dirname']."/thumb/".$pathInfo['basename'];
+		
 		unlink($thumbPath);
-		unlink(realpath("../..".$picture['path_to_pic']));
+		
+		unlink(realpath($picture['path_to_pic']));
 		
 		$controller->loadModel('Gallery.GalleryPicture');
 		$pictures = $controller->GalleryPicture->delete($picture);
@@ -97,11 +99,13 @@ class GalleryPictureCompComponent extends Component
 	 */
 	public function normalizePicture($picture){
 		if(isset($picture['GalleryPicture']))
-			$picture = $picture['GalleryPicture'];
+		$picture = $picture['GalleryPicture'];
 		
-		$pathInfo = pathinfo($picture['path_to_pic']);		
+		$pathInfo = pathinfo($picture['path_to_pic']);	
+		
 		$picture['thumb'] = $pathInfo['dirname']."/thumb/".$pathInfo['basename'];
 		return $picture;
+		
 	}
 	
 	/**
@@ -109,13 +113,19 @@ class GalleryPictureCompComponent extends Component
 	 * @param unknown_type $picture
 	 */
 	public function generateThumbnail($picture){
-		$sourceSize = getimagesize(realpath("../..".$picture['path_to_pic']));
-		$pathInfo = pathinfo(realpath("../..".$picture['path_to_pic']));
+	
+		$sourceSize = getimagesize(realpath($picture['path_to_pic']));
+		$pathInfo = pathinfo(realpath($picture['path_to_pic']));
+		
+		if(!file_exists($pathInfo['dirname'].'/thumb')){
+			mkdir($pathInfo['dirname'].'/thumb');
+		}
+		
 		$thumbPath = $pathInfo['dirname']."/thumb/".$pathInfo['basename'];
 		                                   
 		// Resample
 		$image_thumb = imagecreatetruecolor(160, 120);
-		$image_source = imagecreatefromjpeg(realpath("../..".$picture['path_to_pic']));
+		$image_source = imagecreatefromjpeg(realpath($picture['path_to_pic']));
 		
 		$width = $sourceSize[0];
 		$heigth = $sourceSize[1];

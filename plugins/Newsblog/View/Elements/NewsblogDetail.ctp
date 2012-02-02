@@ -1,9 +1,13 @@
 <?php 
+	App::uses('Sanitize', 'Utility');
+
 	$this->Html->script('/newsblog/js/displayFullNews', false);
 	$this->Html->css('/newsblog/css/displayFullNews', null, array('inline' => false));
 	$DateTimeHelper = $this->Helpers->load('Time');
 	$this->Helpers->load('BBCode');
 	$this->Helpers->load('SocialNetwork');
+	
+	$data = Sanitize::clean($data);
 	
 	//set meta tags for social network buttons
 	//Facebook
@@ -18,11 +22,11 @@
 ?>
 
 <div class='showFullNewsContainer'>
-	<div class='showFullNewsTitle'>
+	<h2 class='showFullNewsTitle'>
 		<?php echo $data['NewsEntry']['title'];?>
-	</div>
+	</h2>
 	<?php if($data['NewsEntry']['subtitle'] != null & $data['NewsEntry']['subtitle'] != ''){
-		echo '<div class="showFullNewsSubtitle">'.$data['NewsEntry']['subtitle'].'</div>';
+		echo '<h3 class="showFullNewsSubtitle">'.$data['NewsEntry']['subtitle'].'</h3>';
 	}?>
 	<div class='showFullNewsInfo'>
 		<?php 

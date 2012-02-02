@@ -18,7 +18,7 @@
 	?>
 		
 	<div id="webshop_detailview">'
-		<?php echo $this->Html->image('/WebShop/img/products/'.$data['WebshopProduct']['picture'], array('class' => "webshop_detailview_image", 'style' => "margin-right: 10px")); ?>
+		<?php echo $this->Html->image($data['WebshopProduct']['picturePath'].$data['WebshopProduct']['picture'], array('class' => "webshop_detailview_image", 'style' => "margin-right: 10px")); ?>
 		<h2><?php echo $data['WebshopProduct']['name'] ?></h2>
 		
 		<table class="webshop_infobox">

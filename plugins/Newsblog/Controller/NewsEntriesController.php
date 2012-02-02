@@ -43,10 +43,10 @@ class NewsEntriesController extends NewsblogAppController {
 			$newNews['published'] = false;
 			//save array on database
 			if($this->NewsEntry->save($newNews)){
-				$this->Session->setFlash("The news has been created! It has to be published!");
+				$this->Session->setFlash(__d('newsblog' ,'The news has been created! It has to be published!'));
 				$this->redirect(array('action' => 'create', $contentId));
 			} else{
-				$this->Session->setFlash("The news hasn't been created!", 'default', array('class' => 'flash_success'));
+				$this->Session->setFlash(__d('newsblog', "The news hasn't been created!"), 'default', array('class' => 'flash_failure'));
 			}
 		}
 		$this->layout = 'overlay';
@@ -73,7 +73,7 @@ class NewsEntriesController extends NewsblogAppController {
 			if($validTo == "" || $validTo == null){
 				$validTo = '9999-12-31 23:59:59';
 			}
-			$action = $data['action'];
+			
 			$id = $data['id'];
 			$changedNews = array();
 			$this->NewsEntry->id = $id;
@@ -89,10 +89,10 @@ class NewsEntriesController extends NewsblogAppController {
 			
 			//save array on database
 			if($this->NewsEntry->save($changedNews)){
-				$this->Session->setFlash("The changes have been saved!");
+				$this->Session->setFlash(__d('newsblog', "The changes have been saved!"));
 				$this->redirect($this->referer());
 			} else{
-				$this->Session->setFlash("The changes haven't been saved!", 'default', array('class' => 'flash_failure'));
+				$this->Session->setFlash(__d('newsblog',"The changes haven't been saved!"), 'default', array('class' => 'flash_failure'));
 				$this->redirect($this->referer());
 			}
 		}
@@ -136,9 +136,9 @@ class NewsEntriesController extends NewsblogAppController {
 			$publishNews['publishedOn'] = date('Y-m-d');
 			
 			if ($this->NewsEntry->save($publishNews)){
-				$this->Session->setFlash("The selected news has been published.");
+				$this->Session->setFlash(__d('newsblog', "The selected news has been published."));
 			} else{
-				$this->Session->setFlash("The selected news hasn\'t been published.");
+				$this->Session->setFlash(__d('newsblog',"The selected news hasn\'t been published."), 'default', array('class' => 'flash_failure'));
 			}
 			
 			$this->redirect(array('action' => 'publish', $contentId));
@@ -157,10 +157,10 @@ class NewsEntriesController extends NewsblogAppController {
 		
 		$this->NewsEntry->id = $id;
 		if($this->NewsEntry->saveField('deleted', true)){
-			$this->Session->setFlash('The selected news has been deleted.');
+			$this->Session->setFlash(__d('newsblog', 'The selected news has been deleted.'));
 			$this->redirect($this->referer());
 		} else{
-			$this->Session->setFlash('The selected news hasn\'t been deleted.');
+			$this->Session->setFlash(__d('newsblog', 'The selected news hasn\'t been deleted.'), 'default', array('class' => 'flash_failure'));
 			$this->redirect($this->referer());
 		}
 	}

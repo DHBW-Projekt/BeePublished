@@ -35,19 +35,40 @@ class ManageImagesController  extends GalleryAppController{
 	 * transforms the form input for internal procession
 	 * Enter description here ...
 	 */
-
+	 public function  strcontains($haystack,$needle) {  
+      if  (strpos($haystack,$needle)!==false)  
+        return true;  
+      else  
+        return false;  
+    }  
+    
 	public function uploadImage($contentId){
 		
 		$pluginId = $this->getPluginId();
-		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
+		$stringer = explode('.',$this->data['addImage']['File']['name'] );
 
-		$image = array('name' => $this->data['addImage']['File']['name'],
+		if($this->strcontains($stringer[0],'.')){
+			// not allowed
+			$this->Session->setFlash('Corrupt Filename');
+			
+		} else {
+			//check File Format
+			if($stringer[1]!="jpeg" && $stringer[1]!="jpg" && $stringer[1]!="JPEG" && $stringer[1]!="JPG"){
+				
+				$this->Session->setFlash('Corrupt Filetype only JPG allowed');
+			} else {
+						$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
+		
+		
+						$image = array('name' => $this->data['addImage']['File']['name'],
 								'tmp_name' => $this->data['addImage']['File']['tmp_name'],
 								'size' => $this->data['addImage']['File']['size'],
 								'title' => $this->data['addImage']['Title']);
-		$this->addImageInternal($image);
-		$this->Session->setFlash('Image saved');
-		
+						$this->addImageInternal($image);
+						$this->Session->setFlash('Image saved');
+			}
+		}
+	
 		$this->redirect($this->referer());
 	}
 	
@@ -60,16 +81,39 @@ class ManageImagesController  extends GalleryAppController{
 		$pluginId = $this->getPluginId();
 		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
 
+		if(count($this->params['form']['files']['size']) == 1 && $this->params['form']['files']['size'][0] == 0){
+			$this->Session->setFlash('No file selected');
+			$this->redirect($this->referer());
+			return;
+		}
+		
 		for($i = 0;$i<count($this->params['form']['files']['name']);$i++){
-			$image = array('name' => $this->params['form']['files']['name'][$i],
+			$stringer = explode('.',$this->params['form']['files']['name'][$i]);
+
+			if($this->strcontains($stringer[0],'.')){
+			// not allowed
+				$this->Session->setFlash('Corrupt Filename');
+				break;
+			} else {
+			//check File Format
+				if($stringer[1]!="jpeg" && $stringer[1]!="jpg" && $stringer[1]!="JPEG" && $stringer[1]!="JPG"){
+				
+					$this->Session->setFlash('Corrupt Filetype only JPG allowed');
+					break;
+				} else {
+					$image = array('name' => $this->params['form']['files']['name'][$i],
 							'tmp_name' => $this->params['form']['files']['tmp_name'][$i],
 							'size' => $this->params['form']['files']['size'][$i],
 							'title' => $this->params['form']['files']['name'][$i]
-			);
-			$this->addImageInternal($image);
+					);
+			
+				$this->addImageInternal($image);
+				$this->Session->setFlash('Images saved');
+			}//filetype
+			}//filename
 		}
 		
-		$this->Session->setFlash('Images saved');
+		
 		
 		$this->redirect($this->referer());
 		
@@ -97,19 +141,33 @@ class ManageImagesController  extends GalleryAppController{
 	 */
 	private function addImageInternal($image){
 		
-		$dest = realpath("../../app/webroot/img/gallery").'/'.$image['name'];
+	
+		
+		$timestamp = time();
+		$day = date("dmY",$timestamp);
+		$time = date("Hi",$timestamp);
+
+		$dir_gallery = "uploads/gallery";
+		
+		$filedest = "uploads/gallery".'/'.$day.$time.$image['name'];
+		
+
+		
+		if(!file_exists($dir_gallery)){
+			mkdir($dir_gallery);
+		}
+		
+	
 		
 		$image_source = imagecreatefromjpeg($image['tmp_name']);
 		
-		$exif = exif_read_data($image['tmp_name']);
-		
 		// Output
-		imagejpeg($image_source,$dest, 100);
+		imagejpeg($image_source,$filedest, 100);
 		
 		// save to db
 		$dbImage = array(
 					'title' => $image['title'],
-					'path_to_pic' => "/app/webroot/img/gallery/".$image['name'] );
+					'path_to_pic' => $filedest );
 		
 		$this->GalleryPictureComp->generateThumbnail($dbImage);
 		$this->GalleryPictureComp->save($this,$dbImage);

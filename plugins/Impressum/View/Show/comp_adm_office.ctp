@@ -9,7 +9,7 @@
 	echo $this->Form->create('Impressum',array('url' => array('plugin'     => 'Impressum',
 														   	  'controller' => 'Show',
 															  'action'	   => 'admOffice'))); 
-	echo $this->Form->input('Impressum.adm_office', array('checked' => $input['Impressum']['adm_office'], 'id' => 'box', 'label' => __('  Behördliche Zulassung')));
+	echo $this->Form->input('Impressum.adm_office', array('checked' => $input['Impressum']['adm_office'], 'id' => 'box', 'label' => __('Behördliche Zulassung')));
 ?>
 <br>
 <?php
@@ -19,46 +19,40 @@
 		echo '<div id="datadiv" style="display:none">';
 	}
 	
-	echo $this->Form->label('Impressum.adm_office_name', __('Name der Behörde:'));
-	if (!empty($data['Impressum']['adm_office_name'])) {
-		echo $this->Form->input('Impressum.adm_office_name', array('label' => false, 'value' => $data['Impressum']['adm_office_name']));
+	if (!empty($input['Impressum']['adm_office_name'])) {
+		echo $this->Form->input('Impressum.adm_office_name', array('label' => __('Name der Behörde:'), 'value' => $input['Impressum']['adm_office_name']));
 	} else {
-		echo $this->Form->input('Impressum.adm_office_name', array('label' => false));
+		echo $this->Form->input('Impressum.adm_office_name', array('label' => __('Name der Behörde:')));
 	}
 	
-	echo $this->Form->label('Impressum.adm_office_street', __('Straße:'));
-	if (!empty($data['Impressum']['adm_office_street'])) {
-		echo $this->Form->input('Impressum.adm_office_street', array('label' => false, 'value' => $data['Impressum']['adm_office_street']));
+	if (!empty($input['Impressum']['adm_office_street'])) {
+		echo $this->Form->input('Impressum.adm_office_street', array('label' => __('Straße:'), 'value' => $input['Impressum']['adm_office_street']));
 	} else {
-		echo $this->Form->input('Impressum.adm_office_street', array('label' => false));
+		echo $this->Form->input('Impressum.adm_office_street', array('label' => __('Straße:')));
 	}
 	
-	echo $this->Form->label('Impressum.adm_office_house_no', __('Hausnummer:'));
-	if (!empty($data['Impressum']['reg_house_no'])) {
-		echo $this->Form->input('Impressum.adm_office_house_no', array('label' => false, 'value' => $data['Impressum']['adm_office_house_no']));
+	if (!empty($input['Impressum']['adm_office_house_no'])) {
+		echo $this->Form->input('Impressum.adm_office_house_no', array('label' => __('Hausnummer:'), 'value' => $input['Impressum']['adm_office_house_no']));
 	} else {
-		echo $this->Form->input('Impressum.adm_office_house_no', array('label' => false));
+		echo $this->Form->input('Impressum.adm_office_house_no', array('label' => __('Hausnummer:')));
 	}
 	
-	echo $this->Form->label('Impressum.adm_office_post_code', __('Postleitzahl:'));
-	if (!empty($data['Impressum']['adm_office_post_code'])) {
-		echo $this->Form->input('Impressum.adm_office_post_code', array('label' => false, 'value' => $data['Impressum']['adm_office_post_code']));
+	if (!empty($input['Impressum']['adm_office_post_code'])) {
+		echo $this->Form->input('Impressum.adm_office_post_code', array('label' => __('Postleitzahl:'), 'value' => $input['Impressum']['adm_office_post_code']));
 	} else {
-		echo $this->Form->input('Impressum.adm_office_post_code', array('label' => false));
+		echo $this->Form->input('Impressum.adm_office_post_code', array('label' => __('Postleitzahl:')));
 	}
 	
-	echo $this->Form->label('Impressum.adm_office_city', __('Ort:'));
-	if (!empty($data['Impressum']['adm_office_city'])) {
-		echo $this->Form->input('Impressum.adm_office_city', array('label' => false, 'value' => $data['Impressum']['adm_office_city']));
+	if (!empty($input['Impressum']['adm_office_city'])) {
+		echo $this->Form->input('Impressum.adm_office_city', array('label' => __('Ort:'), 'value' => $input['Impressum']['adm_office_city']));
 	} else {
-		echo $this->Form->input('Impressum.adm_office_city', array('label' => false));
+		echo $this->Form->input('Impressum.adm_office_city', array('label' => __('Ort:')));
 	}
 	
-	echo $this->Form->label('Impressum.adm_office_country', __('Land:'));
-	if (!empty($data['Impressum']['adm_office_country'])) {
-		echo $this->Form->input('Impressum.adm_office_country', array('label' => false, 'value' => $data['Impressum']['adm_office_country']));
+	if (!empty($input['Impressum']['adm_office_country'])) {
+		echo $this->Form->input('Impressum.adm_office_country', array('label' => __('Land:'), 'value' => $input['Impressum']['adm_office_country']));
 	} else {
-		echo $this->Form->input('Impressum.adm_office_country', array('label' => false));
+		echo $this->Form->input('Impressum.adm_office_country', array('label' => __('Land:')));
 	}
 	
 	echo "</div>";

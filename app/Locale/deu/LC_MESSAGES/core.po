@@ -1,0 +1,352 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2012-01-27 19:59+0100\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: Controller/ContainersController.php:41
+msgid "Invalid container"
+msgstr ""
+
+#: Controller/ContainersController.php:58
+#: Controller/ContentsController.php:55
+msgid "Invalid role"
+msgstr ""
+
+#: Controller/ContentsController.php:40
+msgid "Invalid content"
+msgstr ""
+
+#: Controller/EmailTemplatesController.php:102
+msgid "Saving failed. You have to include the text \"EMAILTEXTCONTENT\" once."
+msgstr ""
+
+#: Controller/EmailTemplatesController.php:108;158
+msgid "Successfully saved"
+msgstr ""
+
+#: Controller/EmailTemplatesController.php:110;163
+msgid "Saving failed"
+msgstr ""
+
+#: Controller/EmailTemplatesController.php:138
+msgid "Successfully deleted"
+msgstr ""
+
+#: Controller/EmailTemplatesController.php:147
+msgid "Deletion failed"
+msgstr ""
+
+#: Controller/MenuEntriesController.php:79
+msgid "Invalid Menu Entry"
+msgstr ""
+
+#: Controller/MenuEntriesController.php:110
+#: Controller/PagesController.php:180
+msgid "Invalid menu entry"
+msgstr ""
+
+#: Controller/PluginsController.php:153
+msgid "Plugin tables are now up to date."
+msgstr "Die Plugintabellen sind jetzt auf dem aktuellen Stand."
+
+#: Controller/PluginsController.php:187
+msgid "Plugin successfully uninstalled."
+msgstr "Das Plugin wurde erfolgreich deinstalliert."
+
+#: Controller/UsersController.php:71
+msgid "The user has been created."
+msgstr "Der Benutzer wurde erfolgreich angelegt."
+
+#: Controller/UsersController.php:74
+msgid "The user couldn't be created!"
+msgstr "Der Benutzer konnte nicht angelegt werden!"
+
+#: Controller/UsersController.php:96
+msgid "Your user has been activated."
+msgstr "Ihr Benutzer wurde aktiviert."
+
+#: Controller/UsersController.php:99
+msgid "Token invalid! Your user hasn't been activated."
+msgstr "Das Token ist ungültig! Ihr Benutzer wurde nicht aktiviert."
+
+#: Controller/UsersController.php:104;121;146;297
+msgid "Invalid user"
+msgstr "Ungültiger Benutzer."
+
+#: Controller/UsersController.php:125
+msgid "The user has been saved"
+msgstr "Der Benutzer wurde aktualisiert."
+
+#: Controller/UsersController.php:127
+msgid "The user could not be saved. Please, try again."
+msgstr "Der Benutzer konnte nicht aktualisiert werden. Bitte versuchen Sie es erneut!"
+
+#: Controller/UsersController.php:149
+msgid "You cannot delete your own user."
+msgstr "Sie können nicht Ihren eigenen Benutzer löschen."
+
+#: Controller/UsersController.php:153
+msgid "User deleted"
+msgstr "Der Benutzer wurde gelöscht."
+
+#: Controller/UsersController.php:156
+msgid "User was not deleted"
+msgstr "Der Benutzer wurde nicht gelöscht."
+
+#: Controller/UsersController.php:170
+msgid "You are already logged in!"
+msgstr "Sie sind bereits eingeloggt!"
+
+#: Controller/UsersController.php:181
+msgid "Welcome"
+msgstr "Willkommen"
+
+#: Controller/UsersController.php:184
+msgid "Your username or password was incorrect."
+msgstr "Ihr Benutzername oder Passwort war falsch."
+
+#: Controller/UsersController.php:188
+msgid "Login wasn't possible! Your user either hasn't been activated yet or has been locked!"
+msgstr "Login nicht möglich! Ihr Benutzer ist entweder noch nicht aktiviert oder wurde gesperrt!"
+
+#: Controller/UsersController.php:205
+msgid "Good-Bye"
+msgstr "Auf Wiedersehen"
+
+#: Controller/UsersController.php:248
+msgid "Your password has been resetted. The new password was send to your emailaddress."
+msgstr "Ihr Passwort wurde zurückgesetzt. Das neue Passwort wurde an ihre Emailadresse versendet."
+
+#: Controller/UsersController.php:252
+msgid "Username and/or Email were wrong!"
+msgstr "Benutzername und/oder Emailadresse falsch!"
+
+#: Controller/UsersController.php:274
+msgid "Your password has been changed!"
+msgstr "Ihr Passwort wurde geändert!"
+
+#: Controller/UsersController.php:278
+msgid "Your password hasn't been changed!"
+msgstr ""
+
+#: Controller/Component/ConfigComponent.php:11
+msgid "invalid key"
+msgstr ""
+
+#: View/Configurations/index.ctp:15
+msgid "Save Configuration"
+msgstr ""
+
+#: View/Elements/display-container.ctp:14
+msgid "Unknown module"
+msgstr ""
+
+#: View/Elements/sidebar.ctp:10;18
+msgid "User Management"
+msgstr "Benutzerverwaltung"
+
+#: View/Elements/sidebar.ctp:26
+msgid "Plugin Management"
+msgstr "Pluginverwaltung"
+
+#: View/Elements/sidebar.ctp:34
+msgid "Permission Management"
+msgstr "Berechtigungsverwaltung"
+
+#: View/Elements/sidebar.ctp:42
+msgid "Email Templates"
+msgstr "Emailvorlagen"
+
+#: View/EmailTemplates/index.ctp:17
+msgid "Template"
+msgstr "Vorlagen"
+
+#: View/EmailTemplates/index.ctp:27
+msgid "Create new template"
+msgstr "Neue Vorlage anlegen"
+
+#: View/EmailTemplates/index.ctp:38
+msgid "Active Template: "
+msgstr "Aktive Vorlage: "
+
+#: View/MenuEntries/add.ctp:6
+msgid "create"
+msgstr ""
+
+#: View/MenuEntries/edit.ctp:6
+msgid "edit"
+msgstr ""
+
+#: View/Plugins/index.ctp:3
+msgid "Installed"
+msgstr ""
+
+#: View/Plugins/index.ctp:7;40
+#: View/Users/view.ctp:118
+msgid "Name"
+msgstr ""
+
+#: View/Plugins/index.ctp:8;41
+msgid "Version"
+msgstr ""
+
+#: View/Plugins/index.ctp:9;42
+msgid "Author"
+msgstr "Autor"
+
+#: View/Plugins/index.ctp:22
+msgid "No Database tables"
+msgstr "Keine Datenbanktabelle"
+
+#: View/Plugins/index.ctp:24
+msgid "Update plugin"
+msgstr "Plugin aktualisieren"
+
+#: View/Plugins/index.ctp:26
+msgid "Up to date"
+msgstr "Auf aktuellem Stand"
+
+#: View/Plugins/index.ctp:28
+msgid "Unknown Plugin"
+msgstr "Unbekanntes Plugin"
+
+#: View/Plugins/index.ctp:31
+msgid "Uninstall plugin"
+msgstr "Plugin deinstallieren"
+
+#: View/Plugins/index.ctp:36
+msgid "Available"
+msgstr "Verfügbar"
+
+#: View/Plugins/index.ctp:52
+msgid "Install plugin"
+msgstr "Plugin installieren"
+
+#: View/Users/change_password.ctp:8
+#: View/Users/reset_password.ctp:5
+msgid "Old Password:"
+msgstr "Aktuelles Passwort:"
+
+#: View/Users/change_password.ctp:9
+msgid "New Password:"
+msgstr "Neues Passwort:"
+
+#: View/Users/change_password.ctp:10
+#: View/Users/register.ctp:8
+msgid "Confirm Password:"
+msgstr "Passwortbestätigung:"
+
+#: View/Users/change_password.ctp:11
+msgid "Change password!"
+msgstr "Passwort ändern!"
+
+#: View/Users/edit.ctp:4
+#: View/Users/view.ctp:54
+msgid "Edit User"
+msgstr "Benutzer bearbeiten"
+
+#: View/Users/edit.ctp:11
+msgid "Submit"
+msgstr ""
+
+#: View/Users/login.ctp:4
+#: View/Users/register.ctp:6
+#: View/Users/reset_password.ctp:4
+msgid "Username:"
+msgstr "Benutzername:"
+
+#: View/Users/login.ctp:5
+#: View/Users/register.ctp:7
+msgid "Password:"
+msgstr "Passwort:"
+
+#: View/Users/login.ctp:6
+msgid "Login"
+msgstr "Login"
+
+#: View/Users/register.ctp:4
+msgid "Register new User"
+msgstr "Neuen Benutzer anlegen"
+
+#: View/Users/register.ctp:9
+msgid "Email:"
+msgstr "Emailadresse:"
+
+#: View/Users/register.ctp:12
+msgid "Create User"
+msgstr "Benutzer anlegen"
+
+#: Model/EmailTemplate.php:validation for field name
+msgid "This field cannot be empty."
+msgstr "Dieses Feld darf nicht leer sein."
+
+#: Model/EmailTemplate.php:validation for field name;validation for field name
+msgid "The name already exists."
+msgstr "Der Name existiert bereits."
+
+#: Model/EmailTemplate.php:validation for field active
+msgid "boolean"
+msgstr ""
+
+#: Model/Page.php:validation for field name
+msgid "Not a valid URL. (Starting with / and characters a-z, 0-9 and -)"
+msgstr "Keine gültige URL. (Startend mit / und Zeichen a-z, 0-9 and -)"
+
+#: Model/Page.php:validation for field name
+msgid "URL already in use."
+msgstr "Die URL wird bereits verwendet."
+
+#: Model/User.php:validation for field username
+msgid "A username is required."
+msgstr "Ein Benutzername wird benötigt."
+
+#: Model/User.php:validation for field username
+msgid "This username has already been taken. Please choose another username."
+msgstr "Der Benutzername wird bereits verwendet. Bitte wählen Sie einen anderen."
+
+#: Model/User.php:validation for field username
+msgid "Usernames must only contain letters and numbers."
+msgstr "Benutzernamen dürfen nur Buchstaben und Zahlen beinhalten."
+
+#: Model/User.php:validation for field password
+msgid "A password is required"
+msgstr "Ein Passwort wird benötigt."
+
+#: Model/User.php:validation for field password
+msgid "Password is too short. Please choose a password with at least 8 characters."
+msgstr "Das Passwort ist zu kurz. Bitte wählen Sie ein Passwort mit mindestens 8 Buchstaben."
+
+#: Model/User.php:validation for field current_password
+msgid "Please enter your current password."
+msgstr "Bitte geben Sie ihr aktuelles Passwort ein."
+
+#: Model/User.php:validation for field current_password
+msgid "Current password was not entered correctly"
+msgstr "Das aktuelle Passwort wurde falsch eingegeben."
+
+#: Model/User.php:validation for field password_confirm
+msgid "Passwords do not match"
+msgstr "Die Passwörter stimmen nicht überein."
+
+#: Model/User.php:validation for field email
+msgid "Please supply a valid & active email address."
+msgstr "Bitte geben Sie eine gültige & aktive Emailadresse ein."
+
+#: Model/User.php:validation for field email
+msgid "This email has already been taken. If you forgot your password, please reset it."
+msgstr "Die Emailadresse wird bereits verwendet. Wenn Sie ihr Passwort vergessen haben, setzen Sie es bitte zurück"
+
+#: webroot/test.php:87
+msgid "Debug setting does not allow access to this url."
+msgstr ""
