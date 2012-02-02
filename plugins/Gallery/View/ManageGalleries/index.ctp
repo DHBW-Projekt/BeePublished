@@ -50,8 +50,7 @@ foreach ($data['AllGalleries'] as $gallery){
 								'action' => 'edit', $gallery['GalleryEntry']['id'],$data['ContentId']),
 							array(
 								'escape' => false, 
-								'title' => __('Edit Gallery')),
-								__('Do you really want to edit this Gallery?'));
+								'title' => __('Edit Gallery')));
 		};
 		echo '</td>';
 	
