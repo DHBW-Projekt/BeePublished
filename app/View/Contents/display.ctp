@@ -7,6 +7,15 @@ if (isset($error)) {
         array('plugin' => $plugin, 'controller' => $view, 'action' => 'admin', $id),
         array('escape' => False, 'id' => 'overlay', 'class' => 'setting_button')
     );
-    echo $this->element($view, array('data' => $data), array('plugin' => $plugin));
+    echo $this->element(
+    	$view, 
+    	array(
+    		'data' => $data,
+    		'url' => $url, 
+    		'contentId' => $id, 
+    		'pluginId' => $pluginId
+    	), 
+    	array('plugin' => $plugin)
+    );
 }
 ?>

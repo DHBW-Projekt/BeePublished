@@ -1,8 +1,9 @@
 <?php 
 	App::uses('Sanitize', 'Utility');
 	$newsentry = Sanitize::clean($newsentry);
-	$this->Html->css('/newsblog/css/editNews', null, array('inline' => false));
 	$this->Html->css('/css/jquery-ui-1.8.16.custom', null, array('inline' => false));
+	$this->Html->css('/newsblog/css/editNews', null, array('inline' => false));
+	$this->Html->script('jquery/jquery-ui-timepicker-addon', array('inline' => false));
 	$this->Html->script('/newsblog/js/editNews', array('inline' => false));
 	$this->Html->script('ckeditor/ckeditor', array('inline' => false));
 	$this->Html->script('ckeditor/adapters/jquery', array('inline' => false));
@@ -44,14 +45,14 @@
 		//'div' => 'editNewsTitle',
 		'label' => __d('newsblog','Title:'),
 		'name' => 'title',
-		'value'=> $newsentry['NewsEntry']['title']
+		'value'=> Sanitize::html($newsentry['NewsEntry']['title'])
 	));
 	//create subtitle input
 	echo $this->Form->input('NewsEntry.subtitle', array(
 		//'div' => 'writeNewsSubtitle',
 		'label' => __d('newsblog', 'Subtitle:'),
 		'name' => 'subtitle',
-		'value'=> $newsentry['NewsEntry']['subtitle']
+		'value'=> Sanitize::html($newsentry['NewsEntry']['subtitle'])
 	));
 	//create entrytext textarea
 	echo $this->Form->input('NewsEntry.text', array(
@@ -59,27 +60,27 @@
 		'label' => false,
 		'id' => 'editNewsTextEditor',
 		'name' => 'text',
-		'value' => $newsentry['NewsEntry']['text']
+		'value' => Sanitize::html($newsentry['NewsEntry']['text'])
 	));
 	//create validFrom input
 	echo $this->Form->input('NewsEntry.validFrom', array(
-		//'div' => 'editNewsValidConfig',
+		'div' => 'editNewsValidConfig',
 		'type' => 'text',
 		'id' => 'nbValidFromDatepicker',
 		'name' => 'validFromUI',
 		'class' => 'datepicker',
 		'label' => __d('newsblog', 'Valid from:'),
-		'value'=> $newsentry['NewsEntry']['validFrom']
+		'value'=> Sanitize::html($newsentry['NewsEntry']['validFrom'])
 	));
 	//create validTo input
 	echo $this->Form->input('NewsEntry.validTo', array(
-		//'div' => 'editNewsValidConfig',
+		'div' => 'editNewsValidConfig',
 		'type' => 'text',
 		'id' => 'nbValidToDatepicker',
 		'name' => 'validToUI',
 		'class' => 'datepicker',
 		'label' => __d('newsblog', 'Valid to:'),
-		'value'=> $newsentry['NewsEntry']['validTo']
+		'value'=> Sanitize::html($newsentry['NewsEntry']['validTo'])
 	));
 	
 	echo $this->Form->end(__d('newsblog', 'Save changes'));
