@@ -8,9 +8,9 @@ echo $this->element('admin_menu_galleries',array("ContentId" => $data['ContentId
 	$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete');
 	
 	
-echo "<h1> ".__('Manage Your Galleries')."</h1>";
+echo "<h1> ".__('Manage your galleries')."</h1>";
 echo $this->Session->flash('GalleryNotification');
-echo '<div class="galleryinfo">'.__('Here you can edit, delete your galleries or assign pictures to them').'</div>';
+echo '<div class="galleryinfo">'.__('Here you can edit, delete your galleries or assign pictures to them.').'</div>';
 
 echo '<table>';
 	echo '<thead>';

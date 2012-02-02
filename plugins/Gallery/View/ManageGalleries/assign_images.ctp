@@ -3,9 +3,9 @@ $this->Html->script('/gallery/js/assign', false);
 $this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
 echo $this->element('admin_menu_galleries',array("ContentId" => $ContentId));
 
-echo "<h1>".__("Assign images to your gallery")."</h1>";
+echo "<h1>".__("Assign images to your gallery.")."</h1>";
 
-echo '<div class="galleryinfo">'.__('Please assign images from your image repository to your gallery').'</div>';
+echo '<div class="galleryinfo">'.__('Please assign images from your image repository to your gallery.').'</div>';
 ?>
  <div class="role">
         <div class="users_role">Available pictures</div>
