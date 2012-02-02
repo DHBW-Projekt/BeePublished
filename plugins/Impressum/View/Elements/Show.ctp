@@ -93,11 +93,10 @@
 		?>
 	</tbody>
 </table>
-<br>
 
 <!-- this was all data a private person needs to provide -->
 <?php if ($data['Impressum']['type']!='priv') { ?>
-
+	<br>
 	<!-- so now here comes all the legal stuff -->
 
 	<!-- maybe it has to be registered -->
@@ -189,11 +188,11 @@
 				}
 			?>
 		</p>
+		<br>
 	<?php } //adm_office == true ?>
 <?php } //type != priv ?>
 
 <!-- now everybody needs the following -->
-<br>
 <h2>
 	<?php echo __('Haftungsausschluss'); ?>
 </h2>
