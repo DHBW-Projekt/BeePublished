@@ -1,23 +1,29 @@
 <?php 
+App::uses('Sanitize', 'Utility');
+$this->Helpers->load('BBCode');
+$DateTimeHelper = $this->Helpers->load('Time');
+//bin javascript and css
 $this->Html->script('/newsblog/js/admin_publish', false);
 $this->Html->css('/newsblog/css/admin', null, array('inline' => false));
-
-$DateTimeHelper = $this->Helpers->load('Time');
+//clean data from model
+$entriesToPublish = Sanitize::clean($entriesToPublish);
 
 echo $this->element('admin_menu',array('plugin' => 'Newsblog'), array('contentId' => $contentId));
 $this->Js->set('webroot', $webroot);
+//read permission
 $publishAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Publish');
 
 if($publishAllowed){
 	echo '<div id="admin_newsblog-publish">';
 	if(count($entriesToPublish) > 0){
 		foreach($entriesToPublish as $entryToPublish):
+			//read data array into variables
 			$id = $entryToPublish['NewsEntry']['id'];
 			$username = $entryToPublish['Author']['username'];
-			$title = $entryToPublish['NewsEntry']['title'];
-			$subtitle = $entryToPublish['NewsEntry']['subtitle'];
-			$text = $entryToPublish['NewsEntry']['text'];
-			$createdOn = $entryToPublish['NewsEntry']['createdOn'];
+			$title = Sanitize::html($entryToPublish['NewsEntry']['title']);
+			$subtitle = Sanitize::html($entryToPublish['NewsEntry']['subtitle']);
+			$text = $this->BBCode->transformBBCode(Sanitize::html($entryToPublish['NewsEntry']['text']));
+			$createdOn = Sanitize::html($entryToPublish['NewsEntry']['createdOn']);
 			$createdOnDate = $DateTimeHelper->format('m-d-Y', $entryToPublish['NewsEntry']['createdOn']);
 			$createdOnTime = $DateTimeHelper->format('H:i', $entryToPublish['NewsEntry']['createdOn']);
 			
