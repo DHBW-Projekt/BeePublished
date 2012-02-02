@@ -1,5 +1,27 @@
+/*
+* This file is part of BeePublished which is based on CakePHP.
+* BeePublished is free software: you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation, either version 3
+* of the License, or any later version.
+* BeePublished is distributed in the hope that it will be useful, but
+* WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+* You should have received a copy of the GNU General Public
+* License along with BeePublished. If not, see
+* http://www.gnu.org/licenses/.
+*
+* @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+* @author Patrick Zamzow
+*
+* @description Google Maps
+*/
+
+//prefer route instead of map
 var lock = false;
 
+//init map
 function initializeGoogleMaps(panel) {
 	try {
 		var latlng = new google.maps.LatLng(0, 0);
@@ -18,6 +40,7 @@ function initializeGoogleMaps(panel) {
 	}
 }
 
+//show location
 function showLocation(panel, home) {
     var geocoder = new google.maps.Geocoder();
     var position;
@@ -38,6 +61,7 @@ function showLocation(panel, home) {
     }
 }
 
+//print route
 function printRoute(panel, start, destination) {
     var directionsDisplay = new google.maps.DirectionsRenderer();
     var directionsService = new google.maps.DirectionsService();
@@ -60,6 +84,7 @@ function printRoute(panel, start, destination) {
     lock = true;
 }
 
+//quick search and hover
 $(document).ready(function(){
 	if ($('input#search_locations').length > 0)
 		$('input#search_locations').quicksearch('table#locations tbody tr');
