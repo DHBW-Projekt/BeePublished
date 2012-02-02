@@ -1,3 +1,4 @@
+<!-- Shows a text-editor for formating and editing texts -->
 <h2><?php echo  __d('static_text', 'Set Text');?></h2>
 <?php
 	echo $this->element('admin_menu', array('contentId' => $contentId));

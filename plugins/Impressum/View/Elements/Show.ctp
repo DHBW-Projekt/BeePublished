@@ -185,7 +185,7 @@
 			<?php 
 				if ($data['Impressum']['type'] == 'job') {
 					echo __('Es gelten folgende berufsrechtliche Regelungen: ').
-					$this->Html->link($data['Impressum']['adm_regulations'],$data['Impressum']['adm_regulations_link']);
+					$this->Html->link($data['Impressum']['regulations_name'],$data['Impressum']['regulations_link'], array('target' => '_blank'));
 				}
 			?>
 		</p>
@@ -282,7 +282,7 @@
 			Facebook-Plugins erkennen Sie an dem Facebook-Logo oder dem
 			"Like-Button" ("Gefällt mir") auf unserer Seite. Eine Übersicht über
 			die Facebook-Plugins finden Sie ').
-			$this->Html->link(__('hier'),"http://developers.facebook.com/docs/plugins/").'.';
+			$this->Html->link(__('hier'),"http://developers.facebook.com/docs/plugins/", array('target' => '_blank')).'.';
 		?>
 	</p>
 	<br>
@@ -298,7 +298,7 @@
 			zuordnen. Wir weisen darauf hin, dass wir als Anbieter der Seiten keine
 			Kenntnis vom Inhalt der übermittelten Daten sowie deren Nutzung durch
 			Facebook erhalten. Weitere Informationen hierzu finden Sie in der ').
-			$this->Html->link(__('Datenschutzerklärung von Facebook'), "http://www.facebook.com/policy.php").'.';
+			$this->Html->link(__('Datenschutzerklärung von Facebook'), "http://www.facebook.com/policy.php", array('target' => '_blank')).'.';
 		?>
 	</p>
 	<br>
@@ -334,14 +334,14 @@
 			echo __('Wir weisen darauf hin, dass wir als Anbieter der Seiten keine Kenntnis
 			vom Inhalt der übermittelten Daten sowie deren Nutzung durch Twitter
 			erhalten. Weitere Informationen hierzu finden Sie in der ').
-			$this->Html->link(__('Datenschutzerklärung von Twitter'), "http://twitter.com/privacy").'.'; 
+			$this->Html->link(__('Datenschutzerklärung von Twitter'), "http://twitter.com/privacy", array('target' => '_blank')).'.'; 
 		?>
 	</p>
 	<br>
 	<p align="justify">
 		<?php 
 			echo __('Ihre Datenschutzeinstellungen bei Twitter können Sie in den ').
-			$this->Html->link(__('Konto-Einstellungen'), "http://twitter.com/account/settings").__(' ändern.');
+			$this->Html->link(__('Konto-Einstellungen'), "http://twitter.com/account/settings", array('target' => '_blank')).__(' ändern.');
 		?>
 	</p>
 <?php }//twitter == true?>
@@ -366,7 +366,7 @@
 			Datenerhebung und die weitere Verarbeitung und Nutzung der erfassten Daten durch Google sowie 
 			Ihre diesbezüglichen Rechte und Einstellungsmöglichkeiten zum Schutz Ihrer Privatsphäre 
 			entnehmen Sie bitte den ').
-			$this->Html->link(__('Datenschutzhinweisen'), "http://www.google.com/intl/de/+/policy/+1button.html").
+			$this->Html->link(__('Datenschutzhinweisen'), "http://www.google.com/intl/de/+/policy/+1button.html", array('target' => '_blank')).
 			__('von Google zur "+1"-Schaltfläche. Wenn Sie bei Google Plus registriert sind und nicht möchten, 
 			dass Google über unsere Website Daten über Sie sammelt und mit Ihren bei Google gespeicherten 
 			Mitgliedsdaten verknüpft, müssen Sie sich vor Ihrem Besuch unserer Website bei Google Plus ausloggen.'); 
@@ -388,7 +388,7 @@
 			direkt an Xing übermittelt und dort gespeichert. Wir haben keinen Einfluss auf Umfang, 
 			Inhalt und Art der Daten, die Xing mit der Schaltfläche erfasst. Details zum Umgang mit Ihren 
 			persönlichen Daten durch Xing sowie Ihren diesbezüglichen Rechten entnehmen Sie bitte den').
-			$this->Html->link(__('Datenschutzhinweisen von Xing'), "http://www.xing.com/privacy").
+			$this->Html->link(__('Datenschutzhinweisen von Xing'), "http://www.xing.com/privacy", array('target' => '_blank')).
 			__('. Wenn Sie Xing-Mitglied sind und nicht möchten, dass Xing über unsere Webseite Daten 
 			Daten über Sie sammelt, sollten Sie sich vor dem Besuch unserer Webseite bei Xing ausloggen.'); 
 		?>
@@ -409,7 +409,7 @@
 			direkt an LinkedIn übermittelt und dort gespeichert. Wir haben keinen Einfluss auf Umfang, 
 			Inhalt und Art der Daten, die LinkedIn mit der Schaltfläche erfasst. Details zum Umgang mit Ihren 
 			persönlichen Daten durch LinkedIn sowie Ihren diesbezüglichen Rechten entnehmen Sie bitte den').
-			$this->Html->link(__('Datenschutzhinweisen von LinkedIn'), "http://de.linkedin.com/static?key=privacy_policy").
+			$this->Html->link(__('Datenschutzhinweisen von LinkedIn'), "http://de.linkedin.com/static?key=privacy_policy", array('target' => '_blank')).
 			__('. Wenn Sie LinkedIn-Mitglied sind und nicht möchten, dass LinkedIn über unsere Webseite Daten 
 			Daten über Sie sammelt, sollten Sie sich vor dem Besuch unserer Webseite bei LinkedIn ausloggen.'); 
 		?>
@@ -419,6 +419,11 @@
 <!-- and now write where we stole the texts ;-) -->
 <p style="font-style: italic;">
 	<small>
-		<?php echo __('Quelle: ').$this->Html->link(__('Impressum-Generator von e-Recht24'), "http://www.e-recht24.de"); ?>
+		<?php
+			echo __('Quelle der Texte: ').$this->Html->link(__('Impressum-Generator von e-Recht24', array('target' => '_blank')), "http://www.e-recht24.de");
+			echo '<br>';
+			echo __('Diese Seite wurde mit ').$this->Html->link(__('YAML'), 'http://www.yaml.de', array('target' => '_blank')).__(' erstellt.');
+		?>
 	</small>
+	
 </p>

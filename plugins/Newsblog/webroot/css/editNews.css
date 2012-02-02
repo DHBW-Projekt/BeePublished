@@ -3,6 +3,10 @@
 }
 
 .ui-datepicker-trigger{
-	height:25px;
-	width:25px;
+	height: 25px;
+	width: 25px;
+}
+
+.editNewsValidConfig input{
+	width: auto;
 }

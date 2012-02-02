@@ -1,8 +1,10 @@
 <?php 
+$this->Html->script('jquery/jquery-ui-timepicker-addon', array('inline' => false));
 $this->Html->script('ckeditor/ckeditor', array('inline' => false));
 $this->Html->script('ckeditor/adapters/jquery', array('inline' => false));
 $this->Html->script('/newsblog/js/admin_write', false);
 $this->Html->css('/newsblog/css/admin', null, array('inline' => false));
+$this->Html->css('/css/jquery-ui-1.8.16.custom', null, array('inline' => false));
 
 $DateTimeHelper = $this->Helpers->load('Time');
 
@@ -10,6 +12,8 @@ echo $this->element('admin_menu',array('plugin' => 'Newsblog'), array('contentId
 $this->Js->set('webroot', $webroot);
 $this->Js->set('validFromAltText', __d('newsblog','Choose Valid From'));
 $this->Js->set('validToAltText', __d('newsblog','Choose Valid To'));
+$dateFormat = __('m-d-Y');
+$this->Js->set('dateFormatForPicker', $dateFormat);
 $writeAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'Write');
 
 if($writeAllowed){

@@ -6,31 +6,35 @@ $(document).ready(function () {
 		}
 	);
 	
-	$('#nbValidFromDatepicker').datepicker(
-			{
-				autoSize: true,
-				formatDate: 'ISO_8601',
-				altField: '#validFromDB',
-				altFormat: 'yy-mm-dd',
-				showOn: "button",
-				buttonImage: window.app.webroot+"img/calendar.png",
-				buttonImageOnly: true,
-				buttonText: window.app.validFromAltText,
-				showOptions: {direction: 'up'}
-			}
-	);
+	$('#nbValidFromDatepicker').datetimepicker({
+		minDate: new Date(),
+		showOn: "button",
+		buttonImage: window.app.webroot+"img/calendar.png",
+		buttonImageOnly: true,
+		buttonText: window.app.validFromAltText,
+		showOptions: {direction: 'up'},
+		onClose: function(dateText, inst){
+			var dateTimeInput = dateText.split(" ");
+			var dateInput = dateTimeInput[0].split("/");
+			var timeInput = dateTimeInput[1].split(":");
+			var datetimedb = dateInput[2] + '-' + dateInput[0] + '-' + dateInput[1] + ' ' + timeInput[0] + ':' + timeInput[1] + ':00';
+			$('#validFromDB').attr('value', datetimedb);
+		}
+	});
 	
-	$('#nbValidToDatepicker').datepicker(
-			{
-				autoSize: true,
-				formatDate: 'ISO_8601',
-				altField: '#validToDB',
-				altFormat: 'yy-mm-dd',
-				showOn: "button",
-				buttonImage: window.app.webroot+"img/calendar.png",
-				buttonImageOnly: true,
-				buttonText: window.app.validToAltText,
-				showOptions: {direction: 'up'}
-			}
-	);
+	$('#nbValidToDatepicker').datetimepicker({
+		minDate: new Date(),
+		showOn: "button",
+		buttonImage: window.app.webroot+"img/calendar.png",
+		buttonImageOnly: true,
+		buttonText: window.app.validFromAltText,
+		showOptions: {direction: 'up'},
+		onClose: function(dateText, inst){
+			var dateTimeInput = dateText.split(" ");
+			var dateInput = dateTimeInput[0].split("/");
+			var timeInput = dateTimeInput[1].split(":");
+			var datetimedb = dateInput[2] + '-' + dateInput[0] + '-' + dateInput[1] + ' ' + timeInput[0] + ':' + timeInput[1] + ':59';
+			$('#validToDB').attr('value', datetimedb);
+		}
+	});
 });

@@ -7,6 +7,9 @@ class NewsletterSettingsController extends NewsletterAppController {
 	
 	public function index($contentID, $pluginId){
 		$pluginText = $this->ContentValueManager->getContentValues($contentID);
+		if ($this->ContentValueManager->getContentValues($contentID) == null){
+			$pluginText['text'] = __d('newsletter','Here you can subscribe or unsubscribe to our newsletter.');
+		}
 		$this->set('pluginText', $pluginText);
 		$this->set('contentID', $contentID);
 		$this->set('pluginId', $pluginId);

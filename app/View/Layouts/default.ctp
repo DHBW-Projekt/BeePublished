@@ -102,7 +102,7 @@
         Powered by BeePublished - All rights reserved - &copy; Copyright 2011-2012
     </div>
 </div>
-<? if ($adminMode) {
+<?php if ($adminMode) {
     echo $this->element('sidebar');
 }
 ?>

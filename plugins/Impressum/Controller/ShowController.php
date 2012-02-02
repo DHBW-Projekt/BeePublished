@@ -7,9 +7,7 @@ class ShowController extends AppController {
 
 	//authorization check
 	function beforeFilter()	{
-		//Actions which don't require authorization
 		parent::beforeFilter();
-		//TODO change to save
 		$this->Auth->allow('*');
 	}
 
@@ -110,6 +108,7 @@ class ShowController extends AppController {
 					$data['Impressum']['legal_form'] = null;
 					$data['Impressum']['auth_rep_first_name'] = null;
 					$data['Impressum']['auth_rep_last_name'] = null;
+					$data['Impressum']['adm_office'] = true; //every job needs an admission office
 
 					if($this->Impressum->save($data)) {
 						$this->render('privJobData');
@@ -459,46 +458,77 @@ class ShowController extends AppController {
 	 * The next area is only about checking data completeness
 	 */
 
+	/**
+	 * this method is called by the method isComplete to check whether the impressum is completed
+	 */
 	function checkDataCompleteness() {
 		$data = $this->Impressum->find('first');
 		switch ($data['Impressum']['type']) {
 			case 'comp':
-				$this->checkCompData($data);
+				$this->checkGeneralData($data);
 				if ($this->complete) {
 					$this->checkAddress($data);
 					if ($this->complete) {
 						$this->checkContactData($data);
 						if ($this->complete) {
-							$this->checkLegalData($data);
-							if ($this->complete and $data['Impressum']['reg']) {
-								$this->checkRegister($data);
+							$this->checkAuthRepData($data);
+							if($this->complete) {
+								$this->checkLegalData($data);
+								if ($this->complete and $data['Impressum']['reg']) {
+									$this->checkRegister($data);
+									if ($this->complete and $data['Impressum']['adm_office']) {
+										$this->checkAdmOffice($data);
+									}
+								}
 							}
 						}
 					}
 				}
 				break;
 			case 'club':
-				$this->checkCompData($data);
+				$this->checkGeneralData($data);
 				if ($this->complete) {
 					$this->checkAddress($data);
 					if ($this->complete) {
 						$this->checkContactData($data);
 						if ($this->complete) {
-							if (!$data['Impressum']['reg']) {
-								$this->complete = false;
-								$this->Session->setFlash(__('Jeder Verein muss ins Register eingetragen werden.'), 'default', array('class' => 'flash_failure'));
-							} else {
-								$this->checkRegister($data);
+							$this->checkAuthRepData($data);
+							if ($this->complete) {
+								if (!$data['Impressum']['reg']) {
+									$this->complete = false;
+									$this->Session->setFlash(__('Jeder Verein muss ins Register eingetragen werden.'), 'default', array('class' => 'flash_failure'));
+								} else {
+									$this->checkRegister($data);
+								}
 							}
 						}
 					}
 				}
-
+				break;
+			case 'public':
+				$this->checkGeneralData($data);
+				if ($this->complete) {
+					$this->checkAddress($data);
+					if ($this->complete) {
+						$this->checkContactData($data);
+						if ($this->complete) {
+							$this->checkAuthRepData($data);
+							if ($this->complete) {
+								if (!$data['Impressum']['adm_office']) {
+									$this->complete = false;
+									$this->Session->setFlash(__('Für eine Körperschaft öffentlichen Rechts muss eine Aufsichtsbehörde angegeben werden.'), 'default', array('class' => 'flash_failure'));
+								} else {
+									$this->checkRegister($data);
+								}
+							}
+						}
+					}
+				}
 				break;
 			case 'job':
 				$this->checkPrivData($data);
 				if ($this->complete) {
-					$this->checkAddressData($data);
+					$this->checkAddress($data);
 					if ($this->complete) {
 						$this->checkContactData($data);
 						if ($this->complete) {
@@ -581,26 +611,21 @@ class ShowController extends AppController {
 	 * @param $data
 	 */
 	function checkJobData($data) {
-		if (!$data['Impressum']['adm']) {
+		if (empty($data['Impressum']['job_title'])) {
 			$this->complete = false;
-			$this->Session->setFlash(__('Für geschützte Berufsbezeichnungen muss eine Aufsichtsbehörde angegeben werden.'), 'default', array('class' => 'flash_failure'));
+			$this->Session->setFlash(__('Berufsbezeichnung fehlt'), 'default', array('class' => 'flash_failure'));
 		} else {
-			if (empty($data['Impressum']['job_title'])) {
+			if (empty($data['Impressum']['regulations_name'])) {
 				$this->complete = false;
-				$this->Session->setFlash(__('Berufsbezeichnung fehlt'), 'default', array('class' => 'flash_failure'));
+				$this->Session->setFlash(__('Berufsrechtliche Regelungen fehlen'), 'default', array('class' => 'flash_failure'));
 			} else {
-				if (empty($data['Impressum']['regulations_name'])) {
+				if (empty($data['Impressum']['regulations_link'])) {
 					$this->complete = false;
-					$this->Session->setFlash(__('Berufsrechtliche Regelungen fehlen'), 'default', array('class' => 'flash_failure'));
+					$this->Session->setFlash(__('Link zu berufsrechtlichen Regelungen fehlt'), 'default', array('class' => 'flash_failure'));
 				} else {
-					if (empty($data['Impressum']['regulations_link'])) {
-						$this->complete = false;
-						$this->Session->setFlash(__('Link zu berufsrechtlichen Regelungen fehlt'), 'default', array('class' => 'flash_failure'));
-					} else {
-						$this->checkAdmOffice($data);
-						if ($this->complete) {
-							$this->complete = true;
-						}
+					$this->checkAdmOffice($data);
+					if ($this->complete) {
+						$this->complete = true;
 					}
 				}
 			}

@@ -2,12 +2,7 @@
 if(!isset($data))
 	echo __("No image assigned");
 else {
-	echo $this->Html->image($data['path_to_pic'],
-		array(
-			'style' => 'float: left', 
-			'width' => '350px'
-		)
-	);
+	echo '<img src="'.$this->webroot.$data['path_to_pic'].'" width="100%" />';
 	echo '<div style="clear:both;"></div>';
 }
 ?>

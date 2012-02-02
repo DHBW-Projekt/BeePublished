@@ -7,10 +7,21 @@ if(isset($data['view']) && $data['view'] == 'Single'){
 	echo "<h1>".__("Gallery overview")."</h1>";	
 	foreach ($data as $gallery){
 		echo '<div class="galleryImage">';
-		if(isset($gallery['GalleryEntry']['titlepicture']['thumb'])){
-			echo '<a href="/DualonCMS/galleryoverview/view/'.$gallery['GalleryEntry']['id'].'">';
-			echo '<img src="'.$this->webroot.$gallery['GalleryEntry']['titlepicture']['thumb'].'" alt=""></a>';
+
+		if(!$adminMode){
+			echo '<a href="'.$this->here.'/galleryoverview/view/'.$gallery['GalleryEntry']['id'].'">';
 		}
+		
+		if(isset($gallery['GalleryEntry']['titlepicture']['thumb'])){
+			echo '<img src="'.$this->webroot.$gallery['GalleryEntry']['titlepicture']['thumb'].'" alt="">';
+		} else {
+			echo '<img src="'.$this->webroot.$gallery['GalleryPicture'][0]['thumb'].'" alt="">';
+		}
+		
+		if(!$adminMode){
+			echo '</a>';
+		}
+		
 		echo '<div class="galleryTitle">'.$gallery['GalleryEntry']['title'].'</div>';
 		echo '</div>';
 	}

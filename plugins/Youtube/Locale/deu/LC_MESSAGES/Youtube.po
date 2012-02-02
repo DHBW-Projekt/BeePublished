@@ -30,9 +30,17 @@ msgstr ""
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: View\Youtube\admin.ctp:14
-msgid "In order for this plugin to work correctly, go to youtube, select the video and copy the link provided in the top of your browser."
+#: View\Youtube\admin.ctp:13
+msgid "In order for this plugin to work correctly, go to youtube, select the video and copy the link provided at the top of your browser."
 msgstr "Damit dieses Plugin ordnungsgemäß funktioniert rufen Sie Ihr Video auf Youtube auf und kopiren die URL, welche in ihrem Browser angegeben wird."
+
+#: View\Youtube\admin.ctp:17
+msgid "The current video has the following url: "
+msgstr "Das aktuelle Video hat die folgende URL:"
+
+#: View\Youtube\admin.ctp:18
+msgid "You can change the used url by saving a new one."
+msgstr "Sie können die verwendete URL ändern, indem Sie eine neue speichern."
 
 #: View\Youtube\admin.ctp:30
 msgid "Save"
