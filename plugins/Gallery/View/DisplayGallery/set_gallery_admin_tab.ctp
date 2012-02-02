@@ -1,5 +1,6 @@
 <?php 
-echo $this->element('admin_menu_galleries',array("ContentId" => $data['ContentId']));
+echo $this->element('admin_menu',array("ContentId" => $ContentId, "mContext" => $mContext));
+
 $this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
 $this->Html->script('/gallery/js/gallerytableassign', false);
 echo "<h1> ".__('Assign a Gallery')."</h1>";
@@ -38,7 +39,7 @@ foreach ($data['AllGalleries'] as $gallery){
 			}
 			echo $this->Html->link(
 			$this->Html->image("check.png", array('width' => '16px')),
-			array('action' => 'setGallery', $data['ContentId'], $gallery['GalleryEntry']['id']),
+			array('action' => 'setGallery', $ContentId, $gallery['GalleryEntry']['id'],$mContext),
 			array('escape' => False, 'class' => $class, "style" => $style)
 			);
 		echo '</td>';

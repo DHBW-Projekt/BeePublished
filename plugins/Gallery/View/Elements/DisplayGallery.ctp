@@ -16,20 +16,42 @@ if(!isset($data)){
 if(!isset($data['GalleryPicture'])){
 	echo __('No pictures in gallery.');
 } else {
-foreach ($data['GalleryPicture'] as $pic){
+		$titlepic  = $data['GalleryEntry']['titlepicture'];
+		$title_is_inGallery = false;
+		//check whether the title image ist part of the gallery
+		foreach ($data['GalleryPicture'] as $checkpic){
+			if($titlepic['id'] == $checkpic['id']){
+			$title_is_inGallery = true;
+			}//if
+		}
+		
+		if(!$title_is_inGallery){
+			echo '<div class="galleryImage">';
+			echo '<a class="fancybox" ';
+			echo 'title = "'.$this->webroot.'#'.$titlepic['title'].'#'.$data['GalleryEntry']['id'].'#'.$titlepic['id'].'" ';
+			echo 'rel="group" href="';
+			echo $this->webroot.$titlepic['path_to_pic'].'">';
+	
+			echo '<img src="'.$this->webroot.$titlepic['thumb'].'" />';
+			echo '</a>';
+			
+			echo '</div>';
+		}
+		
+	foreach ($data['GalleryPicture'] as $pic){
+		echo '<div class="galleryImage">';
 
-	echo '<div class="galleryImage">';
-	echo '<a class="fancybox" ';
-	echo 'title = "'.$this->webroot.'#'.$pic['title'].'#'.$data['GalleryEntry']['id'].'#'.$pic['id'].'" ';
-	echo 'rel="group" href="';
-	echo $this->webroot.$pic['path_to_pic'].'">';
+		echo '<a class="fancybox" ';
+		echo 'title = "'.$this->webroot.'#'.$pic['title'].'#'.$data['GalleryEntry']['id'].'#'.$pic['id'].'" ';
+		echo 'rel="group" href="';
+		echo $this->webroot.$pic['path_to_pic'].'">';
 	
-	echo '<img src="'.$this->webroot.$pic['thumb'].'" />';
-	echo '</a>';
+		echo '<img src="'.$this->webroot.$pic['thumb'].'" />';
+		echo '</a>';
 	
 	
-	echo '</div>';
-}
+		echo '</div>';
+	}
 echo '<div id="fb-root"></div>';
 echo '<div style="clear:both;"></div>';
 }

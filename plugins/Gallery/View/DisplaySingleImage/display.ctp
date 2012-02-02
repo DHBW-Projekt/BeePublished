@@ -3,6 +3,8 @@ $this->Helpers->load('SocialNetwork');
 $this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
 echo '<div style="clear:both;"></div>';
 
+$this->set('title_for_layout', $data['image']['title']);
+
 
 echo '<h1>'.$data['image']['title'].'</h1>';
 

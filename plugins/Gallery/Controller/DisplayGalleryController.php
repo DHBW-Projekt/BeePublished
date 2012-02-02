@@ -9,27 +9,29 @@ class DisplayGalleryController extends AppController {
 	}
 	
 	public function admin($contentId){
-		$this->redirect(array('action' => 'setGalleryAdminTab', $contentId));
+		$this->redirect(array('action' => 'setGalleryAdminTab', $contentId, 'singleGallery'));
 	}
 	
-	public function setGalleryAdminTab($contentId){
+	public function setGalleryAdminTab($contentId, $menue_context){
 		$currentlyassigned =  $this->ContentValueManager->getContentValues($contentId);
 		
 		$allGalleries = $this->Gallery->getAllGalleries($this);
 
 		$data = array(	'AllGalleries' => $allGalleries,
-						'ContentId' => $contentId,
 						'CurrGallery' => $currentlyassigned
 		);
 		
 		$this->set('data',$data);
+		$this->set('mContext',$menue_context);
+		$this->set('ContentId',$contentId);
 	}
 	
-	public function setGallery($contentId, $galleryId){
+	public function setGallery($contentId, $galleryId, $menue_context){
 		$this->ContentValueManager->saveContentValues($contentId, array('galleryID' => $galleryId));
 
 		$this->Session->setFlash('Gallery sucessfully assigned');
-		
+		$this->set('mContext',$menue_context);
+		$this->set('ContentId',$contentId);
 		$this->redirect($this->referer());
 	}
 	

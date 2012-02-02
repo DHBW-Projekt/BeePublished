@@ -10,7 +10,7 @@ class DisplaySingleImageController extends GalleryAppController
 	}
 	
 	public function display($galleryid, $pictureid){
-	
+		
 		$image = $this->GalleryPictureComp->getPicture($this, $pictureid);
 		
 		$data = array(	'image' => $image,
