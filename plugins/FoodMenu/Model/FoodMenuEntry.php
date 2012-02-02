@@ -32,7 +32,7 @@ class FoodMenuEntry extends AppModel {
 				'message' => 'Please enter a valid currency.'
 		),
 		'price' => array(
-				'rule' => array('decimal', 2),
+				'rule' => array('numeric', 2),
 				'message' => 'Please enter a decimal value with two digits.'
 		)
 	);
@@ -57,5 +57,9 @@ class FoodMenuEntry extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+	
+	function invalidate($field, $value = true) {
+		return parent::invalidate($field, __d('food_menu', $value, true));
+	} 
 
 }

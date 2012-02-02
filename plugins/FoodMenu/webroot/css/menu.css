@@ -1,6 +1,6 @@
 ul.FoodMenuMenu {
   margin: 0; padding: 0.8em;
-  text-align: center;
+  text-align: left;
 }
 
 ul.FoodMenuMenu li {
@@ -14,7 +14,6 @@ ul.FoodMenuMenu a:hover, ul#FoodMenuMenu span {
 }
 
 ul.FoodMenuMenu a:link, a:visited {
-  text-decoration: none;
 }
 
 ul.FoodMenuMenu a:active {
@@ -74,7 +73,7 @@ ul.FoodMenuMenu a:active {
 }
 
 #foodMenuHeader p{
-	text-align:center;
+	text-align:left;
 }
 
 #userMenuEntries table{

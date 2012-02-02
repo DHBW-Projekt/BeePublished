@@ -18,7 +18,7 @@ echo $this->Form->end();
 echo "<h2>".__('Add multiple images')."</h2>";
 
 echo $this->Form->create('addImage', array('url' => array('plugin' => 'Gallery','controller' => 'ManageImages','action' => 'uploadImages',$data['ContentId']),'type' => 'file'));
-echo $this->Form->input('data', array('label'=>'File', 'type'=>'file', 'name' => 'files[]', 'multiple'));
+echo $this->Form->input('data', array('label'=>'Files', 'type'=>'file', 'name' => 'files[]', 'multiple'));
 echo $this->Form->submit(__('Add images'));
 echo $this->Form->end();
 
