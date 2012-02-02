@@ -12,7 +12,10 @@ textarea#PluginTextText {
 	color: #cccccc;
 }
 table.newsletters{
-	
+}
+
+.subscription_form input{
+	max-width:100%;
 }
 
 table#recipients{

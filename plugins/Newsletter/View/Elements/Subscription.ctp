@@ -22,8 +22,6 @@ echo '<div id="subscription">';
 		echo $this->Form->input('NewsletterRecipient.email', array('label' => __d('newsletter','E-Mail:')));
 		echo $this->Html->div('validation_error',$validationErrors['email'][0]);
    		echo $this->Form->end(__d('newsletter','(Un)subscribe'));
-//    		echo '</div>';
-//    		echo '</div>';
    		echo $this->Session->flash('NewsletterRecipient');
     } 
 	// 	if current user is registered
@@ -37,10 +35,10 @@ echo '<div id="subscription">';
     			'action' => 'userUnSubscribe')));
 		if (isset($userAsRecipient)){
 			if ((isset($userAsRecipient['NewsletterRecipient']['active'])) && ($userAsRecipient['NewsletterRecipient']['active'] == 1)){
-				echo __d('newsletter','You subscribed for the newsletter');
+				echo __d('newsletter','You subscribed to newsletter');
 				echo $this->Form->end(__d('newsletter','Unsubscribe'));
 			} else {
-				echo __d('newsletter','You didn\'t subscribe for the newsletter');
+				echo __d('newsletter','You didn\'t subscribe to our newsletter');
 				echo $this->Form->end(__d('newsletter','Subscribe'));
 			};
 		};
