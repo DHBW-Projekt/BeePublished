@@ -1,4 +1,5 @@
 <?php 
+$this->Html->script('jquery/jquery-ui-timepicker-addon', array('inline' => false));
 $this->Html->script('ckeditor/ckeditor', array('inline' => false));
 $this->Html->script('ckeditor/adapters/jquery', array('inline' => false));
 $this->Html->script('/newsblog/js/admin_write', false);

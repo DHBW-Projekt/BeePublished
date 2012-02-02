@@ -1,6 +1,7 @@
+<!-- displays the loaded data -->
 <?php
-$this->Html->css('/StaticText/css/template',null,array('inline' => false));
-$this->Helpers->load('BBCode');
+	$this->Html->css('/StaticText/css/template',null,array('inline' => false));
+	$this->Helpers->load('BBCode');
 ?>
 
 <div class="staticText_show">
