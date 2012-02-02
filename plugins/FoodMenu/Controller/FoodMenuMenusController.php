@@ -97,9 +97,6 @@ class FoodMenuMenusController extends FoodMenuAppController {
 		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete', true);
 		
 		if(array_key_exists('FoodMenuMenu', $this->request->data)) {
-			
-			debug($this->request->data);
-			
 			$ids = array_keys($this->request->data['FoodMenuMenu']);
 			foreach ($ids as $id) {
 					$this->FoodMenuMenu->id = $id;
