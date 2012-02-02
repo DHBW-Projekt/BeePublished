@@ -30,13 +30,5 @@ class DisplayGalleryController extends AppController {
 		$this->redirect($this->referer());
 	}
 	
-	public function displaySingleImage($galleryid, $pictureid){
-		$image = $this->GalleryPictureComp->getPicture($this, $pictureid);
-		
-		$data = array(	'image' => $image,
-		);
-		$this->set('data',$data);
-		
-		
-	}
+
 }

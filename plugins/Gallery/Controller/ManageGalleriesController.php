@@ -70,12 +70,13 @@ class ManageGalleriesController  extends GalleryAppController{
 					$this->Session->setFlash(__('Your Gallery was not saved. You have to assign a title picture'), 'default', array('class' => 'flash_failure'));
 					$this->redirect(array(	'action' => 'index', $contentId));
 				}else {
+					debug($this->request->data);
 					if($this->GalleryEntry->save($this->request->data)) {
 						$this->Session->setFlash(__('Your Gallery was saved.'), 'default', array('class' => 'flash_success'));
-						$this->redirect(array('action' => 'index', $contentId));	
+						//$this->redirect(array('action' => 'index', $contentId));	
 					} else {
 						$this->Session->setFlash(__('Your Gallery was not saved.'), 'default', array('class' => 'flash_failure'));
-						$this->redirect(array(	'action' => 'index', $contentId));		
+						//$this->redirect(array(	'action' => 'index', $contentId));		
 					}
 				}		
     		}//data empty
@@ -88,6 +89,8 @@ class ManageGalleriesController  extends GalleryAppController{
 	 * @param int $contentId
 	 */
 	public function delete($galleryId, $contentId){
+		
+		//test
 		$pluginId = $this->getPluginId();
 		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete', true);
 		
@@ -104,14 +107,19 @@ class ManageGalleriesController  extends GalleryAppController{
 		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete', true);
 		
 		if ($this->request->is('post')){
+			debug($this->data);
 			$galleries=  $this->Gallery->getAllGalleries($this);
-			
-			$selectedGalleries = $this->data['selectGalleries'];
-			foreach($galleries as $gallery){
-				$id = $gallery['GalleryEntry']['id'];
-				if ($selectedGalleries[$id] == 1){
-					$this->Gallery->delete($this,$id);
+			if(isset($this->data['selectGalleries'])) {
+				$selectedGalleries = $this->data['selectGalleries'];
+				foreach($galleries as $gallery){
+					$id = $gallery['GalleryEntry']['id'];
+					if ($selectedGalleries[$id] == 1){
+						$this->Gallery->delete($this,$id);
+					}
 				}
+					$this->Session->setFlash(__('Deleted sucessfully'), 'default', array('class' => 'flash_success'),'GalleryNotification');
+			} else {
+					$this->Session->setFlash(__('Nothing selected.'), 'default', array('class' => 'flash_failure'),'GalleryNotification');
 			}
 			$this->redirect($this->referer());
 		}
