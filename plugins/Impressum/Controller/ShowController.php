@@ -505,7 +505,7 @@ class ShowController extends AppController {
 					}
 				}
 				break;
-			case 'club':
+			case 'public':
 				$this->checkGeneralData($data);
 				if ($this->complete) {
 					$this->checkAddress($data);
