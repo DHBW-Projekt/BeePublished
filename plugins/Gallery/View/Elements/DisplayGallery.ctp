@@ -14,7 +14,7 @@ if(!isset($data)){
 	</div> 
 <?php
 if(!isset($data['GalleryPicture'])){
-	echo __('No pictures in gallery');
+	echo __('No pictures in gallery.');
 } else {
 foreach ($data['GalleryPicture'] as $pic){
 

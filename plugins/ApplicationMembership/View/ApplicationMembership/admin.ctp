@@ -1,5 +1,24 @@
-<!--  Application Adminstration View -->
-<?php 
+<?php
+/*
+ * This file is part of BeePublished which is based on CakePHP.
+ * BeePublished is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3
+ * of the License, or any later version.
+ * BeePublished is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public
+ * License along with BeePublished. If not, see
+ * http://www.gnu.org/licenses/.
+ *
+ * @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+ * @author Yvonne Laier and Maximilian Stueber
+ *
+ * @description Application Adminstration View
+ */
+
 	//LOAD css-file
 	echo $this->Html->css('/ApplicationMembership/css/applicationmembership');
 	
@@ -20,7 +39,7 @@
 			<thead>
 				<tr>
 					<th></th>
-					<th><?php echo __d('application_membership','Application'); ?></th>
+					<th colspan="2"><?php echo __d('application_membership','Application'); ?></th>
 					<th><?php echo __d('application_membership','Action'); ?></th>
 				</tr>
 			</thead>
@@ -34,56 +53,10 @@
 					$type = 'passive';
 			?>
 			<tr>
-				<td name="applicationDoneField"><?php echo $this->Form->checkbox($application['ApplicationMembership']['id']); ?></td>
-				<td>
-					<table>
-						<tr>
-							<td><?php echo __d('application_membership','Type:'); ?></td>
-							<td><?php echo $type;?></td>
-						</tr>
-						<tr class="applicationmembership_space">
-							<td><?php echo __d('application_membership','Title:'); ?></td>
-							<td><?php echo $application['ApplicationMembership']['title']; ?></td>
-						</tr>
-						<tr>
-							<td><?php echo __d('application_membership','Last Name:'); ?></td>
-							<td><?php echo $application['ApplicationMembership']['last_name']; ?></td>
-						</tr>
-						<tr>
-							<td><?php echo __d('application_membership','First Name:'); ?></td>
-							<td><?php echo $application['ApplicationMembership']['first_name']; ?></td>
-						</tr>
-						<tr>
-							<td><?php echo __d('application_membership','Date of birth:'); ?></td>
-							<td><?php echo $application['ApplicationMembership']['date_of_birth']; ?></td>
-						</tr>
-						<tr>
-							<td><?php echo __d('application_membership','Email:'); ?></td>
-							<td><?php echo $application['ApplicationMembership']['email']; ?></td>
-						</tr>
-						<tr>
-							<td><?php echo __d('application_membership','Telephone:'); ?></td>
-							<td><?php echo $application['ApplicationMembership']['telephone']; ?></td>
-						</tr>
-						<tr>
-							<td><?php echo __d('application_membership','Street:'); ?></td>
-							<td><?php echo $application['ApplicationMembership']['street']; ?></td>
-						</tr>
-						<tr>
-							<td><?php echo __d('application_membership','ZIP:'); ?></td>
-							<td><?php echo $application['ApplicationMembership']['zip']; ?></td>
-						</tr>
-						<tr>
-							<td><?php echo __d('application_membership','City:'); ?></td>
-							<td><?php echo $application['ApplicationMembership']['city']; ?></td>
-						</tr>
-						<tr class="applicationmembership_space">
-							<td><?php echo __d('application_membership','Comment:'); ?></td>
-							<td><?php echo $application['ApplicationMembership']['comment']; ?></td>
-						</tr>
-					</table>				
-				</td>
-				<td>
+				<td name="applicationDoneField" rowspan="11"><?php echo $this->Form->checkbox($application['ApplicationMembership']['id']); ?></td>
+				<td><?php echo __d('application_membership','Type:'); ?></td>
+				<td><?php echo $type;?></td>
+				<td rowspan="11">
 				<?php echo $this->Html->link($this->Html->image("test-pass-icon.png"),
 						array('action' => 'done', $contentID, $application['ApplicationMembership']['id']),
 						array('escape' => False)
@@ -91,6 +64,46 @@
 				?>
 				</td>
 			</tr>
+			<tr class="applicationmembership_space">
+				<td><?php echo __d('application_membership','Title:'); ?></td>
+				<td><?php echo $application['ApplicationMembership']['title']; ?></td>
+			</tr>
+			<tr>			
+				<td><?php echo __d('application_membership','Last Name:'); ?></td>
+				<td><?php echo $application['ApplicationMembership']['last_name']; ?></td>
+			</tr>
+			<tr>
+				<td><?php echo __d('application_membership','First Name:'); ?></td>
+				<td><?php echo $application['ApplicationMembership']['first_name']; ?></td>
+			</tr>
+			<tr>
+				<td><?php echo __d('application_membership','Date of birth:'); ?></td>
+				<td><?php echo $application['ApplicationMembership']['date_of_birth']; ?></td>
+			</tr>
+			<tr>
+				<td><?php echo __d('application_membership','Email:'); ?></td>
+				<td><?php echo $application['ApplicationMembership']['email']; ?></td>
+			</tr>
+			<tr>
+				<td><?php echo __d('application_membership','Telephone:'); ?></td>
+				<td><?php echo $application['ApplicationMembership']['telephone']; ?></td>
+			</tr>
+			<tr>
+				<td><?php echo __d('application_membership','Street:'); ?></td>
+				<td><?php echo $application['ApplicationMembership']['street']; ?></td>
+			</tr>
+			<tr>
+				<td><?php echo __d('application_membership','ZIP:'); ?></td>
+				<td><?php echo $application['ApplicationMembership']['zip']; ?></td>
+			</tr>
+			<tr>
+				<td><?php echo __d('application_membership','City:'); ?></td>
+				<td><?php echo $application['ApplicationMembership']['city']; ?></td>
+			</tr>
+			<tr class="applicationmembership_space">
+				<td><?php echo __d('application_membership','Comment:'); ?></td>
+				<td><?php echo $application['ApplicationMembership']['comment']; ?></td>
+			</tr>			
 		<?php
 		}
 		?>

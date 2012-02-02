@@ -1,16 +1,28 @@
 .newsblogtitle{
+	margin: 0px;
+	padding: 0px;
+	margin-top: 5px !important;
 	font-size: 24px;
 	font-style: italic;
-	padding:5px;
+}
+.newsblog_entry_container h2,h3{
+	margin: 0px;
+	padding: 0px;
 }
 
+.newsblogreadconfig{
+	margin:0px;
+	padding:0px;
+	margin-left: 5px !important;
+}
 .newsblogtitle_border{
 	height: 3px;
 	line-height: 3px;
 }
 
 .newsblogcontainer{
-	clear: both;
+	float:left;
+	width:100%;
 	min-height:30px;
 }
 
@@ -78,6 +90,7 @@
 
 .newsblogreadconfig_form div{
 	float:left;
+	margin: 0px;
 	margin-right: 5px;
 	height: 20px !important;
 	line-height:20px !important;
@@ -94,21 +107,25 @@
 
 .newsblogreadconfig_form div input{
 	font-size: 12px !important;
+	height: auto;
 	width: auto;
 }
 
 
 .newsblogreadconfig_select{
 	width: auto;
-	height: 20px;
 }
 
 .newsblogreadconfig_items{
 	display: none;
 }
 
+.newsblogreadconfig_items form{
+	padding: 5px;
+})
+
 .newsblogreadconfig_button{
-	padding:5px;
+	/*padding:5px;*/
 }
 
 .newsblog_entry_social{
