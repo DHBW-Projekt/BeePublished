@@ -48,6 +48,7 @@
 	echo $this->Form->input('price', array('label' => (__d("web_shop", 'Price').':')));
 	echo $this->Form->label(__d("web_shop", 'Picture').':');
 	echo $this->Form->file('WebshopProduct.submittedfile');
+	echo $this->Form->hidden('picturePath');
 	echo "<br>";
 	echo $this->Html->image($this->data['WebshopProduct']['picturePath'].$this->data['WebshopProduct']['picture'], array('style' => 'width: 100px'));
 	echo "<br>";
