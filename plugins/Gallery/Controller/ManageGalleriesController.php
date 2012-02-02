@@ -110,19 +110,24 @@ class ManageGalleriesController  extends GalleryAppController{
 	public function deleteSelected($contentId){
 		$pluginId = $this->getPluginId();
 		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete', true);
-		
+		$deleteditems = -1;
 		if ($this->request->is('post')){
-			debug($this->data);
+		
 			$galleries=  $this->Gallery->getAllGalleries($this);
 			if(isset($this->data['selectGalleries'])) {
 				$selectedGalleries = $this->data['selectGalleries'];
+			
+				
 				foreach($galleries as $gallery){
 					$id = $gallery['GalleryEntry']['id'];
 					if ($selectedGalleries[$id] == 1){
 						$this->Gallery->delete($this,$id);
+						$deleteditems++;
 					}
 				}
+				if(! ($deleteditems <=0)){
 					$this->Session->setFlash(__('Deleted sucessfully'), 'default', array('class' => 'flash_success'),'GalleryNotification');
+				}	
 			} else {
 					$this->Session->setFlash(__('Nothing selected.'), 'default', array('class' => 'flash_failure'),'GalleryNotification');
 			}
