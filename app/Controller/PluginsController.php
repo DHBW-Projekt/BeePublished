@@ -83,7 +83,7 @@ class PluginsController extends AppController
             $existingPermissions[] = $permission['Permission']['action'];
         }
 
-        if ($permissions != null) {
+        if ($permissions != null && array_key_exists('permission', $permissions)) {
             foreach ($permissions['permission'] as $permission) {
                 if (in_array($permission['action'], $existingPermissions)) {
                     continue;

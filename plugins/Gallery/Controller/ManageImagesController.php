@@ -43,29 +43,42 @@ class ManageImagesController  extends GalleryAppController{
     }  
     
 	public function uploadImage($contentId){
+				
+		// test if image is selected
+		if($this->data['addImage']['File']['size'] == 0){
+			$this->Session->setFlash('No file selected');
+			$this->redirect($this->referer());
+			return;
+		}
 		
 		$pluginId = $this->getPluginId();
 		$stringer = explode('.',$this->data['addImage']['File']['name'] );
 
 		if($this->strcontains($stringer[0],'.')){
 			// not allowed
-			$this->Session->setFlash('Corrupt Filename');
+			$this->Session->setFlash('Wrong filename');
 			
 		} else {
 			//check File Format
 			if($stringer[1]!="jpeg" && $stringer[1]!="jpg" && $stringer[1]!="JPEG" && $stringer[1]!="JPG"){
 				
-				$this->Session->setFlash('Corrupt Filetype only JPG allowed');
+				$this->Session->setFlash('Wrong filetype, only JPG allowed');
 			} else {
-						$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
-		
-		
-						$image = array('name' => $this->data['addImage']['File']['name'],
+				$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
+				$image = array('name' => $this->data['addImage']['File']['name'],
 								'tmp_name' => $this->data['addImage']['File']['tmp_name'],
 								'size' => $this->data['addImage']['File']['size'],
 								'title' => $this->data['addImage']['Title']);
-						$this->addImageInternal($image);
-						$this->Session->setFlash('Image saved');
+				
+				if($image['title'] == ""){
+					$image['title'] = $image['name'];
+				}
+				
+				if($this->addImageInternal($image)){
+					$this->Session->setFlash('Images saved');
+				} else {
+					$this->Session->setFlash('Image is not a valid jpeg files');
+				}
 			}
 		}
 	
@@ -81,6 +94,12 @@ class ManageImagesController  extends GalleryAppController{
 		$pluginId = $this->getPluginId();
 		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
 
+		if(count($this->params['form']['files']['size']) == 1 && $this->params['form']['files']['size'][0] == 0){
+			$this->Session->setFlash('No file selected');
+			$this->redirect($this->referer());
+			return;
+		}
+		
 		for($i = 0;$i<count($this->params['form']['files']['name']);$i++){
 			$stringer = explode('.',$this->params['form']['files']['name'][$i]);
 
@@ -101,8 +120,13 @@ class ManageImagesController  extends GalleryAppController{
 							'title' => $this->params['form']['files']['name'][$i]
 					);
 			
-				$this->addImageInternal($image);
-				$this->Session->setFlash('Images saved');
+				if($this->addImageInternal($image)){
+					$this->Session->setFlash('Images saved');
+				} else {
+					$this->Session->setFlash('Image is not a valid jpeg files');
+					break;
+				}
+				
 			}//filetype
 			}//filename
 		}
@@ -151,9 +175,9 @@ class ManageImagesController  extends GalleryAppController{
 			mkdir($dir_gallery);
 		}
 		
-	
-		
-		$image_source = imagecreatefromjpeg($image['tmp_name']);
+		if(!$image_source = @imagecreatefromjpeg($image['tmp_name'])){
+			return false;
+		}
 		
 		// Output
 		imagejpeg($image_source,$filedest, 100);
@@ -165,6 +189,7 @@ class ManageImagesController  extends GalleryAppController{
 		
 		$this->GalleryPictureComp->generateThumbnail($dbImage);
 		$this->GalleryPictureComp->save($this,$dbImage);
+		return true;
 	}
 	
 	public function delete($pictureId, $contentId){

@@ -8,10 +8,10 @@
 <div id="contactform_form">
 	<h2><?php echo __d('contact_form','Contact Form'); ?></h2>
 	<?php 
-		$validationError = $this->Session->read('Validation.ContactForm.validationErrors');
-		echo $this->Session->flash('ContactForm');
+		$validationError = $this->Session->read('Validation.ContactRequest.validationErrors');
+		echo $this->Session->flash('ContactRequest');
 		
-		echo $this->Form->create('ContactForm', array('url' => $url.'/contactform/send'));
+		echo $this->Form->create('ContactRequest', array('url' => $url.'/contactform/send'));
 	?>
 	<div class="input">
 		<?php
