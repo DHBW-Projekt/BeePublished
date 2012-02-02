@@ -81,6 +81,12 @@ class ManageImagesController  extends GalleryAppController{
 		$pluginId = $this->getPluginId();
 		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
 
+		if(count($this->params['form']['files']['size']) == 1 && $this->params['form']['files']['size'][0] == 0){
+			$this->Session->setFlash('No file selected');
+			$this->redirect($this->referer());
+			return;
+		}
+		
 		for($i = 0;$i<count($this->params['form']['files']['name']);$i++){
 			$stringer = explode('.',$this->params['form']['files']['name'][$i]);
 
@@ -135,7 +141,7 @@ class ManageImagesController  extends GalleryAppController{
 	 */
 	private function addImageInternal($image){
 		
-		debug($image);
+	
 		
 		$timestamp = time();
 		$day = date("dmY",$timestamp);

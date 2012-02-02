@@ -19,7 +19,8 @@ class ManageGalleriesController  extends GalleryAppController{
 	 * @param int $contentId
 	 */
 	public function index($contentId){
-		
+			
+				
 		$allGalls= $this->Gallery->getAllGalleries($this);
 		
 		$data = array(	'AllGalleries' => $allGalls,
@@ -40,7 +41,7 @@ class ManageGalleriesController  extends GalleryAppController{
 	 * @param int $contentId
 	 */
 	public function create($contentId){
-		
+
 		$pluginId = $this->getPluginId();
 		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
 		
@@ -61,7 +62,7 @@ class ManageGalleriesController  extends GalleryAppController{
 		} else {
 			$this->loadModel('Gallery.GalleryEntry');
 			if (!empty($this->request->data)) {
-				debug($this->request->data);
+				
 				if($this->request->data['GalleryEntry']['gallery_picture_id'] == null){
 					
 				

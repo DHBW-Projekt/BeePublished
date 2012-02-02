@@ -82,7 +82,7 @@ class GalleryPictureCompComponent extends Component
 		$picture = $this->getPicture($controller, $pictureId);
 		
 		$pathInfo = pathinfo(realpath($picture['path_to_pic']));
-		debug($pathInfo);
+	
 		$thumbPath = $pathInfo['dirname']."/thumb/".$pathInfo['basename'];
 		
 		unlink($thumbPath);

@@ -1,0 +1,34 @@
+@CHARSET "UTF-8";
+
+/* FORMATTING admin overlay */
+div #contact_form_admin{
+	width:100%;
+	text-align: left;
+}
+
+div #contact_form_admin_content{
+	padding: 20px;
+}
+
+/* FORMATTING contact form */
+div #contactform_between{
+	text-align: left;
+	margin-top: 5px;
+	margin-right: 7%;
+}
+
+div #contactform_between label{
+	width: 93%;
+	text-align: left;
+}
+
+div #contactform_bottom{
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 5%;
+	text-align: left;
+}
+
+label.recaptcha_input_area_text{
+	float: none;
+}
