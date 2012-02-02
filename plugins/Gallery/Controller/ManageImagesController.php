@@ -96,6 +96,7 @@ class ManageImagesController  extends GalleryAppController{
 		$pluginId = $this->getPluginId();
 		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
 		$this->set('mContext',$menue_context);
+		$this->set('ContentId',$contentId);
 		if(count($this->params['form']['files']['size']) == 1 && $this->params['form']['files']['size'][0] == 0){
 			$this->Session->setFlash('No file selected');
 			$this->redirect($this->referer());
@@ -203,6 +204,7 @@ class ManageImagesController  extends GalleryAppController{
 		$this->deletePictureInternal($pictureId);
 		$this->Session->setFlash('Image deleted');
 		$this->set('mContext',$menue_context);
+		$this->set('ContentId',$contentId);
 		$this->redirect($this->referer());
 	}
 	
@@ -218,6 +220,7 @@ class ManageImagesController  extends GalleryAppController{
 		}
 		$this->Session->setFlash('Images deleted');
 		$this->set('mContext',$menue_context);
+		$this->set('ContentId',$contentId);
 		$this->redirect($this->referer());
 	}
 	
@@ -233,17 +236,18 @@ class ManageImagesController  extends GalleryAppController{
 		
 		$picture = $this->GalleryPictureComp->getPicture($this,$pictureId);
 		
-		$data = array(	'Picture' => $picture,
-						'ContentId' => $contentId );
+		$data = array(	'Picture' => $picture);
 		
 		$this->set('data',$data);
+		$this->set('ContentId',$contentId);
 		$this->set('mContext',$menue_context);		
 	}
 	
 	public function save($contentId, $menue_context){
 		$this->GalleryPictureComp->save($this,$this->data['GalleryPicture']);
-		$this->redirect(array('action' => 'index', $contentId));
-			$this->set('mContext',$menue_context);		
+		$this->set('mContext',$menue_context);
+		$this->set('ContentId',$contentId);
+		$this->redirect(array('action' => 'index', $contentId,$menue_context));
 	}
 	
 }

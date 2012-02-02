@@ -14,9 +14,14 @@
     			echo "</li>";
     		}
     		echo "<li>";
-    		echo $this->Html->link(__('Create gallery'),array('plugin' => 'Gallery', 'controller' => 'ManageGalleries', 'action' => 'create', $ContentId,$mContext));
+    		echo $this->Html->link(__('Manage images'),array('plugin' => 'Gallery', 'controller' => 'ManageImages', 'action' => 'index', $ContentId,$mContext));
     		echo "</li>";
     		
+    		/*
+    		echo "<li>";
+    		echo $this->Html->link(__('Create gallery'),array('plugin' => 'Gallery', 'controller' => 'ManageGalleries', 'action' => 'create', $ContentId,$mContext));
+    		echo "</li>";
+    		*/
     		echo "<li>";
     		echo $this->Html->link(__('Manage Galleries'),array('plugin' => 'Gallery', 'controller' => 'ManageGalleries', 'action' => 'index', $ContentId,$mContext));
     		echo "</li>";	
