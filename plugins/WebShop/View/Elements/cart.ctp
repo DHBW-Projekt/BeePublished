@@ -19,7 +19,7 @@
 		//GET all products
 		foreach ($data as $product){
 			echo '<tr>';
-			echo '<td>'.$this->Html->image('/WebShop/img/products/'.$product['WebshopProduct']['picture'], array('class' => "webshop_cart_product_img")).'</td>';
+			echo '<td>'.$this->Html->image($product['WebshopProduct']['picturePath'].$product['WebshopProduct']['picture'], array('class' => "webshop_cart_product_img")).'</td>';
 			echo '<td>'.$this->Html->link($product['WebshopProduct']['name'], $url.'/webshop/view/'.$product['WebshopProduct']['id']).'</td>';
 			echo '<td>'.$product['WebshopProduct']['price'].'</td>';
 			echo '<td>'.$product['count'].'</td>';

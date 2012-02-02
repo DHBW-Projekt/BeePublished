@@ -1,4 +1,7 @@
 <?php
+
+App::uses('Sanitize', 'Utility');
+
 /**
  * Component for WebShopComponent.
  *
@@ -45,7 +48,7 @@ class WebShopComponent extends Component {
 	function productOverview($controller, $url_params, $contentValues){
 		
 		//LOAD model
-		$controller->loadModel("WebshopProduct");
+		$controller->loadModel("WebShop.WebshopProduct");
 		
 		//Default NumberOfEntries
 		if(!isset($contentValues['NumberOfEntries']))
@@ -69,7 +72,7 @@ class WebShopComponent extends Component {
 	function search($controller, $url_params, $contentValues){
 		
 		//LOAD model
-		$controller->loadModel('WebshopProduct');
+		$controller->loadModel('WebShop.WebshopProduct');
 		
 		//Default NumberOfEntries
 		if(!isset($contentValues['NumberOfEntries']))
@@ -77,6 +80,9 @@ class WebShopComponent extends Component {
 		
 		//DATA from request
 		if (!empty($controller->data)) {
+			
+			//SANITIZE
+			$controller->data =  Sanitize::paranoid($controller->data);
 			
 			//PAGINATION options
 			$controller->paginate = array(
@@ -121,7 +127,7 @@ class WebShopComponent extends Component {
 	function view($controller, $id=null) {
 		
 		//LOAD model
-		$controller->loadModel('WebshopProduct');
+		$controller->loadModel('WebShop.WebshopProduct');
 
 		//RETURN product
 		return array('data' => $controller->WebshopProduct->findById($id));
@@ -136,7 +142,7 @@ class WebShopComponent extends Component {
 		$data = array();
 		
 		//LOAD model
-		$controller->loadModel('WebshopProduct');
+		$controller->loadModel('WebShop.WebshopProduct');
 		
 		//GET all IDs (+ amount) from session
 		$productIDs = $controller->Session->read('webshop_cart');
@@ -231,6 +237,10 @@ class WebShopComponent extends Component {
 		
 		//Check if user is allowed to submit orders
 		if (!$controller->PermissionValidation->actionAllowed($pluginID, 'Submit Order')) {
+			
+			$controller->Session->setFlash(__d('web_shop', 'You are not logged in'), 'default', array(
+								'class' => 'flash_failure'));
+			
 			$controller->redirect($url.'/webshop/cart');
 		}
 		
@@ -244,7 +254,8 @@ class WebShopComponent extends Component {
 		$controller->loadModel('WebshopProduct');
 
 		//CREATE order on DB
-		$controller->WebshopOrder->set(array('customer_id' => '4',
+		$user = $controller->Auth->user();
+		$controller->WebshopOrder->set(array('customer_id' => $user['id'],
 											 'status' => '0'
 		));
 		$controller->WebshopOrder->save();
@@ -269,7 +280,10 @@ class WebShopComponent extends Component {
 		$controller->WebshopPosition->saveMany($pos_data, array('validate' => 'false'));
 		
 		//SEND mail
-		$this->BeeEmail->sendHtmlEmail($to = $this->Config->getValue('email'), $subject = 'DualonCMS: New Order', $viewVars = array('user' => $controller->Auth->user(), 'order' => $order, 'url' => 'localhost'/*env('SERVER_NAME')*/), $viewName = 'WebShop.order');
+		$mail = $this->Config->getValue('email');
+		
+		if(!empty($mail))
+			$this->BeeEmail->sendHtmlEmail($to = $mail, $subject = 'DualonCMS: New Order', $viewVars = array('user' => $controller->Auth->user(), 'order' => $order, 'url' => $this->Config->getValue('page_name')), $viewName = 'WebShop.order');
 		
 		//UNSET cart
 		$controller->Session->write('webshop_cart', null);

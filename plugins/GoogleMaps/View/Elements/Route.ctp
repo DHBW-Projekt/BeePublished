@@ -21,8 +21,8 @@
 
 <div id="directions">
     <?php
-	    echo $this->Form->create('location');
-	    echo $this->Form->input('address', array('label' => (__d("google_maps", 'Street').':'), 'style' => "width:100%"));
+	    echo $this->Form->create('location', array('url' => $url));
+	    echo $this->Form->input('address', array('label' => (__d("google_maps", 'Location').':'), 'style' => "width:100%"));
 	    echo $this->Form->end(__d("google_maps", "Calculate Route"));
     ?>
     <div id="routing"></div>

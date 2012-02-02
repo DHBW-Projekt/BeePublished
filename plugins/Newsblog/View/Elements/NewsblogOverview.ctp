@@ -1,4 +1,5 @@
 <?php
+	App::uses('Sanitize', 'Utility');
 	$DateTimeHelper = $this->Helpers->load('Time');
 	$this->Helpers->load('Slug');
 	$this->Helpers->load('BBCode');
@@ -8,6 +9,9 @@
 	$this->Html->script('/newsblog/js/showNews', false);
 	
 	$this->Html->css('/newsblog/css/showNews', null, array('inline' => false));
+	$this->Html->css('/css/jQueryPagination', null, array('inline' => false));
+	
+	$data = Sanitize::clean($data);
 	
 	if($this->Session->check('Newsblog.itemsPerPage')){
 		$itemsPerPage = $this->Session->read('Newsblog.itemsPerPage');
@@ -25,6 +29,9 @@
 	$allowedActions = $this->PermissionValidation->getPermissions($pluginId);
 	$deleteAllowed = $allowedActions['Delete'];
 	$editAllowed = $allowedActions['Edit'];
+	
+	$dateFormat = __('m-d-Y');
+	$this->Js->set('dateFormatForPicker', $dateFormat);
 ?>
 <?php 
 	if($data['newsblogTitle'] != null || $data['newsblogTitle'] != ''){
@@ -54,7 +61,6 @@
 	echo $this->Form->input(null, array(
 		'options' => array(150 => 150, 200 => 200, 250 => 250, 300 => 300, 350 => 350),
 		'name' => 'previewTextLength',
-		'empty' => '(choose one)',
 		'label' => __d('newsblog', 'Preview text length:'),
 		'default' => 150,
 		'value' => $shorttextLength,
@@ -82,6 +88,7 @@ if( count($data['publishedNewsEntries']) > 0){
 			$substrEnd = $shorttextLength - 3;
 			$text = substr($text, 0, $substrEnd)."...";
 		}
+		
 		$createdOnDate = $DateTimeHelper->format('m-d-Y', $NewsEntry['NewsEntry']['createdOn']);
 		$createdOnTime = $DateTimeHelper->format('H:i', $NewsEntry['NewsEntry']['createdOn']);
 		$createdBy = $NewsEntry['Author']['username'];
@@ -93,7 +100,7 @@ if( count($data['publishedNewsEntries']) > 0){
 		
 		$modifiedString = __d('newsblog', 'modifiedstring');
 		if($NewsEntry['NewsEntry']['lastModifiedOn'] != null){
-			$modifiedOnDate = $DateTimeHelper->format('m-d-Y', $NewsEntry['NewsEntry']['lastModifiedOn']);
+			$modifiedOnDate = $DateTimeHelper->format($dateFormat, $NewsEntry['NewsEntry']['lastModifiedOn']);
 			$modifiedOnTime = $DateTimeHelper->format('H:i', $NewsEntry['NewsEntry']['lastModifiedOn']);
 			$modifiedString = str_replace(':-date-:', $modifiedOnDate, $modifiedString);
 			$modifiedString = str_replace(':-time-:', $modifiedOnTime, $modifiedString);
@@ -108,7 +115,7 @@ if( count($data['publishedNewsEntries']) > 0){
 			<?php }?>
 			<div class="newsblog_entry_info">
 				<?php 
-					if(isset($modifiedOnDate) & isset($modifiedOnTime)){
+					if($NewsEntry['NewsEntry']['lastModifiedOn'] != null){
 						echo $infoString."&nbsp;&nbsp;(".$modifiedString.")";
 					} else{
 						echo $infoString;
@@ -163,7 +170,7 @@ if( count($data['publishedNewsEntries']) > 0){
 
 </div>
 <?php
-if($this->PermissionValidation->getUserRole() < 6 && ($allowedActions['Write'] || $allowedActions['Publish'])){
+if($this->PermissionValidation->getUserRole() < 6 & ($allowedActions['Write'] || $allowedActions['Publish'])){
 	echo '<div class="plugin_administration">';
 		echo $this->Html->link($this->Html->image('tools_small.png'),array('plugin' => 'Newsblog', 'controller' => 'ShowNews', 'action' => 'admin', $data['contentId']), array('escape' => false));
 	echo '</div>';
