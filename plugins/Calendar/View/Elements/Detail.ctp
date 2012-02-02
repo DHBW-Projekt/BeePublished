@@ -1,4 +1,5 @@
 <?php
+App::uses('Sanitize', 'Utility');
 $this->Helpers->load('BBCode');
 ?>
 <div class="calendar_day_head">

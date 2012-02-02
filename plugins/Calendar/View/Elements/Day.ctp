@@ -1,4 +1,5 @@
 <?php
+App::uses('Sanitize', 'Utility');
 $date = date('Y-m-d', $StartTime);
 ?>
 <div class="calendar">

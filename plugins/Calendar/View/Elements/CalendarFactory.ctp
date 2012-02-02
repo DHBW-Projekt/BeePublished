@@ -1,4 +1,5 @@
 <?php
+App::uses('Sanitize', 'Utility');
 $days = array(__d('calendar', 'Sun'), __d('calendar', 'Mon'), __d('calendar', 'Tue'), __d('calendar', 'Wed'), __d('calendar', 'Thu'), __d('calendar', 'Fri'), __d('calendar', 'Sat'));
 for ($i = 0; $i < $FDOW; $i++) {
     array_push($days, array_shift($days));
