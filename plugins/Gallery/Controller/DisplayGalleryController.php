@@ -13,10 +13,13 @@ class DisplayGalleryController extends AppController {
 	}
 	
 	public function setGalleryAdminTab($contentId){
+		$currentlyassigned =  $this->ContentValueManager->getContentValues($contentId);
+		
 		$allGalleries = $this->Gallery->getAllGalleries($this);
 
 		$data = array(	'AllGalleries' => $allGalleries,
-						'ContentId' => $contentId
+						'ContentId' => $contentId,
+						'CurrGallery' => $currentlyassigned
 		);
 		
 		$this->set('data',$data);

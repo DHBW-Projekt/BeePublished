@@ -62,22 +62,27 @@ class ManageGalleriesController  extends GalleryAppController{
 		} else {
 			$this->loadModel('Gallery.GalleryEntry');
 			if (!empty($this->request->data)) {
-				
+				//check whether title picture isset
 				if($this->request->data['GalleryEntry']['gallery_picture_id'] == null){
 					
-				
-				//if(! array_key_exists('gallery_picture_id', $this->request->data)){
 					$this->Session->setFlash(__('Your Gallery was not saved. You have to assign a title picture'), 'default', array('class' => 'flash_failure'));
-					$this->redirect(array(	'action' => 'index', $contentId));
+					$this->redirect(array(	'action' => 'create', $contentId));
 				}else {
-					debug($this->request->data);
-					if($this->GalleryEntry->save($this->request->data)) {
-						$this->Session->setFlash(__('Your Gallery was saved.'), 'default', array('class' => 'flash_success'));
-						//$this->redirect(array('action' => 'index', $contentId));	
+					//check if parameters are set
+
+					if(!empty($this->request->data['GalleryEntry']['title']) || !empty($this->request->data['GalleryEntry']['description'])){
+						if($this->GalleryEntry->save($this->request->data)) {
+							
+							$this->Session->setFlash(__('Your Gallery was saved.'), 'default', array('class' => 'flash_success'));
+							$this->redirect(array('action' => 'index', $contentId));	
+						} else {
+							$this->Session->setFlash(__('Your Gallery was not saved.'), 'default', array('class' => 'flash_failure'));
+							$this->redirect(array(	'action' => 'index', $contentId));		
+						}	
 					} else {
-						$this->Session->setFlash(__('Your Gallery was not saved.'), 'default', array('class' => 'flash_failure'));
-						//$this->redirect(array(	'action' => 'index', $contentId));		
-					}
+						$this->Session->setFlash(__('Your Gallery was not saved. You have to assign a title and a description to your gallery.'), 'default', array('class' => 'flash_failure'));
+						$this->redirect(array(	'action' => 'create', $contentId));		
+					}//check data
 				}		
     		}//data empty
 		}// is post
