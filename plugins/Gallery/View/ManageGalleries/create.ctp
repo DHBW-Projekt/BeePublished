@@ -1,6 +1,6 @@
 <?php
 $this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
-echo $this->element('admin_menu_galleries',array("ContentId" => $data['ContentId']));
+echo $this->element('admin_menu',array("ContentId" => $contentId, "mContext" => $mContext));
 echo $this->Session->flash();
 
 
@@ -15,7 +15,7 @@ echo $this->Session->flash();
 
 		echo '<div class="galleryinfo">'.__('Create a new gallery to share the newest pictures with your audience.').'</div>';
 
-		echo $this->Form->create('GalleryEntry', array('url' => array('plugin' => 'Gallery','controller' => 'ManageGalleries','action' => 'create',$data['ContentId'])));
+		echo $this->Form->create('GalleryEntry', array('url' => array('plugin' => 'Gallery','controller' => 'ManageGalleries','action' => 'create',$ContentId,$mContext)));
 
 
 		echo $this->Form->input('GalleryEntry.title');

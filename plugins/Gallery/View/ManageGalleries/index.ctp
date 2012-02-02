@@ -1,7 +1,7 @@
 <?php
 $this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
 
-echo $this->element('admin_menu_galleries',array("ContentId" => $data['ContentId']));
+echo $this->element('admin_menu',array("ContentId" => $ContentId, "mContext" => $mContext));
 	
 	$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create');
 	$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'edit');
@@ -11,6 +11,29 @@ echo $this->element('admin_menu_galleries',array("ContentId" => $data['ContentId
 echo "<h1> ".__('Manage your galleries')."</h1>";
 echo $this->Session->flash('GalleryNotification');
 echo '<div class="galleryinfo">'.__('Here you can edit, delete your galleries or assign pictures to them.').'</div>';
+
+if($createAllowed) {
+
+	echo "<h1> ".__('Create a new gallery')."</h1>";
+
+
+	echo '<div class="galleryinfo">'.__('Create a new gallery to share the newest pictures with your audience.').'</div>';
+
+	echo $this->Form->create('GalleryEntry', array('url' => array('plugin' => 'Gallery','controller' => 'ManageGalleries','action' => 'create',$ContentId,$mContext)));
+
+
+	echo $this->Form->input('GalleryEntry.title');
+	echo $this->Form->input('GalleryEntry.description', array('div' => 'mandatory', 'type' => 'textarea', 'label' => (__('Description:')))).'<br />';
+
+	echo $this->Form->label(__('Title picture:'));
+
+	echo $this->Form->select('GalleryEntry.gallery_picture_id', $pictures);
+
+	echo $this->Form->submit('Submit');
+	echo $this->Form->end();
+}
+
+echo '<h1>'.__("Existing galleries").'</h1>';
 
 echo '<table>';
 	echo '<thead>';
@@ -28,7 +51,7 @@ echo '<table>';
 				'url' => array(
 				'plugin' => 'Gallery',
 				'controller' => 'ManageGalleries',
-				'action' => 'deleteSelected',$data['ContentId']),
+				'action' => 'deleteSelected',$ContentId,$mContext),
 				'onsubmit'=>'return confirm(\''.__('Do you really want to delete the selected galleries?').'\');'));
 foreach ($data['AllGalleries'] as $gallery){
 	echo "<tr>";
@@ -47,11 +70,10 @@ foreach ($data['AllGalleries'] as $gallery){
 							array(
 								'plugin' => 'Gallery', 
 								'controller' => 'ManageGalleries', 
-								'action' => 'edit', $gallery['GalleryEntry']['id'],$data['ContentId']),
+								'action' => 'edit', $gallery['GalleryEntry']['id'],$ContentId,$mContext),
 							array(
 								'escape' => false, 
-								'title' => __('Edit Gallery')),
-								__('Do you really want to edit this Gallery?'));
+								'title' => __('Edit Gallery')));
 		};
 		echo '</td>';
 	
@@ -65,7 +87,7 @@ foreach ($data['AllGalleries'] as $gallery){
 							array(
 								'plugin' => 'Gallery', 
 								'controller' => 'ManageGalleries', 
-								'action' => 'delete',$gallery['GalleryEntry']['id'],$data['ContentId']),
+								'action' => 'delete',$gallery['GalleryEntry']['id'],$ContentId,$mContext),
 							array(
 								'escape' => false, 
 								'title' => __('Delete Gallery')),
@@ -75,7 +97,7 @@ foreach ($data['AllGalleries'] as $gallery){
 	
 		echo '<td>';
 			if($editAllowed){
-				echo $this->Html->image('add2.png',array('style' => 'float: left', 'width' => '20px', 'alt' => '[]Assign', 'url' => array('plugin' => 'Gallery', 'controller' => 'ManageGalleries', 'action' => 'assignImages',$gallery['GalleryEntry']['id'],$data['ContentId'])));
+				echo $this->Html->image('add2.png',array('style' => 'float: left', 'width' => '20px', 'alt' => '[]Assign', 'url' => array('plugin' => 'Gallery', 'controller' => 'ManageGalleries', 'action' => 'assignImages',$gallery['GalleryEntry']['id'],$ContentId,$mContext)));
 			}		
 		echo '</td>';
 		
