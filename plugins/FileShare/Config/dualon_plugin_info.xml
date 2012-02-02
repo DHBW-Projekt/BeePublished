@@ -10,11 +10,11 @@
                 <action>upload</action>
             </permission>
             <permission>
-                <role>Registered</role>
+                <role>Super-Administrator</role>
                 <action>delete</action>
             </permission>
             <permission>
-                <role>guest</role>
+                <role>Guest</role>
                 <action>download</action>
             </permission>
         </permissions>
