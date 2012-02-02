@@ -19,7 +19,7 @@ class ManageImagesController  extends GalleryAppController{
 	 * Need to pass the content id -> user could switch back to the set set image tab
 	 * @param int $contentId
 	 */
-	public function index($contentId){
+	public function index($contentId, $menue_context){
 		
 		$allPics = $this->GalleryPictureComp->getAllPictures($this);
 		
@@ -27,6 +27,7 @@ class ManageImagesController  extends GalleryAppController{
 						'ContentId' => $contentId );
 		
 		$this->set('data',$data);
+		$this->set('mContext',$menue_context);
 	}
 	
 	
@@ -42,7 +43,7 @@ class ManageImagesController  extends GalleryAppController{
         return false;  
     }  
     
-	public function uploadImage($contentId){
+	public function uploadImage($contentId, $menue_context){
 				
 		// test if image is selected
 		if($this->data['addImage']['File']['size'] == 0){
@@ -81,7 +82,7 @@ class ManageImagesController  extends GalleryAppController{
 				}
 			}
 		}
-	
+		$this->set('mContext',$menue_context);
 		$this->redirect($this->referer());
 	}
 	
@@ -89,11 +90,11 @@ class ManageImagesController  extends GalleryAppController{
 	 * Method is called from the add images form
 	 * transforms the form input for internal procession
 	 */
-	public function uploadImages($contentId){
+	public function uploadImages($contentId, $menue_context){
 		
 		$pluginId = $this->getPluginId();
 		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
-
+		$this->set('mContext',$menue_context);
 		if(count($this->params['form']['files']['size']) == 1 && $this->params['form']['files']['size'][0] == 0){
 			$this->Session->setFlash('No file selected');
 			$this->redirect($this->referer());
@@ -129,6 +130,7 @@ class ManageImagesController  extends GalleryAppController{
 				
 			}//filetype
 			}//filename
+			
 		}
 		
 		
@@ -137,13 +139,14 @@ class ManageImagesController  extends GalleryAppController{
 		
 	}
 	
-	public function create($contentId){
+	public function create($contentId, $menue_context){
 		
 		$pluginId = $this->getPluginId();
 		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
 		
 		
 		$data = array('ContentId' => $contentId );
+		$this->set('mContext',$menue_context);
 		$this->set('data',$data);
 	}
 	
@@ -192,17 +195,18 @@ class ManageImagesController  extends GalleryAppController{
 		return true;
 	}
 	
-	public function delete($pictureId, $contentId){
+	public function delete($pictureId, $contentId, $menue_context){
 		
 		$pluginId = $this->getPluginId();
 		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete', true);
 		
 		$this->deletePictureInternal($pictureId);
 		$this->Session->setFlash('Image deleted');
+		$this->set('mContext',$menue_context);
 		$this->redirect($this->referer());
 	}
 	
-	public function deleteSelected($contentId){
+	public function deleteSelected($contentId,  $menue_context){
 		$pluginId = $this->getPluginId();
 		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete', true);
 		
@@ -213,6 +217,7 @@ class ManageImagesController  extends GalleryAppController{
 			}
 		}
 		$this->Session->setFlash('Images deleted');
+		$this->set('mContext',$menue_context);
 		$this->redirect($this->referer());
 	}
 	
@@ -220,7 +225,7 @@ class ManageImagesController  extends GalleryAppController{
 		$picture = $this->GalleryPictureComp->delete($this,$pictureID);
 	}
 
-	public function edit($pictureId,$contentId){
+	public function edit($pictureId,$contentId,$menue_context){
 		
 		$pluginId = $this->getPluginId();
 		$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'edit', true);
@@ -231,12 +236,14 @@ class ManageImagesController  extends GalleryAppController{
 		$data = array(	'Picture' => $picture,
 						'ContentId' => $contentId );
 		
-		$this->set('data',$data);		
+		$this->set('data',$data);
+		$this->set('mContext',$menue_context);		
 	}
 	
-	public function save($contentId){
+	public function save($contentId, $menue_context){
 		$this->GalleryPictureComp->save($this,$this->data['GalleryPicture']);
 		$this->redirect(array('action' => 'index', $contentId));
+			$this->set('mContext',$menue_context);		
 	}
 	
 }

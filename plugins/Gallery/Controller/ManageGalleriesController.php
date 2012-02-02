@@ -18,7 +18,7 @@ class ManageGalleriesController  extends GalleryAppController{
 	 * Index function, to list all available Galleries
 	 * @param int $contentId
 	 */
-	public function index($contentId){
+	public function index($contentId, $menue_context){
 			
 				
 		$allGalls= $this->Gallery->getAllGalleries($this);
@@ -35,12 +35,13 @@ class ManageGalleriesController  extends GalleryAppController{
 		
 		$this->set('data',$data);
 		$this->set('pictures', $pic_array);
+		$this->set('mContext',$menue_context);
 	}	
 	/**
 	 * Function related the create View (to create a new Gallery)
 	 * @param int $contentId
 	 */
-	public function create($contentId){
+	public function create($contentId, $menue_context){
 
 		$pluginId = $this->getPluginId();
 		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
@@ -58,7 +59,7 @@ class ManageGalleriesController  extends GalleryAppController{
 		
 		$this->set('data',$data);
 		$this->set('pictures', $pic_array);
-		
+		$this->set('mContext',$menue_context);
 		} else {
 			$this->loadModel('Gallery.GalleryEntry');
 			if (!empty($this->request->data)) {
@@ -93,13 +94,14 @@ class ManageGalleriesController  extends GalleryAppController{
 	 * @param int $galleryId
 	 * @param int $contentId
 	 */
-	public function delete($galleryId, $contentId){
-		
-		//test
+	public function delete($galleryId, $contentId, $menue_context){
+	
+	
 		$pluginId = $this->getPluginId();
 		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete', true);
 		
 		$picture = $this->Gallery->delete($this,$galleryId);
+		$this->set('mContext',$menue_context);
 		$this->redirect($this->referer());
 	}
 	
@@ -107,10 +109,11 @@ class ManageGalleriesController  extends GalleryAppController{
 	 * deletes a List of Galleries
 	 * @param int $contentId
 	 */
-	public function deleteSelected($contentId){
+	public function deleteSelected($contentId, $menue_context){
 		$pluginId = $this->getPluginId();
 		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete', true);
 		$deleteditems = -1;
+		$this->set('mContext',$menue_context);
 		if ($this->request->is('post')){
 		
 			$galleries=  $this->Gallery->getAllGalleries($this);
@@ -131,8 +134,10 @@ class ManageGalleriesController  extends GalleryAppController{
 			} else {
 					$this->Session->setFlash(__('Nothing selected.'), 'default', array('class' => 'flash_failure'),'GalleryNotification');
 			}
+			
 			$this->redirect($this->referer());
 		}
+	
 	}//function delete selected
 	
 	/**
@@ -140,7 +145,7 @@ class ManageGalleriesController  extends GalleryAppController{
 	 * @param id $galleryId
 	 * @param id $contentId
 	 */
-	public function edit($galleryId,$contentId){
+	public function edit($galleryId,$contentId, $menue_context){
 		$pluginId = $this->getPluginId();
 		$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'edit', true);
 		
@@ -159,7 +164,8 @@ class ManageGalleriesController  extends GalleryAppController{
 		
 		$gallery = $this->Gallery->getGallery($this,$galleryId);
 		$this->set('data',$gallery);
-		$this->set('ContentId',$contentId);		
+		$this->set('ContentId',$contentId);	
+		$this->set('mContext',$menue_context);	
 	}
 	
 	/**
@@ -167,7 +173,7 @@ class ManageGalleriesController  extends GalleryAppController{
 	 * @param int $galleryId
 	 * @param int $contentId
 	 */
-	public function assignImages($galleryId,$contentId){
+	public function assignImages($galleryId,$contentId, $menue_context){
 			$pluginId = $this->getPluginId();
 			$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete', true);
 		
@@ -175,6 +181,7 @@ class ManageGalleriesController  extends GalleryAppController{
 			$this->set('gallery_pictures',$this->GalleryPictureComp->getAllPicturesGallery($this, $galleryId));
 			$this->set('galleryId', $galleryId);
 			$this->set('ContentId',$contentId);
+			$this->set('mContext',$menue_context);
 		
 	}
 	
@@ -183,7 +190,7 @@ class ManageGalleriesController  extends GalleryAppController{
 	 * @param int $galleryId
 	 * @param int $pictureId
 	 */
-	public function assignImage($galleryId,$pictureId){
+	public function assignImage($galleryId,$pictureId, $menue_context){
 		$picture = $this->GalleryPictureComp->getPicture($this, $pictureId);
 		
 		if($picture['gallery_entry_id'] == null){
@@ -193,6 +200,7 @@ class ManageGalleriesController  extends GalleryAppController{
 		}
 
 		$this->GalleryPictureComp->save($this,$picture);
+		$this->set('mContext',$menue_context);
 		$this->redirect($this->referer());
 	}
 	
@@ -201,12 +209,13 @@ class ManageGalleriesController  extends GalleryAppController{
 	 * @param int $galleryId
 	 * @param int $pictureId
 	 */
-	public function unassignImage($galleryId,$pictureId){
+	public function unassignImage($galleryId,$pictureId,$menue_context){
 		$picture = $this->GalleryPictureComp->getPicture($this, $pictureId);
 		
 		$picture['gallery_entry_id'] = null;
 		
 		$this->GalleryPictureComp->save($this,$picture);
+		$this->set('mContext',$menue_context);
 		$this->redirect($this->referer());
 	}
 
