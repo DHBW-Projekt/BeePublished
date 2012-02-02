@@ -13,8 +13,9 @@ echo '<table>';
 	echo '<thead>';
 		echo '<tr>';
 			echo '<th>'.__('Id').'</th>';
+			echo '<th>'.__('Preview').'</th>';
 			echo '<th>'.__('Title').'</th>';
-			echo '<th></th>';
+			echo '<th>'.__('Assigned').'</th>';
 		echo '</tr>';
 	echo '</thead>';
 	echo '<tbody>';
@@ -22,6 +23,10 @@ echo '<table>';
 foreach ($data['AllPictures'] as $picture){
 	echo '<tr class="Gallery_row">';
 		echo "<td>".$picture['id']."</td>";
+		
+		
+		echo '<td>'.'<img src="'.$this->webroot.$picture['thumb'].'" width="35px" /></td>';
+		
 		echo '<td>'.$picture['title']."</td>";
 		echo "<td>";
 		if ($picture['id'] == $curr_picid){
