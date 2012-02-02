@@ -1,4 +1,5 @@
 .newsblogtitle{
+	font-size: 24px;
 	font-style: italic;
 	padding:5px;
 }
@@ -35,11 +36,12 @@
 }
 
 .newsblog_entry_title{
-	font-size: 1.85em !important;
+	font-size: 20px !important;
 	margin-top: 5px !important;
 }
 
 .newsblog_entry_subtitle{
+	font-size: 16px !important;
 	font-style:italic;
 }
 
@@ -74,15 +76,31 @@
 	position:relative;
 }
 
-#PageDisplayForm div{
+.newsblogreadconfig_form div{
 	float:left;
-	display: inline;
-	padding: 5px;
+	margin-right: 5px;
+	height: 20px !important;
+	line-height:20px !important;
+	vertical-align: middle;
 	font-size: 12px;
+	width: auto;
 }
 
+.newsblogreadconfig_form div label{
+	width: auto;
+	height: 20px !important;
+	line-height: 20px !important;
+}
+
+.newsblogreadconfig_form div input{
+	font-size: 12px !important;
+	width: auto;
+}
+
+
 .newsblogreadconfig_select{
-	width: 70px;
+	width: auto;
+	height: 20px;
 }
 
 .newsblogreadconfig_items{
@@ -95,34 +113,4 @@
 
 .newsblog_entry_social{
 	margin-bottom:5px;
-}
-
-
-
-.pagination {
-	font-size:10px;
-	list-style:none;
-	margin:0px;
-	padding:0px;
-}
-.pagination li{
-	float:left;
-	margin:3px;
-}
-.pagination li a{
-	display:block;
-	padding:3px 5px;
-	color:#fff;
-	background-color:#3292DD;
-	text-decoration:none;
-}
-.pagination li a.active {
-	border:1px solid #000;
-	color:#000;
-	background-color:#fff;
-}
-.pagination li a.inactive {
-	background-color:#eee;
-	color:#777;
-	border:1px solid #ccc;
 }

@@ -9,15 +9,15 @@ $this->Helpers->load('BBCode');
 	
 		<div class='guestbook_post border-color1'>		
 			<div class='guestbook_post_author'>
-				<?php echo $GuestbookPost['GuestbookPost']['author'] . __d('Guestbook', ' on ') . $this->Time->format('d.m.Y', $GuestbookPost['GuestbookPost']['created']) . __d('Guestbook', ' at ') . $this->Time->format('H:i:s',$GuestbookPost['GuestbookPost']['created'])?>
+				<?php echo Sanitize::html($GuestbookPost['GuestbookPost']['author']) . __d('Guestbook', ' on ') . $this->Time->format('d.m.Y', $GuestbookPost['GuestbookPost']['created']) . __d('Guestbook', ' at ') . $this->Time->format('H:i:s',$GuestbookPost['GuestbookPost']['created'])?>
 			</div>				
 			<div class='guestbook_post_title'>
-				<?php echo $GuestbookPost['GuestbookPost']['title']?>
+				<?php echo Sanitize::html($GuestbookPost['GuestbookPost']['title']);?>
 				<?php // creates release and delete links for admins/editors						
 					if ($this->PermissionValidation->actionAllowed($pluginId, 'delete')) {
-						echo $this->Form->postLink($this->Html->image('/img/delete.png', array( 'alt' => __d('Guestbook','Delete post'))),
-							array('plugin' => 'Guestbook', 'controller' => 'GuestbookPost', 'action' => 'delete', $GuestbookPost['GuestbookPost']['id']),
-							array('escape' => false, 'title' => __d('Guestbook','Delete post')),
+						echo $this->Form->postLink($this->Html->image('/img/delete.png', array( 'alt' => __d('Guestbook','Delete'))),
+							array('plugin' => 'Guestbook', 'controller' => 'GuestbookPost', 'action' => 'delete', $contentId, $GuestbookPost['GuestbookPost']['id']),
+							array('escape' => false, 'title' => __d('Guestbook','Delete')),
 							__d('Guestbook','Do you really want to delete this post?'));
 					}
 				?>	

@@ -26,7 +26,7 @@ class FoodMenuCategoriesFoodMenuEntriesController extends FoodMenuAppController 
     	$this->set('categoryID', $categoryID);
     }
     
-    function add($entryName, $entryID, $categoryID) {
+	function add($entryID, $categoryID) {
     	$pluginId = $this->getPluginId();
 		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
 	
@@ -34,26 +34,30 @@ class FoodMenuCategoriesFoodMenuEntriesController extends FoodMenuAppController 
 		$data['FoodMenuCategoriesFoodMenuEntry']['food_menu_category_id'] = $categoryID;
 		$data['FoodMenuCategoriesFoodMenuEntry']['food_menu_entry_id'] = $entryID;
 			if ($this->FoodMenuCategoriesFoodMenuEntry->save($data)) {
-                $this->Session->setFlash(__('The entry has been added.'));
+                $this->Session->setFlash(__d('food_menu', 'The entry has been added.'));
                 $this->redirect($this->referer());
             } else {
-                $this->Session->setFlash(__('The entry couldn\'t be added.'));
+                $this->Session->setFlash(__d('food_menu', 'The entry couldn\'t be added.'));
+                $this->redirect($this->referer());
+            }//else
+    }
+
+    function delete($entryId, $categoryId) {
+		$pluginId = $this->getPluginId();
+		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete', true);
+		
+		$joinID = $this->FoodMenuCategoriesFoodMenuEntry->find('list', array('conditions' => array('food_menu_category_id' => $categoryId, 'food_menu_entry_id' => $entryId)));
+    	
+    		if ($this->FoodMenuCategoriesFoodMenuEntry->delete($joinID)) {
+                $this->Session->setFlash(__d('food_menu', 'The entry has been removed from the category.'));
+                $this->redirect($this->referer());
+            } else {
+                $this->Session->setFlash(__d('food_menu', 'The entry couldn\'t be removed.'));
                 $this->redirect($this->referer());
             }//else
     }
     
-    function delete($joinID) {
-    	$pluginId = $this->getPluginId();
-		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete', true);
-    		if ($this->FoodMenuCategoriesFoodMenuEntry->delete($joinID)) {
-                $this->Session->setFlash(__('The entry has been removed from the category.'));
-                $this->redirect($this->referer());
-            } else {
-                $this->Session->setFlash(__('The entry couldn\'t be removed.'));
-                $this->redirect($this->referer());
-            }//else
-    	
-    }
+    
 }
 
 ?>

@@ -1,9 +1,12 @@
 <?php
 
+App::uses('Sanitize', 'Utility');
+App::import('Vendor','recaptcha/recaptchalib');
+
 class ApplicationMembershipComponent extends Component {
 	
 	public $uses = array('Sanitize');
-	public $components = array('BeeEmail', 'PermissionValidation');
+	public $components = array('BeeEmail', 'PermissionValidation', 'Config');
 	
    /**
 	* Method to transfer data from plugin to CMS.
@@ -44,6 +47,7 @@ class ApplicationMembershipComponent extends Component {
 		
 		//Attributes
 		$data_error = false;
+		$error_message = null;
 		
 		//LOAD model
 		$controller->loadModel("ApplicationMembership.ApplicationMembership");
@@ -51,20 +55,54 @@ class ApplicationMembershipComponent extends Component {
 		//CHECK request and data
 		if (!$controller->request->is('post') || !isset($controller->data['ApplicationMembership']))
 			$data_error = true;
-
+	
+		//SANITIZE
+		$controller->data =  Sanitize::clean($controller->data);
+		
 		//VALIDATE data
 		if(!$data_error){
 			$controller->ApplicationMembership->set($controller->data['ApplicationMembership']);
 		
-			if(!$controller->ApplicationMembership->validates())
+			if(!$controller->ApplicationMembership->validates()){
 				$data_error = true;
+				$error_message = __d('application_membership', 'Please fill out all mandatory fields.');
+			}
+		}
+		
+		//CAPTCHA
+		if(!$data_error){
+			//GET captcha
+			$privatekey = "6LfzYcwSAAAAAEH-Nr-u6qaFaNdIc6h9nlbm0i76";
+			$resp = recaptcha_check_answer( $privatekey,
+											$_SERVER["REMOTE_ADDR"],
+											$controller->data['recaptcha_challenge_field'],
+											$controller->data['recaptcha_response_field']
+			);
+		
+			//VALIDATE CAPTCHA
+			if(!$resp->is_valid){
+				$error_message = __d('application_membership', 'Please fill out the CAPTCHA field.');
+				$data_error = true;
+			}
+		}
+			
+		//VALIDATE mail
+		if(!$data_error){	
+			//GET recipient
+			$mailaddress = $this->Config->getValue('email');
+					
+			//VALIDATE recipient
+			if (empty ($mailaddress)){
+				$error_message = __d('application_membership', 'An error occurred, your request could not be sent. Please contact an administrator.');
+				$data_error = true;
+			}
 		}
 		
 		//SEND email
 		if(!$data_error){
-			$this->BeeEmail->sendHtmlEmail($to = 'maximilian.stueber@me.com',
+			$this->BeeEmail->sendHtmlEmail($to = $mailaddress,
 			$subject = 'New Application for Membership',
-			$viewVars = array('data' => $controller->data['ApplicationMembership'], 'url' => 'localhost'),
+			$viewVars = array('data' => $controller->data['ApplicationMembership'], 'url' => $this->Config->getValue('page_name')),
 			$viewName = 'ApplicationMembership.application');
 		}
 		 
@@ -75,9 +113,9 @@ class ApplicationMembershipComponent extends Component {
 
 		//PRINT error messages
 		if(!$data_error)
-			$controller->Session->setFlash('Thank you for your interest. Your request has been sent.');
+			$controller->Session->setFlash(__d('application_membership', 'Thank you for your interest. Your request has been sent.'));
 		else
-			$controller->Session->setFlash('Please fill out all mandatory fields.', 'default', array(
+			$controller->Session->setFlash($error_message, 'default', array(
 						'class' => 'flash_failure'));
 		
 		//RETURN DATA

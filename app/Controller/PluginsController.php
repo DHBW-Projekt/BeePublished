@@ -28,7 +28,20 @@ class PluginsController extends AppController
             }
             $installed[$idx] = $plugin;
         }
-        $available = $this->CMSPlugin->getPluginList();
+        $allPlugins = $this->CMSPlugin->getPluginList();
+       	$available = array();
+        foreach($allPlugins as $idx => $av_Plugin){
+        	$found = 0;
+        	foreach($installed as $in_Plugin){
+        		if ($in_Plugin['Plugin']['name'] == $av_Plugin['name']){
+        			$found = 1;
+        			break;
+        		}
+        	}
+        	if ($found == 0){
+        		$available[$idx] = $av_Plugin;
+        	}
+        }
         $this->set('installed', $installed);
         $this->set('available', $available);
         $this->set('systemPage', false);
@@ -70,7 +83,7 @@ class PluginsController extends AppController
             $existingPermissions[] = $permission['Permission']['action'];
         }
 
-        if ($permissions != null) {
+        if ($permissions != null && array_key_exists('permission', $permissions)) {
             foreach ($permissions['permission'] as $permission) {
                 if (in_array($permission['action'], $existingPermissions)) {
                     continue;

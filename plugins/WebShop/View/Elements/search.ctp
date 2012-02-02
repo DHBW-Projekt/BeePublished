@@ -37,7 +37,7 @@
 	foreach ((!isset($data['search'])) ? array() : $data['search'] as $product){
 		echo '<li>';
 		
-		echo $this->Html->image('/WebShop/img/products/'.$product['WebshopProduct']['picture'], array('url' => $url.'/webshop/view/'.$product['WebshopProduct']['id'], 'escape' => False));
+		echo $this->Html->image($product['WebshopProduct']['picturePath'].$product['WebshopProduct']['picture'], array('url' => $url.'/webshop/view/'.$product['WebshopProduct']['id'], 'escape' => False));
 	
 		echo '<h3>';
 		echo $this->Html->link($product['WebshopProduct']['name'], $url.'/webshop/view/'.$product['WebshopProduct']['id']);
