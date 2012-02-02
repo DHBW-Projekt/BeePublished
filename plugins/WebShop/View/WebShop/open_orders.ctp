@@ -65,8 +65,15 @@
 							echo '</tr>';
 						}
 						
+						//SET currency
+						$currency = 'EUR';
+						
+						if (isset($position['Product']['WebshopProduct']['currency'])){
+							$currency = $position['Product']['WebshopProduct']['currency'];
+						}
+						
 						echo '<tr>';
-						echo '<td style="text-align: right; padding-top:15px" colspan="4"><strong>'.__d("web_shop", 'Subtotal').': '.number_format($totalPrice, 2, ',', '.').' '.$position['Product']['WebshopProduct']['currency'].'</strong></td>';
+						echo '<td style="text-align: right; padding-top:15px" colspan="4"><strong>'.__d("web_shop", 'Subtotal').': '.number_format($totalPrice, 2, ',', '.').' '.$currency.'</strong></td>';
 						echo '</tr>';
 						echo '</table>';
 					echo '</td>';

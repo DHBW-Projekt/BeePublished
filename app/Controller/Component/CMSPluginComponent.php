@@ -44,6 +44,9 @@ class CMSPluginComponent extends Component
             if ($permissions == "") {
                 return array();
             }
+            if (!array_key_exists('permission', $permissions)){
+            	return array();
+            }
             if (array_key_exists('action', $permissions['permission'])) {
                 $permissionsArray = array();
                 $permissionsArray['permission'][0]['role'] = $permissions['permission']['role'];

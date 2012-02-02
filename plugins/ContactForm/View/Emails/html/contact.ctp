@@ -24,7 +24,7 @@
 	</div><br>
 	<div style = "margin-bottom: 10px">
 		<?php echo __d('contact_form', 'Yours sincerely,'); ?><br>
-		<?php echo '>>Platzhalter<<'; ?><br>
+		<?php echo $url; ?><br>
 	</div>
 	<hr style = "color: grey">
 	<i style = "margin-bottom: 10px; color: grey; font-size: 12px"><?php echo __d('contact_form', 'Information: Contact requests are automatically sent to the e-mail address in your general configurations. To change the recipient of contact requests, please set a new e-mail address in your general configurations in BeePublished.') ?></i>

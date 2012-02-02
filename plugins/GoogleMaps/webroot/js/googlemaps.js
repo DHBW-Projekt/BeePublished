@@ -1,17 +1,21 @@
 var lock = false;
 
 function initializeGoogleMaps(panel) {
-    var latlng = new google.maps.LatLng(0, 0);
-
-    var myOptions = {
-        zoom:15,
-        center: latlng,
-        mapTypeId:google.maps.MapTypeId.ROADMAP
-    };
-    
-    if (!lock) {
-    	map = new google.maps.Map(document.getElementById(panel), myOptions);
-    }
+	try {
+		var latlng = new google.maps.LatLng(0, 0);
+		
+	    var myOptions = {
+	        zoom:15,
+	        center: latlng,
+	        mapTypeId:google.maps.MapTypeId.ROADMAP
+	    };
+	  
+	    if (!lock) {
+	    	map = new google.maps.Map(document.getElementById(panel), myOptions);
+	    }
+	} catch(e) {
+	    window.location.reload();
+	}
 }
 
 function showLocation(panel, home) {
