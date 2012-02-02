@@ -13,32 +13,40 @@ echo '<div id="subscription">';
 	echo $data['text'];
 	echo '<br><br>';
 	if (!($user)){	
-		echo '<div class = "subscription_form">';
-		echo $this->Form->create('Subscription',array(
-			'url' => array(
-				'plugin' => 'Newsletter',
-				'controller' => 'Subscription',
-				'action' => 'guestUnSubscribe')));
-		echo $this->Form->input('NewsletterRecipient.email', array('label' => __d('newsletter','E-Mail:')));
-		echo $this->Html->div('validation_error',$validationErrors['email'][0]);
-   		echo $this->Form->end(__d('newsletter','(Un)subscribe'));
-   		echo $this->Session->flash('NewsletterRecipient');
+		echo '<div class="subscription_form">';
+			echo $this->Form->create('Subscription',array(
+				'url' => array(
+					'plugin' => 'Newsletter',
+					'controller' => 'Subscription',
+					'action' => 'guestUnSubscribe')));
+			echo $this->Form->input('NewsletterRecipient.email', array('label' => __d('newsletter','E-Mail:')));
+			echo $this->Html->div('validation_error',$validationErrors['email'][0]);
+			echo "</div>";
+   			echo $this->Form->end(__d('newsletter','(Un)subscribe'));
+   			echo $this->Session->flash('NewsletterRecipient');
+   		echo '</div>';
     } 
 	// 	if current user is registered
     else if ($user) {
 		// check for newsletter subscription
     	$userAsRecipient = $data['userAsRecipient'];
-    	echo $this->Form->create('UserSubscription', array(
-    		'url' => array(
-    			'plugin' => 'Newsletter',
-    			'controller' => 'Subscription',
-    			'action' => 'userUnSubscribe')));
+    	
 		if (isset($userAsRecipient)){
 			if ((isset($userAsRecipient['NewsletterRecipient']['active'])) && ($userAsRecipient['NewsletterRecipient']['active'] == 1)){
-				echo __d('newsletter','You subscribed to newsletter');
+				echo __d('newsletter','You subscribed to our newsletter');
+				echo $this->Form->create('UserSubscription', array(
+				    		'url' => array(
+				    			'plugin' => 'Newsletter',
+				    			'controller' => 'Subscription',
+				    			'action' => 'userUnSubscribe')));
 				echo $this->Form->end(__d('newsletter','Unsubscribe'));
 			} else {
 				echo __d('newsletter','You didn\'t subscribe to our newsletter');
+				echo $this->Form->create('UserSubscription', array(
+				    		'url' => array(
+				    			'plugin' => 'Newsletter',
+				    			'controller' => 'Subscription',
+				    			'action' => 'userUnSubscribe')));
 				echo $this->Form->end(__d('newsletter','Subscribe'));
 			};
 		};

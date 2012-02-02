@@ -6,6 +6,7 @@ $path = $this->Html->url("/language/".$lang.".txt", true);
 $this->Js->set('language_path', $path);
 
 echo $this->Html->css('/newsletter/css/newsletter', NULL, array('inline' => false));
+echo $this->Html->css('/css/jQueryDataTables.css', NULL, array('inline' => false));
 echo $this->element('admin_menu', array('contentID' => $contentID, 'pluginId' => $pluginId));
 
 echo '<h2>'.__d('newsletter','Create new newsletter:').'</h2>';
