@@ -1,5 +1,23 @@
 <?php
-
+/*
+ * This file is part of BeePublished which is based on CakePHP.
+ * BeePublished is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3
+ * of the License, or any later version.
+ * BeePublished is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public
+ * License along with BeePublished. If not, see
+ * http://www.gnu.org/licenses/.
+ *
+ * @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+ * @author Benedikt Steffan
+ * 
+ * @description Controller to create and destroy associations between menus and categories
+ */
 class FoodMenuMenusFoodMenuCategoriesController extends FoodMenuAppController {
 	
 	public $name = 'FoodMenuMenusFoodMenuCategories';
@@ -15,6 +33,7 @@ class FoodMenuMenusFoodMenuCategoriesController extends FoodMenuAppController {
         $this->set('pluginId', $pluginId);
     }
     
+    // put all associated and not associated categories to an array
     function index($menuName = null, $menuID = null) {
     	$categoriesUsedId = $this->FoodMenuMenusFoodMenuCategory->find('list', array('conditions' => array('FoodMenuMenusFoodMenuCategory.food_menu_menu_id' => $menuID), 'fields' => array('food_menu_category_id')));
     	$categoriesUsed = $this->FoodMenuMenusFoodMenuCategory->find('all', array('conditions' => array('FoodMenuMenusFoodMenuCategory.food_menu_menu_id' => $menuID)));
@@ -26,6 +45,7 @@ class FoodMenuMenusFoodMenuCategoriesController extends FoodMenuAppController {
     	$this->set('menuID', $menuID);
     }
     
+    // add a category to a menu
 	function add($categoryID, $menuID) {
     	$pluginId = $this->getPluginId();
 		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
@@ -42,6 +62,7 @@ class FoodMenuMenusFoodMenuCategoriesController extends FoodMenuAppController {
             }//else
     }
 
+    //delete association between a category and a menu
     function delete($categoryId, $menuId) {
 		$pluginId = $this->getPluginId();
 		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete', true);
