@@ -186,7 +186,7 @@ class NewsletterLettersController extends NewsletterAppController {
 					.env('SERVER_NAME')
 					."/unsubscribepermail/"
 					.$recipient['NewsletterRecipient']['email']
-					."' style='font-color: grey'>"
+					."' style='font-size: 9px'>"
 					.__d('newsletter', 'here')
 					."</a>.";
 			$this->BeeEmail->sendHtmlEmail(

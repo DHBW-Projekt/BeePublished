@@ -125,8 +125,6 @@ class SubscriptionController extends NewsletterAppController {
  	
  	public function unSubscribePerMail($email){
  		$this->set('email', $email);
- 		echo $email;
- 		
  		$this->set('menu', $this->Menu->buildMenu($this, NULL));
  		$this->set('adminMode', false);
  		$this->set('systemPage', true);
