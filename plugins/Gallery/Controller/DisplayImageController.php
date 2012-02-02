@@ -5,6 +5,7 @@ class DisplayImageController extends AppController {
 	
 	public function admin($contentId){		
 		$this->redirect(array('action' => 'setImageAdminTab', $contentId));
+		
 	}
 	
 	public function setImageAdminTab($contentId){
@@ -18,13 +19,14 @@ class DisplayImageController extends AppController {
 						'CurrPicture' => $currentlyassigned );
 		
 		$this->set('data',$data);
+		$this->set('mContext','singleImage');	
 	}
 	
-	public function setImage($contentId, $pictureId){
+	public function setImage($contentId, $pictureId, $menue_context){
 		$this->ContentValueManager->saveContentValues($contentId, array('pictureID' => $pictureId));
 		
 		$this->Session->setFlash('Image sucessfully assigned');
-		
+		$this->set('mContext',$menue_context);	
 		$this->redirect($this->referer());
 	}
 	

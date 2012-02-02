@@ -12,7 +12,7 @@ class DisplayGalleryController extends AppController {
 		$this->redirect(array('action' => 'setGalleryAdminTab', $contentId));
 	}
 	
-	public function setGalleryAdminTab($contentId){
+	public function setGalleryAdminTab($contentId, $menue_context){
 		$currentlyassigned =  $this->ContentValueManager->getContentValues($contentId);
 		
 		$allGalleries = $this->Gallery->getAllGalleries($this);
@@ -23,13 +23,14 @@ class DisplayGalleryController extends AppController {
 		);
 		
 		$this->set('data',$data);
+		$this->set('mContext','singleGallery');
 	}
 	
-	public function setGallery($contentId, $galleryId){
+	public function setGallery($contentId, $galleryId, $menue_context){
 		$this->ContentValueManager->saveContentValues($contentId, array('galleryID' => $galleryId));
 
 		$this->Session->setFlash('Gallery sucessfully assigned');
-		
+		$this->set('mContext','singleGallery');
 		$this->redirect($this->referer());
 	}
 	
