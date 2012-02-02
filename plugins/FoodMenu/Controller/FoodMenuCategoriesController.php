@@ -1,7 +1,7 @@
 <?php
-
+App::uses('Sanitize', 'Utility');
 class FoodMenuCategoriesController extends FoodMenuAppController {
-	
+
 	public $name = 'FoodMenuCategories';
 	public $uses = array('FoodMenu.FoodMenuMenu', 'FoodMenu.FoodMenuCategory', 'FoodMenu.FoodMenuEntry', 'FoodMenu.FoodMenuMenusFoodMenuCategory', 'FoodMenu.FoodMenuCategoriesFoodMenuEntry');
 	var $layout = 'overlay';
@@ -26,11 +26,11 @@ class FoodMenuCategoriesController extends FoodMenuAppController {
 		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
 		
 		if ($this->request->is('post') && isset($this->request->data['FoodMenuCategory'])) {			
-            if ($this->FoodMenuCategory->save($this->request->data)) {
-                $this->Session->setFlash(__d('food_menu', 'The category has been saved.'));
+            if ($this->FoodMenuCategory->save(Sanitize::clean($this->request->data, array('encode' => false)))) {
+                $this->Session->setFlash(__d('food_menu', 'The category has been saved.', array('class' => 'flash_success')));
                 $this->redirect($this->referer());
             } else {
-                $this->Session->setFlash(__d('food_menu', 'The category couldn\'t be saved.'));
+                $this->Session->setFlash(__d('food_menu', 'The category couldn\'t be saved.', array('class' => 'flash_failure')));
             }//else
         }//if
 	}//create
@@ -42,9 +42,9 @@ class FoodMenuCategoriesController extends FoodMenuAppController {
     	if ($this->request->is('post') && isset($this->request->data['FoodMenuCategory'])) {
         	// If the form data can be validated and saved...
         	$save = $this->request->data;
-        	if ($this->FoodMenuCategory->save($save)) {
+        	if ($this->FoodMenuCategory->save(Sanitize::clean($save, array('encode' => false)))) {
             	// Set a session flash message and redirect.
-            	$this->Session->setFlash(__d('food_menu', 'The category has been changed.'));
+            	$this->Session->setFlash(__d('food_menu', 'The category has been changed.', array('class' => 'flash_success')));
             	$this->set('mode', 'edit');
             	$this->redirect($this->referer());
             	//$this->render('/View/admin');
@@ -77,7 +77,7 @@ class FoodMenuCategoriesController extends FoodMenuAppController {
 			if($this->FoodMenuCategory->save($save)) {
 				$this->FoodMenuMenusFoodMenuCategory->deleteAll(array('FoodMenuMenusFoodMenuCategory.food_menu_category_id' => $id), false);
 				$this->FoodMenuCategoriesFoodMenuEntry->deleteAll(array('FoodMenuCategoriesFoodMenuEntry.food_menu_category_id' => $id), false);
-				$this->Session->setFlash(__d('food_menu', 'The category has been deleted.'));
+				$this->Session->setFlash(__d('food_menu', 'The category has been deleted.', array('class' => 'flash_success')));
 				$this->redirect($this->referer());
 			}//if
 		}//if
@@ -99,11 +99,15 @@ class FoodMenuCategoriesController extends FoodMenuAppController {
 						continue;
 					}//if
 					else {
-						$this->Session->setFlash(__d('food_menu', 'Errors occured during deleting.'));
+						$this->Session->setFlash(__d('food_menu', 'Errors occured during deleting.', array('class' => 'flash_failure')));
 						return;
 					}	
 			}
-			$this->Session->setFlash(__d('food_menu', 'The categories have been deleted.'));
+			$this->Session->setFlash(__d('food_menu', 'The categories have been deleted.', array('class' => 'flash_success')));
+			$this->redirect($this->referer());
+		}
+		else {
+			$this->Session->setFlash(__d('food_menu', 'No categories were selected.', array('class' => 'flash_failure')));
 			$this->redirect($this->referer());
 		}
 	}

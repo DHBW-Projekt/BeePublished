@@ -5,7 +5,7 @@ echo $this->element('admin_menu_galleries',array("ContentId" => $data['ContentId
 	$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete');
 	
  	if($createAllowed){
-		echo '<h1>'.__('Add Images').'</h1>';
+	
 
 		echo $this->Session->flash('Image saved');
 		echo $this->Session->flash('Image deleted');

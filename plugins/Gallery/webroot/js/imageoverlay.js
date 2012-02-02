@@ -30,14 +30,10 @@ $(document).ready(function() {
 
 	$(".fancybox").fancybox({
 		'titlePosition' : 'inside',
-		'type': 'iframe',
 		'titleFormat':  formatTitle,
 		prevEffect	: 'none',
 		nextEffect	: 'none',
 		helpers	: {
-			title	: {
-				type: 'outside'
-			},
 			overlay	: {
 				opacity : 0.8,
 				css : {

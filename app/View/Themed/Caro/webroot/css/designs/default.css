@@ -112,7 +112,7 @@ form>div {
     color: #cccccc;
 }
 
-input[type=text], input[type=password],input[type=number], textarea, select{
+input[type=text], input[type=password],input[type=number], textarea, select, input{
     border: 1px solid #DCDCDC;
     box-shadow: 0 0 2px #DDDDDD inset;
 	
@@ -204,4 +204,24 @@ td {
 
 tr:nth-child(2n) {
     background-color: #eee;
+}
+
+.color1 {
+	color: #5d5d5d;
+}
+
+.color2 {
+	color: #ffffff;
+}
+
+.color3 {
+	color: #000000;
+}
+
+.color4 {
+	color: #000000;
+}
+
+.color5 {
+	color: #000000;
 }

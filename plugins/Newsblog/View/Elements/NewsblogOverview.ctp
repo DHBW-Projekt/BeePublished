@@ -1,17 +1,18 @@
 <?php
 	App::uses('Sanitize', 'Utility');
+	$data = Sanitize::clean($data);
+	
+	//load helpers
 	$DateTimeHelper = $this->Helpers->load('Time');
 	$this->Helpers->load('Slug');
 	$this->Helpers->load('BBCode');
 	$this->Helpers->load('SocialNetwork');
 	
+	//bind javascript and css
 	$this->Html->script('jquery/jPaginate', false);
 	$this->Html->script('/newsblog/js/showNews', false);
-	
 	$this->Html->css('/newsblog/css/showNews', null, array('inline' => false));
 	$this->Html->css('/css/jQueryPagination', null, array('inline' => false));
-	
-	$data = Sanitize::clean($data);
 	
 	if($this->Session->check('Newsblog.itemsPerPage')){
 		$itemsPerPage = $this->Session->read('Newsblog.itemsPerPage');
@@ -26,6 +27,7 @@
 		$shorttextLength = 150;
 	}
 	
+	//get permissions
 	$allowedActions = $this->PermissionValidation->getPermissions($pluginId);
 	$deleteAllowed = $allowedActions['Delete'];
 	$editAllowed = $allowedActions['Edit'];
@@ -80,13 +82,13 @@ if( count($data['publishedNewsEntries']) > 0){
 	foreach($data['publishedNewsEntries'] as $NewsEntry):
 		$newsEntryId = $NewsEntry['NewsEntry']['id'];
 		$newsblogEntryDivId = "newsblogEntry".$newsEntryId;
-		$title = $NewsEntry['NewsEntry']['title'];
-		$subtitle = $NewsEntry['NewsEntry']['subtitle'];
+		$title = Sanitize::html($NewsEntry['NewsEntry']['title']);
+		$subtitle = Sanitize::html($NewsEntry['NewsEntry']['subtitle']);
 		$titleForUrl = $this->Slug->generateSlug($title);
-		$text = $this->BBCode->removeBBCode($NewsEntry['NewsEntry']['text']);
+		$text = $this->BBCode->removeBBCode(Sanitize::html($NewsEntry['NewsEntry']['text']));
 		if(strlen($text) > $shorttextLength){
 			$substrEnd = $shorttextLength - 3;
-			$text = substr($text, 0, $substrEnd)."...";
+			$text = Sanitize::html(substr($text, 0, $substrEnd)."...");
 		}
 		
 		$createdOnDate = $DateTimeHelper->format('m-d-Y', $NewsEntry['NewsEntry']['createdOn']);

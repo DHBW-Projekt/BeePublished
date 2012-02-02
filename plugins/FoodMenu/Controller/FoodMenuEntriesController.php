@@ -1,5 +1,24 @@
 <?php
-
+/*
+ * This file is part of BeePublished which is based on CakePHP.
+ * BeePublished is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3
+ * of the License, or any later version.
+ * BeePublished is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public
+ * License along with BeePublished. If not, see
+ * http://www.gnu.org/licenses/.
+ *
+ * @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+ * @author Benedikt Steffan
+ * 
+ * @description Controller to perform create, edit and delete of entries
+ */
+App::uses('Sanitize', 'Utility');
 class FoodMenuEntriesController extends FoodMenuAppController {
 	
 	public $name = 'FoodMenuEntries';
@@ -24,12 +43,14 @@ class FoodMenuEntriesController extends FoodMenuAppController {
 		$pluginId = $this->getPluginId();
 		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
 		
-			if ($this->request->is('post') && isset($this->request->data['FoodMenuEntry'])) {			
-            if ($this->FoodMenuEntry->save($this->request->data)) {
-                $this->Session->setFlash(__d('food_menu', 'The entry has been saved successfully.'));
+			if ($this->request->is('post') && isset($this->request->data['FoodMenuEntry'])) {
+			$save = $this->request->data;
+			$save['FoodMenuEntry']['price'] = str_replace(',', '.', $save['FoodMenuEntry']['price']);				
+            if ($this->FoodMenuEntry->save(Sanitize::clean($save, array('encode' => false)))) {
+                $this->Session->setFlash(__d('food_menu', 'The entry has been saved successfully.', array('class' => 'flash_success')));
                 $this->redirect($this->referer());
             } else {
-                $this->Session->setFlash(__d('food_menu', 'The entry couldn\'t be saved.'));
+                $this->Session->setFlash(__d('food_menu', 'The entry couldn\'t be saved.', array('class' => 'flash_failure')));
             }//else
         }//if
 	}//create
@@ -41,9 +62,10 @@ class FoodMenuEntriesController extends FoodMenuAppController {
     	if ($this->request->is('post') && isset($this->request->data['FoodMenuEntry'])) {
         	// If the form data can be validated and saved...
         	$save = $this->request->data;
-        	if ($this->FoodMenuEntry->save($save)) {
+        	$save['FoodMenuEntry']['price'] = str_replace(',', '.', $save['FoodMenuEntry']['price']);
+        	if ($this->FoodMenuEntry->save(Sanitize::clean($save, array('encode' => false)))) {
             	// Set a session flash message and redirect.
-            	$this->Session->setFlash((__d('food_menu', 'The entry has been changed successfully')));
+            	$this->Session->setFlash((__d('food_menu', 'The entry has been changed successfully', array('class' => 'flash_success'))));
             	$this->set('mode', 'edit');
             	$this->redirect($this->referer());
             	//$this->render('/View/admin');
@@ -76,7 +98,7 @@ class FoodMenuEntriesController extends FoodMenuAppController {
 			$save['FoodMenuEntry'] = $this->request->data['FoodMenuEntry'];
 			if($this->FoodMenuEntry->save($save)) {
 				$this->FoodMenuCategoriesFoodMenuEntry->deleteAll(array('FoodMenuCategoriesFoodMenuEntry.food_menu_entry_id' => $id), false);
-				$this->Session->setFlash(__d('food_menu', 'The entry has been deleted.'));
+				$this->Session->setFlash(__d('food_menu', 'The entry has been deleted.', array('class' => 'flash_success')));
 				$this->redirect($this->referer());
 			}//if
 		}//if	
@@ -98,11 +120,15 @@ class FoodMenuEntriesController extends FoodMenuAppController {
 						continue;
 					}//if
 					else {
-						$this->Session->setFlash(__d('food_menu', 'Errors occured during deleting.'));
+						$this->Session->setFlash(__d('food_menu', 'Errors occured during deleting.', array('class' => 'flash_failure')));
 						$this->redirect($this->referer());
 					}	
 			}
-			$this->Session->setFlash(__d('food_menu', 'The entries have been deleted.'));
+			$this->Session->setFlash(__d('food_menu', 'The entries have been deleted.', array('class' => 'flash_success')));
+			$this->redirect($this->referer());
+		}
+		else {
+			$this->Session->setFlash(__d('food_menu', 'No entries were selected.', array('class' => 'flash_failure')));
 			$this->redirect($this->referer());
 		}
 	}//deleteMultiple

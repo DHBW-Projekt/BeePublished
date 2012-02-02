@@ -18,6 +18,7 @@
  * 
  * @description This controller includes the logic for creating, editing, saving and deleting email templates.
  */
+
 App::uses('AppController', 'Controller');
 
 class EmailTemplatesController extends AppController

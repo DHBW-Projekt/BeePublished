@@ -1,10 +1,26 @@
 <?php
-App::uses('AppController', 'Controller');
-/**
- * Pages Controller
+/*
+ * This file is part of BeePublished which is based on CakePHP.
+ * BeePublished is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3
+ * of the License, or any later version.
+ * BeePublished is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public
+ * License along with BeePublished. If not, see
+ * http://www.gnu.org/licenses/.
  *
- * @property Page $Page
+ * @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+ * @author Christoph Krämer
+ *
+ * @description Controller to build pages to display for user
  */
+
+App::uses('AppController', 'Controller');
+
 class PagesController extends AppController
 {
 
@@ -23,48 +39,55 @@ class PagesController extends AppController
 
     function display()
     {
-        $path = explode('/', $this->request->url);
-        $this->set('adminMode', false);
-        if (sizeof($path) > 0 && $path[0] == 'admin') {
-            array_shift($path);
-            //Check Admin rights
-            if ($this->PermissionValidation->actionAllowed(null, 'AdminMode')) {
-                $this->set('adminMode', true);
-            } else {
-                $url = $this->request->webroot . implode('/', $path);
-                $this->redirect($url);
-            }
-        }
-        $url = implode('/', $path);
-
-        //Get page to display
-        $page = $this->findPage($url);
-
-        if (!$page) {
-            $this->set('elements', array());
-            $this->myUrl = null;
+        if (!$this->PermissionValidation->actionAllowed(null, 'AdminMode') && $this->Config->getValue('status') == 0) {
+            $this->set('offlineText', $this->Config->getValue('status_text'));
+            $this->set('menu', array());
+            $this->set('adminMode', false);
+            $this->render('offline');
         } else {
-            $pageUrl = $page['Page']['name'];
-            $this->myUrl = $pageUrl;
-            $url = '/' . $url;
-            $count = 1;
-            $diff = substr($url, strlen($pageUrl));
+            $path = explode('/', $this->request->url);
+            $this->set('adminMode', false);
+            if (sizeof($path) > 0 && $path[0] == 'admin') {
+                array_shift($path);
+                //Check Admin rights
+                if ($this->PermissionValidation->actionAllowed(null, 'AdminMode')) {
+                    $this->set('adminMode', true);
+                } else {
+                    $url = $this->request->webroot . implode('/', $path);
+                    $this->redirect($url);
+                }
+            }
+            $url = implode('/', $path);
 
-            if (substr($diff, 0, 1) == '/') {
-                $diff = substr($diff, 1);
+            //Get page to display
+            $page = $this->findPage($url);
+
+            if (!$page) {
+                $this->set('elements', array());
+                $this->myUrl = null;
+            } else {
+                $pageUrl = $page['Page']['name'];
+                $this->myUrl = $pageUrl;
+                $url = '/' . $url;
+                $count = 1;
+                $diff = substr($url, strlen($pageUrl));
+
+                if (substr($diff, 0, 1) == '/') {
+                    $diff = substr($diff, 1);
+                }
+
+                //Find elements for page to display
+                $elements = $this->setupPageElements($page['Container'], $diff, true);
+                ksort($elements);
+
+                //Output data
+                $this->set('elements', $elements);
             }
 
-            //Find elements for page to display
-            $elements = $this->setupPageElements($page['Container'], $diff, true);
-            ksort($elements);
-
-            //Output data
-            $this->set('elements', $elements);
+            $this->set('menu', $this->Menu->buildMenu($this, NULL));
+            $this->set('pageid', $page['Page']['id']);
+            $this->set('systemPage', false);
         }
-
-        $this->set('menu', $this->Menu->buildMenu($this, NULL));
-        $this->set('pageid', $page['Page']['id']);
-        $this->set('systemPage', false);
     }
 
     private function setupPageElements($container, $diff, $root = false)
@@ -126,7 +149,7 @@ class PagesController extends AppController
                     } else {
                         $url = null;
                     }
-                    $contentData['viewData'] = $this->Components->load($contentData['plugin'] . '.' . $contentData['view'])->getData($this, $params, $url, $childContent['id'],$this->myUrl);
+                    $contentData['viewData'] = $this->Components->load($contentData['plugin'] . '.' . $contentData['view'])->getData($this, $params, $url, $childContent['id'], $this->myUrl);
                     $contentData['id'] = $childContent['id'];
                     $contentData['pageUrl'] = $this->myUrl;
                 }
@@ -170,7 +193,7 @@ class PagesController extends AppController
 
     public function delete($id = null)
     {
-        $this->PermissionValidation->actionAllowed(null, 'LayoutManager',true);
+        $this->PermissionValidation->actionAllowed(null, 'LayoutManager', true);
 
         if (!$this->request->is('post')) {
             throw new MethodNotAllowedException();
@@ -184,7 +207,7 @@ class PagesController extends AppController
 
     function json($id)
     {
-        $this->PermissionValidation->actionAllowed(null, 'LayoutManager',true);
+        $this->PermissionValidation->actionAllowed(null, 'LayoutManager', true);
 
         $data = $this->Page->findById($id);
         $page['Page'] = $data['Page'];

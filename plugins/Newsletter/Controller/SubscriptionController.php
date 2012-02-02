@@ -6,14 +6,9 @@ Configure::write('Config.language', 'ger');
 class SubscriptionController extends NewsletterAppController {
 	
 	public $name = 'Subscription';
-	public $uses = array('Newsletter.NewsletterRecipient', 'User', 'Newsletter.NewsletterLetter');
+	public $uses = array('Newsletter.NewsletterRecipient', 'User', 'Newsletter.NewsletterLetter', 'MenuEntry');
+	public $components = array('Menu');
  	
-// 	public $paginate = array(
-// 				'NewsletterLetter' => array(
-// 					'limit' => 10, 
-// 					'order' => array(
-// 						'NewsletterLetter.date' => 'desc',
-// 						'NewsletterLetter.id' => 'desc')));
 
 	function beforeRender(){
 		parent::beforeRender();
@@ -33,10 +28,14 @@ class SubscriptionController extends NewsletterAppController {
  		$this->layout = 'overlay';
  		$this->set('pluginId', $pluginId);
  		$this->set('contentID', $contentID);
-		$this->redirect(array('plugin' => 'Newsletter', 'controller' => 'NewsletterLetters', 'action' => 'index', $contentID, $pluginId));
+		$this->redirect(array(
+			'plugin' => 'Newsletter', 
+			'controller' => 'NewsletterLetters', 
+			'action' => 'index', $contentID, $pluginId));
  	}
  	
  	public function guestUnSubscribe(){
+//  		echo 'test';
  		if ($this->request->is('post')){
  			// check if recipient exists
  			if($recipient = $this->NewsletterRecipient->findByEmail($this->request->data['NewsletterRecipient']['email'])){
@@ -124,6 +123,45 @@ class SubscriptionController extends NewsletterAppController {
  		}
  	}
  	
+ 	public function unSubscribePerMail($email){
+ 		$this->set('email', $email);
+ 		$this->set('menu', $this->Menu->buildMenu($this, NULL));
+ 		$this->set('adminMode', false);
+ 		$this->set('systemPage', true);
+ 	}
+ 	
+ 	public function unsubscribe(){
+ 		if ($this->request->is('post')){
+ 			if($recipient = $this->NewsletterRecipient->findByEmail($this->request->data['NewsletterRecipient']['email'])){
+ 				// check if recipient is active
+ 				if($recipient['NewsletterRecipient']['active'] == 1){
+ 					// inactivate recipient
+ 					$recipient['NewsletterRecipient']['active'] = 0;
+ 					$action = 'delete';
+ 					$this->NewsletterRecipient->set($recipient);
+ 					if($this->NewsletterRecipient->save()) {
+ 						$this->Session->setFlash(__d('newsletter','You have unsubscribed successfully.'), 'default', array(
+ 					 									'class' => 'flash_success'), 
+ 					 									'unsubscribePerMail');
+ 					} else {
+ 						$this->Session->setFlash(__d('newsletter','You couldn\'t be unsubscribed.'), 'default', array(
+ 						 					 			'class' => 'flash_failure'), 
+ 						 					 			'unsubscribePerMail');
+ 					}
+ 				}else {
+ 					$this->Session->setFlash(__d('newsletter','You haven\'t subscribed'), 'default', array(
+ 					 				 						 					 			'class' => 'flash_failure'), 
+ 					 				 						 					 			'unsubscribePerMail');
+ 				}
+ 			} else {
+ 				$this->Session->setFlash(__d('newsletter','You haven\'t subscribed'), 'default', array(
+ 				 				 						 					 			'class' => 'flash_failure'), 
+ 				 				 						 					 			'unsubscribePerMail');
+ 			}
+ 		}
+ 		$this->redirect($this->referer());
+ 	}
+ 	
  	private function add(){
  		if ($this->request->is('post')){
  			$email = $this->data['NewsletterRecipient']['email'];
@@ -171,11 +209,5 @@ class SubscriptionController extends NewsletterAppController {
  		}
  		$this->redirect($this->referer());
  	}
-	
-//  	function beforeFilter(){
-// 		parent::beforeRender();
-// 		$pluginId = $this->getPluginId();
-// 		$this->set('pluginId', $pluginId);
-//  	}
  	
 }
