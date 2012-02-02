@@ -3,6 +3,13 @@
 	margin-top: 5px !important;
 }
 
+.showFullNewsContainer h2,h3{
+	margin: 0px;
+	padding: 0px;
+	margin-top: 5px !important;
+	
+}
+
 .showFullNewsSubtitle{
 	font-size:16px;
 	font-style:italic;
