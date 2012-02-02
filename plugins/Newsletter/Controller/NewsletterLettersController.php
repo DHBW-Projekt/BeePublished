@@ -6,7 +6,6 @@ class NewsletterLettersController extends NewsletterAppController {
 	
 	var $layout = 'overlay';
 	
-	public $name = 'NewsletterLetters';	
 	public $uses = array(
 		'Newsletter.NewsletterLetter',
 		'Newsletter.NewsletterRecipient',
@@ -179,7 +178,17 @@ class NewsletterLettersController extends NewsletterAppController {
 			'conditions' => array(
 				'active' => 1)));
 		foreach ($recipients as $recipient){
-			debug($recipient);
+		$content = $newsletter['NewsletterLetter']['content'];
+		$content = $content
+					."<br><br>"
+					.__d('newsletter', 'If you want to unsubscribe to our newsletter, click ')
+					."<a href='"
+					.env('SERVER_NAME')
+					."/unsubscribepermail/"
+					.$recipient['NewsletterRecipient']['email']
+					."' style='font-color: grey'>"
+					.__d('newsletter', 'here')
+					."</a>.";
 			$this->BeeEmail->sendHtmlEmail(
 				$recipient['NewsletterRecipient']['email'],
 				$newsletter['NewsletterLetter']['subject'],
