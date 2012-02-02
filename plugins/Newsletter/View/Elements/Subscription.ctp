@@ -28,17 +28,23 @@ echo '<div id="subscription">';
     else if ($user) {
 		// check for newsletter subscription
     	$userAsRecipient = $data['userAsRecipient'];
-    	echo $this->Form->create('UserSubscription', array(
-    		'url' => array(
-    			'plugin' => 'Newsletter',
-    			'controller' => 'Subscription',
-    			'action' => 'userUnSubscribe')));
+    	
 		if (isset($userAsRecipient)){
 			if ((isset($userAsRecipient['NewsletterRecipient']['active'])) && ($userAsRecipient['NewsletterRecipient']['active'] == 1)){
-				echo __d('newsletter','You subscribed to newsletter');
+				echo __d('newsletter','You subscribed to our newsletter');
+				echo $this->Form->create('UserSubscription', array(
+				    		'url' => array(
+				    			'plugin' => 'Newsletter',
+				    			'controller' => 'Subscription',
+				    			'action' => 'userUnSubscribe')));
 				echo $this->Form->end(__d('newsletter','Unsubscribe'));
 			} else {
 				echo __d('newsletter','You didn\'t subscribe to our newsletter');
+				echo $this->Form->create('UserSubscription', array(
+				    		'url' => array(
+				    			'plugin' => 'Newsletter',
+				    			'controller' => 'Subscription',
+				    			'action' => 'userUnSubscribe')));
 				echo $this->Form->end(__d('newsletter','Subscribe'));
 			};
 		};
