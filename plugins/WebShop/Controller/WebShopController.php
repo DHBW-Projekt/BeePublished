@@ -202,12 +202,12 @@ class WebShopController extends WebShopAppController {
 					$error_message = __d('web_shop', 'Errors during picture upload.');
 					$data_new['WebshopProduct']['picture'] = $data_old['WebshopProduct']['picture'];
 				}
-				
-				//SET new data
+			}
+			
+			//SAVE
+			if(!$update_error){
 				$this->WebshopProduct->set(array('picture' => $data_new['WebshopProduct']['picture']));
-				
-				//SAVE on DB
-				$update_error = !$this->WebshopProduct->save();
+				$this->WebshopProduct->save();
 			}
 			
 			//SET data
