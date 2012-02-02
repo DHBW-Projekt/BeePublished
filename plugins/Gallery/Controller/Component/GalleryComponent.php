@@ -11,8 +11,13 @@ class GalleryComponent extends Component {
 	 */
 	public function getGallery($controller, $galleryId){		
 		$controller->loadModel('Gallery.GalleryEntry');	
-		$gallery = $controller->GalleryEntry->findById($galleryId);		
+		$gallery = $controller->GalleryEntry->findById($galleryId);
+		//assigned gallery was deleted
+		if(empty($gallery)){
+			return null;
+		}
 		$this->normalizeGallery($controller, &$gallery);
+	
 		if(isset($gallery['GalleryPicture']))
 			foreach($gallery['GalleryPicture'] as &$picture)
 				$this->GalleryPictureComp->normalizePicture(&$picture);
