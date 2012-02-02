@@ -192,7 +192,7 @@ class NewsletterLettersController extends NewsletterAppController {
 			$this->BeeEmail->sendHtmlEmail(
 				$recipient['NewsletterRecipient']['email'],
 				$newsletter['NewsletterLetter']['subject'],
-				$newsletter['NewsletterLetter']['content']);
+				$content);
 		} //foreach
 		$newsletter['NewsletterLetter']['draft'] = 0;
 		$this->NewsletterLetter->set($newsletter);
