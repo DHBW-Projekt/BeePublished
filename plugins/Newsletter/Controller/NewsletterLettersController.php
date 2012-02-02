@@ -6,7 +6,7 @@ class NewsletterLettersController extends NewsletterAppController {
 	
 	var $layout = 'overlay';
 	
-	public $name = 'newsletterLetters';	
+	public $name = 'NewsletterLetters';	
 	public $uses = array(
 		'Newsletter.NewsletterLetter',
 		'Newsletter.NewsletterRecipient',
