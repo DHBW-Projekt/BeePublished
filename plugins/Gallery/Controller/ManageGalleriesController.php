@@ -67,7 +67,7 @@ class ManageGalleriesController  extends GalleryAppController{
 				if($this->request->data['GalleryEntry']['gallery_picture_id'] == null){
 					
 					$this->Session->setFlash(__('Your Gallery was not saved. You have to assign a title picture'), 'default', array('class' => 'flash_failure'));
-					$this->redirect(array(	'action' => 'create', $contentId));
+					$this->redirect(array(	'action' => 'create', $contentId,$menue_context));
 				}else {
 					//check if parameters are set
 
@@ -75,14 +75,14 @@ class ManageGalleriesController  extends GalleryAppController{
 						if($this->GalleryEntry->save($this->request->data)) {
 							
 							$this->Session->setFlash(__('Your Gallery was saved.'), 'default', array('class' => 'flash_success'));
-							$this->redirect(array('action' => 'index', $contentId));	
+							$this->redirect(array('action' => 'index', $contentId,$menue_context));	
 						} else {
 							$this->Session->setFlash(__('Your Gallery was not saved.'), 'default', array('class' => 'flash_failure'));
-							$this->redirect(array(	'action' => 'index', $contentId));		
+							$this->redirect(array(	'action' => 'index', $contentId,$menue_context));		
 						}	
 					} else {
 						$this->Session->setFlash(__('Your Gallery was not saved. You have to assign a title and a description to your gallery.'), 'default', array('class' => 'flash_failure'));
-						$this->redirect(array(	'action' => 'create', $contentId));		
+						$this->redirect(array(	'action' => 'create', $contentId,$menue_context));		
 					}//check data
 				}		
     		}//data empty
