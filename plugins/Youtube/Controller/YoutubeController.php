@@ -9,7 +9,11 @@ class YoutubeController extends YoutubeAppController{
 		$this->layout = 'overlay';
 		// set contentId used for settings
 		$this->set('contentId', $contentId);
-		
+		// get current link to display
+		$currentLink = $this->YoutubeLink->find('first', array('conditions' => array('contentId' => $contentId), 'fields' => array('YoutubeLink.url')));
+		// work on value to get a working url before setting it
+		$this->set('currentLink', str_replace('embed/', 'watch?v=', $currentLink['YoutubeLink']['url']));
+
 		if ($this->request->is('post')){
 			// get data from post
 			$newLink = $this->request->data;

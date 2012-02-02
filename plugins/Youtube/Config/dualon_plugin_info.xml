@@ -4,9 +4,7 @@
 		<name>Youtube</name>
 		<author>Sebastian Haase</author>
 		<version>1.0</version>
-		<permissions>
-			<permission>	
-			</permission>
+		<permissions> 
 		</permissions>	
 		<views>
 			<view>

@@ -27,7 +27,7 @@ class SubscriptionComponent extends Component {
 			}
 		};
 		if (!array_key_exists('text',$params)) {
-			$text = __d('newsletter','no text');
+			$text = __d('newsletter','Here you can subscribe or unsubscribe to our newsletter.');
 		} else {
 			$text = $params['text']; //exists and published
 		}
