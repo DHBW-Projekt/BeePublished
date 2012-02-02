@@ -20,9 +20,12 @@
 * @description Basic Settings for all controllers
 */
 
+// show admin menu
 echo $this->element('admin_menu', array('contentID' => $contentID, 'pluginId' => $pluginId));
+// show flash at this position
 echo $this->Session->flash('NewsletterSaved');
 
+// show newsletter
 if (isset($newsletter)){
 	$this->Html->script('ckeditor/ckeditor', false);;
 	$this->Html->script('ckeditor/adapters/jquery',false);

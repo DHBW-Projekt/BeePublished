@@ -25,13 +25,15 @@ $this->Html->css('menu-template', NULL, array('inline' => false));
 $settingsAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'ChangeNewsletterSettings');
 $recipientsAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'unSubscribeOtherUsers');
 ?>
+
 <div id="menu" class="overlay">
     <ol class="nav">
         <li><?php echo $this->Html->link(__d('newsletter','Newsletters'),array(
 			'plugin' => 'Newsletter', 
         	'controller' => 'NewsletterLetters', 
         	'action' => 'index', $contentID, $pluginId));?></li>
-<?php         	
+<?php
+// only show this menu item if user is allowed to edit recipients list         	
 if($recipientsAllowed){
 	echo '<li>';
 		echo $this->Html->link(__d('newsletter','Recipients'),array(
@@ -41,6 +43,7 @@ if($recipientsAllowed){
        echo '</li>';
 };
 if($settingsAllowed){
+	// only show this menu item if user is allowed to change settings
 	echo '<li>';
 		echo $this->Html->link(__d('newsletter','General Settings'),array(
         	'plugin' => 'Newsletter', 

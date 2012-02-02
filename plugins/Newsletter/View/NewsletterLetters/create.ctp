@@ -20,10 +20,14 @@
 * @description Basic Settings for all controllers
 */
 
+// get validation errors
 $validationErrors = $this->Session->read('Validation.NewsletterLetter.validationErrors');
 
+// show admin menu
 echo $this->element('admin_menu', array('contentID' => $contentID, 'pluginId' => $pluginId));
+// show flash at this position
 echo $this->Session->flash('NewsletterSaved');
+// show newsletter
 if (isset($newsletter)){
 	$this->Html->script('ckeditor/ckeditor', false);;
 	$this->Html->script('ckeditor/adapters/jquery',false);
@@ -35,6 +39,7 @@ if (isset($newsletter)){
     		'action' => 'saveNew', $contentID, $pluginId)));
 	echo $this->Form->input('NewsletterLetter.subject', array(
 		'label' => __d('newsletter','Subject:')));
+	// show validation errors if existing
 	if (isset($validationErrors['subject'][0])){
 		echo $this->Html->div('validation_error',$validationErrors['subject'][0]);
 	};

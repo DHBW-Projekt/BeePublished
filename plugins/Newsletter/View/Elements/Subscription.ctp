@@ -26,13 +26,17 @@ $this->Html->script('/newsletter/js/newsletter', false);
 $this->Html->script('/ckeditor/ckeditor', false);
 $this->Html->css('/newsletter/css/newsletter', NULL, array('inline' => false));
 
+// get actions that are allowed for current user
 $allowedActions = $this->PermissionValidation->getPermissions($pluginId);
 
 echo '<div id="subscription">';
+	// title
 	echo '<h1>'.__d('newsletter','Newsletter').'</h1>';
+	// echo text that is saved in content values
 	echo $data['text'];
 	echo '<br><br>';
 	if (!($user)){	
+		// show form with input field to unSubscribe
 		echo '<div class="subscription_form">';
 			echo $this->Form->create('Subscription',array(
 				'url' => array(
@@ -50,8 +54,8 @@ echo '<div id="subscription">';
     else if ($user) {
 		// check for newsletter subscription
     	$userAsRecipient = $data['userAsRecipient'];
-    	
 		if (isset($userAsRecipient)){
+			// if user has subscribed, show unsubscribe button
 			if ((isset($userAsRecipient['NewsletterRecipient']['active'])) && ($userAsRecipient['NewsletterRecipient']['active'] == 1)){
 				echo __d('newsletter','You subscribed to our newsletter');
 				echo $this->Form->create('UserSubscription', array(
@@ -61,6 +65,7 @@ echo '<div id="subscription">';
 				    			'action' => 'userUnSubscribe')));
 				echo $this->Form->end(__d('newsletter','Unsubscribe'));
 			} else {
+				// if user hasn't subscribed, show subscribe button
 				echo __d('newsletter','You didn\'t subscribe to our newsletter');
 				echo $this->Form->create('UserSubscription', array(
 				    		'url' => array(
@@ -74,6 +79,7 @@ echo '<div id="subscription">';
 	};
 echo '</div>';
 
+// if user is admin or is allowed to create/edit/save newsletters show button to get to admin overlay
 if($this->PermissionValidation->getUserRole() < 6 
 	&& ($allowedActions['CreateNewsletter'] 
 	|| $allowedActions['EditNewsletter']

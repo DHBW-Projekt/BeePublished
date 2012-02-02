@@ -25,9 +25,13 @@ $this->Html->script('/ckeditor/adapters/jquery',false);
 $this->Html->script('/newsletter/js/admin',false);
 echo $this->Html->css('/newsletter/css/newsletter', NULL, array('inline' => false));
 
+// show admin menu
 echo $this->element('admin_menu', array('contentID' => $contentID, 'pluginId' => $pluginId));
+
 echo '<h1>'.__d('newsletter','Information text on subscription view:').'</h1>';
+// flash position here	
 echo $this->Session->flash('TextSaved');
+// form for text setting	
 echo $this->Form->create('PluginText', array(
 	'url' => array(
 		'plugin' => 'Newsletter',

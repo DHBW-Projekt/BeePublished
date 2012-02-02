@@ -22,7 +22,7 @@
 
 /**
  * 
- * 
+ * NewsletterAppController
  * @author marcuslieberenz
  *
  */

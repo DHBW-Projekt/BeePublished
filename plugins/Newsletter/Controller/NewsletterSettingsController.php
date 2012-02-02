@@ -20,14 +20,22 @@
 * @description Basic Settings for all controllers
 */
 
+/**
+*
+* This Controller implements the logic for the setting in the admin overlay
+* @author marcuslieberenz
+*
+*/
 class NewsletterSettingsController extends NewsletterAppController {
 	
 	var $layout = 'overlay';
 	var $components = array('ContentValueManager');
 	
+	// get and set date for index view
 	public function index($contentID, $pluginId){
 		$pluginText = $this->ContentValueManager->getContentValues($contentID);
 		if ($this->ContentValueManager->getContentValues($contentID) == null){
+			// if there is no content value show default text
 			$pluginText['text'] = __d('newsletter','Here you can subscribe or unsubscribe to our newsletter.');
 		}
 		$this->set('pluginText', $pluginText);
@@ -35,9 +43,12 @@ class NewsletterSettingsController extends NewsletterAppController {
 		$this->set('pluginId', $pluginId);
 	}
 	
+	// save settings
 	public function save($contentID, $pluginId){
+		// check if user is allowed to change settings
 		$this->PermissionValidation->actionAllowed($pluginId, 'ChangeNewsletterSettings', true);
 		if ($this->request->is('post')){
+			// save text in content values and show flash
 			$text = $this->data['text'];
 			$contentValue['text'] = $text; 
 			$this->ContentValueManager->saveContentValues($contentID, $contentValue);

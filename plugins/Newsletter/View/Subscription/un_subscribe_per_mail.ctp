@@ -20,9 +20,12 @@
 * @description Basic Settings for all controllers
 */
 
+// get validation errors
 $validationErrors = $this->Session->read('Validation.NewsletterRecipient.validationErrors');
+
 echo __d('newsletter', 'Here you can unsubscribe from our newsletter');
 	echo $this->Session->flash('unsubscribePerMail');
+	// form for unsubscription
 	echo $this->Form->create('Subscription',array(
 			'url' => array(
 				'plugin' => 'Newsletter',

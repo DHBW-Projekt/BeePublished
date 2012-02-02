@@ -20,8 +20,10 @@
 * @description Basic Settings for all controllers
 */
 
+// show admin menu
 echo $this->element('admin_menu', array('contentID' => $contentID, 'pluginId' => $pluginId));
 
+// show newsletter
 if (isset($newsletter)){
 	$this->Html->script('ckeditor/ckeditor', false);;
 	$this->Html->script('ckeditor/adapters/jquery',false);
@@ -41,6 +43,7 @@ if (isset($newsletter)){
 		'value' => $newsletter['NewsletterLetter']['content'],
 		'rows' => '30'));
 	if ($newsletter['NewsletterLetter']['draft'] == 1){
+		// if newsletter is a draft show send and edit buttons
 		echo $this->Form->submit(__d('newsletter','Send'), array(
 			'name' => 'send',
 			'div' => false));
@@ -48,6 +51,7 @@ if (isset($newsletter)){
 			'name' => 'edit',
 			'div' => false));
 	} else {
+		// if newsletter is already sent, show date of sending
 		echo __d('newsletter','This newsletter has been sent on ').$newsletter['NewsletterLetter']['date']; 
 	};
 	echo $this->Form->end();	
