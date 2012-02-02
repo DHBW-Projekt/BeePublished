@@ -9,11 +9,13 @@ class DisplayImageController extends AppController {
 	
 	public function setImageAdminTab($contentId){
 		$this->layout = 'overlay';
+		$currentlyassigned =  $this->ContentValueManager->getContentValues($contentId);
 		
 		$allPics = $this->GalleryPictureComp->getAllPictures($this);
 		
 		$data = array(	'AllPictures' => $allPics,
-						'ContentId' => $contentId );
+						'ContentId' => $contentId,
+						'CurrPicture' => $currentlyassigned );
 		
 		$this->set('data',$data);
 	}

@@ -1,5 +1,28 @@
 <?php
-
+/*
+* This file is part of BeePublished which is based on CakePHP.
+* BeePublished is free software: you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation, either version 3
+* of the License, or any later version.
+* BeePublished is distributed in the hope that it will be useful, but
+* WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+* You should have received a copy of the GNU General Public
+* License along with BeePublished. If not, see
+* http://www.gnu.org/licenses/.
+*
+* @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+* @author Sebastian Haase
+*
+* @description Used for admin overlay
+* 			   admin gets values to display // decides which action was clicked
+* 			   settigns to change default values / configuration
+* 			   clean_db if posts are not deleted immediately to free up database
+* 			   _release to release 1 to n posts
+* 			   _delete to delete 1 to n posts
+*/
 class GuestbookController extends GuestbookAppController {
 
 	public $uses = array('Guestbook.GuestbookPost');

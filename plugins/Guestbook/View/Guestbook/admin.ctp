@@ -1,4 +1,23 @@
 <?php 
+/*
+* This file is part of BeePublished which is based on CakePHP.
+* BeePublished is free software: you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation, either version 3
+* of the License, or any later version.
+* BeePublished is distributed in the hope that it will be useful, but
+* WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+* You should have received a copy of the GNU General Public
+* License along with BeePublished. If not, see
+* http://www.gnu.org/licenses/.
+*
+* @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+* @author Sebastian Haase
+*
+* @description first page for admin overlay, displaying all pending posts
+*/
 App::uses('Sanitize', 'Utility');
 $this->Helpers->load('Time');
 $this->Helpers->load('BBCode');
@@ -27,7 +46,7 @@ $this->Html->css('/Guestbook/css/design',null,array('inline' => false));
 	<tfoot>
 		<tr>
 			<td colspan="3">
-				<?php echo $this->Html->image('/app/webroot/img/arrow.png', array('height' => 20,'width' => 20));?>
+				<?php echo $this->Html->image('/img/arrow.png', array('height' => 20,'width' => 20));?>
 				<?php echo $this->Form->submit(__d('Guestbook', 'Release'), array('name' => 'release', 'div' => false));?>
 				<?php echo $this->Form->submit(__d('Guestbook', 'Delete'), array('name' => 'delete', 'div' => false));?>
 			</td>

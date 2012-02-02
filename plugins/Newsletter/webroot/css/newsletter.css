@@ -12,8 +12,16 @@ textarea#PluginTextText {
 	color: #cccccc;
 }
 table.newsletters{
-	
 }
+
+.subscription_form input{
+	max-width:100%;
+}
+
+#subscription{
+	margin: 0px;
+}
+
 table#recipients{
 	clear: both;
 	width:500px;	
@@ -24,77 +32,5 @@ table#newsletters{
 	width: 500px;
 }
 
-.dataTables_length{
-	float:left;
-	width:50%;
-}
-
-.dataTables_filter{
-	float:right;
-	width:50%;
-	text-align:right;
-}
-
-.dataTables_info{
-	float:left;
-	width:50%;
-}
-
-.dataTables_paginate{
-	float:right;
-	width:50%;
-	text-align:right;
-}
-
-
-.dataTables_wrapper div label{
-	width:100%;
-}
-
-.dataTables_wrapper div label select{
-	width:auto;
-}
-
-.dataTables_wrapper div label input{
-	width:auto;
-}
-
-.dataTables_wrapper{
-	width:500px;	
-}
-
-
-.paging_full_numbers span.paginate_button, .paging_full_numbers span.paginate_active{
-	border: 1px solid #AAA;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	heigth: 20px;
-	padding: 2px 5px;
-	margin: 0 3px;
-	cursor: pointer;
-}
-
-.paging_full_numbers span.paginate_button{
-	background-color:#AAAAAA;
-}
-
-.paging_full_numbers span.paginate_button:hover{
-	background-color:#CCCCCC;
-}
-
-.paging_full_numbers span.paginate_button_disabled{
-	cursor: default;
-	background-color:#DDDDDD;
-}
-
-.paging_full_numbers span.paginate_button_disabled:hover{
-	background-color:#DDDDDD;
-}
-
-
-
-.paging_full_numbers span.paginate_active{
-	background-color:#FFFFFF;
-}
 
 

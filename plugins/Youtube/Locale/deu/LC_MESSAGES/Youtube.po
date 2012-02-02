@@ -1,5 +1,22 @@
 # LANGUAGE translation of CakePHP Application
-# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+# This file is part of BeePublished which is based on CakePHP.
+# BeePublished is free software: you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation, either version 3
+# of the License, or any later version.
+# BeePublished is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+# You should have received a copy of the GNU General Public
+# License along with BeePublished. If not, see
+# http://www.gnu.org/licenses/.
+#
+# @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+# @author Sebastian Haase
+#
+# @description Translation for Youtube Plugin
 #
 #, fuzzy
 msgid ""
@@ -30,9 +47,17 @@ msgstr ""
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: View\Youtube\admin.ctp:14
-msgid "In order for this plugin to work correctly, go to youtube, select the video and copy the link provided in the top of your browser."
+#: View\Youtube\admin.ctp:13
+msgid "In order for this plugin to work correctly, go to youtube, select the video and copy the link provided at the top of your browser."
 msgstr "Damit dieses Plugin ordnungsgemäß funktioniert rufen Sie Ihr Video auf Youtube auf und kopiren die URL, welche in ihrem Browser angegeben wird."
+
+#: View\Youtube\admin.ctp:17
+msgid "The current video has the following url: "
+msgstr "Das aktuelle Video hat die folgende URL:"
+
+#: View\Youtube\admin.ctp:18
+msgid "You can change the used url by saving a new one."
+msgstr "Sie können die verwendete URL ändern, indem Sie eine neue speichern."
 
 #: View\Youtube\admin.ctp:30
 msgid "Save"

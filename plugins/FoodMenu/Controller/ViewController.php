@@ -38,7 +38,17 @@ class ViewController extends FoodMenuAppController {
 				
 				/* Check if a valid date was entered */
 				$dateArray = explode('-', $date);
-				if(checkdate($dateArray[0], $dateArray[1], $dateArray[2])) {
+				$isInteger = false;
+				if((is_numeric($dateArray[0])) && is_numeric($dateArray[0]) && is_numeric($dateArray[0])) {
+					$isInteger = true;
+				}
+				else {
+					$date = date('m-d-Y');
+					$dateArray = explode('-', $date);
+					$isInteger = true;
+					
+				}
+				if($isInteger && (checkdate(((int)$dateArray[0]), ((int)$dateArray[1]), ((int)$dateArray[2])))) {
 					
 					//Get the referer Url
 					$refererurl = $this->referer();

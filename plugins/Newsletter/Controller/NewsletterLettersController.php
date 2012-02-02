@@ -6,7 +6,6 @@ class NewsletterLettersController extends NewsletterAppController {
 	
 	var $layout = 'overlay';
 	
-	public $name = 'newsletterLetters';	
 	public $uses = array(
 		'Newsletter.NewsletterLetter',
 		'Newsletter.NewsletterRecipient',
@@ -179,10 +178,21 @@ class NewsletterLettersController extends NewsletterAppController {
 			'conditions' => array(
 				'active' => 1)));
 		foreach ($recipients as $recipient){
+		$content = $newsletter['NewsletterLetter']['content'];
+		$content = $content
+					."<br><br>"
+					.__d('newsletter', 'If you want to unsubscribe to our newsletter, click ')
+					."<a href='"
+					.env('SERVER_NAME')
+					."/unsubscribepermail/"
+					.$recipient['NewsletterRecipient']['email']
+					."' style='font-size: 9px'>"
+					.__d('newsletter', 'here')
+					."</a>.";
 			$this->BeeEmail->sendHtmlEmail(
 				$recipient['NewsletterRecipient']['email'],
 				$newsletter['NewsletterLetter']['subject'],
-				$newsletter['NewsletterLetter']['content']);
+				$content);
 		} //foreach
 		$newsletter['NewsletterLetter']['draft'] = 0;
 		$this->NewsletterLetter->set($newsletter);
@@ -202,20 +212,26 @@ class NewsletterLettersController extends NewsletterAppController {
 					'NewsletterLetter.id' => 'desc'),
 				'conditions' => array(
 					'NewsletterLetter.draft' => '1')));
-			$selectedNewsletters = $this->data['selectNewsletters'];
-			foreach($newsletters as $newsletter){
-				$id = $newsletter['NewsletterLetter']['id'];
-				if ($selectedNewsletters[$id] == 1){
-					if($this->NewsletterLetter->delete($id)){
-						$this->Session->setFlash(__d('newsletter','The selected newsletters have been deleted'), 'default', array(
-							'class' => 'flash_success'), 
+			if (isSet($this->data['selectNewsletters'])){
+				$selectedNewsletters = $this->data['selectNewsletters'];
+				foreach($newsletters as $newsletter){
+					$id = $newsletter['NewsletterLetter']['id'];
+					if ($selectedNewsletters[$id] == 1){
+						if($this->NewsletterLetter->delete($id)){
+							$this->Session->setFlash(__d('newsletter','The selected newsletters have been deleted'), 'default', array(
+								'class' => 'flash_success'), 
+								'NewsletterDeleted');
+						} else {
+							$this->Session->setFlash(__d('newsletter','The selected newsletters couldn\'t be deleted'), 'default', array(
+								'class' => 'flash_failure'), 
 							'NewsletterDeleted');
-					} else {
-						$this->Session->setFlash(__d('newsletter','The selected newsletters couldn\'t be deleted'), 'default', array(
-							'class' => 'flash_failure'), 
-						'NewsletterDeleted');
+						}
 					}
 				}
+			} else {
+				$this->Session->setFlash(__d('newsletter','You haven\'t selected any newsletter to delete.'), 'default', array(
+					'class' => 'flash_failure'), 
+					'NewsletterDeleted');
 			}
 		}
 		$this->redirect($this->referer());
