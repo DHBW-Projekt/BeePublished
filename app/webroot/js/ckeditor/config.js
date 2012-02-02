@@ -30,10 +30,10 @@ CKEDITOR.editorConfig = function (config) {
         'smiley', 'sad', 'wink', 'laugh', 'cheeky', 'blush', 'surprise',
         'indecision', 'angel', 'cool', 'crying', 'kiss'
     ];
-    config.filebrowserBrowseUrl = '/kcfinder/browse.php?type=files&cms=beepublished';
-    config.filebrowserImageBrowseUrl = '/kcfinder/browse.php?type=images&cms=beepublished';
-    config.filebrowserFlashBrowseUrl = '/kcfinder/browse.php?type=flash&cms=beepublished';
-    config.filebrowserUploadUrl = '/kcfinder/upload.php?type=files&cms=beepublished';
-    config.filebrowserImageUploadUrl = '/kcfinder/upload.php?type=images&cms=beepublished';
-    config.filebrowserFlashUploadUrl = '/kcfinder/upload.php?type=flash&cms=beepublished';
+    config.filebrowserBrowseUrl = window.app.webroot+'/kcfinder/browse.php?type=files&cms=beepublished';
+    config.filebrowserImageBrowseUrl = window.app.webroot+'kcfinder/browse.php?type=images&cms=beepublished';
+    config.filebrowserFlashBrowseUrl = window.app.webroot+'kcfinder/browse.php?type=flash&cms=beepublished';
+    config.filebrowserUploadUrl = window.app.webroot+'kcfinder/upload.php?type=files&cms=beepublished';
+    config.filebrowserImageUploadUrl = window.app.webroot+'kcfinder/upload.php?type=images&cms=beepublished';
+    config.filebrowserFlashUploadUrl = window.app.webroot+'kcfinder/upload.php?type=flash&cms=beepublished';
 };
