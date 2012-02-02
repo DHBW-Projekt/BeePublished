@@ -50,7 +50,7 @@ for ($i = 0; $i < 7; $i++) {
                 foreach ($calendarEntries as $entry) {
                     if (!$entry['notime']) break;
                     echo '<div class="calendar_entry notime">';
-                    echo '<div class="calendar_entry_content">' . $entry['name'] . '</div>';
+                    echo '<div class="calendar_entry_content">' . Sanitize::html($entry['name']) . '</div>';
                     echo '</div>';
                 }
                 echo '</td>';
