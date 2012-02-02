@@ -3,9 +3,14 @@
  * Controller for editing text
  */
 class DisplayTextController extends StaticTextAppController {
+	//Component for editing the ContentValue-table
 	public $components = array('ContentValueManager');
 	
-	//main-function
+	/*
+	 * Main-Function
+	 * Loads the Data from the database and prepare it to be displayed
+	 * Tests if the actual user has the right to edit-text
+	 */
 	public function admin($contentId){
 		$this->set('contentId',$contentId );
 		$this->layout = 'overlay';
@@ -15,7 +20,7 @@ class DisplayTextController extends StaticTextAppController {
 		$textPlugin = $this->Plugin->findByName($this->plugin);
 		//Get plugin-ID
 		$pluginId = $textPlugin['Plugin']['id'];
-		$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'edit');
+		$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'edittext');
 		//If you are in the requiered role
 		if ($editAllowed){	
 			//Load and save data
@@ -31,12 +36,13 @@ class DisplayTextController extends StaticTextAppController {
 			} else {
 				$text = __d('static_text',"empty"); //"Leer" or '' ?
 			} 
-			
+			// load the value for 'published' to display it
 			if (array_key_exists('Published', $contentValues)) {
 				$pub = $contentValues['Published'];
 			} else {
 				$pub = false;
 			}
+			//prepare data to be displayed
 			if (empty($this->request->data)) {
 				$this->request->data = array(
 			                'null' => array(
