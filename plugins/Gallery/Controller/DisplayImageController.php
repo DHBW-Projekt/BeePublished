@@ -15,11 +15,11 @@ class DisplayImageController extends AppController {
 		$allPics = $this->GalleryPictureComp->getAllPictures($this);
 		
 		$data = array(	'AllPictures' => $allPics,
-						'ContentId' => $contentId,
 						'CurrPicture' => $currentlyassigned );
 		
 		$this->set('data',$data);
 		$this->set('mContext','singleImage');	
+		$this->set('ContentId',$contentId);
 	}
 	
 	public function setImage($contentId, $pictureId, $menue_context){
@@ -27,6 +27,7 @@ class DisplayImageController extends AppController {
 		
 		$this->Session->setFlash('Image sucessfully assigned');
 		$this->set('mContext',$menue_context);	
+		$this->set('ContentId',$contentId);
 		$this->redirect($this->referer());
 	}
 	

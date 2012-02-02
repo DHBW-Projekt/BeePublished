@@ -23,8 +23,7 @@ class ManageGalleriesController  extends GalleryAppController{
 				
 		$allGalls= $this->Gallery->getAllGalleries($this);
 		
-		$data = array(	'AllGalleries' => $allGalls,
-						'ContentId' => $contentId );
+		$data = array(	'AllGalleries' => $allGalls);
 		$pic_array = array();
 		$index = 0;
 		foreach( $this->GalleryPictureComp->getAllPictures($this) as $picture){
@@ -36,6 +35,7 @@ class ManageGalleriesController  extends GalleryAppController{
 		$this->set('data',$data);
 		$this->set('pictures', $pic_array);
 		$this->set('mContext',$menue_context);
+		$this->set('ContentId',$contentId);
 	}	
 	/**
 	 * Function related the create View (to create a new Gallery)

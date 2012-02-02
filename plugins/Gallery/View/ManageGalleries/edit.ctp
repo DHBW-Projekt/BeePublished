@@ -1,6 +1,6 @@
 <?php
 echo $this->Session->flash();
-echo $this->element('admin_menu_galleries',array("ContentId" => $ContentId));
+echo $this->element('admin_menu',array("ContentId" => $ContentId, "mContext" => $mContext));
 
 	$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create');
 	$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'edit');

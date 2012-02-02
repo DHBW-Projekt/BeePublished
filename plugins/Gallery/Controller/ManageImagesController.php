@@ -23,11 +23,11 @@ class ManageImagesController  extends GalleryAppController{
 		
 		$allPics = $this->GalleryPictureComp->getAllPictures($this);
 		
-		$data = array(	'AllPictures' => $allPics,
-						'ContentId' => $contentId );
+		$data = array(	'AllPictures' => $allPics);
 		
 		$this->set('data',$data);
 		$this->set('mContext',$menue_context);
+		$this->set('ContentId',$contentId);
 	}
 	
 	
@@ -83,6 +83,7 @@ class ManageImagesController  extends GalleryAppController{
 			}
 		}
 		$this->set('mContext',$menue_context);
+		$this->set('ContentId',$contentId);
 		$this->redirect($this->referer());
 	}
 	
@@ -145,9 +146,8 @@ class ManageImagesController  extends GalleryAppController{
 		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
 		
 		
-		$data = array('ContentId' => $contentId );
 		$this->set('mContext',$menue_context);
-		$this->set('data',$data);
+		$this->set('ContentId',$contentId);
 	}
 	
 	/**

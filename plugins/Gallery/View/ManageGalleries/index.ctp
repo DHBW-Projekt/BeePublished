@@ -1,7 +1,7 @@
 <?php
 $this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
 
-echo $this->element('admin_menu_galleries',array("ContentId" => $data['ContentId']));
+echo $this->element('admin_menu',array("ContentId" => $ContentId, "mContext" => $mContext));
 	
 	$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create');
 	$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'edit');
@@ -28,7 +28,7 @@ echo '<table>';
 				'url' => array(
 				'plugin' => 'Gallery',
 				'controller' => 'ManageGalleries',
-				'action' => 'deleteSelected',$data['ContentId']),
+				'action' => 'deleteSelected',$ContentId),
 				'onsubmit'=>'return confirm(\''.__('Do you really want to delete the selected galleries?').'\');'));
 foreach ($data['AllGalleries'] as $gallery){
 	echo "<tr>";
@@ -47,7 +47,7 @@ foreach ($data['AllGalleries'] as $gallery){
 							array(
 								'plugin' => 'Gallery', 
 								'controller' => 'ManageGalleries', 
-								'action' => 'edit', $gallery['GalleryEntry']['id'],$data['ContentId']),
+								'action' => 'edit', $gallery['GalleryEntry']['id'],$ContentId),
 							array(
 								'escape' => false, 
 								'title' => __('Edit Gallery')));
@@ -64,7 +64,7 @@ foreach ($data['AllGalleries'] as $gallery){
 							array(
 								'plugin' => 'Gallery', 
 								'controller' => 'ManageGalleries', 
-								'action' => 'delete',$gallery['GalleryEntry']['id'],$data['ContentId']),
+								'action' => 'delete',$gallery['GalleryEntry']['id'],$ContentId),
 							array(
 								'escape' => false, 
 								'title' => __('Delete Gallery')),
@@ -74,7 +74,7 @@ foreach ($data['AllGalleries'] as $gallery){
 	
 		echo '<td>';
 			if($editAllowed){
-				echo $this->Html->image('add2.png',array('style' => 'float: left', 'width' => '20px', 'alt' => '[]Assign', 'url' => array('plugin' => 'Gallery', 'controller' => 'ManageGalleries', 'action' => 'assignImages',$gallery['GalleryEntry']['id'],$data['ContentId'])));
+				echo $this->Html->image('add2.png',array('style' => 'float: left', 'width' => '20px', 'alt' => '[]Assign', 'url' => array('plugin' => 'Gallery', 'controller' => 'ManageGalleries', 'action' => 'assignImages',$gallery['GalleryEntry']['id'],$ContentId)));
 			}		
 		echo '</td>';
 		

@@ -1,12 +1,12 @@
 <?php
-echo $this->element('admin_menu_images',array("ContentId" => $data['ContentId']));
+echo $this->element('admin_menu',array("ContentId" => $ContentId, "mContext" => $mContext));
 
 echo $this->Session->flash('Image saved');
 echo $this->Session->flash('Image deleted');
 
 echo "<h2>".__('Add single image')."</h2>";
 
-echo $this->Form->create('addImage', array('url' => array('plugin' => 'Gallery','controller' => 'ManageImages','action' => 'uploadImage',$data['ContentId']),'type' => 'file'));
+echo $this->Form->create('addImage', array('url' => array('plugin' => 'Gallery','controller' => 'ManageImages','action' => 'uploadImage',$ContentId),'type' => 'file'));
 
 echo $this->Form->input(__('Title'));
 echo $this->Form->label(__('File'));
@@ -17,7 +17,7 @@ echo $this->Form->end();
 
 echo "<h2>".__('Add multiple images')."</h2>";
 
-echo $this->Form->create('addImage', array('url' => array('plugin' => 'Gallery','controller' => 'ManageImages','action' => 'uploadImages',$data['ContentId']),'type' => 'file'));
+echo $this->Form->create('addImage', array('url' => array('plugin' => 'Gallery','controller' => 'ManageImages','action' => 'uploadImages',$ContentId),'type' => 'file'));
 echo $this->Form->input('data', array('label'=>'Files', 'type'=>'file', 'name' => 'files[]', 'multiple'));
 echo $this->Form->submit(__('Add images'));
 echo $this->Form->end();
@@ -44,7 +44,7 @@ echo $this->Form->create('selectPictures', array(
 				'url' => array(
 				'plugin' => 'Gallery',
 				'controller' => 'ManageImages',
-				'action' => 'deleteSelected',$data['ContentId']),
+				'action' => 'deleteSelected',$ContentId),
 				'onsubmit'=>'return confirm(\''.__('Do you really want to delete the selected images?').'\');'));
 
 foreach ($data['AllPictures'] as $picture){
@@ -74,7 +74,7 @@ foreach ($data['AllPictures'] as $picture){
 									'controller' => 'ManageImages', 
 									'action' => 'delete', 
 									$picture['id'],
-									$data['ContentId']),
+									$ContentId),
 								array(
 									'escape' => false, 
 									'title' => __('Delete Image')),

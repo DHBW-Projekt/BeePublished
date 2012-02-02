@@ -1,5 +1,5 @@
 <?php
-echo $this->element('admin_menu_images',array("ContentId" => $data['ContentId']));
+echo $this->element('admin_menu',array("ContentId" => $ContentId, "mContext" => $mContext));
 	echo '<h1>'.__('Edit an image').'</h1>';
 	$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create');
 	$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'edit');
