@@ -97,7 +97,7 @@ msgstr "Suchergebnisse"
 
 #: View\Elements\search.ctp:20
 msgid "Search result"
-msgstr "Suchergebniss"
+msgstr "Suchergebnis"
 
 #: View\WebShop\admin.ctp:16
 msgid "Create new product"
