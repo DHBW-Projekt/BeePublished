@@ -12,7 +12,7 @@
     echo $this->Html->css('designs/' . $design);
    
     if ($mobile) {
-        echo $this->Html->css('mobil');
+        echo $this->Html->css('mobile');
     ?>
         <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;"></meta>
     <?php
