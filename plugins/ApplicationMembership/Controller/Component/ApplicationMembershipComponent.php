@@ -1,8 +1,4 @@
 <?php
-
-App::uses('Sanitize', 'Utility');
-App::import('Vendor','recaptcha/recaptchalib');
-
 /*
  * This file is part of BeePublished which is based on CakePHP.
  * BeePublished is free software: you can redistribute it and/or
@@ -22,6 +18,10 @@ App::import('Vendor','recaptcha/recaptchalib');
  *
  * @description Component Controller for MemberApp.
  */
+
+App::uses('Sanitize', 'Utility');
+App::import('Vendor','recaptcha/recaptchalib');
+
 class ApplicationMembershipComponent extends Component {
 	
 	public $uses = array('Sanitize');

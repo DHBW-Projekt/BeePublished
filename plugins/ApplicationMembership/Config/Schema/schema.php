@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of BeePublished which is based on CakePHP.
  * BeePublished is free software: you can redistribute it and/or
