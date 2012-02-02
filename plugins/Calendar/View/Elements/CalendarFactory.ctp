@@ -1,5 +1,5 @@
 <?php
-$days = array(__d('calendar','Sun'), __d('calendar','Mon'), __d('calendar','Tue'), __d('calendar','Wed'), __d('calendar','Thu'), __d('calendar','Fri'), __d('calendar','Sat'));
+$days = array(__d('calendar', 'Sun'), __d('calendar', 'Mon'), __d('calendar', 'Tue'), __d('calendar', 'Wed'), __d('calendar', 'Thu'), __d('calendar', 'Fri'), __d('calendar', 'Sat'));
 for ($i = 0; $i < $FDOW; $i++) {
     array_push($days, array_shift($days));
 }
@@ -10,12 +10,12 @@ $currentRow = 0;
     <div class="<?php echo $ClassPrefix; ?>calendar_head">
         <?php if ($navigation) : ?>
         <div
-            class="<?php echo $ClassPrefix; ?>month_minus"><?php echo $this->Html->link('<< ' . __d('calendar', date('M', strtotime('-1 months', $time)))." ".date('y', strtotime('-1 months', $time)), $url . 'largecalendar/month/' . date('Y-m', strtotime('-1 months', $time)));?></div>
+            class="<?php echo $ClassPrefix; ?>month_minus"><?php echo $this->Html->link('<< ' . __d('calendar', date('M', strtotime('-1 months', $time))) . " " . date('y', strtotime('-1 months', $time)), $url . 'largecalendar/month/' . date('Y-m', strtotime('-1 months', $time)));?></div>
         <div
-            class="<?php echo $ClassPrefix; ?>month_plus"><?php echo $this->Html->link(__d('calendar', date('M', strtotime('+1 months', $time)))." ".date('y', strtotime('+1 months', $time)) . ' >>', $url . 'largecalendar/month/' . date('Y-m', strtotime('+1 months', $time)));?></div>
+            class="<?php echo $ClassPrefix; ?>month_plus"><?php echo $this->Html->link(__d('calendar', date('M', strtotime('+1 months', $time))) . " " . date('y', strtotime('+1 months', $time)) . ' >>', $url . 'largecalendar/month/' . date('Y-m', strtotime('+1 months', $time)));?></div>
         <?php endif; ?>
         <div
-            class="<?php echo $ClassPrefix; ?>calendar_name"><?php echo $this->Html->link(__d('calendar',date('F', $time)) . ' ' . date('Y', $time), $url . 'largecalendar/month/' . date('Y-m', $time));?></div>
+            class="<?php echo $ClassPrefix; ?>calendar_name"><?php echo $this->Html->link(__d('calendar', date('F', $time)) . ' ' . date('Y', $time), $url . 'largecalendar/month/' . date('Y-m', $time));?></div>
     </div>
     <table cellspacing="0">
         <colgroup>
@@ -88,7 +88,13 @@ $currentRow = 0;
                         echo '</div>';
                     }
 
-                    echo '<div class="' . $ClassPrefix . 'calendar_entry_content">' . $this->Html->link($entry['name'], $url . 'largecalendar/detail/' . $entry['id']) . '</div>';
+                    echo '<div class="' . $ClassPrefix . 'calendar_entry_content">';
+                    if ($this->PermissionValidation->actionAllowed($PluginId, 'CreateEvent')) {
+                        echo $this->Html->link($this->Html->image('edit.png', array('width' => 10, 'height' => 10)), array('plugin' => 'Calendar', 'controller' => 'CalendarEntries', 'action' => 'edit', $entry['id']), array('escape' => false, 'class' => 'calendar_add_entry'));
+                        echo $this->Html->link($this->Html->image('delete.png', array('width' => 10, 'height' => 10)), array('plugin' => 'Calendar', 'controller' => 'CalendarEntries', 'action' => 'delete', $entry['id']), array('escape' => false));
+                    }
+                    echo $this->Html->link(Sanitize::html($entry['name']), $url . 'largecalendar/detail/' . $entry['id']);
+                    echo '</div>';
                     echo '</div>';
                 }
             }

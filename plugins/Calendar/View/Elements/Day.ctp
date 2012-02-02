@@ -41,18 +41,22 @@ $date = date('Y-m-d', $StartTime);
                     $notimeClass = '';
                 }
                 echo '<div class="calendar_entry' . $notimeClass . '">';
-                echo '<div class="calendar_entry_content">' . $this->Html->link($entry['name'], $URL . 'largecalendar/detail/' . $entry['id']) . '</div>';
+                echo '<div class="calendar_entry_content">' . $this->Html->link(Sanitize::html($entry['name']), $URL . 'largecalendar/detail/' . $entry['id']) . '</div>';
                 echo '<div class="calendar_entry_time_start">';
                 if (!$entry['notime']) {
                     echo substr($entry['start_time'], 0, 5) . ' - ' . substr($entry['end_time'], 0, 5);
                 } else {
-                    echo __('all day event');
+                    echo __d('calendar','all day event');
+                }
+                if ($this->PermissionValidation->actionAllowed($PluginId,'CreateEvent')) {
+                    echo $this->Html->link($this->Html->image('edit.png', array('width' => 15, 'height' => 15)),array('plugin' => 'Calendar', 'controller' => 'CalendarEntries', 'action' => 'edit', $entry['id']),array('escape' => false, 'class' => 'calendar_add_entry'));
+                    echo $this->Html->link($this->Html->image('delete.png', array('width' => 15, 'height' => 15)),array('plugin' => 'Calendar', 'controller' => 'CalendarEntries', 'action' => 'delete', $entry['id']),array('escape' => false));
                 }
                 echo '</div>';
                 echo '</div>';
             }
         }
-        echo $this->Html->link($this->Html->image('add.png', array('width' => 18, 'height' => 18)) . __d('calendar', 'Add Entry'), array('plugin' => 'Calendar', 'controller' => 'CalendarEntries', 'action' => 'add', $date), array('escape' => false, 'class' => 'calendar_add_entry'));
+        echo $this->Html->link($this->Html->image('add.png', array('width' => 15, 'height' => 15)) . __d('calendar', 'Add Entry'), array('plugin' => 'Calendar', 'controller' => 'CalendarEntries', 'action' => 'add', $date), array('escape' => false, 'class' => 'calendar_add_entry'));
         echo '</div>';
         ?>
     </div>
