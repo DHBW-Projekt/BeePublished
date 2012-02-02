@@ -1,6 +1,6 @@
 <?php
 $this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
-echo $this->element('admin_menu',array("ContentId" => $ContentId, "mContext" => $mContext));
+echo $this->element('admin_menu',array("ContentId" => $contentId, "mContext" => $mContext));
 echo $this->Session->flash();
 
 
