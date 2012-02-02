@@ -16,12 +16,26 @@
 * @author Sebastian Haase
 *
 * @description css to change position and size of html elements only for Youtube Plugin
+			   especially necessary to resize videos dynamically
 */
 div #youtube_settings{
 	width: 100%;
 }
 
-div.youtube_show {
+div.youtube_video{
+	position: relative;
+	padding-bottom: 56.25%;
+	padding-top: 30px;
+	height: 0;
+	overflow: hidden;
+}
+
+div.youtube_video iframe,  
+div.youtube_video object,  
+div.youtube_video embed {
+	position: absolute;
+	top: 0;
+	left: 0;
 	width: 100%;
-	padding: 1em;
+	height: 100%;
 }
