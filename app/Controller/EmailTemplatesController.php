@@ -1,8 +1,11 @@
 <?php
 App::uses('AppController', 'Controller');
 /**
- * Plugin Controller
- *
+ * This controller includes the logic for creating, editing, saving and deleting
+ * email templates.
+ * 
+ * @author Tobias Hoehmann
+ * 
  */
 class EmailTemplatesController extends AppController
 {
