@@ -8,8 +8,8 @@ class DisplayGalleryController extends AppController {
 		$this->redirect(array('controller' => 'DisplayGallery', 'action' => 'index'));
 	}
 	
-	public function admin($contentId){
-		$this->redirect(array('action' => 'setGalleryAdminTab', $contentId));
+	public function admin($contentId, $menue_context){
+		$this->redirect(array('action' => 'setGalleryAdminTab', $ContentId, 'singleImage'));
 	}
 	
 	public function setGalleryAdminTab($contentId, $menue_context){
