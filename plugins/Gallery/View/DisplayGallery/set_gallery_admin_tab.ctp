@@ -39,7 +39,7 @@ foreach ($data['AllGalleries'] as $gallery){
 			}
 			echo $this->Html->link(
 			$this->Html->image("check.png", array('width' => '16px')),
-			array('action' => 'setGallery', $ContentId, $gallery['GalleryEntry']['id']),
+			array('action' => 'setGallery', $ContentId, $gallery['GalleryEntry']['id'],$mContext),
 			array('escape' => False, 'class' => $class, "style" => $style)
 			);
 		echo '</td>';

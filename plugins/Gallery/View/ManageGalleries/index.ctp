@@ -28,7 +28,7 @@ echo '<table>';
 				'url' => array(
 				'plugin' => 'Gallery',
 				'controller' => 'ManageGalleries',
-				'action' => 'deleteSelected',$ContentId),
+				'action' => 'deleteSelected',$ContentId,$mContext),
 				'onsubmit'=>'return confirm(\''.__('Do you really want to delete the selected galleries?').'\');'));
 foreach ($data['AllGalleries'] as $gallery){
 	echo "<tr>";
@@ -47,7 +47,7 @@ foreach ($data['AllGalleries'] as $gallery){
 							array(
 								'plugin' => 'Gallery', 
 								'controller' => 'ManageGalleries', 
-								'action' => 'edit', $gallery['GalleryEntry']['id'],$ContentId),
+								'action' => 'edit', $gallery['GalleryEntry']['id'],$ContentId,$mContext),
 							array(
 								'escape' => false, 
 								'title' => __('Edit Gallery')));
@@ -64,7 +64,7 @@ foreach ($data['AllGalleries'] as $gallery){
 							array(
 								'plugin' => 'Gallery', 
 								'controller' => 'ManageGalleries', 
-								'action' => 'delete',$gallery['GalleryEntry']['id'],$ContentId),
+								'action' => 'delete',$gallery['GalleryEntry']['id'],$ContentId,$mContext),
 							array(
 								'escape' => false, 
 								'title' => __('Delete Gallery')),
@@ -74,7 +74,7 @@ foreach ($data['AllGalleries'] as $gallery){
 	
 		echo '<td>';
 			if($editAllowed){
-				echo $this->Html->image('add2.png',array('style' => 'float: left', 'width' => '20px', 'alt' => '[]Assign', 'url' => array('plugin' => 'Gallery', 'controller' => 'ManageGalleries', 'action' => 'assignImages',$gallery['GalleryEntry']['id'],$ContentId)));
+				echo $this->Html->image('add2.png',array('style' => 'float: left', 'width' => '20px', 'alt' => '[]Assign', 'url' => array('plugin' => 'Gallery', 'controller' => 'ManageGalleries', 'action' => 'assignImages',$gallery['GalleryEntry']['id'],$ContentId,$mContext)));
 			}		
 		echo '</td>';
 		

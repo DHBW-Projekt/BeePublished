@@ -4,11 +4,11 @@ class DisplayImageController extends AppController {
 	var $components = array('ContentValueManager','Gallery.GalleryPictureComp');
 	
 	public function admin($contentId){		
-		$this->redirect(array('action' => 'setImageAdminTab', $contentId));
+		$this->redirect(array('action' => 'setImageAdminTab', $contentId,'singleImage'));
 		
 	}
 	
-	public function setImageAdminTab($contentId){
+	public function setImageAdminTab($contentId,$menue_context){
 		$this->layout = 'overlay';
 		$currentlyassigned =  $this->ContentValueManager->getContentValues($contentId);
 		
@@ -18,7 +18,7 @@ class DisplayImageController extends AppController {
 						'CurrPicture' => $currentlyassigned );
 		
 		$this->set('data',$data);
-		$this->set('mContext','singleImage');	
+		$this->set('mContext',$menue_context);	
 		$this->set('ContentId',$contentId);
 	}
 	

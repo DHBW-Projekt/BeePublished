@@ -1,7 +1,7 @@
 <?php
 $this->Html->script('/gallery/js/assign', false);
 $this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
-echo $this->element('admin_menu_galleries',array("ContentId" => $ContentId));
+echo $this->element('admin_menu',array("ContentId" => $ContentId, "mContext" => $mContext));
 
 echo "<h1>".__("Assign images to your gallery.")."</h1>";
 

@@ -48,7 +48,6 @@ class ManageGalleriesController  extends GalleryAppController{
 		
 
 		if (! $this->request->is('post')) {
-		$data = array( 'ContentId' => $contentId );
 		$pic_array = array();
 		$index = 0;
 		foreach( $this->GalleryPictureComp->getAllPictures($this) as $picture){
@@ -57,7 +56,7 @@ class ManageGalleriesController  extends GalleryAppController{
 			$index++;
 		}
 		
-		$this->set('data',$data);
+		$this->set('ContentId',$contentId);
 		$this->set('pictures', $pic_array);
 		$this->set('mContext',$menue_context);
 		} else {
@@ -153,10 +152,10 @@ class ManageGalleriesController  extends GalleryAppController{
 				if($this->Gallery->save($this,$this->request->data)) {
 					$this->Session->setFlash(__('Your changes were saved!'), 'default', array('class' => 'flash_success'));
 					//redirect 
-					$this->redirect(array('action' => 'index', $contentId));	
+					$this->redirect(array('action' => 'index', $contentId,$menue_context));	
 				} else {
 					$this->Session->setFlash(__('Your Gallery was not saved'), 'default', array('class' => 'flash_failure'));
-					$this->redirect(array(	'action' => 'index', $contentId));		
+					$this->redirect(array(	'action' => 'index', $contentId,$menue_context));		
 				}
 				//$this->redirect($this->referer());
 		}

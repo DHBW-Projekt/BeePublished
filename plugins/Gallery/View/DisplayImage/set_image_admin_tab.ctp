@@ -40,7 +40,7 @@ foreach ($data['AllPictures'] as $picture){
 		
 	echo $this->Html->link(
 	$this->Html->image("check.png", array('width' => '16px')),
-	array('action' => 'setImage', $ContentId, $picture['id']),
+	array('action' => 'setImage', $ContentId, $picture['id'],$mContext),
 	array('escape' => False, 'class' => $class, "style" => $style));
 	echo "</td>";
 	echo "</tr>";
