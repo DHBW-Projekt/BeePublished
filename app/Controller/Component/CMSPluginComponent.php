@@ -1,4 +1,24 @@
 <?php
+/*
+ * This file is part of BeePublished which is based on CakePHP.
+ * BeePublished is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3
+ * of the License, or any later version.
+ * BeePublished is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public
+ * License along with BeePublished. If not, see
+ * http://www.gnu.org/licenses/.
+ *
+ * @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+ * @author Christoph Krämer
+ *
+ * @description Receives CMS Plugin information
+ */
+
 App::uses('Xml', 'Utility');
 
 class CMSPluginComponent extends Component
@@ -6,10 +26,13 @@ class CMSPluginComponent extends Component
 
     function getPluginList()
     {
+        //get list of all available plugins from cake
         $allPlugins = App::objects('plugins');
         $cmsPlugins = array();
         foreach ($allPlugins as $plugin) {
+            //only add plugin to list if it is an CMS plugin
             if ($this->isCMSPlugin($plugin)) {
+                //parse information cms
                 $xml = Xml::build($this->getConfigPath($plugin));
                 $xmlData = Xml::toArray($xml);
 
@@ -21,6 +44,7 @@ class CMSPluginComponent extends Component
         return $cmsPlugins;
     }
 
+    //Get Plugin Version
     function getVersion($plugin)
     {
         $xml = Xml::build($this->getConfigPath($plugin));
@@ -28,6 +52,7 @@ class CMSPluginComponent extends Component
         return $xmlData['dualon']['plugin']['version'];
     }
 
+    //Get Plugin Author
     function getAuthor($plugin)
     {
         $xml = Xml::build($this->getConfigPath($plugin));
@@ -35,10 +60,13 @@ class CMSPluginComponent extends Component
         return $xmlData['dualon']['plugin']['author'];
     }
 
+    //Get plugin permissions
     function getPermissions($plugin)
     {
         $xml = Xml::build($this->getConfigPath($plugin));
+        //Create array from XML structure
         $xmlData = Xml::toArray($xml);
+        //only proceed if permissions really exist
         if (array_key_exists('permissions', $xmlData['dualon']['plugin'])) {
             $permissions = $xmlData['dualon']['plugin']['permissions'];
             if ($permissions == "") {
@@ -59,10 +87,13 @@ class CMSPluginComponent extends Component
         }
     }
 
+    //Get plugin views
     function getViews($plugin)
     {
         $xml = Xml::build($this->getConfigPath($plugin));
+        //create array from plugin XML structure
         $xmlData = Xml::toArray($xml);
+        //only proceed if view really exist
         if (array_key_exists('views', $xmlData['dualon']['plugin'])) {
             $views = $xmlData['dualon']['plugin']['views'];
             if ($views == "") {
@@ -120,16 +151,20 @@ class CMSPluginComponent extends Component
 
     function getInstallStatus($plugin)
     {
+        //If plugin has schema all tables have to be checked
         if ($this->hasSchema($plugin)) {
             $schema = $this->initSchema($plugin);
             $db = ConnectionManager::getDataSource($schema->connection);
             $db->cacheSources = false;
 
+            //get installed tables
             $installedTables = $db->listSources();
+            //get tables required by plugin
             $schemaTables = $schema->tables;
 
             $notFound = 0;
 
+            //check each table if it exists
             foreach ($schemaTables as $schemaTable => $table) {
                 if (!in_array($schemaTable, $installedTables)) {
                     $notFound++;
@@ -142,6 +177,7 @@ class CMSPluginComponent extends Component
                 return 2;
             }
 
+            //compare current state with state required by plugin
             $installed = $schema->read(array('plugin' => $plugin));
             $compare = $schema->compare($installed, $schema);
 
@@ -163,6 +199,7 @@ class CMSPluginComponent extends Component
 
     function executeSQL($contents, $db)
     {
+        //for each table do required sql operations
         foreach ($contents as $table => $sql) {
             if (!empty($sql)) {
                 $error = null;

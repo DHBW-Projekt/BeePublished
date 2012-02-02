@@ -1,10 +1,26 @@
 <?php
-App::uses('AppController', 'Controller');
-/**
- * Containers Controller
+/*
+ * This file is part of BeePublished which is based on CakePHP.
+ * BeePublished is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3
+ * of the License, or any later version.
+ * BeePublished is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public
+ * License along with BeePublished. If not, see
+ * http://www.gnu.org/licenses/.
  *
- * @property Container $Container
+ * @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+ * @author Christoph Krämer
+ *
+ * @description Controller for container backend functionality in layout manager
  */
+
+App::uses('AppController', 'Controller');
+
 class ContainersController extends AppController
 {
 
@@ -45,6 +61,7 @@ class ContainersController extends AppController
         $oldOrder = $container['Container']['order'];
         $oldColumn = $container['Container']['column'];
         $this->Container->delete();
+        //update positions of other containers and contents
         $this->Container->query('UPDATE containers SET `order` = `order`-1 WHERE parent_id=' . $oldContainer . ' AND `column`=' . $oldColumn . ' AND `order`>=' . $oldOrder);
         $this->Content->query('UPDATE contents SET `order` = `order`-1 WHERE container_id=' . $oldContainer . ' AND `column`=' . $oldColumn . ' AND `order`>=' . $oldOrder);
 
@@ -62,6 +79,7 @@ class ContainersController extends AppController
         $oldOrder = $container['Container']['order'];
         $oldColumn = $container['Container']['column'];
         if ($this->request->is('post')) {
+            //update other containers and contents to set new positions
             $this->Container->query('UPDATE containers SET `order` = `order`-1 WHERE parent_id=' . $oldContainer . ' AND `column`=' . $oldColumn . ' AND `order`>=' . $oldOrder);
             $this->Content->query('UPDATE contents SET `order` = `order`-1 WHERE container_id=' . $oldContainer . ' AND `column`=' . $oldColumn . ' AND `order`>=' . $oldOrder);
             $this->Container->query('UPDATE containers SET `order` = `order`+1 WHERE parent_id=' . $newContainer . ' AND `column`=' . $newColumn . ' AND `order`>=' . $newOrder);
