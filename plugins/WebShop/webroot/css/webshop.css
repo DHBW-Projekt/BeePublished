@@ -12,6 +12,11 @@
 	-khtml-border-radius:15px;
 }
 
+#websop_searchbar label{
+	width: auto;
+	margin-right:10px;
+}
+
 #webshop_cart p{
 	margin-top:5px;
 }
