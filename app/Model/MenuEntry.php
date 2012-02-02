@@ -15,6 +15,15 @@ class MenuEntry extends AppModel {
  * @var string
  */
 	public $displayField = 'name';
+	
+	public $validate = array(
+        'name' => array(
+            'notempty' => array(
+				'rule' => array('notempty'),
+            	'message' => 'Menu entry name can not be empty.'
+			)
+		)
+	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
