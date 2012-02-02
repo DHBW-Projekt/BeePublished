@@ -28,7 +28,10 @@ class SubscriptionController extends NewsletterAppController {
  		$this->layout = 'overlay';
  		$this->set('pluginId', $pluginId);
  		$this->set('contentID', $contentID);
-		$this->redirect(array('plugin' => 'Newsletter', 'controller' => 'NewsletterLetters', 'action' => 'index', $contentID, $pluginId));
+		$this->redirect(array(
+			'plugin' => 'Newsletter', 
+			'controller' => 'NewsletterLetters', 
+			'action' => 'index', $contentID, $pluginId));
  	}
  	
  	public function guestUnSubscribe(){
