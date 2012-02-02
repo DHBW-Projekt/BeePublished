@@ -1,6 +1,5 @@
 <?php
 $validationErrors = $this->Session->read('Validation.NewsletterRecipient.validationErrors');
-debug($validationErrors);
 echo __d('newsletter', 'Here you can unsubscribe from our newsletter');
 	echo $this->Session->flash('unsubscribePerMail');
 	echo $this->Form->create('Subscription',array(
