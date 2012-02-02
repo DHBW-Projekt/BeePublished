@@ -4,7 +4,6 @@ input, textarea, select {
     border-radius: 4px;
     padding: 2px;
 }
-
 input[type=text], input[type=password] {
     height: 18px;
 }
