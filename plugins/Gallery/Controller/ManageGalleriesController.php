@@ -24,14 +24,18 @@ class ManageGalleriesController  extends GalleryAppController{
 		$allGalls= $this->Gallery->getAllGalleries($this);
 		
 		$data = array(	'AllGalleries' => $allGalls);
-		$pic_array = array();
-		$index = 0;
-		foreach( $this->GalleryPictureComp->getAllPictures($this) as $picture){
-			
-			$pic_array[$index] = array($picture['id'] =>  $picture['id']);
-			$index++;
-		}
+
 		
+		if (! $this->request->is('post')) {
+			$pic_array = array();
+			$index = 0;
+			foreach( $this->GalleryPictureComp->getAllPictures($this) as $picture){
+					
+				$pic_array[$picture['id']] = $picture['title'];
+				$index++;
+			}
+		}
+				
 		$this->set('data',$data);
 		$this->set('pictures', $pic_array);
 		$this->set('mContext',$menue_context);

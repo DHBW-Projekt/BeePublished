@@ -6,7 +6,7 @@ echo $this->Session->flash('Image deleted');
 
 echo "<h2>".__('Add single image')."</h2>";
 
-echo $this->Form->create('addImage', array('url' => array('plugin' => 'Gallery','controller' => 'ManageImages','action' => 'uploadImage',$ContentId),'type' => 'file'));
+echo $this->Form->create('addImage', array('url' => array('plugin' => 'Gallery','controller' => 'ManageImages','action' => 'uploadImage',$ContentId,$mContext),'type' => 'file'));
 
 echo $this->Form->input(__('Title'));
 echo $this->Form->label(__('File'));
@@ -17,7 +17,7 @@ echo $this->Form->end();
 
 echo "<h2>".__('Add multiple images')."</h2>";
 
-echo $this->Form->create('addImage', array('url' => array('plugin' => 'Gallery','controller' => 'ManageImages','action' => 'uploadImages',$ContentId),'type' => 'file'));
+echo $this->Form->create('addImage', array('url' => array('plugin' => 'Gallery','controller' => 'ManageImages','action' => 'uploadImages',$ContentId,$mContext),'type' => 'file'));
 echo $this->Form->input('data', array('label'=>'Files', 'type'=>'file', 'name' => 'files[]', 'multiple'));
 echo $this->Form->submit(__('Add images'));
 echo $this->Form->end();
@@ -60,12 +60,12 @@ foreach ($data['AllPictures'] as $picture){
 	echo "<td>".$picture['title']."</td>";
 	
 	echo '<td>';
-	echo $this->Html->image('/app/webroot/img/edit.png',array('style' => 'float: left', 'width' => '20px', 'alt' => '[]Edit', 'url' => array('plugin' => 'Gallery', 'controller' => 'ManageImages', 'action' => 'edit', $picture['id'],$data['ContentId'])));
+	echo $this->Html->image('edit.png',array('style' => 'float: left', 'width' => '20px', 'alt' => '[]Edit', 'url' => array('plugin' => 'Gallery', 'controller' => 'ManageImages', 'action' => 'edit', $picture['id'],$ContentId,$mContext)));
 	echo '</td>';
 	
 	echo '<td>';
 	
-	echo $this->Html->link($this->Html->image('/app/webroot/img/delete.png', array(
+	echo $this->Html->link($this->Html->image('delete.png', array(
 								'height' => 20, 
 								'width' => 20, 
 								'alt' => __('[x]Delete'))),
@@ -74,7 +74,7 @@ foreach ($data['AllPictures'] as $picture){
 									'controller' => 'ManageImages', 
 									'action' => 'delete', 
 									$picture['id'],
-									$ContentId),
+									$ContentId,$mContext),
 								array(
 									'escape' => false, 
 									'title' => __('Delete Image')),
@@ -88,7 +88,7 @@ echo '</tbody>';
 	echo '<tfoot>';	
 			echo '<tr>';
 				echo '<td>';
-				echo $this->Html->image('/app/webroot/img/arrow.png', array(
+				echo $this->Html->image('arrow.png', array(
 						'height' => 20,
 						'width' => 20));
 				echo '</td>';
