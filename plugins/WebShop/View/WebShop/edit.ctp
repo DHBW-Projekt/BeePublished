@@ -30,7 +30,7 @@
 	echo $this->Form->label(__d("web_shop", 'Picture').':');
 	echo $this->Form->file('WebshopProduct.submittedfile');
 	echo "<br>";
-	echo $this->Html->image('/WebShop/img/products/'.$this->data['WebshopProduct']['picture'], array('style' => 'width: 100px'));
+	echo $this->Html->image($this->data['WebshopProduct']['picturePath'].$this->data['WebshopProduct']['picture'], array('style' => 'width: 100px'));
 	echo "<br>";
 	echo $this->Form->submit(__d("web_shop", 'Save', true), array('name' => 'save', 'div' => false));
 	echo $this->Form->submit(__d("web_shop", 'Cancel', true), array('name' => 'cancel', 'div' => false));
