@@ -81,7 +81,7 @@
 
 	<div class="input">
 		<?php 
-			echo $this->Form->label('recaptcha_response_field', __d('application_membership','Captcha'));
+			echo $this->Form->label('recaptcha_response_field', ' ');
 			echo recaptcha_get_html($publickey);	
 		?>
 	</div>
