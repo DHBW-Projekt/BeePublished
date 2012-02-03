@@ -27,7 +27,7 @@ $this->Html->css('/Guestbook/css/design',null,array('inline' => false));
 	<tfoot>
 		<tr>
 			<td colspan="3">
-				<?php echo $this->Html->image('/app/webroot/img/arrow.png', array('height' => 20,'width' => 20));?>
+				<?php echo $this->Html->image('/img/arrow.png', array('height' => 20,'width' => 20));?>
 				<?php echo $this->Form->submit(__d('Guestbook', 'Release'), array('name' => 'release', 'div' => false));?>
 				<?php echo $this->Form->submit(__d('Guestbook', 'Delete'), array('name' => 'delete', 'div' => false));?>
 			</td>

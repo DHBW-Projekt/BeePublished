@@ -1,10 +1,10 @@
 # LANGUAGE translation of Contact Form in BeePublished
-# Copyright 2011-2012>
+# Copyright  YEAR NAME <EMAIL@ADDRESS>
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.0\n"
+"Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2012-01-21 11:44+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: Corinna Knick\n"
@@ -14,96 +14,96 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: Controller\Component\ContactFormComponent.php:19
-#: View\Elements\request.ctp:10
+#: Controller\Component\ContactFormComponent.php
+#: View\Elements\request.ctp
 msgid "Contact Form"
 msgstr "Kontaktformular"
 
-#: Controller\Component\ContactFormComponent.php:93
+#: Controller\Component\ContactFormComponent.php
 msgid "Request through contact form"
 msgstr "Anfrage über Kontaktformular"
 
-#: Controller\Component\ContactFormComponent.php:100
+#: Controller\Component\ContactFormComponent.php
 msgid "Thank you for your interest. Your request has been sent."
 msgstr "Vielen Dank für Ihr Interesse. Ihre Anfrage wurde versandt."
 
-#: Controller\Component\ContactFormComponent.php:122
+#: Controller\Component\ContactFormComponent.php
 msgid "You cannot send an empty contact form."
 msgstr "Sie können kein leeres Kontaktformular abschicken."
 
-#: Controller\Component\ContactFormComponent.php:126
+#: Controller\Component\ContactFormComponent.php
 msgid "Please fill out all mandatory fields correctly."
 msgstr "Bitte füllen Sie alle Pflichtfelder korrekt aus."
 
-#: Controller\Component\ContactFormComponent.php:130
+#: Controller\Component\ContactFormComponent.php
 msgid "Please fill out the CAPTCHA field correctly."
 msgstr "Bitte füllen Sie das CAPTCHA-Feld korrekt aus."
 
-#: Controller\Component\ContactFormComponent.php:134
+#: Controller\Component\ContactFormComponent.php
 msgid "An error occurred, your request could not be sent. Please contact an administrator."
 msgstr "Es ist ein Fehler aufgetreten, Ihre Anfrage konnte nicht gesendet werden. Bitte kontaktieren Sie einen Administrator."
 
-#: View\ContactForm\admin.ctp:9
+#: View\ContactForm\admin.ctp
 msgid "Configuration"
 msgstr "Konfiguration"
 
-#: View\ContactForm\admin.ctp:10
+#: View\ContactForm\admin.ctp
 msgid "There are no configuration options available. Contact requests are automatically sent to the e-mail address in your general configurations. To change the recipient of contact requests, please set a new e-mail address in your general configurations."
 msgstr "Es sind keine Konfigurationsoptionen verfügbar. Kontaktanfragen werden automatisch an die E-Mailadresse in Ihren allgemeinen Konfigurationen gesendet. Wenn Sie den Empfänger von Kontaktanfragen ändern möchten, setzen Sie bitte eine neue E-Mailadresse in Ihren allgemeinen Konfigurationen."
 
-#: View\Elements\request.ctp:17
+#: View\Elements\request.ctp
 msgid "Name:"
 msgstr "Name:"
 
-#: View\Elements\request.ctp:19
+#: View\Elements\request.ctp
 msgid "E-Mail*:"
 msgstr "E-Mail*:"
 
-#: View\Elements\request.ctp:21
+#: View\Elements\request.ctp
 msgid "Subject*:"
 msgstr "Betreff*:"
 
-#: View\Elements\request.ctp:23
+#: View\Elements\request.ctp
 msgid "Message*:"
 msgstr "Nachricht*:"
 
-#: View\Elements\request.ctp:25
+#: View\Elements\request.ctp
 msgid "* - Mandatory fields"
 msgstr "* - Pflichtfelder"
 
-#: View\Elements\request.ctp:29
+#: View\Elements\request.ctp
 msgid "Send"
 msgstr "Absenden"
 
-#: View\Emails\html\contact.ctp:1
+#: View\Emails\html\contact.ctp
 msgid "Hello Admin."
 msgstr "Hallo Administrator."
 
-#: View\Emails\html\contact.ctp:2
+#: View\Emails\html\contact.ctp
 msgid "A user sent you the following contact request:"
 msgstr "Ein Nutzer schickte Ihnen die folgende Kontaktanfrage:"
 
-#: View\Emails\html\contact.ctp:6
+#: View\Emails\html\contact.ctp
 msgid "Name: "
 msgstr "Name: "
 
-#: View\Emails\html\contact.ctp:9
+#: View\Emails\html\contact.ctp
 msgid "E-Mail: "
 msgstr "E-Mail: "
 
-#: View\Emails\html\contact.ctp:12
+#: View\Emails\html\contact.ctp
 msgid "Subject: "
 msgstr "Betreff: "
 
-#: View\Emails\html\contact.ctp:15
+#: View\Emails\html\contact.ctp
 msgid "Message: "
 msgstr "Nachricht: "
 
-#: View\Emails\html\contact.ctp:..
+#: View\Emails\html\contact.ctp
 msgid "Yours sincerely,"
 msgstr "Mit freundlichen Grüßen,"
 
-#: View\Emails\html\contact.ctp:20
+#: View\Emails\html\contact.ctp
 msgid "Information: Contact requests are automatically sent to the e-mail address in your general configurations. To change the recipient of contact requests, please set a new e-mail address in your general configurations in BeePublished."
 msgstr "Information: Kontaktanfragen werden automatisch an die E-Mailadresse in Ihren allgemeinen Konfigurationen gesendet. Wenn Sie den Empfänger von Kontaktanfragen ändern möchten, setzen Sie bitte eine neue E-Mailadresse in Ihren allgemeinen Konfigurationen in BeePublished."
 

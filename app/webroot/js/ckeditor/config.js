@@ -10,7 +10,7 @@ CKEDITOR.editorConfig = function (config) {
     config.extraPlugins = 'bbcode';
     config.removePlugins = 'bidi,button,dialogadvtab,div,flash,format,forms,horizontalrule,iframe,indent,justify,liststyle,pagebreak,showborders,stylescombo,table,tabletools,templates';
     config.disableObjectResizing = true;
-    config.fontSize_sizes = "30/30%;50/50%;100/100%;120/120%;150/150%;200/200%;300/300%";
+    config.fontSize_sizes = "10/10px;12/12px;14/14px;16/16px;20/20px;22/22px;24/24px";
     config.toolbar = [
         ['Undo', 'Redo'],
         ['Bold', 'Italic', 'Underline'],
@@ -30,10 +30,10 @@ CKEDITOR.editorConfig = function (config) {
         'smiley', 'sad', 'wink', 'laugh', 'cheeky', 'blush', 'surprise',
         'indecision', 'angel', 'cool', 'crying', 'kiss'
     ];
-    config.filebrowserBrowseUrl = '/kcfinder/browse.php?type=files&cms=beepublished';
-    config.filebrowserImageBrowseUrl = '/kcfinder/browse.php?type=images&cms=beepublished';
-    config.filebrowserFlashBrowseUrl = '/kcfinder/browse.php?type=flash&cms=beepublished';
-    config.filebrowserUploadUrl = '/kcfinder/upload.php?type=files&cms=beepublished';
-    config.filebrowserImageUploadUrl = '/kcfinder/upload.php?type=images&cms=beepublished';
-    config.filebrowserFlashUploadUrl = '/kcfinder/upload.php?type=flash&cms=beepublished';
+    config.filebrowserBrowseUrl = window.app.webroot+'/kcfinder/browse.php?type=files&cms=beepublished';
+    config.filebrowserImageBrowseUrl = window.app.webroot+'kcfinder/browse.php?type=images&cms=beepublished';
+    config.filebrowserFlashBrowseUrl = window.app.webroot+'kcfinder/browse.php?type=flash&cms=beepublished';
+    config.filebrowserUploadUrl = window.app.webroot+'kcfinder/upload.php?type=files&cms=beepublished';
+    config.filebrowserImageUploadUrl = window.app.webroot+'kcfinder/upload.php?type=images&cms=beepublished';
+    config.filebrowserFlashUploadUrl = window.app.webroot+'kcfinder/upload.php?type=flash&cms=beepublished';
 };

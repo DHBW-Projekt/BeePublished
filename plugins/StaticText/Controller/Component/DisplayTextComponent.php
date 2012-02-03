@@ -1,5 +1,7 @@
 <?php
-
+/*
+ *  Loads and returns the text from the database, if the text exists
+ */
 class DisplayTextComponent extends Component
 {
 	//Shows the text from the contentvalue-model

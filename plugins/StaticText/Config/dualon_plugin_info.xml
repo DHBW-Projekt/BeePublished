@@ -11,7 +11,7 @@
         <permissions>
             <permission>
                 <role>Author</role>
-                <action>edit</action>
+                <action>edittext</action>
             </permission>
         </permissions>
     </plugin>
