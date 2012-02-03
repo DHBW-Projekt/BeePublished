@@ -21,7 +21,7 @@ msgid "A file with the specified name already exists!"
 msgstr "Eine Datei mit dem angegebenen Namen existiert bereits!"
 
 msgid "The file with the filename "
-msgstr "Die Date mit dem Dateinamen "
+msgstr "Die Datei mit dem Dateinamen "
 
 msgid " has been uploaded."
 msgstr " wurde erfolgreich hochgeladen."
@@ -54,7 +54,7 @@ msgid "Browse"
 msgstr "Durchsuchen"
 
 msgid "Cryptkey"
-msgstr "Verschlüsselungsphrase"
+msgstr "Schlüssel"
 
 msgid "Expire time"
 msgstr "Gültigkeit"
