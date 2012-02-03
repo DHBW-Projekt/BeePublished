@@ -151,8 +151,8 @@ class MyFilesController extends FileShareAppController
         if (empty($this->request->data)) {
             $this->request->data = array(
                 'null' => array(
-                    'Cryptkey' => $ck,
-                    'Expire time' => $et
+                    __d('file_share','Cryptkey') => $ck,
+                    __d('file_share','Expire time') => $et
                 )
             );
         }
