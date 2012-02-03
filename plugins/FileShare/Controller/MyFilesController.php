@@ -117,7 +117,7 @@ class MyFilesController extends FileShareAppController
         parent::beforeFilter();
 
         //Actions which don't require authorization
-        $this->Auth->allow('upload');
+        $this->Auth->allow('upload','download');
     }
 
     public function admin()
@@ -151,8 +151,8 @@ class MyFilesController extends FileShareAppController
         if (empty($this->request->data)) {
             $this->request->data = array(
                 'null' => array(
-                    'Cryptkey' => $ck,
-                    'Expire time' => $et
+                    __d('file_share','Cryptkey') => $ck,
+                    __d('file_share','Expire time') => $et
                 )
             );
         }
