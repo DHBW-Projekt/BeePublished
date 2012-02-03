@@ -75,7 +75,7 @@ class ApplicationMembershipComponent extends Component {
 			$data_error = true;
 	
 		//SANITIZE
-		$controller->data =  Sanitize::html($controller->data);
+		$controller->data = Sanitize::clean($controller->data);
 		
 		//VALIDATE data
 		if(!$data_error){
