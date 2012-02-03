@@ -24,7 +24,7 @@
 	
 	<div class="input">
 		<?php 
-			echo $this->Form->label('recaptcha_response_field', __d('contact_form',' '));
+			echo $this->Form->label('recaptcha_response_field', ' ');
 			echo recaptcha_get_html($publickey);
 		?>
 	</div>

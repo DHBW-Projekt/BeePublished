@@ -67,10 +67,6 @@ msgstr "Betreff*:"
 msgid "Message*:"
 msgstr "Nachricht*:"
 
-#: View\Elements\request.ctp:..
-msgid "CAPTCHA*:"
-msgstr "CAPTCHA*:"
-
 #: View\Elements\request.ctp:25
 msgid "* - Mandatory fields"
 msgstr "* - Pflichtfelder"
