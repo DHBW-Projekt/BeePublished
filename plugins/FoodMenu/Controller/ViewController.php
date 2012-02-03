@@ -22,13 +22,15 @@ class ViewController extends FoodMenuAppController {
         $pluginId = $this->getPluginId();
         $this->set('pluginId', $pluginId);
     }
-
+	// Method to start admin overlay
 	public function admin( $contentID ) {
 		$menus = $this->FoodMenuMenu->find('all', array('order' => array('valid_until ASC')));
 		$this->set('menus', $menus);
+		//render first page of admin overlay
 		$this->render('/FoodMenuMenus/index');
 	}
 	
+	// perform date selection if a user wants to know what dishes are availible on a special date
 	function selectDate() {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			$data = $this->request->data;
