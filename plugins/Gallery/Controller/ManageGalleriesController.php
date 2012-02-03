@@ -1,9 +1,32 @@
 <?php
+/*
+ * This file is part of BeePublished which is based on CakePHP.
+ * BeePublished is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3
+ * of the License, or any later version.
+ * BeePublished is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public
+ * License along with BeePublished. If not, see
+ * http://www.gnu.org/licenses/.
+ *
+ * @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+ * @author Alexander Müller & Fabian Kajzar
+ * 
+ * @description Controller to manage all operations relating galleries
+ */
+
 class ManageGalleriesController  extends GalleryAppController{
 	public $layout = 'overlay';
 	
 	public $components = array('Gallery.Gallery','Gallery.GalleryPictureComp');
 	
+	/* (non-PHPdoc)
+	 * @see Controller::beforeRender()
+	 */
 	function beforeRender()
     {
         parent::beforeRender();
@@ -17,14 +40,13 @@ class ManageGalleriesController  extends GalleryAppController{
 	/**
 	 * Index function, to list all available Galleries
 	 * @param int $contentId
+	 * @param string $menue_context
 	 */
-	public function index($contentId, $menue_context){
-			
+	public function index($contentId, $menue_context){	
 				
 		$allGalls= $this->Gallery->getAllGalleries($this);
 		
 		$data = array(	'AllGalleries' => $allGalls);
-
 		
 		if (! $this->request->is('post')) {
 			$pic_array = array();
@@ -44,16 +66,18 @@ class ManageGalleriesController  extends GalleryAppController{
 	/**
 	 * Function related the create View (to create a new Gallery)
 	 * @param int $contentId
+	 * @param string $menue_context
 	 */
 	public function create($contentId, $menue_context){
 
 		$pluginId = $this->getPluginId();
 		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
 		
-
+		//check whether in put is poast
 		if (! $this->request->is('post')) {
 		$pic_array = array();
 		$index = 0;
+		//build up array for titlepic drop down
 		foreach( $this->GalleryPictureComp->getAllPictures($this) as $picture){
 			
 			$pic_array[$picture['id']] = $picture['title'];
@@ -96,9 +120,9 @@ class ManageGalleriesController  extends GalleryAppController{
 	 * deletes a gallery
 	 * @param int $galleryId
 	 * @param int $contentId
+	 * @param string $menue_context
 	 */
 	public function delete($galleryId, $contentId, $menue_context){
-	
 	
 		$pluginId = $this->getPluginId();
 		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete', true);
@@ -126,20 +150,22 @@ class ManageGalleriesController  extends GalleryAppController{
 				
 				foreach($galleries as $gallery){
 					$id = $gallery['GalleryEntry']['id'];
+					//check whether deleted are set
 					if ($selectedGalleries[$id] == 1){
 						$this->Gallery->delete($this,$id);
 						$deleteditems++;
 					}
 				}
+				//notify
 				if(! ($deleteditems <=0)){
 					$this->Session->setFlash(__('Deleted sucessfully'), 'default', array('class' => 'flash_success'),'GalleryNotification');
-				}	
+				}//if
 			} else {
 					$this->Session->setFlash(__('Nothing selected.'), 'default', array('class' => 'flash_failure'),'GalleryNotification');
-			}
+			}//else
 			
 			$this->redirect($this->referer());
-		}
+		}//if is post
 	
 	}//function delete selected
 	
@@ -147,6 +173,7 @@ class ManageGalleriesController  extends GalleryAppController{
 	 * Allows to Edit Galleries, related to Edit view
 	 * @param id $galleryId
 	 * @param id $contentId
+	 * @param id $menue_context 
 	 */
 	public function edit($galleryId,$contentId, $menue_context){
 		$pluginId = $this->getPluginId();
@@ -160,8 +187,8 @@ class ManageGalleriesController  extends GalleryAppController{
 				} else {
 					$this->Session->setFlash(__('Your Gallery was not saved'), 'default', array('class' => 'flash_failure'));
 					$this->redirect(array(	'action' => 'index', $contentId,$menue_context));		
-				}
-				//$this->redirect($this->referer());
+				}//else
+				$this->redirect($this->referer());
 		}
 		//if no post data isset
 		
@@ -175,6 +202,7 @@ class ManageGalleriesController  extends GalleryAppController{
 	 * Method related to the View for assigning images to a gallery
 	 * @param int $galleryId
 	 * @param int $contentId
+	 * @param int $menuecontext
 	 */
 	public function assignImages($galleryId,$contentId, $menue_context){
 			$pluginId = $this->getPluginId();
@@ -192,8 +220,10 @@ class ManageGalleriesController  extends GalleryAppController{
 	 * Assigns an image to the specified Gallery
 	 * @param int $galleryId
 	 * @param int $pictureId
+	 * @param int $menuecontext
 	 */
 	public function assignImage($galleryId,$pictureId, $menue_context){
+		//get pictures
 		$picture = $this->GalleryPictureComp->getPicture($this, $pictureId);
 		
 		if($picture['gallery_entry_id'] == null){
@@ -211,6 +241,7 @@ class ManageGalleriesController  extends GalleryAppController{
 	 * Ressigns an image to the specified Gallery
 	 * @param int $galleryId
 	 * @param int $pictureId
+	 * @param int $menuecontext
 	 */
 	public function unassignImage($galleryId,$pictureId,$menue_context){
 		$picture = $this->GalleryPictureComp->getPicture($this, $pictureId);

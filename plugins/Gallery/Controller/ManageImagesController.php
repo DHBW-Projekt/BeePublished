@@ -1,4 +1,24 @@
 <?php
+/*
+ * This file is part of BeePublished which is based on CakePHP.
+ * BeePublished is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3
+ * of the License, or any later version.
+ * BeePublished is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public
+ * License along with BeePublished. If not, see
+ * http://www.gnu.org/licenses/.
+ *
+ * @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+ * @author Alexander Müller & Fabian Kajzar
+ * 
+ * @description Controller to manage all operations relating images
+ */
+
 class ManageImagesController  extends GalleryAppController{
 	var $layout = 'overlay';
 	
@@ -43,6 +63,11 @@ class ManageImagesController  extends GalleryAppController{
         return false;  
     }  
     
+	/**
+	 * Uploads an imge and checks the context
+	 * @param int $contentId
+	 * @param int $menue_context
+	 */
 	public function uploadImage($contentId, $menue_context){
 				
 		// test if image is selected
@@ -141,6 +166,11 @@ class ManageImagesController  extends GalleryAppController{
 		
 	}
 	
+	/**
+	 * Create View
+	 * @param int $contentId
+	 * @param String $menue_context
+	 */
 	public function create($contentId, $menue_context){
 		
 		$pluginId = $this->getPluginId();
@@ -163,8 +193,6 @@ class ManageImagesController  extends GalleryAppController{
 	 */
 	private function addImageInternal($image){
 		
-	
-		
 		$timestamp = time();
 		$day = date("dmY",$timestamp);
 		$time = date("Hi",$timestamp);
@@ -173,8 +201,7 @@ class ManageImagesController  extends GalleryAppController{
 		
 		$filedest = "uploads/gallery".'/'.$day.$time.$image['name'];
 		
-
-		
+		//if the folder does not exist create it!
 		if(!file_exists($dir_gallery)){
 			mkdir($dir_gallery);
 		}
@@ -196,6 +223,12 @@ class ManageImagesController  extends GalleryAppController{
 		return true;
 	}
 	
+	/**
+	 * Deletes one picture
+	 * @param int $pictureId
+	 * @param int $contentId
+	 * @param string $menue_context
+	 */
 	public function delete($pictureId, $contentId, $menue_context){
 		
 		$pluginId = $this->getPluginId();
@@ -208,6 +241,11 @@ class ManageImagesController  extends GalleryAppController{
 		$this->redirect($this->referer());
 	}
 	
+	/**
+	 * Delete a list of images
+	 * @param int $contentId
+	 * @param string $menue_context
+	 */
 	public function deleteSelected($contentId,  $menue_context){
 		$pluginId = $this->getPluginId();
 		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete', true);
@@ -224,10 +262,20 @@ class ManageImagesController  extends GalleryAppController{
 		$this->redirect($this->referer());
 	}
 	
+	/**
+	 * Deletes a picture
+	 * @param int $pictureID
+	 */
 	private function deletePictureInternal($pictureID){
 		$picture = $this->GalleryPictureComp->delete($this,$pictureID);
 	}
 
+	/**
+	 * Method relating the Edit view to edit a gallery
+	 * @param unknown_type $pictureId
+	 * @param unknown_type $contentId
+	 * @param unknown_type $menue_context
+	 */
 	public function edit($pictureId,$contentId,$menue_context){
 		
 		$pluginId = $this->getPluginId();
@@ -243,6 +291,11 @@ class ManageImagesController  extends GalleryAppController{
 		$this->set('mContext',$menue_context);		
 	}
 	
+	/**
+	 * saves an image to the db
+	 * @param unknown_type $contentId
+	 * @param unknown_type $menue_context
+	 */
 	public function save($contentId, $menue_context){
 		$this->GalleryPictureComp->save($this,$this->data['GalleryPicture']);
 		$this->set('mContext',$menue_context);
