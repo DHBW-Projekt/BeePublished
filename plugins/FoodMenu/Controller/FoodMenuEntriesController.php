@@ -34,11 +34,13 @@ class FoodMenuEntriesController extends FoodMenuAppController {
         $this->set('pluginId', $pluginId);
     }
     
+    // put all entries into an array
     public function index() {
 		$entries = $this->FoodMenuEntry->find('all', array('conditions' => array('deleted' => null)));
 		$this->set('entries', $entries);	
 	}
 
+	// create a new entry
 	function create() {
 		$pluginId = $this->getPluginId();
 		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
@@ -55,6 +57,7 @@ class FoodMenuEntriesController extends FoodMenuAppController {
         }//if
 	}//create
 	
+	// edit an existing entry
 	function edit($name = null, $id = null) {	
 		$pluginId = $this->getPluginId();
 		$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'edit', true);
@@ -87,6 +90,7 @@ class FoodMenuEntriesController extends FoodMenuAppController {
 			
 	}//edit
 
+	//delete an entry (logically)
 	function delete($name = null, $id = null) {
 		$pluginId = $this->getPluginId();
 		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete', true);
@@ -95,7 +99,9 @@ class FoodMenuEntriesController extends FoodMenuAppController {
 		if ($this->request->is('get')) {
 			$this->request->data = $this->FoodMenuEntry->read();
 			$this->request->data['FoodMenuEntry']['deleted'] = date("Y-m-d H:i:s");
-			$save['FoodMenuEntry'] = $this->request->data['FoodMenuEntry'];
+			$save['FoodMenuEntry'] = $this->request->data['FoodMenuEntry'];#
+			
+			//if deletion was successful, delete associations, too.
 			if($this->FoodMenuEntry->save($save)) {
 				$this->FoodMenuCategoriesFoodMenuEntry->deleteAll(array('FoodMenuCategoriesFoodMenuEntry.food_menu_entry_id' => $id), false);
 				$this->Session->setFlash(__d('food_menu', 'The entry has been deleted.', array('class' => 'flash_success')));
@@ -104,6 +110,7 @@ class FoodMenuEntriesController extends FoodMenuAppController {
 		}//if	
 	}//delete
 	
+	//delete more than one entry at once
 	function deleteMultiple() {
 		$pluginId = $this->getPluginId();
 		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete', true);
@@ -115,6 +122,7 @@ class FoodMenuEntriesController extends FoodMenuAppController {
 					$this->request->data = $this->FoodMenuEntry->read();
 					$this->request->data['FoodMenuEntry']['deleted'] = date("Y-m-d H:i:s");
 					$save['FoodMenuEntry'] = $this->request->data['FoodMenuEntry'];
+					//if deletion was successful, delete associations, too.
 					if($this->FoodMenuEntry->save($save)) {
 						$this->FoodMenuCategoriesFoodMenuEntry->deleteAll(array('FoodMenuCategoriesFoodMenuEntry.food_menu_entry_id' => $id), false);
 						continue;
