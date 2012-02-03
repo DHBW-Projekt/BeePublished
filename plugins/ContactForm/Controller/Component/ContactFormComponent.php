@@ -75,7 +75,7 @@ class ContactFormComponent extends Component {
 		}	
 		
 		//SANITIZE
-		$controller->data =  Sanitize::html($controller->data);
+		$controller->data =  Sanitize::clean($controller->data);
 
 		//SET input data
 		$controller->ContactRequest->set($controller->data['ContactRequest']);
