@@ -1,6 +1,6 @@
 <?php 
 	App::uses('Sanitize', 'Utility');
-	$data = Sanitize::clean($data);
+	$data = Sanitize::clean($data, array('unicode' => true, 'encode' => false, 'remove_html' => true));;
 	
 	//bind javascript and css
 	$this->Html->script('/newsblog/js/displayFullNews', false);
@@ -25,10 +25,10 @@
 
 <div class='showFullNewsContainer'>
 	<h2 class='showFullNewsTitle'>
-		<?php echo Sanitize::html($data['NewsEntry']['title']);?>
+		<?php echo $data['NewsEntry']['title'];?>
 	</h2>
 	<?php if($data['NewsEntry']['subtitle'] != null & $data['NewsEntry']['subtitle'] != ''){
-		echo '<h3 class="showFullNewsSubtitle">'.Sanitize::html($data['NewsEntry']['subtitle']).'</h3>';
+		echo '<h3 class="showFullNewsSubtitle">'.$data['NewsEntry']['subtitle'].'</h3>';
 	}?>
 	<div class='showFullNewsInfo'>
 		<?php 
@@ -57,7 +57,7 @@
 		?>
 	</div>
 	<div class='showFullNewsBody'>
-		<?php echo $this->BBCode->transformBBCode(Sanitize::html($data['NewsEntry']['text']));?>
+		<?php echo $this->BBCode->transformBBCode($data['NewsEntry']['text']);?>
 	</div>
 	<div class='showFullNewsSocial'>
 		<?php

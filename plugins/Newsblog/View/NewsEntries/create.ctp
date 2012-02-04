@@ -1,11 +1,11 @@
 <?php 
-$this->Html->script('jquery/jquery-ui-timepicker-addon', array('inline' => false));
+$this->Html->script('jquery/jqueryui/jquery-ui-timepicker-addon', array('inline' => false));
 $this->Html->script('ckeditor/ckeditor', array('inline' => false));
 $this->Html->script('ckeditor/adapters/jquery', array('inline' => false));
 $this->Html->script('/newsblog/js/admin_write', false);
 $this->Html->css('/newsblog/css/admin', null, array('inline' => false));
-$this->Html->css('/css/jquery-ui-1.8.16.custom', null, array('inline' => false));
-
+$this->Html->css('/css/jqueryui/jquery-ui-1.8.17.custom', null, array('inline' => false));
+$this->Html->css('/css/jqueryui/jquery-ui-timepicker-addon.css', null, array('inline' => false));
 $DateTimeHelper = $this->Helpers->load('Time');
 
 echo $this->element('admin_menu',array('plugin' => 'Newsblog'), array('contentId' => $contentId));
