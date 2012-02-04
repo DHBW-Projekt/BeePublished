@@ -19,6 +19,8 @@
  * @description Component that capsulates basic operations on image objects
  */
 
+App::uses('Sanitize', 'Utility');
+
 class GalleryPictureCompComponent extends Component
 {
 	public $uses = array ('Gallery.GalleryPicture');
@@ -124,8 +126,8 @@ class GalleryPictureCompComponent extends Component
 		$pathInfo = pathinfo($picture['path_to_pic']);	
 		
 		$picture['thumb'] = $pathInfo['dirname']."/thumb/".$pathInfo['basename'];
-		return $picture;
 		
+		return Sanitize::clean($picture, array('encode' => false));
 	}
 	
 	/**
