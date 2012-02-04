@@ -1,13 +1,26 @@
 <?php
+/*
+ * This file is part of BeePublished which is based on CakePHP.
+ * BeePublished is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3
+ * of the License, or any later version.
+ * BeePublished is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public
+ * License along with BeePublished. If not, see
+ * http://www.gnu.org/licenses/.
+ *
+ * @copyright 2012 Duale Hochschule Baden-Wuerttemberg Mannheim
+ * @author Maximilian Stueber and Patrick Zamzow
+ *
+ * @description Controller for WebShop.
+ */
 
 App::uses('Sanitize', 'Utility');
 
-/**
- * WebShopController
- * 
- * @author Maximilian Stueber and Patrick Zamzow
- *
- */
 class WebShopController extends WebShopAppController {
 	
 	//Attributes
@@ -115,7 +128,7 @@ class WebShopController extends WebShopAppController {
 							'name' => $this->data['WebshopProduct']['name'],
 							'description' => $this->data['WebshopProduct']['description'],
 							'price' => $this->data['WebshopProduct']['price'],
-							'picture' => $file_name
+							'picture' => $file_name,
 				));
 				
 				//VALIDATE
@@ -177,34 +190,38 @@ class WebShopController extends WebShopAppController {
 
 			$data_new = $this->data;
 			$data_new['WebshopProduct']['picture'] = $data_old['WebshopProduct']['picture'];
+			
+			//UPLOAD new file (if necessary)			
+			if (!empty($data_new['WebshopProduct']['submittedfile']['name'])){
+				$result = $this->uploadImage($data_new['WebshopProduct']['submittedfile'], $data_old['WebshopProduct']['picture'], false);
+				
+				$update_error = $result['error'];
+				$data_new['WebshopProduct']['picture'] = $result['file_name'];
 
+				if($update_error){
+					$error_message = __d('web_shop', 'Errors during picture upload.');
+					$data_new['WebshopProduct']['picture'] = $data_old['WebshopProduct']['picture'];
+				}
+			}
+			
+			//SAVE
+			if(!$update_error){
+				$this->WebshopProduct->set(array('picture' => $data_new['WebshopProduct']['picture']));
+				$this->WebshopProduct->save();
+			}
+			
 			//SET data
 			if(!$update_error){
 				$this->WebshopProduct->set($data_old);
 				$this->WebshopProduct->set($data_new);
-				
+			
 				$update_error = !$this->WebshopProduct->validates();
 			}
-			
-			//UPLOAD new file (if necessary)			
-			if (!$update_error && !empty($data_new['WebshopProduct']['submittedfile']['name'])){
-				$result = $this->uploadImage($data_new['WebshopProduct']['submittedfile'], $data_old['WebshopProduct']['picture'], false);
-				
-				$data_new['WebshopProduct']['picture'] = $result['file_name'];
-				$update_error = $result['error'];
 
-				if($update_error)
-					$error_message = __d('web_shop', 'Errors during picture upload.');
-			}
-
-			//SET new data
+			//SAVE
 			if(!$update_error){
-				$this->WebshopProduct->set($data_new);
-				
-				//SAVE
 				$update_error = !$this->WebshopProduct->save();
 			}
-		
 		
 			//PRINT messages
 			if (!$update_error){
@@ -300,7 +317,7 @@ class WebShopController extends WebShopAppController {
 		}
 		
 		//REMOVE old image
-		if(!$init_creation && $file_old != 'no_image.png'){
+		if(!$upload_error && !$init_creation && $file_old != 'no_image.png'){
 			@unlink($file_path.$file_old);
 		}
 	

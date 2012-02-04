@@ -33,7 +33,7 @@
 	<?php echo $data['Impressum']['post_code'].' '.$data['Impressum']['city']; ?>
 	<br />
 	<?php echo $data['Impressum']['country']; ?>
-	<br />
+	<br>
 </p>
 <br>
 
@@ -52,7 +52,6 @@
 <h2>
 	<?php echo __('Kontaktdaten'); ?>
 </h2>
-<br>
 <table>
 	<tbody>
 		<?php 
@@ -93,11 +92,9 @@
 		?>
 	</tbody>
 </table>
-<br>
 
 <!-- this was all data a private person needs to provide -->
 <?php if ($data['Impressum']['type']!='priv') { ?>
-
 	<!-- so now here comes all the legal stuff -->
 
 	<!-- maybe it has to be registered -->
@@ -163,10 +160,10 @@
 			<!-- job title is only needed if the person has a special job -->
 			<?php 
 				if ($data['Impressum']['type'] == 'job') { 
-					echo "<br>".__('Berufsbezeichnung: ').$data['Impressum']['job_title']; 
-					echo "<br>".__('Zuständige Kammer: ');
+					echo __('Berufsbezeichnung: ').$data['Impressum']['job_title']."<br>"; 
+					echo __('Zuständige Kammer: ');
 				} else {
-					echo "<br>".__('Zuständige Behörde: ');
+					echo __('Zuständige Behörde: ');
 				}
 				echo $data['Impressum']['adm_office_name'];
 			?>
@@ -189,11 +186,11 @@
 				}
 			?>
 		</p>
+		<br>
 	<?php } //adm_office == true ?>
 <?php } //type != priv ?>
 
 <!-- now everybody needs the following -->
-<br>
 <h2>
 	<?php echo __('Haftungsausschluss'); ?>
 </h2>

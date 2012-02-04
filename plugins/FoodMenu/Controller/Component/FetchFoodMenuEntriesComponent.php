@@ -1,7 +1,26 @@
 <?php
-
+/*
+ * This file is part of BeePublished which is based on CakePHP.
+ * BeePublished is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3
+ * of the License, or any later version.
+ * BeePublished is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public
+ * License along with BeePublished. If not, see
+ * http://www.gnu.org/licenses/.
+ *
+ * @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+ * @author Benedikt Steffan
+ * 
+ * @description Component to fetch database datasets
+ */
 class FetchFoodMenuEntriesComponent extends Component
 {
+	// provide menus for view
 	public function getMenus($controller, $selectedDate = null) {
 		$menuItems = array();
 		
@@ -26,6 +45,7 @@ class FetchFoodMenuEntriesComponent extends Component
         return $menuItems;
     }
     
+	// provide categories for view
     public function getCategories($controller, $menuID)
     {
     	$categoryItems = array();
@@ -47,6 +67,7 @@ class FetchFoodMenuEntriesComponent extends Component
         return $categoryItems;
     }
 	
+	// provide entries for view
     public function getEntries($controller, $menuID, $categoryID)
     {
     	$entryItems = array();
@@ -63,6 +84,7 @@ class FetchFoodMenuEntriesComponent extends Component
         return $entryItems;
     }
     
+    //calc weekday by value in food_menu_series_id
     public function getWeekdays($seriesId) {
 		$days = $seriesId;
 		$daysAvailible = array();
@@ -74,6 +96,6 @@ class FetchFoodMenuEntriesComponent extends Component
 			else $daysAvailible[$i] = 0;
 		}
 		return $daysAvailible;   	
-    }
+    } // like a boss ;-)
     
 }

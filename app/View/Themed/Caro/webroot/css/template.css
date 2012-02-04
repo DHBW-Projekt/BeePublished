@@ -140,14 +140,7 @@
 }
 
 h2, h1, h3, h4, h5, h6 {
-    -moz-border-radius-topleft: 3px;
-    -moz-border-radius-topright: 3px;
-    -moz-border-radius-bottomright: 0px;
-    -moz-border-radius-bottomleft: 0px;
-    -webkit-border-radius: 3px 3px 0px 0px;
-    border-radius: 3px 3px 0px 0px;
     border-bottom: none;
-    padding: 5px 10px;
     margin: 10px 0px;
 }
 
@@ -221,7 +214,7 @@ h2, h1, h3, h4, h5, h6 {
 }
 
 .user_detail, .users-placeholder {
-    width: 125px;
+    width: 145px;
     height: 75px;
     margin: 5px;
     float: left;
@@ -241,10 +234,10 @@ h2, h1, h3, h4, h5, h6 {
 form {
     text-align: left;
     margin: 0.5em;
-    overflow: auto;
+
 }
 
-form>div {
+form div {
     margin: 1em;
     text-align: left;
 }
@@ -252,10 +245,22 @@ form>div {
 label {
     display: inline-block;
     margin-right: 2em;
-    text-align: right;
+    text-align: left;
     width: 25%;
 	
 }
+
+input[type="radio"] {
+clear:both;
+float:left;
+margin-right: 5px;
+}
+
+p > label {
+	float:left;
+}
+
+
 
 .input.checkbox label{
 	text-align: left;

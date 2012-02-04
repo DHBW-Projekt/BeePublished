@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2012-01-26 11:47+0100\n"
+"POT-Creation-Date: 2012-02-02 14:14+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -13,6 +13,60 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+msgid "You don't have permissions to upload a file!"
+msgstr "Sie haben keine Berechtigung eine Datei hochzuladen!"
+
+msgid "A file with the specified name already exists!"
+msgstr "Eine Datei mit dem angegebenen Namen existiert bereits!"
+
+msgid "The file with the filename "
+msgstr "Die Datei mit dem Dateinamen "
+
+msgid " has been uploaded."
+msgstr " wurde erfolgreich hochgeladen."
+
+msgid "Unable to upload your file"
+msgstr "Ihre Datei konnte nicht hochgeladen werden"
+
+msgid "No file selected!"
+msgstr "Keine Datei ausgewählt!"
+
+msgid "Your file is bigger than "
+msgstr "Ihre Datei ist größer als "
+
+msgid "You don't have permissions to delete "
+msgstr "Sie haben keine Berechtigung die folgende Datei zu löschen: "
+
+msgid "The file "
+msgstr "Die Datei "
+
+msgid " has been deleted."
+msgstr " wurde erfolgreich gelöscht."
+
+msgid "An error occurred while deleting "
+msgstr "Während des Löschens ist ein Fehler aufgetreten. Datei: "
+
+msgid "Saved successfully"
+msgstr "Erfolgreich gespeichert"
+
+msgid "Browse"
+msgstr "Durchsuchen"
+
+msgid "Cryptkey"
+msgstr "Schlüssel"
+
+msgid "Expire time"
+msgstr "Gültigkeit"
+
+msgid " in seconds"
+msgstr " in sekunden"
+
+msgid "Your link expired "
+msgstr "Ihr Link ist vor "
+
+msgid " seconds ago."
+msgstr " sekunden abgelaufen."
 
 msgid "Filename"
 msgstr "Dateiname"

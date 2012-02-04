@@ -3,5 +3,5 @@ $(document).ready(function () {
         onChangeLoad:window.app.webroot+'configuration/designs',
         selects:['data[Configuration][active_template]', 'data[Configuration][active_design]']
     });
-    $('#ConfigurationStatus-text').ckeditor(function () {},{});
+    $('#ConfigurationStatusText').ckeditor(function () {},{});
 });
