@@ -6,10 +6,6 @@ $(document).ready(function () {
 		$('.newsblog_entry_buttons', this).hide();
 	});
 	
-	$(".newsentry_delete_button_icon" ,this).click(function(){
-		
-	})
-	
 	$(".overlay").fancybox({
 		'type':'iframe',
 		'width':'90%',
@@ -20,8 +16,15 @@ $(document).ready(function () {
 	});
 	
 	$('.newsblogreadconfig_button').click(function(){
-		var items = $('.newsblogreadconfig_items');
-		items.toggle('slow');
+		$('.newsblogreadconfig_items').slideToggle('slow', function(){
+			var isVisible = $('.newsblogreadconfig_items').is(':visible');
+			var isHidden = $('.newsblogreadconfig_items').is(':hidden');
+			if( isVisible ){
+				$('.newsblogreadconfig_button a').html(window.app.hideConfigText);
+			} else if( isHidden ){
+				$('.newsblogreadconfig_button a').html(window.app.showConfigText);
+			}
+		});
 	});
 	
 	$('.newsblogcontainer').jPaginate({
