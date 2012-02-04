@@ -1,4 +1,24 @@
 <?php
+/*
+ * This file is part of BeePublished which is based on CakePHP.
+ * BeePublished is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3
+ * of the License, or any later version.
+ * BeePublished is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public
+ * License along with BeePublished. If not, see
+ * http://www.gnu.org/licenses/.
+ *
+ * @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+ * @author Alexander Müller & Fabian Kajzar
+ * 
+ * @description Component that capsulates basic operations on gallery objects
+ */
+
 class GalleryComponent extends Component {
 	public $uses = array ('Gallery.GalleryEntry', 'Gallery.GalleryPicture');
 	public $components = array('Gallery.GalleryPictureComp');
@@ -11,8 +31,13 @@ class GalleryComponent extends Component {
 	 */
 	public function getGallery($controller, $galleryId){		
 		$controller->loadModel('Gallery.GalleryEntry');	
-		$gallery = $controller->GalleryEntry->findById($galleryId);		
+		$gallery = $controller->GalleryEntry->findById($galleryId);
+		//assigned gallery was deleted
+		if(empty($gallery)){
+			return null;
+		}
 		$this->normalizeGallery($controller, &$gallery);
+	
 		if(isset($gallery['GalleryPicture']))
 			foreach($gallery['GalleryPicture'] as &$picture)
 				$this->GalleryPictureComp->normalizePicture(&$picture);

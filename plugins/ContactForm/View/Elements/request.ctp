@@ -41,12 +41,6 @@
 			echo $this->Form->input('email', array('label' => __d('contact_form','E-Mail*:'), 'maxlength' => '50'));
 			echo $this->Form->input('subject', array('label' => __d('contact_form','Subject*:'), 'maxlength' => '100'));
 			echo $this->Form->input('body', array('label' => __d('contact_form','Message*:'), 'rows' => '4'));
-		?>
-	</div>
-	
-	<div class="input">
-		<?php 
-			echo $this->Form->label('recaptcha_response_field', __d('contact_form','CAPTCHA*:'));
 			echo recaptcha_get_html($publickey);
 		?>
 	</div>

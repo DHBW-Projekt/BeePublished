@@ -1,12 +1,33 @@
 <?php
-echo $this->element('admin_menu_images',array("ContentId" => $data['ContentId']));
+/*
+ * This file is part of BeePublished which is based on CakePHP.
+ * BeePublished is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3
+ * of the License, or any later version.
+ * BeePublished is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public
+ * License along with BeePublished. If not, see
+ * http://www.gnu.org/licenses/.
+ *
+ * @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+ * @author Alexander Müller & Fabian Kajzar
+ * 
+ * @description index view for images
+ */
+
+
+echo $this->element('admin_menu',array("ContentId" => $ContentId, "mContext" => $mContext));
 
 echo $this->Session->flash('Image saved');
 echo $this->Session->flash('Image deleted');
 
 echo "<h2>".__('Add single image')."</h2>";
 
-echo $this->Form->create('addImage', array('url' => array('plugin' => 'Gallery','controller' => 'ManageImages','action' => 'uploadImage',$data['ContentId']),'type' => 'file'));
+echo $this->Form->create('addImage', array('url' => array('plugin' => 'Gallery','controller' => 'ManageImages','action' => 'uploadImage',$ContentId,$mContext),'type' => 'file'));
 
 echo $this->Form->input(__('Title'));
 echo $this->Form->label(__('File'));
@@ -17,7 +38,7 @@ echo $this->Form->end();
 
 echo "<h2>".__('Add multiple images')."</h2>";
 
-echo $this->Form->create('addImage', array('url' => array('plugin' => 'Gallery','controller' => 'ManageImages','action' => 'uploadImages',$data['ContentId']),'type' => 'file'));
+echo $this->Form->create('addImage', array('url' => array('plugin' => 'Gallery','controller' => 'ManageImages','action' => 'uploadImages',$ContentId,$mContext),'type' => 'file'));
 echo $this->Form->input('data', array('label'=>'Files', 'type'=>'file', 'name' => 'files[]', 'multiple'));
 echo $this->Form->submit(__('Add images'));
 echo $this->Form->end();
@@ -32,7 +53,6 @@ echo '<table>';
 	echo '<thead>';
 		echo '<tr>';
 			echo '<th></th>';
-			echo '<th>'.__('Id').'</th>';
 			echo '<th>'.__('Preview').'</th>';
 			echo '<th>'.__('Title').'</th>';
 			echo '<th>'.__('Edit').'</th>';
@@ -44,28 +64,25 @@ echo $this->Form->create('selectPictures', array(
 				'url' => array(
 				'plugin' => 'Gallery',
 				'controller' => 'ManageImages',
-				'action' => 'deleteSelected',$data['ContentId']),
+				'action' => 'deleteSelected',$ContentId),
 				'onsubmit'=>'return confirm(\''.__('Do you really want to delete the selected images?').'\');'));
 
 foreach ($data['AllPictures'] as $picture){
 	echo "<tr>";
 	
 	echo "<td>".$this->Form->checkbox($picture['id'])."</td>";
-	
-	echo "<td>".$picture['id']."</td>";
-	
+		
 	echo '<td>'.'<img src="'.$this->webroot.$picture['thumb'].'" width="35px" /></td>';
-	
-	
+
 	echo "<td>".$picture['title']."</td>";
 	
 	echo '<td>';
-	echo $this->Html->image('/app/webroot/img/edit.png',array('style' => 'float: left', 'width' => '20px', 'alt' => '[]Edit', 'url' => array('plugin' => 'Gallery', 'controller' => 'ManageImages', 'action' => 'edit', $picture['id'],$data['ContentId'])));
+	echo $this->Html->image('edit.png',array('style' => 'float: left', 'width' => '20px', 'alt' => '[]Edit', 'url' => array('plugin' => 'Gallery', 'controller' => 'ManageImages', 'action' => 'edit', $picture['id'],$ContentId,$mContext)));
 	echo '</td>';
 	
 	echo '<td>';
 	
-	echo $this->Html->link($this->Html->image('/app/webroot/img/delete.png', array(
+	echo $this->Html->link($this->Html->image('delete.png', array(
 								'height' => 20, 
 								'width' => 20, 
 								'alt' => __('[x]Delete'))),
@@ -74,7 +91,7 @@ foreach ($data['AllPictures'] as $picture){
 									'controller' => 'ManageImages', 
 									'action' => 'delete', 
 									$picture['id'],
-									$data['ContentId']),
+									$ContentId,$mContext),
 								array(
 									'escape' => false, 
 									'title' => __('Delete Image')),
@@ -88,7 +105,7 @@ echo '</tbody>';
 	echo '<tfoot>';	
 			echo '<tr>';
 				echo '<td>';
-				echo $this->Html->image('/app/webroot/img/arrow.png', array(
+				echo $this->Html->image('arrow.png', array(
 						'height' => 20,
 						'width' => 20));
 				echo '</td>';

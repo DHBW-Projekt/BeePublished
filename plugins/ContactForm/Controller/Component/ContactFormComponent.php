@@ -24,7 +24,6 @@ App::import('Vendor','recaptcha/recaptchalib');
 class ContactFormComponent extends Component {
 
 	//LOAD components
-	public $uses = array('Sanitize');
 	var $components = array('BeeEmail', 'PermissionValidation', 'Config');
 
 	/**

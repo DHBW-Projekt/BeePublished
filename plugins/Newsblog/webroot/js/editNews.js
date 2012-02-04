@@ -7,7 +7,6 @@ $(document).ready(function () {
 	);
 	
 	$('#nbValidFromDatepicker').datetimepicker({
-		minDate: new Date(),
 		showOn: "button",
 		buttonImage: window.app.webroot+"img/calendar.png",
 		buttonImageOnly: true,

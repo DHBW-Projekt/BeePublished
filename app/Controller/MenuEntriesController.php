@@ -128,15 +128,16 @@ class MenuEntriesController extends AppController
         
         $menuEntry = $this->MenuEntry->findById($this->MenuEntry->id);
         
-        if (isset($menuEntry['ChildMenuEntry']))
+        $this->MenuEntry->delete();
+        $this->Page->delete($menuEntry['Page']);
+        
+        if (!empty($menuEntry['ChildMenuEntry'])){
 	        foreach ($menuEntry['ChildMenuEntry'] as $child):
 	        	$this->delete($child['id']);
 	        endforeach;
-        
-	    $this->MenuEntry->delete($menuEntry['MenuEntry']);
-	    $this->Page->delete($menuEntry['Page']);
+        }
 
-       $this->render('close');
+       	$this->render('close');
     }
 
     function sort()

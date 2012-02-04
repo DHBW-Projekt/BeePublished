@@ -1,7 +1,27 @@
 <?php
+/*
+ * This file is part of BeePublished which is based on CakePHP.
+ * BeePublished is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3
+ * of the License, or any later version.
+ * BeePublished is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public
+ * License along with BeePublished. If not, see
+ * http://www.gnu.org/licenses/.
+ *
+ * @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+ * @author Benedikt Steffan
+ * 
+ * @description Componet to set data for user view
+ */
 class ViewComponent extends Component {
 	public $components = array('FoodMenu.FetchFoodMenuEntries');
-		
+	
+	//set Data for view	
 	public function getData($controller, $params, $url, $id)	{
 		$controller->helpers[] = 'Number';
 		
@@ -29,7 +49,7 @@ class ViewComponent extends Component {
         	    	$data['Action'] = 'showMenus';
 				}//default values
 				
-				//change date format
+				//change date format to yyyy-mm-dd
 				$selectedDate = split('-', $possibleDate);
 				$selectedDate = $selectedDate[2] . '-' . $selectedDate[0] . '-' .$selectedDate[1];
 
@@ -60,13 +80,14 @@ class ViewComponent extends Component {
         	$data['Action'] = 'showMenus';
         	// default values
         }
-
+		// in switch: decide what the user requested
+		// in cases: decide whether if a date was selected or not + create the output data for view
         switch ($data['Action']) {
         	case 'showMenus':
 		        if(!(isset($selectedDate))) {
 					$data['show']['FoodMenuMenu'] = $this->FetchFoodMenuEntries->getMenus($controller);
 		        } else {
-		        	 $data['show']['FoodMenuMenu'] = $this->FetchFoodMenuEntries->getMenus($controller, $selectedDate); 
+		        	$data['show']['FoodMenuMenu'] = $this->FetchFoodMenuEntries->getMenus($controller, $selectedDate); 
 		        }
                 break;
             case 'showCategories':
@@ -110,7 +131,10 @@ class ViewComponent extends Component {
         		// change the date format again
         	} else $selectedDate = '';
         } else $selectedDate = '';
+        
+        //set selected date to view in the users input field
         $controller->set('selectedDate', $selectedDate);
+        //set webroot for js-files
         $controller->set('webroot', $controller->webroot);
         return $data;
 	}

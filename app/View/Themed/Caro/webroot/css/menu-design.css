@@ -5,15 +5,15 @@ ol.nav {
 ol.nav li {
 	list-style: none;
 	background-color: #dcdcdc;
-	color: inherit;
+	//color: inherit;
 	
 }	
 
-ol.nav li:hover {
+ol.nav li a:hover {
 	list-style: none;
-	background-color: #c4c2c2;
-	text-decoration: none;
-	color: #ffffff;
+	//background-color: #c4c2c2;
+	text-decoration: underline;
+	//color: #ffffff;
 	
 	}
 	
@@ -29,20 +29,20 @@ ol.nav li a {
 
 ol.nav li ol.subnav {
 	background-color:  #F4F4F4;
-	color:inherit; 
+	//color:inherit; 
 }
 
 
 ol.nav li ol.subnav li {
 	background-color: #F4F4F4;
-	color:inherit; 
+	//color:inherit; 
 }
 
- ol.nav li ol.subnav li:hover {
+/* ol.nav li ol.subnav li:hover {
 	list-style: none;
 	text-decoration: underline;
 	color: #696969;
-} 
+}  */
 
 
 

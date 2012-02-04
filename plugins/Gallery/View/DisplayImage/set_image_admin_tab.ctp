@@ -1,5 +1,27 @@
 <?php 
-echo $this->element('admin_menu_images',array("ContentId" => $data['ContentId']));
+/*
+ * This file is part of BeePublished which is based on CakePHP.
+ * BeePublished is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3
+ * of the License, or any later version.
+ * BeePublished is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public
+ * License along with BeePublished. If not, see
+ * http://www.gnu.org/licenses/.
+ *
+ * @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+ * @author Alexander Müller & Fabian Kajzar
+ * 
+ * @description Entry view for image administration
+ */
+
+
+echo $this->element('admin_menu',array("ContentId" => $ContentId, "mContext" => $mContext));
+
 $this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
 $this->Html->script('/gallery/js/gallerytableassign', false);
 echo $this->Session->flash('Image assigned');
@@ -39,7 +61,7 @@ foreach ($data['AllPictures'] as $picture){
 		
 	echo $this->Html->link(
 	$this->Html->image("check.png", array('width' => '16px')),
-	array('action' => 'setImage', $data['ContentId'], $picture['id']),
+	array('action' => 'setImage', $ContentId, $picture['id'],$mContext),
 	array('escape' => False, 'class' => $class, "style" => $style));
 	echo "</td>";
 	echo "</tr>";

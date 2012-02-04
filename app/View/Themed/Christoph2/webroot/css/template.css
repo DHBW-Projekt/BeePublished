@@ -62,7 +62,7 @@ form div {
 #header {
     position: relative;
     margin-top: 60px;
-    height: 100px;
+    height: 80px;
     width: 225px;
 }
 
@@ -75,7 +75,7 @@ form div {
 
 #pagelogo {
 	text-align:center;
-    padding: 20px 5px;
+    padding: 15px 5px;
 }
 
 #topnav {
