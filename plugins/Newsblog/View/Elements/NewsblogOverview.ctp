@@ -1,6 +1,6 @@
 <?php
 	App::uses('Sanitize', 'Utility');
-	$data = Sanitize::clean($data);
+	$data = Sanitize::clean($data, array('unicode' => true, 'encode' => false, 'remove_html' => true));;
 	
 	//load helpers
 	$DateTimeHelper = $this->Helpers->load('Time');
@@ -9,10 +9,10 @@
 	$this->Helpers->load('SocialNetwork');
 	
 	//bind javascript and css
-	$this->Html->script('jquery/jPaginate', false);
+	$this->Html->script('jquery/jpaginate', false);
 	$this->Html->script('/newsblog/js/showNews', false);
 	$this->Html->css('/newsblog/css/showNews', null, array('inline' => false));
-	$this->Html->css('/css/jQueryPagination', null, array('inline' => false));
+	$this->Html->css('/css/jpaginate', null, array('inline' => false));
 	
 	if($this->Session->check('Newsblog.itemsPerPage')){
 		$itemsPerPage = $this->Session->read('Newsblog.itemsPerPage');
@@ -34,6 +34,11 @@
 	
 	$dateFormat = __('m-d-Y');
 	$this->Js->set('dateFormatForPicker', $dateFormat);
+	
+	$hideConfigurationText = __d('newsblog', 'Hide Configuration');
+	$this->Js->set('hideConfigText', $hideConfigurationText);
+	$showConfigurationText = __d('newsblog', 'Show Configuration');
+	$this->Js->set('showConfigText', $showConfigurationText);
 ?>
 <?php 
 	if($data['newsblogTitle'] != null || $data['newsblogTitle'] != ''){
@@ -42,39 +47,6 @@
 		echo '</h1><div class="newsblogtitle_border color1"></div>';
 	}?>
 
-<div class='newsblogreadconfig'>
-	<div class='newsblogreadconfig_button'>
-		<?php echo $this->Form->button(__d('newsblog', 'ShowHideConfiguration'));?>
-	</div>
-	<div class='newsblogreadconfig_items'>
-	<?php
-	echo $this->Form->create(null, array('url' => array('plugin' => 'Newsblog', 'controller' => 'ShowNews', 'action' => 'general'), 'class' => 'newsblogreadconfig_form'));
-	//get current 
-	echo $this->Form->input(null, array(
-		'options' => array(10 => 10, 15 => 15, 20 => 20, 25 => 25),
-		'name' => 'itemsPerPage',
-		'label' => __d('newsblog', 'Items per page:'),
-		'default' => 10,
-		'value' => $itemsPerPage,
-		'class' => 'newsblogreadconfig_select',
-		'div' => 'configform_input'
-	));
-	
-	echo $this->Form->input(null, array(
-		'options' => array(150 => 150, 200 => 200, 250 => 250, 300 => 300, 350 => 350),
-		'name' => 'previewTextLength',
-		'label' => __d('newsblog', 'Preview text length:'),
-		'default' => 150,
-		'value' => $shorttextLength,
-		'class' => 'newsblogreadconfig_select',
-		'div' => 'configform_input'
-	));
-	
-	//create submit button
-	echo $this->Form->end(__d('newsblog', 'Save Configuration'));?>
-	</div>
-</div>
-
 <div class='newsblogcontainer'>
 
 <?php 
@@ -82,13 +54,13 @@ if( count($data['publishedNewsEntries']) > 0){
 	foreach($data['publishedNewsEntries'] as $NewsEntry):
 		$newsEntryId = $NewsEntry['NewsEntry']['id'];
 		$newsblogEntryDivId = "newsblogEntry".$newsEntryId;
-		$title = Sanitize::html($NewsEntry['NewsEntry']['title']);
-		$subtitle = Sanitize::html($NewsEntry['NewsEntry']['subtitle']);
+		$title = $NewsEntry['NewsEntry']['title'];
+		$subtitle = $NewsEntry['NewsEntry']['subtitle'];
 		$titleForUrl = $this->Slug->generateSlug($title);
-		$text = $this->BBCode->removeBBCode(Sanitize::html($NewsEntry['NewsEntry']['text']));
+		$text = $this->BBCode->removeBBCode($NewsEntry['NewsEntry']['text']);
 		if(strlen($text) > $shorttextLength){
 			$substrEnd = $shorttextLength - 3;
-			$text = Sanitize::html(substr($text, 0, $substrEnd)."...");
+			$text = substr($text, 0, $substrEnd)."...";
 		}
 		
 		$createdOnDate = $DateTimeHelper->format('m-d-Y', $NewsEntry['NewsEntry']['createdOn']);
@@ -171,6 +143,40 @@ if( count($data['publishedNewsEntries']) > 0){
 }?>
 
 </div>
+
+<div class='newsblogreadconfig'>
+<div class='newsblogreadconfig_button'>
+<a style="cursor:pointer;"><?php echo $showConfigurationText;?></a>
+	</div>
+	<div class='newsblogreadconfig_items'>
+	<?php
+	echo $this->Form->create(null, array('url' => array('plugin' => 'Newsblog', 'controller' => 'ShowNews', 'action' => 'general'), 'class' => 'newsblogreadconfig_form'));
+	//get current 
+	echo $this->Form->input(null, array(
+		'options' => array(10 => 10, 15 => 15, 20 => 20, 25 => 25),
+		'name' => 'itemsPerPage',
+		'label' => __d('newsblog', 'Items per page:'),
+		'default' => 10,
+		'value' => $itemsPerPage,
+		'class' => 'newsblogreadconfig_select',
+		'div' => 'configform_input'
+	));
+	
+	echo $this->Form->input(null, array(
+		'options' => array(150 => 150, 200 => 200, 250 => 250, 300 => 300, 350 => 350),
+		'name' => 'previewTextLength',
+		'label' => __d('newsblog', 'Preview text length:'),
+		'default' => 150,
+		'value' => $shorttextLength,
+		'class' => 'newsblogreadconfig_select',
+		'div' => 'configform_input'
+	));
+	
+	//create submit button
+	echo $this->Form->end(__d('newsblog', 'Save Configuration'));?>
+	</div>
+</div>
+
 <?php
 if($this->PermissionValidation->getUserRole() < 6 & ($allowedActions['Write'] || $allowedActions['Publish'])){
 	echo '<div class="plugin_administration">';
