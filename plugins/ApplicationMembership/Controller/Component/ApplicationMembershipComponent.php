@@ -24,7 +24,6 @@ App::import('Vendor','recaptcha/recaptchalib');
 
 class ApplicationMembershipComponent extends Component {
 	
-	public $uses = array('Sanitize');
 	public $components = array('BeeEmail', 'PermissionValidation', 'Config');
 	
    /**
@@ -76,7 +75,7 @@ class ApplicationMembershipComponent extends Component {
 			$data_error = true;
 	
 		//SANITIZE
-		$controller->data =  Sanitize::clean($controller->data);
+		$controller->data = Sanitize::clean($controller->data);
 		
 		//VALIDATE data
 		if(!$data_error){
