@@ -150,19 +150,6 @@ a {
     color: #2E2E2E;
 }
 
-.validation_error {
-    color: #A00000;
-}
-
-.flash_success, #flashMessage.message {
-    border: 3px solid #bedf5d;
-    background: #e2f1a8;
-}
-
-.flash_failure {
-    border: 3px solid #990000;
-    background: #f97d88;
-}
 
 .plugin_administration {
     border: 1px solid #2E2E2E;
