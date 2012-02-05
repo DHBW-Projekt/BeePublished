@@ -38,7 +38,7 @@ input,textarea {
 }
 
 #pagelogo:after {
-	content: "Restaurant Cafe";
+	content: "Beni ist doof";
 	font-family: Arial, Helvetica, sans-serif;
 	font-weight: bold;
 	font-size: 36px;
@@ -47,7 +47,7 @@ input,textarea {
 	display: block;
 }
 
-input[type=button],input[type=submit] {
+input[type=button],input[type=submit],button {
 	font-size: 12px;
 	font-weight: bold;
 	border: 1px solid #ff6600;
