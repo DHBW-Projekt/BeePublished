@@ -1,12 +1,29 @@
 <?php
-
+/*
+* This file is part of BeePublished which is based on CakePHP.
+* BeePublished is free software: you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation, either version 3
+* of the License, or any later version.
+* BeePublished is distributed in the hope that it will be useful, but
+* WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+* You should have received a copy of the GNU General Public
+* License along with BeePublished. If not, see
+* http://www.gnu.org/licenses/.
+*
+* @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+* @author Maximilian Stüber, Corinna Knick
+*
+* @description send method of contact form
+*/
 App::uses('Sanitize', 'Utility');
 App::import('Vendor','recaptcha/recaptchalib');
 
 class ContactFormComponent extends Component {
 
 	//LOAD components
-	public $uses = array('Sanitize');
 	var $components = array('BeeEmail', 'PermissionValidation', 'Config');
 
 	/**
@@ -60,16 +77,16 @@ class ContactFormComponent extends Component {
 		//SANITIZE
 		$controller->data =  Sanitize::clean($controller->data);
 
-		//SET data
+		//SET input data
 		$controller->ContactRequest->set($controller->data['ContactRequest']);
 		
-		//VALIDATE data
+		//VALIDATE input data
 		if(!$controller->ContactRequest->validates()){
 			$controller->Session->setFlash(__d('contact_form','Please fill out all mandatory fields correctly.'), 'flash_failure');
 			return array('data' => $controller->ContactRequest, 'Element' => 'request');
 		}
 				
-		//GET captcha
+		//GET CAPTCHA
 		$privatekey = "6LfzYcwSAAAAAEH-Nr-u6qaFaNdIc6h9nlbm0i76";
 		$resp = recaptcha_check_answer( $privatekey,
 										$_SERVER["REMOTE_ADDR"],

@@ -7,6 +7,14 @@ class MyFilesController extends FileShareAppController
     function upload()
     {
 
+        $pluginId = $this->getPluginId();
+		$uploadAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'upload');
+        if(!$uploadAllowed) {
+            $this->Session->setFlash(__d('file_share','You don\'t have permissions to upload a file!'), 'default', array(
+                                                                                                           'class' => 'flash_failure'));
+                $this->redirect($this->referer());
+        }
+
         if (!empty($this->request->data) && is_uploaded_file($this->request->data['MyFile']['File']['tmp_name'])) {
 
             $fileData = fread(fopen($this->data['MyFile']['File']['tmp_name'], "r"), $this->request->data['MyFile']['File']['size']);
@@ -28,7 +36,7 @@ class MyFilesController extends FileShareAppController
             fclose($fh);
 
             if ($this->MyFile->save($this->request->data)) {
-                $this->Session->setFlash(__d('file_share','The file with the filename ' . $this->request->data['MyFile']['filename'] . ' has been uploaded.'));
+                $this->Session->setFlash(__d('file_share','The file with the filename ') . $this->request->data['MyFile']['filename'] . __d('file_share',' has been uploaded.'));
 
             } else {
                 $this->Session->setFlash(__d('file_share','Unable to upload your file'), 'default', array(
@@ -39,8 +47,10 @@ class MyFilesController extends FileShareAppController
         if ($this->request->data['MyFile']['File']['error'] == 4) {
             $this->Session->setFlash(__d('file_share','No file selected!'), 'default', array(
                                                                           'class' => 'flash_failure'));
-        } else {
-        $this->Session->setFlash(__d('file_share','Your file is bigger than ') . ini_get(post_max_size), 'default', array(
+        }
+
+        if(empty($this->request->data)) {
+            $this->Session->setFlash(__d('file_share','Your file is bigger than ') . ini_get(post_max_size), 'default', array(
                                                                           'class' => 'flash_failure'));
         }
         
@@ -68,8 +78,7 @@ class MyFilesController extends FileShareAppController
         $id = $temp[0];
         $exp = $temp[1];
         if ($exp != "" && (time() - $exp) > $et) {
-            echo time() - $exp;
-            exit();
+            $this->redirect(array('action' => 'expired', time() - $exp));
         }
         $file = $this->MyFile->findById($id);
         $filename = $file['MyFile']['filename'];
@@ -85,14 +94,17 @@ class MyFilesController extends FileShareAppController
 
     function delete($id)
     {
+        $pluginId = $this->getPluginId();
+		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete');
+
         $file = $this->MyFile->findById($id);
-        if ($file['MyFile']['owner'] != $this->Auth->user('id') && $this->Auth->user('role_id') < 6) {
+        if ($file['MyFile']['owner'] != $this->Auth->user('id') && !$deleteAllowed) {
             $this->Session->setFlash(__d('file_share','You don\'t have permissions to delete ') . $file['MyFile']['filename'], 'default', array(
                                                                                                                              'class' => 'flash_failure'));
             $this->redirect($this->referer());
         }
         if (unlink($file['MyFile']['path']) && $this->MyFile->delete($id)) {
-            $this->Session->setFlash(__d('file_share','The file ' . $file['MyFile']['filename'] . ' has been deleted.'));
+            $this->Session->setFlash(__d('file_share','The file ') . $file['MyFile']['filename'] . __d('file_share',' has been deleted.'));
             $this->redirect($this->referer());
         }
         $this->Session->setFlash(__d('file_share','An error occurred while deleting ') . $file['MyFile']['filename'], 'default', array(
@@ -105,7 +117,7 @@ class MyFilesController extends FileShareAppController
         parent::beforeFilter();
 
         //Actions which don't require authorization
-        $this->Auth->allow('download');
+        $this->Auth->allow('upload','download');
     }
 
     public function admin()
@@ -139,11 +151,15 @@ class MyFilesController extends FileShareAppController
         if (empty($this->request->data)) {
             $this->request->data = array(
                 'null' => array(
-                    'Cryptkey' => $ck,
-                    'Expire time' => $et
+                    __d('file_share','Cryptkey') => $ck,
+                    __d('file_share','Expire time') => $et
                 )
             );
         }
+    }
+
+    function expired() {
+        $this->layout = 'overlay';
     }
 
     public function decrypt($value, $ck)

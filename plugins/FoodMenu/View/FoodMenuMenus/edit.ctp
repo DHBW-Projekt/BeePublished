@@ -1,4 +1,23 @@
 <?php
+/*
+ * This file is part of BeePublished which is based on CakePHP.
+ * BeePublished is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3
+ * of the License, or any later version.
+ * BeePublished is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public
+ * License along with BeePublished. If not, see
+ * http://www.gnu.org/licenses/.
+ *
+ * @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+ * @author Benedikt Steffan
+ * 
+ * @description View for editing menus
+ */
 	echo $this->element('admin_menu');
 	
 	$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create');
@@ -6,6 +25,8 @@
 	$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete');
 	
 	echo $this->Session->flash();
+	
+	//check permission of current user
 	if($editAllowed){
 		echo $this->Form->create('FoodMenuAddCategories', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuMenusFoodMenuCategories', 'action' => 'index', $menu['FoodMenuMenu']['name'], $menu['FoodMenuMenu']['id'])));
 		echo '<h1>'.(__d('food_menu', 'Add categories to menu')).'</h1>';
@@ -18,6 +39,10 @@
 		echo $this->Form->input('valid_from', array('value' => $menu['FoodMenuMenu']['valid_from'], 'selected'=>$menu['FoodMenuMenu']['valid_from'], 'label' => (__d('food_menu', 'Valid From:'))));
 		echo $this->Form->input('valid_until', array('value' => $menu['FoodMenuMenu']['valid_until'], 'selected'=>$menu['FoodMenuMenu']['valid_until'], 'label' => (__d('food_menu', 'Valid until:'))));
 			echo $this->Form->label(__d('food_menu', 'Valid on weekday:'));
+			
+				/*
+				 * check on which dates the menu is availble and check these checkboxes in edit mode
+				 */
 				$days = $menu['FoodMenuMenu']['food_menu_series_id'];
 				if ($days >= 64) {
 					$su = true;
