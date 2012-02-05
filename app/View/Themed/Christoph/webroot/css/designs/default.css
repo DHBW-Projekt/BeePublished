@@ -28,7 +28,7 @@ input,textarea {
 	font-size: 13px;
 }
 
-input[type=button],input[type=submit] {
+input[type=button],input[type=submit],button {
 	-webkit-box-shadow: inset 0px 0px 8px #095B85;
 	-moz-box-shadow: inset 0px 0px 8px #095B85;
 	box-shadow: inset 0px 0px 8px #095B85;
@@ -36,14 +36,15 @@ input[type=button],input[type=submit] {
 	color: #ffffff;
 }
 
-input[type=text],input[type=password],textarea,select {
+input[type=text],input[type=password],input,textarea,select {
 	-webkit-box-shadow: inset 0px 0px 4px #dddddd;
 	-moz-box-shadow: inset 0px 0px 4px #dddddd;
 	box-shadow: inset 0px 0px 4px #dddddd;
 	border: 1px solid #999999;
 }
 
-.color1,input[type=button]:hover,input[type=submit]:hover,.users_role {
+.color1,input[type=button]:hover,input[type=submit]:hover,button:hover,.users_role
+	{
 	background-color: #3292DD;
 	background-image: none;
 	color: #ffffff;
@@ -53,7 +54,7 @@ input[type=text],input[type=password],textarea,select {
 	border-color: #3292DD;
 }
 
-.color2,input[type=button],input[type=submit] {
+.color2,input[type=button],input[type=submit],button {
 	background-color: #0F73A6;
 	background-image: none;
 	color: #ffffff;
@@ -128,4 +129,24 @@ a {
 .user_detail,.users-placeholder {
 	border: 1px dotted #3292DD;
 	background-color: #ffffff;
+}
+table {
+	border-spacing: 0px;
+	margin: 1em 0;
+}
+
+th {
+	background-color: #ededed;
+	border: none;
+	border-right: 1px solid #5d5d5d;
+	border-bottom: 1px solid #5d5d5d;
+}
+
+td {
+	border: none;
+	border-right: 1px solid #5d5d5d;
+}
+
+tr:nth-child(2n) {
+	background-color: #eee;
 }

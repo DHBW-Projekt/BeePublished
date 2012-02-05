@@ -13,12 +13,13 @@ label {
 	float: left;
 }
 
-input[type=text],input[type=password],input[type=textarea],input[type=number]  {
+input[type=text],input[type=password],input[type=textarea],input[type=number]
+	{
 	margin: 0;
 	width: 60%;
 }
 
-input[type=button],input[type=submit], button{
+input[type=button],input[type=submit],button {
 	padding: 2px 10px;
 }
 
@@ -52,6 +53,7 @@ form div {
 	width: 1000px;
 	height: 600px;
 	margin: 0 auto;
+	position: relative;
 }
 
 #header {
@@ -132,17 +134,15 @@ form div {
 	right: 0px;
 	text-transform: uppercase;
 	display: block;
-	width: 200px;
 	top: 0px;
 	float: right;
 	margin-top: 50px;
 	margin-right: 30px;
-	border-right: 2px solid #DDD;
 	margin-bottom: 30px;
 }
 
 #footer {
-	clear:both;
+	clear: both;
 	padding: 10px 20px;
 	padding-bottom: 30px;
 	margin-bottom: 30px;
@@ -175,7 +175,9 @@ form div {
 	cursor: move;
 }
 
-
+table {
+	width: 100%;
+}
 
 th {
 	padding: 0.5em;
@@ -230,4 +232,27 @@ th:last-of-type {
 	text-align: center;
 	font-weight: bold;
 	float: left;
+}
+
+div #plugin_config td.name {
+	width: 13em;
+}
+
+div #plugin_config td.version {
+	width: 4em;
+	text-align: center;
+}
+
+div #plugin_config td.author {
+	
+}
+
+div #plugin_config td.status {
+	width: 7em;
+	text-align: center;
+}
+
+div #plugin_config td.action {
+	width: 7em;
+	text-align: center;
 }

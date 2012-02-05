@@ -4,6 +4,8 @@ ol.nav {
 	margin: 0;
 	float: right;
 	z-index: 1000;
+	max-width: 500px;
+	
 }
 
 ol.nav li ol.subnav {
@@ -12,34 +14,45 @@ ol.nav li ol.subnav {
 	margin: 0;
 	padding: 0;
 	position: absolute;
-	right: 280px;
-	top: 0;
+	right: 150px;
+	top: 5px;
 }
 
 ol.subnav li ol.subnav {
 	top: -1px;
-	right: 210px;
+	right: 150px;
 }
 
+ol.nav li:nth-of-type(2n+1) {
+	clear: right;
+}
+.editIconContainer * {
+		z-index:1010;
+	}
+	ol.nav li ol.subnav * {
+		z-index:1020;
+	}
 ol.nav li {
 	float: right;
-	clear: right;
 	margin: 0;
 	position: relative;
 	display: block;
 	vertical-align: middle;
 	padding: 10px 20px;
 	z-index: 1000;
-	width: 260px;
+	width: 200px;
 	cursor: pointer;
 	text-align: right;
+}
+#menu.overlay ol.nav li {
+	clear:right;
 }
 
 ol.nav li ol.subnav li {
 	margin: 0;
 	padding: 5px;
 	clear: both;
-	width: 200px;
+	width: 150px;
 	border: 0;
 }
 

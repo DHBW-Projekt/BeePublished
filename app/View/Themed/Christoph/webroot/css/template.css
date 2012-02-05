@@ -1,8 +1,9 @@
-input,textarea,select {
+input,textarea,select,button {
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	border-radius: 4px;
 	padding: 2px;
+	margin: 1px;
 }
 
 label {
@@ -11,9 +12,11 @@ label {
 	text-align: left;
 	width: 15%;
 	float: left;
+	vertical-align: middle;
 }
 
-input[type=text],input[type=password],input[type=textarea] {
+input[type=text],input[type=password],input[type=textarea],input[type=number]
+	{
 	margin: 0;
 	width: 60%;
 	-webkit-border-radius: 5px;
@@ -30,7 +33,7 @@ p>label {
 	float: left;
 }
 
-input[type=button],input[type=submit] {
+input[type=button],input[type=submit],button {
 	padding: 2px 10px;
 }
 
@@ -215,4 +218,51 @@ form div {
 	text-align: center;
 	font-weight: bold;
 	float: left;
+}
+
+table {
+	width: 100%;
+}
+
+th {
+	padding: 0.5em;
+}
+
+th:last-of-type {
+	border-right: none;
+}
+
+td {
+	padding: 0.5em;
+}
+
+td:last-of-type {
+	border-right: none;
+}
+
+tfoot tr td {
+	border: none;
+}
+
+div #plugin_config td.name {
+	width: 13em;
+}
+
+div #plugin_config td.version {
+	width: 4em;
+	text-align: center;
+}
+
+div #plugin_config td.author {
+	
+}
+
+div #plugin_config td.status {
+	width: 7em;
+	text-align: center;
+}
+
+div #plugin_config td.action {
+	width: 7em;
+	text-align: center;
 }

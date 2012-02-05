@@ -12,8 +12,10 @@ function initMenu() {
 		"href" : "#",
 		"style" : "text-align:left;"
 	});
+	
+	if($("#menuswitch").length<1) {
 	$("#topnav-content").append(menuswitchelement);
-
+	}
 	var hidden = "false";
 	if (document.cookie) {
 		cookiefile = document.cookie;
