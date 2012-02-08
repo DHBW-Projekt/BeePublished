@@ -68,6 +68,10 @@ msgid "Message*:"
 msgstr "Nachricht*:"
 
 #: View\Elements\request.ctp
+msgid "For your own security please insert the following words:"
+msgstr "Für Ihre eigene Sicherheit geben Sie die folgenden Wörter ein:"
+
+#: View\Elements\request.ctp
 msgid "* - Mandatory fields"
 msgstr "* - Pflichtfelder"
 
