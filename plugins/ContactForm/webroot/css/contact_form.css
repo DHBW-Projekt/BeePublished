@@ -49,3 +49,7 @@ div #contactform_bottom{
 label.recaptcha_input_area_text{
 	float: none;
 }
+
+#contactform_captcha{
+	margin-top: 15px;
+}
