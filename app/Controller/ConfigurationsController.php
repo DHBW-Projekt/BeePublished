@@ -54,9 +54,9 @@ class ConfigurationsController extends AppController
             //Save configuration data
             $this->Configuration->id = $config['Configuration']['id'];
             if ($this->Configuration->save($this->request->data)) {
-                $this->Session->setFlash('Successfully saved');
+                $this->Session->setFlash(__('Successfully saved'));
             } else {
-                $this->Session->setFlash('Saving failed');
+                $this->Session->setFlash(__('Saving failed'));
             }
             $this->redirect(array('action' => 'index'));
         } else {

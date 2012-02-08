@@ -25,7 +25,7 @@ $this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
 if(isset($data['view']) && $data['view'] == 'Single'){	
 	echo $this->element('DisplayGallery',array('data' => $data));
 } else {
-	echo "<h1>".__("Gallery overview")."</h1>";	
+	echo "<h1>".__d('gallery', "Gallery overview")."</h1>";	
 	foreach ($data as $gallery){
 		echo '<div class="galleryImage">';
 

@@ -1,0 +1,242 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2012-02-08 21:36+0100\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: Controller\ManageGalleriesController.php:96
+msgid "Your Gallery was not saved. You have to assign a title picture"
+msgstr ""
+
+#: Controller\ManageGalleriesController.php:104
+msgid "Your Gallery was saved."
+msgstr ""
+
+#: Controller\ManageGalleriesController.php:107
+msgid "Your Gallery was not saved."
+msgstr ""
+
+#: Controller\ManageGalleriesController.php:111
+msgid "Your Gallery was not saved. You have to assign a title and a description to your gallery."
+msgstr ""
+
+#: Controller\ManageGalleriesController.php:161
+msgid "Deleted sucessfully"
+msgstr ""
+
+#: Controller\ManageGalleriesController.php:164
+msgid "Nothing selected."
+msgstr ""
+
+#: Controller\ManageGalleriesController.php:184
+msgid "Your changes were saved!"
+msgstr ""
+
+#: Controller\ManageGalleriesController.php:188
+msgid "Your Gallery was not saved"
+msgstr ""
+
+#: View\DisplayGallery\set_gallery_admin_tab.ctp:26
+msgid "Assign a gallery"
+msgstr ""
+
+#: View\DisplayGallery\set_gallery_admin_tab.ctp:35
+msgid "Please assign a gallery to the view."
+msgstr ""
+
+#: View\DisplayGallery\set_gallery_admin_tab.ctp:40
+#: View\DisplayImage\set_image_admin_tab.ctp:39
+#: View\ManageGalleries\index.ctp:63
+#: View\ManageImages\create.ctp:39
+#: View\ManageImages\index.ctp:32;57
+msgid "Title"
+msgstr ""
+
+#: View\DisplayGallery\set_gallery_admin_tab.ctp:41
+#: View\ManageGalleries\index.ctp:64
+msgid "Description"
+msgstr ""
+
+#: View\DisplayImage\set_image_admin_tab.ctp:37
+msgid "Id"
+msgstr ""
+
+#: View\DisplayImage\set_image_admin_tab.ctp:38
+#: View\ManageImages\index.ctp:56
+msgid "Preview"
+msgstr ""
+
+#: View\DisplayImage\set_image_admin_tab.ctp:40
+msgid "Assigned"
+msgstr ""
+
+#: View\Elements\DisplayGallery.ctp:28
+msgid "No gallery assigned"
+msgstr ""
+
+#: View\Elements\DisplayGallery.ctp:38
+msgid "No pictures in gallery."
+msgstr ""
+
+#: View\Elements\DisplayImage.ctp:24
+msgid "No image assigned"
+msgstr ""
+
+#: View\Elements\GalleryOverview.ctp:28
+msgid "Gallery overview"
+msgstr ""
+
+#: View\Elements\admin_menu.ctp:31
+msgid "Assign gallery"
+msgstr ""
+
+#: View\Elements\admin_menu.ctp:35
+msgid "Assign image"
+msgstr ""
+
+#: View\Elements\admin_menu.ctp:39
+msgid "Manage images"
+msgstr ""
+
+#: View\Elements\admin_menu.ctp:48
+msgid "Manage Galleries"
+msgstr ""
+
+#: View\ManageGalleries\assign_images.ctp:27
+msgid "Assign images to your gallery."
+msgstr ""
+
+#: View\ManageGalleries\assign_images.ctp:29
+msgid "Please assign images from your image repository to your gallery."
+msgstr ""
+
+#: View\ManageGalleries\edit.ctp:33
+msgid "Title:"
+msgstr ""
+
+#: View\ManageGalleries\edit.ctp:35
+#: View\ManageGalleries\index.ctp:47
+msgid "Description:"
+msgstr ""
+
+#: View\ManageGalleries\edit.ctp:37
+#: View\ManageGalleries\index.ctp:49
+msgid "Title picture:"
+msgstr ""
+
+#: View\ManageGalleries\edit.ctp:39
+msgid "Save changes"
+msgstr ""
+
+#: View\ManageGalleries\index.ctp:32
+msgid "Manage your galleries"
+msgstr ""
+
+#: View\ManageGalleries\index.ctp:34
+msgid "Here you can edit, delete your galleries or assign pictures to them."
+msgstr ""
+
+#: View\ManageGalleries\index.ctp:38
+msgid "Create a new gallery"
+msgstr ""
+
+#: View\ManageGalleries\index.ctp:41
+msgid "Create a new gallery to share the newest pictures with your audience."
+msgstr ""
+
+#: View\ManageGalleries\index.ctp:57
+msgid "Existing galleries"
+msgstr ""
+
+#: View\ManageGalleries\index.ctp:76
+msgid "Do you really want to delete the selected galleries?"
+msgstr ""
+
+#: View\ManageGalleries\index.ctp:90
+msgid "[x]Edit"
+msgstr ""
+
+#: View\ManageGalleries\index.ctp:97
+msgid "Edit Gallery"
+msgstr ""
+
+#: View\ManageGalleries\index.ctp:107;139
+#: View\ManageImages\index.ctp:88;116
+msgid "[x]Delete"
+msgstr ""
+
+#: View\ManageGalleries\index.ctp:114
+msgid "Delete Gallery"
+msgstr ""
+
+#: View\ManageGalleries\index.ctp:115
+msgid "Do you really want to delete this Gallery?"
+msgstr ""
+
+#: View\ManageGalleries\index.ctp:136
+#: View\ManageImages\index.ctp:59;113
+msgid "Delete"
+msgstr ""
+
+#: View\ManageImages\create.ctp:35
+msgid "Add single images"
+msgstr ""
+
+#: View\ManageImages\create.ctp:40
+#: View\ManageImages\index.ctp:33
+msgid "File"
+msgstr ""
+
+#: View\ManageImages\create.ctp:44
+#: View\ManageImages\index.ctp:36
+msgid "Add image"
+msgstr ""
+
+#: View\ManageImages\create.ctp:47
+#: View\ManageImages\index.ctp:39
+msgid "Add multiple images"
+msgstr ""
+
+#: View\ManageImages\create.ctp:52
+#: View\ManageImages\index.ctp:43
+msgid "Add images"
+msgstr ""
+
+#: View\ManageImages\edit.ctp:24
+msgid "Edit an image"
+msgstr ""
+
+#: View\ManageImages\index.ctp:28
+msgid "Add single image"
+msgstr ""
+
+#: View\ManageImages\index.ctp:50
+msgid "Existing images"
+msgstr ""
+
+#: View\ManageImages\index.ctp:58
+msgid "Edit"
+msgstr ""
+
+#: View\ManageImages\index.ctp:68;117
+msgid "Do you really want to delete the selected images?"
+msgstr ""
+
+#: View\ManageImages\index.ctp:97
+msgid "Delete Image"
+msgstr ""
+
+#: View\ManageImages\index.ctp:98
+msgid "Do you really want to delete this image?"
+msgstr ""
+
