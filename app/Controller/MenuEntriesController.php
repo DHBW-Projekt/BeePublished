@@ -120,7 +120,7 @@ class MenuEntriesController extends AppController
 
         $this->MenuEntry->id = $id;
         if (!$this->MenuEntry->exists()) {
-            throw new NotFoundException(__('Invalid menu entry'));
+            return;
         }
 
         $menuEntry = $this->MenuEntry->findById($this->MenuEntry->id);
