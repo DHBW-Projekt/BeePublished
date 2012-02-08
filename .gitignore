@@ -1,6 +1,7 @@
 /app/Config/database.php
 /app/Config/email.php
 /app/tmp
+/app/webroot/uploads
 /lib/Cake/Console/Templates/skel/tmp/
 /vendors
 .DS_Store
