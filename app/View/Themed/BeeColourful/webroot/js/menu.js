@@ -37,23 +37,31 @@ function initMenu() {
 		prepareforhide();
 	}
 	function prepareforhide() {
-		$(menuswitchelement).html("Menu verstecken >>").click(function() {
+		if (window.app.language == 'de'){
+			var text = "Men&uuml; verstecken >>";
+		} else {
+			var text = "Hide menu >>";
+		}
+		$(menuswitchelement).html(text).click(function() {
 			$("#pagelogo").hide();
 			$("#menu").hide();
 			hidden = "true";
 			document.cookie = "hidden=" + hidden;
 			prepareforshow();
 		});
-
 	}
 	function prepareforshow() {
-		$(menuswitchelement).html("Menu anzeigen >>").click(function() {
+		if (window.app.language == 'de'){
+			var text = "Men&uuml; anzeigen >>";
+		} else {
+			var text = "Show menu >>";
+		}
+		$(menuswitchelement).html(text).click(function() {
 			$("#pagelogo").show();
 			$("#menu").show();
 			hidden = "false";
 			document.cookie = "hidden=" + hidden;
 			prepareforhide();
 		});
-
 	}
 }
