@@ -16,43 +16,43 @@ msgstr ""
 
 #: Controller\ManageGalleriesController.php:96
 msgid "Your Gallery was not saved. You have to assign a title picture"
-msgstr ""
+msgstr "Ihre Gallerie wurde nicht gespeichert. Sie müssen ein Titelbild hinzufügen."
 
 #: Controller\ManageGalleriesController.php:104
 msgid "Your Gallery was saved."
-msgstr ""
+msgstr "Ihre Gallerie wurde gespeichert"
 
 #: Controller\ManageGalleriesController.php:107
 msgid "Your Gallery was not saved."
-msgstr ""
+msgstr "Ihre Gallerie wurde nicht gespeichert"
 
 #: Controller\ManageGalleriesController.php:111
 msgid "Your Gallery was not saved. You have to assign a title and a description to your gallery."
-msgstr ""
+msgstr "Ihre Gallery wurde nicht gespeichert. Sie müssen ein Titelbild und eine Beschreibung hinzufügen."
 
 #: Controller\ManageGalleriesController.php:161
 msgid "Deleted sucessfully"
-msgstr ""
+msgstr "Ergfolgreich gelöscht"
 
 #: Controller\ManageGalleriesController.php:164
 msgid "Nothing selected."
-msgstr ""
+msgstr "Nichts ausgewählt"
 
 #: Controller\ManageGalleriesController.php:184
 msgid "Your changes were saved!"
-msgstr ""
+msgstr "Deine Änderungen wurden gespeichert"
 
 #: Controller\ManageGalleriesController.php:188
 msgid "Your Gallery was not saved"
-msgstr ""
+msgstr "Deine Gallerie wurde nicht gespeichert"
 
 #: View\DisplayGallery\set_gallery_admin_tab.ctp:26
 msgid "Assign a gallery"
-msgstr ""
+msgstr "Weise eine Galleries dem View zu"
 
 #: View\DisplayGallery\set_gallery_admin_tab.ctp:35
 msgid "Please assign a gallery to the view."
-msgstr ""
+msgstr "Bitte weise dem View eine Gallerie zu."
 
 #: View\DisplayGallery\set_gallery_admin_tab.ctp:40
 #: View\DisplayImage\set_image_admin_tab.ctp:39
@@ -60,169 +60,169 @@ msgstr ""
 #: View\ManageImages\create.ctp:39
 #: View\ManageImages\index.ctp:32;57
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #: View\DisplayGallery\set_gallery_admin_tab.ctp:41
 #: View\ManageGalleries\index.ctp:64
 msgid "Description"
-msgstr ""
+msgstr "Beschreibung"
 
 #: View\DisplayImage\set_image_admin_tab.ctp:37
 msgid "Id"
-msgstr ""
+msgstr "Id"
 
 #: View\DisplayImage\set_image_admin_tab.ctp:38
 #: View\ManageImages\index.ctp:56
 msgid "Preview"
-msgstr ""
+msgstr "Vorschau"
 
 #: View\DisplayImage\set_image_admin_tab.ctp:40
 msgid "Assigned"
-msgstr ""
+msgstr "Ausgewählt"
 
 #: View\Elements\DisplayGallery.ctp:28
 msgid "No gallery assigned"
-msgstr ""
+msgstr "Keine Gallerie ausgewählt"
 
 #: View\Elements\DisplayGallery.ctp:38
 msgid "No pictures in gallery."
-msgstr ""
+msgstr "In dieser Gallerie sind keine Bilder."
 
 #: View\Elements\DisplayImage.ctp:24
 msgid "No image assigned"
-msgstr ""
+msgstr "Es sind keine Bilder ausgewählt"
 
 #: View\Elements\GalleryOverview.ctp:28
 msgid "Gallery overview"
-msgstr ""
+msgstr "Gallerie Überblick"
 
 #: View\Elements\admin_menu.ctp:31
 msgid "Assign gallery"
-msgstr ""
+msgstr "Wähle eine Gallerie"
 
 #: View\Elements\admin_menu.ctp:35
 msgid "Assign image"
-msgstr ""
+msgstr "Wähle ein Bild"
 
 #: View\Elements\admin_menu.ctp:39
 msgid "Manage images"
-msgstr ""
+msgstr "Verwalte deine Bilder"
 
 #: View\Elements\admin_menu.ctp:48
 msgid "Manage Galleries"
-msgstr ""
+msgstr "Verwalte deine Gallerien"
 
 #: View\ManageGalleries\assign_images.ctp:27
 msgid "Assign images to your gallery."
-msgstr ""
+msgstr "Füge Bilder deiner Gallerie zu"
 
 #: View\ManageGalleries\assign_images.ctp:29
 msgid "Please assign images from your image repository to your gallery."
-msgstr ""
+msgstr "Bitte füge Bilder aus deiner Bildersammlung der Gallerie zu"
 
 #: View\ManageGalleries\edit.ctp:33
 msgid "Title:"
-msgstr ""
+msgstr "Titel:"
 
 #: View\ManageGalleries\edit.ctp:35
 #: View\ManageGalleries\index.ctp:47
 msgid "Description:"
-msgstr ""
+msgstr "Beschreibung:"
 
 #: View\ManageGalleries\edit.ctp:37
 #: View\ManageGalleries\index.ctp:49
 msgid "Title picture:"
-msgstr ""
+msgstr "Titelbild:"
 
 #: View\ManageGalleries\edit.ctp:39
 msgid "Save changes"
-msgstr ""
+msgstr "Speicher die Änderungen"
 
 #: View\ManageGalleries\index.ctp:32
 msgid "Manage your galleries"
-msgstr ""
+msgstr "Verwalte deine Gallerien"
 
 #: View\ManageGalleries\index.ctp:34
 msgid "Here you can edit, delete your galleries or assign pictures to them."
-msgstr ""
+msgstr "In diesem Bereich kannst du Gallieren editieren und löschen, sowie Bilder zuweisen."
 
 #: View\ManageGalleries\index.ctp:38
 msgid "Create a new gallery"
-msgstr ""
+msgstr "Erstelle eine neue Gallerie"
 
 #: View\ManageGalleries\index.ctp:41
 msgid "Create a new gallery to share the newest pictures with your audience."
-msgstr ""
+msgstr "Erstelel eine neue Gallerie."
 
 #: View\ManageGalleries\index.ctp:57
 msgid "Existing galleries"
-msgstr ""
+msgstr "Bestehende Gallerien"
 
 #: View\ManageGalleries\index.ctp:76
 msgid "Do you really want to delete the selected galleries?"
-msgstr ""
+msgstr "Willst du die Gallerien wirklich löschen?"
 
 #: View\ManageGalleries\index.ctp:90
 msgid "[x]Edit"
-msgstr ""
+msgstr "Editieren"
 
 #: View\ManageGalleries\index.ctp:97
 msgid "Edit Gallery"
-msgstr ""
+msgstr "Editiere eine Gallerie"
 
 #: View\ManageGalleries\index.ctp:107;139
 #: View\ManageImages\index.ctp:88;116
 msgid "[x]Delete"
-msgstr ""
+msgstr "Löschen"
 
 #: View\ManageGalleries\index.ctp:114
 msgid "Delete Gallery"
-msgstr ""
+msgstr "Lösche eine Gallerie"
 
 #: View\ManageGalleries\index.ctp:115
 msgid "Do you really want to delete this Gallery?"
-msgstr ""
+msgstr "Willst du diese Gallerie wirklich löschen?"
 
 #: View\ManageGalleries\index.ctp:136
 #: View\ManageImages\index.ctp:59;113
 msgid "Delete"
-msgstr ""
+msgstr "Löschen"
 
 #: View\ManageImages\create.ctp:35
 msgid "Add single images"
-msgstr ""
+msgstr "Füge ein Bild hinzu"
 
 #: View\ManageImages\create.ctp:40
 #: View\ManageImages\index.ctp:33
 msgid "File"
-msgstr ""
+msgstr "Datei"
 
 #: View\ManageImages\create.ctp:44
 #: View\ManageImages\index.ctp:36
 msgid "Add image"
-msgstr ""
+msgstr "Füge ein Bild hinzu"
 
 #: View\ManageImages\create.ctp:47
 #: View\ManageImages\index.ctp:39
 msgid "Add multiple images"
-msgstr ""
+msgstr "Füge mehrere Bilder hinzu"
 
 #: View\ManageImages\create.ctp:52
 #: View\ManageImages\index.ctp:43
 msgid "Add images"
-msgstr ""
+msgstr "Füge Bilder hinzu"
 
 #: View\ManageImages\edit.ctp:24
 msgid "Edit an image"
-msgstr ""
+msgstr "Editiere ein Bild"
 
 #: View\ManageImages\index.ctp:28
 msgid "Add single image"
-msgstr ""
+msgstr "Füge ein einzelnes Bild hinzu"
 
 #: View\ManageImages\index.ctp:50
 msgid "Existing images"
-msgstr ""
+msgstr "Existierende Bilder"
 
 #: View\ManageImages\index.ctp:58
 msgid "Edit"
