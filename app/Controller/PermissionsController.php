@@ -37,7 +37,7 @@ class PermissionsController extends AppController
         $this->layout = 'overlay';
         if (!empty($this->request->data)) {
             $this->Permission->saveAll($this->request->data['Permission']);
-            $this->Session->setFlash('Successfully saved');
+            $this->Session->setFlash(__('Successfully saved'));
         }
         else {
             $permissions = $this->Permission->find('all');
