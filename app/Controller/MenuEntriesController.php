@@ -118,9 +118,6 @@ class MenuEntriesController extends AppController
     {
     	$this->PermissionValidation->actionAllowed(null, 'LayoutManager',true);
     	
-        if (!$this->request->is('post')) {
-            throw new MethodNotAllowedException();
-        }
         $this->MenuEntry->id = $id;
         if (!$this->MenuEntry->exists()) {
             throw new NotFoundException(__('Invalid menu entry'));
@@ -132,9 +129,9 @@ class MenuEntriesController extends AppController
         $this->Page->delete($menuEntry['Page']);
         
         if (!empty($menuEntry['ChildMenuEntry'])){
-	        foreach ($menuEntry['ChildMenuEntry'] as $child):
+	        foreach ($menuEntry['ChildMenuEntry'] as $child) {
 	        	$this->delete($child['id']);
-	        endforeach;
+            }
         }
 
        	$this->render('close');
