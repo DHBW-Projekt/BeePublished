@@ -41,9 +41,15 @@
 			echo $this->Form->input('email', array('label' => __d('contact_form','E-Mail*:'), 'maxlength' => '50'));
 			echo $this->Form->input('subject', array('label' => __d('contact_form','Subject*:'), 'maxlength' => '100'));
 			echo $this->Form->input('body', array('label' => __d('contact_form','Message*:'), 'rows' => '4'));
-			echo recaptcha_get_html($publickey);
 		?>
 	</div>
+	<div id="contactform_captcha">
+	<?php 
+		echo '<p>'.__d("contact_form","For your own security please insert the following words:").'</p>';
+		echo recaptcha_get_html($publickey);
+	?>
+	</div>
+	
 	<div id='contactform_between'><i><?php echo $this->Form->label(__d('contact_form','* - Mandatory fields')); ?></i></div>
 	<div style="align: left"><br><?php echo $this->Form->end(__d('contact_form','Send')); ?></div>
 </div>

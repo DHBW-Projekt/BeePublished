@@ -19,6 +19,10 @@
  * @description Web-Shop Search View.
  */
 
+	//HELPER
+	App::uses('Sanitize', 'Utility');
+	$this->Helpers->load('BBCode');
+
 	//INTEGRATE searchbar
 	echo $this->element('SearchBar', array('url' => $url));
 	
@@ -50,10 +54,9 @@
 	else
 		$start_value = 1;
 	
-	//PRINT products
-	echo '<ol start="'.$start_value.'">';
+	//PRINT products	
+	echo '<div start="'.$start_value.'">';
 	foreach ((!isset($data['search'])) ? array() : $data['search'] as $product){
-		echo '<li>';
 		
 		echo $this->Html->image($product['WebshopProduct']['picturePath'].$product['WebshopProduct']['picture'], array('url' => $url.'/webshop/view/'.$product['WebshopProduct']['id'], 'escape' => False));
 	
@@ -63,16 +66,14 @@
 	
 		echo '<p class="websop_price">'.$product['WebshopProduct']['price'];
 		echo ' '.$product['WebshopProduct']['currency'].'</p>';
-		echo $this->element('ShortText', array( 'text' => $product['WebshopProduct']['description'], 'productID' => $product['WebshopProduct']['id'], 'url' => $url));
+		echo $this->element('ShortText', array( 'text' => $this->BBCode->removeBBCode(Sanitize::html($product['WebshopProduct']['description'])), 'productID' => $product['WebshopProduct']['id'], 'url' => $url));
 		echo '<br style="clear:left">';
-		echo '</li>';
 		
 		//NO line for last element
 		if($last_element != $product){
 			echo '<hr class="websop_separator">';
 		}
 	}
-	echo '</ol>';
 	
 	//PAGINATION numbers
 	if (isset($this->Paginator) && $this->Paginator->counter('{:pages}') > 1) {

@@ -31,4 +31,8 @@
 .showFullNewsSocial{
 	margin-top: 5px;
 	margin-bottom: 5px;
+	margin-bottom:5px;
+	vertical-align: middle;
+	line-height: 25px;
+	height: 25px;
 }

@@ -18,6 +18,9 @@
  *
  * @description Produkt Administrations View.
  */
+
+	//LOAD
+	App::uses('Sanitize', 'Utility');
 	
 	//LOAD js
 	 $this->Html->script('/web_shop/js/admin', false); 
@@ -77,7 +80,7 @@
 							$totalPrice = $totalPrice + $pricePerProd;
 							
 							echo '<tr>';
-							echo '<td>'.$position['Product']['WebshopProduct']['name'].' (ID: '.$position['Product']['WebshopProduct']['id'].')</td>';
+							echo '<td>'.Sanitize::html($position['Product']['WebshopProduct']['name']).' (ID: '.$position['Product']['WebshopProduct']['id'].')</td>';
 							echo '<td>'.$position['count'].'</td>';
 							echo '<td>'.number_format($position['Product']['WebshopProduct']['price'], 2, ',', '.').' '.$position['Product']['WebshopProduct']['currency'].'</td>';
 							echo '<td>'.number_format($pricePerProd, 2, ',', '.').' '.$position['Product']['WebshopProduct']['currency'].'</td>';

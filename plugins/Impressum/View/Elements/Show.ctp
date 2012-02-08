@@ -272,6 +272,7 @@
 
 <!-- the following is only needed if facebook plugin is used -->
 <?php if ($socNet['facebook']) { ?>
+	<br>
 	<h3>
 		<?php echo __('Datenschutzerklärung für die Nutzung von Facebook-Plugins (Like-Button)'); ?>
 	</h3>
@@ -314,7 +315,8 @@
 <?php } //facebook == true ?>
 
 <!-- the following is only needed if the twitter plugin is used -->
-<?php if ($socNet['twitter'] == 0) { ?>
+<?php if ($socNet['twitter']) { ?>
+	<br>
 	<h3>
 		<?php echo __('Datenschutzerklärung für die Nutzung von Twitter'); ?>
 	</h3>
@@ -348,7 +350,8 @@
 <?php }//twitter == true?>
 
 <!-- the following is only needed if the google plus plugin is used -->
-<?php if ($socNet['googleplus'] == 0) { ?>
+<?php if ($socNet['googleplus']) { ?>
+	<br>
 	<h3>
 		<?php echo __('Datenschutzerklärung für die Nutzung von GooglePlus'); ?>
 	</h3>
@@ -376,7 +379,8 @@
 <?php }//google plus == true?>
 
 <!-- the following is only needed if the xing plugin is used -->
-<?php if ($socNet['xing'] == 0) { ?>
+<?php if ($socNet['xing']) { ?>
+	<br>
 	<h3>
 		<?php echo __('Datenschutzerklärung für die Nutzung von Xing'); ?>
 	</h3>
@@ -397,7 +401,8 @@
 <?php }//xing == true?>
 
 <!-- the following is only needed if the linkedin plugin is used -->
-<?php if ($socNet['linkedin'] == 0) { ?>
+<?php if ($socNet['linkedin']) { ?>
+	<br>
 	<h3>
 		<?php echo __('Datenschutzerklärung für die Nutzung von LinkedIn'); ?>
 	</h3>
