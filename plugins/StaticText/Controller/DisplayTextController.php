@@ -27,7 +27,7 @@ class DisplayTextController extends StaticTextAppController {
 			//save data
 			if ($this->request->is('post')) {
 				$this->ContentValueManager->saveContentValues($contentId, $this->request->data['null']);
-				$this->Session->setFlash(__d('static_text', 'Successfully saved'));
+				$this->Session->setFlash(__d('static_text', 'Successfully saved'),'default', array('class' => 'flash_success'), 'StaticText.Admin');
 			}
 			//load data with contentId
 			$contentValues = $this->ContentValueManager->getContentValues($contentId);
@@ -52,7 +52,7 @@ class DisplayTextController extends StaticTextAppController {
 				);
 			}
 		} else    { //If you are not aloowed to
-		   $this->Session->setFlash(__d('static_text','You are not authenticated to enter these page!'));
+		   $this->Session->setFlash(__d('static_text','You are not authenticated to enter these page!'), 'default', array('class' => 'flash_failure'), 'StaticText.Admin');
 		   //Go to mainpage
 			$this->redirect($this->referer());
 		}
