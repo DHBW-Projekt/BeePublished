@@ -149,7 +149,7 @@ msgstr "Ungültiger Schlüssel"
 
 #: View/Configurations/index.ctp:21
 msgid "Save Configuration"
-msgstr "Konfiguration gespeichert"
+msgstr "Konfiguration speichern"
 
 #: View/Elements/display-container.ctp:14
 msgid "Unknown module"
@@ -296,207 +296,207 @@ msgstr "Nutzer erstellen"
 
 #: View/Users/view.ctp:2
 msgid "User"
-msgstr ""
+msgstr "Benutzer"
 
 #: View/Users/view.ctp:4;71;114
 msgid "Id"
-msgstr ""
+msgstr "ID"
 
 #: View/Users/view.ctp:9
 msgid "Role"
-msgstr ""
+msgstr "Rolle"
 
 #: View/Users/view.ctp:14
 msgid "Username"
-msgstr ""
+msgstr "Benutzername"
 
 #: View/Users/view.ctp:19
 msgid "Password"
-msgstr ""
+msgstr "Passwort"
 
 #: View/Users/view.ctp:24
 msgid "Email"
-msgstr ""
+msgstr "E-Mail"
 
 #: View/Users/view.ctp:29
 msgid "Last Login"
-msgstr ""
+msgstr "Letze Anmeldung"
 
 #: View/Users/view.ctp:34
 msgid "Registered"
-msgstr ""
+msgstr "Registriert"
 
 #: View/Users/view.ctp:39
 msgid "Confirmation Token"
-msgstr ""
+msgstr "Aktivierungscode"
 
 #: View/Users/view.ctp:44
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: View/Users/view.ctp:52;79;126
 msgid "Actions"
-msgstr ""
+msgstr "Aktionen"
 
 #: View/Users/view.ctp:55
 msgid "Delete User"
-msgstr ""
+msgstr "Benutzer löschen"
 
 #: View/Users/view.ctp:55;96;147
 msgid "Are you sure you want to delete # %s?"
-msgstr ""
+msgstr "Wollen Sie wirklich # %s löschen"
 
 #: View/Users/view.ctp:56
 msgid "List Users"
-msgstr ""
+msgstr "Benutzer auflisten"
 
 #: View/Users/view.ctp:57
 msgid "New User"
-msgstr ""
+msgstr "Neue Benutzer"
 
 #: View/Users/view.ctp:58
 msgid "List Roles"
-msgstr ""
+msgstr "Rollen auflisten"
 
 #: View/Users/view.ctp:59
 msgid "New Role"
-msgstr ""
+msgstr "Neue Rolle"
 
 #: View/Users/view.ctp:60
 msgid "List Log Entries"
-msgstr ""
+msgstr "Protokoll Einträge auflisten"
 
 #: View/Users/view.ctp:61;105
 msgid "New Log Entry"
-msgstr ""
+msgstr "Neuer Log-Eintrag"
 
 #: View/Users/view.ctp:62
 msgid "List Pages"
-msgstr ""
+msgstr "Seiten auflisten"
 
 #: View/Users/view.ctp:63;156
 msgid "New Page"
-msgstr ""
+msgstr "Neue Seite"
 
 #: View/Users/view.ctp:67
 msgid "Related Log Entries"
-msgstr ""
+msgstr "Zusammenhängende Log-Einträge"
 
 #: View/Users/view.ctp:72;116
 msgid "User Id"
-msgstr ""
+msgstr "Benutzer ID"
 
 #: View/Users/view.ctp:73
 msgid "Ipaddress"
-msgstr ""
+msgstr "IP-Adresse"
 
 #: View/Users/view.ctp:74
 msgid "Action"
-msgstr ""
+msgstr "Aktion"
 
 #: View/Users/view.ctp:75
 msgid "ActionDate"
-msgstr ""
+msgstr "Datum der Aktion"
 
 #: View/Users/view.ctp:76
 msgid "Object Class"
-msgstr ""
+msgstr "Objekt Klasse"
 
 #: View/Users/view.ctp:77
 msgid "Object Id"
-msgstr ""
+msgstr "Objekt ID"
 
 #: View/Users/view.ctp:78
 msgid "Data"
-msgstr ""
+msgstr "Daten"
 
 #: View/Users/view.ctp:94;145
 msgid "View"
-msgstr ""
+msgstr "View"
 
 #: View/Users/view.ctp:95;146
 msgid "Edit"
-msgstr ""
+msgstr "Bearbeiten"
 
 #: View/Users/view.ctp:96;147
 msgid "Delete"
-msgstr ""
+msgstr "Löschen"
 
 #: View/Users/view.ctp:110
 msgid "Related Pages"
-msgstr ""
+msgstr "Zusammenhängene Seiten"
 
 #: View/Users/view.ctp:115
 msgid "Container Id"
-msgstr ""
+msgstr "Container Id"
 
 #: View/Users/view.ctp:117
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #: View/Users/view.ctp:119
 msgid "ValidFrom"
-msgstr ""
+msgstr "Gültig von"
 
 #: View/Users/view.ctp:120
 msgid "ValidTo"
-msgstr ""
+msgstr "Gültig bis"
 
 #: View/Users/view.ctp:121
 msgid "Published"
-msgstr ""
+msgstr "Veröffentlicht"
 
 #: View/Users/view.ctp:122
 msgid "MetaTags"
-msgstr ""
+msgstr "MetaTags"
 
 #: View/Users/view.ctp:123
 msgid "DateCreated"
-msgstr ""
+msgstr "Erstellungsdatum"
 
 #: View/Users/view.ctp:124
 msgid "DateLastChange"
-msgstr ""
+msgstr "zuletzt geändert"
 
 #: View/Users/view.ctp:125
 msgid "Description"
-msgstr ""
+msgstr "Beschreibung"
 
 #: Model/EmailTemplate.php:validation for field name
 msgid "This field cannot be empty."
-msgstr ""
+msgstr "Dieses Feld kann nicht leer sein"
 
 #: Model/EmailTemplate.php:validation for field name;validation for field name
 msgid "The name already exists."
-msgstr ""
+msgstr "Der name existiert bereits"
 
 #: Model/EmailTemplate.php:validation for field active
 msgid "boolean"
-msgstr ""
+msgstr "boolean"
 
 #: Model/MenuEntry.php:validation for field name
 msgid "Menu entry name can not be empty."
-msgstr ""
+msgstr "Der Menüeintrag kann nicht leer sein"
 
 #: Model/Page.php:validation for field name
 msgid "Not a valid URL. (Starting with / and characters a-z, 0-9 and -)"
-msgstr ""
+msgstr "Keine gültige URL. ( Beginnend mit / und den Zeichen a-z 0-9 und -"
 
 #: Model/Page.php:validation for field name
 msgid "URL already in use."
-msgstr ""
+msgstr "URL wird bereits verwendet"
 
 #: Model/Page.php:validation for field name
 msgid "Page name can not be empty."
-msgstr ""
+msgstr "Die Seite kann nicht leer sein"
 
 #: Model/User.php:validation for field username
 msgid "A username is required."
-msgstr ""
+msgstr "Bitte geben Sie einen Benutzernamen ein"
 
 #: Model/User.php:validation for field username
 msgid "This username has already been taken. Please choose another username."
-msgstr "Dieser Nutzername wird bereits verwendet. Bitte wählen Sie einen anderen Nutzernamen."
+msgstr "Diese Benutzername ist schon vergeben. Bitte wählen Sie einen anderen Benutzernamen."
 
 #: Model/User.php:validation for field username
 msgid "Usernames must only contain letters and numbers."
@@ -533,3 +533,39 @@ msgstr "Diese E-Mail-Adresse ist bereits registriert. Wenn Sie Ihr Passwort verg
 #: webroot/test.php:87
 msgid "Debug setting does not allow access to this url."
 msgstr "Die Debugging-Einstellungen erlauben keinen Zugriff auf diese URL"
+
+msgid "Configuration:"
+msgstr "Konfiguration:"
+
+msgid "Page Name:"
+msgstr "Seitenname:"
+
+msgid "Email:"
+msgstr "E-Mail:"
+
+msgid "Template:"
+msgstr "Template:"
+
+msgid "Design:"
+msgstr "Design:"
+
+msgid "Online"
+msgstr "Online"
+
+msgid "Search Users:"
+msgstr "Nutzer durchsuchen:"
+
+msgid "Users"
+msgstr "Nutzer"
+
+msgid "General Configuration"
+msgstr "Allgemeine Konfiguration"
+
+msgid "Plugins"
+msgstr "Plugins"
+
+msgid "Permissions"
+msgstr "Berechtigungen"
+
+msgid "Email Templates"
+msgstr "E-Mail Vorlagen"
