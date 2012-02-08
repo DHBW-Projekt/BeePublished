@@ -13,7 +13,7 @@
  * License along with BeePublished. If not, see
  * http://www.gnu.org/licenses/.
  *
- * @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+ * @copyright 2012 Duale Hochschule Baden-Wï¿½rttemberg Mannheim
  * @author Yvonne Laier and Maximilian Stueber
  *
  * @description Request-View for contact form
@@ -22,6 +22,8 @@
 	//CAPTCHA
 	App::import('Vendor','recaptcha/recaptchalib');
 	$publickey = "6LfzYcwSAAAAAN3vRDzZKXkC0rYkwaKQTi8hMkj6";
+	
+	setlocale(LC_ALL, "de_DE.utf8");
 ?>
 
 <div id='applicationmembership_form'>
@@ -41,7 +43,7 @@
 		<?php
 			echo $this->Form->label('type', __d('application_membership','Membership*'));
 		
-			$options = array('true' => 'active','false' => 'passive');
+			$options = array('true' => __d('application_membership','active'),'false' => __d('application_membership','passive'));
 			echo $this->Form->select('type', $options, array('label' => false));
 		?>
 	</div>
@@ -50,7 +52,7 @@
 		<?php
 			echo $this->Form->label('title', __d('application_membership','Form of address*'));
 
-			$options = array('Ms/Mrs' => 'Ms/Mrs','Mr' => 'Mr');
+			$options = array(__d('application_membership','Ms/Mrs') => __d('application_membership','Ms/Mrs'), __d('application_membership','Mr') => __d('application_membership','Mr'));
 
 			echo $this->Form->select('title', $options, array('label' => __d('application_membership','Form of address*')));
 		?>
