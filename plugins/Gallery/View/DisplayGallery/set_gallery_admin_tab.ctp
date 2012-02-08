@@ -23,7 +23,7 @@ echo $this->element('admin_menu',array("ContentId" => $ContentId, "mContext" => 
 
 $this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
 $this->Html->script('/gallery/js/gallerytableassign', false);
-echo "<h1> ".__('Assign a Gallery')."</h1>";
+echo "<h1> ".__('Assign a gallery')."</h1>";
 
 echo $this->Session->flash();
 $curr_galleryid=-1;

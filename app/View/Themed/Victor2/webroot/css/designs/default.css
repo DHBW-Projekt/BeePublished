@@ -5,8 +5,7 @@ body,#overlay-header {
 }
 
 #main {
-	background-color: #fff;
-	background: url(../../img/restaurant.jpg) repeat-x;
+	background: url(../../img/restaurant.jpg) repeat-x #fff;
 }
 
 h1 {
@@ -47,22 +46,23 @@ input,textarea {
 	display: block;
 }
 
-input[type=button],input[type=submit] {
-	font-size: 12px;
+input[type=button],input[type=submit],button {
+	font-size: 13px;
 	font-weight: bold;
 	border: 1px solid #ff6600;
 	color: #ffffff;
 	letter-spacing: -1px;
 }
 
-input[type=text],input[type=password],textarea,select {
+input[type=text],input[type=password],textarea,select,input {
 	-webkit-box-shadow: inset 0px 0px 4px #dddddd;
 	-moz-box-shadow: inset 0px 0px 4px #dddddd;
 	box-shadow: inset 0px 0px 4px #dddddd;
 	border: 1px solid #999999;
 }
 
-.color1,input[type=button]:hover,input[type=submit]:hover,.users_role {
+.color1,input[type=button]:hover,input[type=submit]:hover,button:hover,.users_role
+	{
 	background-color: #ff6600;
 	background-image: none;
 	color: #ffffff;
@@ -72,7 +72,7 @@ input[type=text],input[type=password],textarea,select {
 	border-color: #ff6600;
 }
 
-.color2,input[type=button],input[type=submit] {
+.color2,input[type=button],input[type=submit],button {
 	background-color: #ff9900;
 	background-image: none;
 	color: #ffffff;
@@ -132,24 +132,12 @@ a {
 
 #menu {
 	font-family: Arial, Helvetica, sans-serif;
+	border-right: 2px solid #DDD;
+	background: #fff;
 }
 
 #footer {
 	color: #cccccc;
-}
-
-.validation_error {
-	color: #A00000;
-}
-
-.flash_success,#flashMessage.message {
-	border: 3px solid #bedf5d;
-	background: #e2f1a8;
-}
-
-.flash_failure {
-	border: 3px solid #990000;
-	background: #f97d88;
 }
 
 .plugin_administration {

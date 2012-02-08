@@ -19,6 +19,8 @@
  * @description Component that capsulates basic operations on gallery objects
  */
 
+App::uses('Sanitize', 'Utility');
+
 class GalleryComponent extends Component {
 	public $uses = array ('Gallery.GalleryEntry', 'Gallery.GalleryPicture');
 	public $components = array('Gallery.GalleryPictureComp');
@@ -112,5 +114,7 @@ class GalleryComponent extends Component {
 		unset($gallery['GalleryPicture']['title']);
 		unset($gallery['GalleryPicture']['path_to_pic']);
 		unset($gallery['GalleryPicture']['gallery_entry_id']);
+		
+		$gallery = Sanitize::clean($gallery, array('encode' => false));
 	}
 }
