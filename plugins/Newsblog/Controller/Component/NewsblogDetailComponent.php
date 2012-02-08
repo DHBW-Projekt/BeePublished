@@ -20,7 +20,7 @@
 */
 
 class NewsblogDetailComponent extends Component {
-
+	var $components = array('Config');
 	public function getData($controller, $params, $url, $id){
 		$urlParts = explode('-', $url[0], 2);
 		$newsEntryId = $urlParts[0];
