@@ -130,10 +130,32 @@ if( count($data['publishedNewsEntries']) > 0){
 		<div class="newsblog_entry_social">
 			<?php 
 				$socialURL = $this->Html->url($url.'/shownews/'.$newsEntryId.'-'.$titleForUrl, true);
-				echo $this->SocialNetwork->insertFacebookShare($socialURL);
-				echo $this->SocialNetwork->insertGoogleShare($socialURL);
-				echo $this->SocialNetwork->insertTwitterShare($socialURL);
-			?>
+				
+				$socialNetworks = $data['socialNetworks'];
+				//Facebook
+				if($socialNetworks['facebook']){
+					echo $this->SocialNetwork->insertFacebookShare($socialURL);
+				}
+				
+				//Google+
+				if($socialNetworks['googleplus']){
+					echo $this->SocialNetwork->insertGoogleShare($socialURL);
+				}
+				
+				//Twitter
+				if($socialNetworks['twitter']){
+					echo $this->SocialNetwork->insertTwitterShare($socialURL);
+				}
+				
+				//Xing
+				if($socialNetworks['xing']){
+					echo $this->SocialNetwork->insertXingShare($socialURL);
+				}
+				
+				//LinkedIn
+				if($socialNetworks['linkedin']){
+					echo $this->SocialNetwork->insertLinkedShare($socialURL);
+				}?>
 		</div>
 		<div class="newsblog_entry_buttons">
 			<?php 
