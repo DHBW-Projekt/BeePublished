@@ -24,6 +24,10 @@ class Page extends AppModel
             'isUnique' => array(
                 'rule' => array('isUnique'),
                 'message' => 'URL already in use.'
+            ),            
+            'notempty' => array(
+				'rule' => array('notempty'),
+            	'message' => 'Page name can not be empty.'
             )
         )
     );

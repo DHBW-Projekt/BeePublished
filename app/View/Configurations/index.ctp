@@ -11,6 +11,12 @@ echo $this->Form->input('email');
 echo $this->Form->input('active_template', array('options' => $themes));
 echo $this->Form->input('active_design', array('options' => $designs));
 echo $this->Form->input('status');
-echo $this->Form->input('status-text', array('type' => 'textarea'));
+echo $this->Form->input('status_text', array('type' => 'textarea'));
+//Social Network Configuration
+echo $this->Form->input('facebook');
+echo $this->Form->input('twitter');
+echo $this->Form->input('googleplus', array('label' => 'Google+'));
+echo $this->Form->input('xing');
+echo $this->Form->input('linkedin');
 echo $this->Form->end(__('Save Configuration'));
 ?>

@@ -1,13 +1,34 @@
 <?php 
-	App::uses('Sanitize', 'Utility');
+/*
+* This file is part of BeePublished which is based on CakePHP.
+* BeePublished is free software: you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation, either version 3
+* of the License, or any later version.
+* BeePublished is distributed in the hope that it will be useful, but
+* WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+* You should have received a copy of the GNU General Public
+* License along with BeePublished. If not, see
+* http://www.gnu.org/licenses/.
+*
+* @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+* @author Philipp Scholl
+*
+* @description View element to display the detail view of a certain news entry
+*/
 
+	App::uses('Sanitize', 'Utility');
+	$data = Sanitize::clean($data, array('unicode' => true, 'encode' => false, 'remove_html' => true));;
+	
+	//bind javascript and css
 	$this->Html->script('/newsblog/js/displayFullNews', false);
 	$this->Html->css('/newsblog/css/displayFullNews', null, array('inline' => false));
+	//load helpers
 	$DateTimeHelper = $this->Helpers->load('Time');
 	$this->Helpers->load('BBCode');
 	$this->Helpers->load('SocialNetwork');
-	
-	$data = Sanitize::clean($data);
 	
 	//set meta tags for social network buttons
 	//Facebook
@@ -18,6 +39,7 @@
 	echo $this->Html->meta(null, null, array('itemprop' => 'description', 'content' => substr($this->BBCode->removeBBCode($data['NewsEntry']['text']), 0, 100), 'inline' => false));
 	echo $this->Html->meta(null, null, array('itemprop' => 'name', 'content' => $data['NewsEntry']['title'], 'inline' => false));
 	
+	//set title
 	$this->set('title_for_layout', $data['NewsEntry']['title']);
 ?>
 
@@ -30,9 +52,10 @@
 	}?>
 	<div class='showFullNewsInfo'>
 		<?php 
+		//split created on into two variables (1 for date, 1 for time)
 		$createdOnDate = $DateTimeHelper->format('m-d-Y', $data['NewsEntry']['createdOn']);
 		$createdOnTime = $DateTimeHelper->format('H:i', $data['NewsEntry']['createdOn']);
-		
+		//get information string from i18n and replace placeholders 
 		$infoString = __d('newsblog', 'infostring');
 		$infoString = str_replace(':-date-:', $createdOnDate, $infoString);
 		$infoString = str_replace(':-time-:', $createdOnTime, $infoString);
@@ -45,7 +68,7 @@
 			$modifiedString = str_replace(':-date-:', $modifiedOnDate, $modifiedString);
 			$modifiedString = str_replace(':-time-:', $modifiedOnTime, $modifiedString);
 		}
-		
+		//if entry is modified -> append modifiedString to infoString
 		if(isset($modifiedOnDate) & isset($modifiedOnTime)){
 			echo $infoString."&nbsp;&nbsp;(".$modifiedString.")";
 		} else{
@@ -58,12 +81,31 @@
 	</div>
 	<div class='showFullNewsSocial'>
 		<?php
+			$socialNetworks = $data['socialNetworks'];
 			//Facebook
-			echo $this->SocialNetwork->insertFacebookShare();
+			if($socialNetworks['facebook']){
+				echo $this->SocialNetwork->insertFacebookShare();
+			}
+			
 			//Google+
-			echo $this->SocialNetwork->insertGoogleShare();
+			if($socialNetworks['googleplus']){
+				echo $this->SocialNetwork->insertGoogleShare();
+			}
+			
 			//Twitter
-			echo $this->SocialNetwork->insertTwitterShare();
+			if($socialNetworks['twitter']){
+				echo $this->SocialNetwork->insertTwitterShare();
+			}
+			
+			//Xing
+			if($socialNetworks['xing']){
+				echo $this->SocialNetwork->insertXingShare();
+			}
+			
+			//LinkedIn
+			if($socialNetworks['linkedin']){
+				echo $this->SocialNetwork->insertLinkedShare();
+			}
 		?>
 	</div>
 	<div class='showFullNewsOptions'>

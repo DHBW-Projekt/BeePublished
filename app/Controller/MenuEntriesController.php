@@ -1,10 +1,26 @@
 <?php
-App::uses('AppController', 'Controller');
-/**
- * MenuEntries Controller
+/*
+ * This file is part of BeePublished which is based on CakePHP.
+ * BeePublished is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3
+ * of the License, or any later version.
+ * BeePublished is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public
+ * License along with BeePublished. If not, see
+ * http://www.gnu.org/licenses/.
  *
- * @property MenuEntry $MenuEntry
+ * @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+ * @author Christoph Krämer
+ *
+ * @description Controller for managing all menu operations in CMS core
  */
+
+App::uses('AppController', 'Controller');
+
 class MenuEntriesController extends AppController
 {
 
@@ -112,15 +128,16 @@ class MenuEntriesController extends AppController
         
         $menuEntry = $this->MenuEntry->findById($this->MenuEntry->id);
         
-        if (isset($menuEntry['ChildMenuEntry']))
+        $this->MenuEntry->delete();
+        $this->Page->delete($menuEntry['Page']);
+        
+        if (!empty($menuEntry['ChildMenuEntry'])){
 	        foreach ($menuEntry['ChildMenuEntry'] as $child):
 	        	$this->delete($child['id']);
 	        endforeach;
-        
-	    $this->MenuEntry->delete($menuEntry['MenuEntry']);
-	    $this->Page->delete($menuEntry['Page']);
+        }
 
-       $this->render('close');
+       	$this->render('close');
     }
 
     function sort()

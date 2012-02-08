@@ -1,17 +1,38 @@
 <?php
+/*
+* This file is part of BeePublished which is based on CakePHP.
+* BeePublished is free software: you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation, either version 3
+* of the License, or any later version.
+* BeePublished is distributed in the hope that it will be useful, but
+* WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+* You should have received a copy of the GNU General Public
+* License along with BeePublished. If not, see
+* http://www.gnu.org/licenses/.
+*
+* @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+* @author Philipp Scholl
+*
+* @description View element to display the overview of news entries
+*/
+
 	App::uses('Sanitize', 'Utility');
+	$data = Sanitize::clean($data, array('unicode' => true, 'encode' => false, 'remove_html' => true));;
+	
+	//load helpers
 	$DateTimeHelper = $this->Helpers->load('Time');
 	$this->Helpers->load('Slug');
 	$this->Helpers->load('BBCode');
 	$this->Helpers->load('SocialNetwork');
 	
-	$this->Html->script('jquery/jPaginate', false);
+	//bind javascript and css
+	$this->Html->script('jquery/jpaginate', false);
 	$this->Html->script('/newsblog/js/showNews', false);
-	
 	$this->Html->css('/newsblog/css/showNews', null, array('inline' => false));
-	$this->Html->css('/css/jQueryPagination', null, array('inline' => false));
-	
-	$data = Sanitize::clean($data);
+	$this->Html->css('/css/jpaginate', null, array('inline' => false));
 	
 	if($this->Session->check('Newsblog.itemsPerPage')){
 		$itemsPerPage = $this->Session->read('Newsblog.itemsPerPage');
@@ -26,12 +47,18 @@
 		$shorttextLength = 150;
 	}
 	
+	//get permissions
 	$allowedActions = $this->PermissionValidation->getPermissions($pluginId);
 	$deleteAllowed = $allowedActions['Delete'];
 	$editAllowed = $allowedActions['Edit'];
 	
 	$dateFormat = __('m-d-Y');
 	$this->Js->set('dateFormatForPicker', $dateFormat);
+	
+	$hideConfigurationText = __d('newsblog', 'Hide Configuration');
+	$this->Js->set('hideConfigText', $hideConfigurationText);
+	$showConfigurationText = __d('newsblog', 'Show Configuration');
+	$this->Js->set('showConfigText', $showConfigurationText);
 ?>
 <?php 
 	if($data['newsblogTitle'] != null || $data['newsblogTitle'] != ''){
@@ -39,39 +66,6 @@
 		echo $data['newsblogTitle'];
 		echo '</h1><div class="newsblogtitle_border color1"></div>';
 	}?>
-
-<div class='newsblogreadconfig'>
-	<div class='newsblogreadconfig_button'>
-		<?php echo $this->Form->button(__d('newsblog', 'ShowHideConfiguration'));?>
-	</div>
-	<div class='newsblogreadconfig_items'>
-	<?php
-	echo $this->Form->create(null, array('url' => array('plugin' => 'Newsblog', 'controller' => 'ShowNews', 'action' => 'general'), 'class' => 'newsblogreadconfig_form'));
-	//get current 
-	echo $this->Form->input(null, array(
-		'options' => array(10 => 10, 15 => 15, 20 => 20, 25 => 25),
-		'name' => 'itemsPerPage',
-		'label' => __d('newsblog', 'Items per page:'),
-		'default' => 10,
-		'value' => $itemsPerPage,
-		'class' => 'newsblogreadconfig_select',
-		'div' => 'configform_input'
-	));
-	
-	echo $this->Form->input(null, array(
-		'options' => array(150 => 150, 200 => 200, 250 => 250, 300 => 300, 350 => 350),
-		'name' => 'previewTextLength',
-		'label' => __d('newsblog', 'Preview text length:'),
-		'default' => 150,
-		'value' => $shorttextLength,
-		'class' => 'newsblogreadconfig_select',
-		'div' => 'configform_input'
-	));
-	
-	//create submit button
-	echo $this->Form->end(__d('newsblog', 'Save Configuration'));?>
-	</div>
-</div>
 
 <div class='newsblogcontainer'>
 
@@ -136,10 +130,32 @@ if( count($data['publishedNewsEntries']) > 0){
 		<div class="newsblog_entry_social">
 			<?php 
 				$socialURL = $this->Html->url($url.'/shownews/'.$newsEntryId.'-'.$titleForUrl, true);
-				echo $this->SocialNetwork->insertFacebookShare($socialURL);
-				echo $this->SocialNetwork->insertGoogleShare($socialURL);
-				echo $this->SocialNetwork->insertTwitterShare($socialURL);
-			?>
+				
+				$socialNetworks = $data['socialNetworks'];
+				//Facebook
+				if($socialNetworks['facebook']){
+					echo $this->SocialNetwork->insertFacebookShare($socialURL);
+				}
+				
+				//Google+
+				if($socialNetworks['googleplus']){
+					echo $this->SocialNetwork->insertGoogleShare($socialURL);
+				}
+				
+				//Twitter
+				if($socialNetworks['twitter']){
+					echo $this->SocialNetwork->insertTwitterShare($socialURL);
+				}
+				
+				//Xing
+				if($socialNetworks['xing']){
+					echo $this->SocialNetwork->insertXingShare($socialURL);
+				}
+				
+				//LinkedIn
+				if($socialNetworks['linkedin']){
+					echo $this->SocialNetwork->insertLinkedShare($socialURL);
+				}?>
 		</div>
 		<div class="newsblog_entry_buttons">
 			<?php 
@@ -169,6 +185,40 @@ if( count($data['publishedNewsEntries']) > 0){
 }?>
 
 </div>
+
+<div class='newsblogreadconfig'>
+<div class='newsblogreadconfig_button'>
+<a style="cursor:pointer;"><?php echo $showConfigurationText;?></a>
+	</div>
+	<div class='newsblogreadconfig_items'>
+	<?php
+	echo $this->Form->create(null, array('url' => array('plugin' => 'Newsblog', 'controller' => 'ShowNews', 'action' => 'general'), 'class' => 'newsblogreadconfig_form'));
+	//get current 
+	echo $this->Form->input(null, array(
+		'options' => array(10 => 10, 15 => 15, 20 => 20, 25 => 25),
+		'name' => 'itemsPerPage',
+		'label' => __d('newsblog', 'Items per page:'),
+		'default' => 10,
+		'value' => $itemsPerPage,
+		'class' => 'newsblogreadconfig_select',
+		'div' => 'configform_input'
+	));
+	
+	echo $this->Form->input(null, array(
+		'options' => array(150 => 150, 200 => 200, 250 => 250, 300 => 300, 350 => 350),
+		'name' => 'previewTextLength',
+		'label' => __d('newsblog', 'Preview text length:'),
+		'default' => 150,
+		'value' => $shorttextLength,
+		'class' => 'newsblogreadconfig_select',
+		'div' => 'configform_input'
+	));
+	
+	//create submit button
+	echo $this->Form->end(__d('newsblog', 'Save Configuration'));?>
+	</div>
+</div>
+
 <?php
 if($this->PermissionValidation->getUserRole() < 6 & ($allowedActions['Write'] || $allowedActions['Publish'])){
 	echo '<div class="plugin_administration">';

@@ -22,13 +22,15 @@ class ViewController extends FoodMenuAppController {
         $pluginId = $this->getPluginId();
         $this->set('pluginId', $pluginId);
     }
-
+	// Method to start admin overlay
 	public function admin( $contentID ) {
 		$menus = $this->FoodMenuMenu->find('all', array('order' => array('valid_until ASC')));
 		$this->set('menus', $menus);
+		//render first page of admin overlay
 		$this->render('/FoodMenuMenus/index');
 	}
 	
+	// perform date selection if a user wants to know what dishes are availible on a special date
 	function selectDate() {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			$data = $this->request->data;
@@ -38,7 +40,17 @@ class ViewController extends FoodMenuAppController {
 				
 				/* Check if a valid date was entered */
 				$dateArray = explode('-', $date);
-				if(checkdate($dateArray[0], $dateArray[1], $dateArray[2])) {
+				$isInteger = false;
+				if((is_numeric($dateArray[0])) && is_numeric($dateArray[0]) && is_numeric($dateArray[0])) {
+					$isInteger = true;
+				}
+				else {
+					$date = date('m-d-Y');
+					$dateArray = explode('-', $date);
+					$isInteger = true;
+					
+				}
+				if($isInteger && (checkdate(((int)$dateArray[0]), ((int)$dateArray[1]), ((int)$dateArray[2])))) {
 					
 					//Get the referer Url
 					$refererurl = $this->referer();

@@ -1,4 +1,8 @@
-﻿﻿<?php $this->Html->script('/impressum/js/impressum', false); ?>
+﻿﻿<?php 
+	$this->Html->script('/impressum/js/impressum', false);
+	$socNet = $data['socialNetworks'];
+	$mdata = $data['Impressum']; 
+?>
 <!-- so this is the automatically generated impressum, which is dynamically created based on database entries -->
 
 <!-- heading section -->
@@ -17,33 +21,33 @@
 <p>
 	<!-- when company, club or public, provide legal entity's title and form, otherwise natural person's name -->
 	<?php
-		if ($data['Impressum']['type']==('comp') or  $data['Impressum']['type']==('club')) {
-			echo $data['Impressum']['comp_name'].' '.$data['Impressum']['legal_form'];
-		} elseif ($data['Impressum']['type']==('public')) {
-			echo $data['Impressum']['legal_form'].' '.$data['Impressum']['comp_name'];
+		if ($mdata['Impressum']['type']==('comp') or  $mdata['Impressum']['type']==('club')) {
+			echo $mdata['Impressum']['comp_name'].' '.$mdata['Impressum']['legal_form'];
+		} elseif ($mdata['Impressum']['type']==('public')) {
+			echo $mdata['Impressum']['legal_form'].' '.$mdata['Impressum']['comp_name'];
 			echo ('<br>Körperschaft des öffentlichen Rechts');
 		} else {
-			echo $data['Impressum']['first_name'].' '.$data['Impressum']['last_name'];
+			echo $mdata['Impressum']['first_name'].' '.$mdata['Impressum']['last_name'];
 		}
 	?>
 	<!-- now everybody needs an address -->
 	<br />
-	<?php echo $data['Impressum']['street'].' '.$data['Impressum']['house_no']; ?>
+	<?php echo $mdata['Impressum']['street'].' '.$mdata['Impressum']['house_no']; ?>
 	<br />
-	<?php echo $data['Impressum']['post_code'].' '.$data['Impressum']['city']; ?>
+	<?php echo $mdata['Impressum']['post_code'].' '.$mdata['Impressum']['city']; ?>
 	<br />
-	<?php echo $data['Impressum']['country']; ?>
-	<br />
+	<?php echo $mdata['Impressum']['country']; ?>
+	<br>
 </p>
 <br>
 
 <!-- authorised representative is only necessary if type is company, club or public -->
-<?php if ($data['Impressum']['type']==('comp') or  $data['Impressum']['type']==('club') or $data['Impressum']['type']==('public')) { ?>
+<?php if ($mdata['Impressum']['type']==('comp') or  $mdata['Impressum']['type']==('club') or $mdata['Impressum']['type']==('public')) { ?>
 	<h3>
 		<?php echo __('Vertretungsberechtigt').': '; ?>
 	</h3>
 	<p>
-		<?php echo $data['Impressum']['auth_rep_first_name'].' '.$data['Impressum']['auth_rep_last_name']; ?>
+		<?php echo $mdata['Impressum']['auth_rep_first_name'].' '.$mdata['Impressum']['auth_rep_last_name']; ?>
 	</p>
 <?php } //if type = comp, club or public ?>
 
@@ -52,75 +56,72 @@
 <h2>
 	<?php echo __('Kontaktdaten'); ?>
 </h2>
-<br>
 <table>
 	<tbody>
 		<?php 
-			if (!empty($data['Impressum']['phone_no'])) {
+			if (!empty($mdata['Impressum']['phone_no'])) {
 				echo("<tr>
 						<td>
 							<p>".__('Telefon').":</p>
 						</td>
 						<td>
-							<p>".$data['Impressum']['phone_no']."</p>
+							<p>".$mdata['Impressum']['phone_no']."</p>
 						</td>
 					</tr>");
 			}
 		?>
 		<?php 
-			if (!empty($data['Impressum']['fax_no'])) {
+			if (!empty($mdata['Impressum']['fax_no'])) {
 				echo("<tr>
 						<td>
 							<p>".__('Telefax').":</p>
 						</td>
 						<td>
-							<p>".$data['Impressum']['fax_no']."</p>
+							<p>".$mdata['Impressum']['fax_no']."</p>
 						</td>
 					</tr>");
 			}
 		?>
 		<?php 
-			if (!empty($data['Impressum']['email'])) {
+			if (!empty($mdata['Impressum']['email'])) {
 				echo("<tr>
 						<td>
 							<p>".__('E-Mail').":</p>
 						</td>
 						<td>
-							<p>".$this->Html->link($data['Impressum']['email'], 'mailto:'.$data['Impressum']['email'])."</p>
+							<p>".$this->Html->link($mdata['Impressum']['email'], 'mailto:'.$mdata['Impressum']['email'])."</p>
 						</td>
 					</tr>");
 			}
 		?>
 	</tbody>
 </table>
-<br>
 
 <!-- this was all data a private person needs to provide -->
-<?php if ($data['Impressum']['type']!='priv') { ?>
-
+<?php if ($mdata['Impressum']['type']!='priv') { ?>
 	<!-- so now here comes all the legal stuff -->
 
 	<!-- maybe it has to be registered -->
-	<?php if ($data['Impressum']['reg']) {?>
+	<?php if ($mdata['Impressum']['reg']) {?>
 		<h2>
 			<?php echo __('Registereintrag'); ?>
 		</h2>
 		<p>
-			<?php echo __('Eintragung beim ').$data['Impressum']['reg_name']; ?>
+			<?php echo __('Eintragung beim ').$mdata['Impressum']['reg_name']; ?>
 			<br>
-			<?php echo $data['Impressum']['reg_street'].' '.$data['Impressum']['reg_house_no']; ?>
+			<?php echo $mdata['Impressum']['reg_street'].' '.$mdata['Impressum']['reg_house_no']; ?>
 			<br>
-			<?php echo $data['Impressum']['reg_post_code'].' '.$data['Impressum']['reg_city']; ?>
+			<?php echo $mdata['Impressum']['reg_post_code'].' '.$mdata['Impressum']['reg_city']; ?>
 			<br>
-			<?php echo $data['Impressum']['reg_country']; ?>
+			<?php echo $mdata['Impressum']['reg_country']; ?>
 			<br>
 			<br>
-			<?php echo __('Registernummer: ').$data['Impressum']['reg_no']; ?>
+			<?php echo __('Registernummer: ').$mdata['Impressum']['reg_no']; ?>
 		</p>
 	<?php } //reg == true?>
 
 	<!-- only companies need economical identification -->
-	<?php if ($data['Impressum']['type'] == 'comp') {?>
+	<?php if ($mdata['Impressum']['type'] == 'comp') {?>
 		<br>
 		<h2>
 			<?php echo __('Umsatzsteuer-Identifikationsnummer'); ?>
@@ -132,11 +133,11 @@
 		</p>
 		<br>
 		<p>
-			<?php echo $data['Impressum']['vat_no']; ?>
+			<?php echo $mdata['Impressum']['vat_no']; ?>
 		</p>
 
 		<!-- but only some have an economic number -->
-		<?php if (!empty($data['Impressum']['eco_no'])) { ?>
+		<?php if (!empty($mdata['Impressum']['eco_no'])) { ?>
 			<br>
 			<h2>
 				<?php echo __('Wirtschafts-Identifikationsnummer'); ?>
@@ -148,13 +149,13 @@
 			</p>
 			<br>
 			<p>
-				<?php echo $data['Impressum']['eco_no']; ?>
+				<?php echo $mdata['Impressum']['eco_no']; ?>
 			</p>
 		<?php } //eco_no ?>
 	<?php } //type == comp ?>
 
 	<!-- maybe there is an admission office -->
-	<?php if ($data['Impressum']['adm_office']) { ?>
+	<?php if ($mdata['Impressum']['adm_office']) { ?>
 		<br>
 		<h2>
 			<?php echo __('Aufsichtsbehörde'); ?>
@@ -162,38 +163,38 @@
 		<p>
 			<!-- job title is only needed if the person has a special job -->
 			<?php 
-				if ($data['Impressum']['type'] == 'job') { 
-					echo "<br>".__('Berufsbezeichnung: ').$data['Impressum']['job_title']; 
-					echo "<br>".__('Zuständige Kammer: ');
+				if ($mdata['Impressum']['type'] == 'job') { 
+					echo __('Berufsbezeichnung: ').$mdata['Impressum']['job_title']."<br>"; 
+					echo __('Zuständige Kammer: ');
 				} else {
-					echo "<br>".__('Zuständige Behörde: ');
+					echo __('Zuständige Behörde: ');
 				}
-				echo $data['Impressum']['adm_office_name'];
+				echo $mdata['Impressum']['adm_office_name'];
 			?>
 			<br>
-			<?php echo $data['Impressum']['adm_office_street'].' '.$data['Impressum']['adm_office_house_no']; ?>
+			<?php echo $mdata['Impressum']['adm_office_street'].' '.$mdata['Impressum']['adm_office_house_no']; ?>
 			<br>
-			<?php echo $data['Impressum']['adm_office_post_code'].' '.$data['Impressum']['adm_office_city']; ?>
+			<?php echo $mdata['Impressum']['adm_office_post_code'].' '.$mdata['Impressum']['adm_office_city']; ?>
 			<br>
 			<?php 
-				if($data['Impressum']['type'] == 'job') {
+				if($mdata['Impressum']['type'] == 'job') {
 					echo __('Land der Verleihung').': ';
 				}
-				echo $data['Impressum']['adm_office_country']; 
+				echo $mdata['Impressum']['adm_office_country']; 
 			?>
 			<br>
 			<?php 
-				if ($data['Impressum']['type'] == 'job') {
+				if ($mdata['Impressum']['type'] == 'job') {
 					echo __('Es gelten folgende berufsrechtliche Regelungen: ').
-					$this->Html->link($data['Impressum']['regulations_name'],$data['Impressum']['regulations_link']);
+					$this->Html->link($mdata['Impressum']['regulations_name'],$mdata['Impressum']['regulations_link'], array('target' => '_blank'));
 				}
 			?>
 		</p>
+		<br>
 	<?php } //adm_office == true ?>
 <?php } //type != priv ?>
 
 <!-- now everybody needs the following -->
-<br>
 <h2>
 	<?php echo __('Haftungsausschluss'); ?>
 </h2>
@@ -270,7 +271,7 @@
 <br>
 
 <!-- the following is only needed if facebook plugin is used -->
-<?php if ($data['Impressum']['facebook']) { ?>
+<?php if ($socNet['facebook']) { ?>
 	<h3>
 		<?php echo __('Datenschutzerklärung für die Nutzung von Facebook-Plugins (Like-Button)'); ?>
 	</h3>
@@ -282,7 +283,7 @@
 			Facebook-Plugins erkennen Sie an dem Facebook-Logo oder dem
 			"Like-Button" ("Gefällt mir") auf unserer Seite. Eine Übersicht über
 			die Facebook-Plugins finden Sie ').
-			$this->Html->link(__('hier'),"http://developers.facebook.com/docs/plugins/").'.';
+			$this->Html->link(__('hier'),"http://developers.facebook.com/docs/plugins/", array('target' => '_blank')).'.';
 		?>
 	</p>
 	<br>
@@ -298,7 +299,7 @@
 			zuordnen. Wir weisen darauf hin, dass wir als Anbieter der Seiten keine
 			Kenntnis vom Inhalt der übermittelten Daten sowie deren Nutzung durch
 			Facebook erhalten. Weitere Informationen hierzu finden Sie in der ').
-			$this->Html->link(__('Datenschutzerklärung von Facebook'), "http://www.facebook.com/policy.php").'.';
+			$this->Html->link(__('Datenschutzerklärung von Facebook'), "http://www.facebook.com/policy.php", array('target' => '_blank')).'.';
 		?>
 	</p>
 	<br>
@@ -313,7 +314,7 @@
 <?php } //facebook == true ?>
 
 <!-- the following is only needed if the twitter plugin is used -->
-<?php if ($data['Impressum']['twitter']) { ?>
+<?php if ($socNet['twitter'] == 0) { ?>
 	<h3>
 		<?php echo __('Datenschutzerklärung für die Nutzung von Twitter'); ?>
 	</h3>
@@ -334,20 +335,20 @@
 			echo __('Wir weisen darauf hin, dass wir als Anbieter der Seiten keine Kenntnis
 			vom Inhalt der übermittelten Daten sowie deren Nutzung durch Twitter
 			erhalten. Weitere Informationen hierzu finden Sie in der ').
-			$this->Html->link(__('Datenschutzerklärung von Twitter'), "http://twitter.com/privacy").'.'; 
+			$this->Html->link(__('Datenschutzerklärung von Twitter'), "http://twitter.com/privacy", array('target' => '_blank')).'.'; 
 		?>
 	</p>
 	<br>
 	<p align="justify">
 		<?php 
 			echo __('Ihre Datenschutzeinstellungen bei Twitter können Sie in den ').
-			$this->Html->link(__('Konto-Einstellungen'), "http://twitter.com/account/settings").__(' ändern.');
+			$this->Html->link(__('Konto-Einstellungen'), "http://twitter.com/account/settings", array('target' => '_blank')).__(' ändern.');
 		?>
 	</p>
 <?php }//twitter == true?>
 
 <!-- the following is only needed if the google plus plugin is used -->
-<?php if ($data['Impressum']['google_plus']) { ?>
+<?php if ($socNet['googleplus'] == 0) { ?>
 	<h3>
 		<?php echo __('Datenschutzerklärung für die Nutzung von GooglePlus'); ?>
 	</h3>
@@ -366,7 +367,7 @@
 			Datenerhebung und die weitere Verarbeitung und Nutzung der erfassten Daten durch Google sowie 
 			Ihre diesbezüglichen Rechte und Einstellungsmöglichkeiten zum Schutz Ihrer Privatsphäre 
 			entnehmen Sie bitte den ').
-			$this->Html->link(__('Datenschutzhinweisen'), "http://www.google.com/intl/de/+/policy/+1button.html").
+			$this->Html->link(__('Datenschutzhinweisen'), "http://www.google.com/intl/de/+/policy/+1button.html", array('target' => '_blank')).
 			__('von Google zur "+1"-Schaltfläche. Wenn Sie bei Google Plus registriert sind und nicht möchten, 
 			dass Google über unsere Website Daten über Sie sammelt und mit Ihren bei Google gespeicherten 
 			Mitgliedsdaten verknüpft, müssen Sie sich vor Ihrem Besuch unserer Website bei Google Plus ausloggen.'); 
@@ -375,7 +376,7 @@
 <?php }//google plus == true?>
 
 <!-- the following is only needed if the xing plugin is used -->
-<?php if ($data['Impressum']['xing']) { ?>
+<?php if ($socNet['xing'] == 0) { ?>
 	<h3>
 		<?php echo __('Datenschutzerklärung für die Nutzung von Xing'); ?>
 	</h3>
@@ -388,7 +389,7 @@
 			direkt an Xing übermittelt und dort gespeichert. Wir haben keinen Einfluss auf Umfang, 
 			Inhalt und Art der Daten, die Xing mit der Schaltfläche erfasst. Details zum Umgang mit Ihren 
 			persönlichen Daten durch Xing sowie Ihren diesbezüglichen Rechten entnehmen Sie bitte den').
-			$this->Html->link(__('Datenschutzhinweisen von Xing'), "http://www.xing.com/privacy").
+			$this->Html->link(__('Datenschutzhinweisen von Xing'), "http://www.xing.com/privacy", array('target' => '_blank')).
 			__('. Wenn Sie Xing-Mitglied sind und nicht möchten, dass Xing über unsere Webseite Daten 
 			Daten über Sie sammelt, sollten Sie sich vor dem Besuch unserer Webseite bei Xing ausloggen.'); 
 		?>
@@ -396,7 +397,7 @@
 <?php }//xing == true?>
 
 <!-- the following is only needed if the linkedin plugin is used -->
-<?php if ($data['Impressum']['linkedin']) { ?>
+<?php if ($socNet['linkedin'] == 0) { ?>
 	<h3>
 		<?php echo __('Datenschutzerklärung für die Nutzung von LinkedIn'); ?>
 	</h3>
@@ -409,7 +410,7 @@
 			direkt an LinkedIn übermittelt und dort gespeichert. Wir haben keinen Einfluss auf Umfang, 
 			Inhalt und Art der Daten, die LinkedIn mit der Schaltfläche erfasst. Details zum Umgang mit Ihren 
 			persönlichen Daten durch LinkedIn sowie Ihren diesbezüglichen Rechten entnehmen Sie bitte den').
-			$this->Html->link(__('Datenschutzhinweisen von LinkedIn'), "http://de.linkedin.com/static?key=privacy_policy").
+			$this->Html->link(__('Datenschutzhinweisen von LinkedIn'), "http://de.linkedin.com/static?key=privacy_policy", array('target' => '_blank')).
 			__('. Wenn Sie LinkedIn-Mitglied sind und nicht möchten, dass LinkedIn über unsere Webseite Daten 
 			Daten über Sie sammelt, sollten Sie sich vor dem Besuch unserer Webseite bei LinkedIn ausloggen.'); 
 		?>
@@ -419,6 +420,11 @@
 <!-- and now write where we stole the texts ;-) -->
 <p style="font-style: italic;">
 	<small>
-		<?php echo __('Quelle: ').$this->Html->link(__('Impressum-Generator von e-Recht24'), "http://www.e-recht24.de"); ?>
+		<?php
+			echo __('Quelle der Texte: ').$this->Html->link(__('Impressum-Generator von e-Recht24', array('target' => '_blank')), "http://www.e-recht24.de");
+			echo '<br>';
+			echo __('Diese Seite wurde mit ').$this->Html->link(__('YAML'), 'http://www.yaml.de', array('target' => '_blank')).__(' erstellt.');
+		?>
 	</small>
+	
 </p>

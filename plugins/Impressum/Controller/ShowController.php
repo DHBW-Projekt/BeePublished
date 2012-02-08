@@ -7,9 +7,7 @@ class ShowController extends AppController {
 
 	//authorization check
 	function beforeFilter()	{
-		//Actions which don't require authorization
 		parent::beforeFilter();
-		//TODO change to save
 		$this->Auth->allow('*');
 	}
 
@@ -31,7 +29,13 @@ class ShowController extends AppController {
 	 * @param add = true, remove = false
 	 */
 	public function setFacebook($facebook) {
-		$data = array('id' => 1, 'facebook' => $facebook);
+		$entry = $this->Impressum->find('first');
+		$value = $entry['Impressum']['facebook'];
+		if ($facebook) {
+			$data = array('id' => 1, 'facebook' => ++$value);
+		} else {
+			$data = array('id' => 1, 'facebook' => --$value);
+		}
 		$this->Impressum->save($data);
 	}
 
@@ -40,7 +44,13 @@ class ShowController extends AppController {
 	 * @param add = true, remove = false
 	 */
 	public function setTwitter($twitter) {
-		$data = array('id' => 1, 'twitter' => $twitter);
+		$entry = $this->Impressum->find('first');
+		$value = $entry['Impressum']['twitter'];
+		if ($twitter) {
+			$data = array('id' => 1, 'twitter' => ++$value);
+		} else {
+			$data = array('id' => 1, 'twitter' => --$value);
+		}
 		$this->Impressum->save($data);
 	}
 
@@ -49,7 +59,13 @@ class ShowController extends AppController {
 	 * @param add = true, remove = false
 	 */
 	public function setGooglePlus($googlePlus) {
-		$data = array('id' => 1, 'google_plus' => $googlePlus);
+		$entry = $this->Impressum->find('first');
+		$value = $entry['Impressum']['google_plus'];
+		if ($googlePlus) {
+			$data = array('id' => 1, 'google_plus' => ++$value);
+		} else {
+			$data = array('id' => 1, 'google_plus' => --$value);
+		}
 		$this->Impressum->save($data);
 	}
 
@@ -58,7 +74,13 @@ class ShowController extends AppController {
 	 * @param add = true, remove = false
 	 */
 	public function setXing($xing) {
-		$data = array('id' => 1, 'xing' => $xing);
+		$entry = $this->Impressum->find('first');
+		$value = $entry['Impressum']['xing'];
+		if ($xing) {
+			$data = array('id' => 1, 'xing' => ++$value);
+		} else {
+			$data = array('id' => 1, 'xing' => --$value);
+		}
 		$this->Impressum->save($data);
 	}
 
@@ -67,7 +89,13 @@ class ShowController extends AppController {
 	 * @param add = true, remove = false
 	 */
 	public function setLinkedin($linkedin) {
-		$data = array('id' => 1, 'linkedin' => $linkedin);
+		$entry = $this->Impressum->find('first');
+		$value = $entry['Impressum']['linkedin'];
+		if ($linkedin) {
+			$data = array('id' => 1, 'linkedin' => ++$value);
+		} else {
+			$data = array('id' => 1, 'linkedin' => --$value);
+		}
 		$this->Impressum->save($data);
 	}
 
@@ -111,7 +139,7 @@ class ShowController extends AppController {
 					$data['Impressum']['auth_rep_first_name'] = null;
 					$data['Impressum']['auth_rep_last_name'] = null;
 					$data['Impressum']['adm_office'] = true; //every job needs an admission office
-						
+
 					if($this->Impressum->save($data)) {
 						$this->render('privJobData');
 						break;
@@ -359,7 +387,7 @@ class ShowController extends AppController {
 			$data = $this->request->data;
 			$entry = $this->Impressum->find('first');
 			if ($entry['Impressum']['type'] == 'club') {
-				$data['Impressum']['reg'];
+				$data['Impressum']['reg'] = true;
 			}
 			if ($data['Impressum']['reg']) {
 				$this->checkRegister($data);
@@ -460,46 +488,77 @@ class ShowController extends AppController {
 	 * The next area is only about checking data completeness
 	 */
 
+	/**
+	 * this method is called by the method isComplete to check whether the impressum is completed
+	 */
 	function checkDataCompleteness() {
 		$data = $this->Impressum->find('first');
 		switch ($data['Impressum']['type']) {
 			case 'comp':
-				$this->checkCompData($data);
+				$this->checkGeneralData($data);
 				if ($this->complete) {
 					$this->checkAddress($data);
 					if ($this->complete) {
 						$this->checkContactData($data);
 						if ($this->complete) {
-							$this->checkLegalData($data);
-							if ($this->complete and $data['Impressum']['reg']) {
-								$this->checkRegister($data);
+							$this->checkAuthRepData($data);
+							if($this->complete) {
+								$this->checkLegalData($data);
+								if ($this->complete and $data['Impressum']['reg']) {
+									$this->checkRegister($data);
+									if ($this->complete and $data['Impressum']['adm_office']) {
+										$this->checkAdmOffice($data);
+									}
+								}
 							}
 						}
 					}
 				}
 				break;
 			case 'club':
-				$this->checkCompData($data);
+				$this->checkGeneralData($data);
 				if ($this->complete) {
 					$this->checkAddress($data);
 					if ($this->complete) {
 						$this->checkContactData($data);
 						if ($this->complete) {
-							if (!$data['Impressum']['reg']) {
-								$this->complete = false;
-								$this->Session->setFlash(__('Jeder Verein muss ins Register eingetragen werden.'), 'default', array('class' => 'flash_failure'));
-							} else {
-								$this->checkRegister($data);
+							$this->checkAuthRepData($data);
+							if ($this->complete) {
+								if (!$data['Impressum']['reg']) {
+									$this->complete = false;
+									$this->Session->setFlash(__('Jeder Verein muss ins Register eingetragen werden.'), 'default', array('class' => 'flash_failure'));
+								} else {
+									$this->checkRegister($data);
+								}
 							}
 						}
 					}
 				}
-
+				break;
+			case 'public':
+				$this->checkGeneralData($data);
+				if ($this->complete) {
+					$this->checkAddress($data);
+					if ($this->complete) {
+						$this->checkContactData($data);
+						if ($this->complete) {
+							$this->checkAuthRepData($data);
+							if ($this->complete) {
+								if (!$data['Impressum']['adm_office']) {
+									$this->complete = false;
+									$this->Session->setFlash(__('Für eine Körperschaft öffentlichen Rechts muss eine Aufsichtsbehörde angegeben werden.'), 'default', array('class' => 'flash_failure'));
+								} else {
+									$this->checkRegister($data);
+								}
+							}
+						}
+					}
+				}
 				break;
 			case 'job':
 				$this->checkPrivData($data);
 				if ($this->complete) {
-					$this->checkAddressData($data);
+					$this->checkAddress($data);
 					if ($this->complete) {
 						$this->checkContactData($data);
 						if ($this->complete) {
