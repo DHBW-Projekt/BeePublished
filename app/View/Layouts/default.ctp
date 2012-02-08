@@ -29,6 +29,11 @@
     echo $this->Html->script('jquery/jquery.cookie');
     echo $this->Html->script('dualon');
     echo $this->Html->script('menu');
+    
+    $lang = $this->Session->read("Config.language");
+    $lang = substr($lang, 0, 2);
+    $this->Js->set('language', $lang);
+    
     if ($adminMode) {
         if (isset($pageid)) {
             $this->Js->set('pageid', $pageid);

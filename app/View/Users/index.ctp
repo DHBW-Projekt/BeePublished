@@ -3,7 +3,7 @@
 <?php echo $this->element('config-menu'); ?>
 <div id="users_overview">
     <div id="users_search_bar">
-    <form>Search Users: <input type="text" id="search-users"/></form>
+    <form><?php echo __('Search Users:'); ?> <input type="text" id="search-users"/></form>
     </div>
     <?php foreach ($roles as $role): ?>
     <div class="role">

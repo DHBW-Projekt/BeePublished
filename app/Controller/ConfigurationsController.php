@@ -112,7 +112,7 @@ class ConfigurationsController extends AppController
     private function uploadImage($file, $init_creation, $file_old="logo.png"){
 	    
 	    /* FILE */
-    	$file_path = WWW_ROOT.'uploads\\';
+    	$file_path = WWW_ROOT.'uploads/';
     	$file_name = "logo.png";
     	$upload_error = true;
     	

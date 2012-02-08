@@ -23,13 +23,11 @@ table.newsletters{
 }
 
 table#recipients{
-	clear: both;
-	width:500px;	
+	clear: both;	
 }
 
 table#newsletters{
 	clear: both;
-	width: 500px;
 }
 
 
