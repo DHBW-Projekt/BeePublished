@@ -57,9 +57,9 @@ class ConfigurationsController extends AppController
             if (isset($this->request->data['Configuration']['submittedfile']))
             	$this->uploadImage($this->data['Configuration']['submittedfile'], true);
             if ($this->Configuration->save($this->request->data)) {
-                $this->Session->setFlash('Successfully saved');
+                $this->Session->setFlash(__('Successfully saved'));
             } else {
-                $this->Session->setFlash('Saving failed');
+                $this->Session->setFlash(__('Saving failed'));
             }
             $this->redirect(array('action' => 'index'));
         } else {

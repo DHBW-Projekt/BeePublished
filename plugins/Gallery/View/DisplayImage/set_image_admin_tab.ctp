@@ -34,10 +34,10 @@ if(array_key_exists('pictureID', $data['CurrPicture'])){
 echo '<table>';
 	echo '<thead>';
 		echo '<tr>';
-			echo '<th>'.__('Id').'</th>';
-			echo '<th>'.__('Preview').'</th>';
-			echo '<th>'.__('Title').'</th>';
-			echo '<th>'.__('Assigned').'</th>';
+			echo '<th>'.__d('gallery', 'Id').'</th>';
+			echo '<th>'.__d('gallery', 'Preview').'</th>';
+			echo '<th>'.__d('gallery', 'Title').'</th>';
+			echo '<th>'.__d('gallery', 'Assigned').'</th>';
 		echo '</tr>';
 	echo '</thead>';
 	echo '<tbody>';

@@ -95,7 +95,7 @@ class WebShopComponent extends Component {
 		if (!empty($controller->data)) {
 			
 			//SANITIZE
-			$controller->data =  Sanitize::paranoid($controller->data);
+			$controller->data = Sanitize::paranoid($controller->data);
 			
 			//PAGINATION options
 			$controller->paginate = array(

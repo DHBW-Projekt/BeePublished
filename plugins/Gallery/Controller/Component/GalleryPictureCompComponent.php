@@ -23,21 +23,21 @@ App::uses('Sanitize', 'Utility');
 
 class GalleryPictureCompComponent extends Component
 {
-	public $uses = array ('Gallery.GalleryPicture');
+	public $uses = array ('Gallery.GalleryPicture','Gallery.GalleryEntry');
 	
 	/**
 	 * loads a picture from db
 	 * @param unknown_type $controller
 	 * @param unknown_type $pictureId
 	 */
-	public function getPicture($controller, $pictureId){
+	public function getPicture($controller, $pictureId){	
 		$controller->loadModel('Gallery.GalleryPicture');
 		$picture = $controller->GalleryPicture->findById($pictureId);
-		
-		$picture = $this->normalizePicture($picture);
-		
-		return $picture;
-	}
+		if(!$picture)
+			return null;
+		else
+			return $this->normalizePicture($picture);
+		}
 	
 	/**
 	 * loads all pictures from db
@@ -102,15 +102,10 @@ class GalleryPictureCompComponent extends Component
 	 */
 	public function delete($controller, $pictureId){
 		$picture = $this->getPicture($controller, $pictureId);
-		
 		$pathInfo = pathinfo(realpath($picture['path_to_pic']));
-	
 		$thumbPath = $pathInfo['dirname']."/thumb/".$pathInfo['basename'];
-		
 		unlink($thumbPath);
-		
 		unlink(realpath($picture['path_to_pic']));
-		
 		$controller->loadModel('Gallery.GalleryPicture');
 		$pictures = $controller->GalleryPicture->delete($picture);
 	}
@@ -119,9 +114,9 @@ class GalleryPictureCompComponent extends Component
 	 * normalizes the picture output -> add thumb path
 	 * @param unknown_type $picture
 	 */
-	public function normalizePicture($picture){
+	public function normalizePicture($picture){		
 		if(isset($picture['GalleryPicture']))
-		$picture = $picture['GalleryPicture'];
+			$picture = $picture['GalleryPicture'];
 		
 		$pathInfo = pathinfo($picture['path_to_pic']);	
 		

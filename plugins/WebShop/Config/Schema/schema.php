@@ -14,7 +14,7 @@ class WebShopSchema extends CakeSchema {
 			'status' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 1, 'collate' => NULL, 'comment' => ''),
 			'created' => array('type' => 'timestamp', 'null' => false, 'default' => 'CURRENT_TIMESTAMP', 'collate' => NULL, 'comment' => ''),
 			'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1), 'fk_customer' => array('column' => 'customer_id', 'unique' => 0)),
-			'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'MyISAM')
+			'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 	);
 	var $webshop_positions = array(
 			'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'key' => 'primary', 'collate' => NULL, 'comment' => ''),
@@ -22,7 +22,7 @@ class WebShopSchema extends CakeSchema {
 			'product_id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'key' => 'index', 'collate' => NULL, 'comment' => ''),
 			'count' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'collate' => NULL, 'comment' => ''),
 			'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1), 'fk_order' => array('column' => 'order_id', 'unique' => 0), 'fk_product' => array('column' => 'product_id', 'unique' => 0)),
-			'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'MyISAM')
+			'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 	);
 	var $webshop_products = array(
 			'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'key' => 'primary', 'collate' => NULL, 'comment' => ''),

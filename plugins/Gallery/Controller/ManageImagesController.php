@@ -234,7 +234,10 @@ class ManageImagesController  extends GalleryAppController{
 		$pluginId = $this->getPluginId();
 		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete', true);
 		
-		$this->deletePictureInternal($pictureId);
+		if(!$this->deletePictureInternal($pictureId)){
+			$this->redirect($this->referer());
+		}
+		
 		$this->Session->setFlash('Image deleted');
 		$this->set('mContext',$menue_context);
 		$this->set('ContentId',$contentId);
@@ -253,7 +256,9 @@ class ManageImagesController  extends GalleryAppController{
 		
 		foreach($this->data['selectPictures'] as $imageId => $toBeDeleted){
 			if($toBeDeleted == 1){
-				$this->deletePictureInternal($imageId);
+				if(!$this->deletePictureInternal($imageId)){
+					$this->redirect($this->referer());
+				}
 			}
 		}
 		$this->Session->setFlash('Images deleted');
@@ -267,7 +272,18 @@ class ManageImagesController  extends GalleryAppController{
 	 * @param int $pictureID
 	 */
 	private function deletePictureInternal($pictureID){
+		
+		// test if is title picture
+		$this->loadModel('Gallery.GalleryEntry');
+		$result = $this->GalleryEntry->query("SELECT * FROM gallery_entries WHERE gallery_picture_id = $pictureID");
+		
+		if(!empty($result)){
+			$this->Session->setFlash('Could not delete the image: it is a title picture!');
+			return false;
+		}
+		
 		$picture = $this->GalleryPictureComp->delete($this,$pictureID);
+		return true;
 	}
 
 	/**

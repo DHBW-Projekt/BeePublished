@@ -11,10 +11,13 @@
 	echo $this->Form->create('null');
 	echo $this->Form->textarea('Text');
 ?>
+<p>
 <?php
 	//options for the radiobuttons
 	$pub = __d('static_text',' published ');
 	$unpub = __d('static_text',' unpublished ');
+	$pub   = "<label>$pub</label>";
+	$unpub = "<label>$unpub</label>";
 	$options =  array(
 		// Not text
 		'label' 	=> false,
@@ -25,6 +28,7 @@
 		'options'	=> array(1 => $pub, 0 =>$unpub )
 	);
 	echo $this->Form->input('Published', $options);?>
+</p>
 </div>
 <?php 
 	$end = __d('static_text','Save');

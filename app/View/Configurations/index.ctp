@@ -21,5 +21,11 @@ echo $this->Form->label(__('Logo'));
 echo $this->Form->file('Configuration.submittedfile', array('label' => false));
 echo $this->Form->input('status');
 echo $this->Form->input('status_text', array('type' => 'textarea'));
+//Social Network Configuration
+echo $this->Form->input('facebook');
+echo $this->Form->input('twitter');
+echo $this->Form->input('googleplus', array('label' => 'Google+'));
+echo $this->Form->input('xing');
+echo $this->Form->input('linkedin');
 echo $this->Form->end(__('Save Configuration'));
 ?>
