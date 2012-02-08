@@ -122,12 +122,14 @@ class WebShopController extends WebShopAppController {
 			if (!$create_error){
 				
 				//SANITIZE
-				$this->data =  Sanitize::clean($this->data);
+				$name_clean = Sanitize::html($this->data['WebshopProduct']['name']);
+				$description_clean = Sanitize::html($this->data['WebshopProduct']['description']);
+				$price_clean = Sanitize::html($this->data['WebshopProduct']['price']);
 				
 				$this->WebshopProduct->set(array(
-							'name' => $this->data['WebshopProduct']['name'],
-							'description' => $this->data['WebshopProduct']['description'],
-							'price' => $this->data['WebshopProduct']['price'],
+							'name' => $name_clean,
+							'description' => $description_clean,
+							'price' => $price_clean,
 							'picture' => $file_name,
 				));
 				
@@ -186,7 +188,7 @@ class WebShopController extends WebShopAppController {
 			$data_old = $this->WebshopProduct->read();
 			
 			//SANITIZE
-			$this->data =  Sanitize::clean($this->data);
+			$this->data = Sanitize::clean($this->data);
 
 			$data_new = $this->data;
 			$data_new['WebshopProduct']['picture'] = $data_old['WebshopProduct']['picture'];
