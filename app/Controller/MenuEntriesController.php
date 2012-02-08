@@ -120,6 +120,7 @@ class MenuEntriesController extends AppController
 
         $this->MenuEntry->id = $id;
         if (!$this->MenuEntry->exists()) {
+            $this->render('close');
             return;
         }
 
