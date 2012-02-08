@@ -80,12 +80,14 @@
 		echo $this->Form->input('city', array('label' => __d('application_membership','City*')));
 		echo $this->Form->input('comment', array('label' => __d('application_membership','Comment'), 'rows' => '4','id'=>'ApplicationMembershipComment'));
 	?>
-
-	<div class="input">
-		<?php
-			echo recaptcha_get_html($publickey);	
-		?>
-	</div>
+	
+	
+	<div id="applicationmembership_captcha">
+	<?php 
+		echo '<p>'.__d("application_membership","For your own security please insert the following words:").'</p>';
+		echo recaptcha_get_html($publickey);
+	?>
+	</div> 
 
 	<p class="applicationmembership_fieldinfo">
 	<?php echo __d('application_membership','The marked fields(*) are required.'); ?>

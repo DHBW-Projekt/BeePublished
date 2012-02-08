@@ -170,8 +170,8 @@ msgid "Comment"
 msgstr "Kommentar"
 
 #: View\Elements\request.ctp
-msgid "Captcha"
-msgstr "Captcha"
+msgid "For your own security please insert the following words:"
+msgstr "Für Ihre eigene Sicherheit geben Sie die folgenden Wörter ein:" 
 
 #: View\Elements\request.ctp
 msgid "The marked fields(*) are required."
