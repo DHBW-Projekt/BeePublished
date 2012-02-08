@@ -10,7 +10,6 @@ echo $this->Form->input('page_name');
 echo $this->Form->input('email');
 echo $this->Form->input('active_template', array('options' => $themes));
 echo $this->Form->input('active_design', array('options' => $designs));
-echo $this->Form->input('active_design', array('options' => $designs));
 
 $options = array('eng' => __('english'), 'deu' => __('german'));
 echo $this->Form->label('title', __('Language'));
