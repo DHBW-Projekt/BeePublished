@@ -31,8 +31,11 @@ echo $this->element('admin_menu',array("ContentId" => $ContentId, "mContext" => 
 		echo $this->Form->create('editor', array('url' => array('plugin' => 'Gallery','controller' => 'ManageGalleries','action' => 'edit',$data['GalleryEntry']['id'],$ContentId,$mContext)));
 		echo $this->Form->hidden('GalleryEntry.id', array('value' => $data['GalleryEntry']['id']));
 		echo $this->Form->input('GalleryEntry.title', array('title' => __('Title:'), 'value' => $data['GalleryEntry']['title']));
-		echo $this->Form->label(__('Description'));
-		echo $this->Form->input('GalleryEntry.description', array('value' => $data['GalleryEntry']['description']));
+		
+		echo $this->Form->input('GalleryEntry.description', array('value' => $data['GalleryEntry']['description'],'div' => 'mandatory', 'type' => 'textarea', 'label' => (__('Description:'))));
+			
+		echo $this->Form->input('GalleryEntry.gallery_picture_id', array('options' => $pictures, 'selected' => $data['GalleryEntry']['titlepicture']['id'],'label' => __('Title picture:')));
+			
 		echo $this->Form->button(__('Save changes'), array('type' => 'submit', 'value' => 'edit'));
 		echo '<div style="clear:both;"></div>';
 	}
