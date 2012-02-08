@@ -139,6 +139,9 @@ class ContainersController extends AppController
             $container['columns'][$content['Content']['column']]['children'][$content['Content']['order']] = $content['Content'];
             $container['columns'][$content['Content']['column']]['children'][$content['Content']['order']]['Plugin'] = $plugin['Plugin'];
         }
+        foreach ($container['columns'] as $idx => $column) {
+            ksort($container['columns'][$idx]['children']);
+        }
         return $container;
     }
 
