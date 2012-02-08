@@ -40,15 +40,15 @@ class MenuEntriesController extends AppController
             $error = false;
             $this->MenuEntry->create();
             $data = $this->request->data;
-            
+
             $url = $this->_getPageURL($parent, $data['MenuEntry']['name']);
-            
+
             $this->Page->create();
             $this->Page->set('title', $data['MenuEntry']['name']);
             $this->Page->set('name', $url);
             $this->Page->set('user_id', $this->Auth->user('id'));
             $this->Page->set('container_id', $this->Container->id);
-            
+
             if ($this->Page->save()) {
             	$data['MenuEntry']['page_id'] = $this->Page->id;
                 $this->Container->create();
@@ -60,24 +60,24 @@ class MenuEntriesController extends AppController
                 $error = true;
                 $this->MenuEntry->validationErrors = $this->Page->validationErrors;
             }
-            
+
             if (!$error) {
                 if ($parent == 0) $parent = null;
                 $data['MenuEntry']['parent_id'] = $parent;
-                
+
                 $parentEntry = $this->MenuEntry->find('first', array(
         			'order' => array('MenuEntry.order' => 'desc'),
         			'conditions' => array('MenuEntry.parent_id' => $parent),
                 	'fields' => 'MenuEntry.order',
                 ));
                 $data['MenuEntry']['order'] = $parentEntry['MenuEntry']['order'] + 1;
-                
+
                 if (!$this->MenuEntry->save($data)) {
                     $error = true;
                     $this->Page->delete();
                 }
             }
-            
+
             if (!$error) {
                 $this->render('close');
                 return;
@@ -98,12 +98,12 @@ class MenuEntriesController extends AppController
             if ($this->MenuEntry->save($this->request->data)) {
             	$menuEntry = $this->MenuEntry->findById($id);
             	$page = $this->Page->findById($menuEntry['MenuEntry']['page_id']);
-            	
+
             	$this->Page->id = $menuEntry['MenuEntry']['page_id'];
             	$page['Page']['title'] = $menuEntry['MenuEntry']['name'];
             	$page['Page']['name'] = $this->_getPageURL($menuEntry['MenuEntry']['parent_id'], $menuEntry['MenuEntry']['name']);
             	$this->Page->save($page);
-            	
+
                 $this->render('close');
                 return;
             }
@@ -117,17 +117,17 @@ class MenuEntriesController extends AppController
     public function delete($id = null)
     {
     	$this->PermissionValidation->actionAllowed(null, 'LayoutManager',true);
-    	
+
         $this->MenuEntry->id = $id;
         if (!$this->MenuEntry->exists()) {
             throw new NotFoundException(__('Invalid menu entry'));
         }
-        
+
         $menuEntry = $this->MenuEntry->findById($this->MenuEntry->id);
-        
+
         $this->MenuEntry->delete();
         $this->Page->delete($menuEntry['Page']);
-        
+
         if (!empty($menuEntry['ChildMenuEntry'])){
 	        foreach ($menuEntry['ChildMenuEntry'] as $child) {
 	        	$this->delete($child['id']);
@@ -138,7 +138,7 @@ class MenuEntriesController extends AppController
     }
 
     function sort()
-    { 
+    {
         $this->layout = 'overlay';
         if ($this->request->is('post')) {
             $data = $this->request->data;
@@ -159,7 +159,7 @@ class MenuEntriesController extends AppController
                 $entry['MenuEntry']['parent_id'] = $parent;
                 $entry['MenuEntry']['order'] = $position;
                 $this->MenuEntry->save($entry);
-                
+
                 $page = $this->Page->findById($entry['MenuEntry']['page_id']);
                 $page['Page']['name'] = $this->_getPageURL($parent, $entry['MenuEntry']['name']);
                 $this->Page->save($page);
@@ -197,11 +197,11 @@ class MenuEntriesController extends AppController
         }
         return $menu;
     }
-    
+
     function _getPageURL($parentEntryID, $name) {
     	$name = Inflector::slug($name, "-");
     	$name = strtolower($name);
-    	
+
     	if ($parentEntryID <> 0) {
     		$parentEntry = $this->MenuEntry->findById($parentEntryID);
     		$parentPage = $this->Page->findById($parentEntry['MenuEntry']['page_id']);
