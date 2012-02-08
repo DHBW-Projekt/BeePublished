@@ -29,24 +29,24 @@ echo $this->element('admin_menu',array("ContentId" => $ContentId, "mContext" => 
 	$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete');
 	
 	
-echo "<h1> ".__('Manage your galleries')."</h1>";
+echo "<h1> ".__d('gallery', 'Manage your galleries')."</h1>";
 echo $this->Session->flash('GalleryNotification');
-echo '<div class="galleryinfo">'.__('Here you can edit, delete your galleries or assign pictures to them.').'</div>';
+echo '<div class="galleryinfo">'.__d('gallery', 'Here you can edit, delete your galleries or assign pictures to them.').'</div>';
 
 if($createAllowed) {
 
-	echo "<h1> ".__('Create a new gallery')."</h1>";
+	echo "<h1> ".__d('gallery', 'Create a new gallery')."</h1>";
 
 
-	echo '<div class="galleryinfo">'.__('Create a new gallery to share the newest pictures with your audience.').'</div>';
+	echo '<div class="galleryinfo">'.__d('gallery', 'Create a new gallery to share the newest pictures with your audience.').'</div>';
 
 	echo $this->Form->create('GalleryEntry', array('url' => array('plugin' => 'Gallery','controller' => 'ManageGalleries','action' => 'create',$ContentId,$mContext)));
 
 
 	echo $this->Form->input('GalleryEntry.title');
-	echo $this->Form->input('GalleryEntry.description', array('div' => 'mandatory', 'type' => 'textarea', 'label' => (__('Description:')))).'<br />';
+	echo $this->Form->input('GalleryEntry.description', array('div' => 'mandatory', 'type' => 'textarea', 'label' => (__d('gallery', 'Description:')))).'<br />';
 
-	echo $this->Form->label(__('Title picture:'));
+	echo $this->Form->label(__d('gallery', 'Title picture:'));
 
 	echo $this->Form->select('GalleryEntry.gallery_picture_id', $pictures);
 
@@ -54,14 +54,14 @@ if($createAllowed) {
 	echo $this->Form->end();
 }
 
-echo '<h1>'.__("Existing galleries").'</h1>';
+echo '<h1>'.__d('gallery', "Existing galleries").'</h1>';
 
 echo '<table>';
 	echo '<thead>';
 		echo '<tr>';
 			echo '<th></th>';
-			echo '<th>'.__('Title').'</th>';
-			echo '<th>'.__('Description').'</th>';
+			echo '<th>'.__d('gallery', 'Title').'</th>';
+			echo '<th>'.__d('gallery', 'Description').'</th>';
 			echo '<th></th>';
 			echo '<th></th>';
 			echo '<th></th>';
@@ -73,7 +73,7 @@ echo '<table>';
 				'plugin' => 'Gallery',
 				'controller' => 'ManageGalleries',
 				'action' => 'deleteSelected',$ContentId,$mContext),
-				'onsubmit'=>'return confirm(\''.__('Do you really want to delete the selected galleries?').'\');'));
+				'onsubmit'=>'return confirm(\''.__d('gallery', 'Do you really want to delete the selected galleries?').'\');'));
 foreach ($data['AllGalleries'] as $gallery){
 	echo "<tr>";
 		echo '<td>';
@@ -87,14 +87,14 @@ foreach ($data['AllGalleries'] as $gallery){
 			echo $this->Html->link($this->Html->image('edit.png', array(
 							'height' => 20, 
 							'width' => 20, 
-							'alt' => __('[x]Edit'))),
+							'alt' => __d('gallery', '[x]Edit'))),
 							array(
 								'plugin' => 'Gallery', 
 								'controller' => 'ManageGalleries', 
 								'action' => 'edit', $gallery['GalleryEntry']['id'],$ContentId,$mContext),
 							array(
 								'escape' => false, 
-								'title' => __('Edit Gallery')));
+								'title' => __d('gallery', 'Edit Gallery')));
 		};
 		echo '</td>';
 	
@@ -104,15 +104,15 @@ foreach ($data['AllGalleries'] as $gallery){
 			echo $this->Html->link($this->Html->image('delete.png', array(
 							'height' => 20, 
 							'width' => 20, 
-							'alt' => __('[x]Delete'))),
+							'alt' => __d('gallery', '[x]Delete'))),
 							array(
 								'plugin' => 'Gallery', 
 								'controller' => 'ManageGalleries', 
 								'action' => 'delete',$gallery['GalleryEntry']['id'],$ContentId,$mContext),
 							array(
 								'escape' => false, 
-								'title' => __('Delete Gallery')),
-								__('Do you really want to delete this Gallery?'));
+								'title' => __d('gallery', 'Delete Gallery')),
+								__d('gallery', 'Do you really want to delete this Gallery?'));
 			}
 		echo '</td>';
 	
@@ -133,10 +133,10 @@ foreach ($data['AllGalleries'] as $gallery){
 						'width' => 20));
 				echo '</td>';
 				echo '<td>';
-					echo $this->Form->submit(__('Delete'), array(
+					echo $this->Form->submit(__d('gallery', 'Delete'), array(
 							'height' => 20,
 							'width' => 20,
-							'alt' => __('[x]Delete')));
+							'alt' => __d('gallery', '[x]Delete')));
 					echo $this->Form->end();
 				echo '</td>';
 			echo '</tr>';

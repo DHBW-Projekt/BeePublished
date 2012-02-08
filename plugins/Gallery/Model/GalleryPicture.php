@@ -49,4 +49,8 @@ class GalleryPicture extends AppModel {
 			'order' => ''
 		)
 	);
+	
+	function invalidate($field, $value = true) {
+		return parent::invalidate($field, __d('gallery', $value, true));
+	}
 }
