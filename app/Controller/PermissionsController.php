@@ -40,7 +40,13 @@ class PermissionsController extends AppController
             $this->Session->setFlash('Successfully saved');
         }
         else {
-            $this->request->data['Permission'] = Set::combine($this->Permission->find('all'), '{n}.Permission.id', '{n}.Permission');
+            $permissions = $this->Permission->find('all');
+            $newPermissions = array();
+            foreach($permissions as $idx=>$permission) {
+                $newPermissions[$idx] = $permission;
+                $newPermissions[$idx]['Permission']['plugin'] = $permission['Plugin']['name'];
+            }
+            $this->request->data['Permission'] = Set::combine($newPermissions, '{n}.Permission.id', '{n}.Permission');
         }
         $roles = $this->Role->find('list');
         $this->set('roles', $roles);
