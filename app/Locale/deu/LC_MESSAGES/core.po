@@ -549,6 +549,9 @@ msgstr "Template:"
 msgid "Design:"
 msgstr "Design:"
 
+msgid "Logo:"
+msgstr: "Logo:"
+
 msgid "Online"
 msgstr "Online"
 
