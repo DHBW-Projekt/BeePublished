@@ -19,8 +19,6 @@
  * @description Controller for WebShop.
  */
 
-App::uses('Sanitize', 'Utility');
-
 class WebShopController extends WebShopAppController {
 	
 	//Attributes
@@ -120,16 +118,11 @@ class WebShopController extends WebShopAppController {
 			
 			//SAVE on DB
 			if (!$create_error){
-				
-				//SANITIZE
-				$name_clean = Sanitize::html($this->data['WebshopProduct']['name']);
-				$description_clean = Sanitize::html($this->data['WebshopProduct']['description']);
-				$price_clean = Sanitize::html($this->data['WebshopProduct']['price']);
-				
+								
 				$this->WebshopProduct->set(array(
-							'name' => $name_clean,
-							'description' => $description_clean,
-							'price' => $price_clean,
+							'name' => $this->data['WebshopProduct']['name'],
+							'description' => $this->data['WebshopProduct']['description'],
+							'price' => $this->data['WebshopProduct']['price'],
 							'picture' => $file_name,
 				));
 				
@@ -186,9 +179,6 @@ class WebShopController extends WebShopAppController {
 		if (isset($this->params['data']['save'])) {
 			//UPDATE db info
 			$data_old = $this->WebshopProduct->read();
-			
-			//SANITIZE
-			$this->data = Sanitize::clean($this->data);
 
 			$data_new = $this->data;
 			$data_new['WebshopProduct']['picture'] = $data_old['WebshopProduct']['picture'];

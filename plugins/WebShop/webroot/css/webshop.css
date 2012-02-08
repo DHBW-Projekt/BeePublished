@@ -31,10 +31,6 @@
 	vertical-align: top;
 }
 
-#websop_productcatalog li{
-	color: #000000;
-}
-
 #websop_productcatalog img{
 	float: left;
 	width: 200px;
@@ -141,6 +137,7 @@
 	background-color: #EEEEEE;
 	border: 1px solid #CCCCCC;
 	margin-top: 10px;
+	width:300px;
 }
 
 .webshop_infobox td{
