@@ -29,7 +29,13 @@ class ShowController extends AppController {
 	 * @param add = true, remove = false
 	 */
 	public function setFacebook($facebook) {
-		$data = array('id' => 1, 'facebook' => $facebook);
+		$entry = $this->Impressum->find('first');
+		$value = $entry['Impressum']['facebook'];
+		if ($facebook) {
+			$data = array('id' => 1, 'facebook' => ++$value);
+		} else {
+			$data = array('id' => 1, 'facebook' => --$value);
+		}
 		$this->Impressum->save($data);
 	}
 
@@ -38,7 +44,13 @@ class ShowController extends AppController {
 	 * @param add = true, remove = false
 	 */
 	public function setTwitter($twitter) {
-		$data = array('id' => 1, 'twitter' => $twitter);
+		$entry = $this->Impressum->find('first');
+		$value = $entry['Impressum']['twitter'];
+		if ($twitter) {
+			$data = array('id' => 1, 'twitter' => ++$value);
+		} else {
+			$data = array('id' => 1, 'twitter' => --$value);
+		}
 		$this->Impressum->save($data);
 	}
 
@@ -47,7 +59,13 @@ class ShowController extends AppController {
 	 * @param add = true, remove = false
 	 */
 	public function setGooglePlus($googlePlus) {
-		$data = array('id' => 1, 'google_plus' => $googlePlus);
+		$entry = $this->Impressum->find('first');
+		$value = $entry['Impressum']['google_plus'];
+		if ($googlePlus) {
+			$data = array('id' => 1, 'google_plus' => ++$value);
+		} else {
+			$data = array('id' => 1, 'google_plus' => --$value);
+		}
 		$this->Impressum->save($data);
 	}
 
@@ -56,7 +74,13 @@ class ShowController extends AppController {
 	 * @param add = true, remove = false
 	 */
 	public function setXing($xing) {
-		$data = array('id' => 1, 'xing' => $xing);
+		$entry = $this->Impressum->find('first');
+		$value = $entry['Impressum']['xing'];
+		if ($xing) {
+			$data = array('id' => 1, 'xing' => ++$value);
+		} else {
+			$data = array('id' => 1, 'xing' => --$value);
+		}
 		$this->Impressum->save($data);
 	}
 
@@ -65,7 +89,13 @@ class ShowController extends AppController {
 	 * @param add = true, remove = false
 	 */
 	public function setLinkedin($linkedin) {
-		$data = array('id' => 1, 'linkedin' => $linkedin);
+		$entry = $this->Impressum->find('first');
+		$value = $entry['Impressum']['linkedin'];
+		if ($linkedin) {
+			$data = array('id' => 1, 'linkedin' => ++$value);
+		} else {
+			$data = array('id' => 1, 'linkedin' => --$value);
+		}
 		$this->Impressum->save($data);
 	}
 
@@ -357,7 +387,7 @@ class ShowController extends AppController {
 			$data = $this->request->data;
 			$entry = $this->Impressum->find('first');
 			if ($entry['Impressum']['type'] == 'club') {
-				$data['Impressum']['reg'];
+				$data['Impressum']['reg'] = true;
 			}
 			if ($data['Impressum']['reg']) {
 				$this->checkRegister($data);
