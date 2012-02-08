@@ -569,3 +569,9 @@ msgstr "Berechtigungen"
 
 msgid "Email Templates"
 msgstr "E-Mail Vorlagen"
+
+msgid "English"
+msgstr "Englisch"
+
+msgid "German"
+msgstr "Deutsch"
