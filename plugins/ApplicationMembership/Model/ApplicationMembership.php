@@ -15,7 +15,7 @@ App::uses('AppModel', 'Model');
  * License along with BeePublished. If not, see
  * http://www.gnu.org/licenses/.
  *
- * @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+ * @copyright 2012 Duale Hochschule Baden-Wï¿½rttemberg Mannheim
  * @author Yvonne Laier and Maximilian Stueber
  *
  * @description Model ApplicationMembership
@@ -23,7 +23,7 @@ App::uses('AppModel', 'Model');
 class ApplicationMembership extends AppModel{
 	
 	function invalidate($field, $value = true) {
-		return parent::invalidate($field, __d("ApplicationMembership", $value, true));
+		return parent::invalidate($field, __d("application_membership", $value, true));
 	}
 	
 	

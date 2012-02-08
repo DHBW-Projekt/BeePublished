@@ -19,6 +19,9 @@
  * @description Produkt Administrations View.
  */
 
+	//LOAD
+	App::uses('Sanitize', 'Utility');
+
 	//LOAD js
 	$this->Html->script('jquery/jquery.quicksearch', false);
 	$this->Html->script('/web_shop/js/webshop', false);
@@ -70,7 +73,7 @@
 				<?php foreach ($products as $product): ?>
 				    <tr>
 				    	<td><?php echo $this->Form->checkbox($product['WebshopProduct']['id']); ?></td>
-					    <td><?php echo $product['WebshopProduct']['name']; ?></td>
+					    <td><?php echo Sanitize::html($product['WebshopProduct']['name']); ?></td>
 					    <td><?php echo $product['WebshopProduct']['created']; ?></td>
 					    <td class="webshop_orientation_right">
 					    	<?php echo $this->Html->link(

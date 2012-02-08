@@ -93,22 +93,22 @@ class ManageGalleriesController  extends GalleryAppController{
 				//check whether title picture isset
 				if($this->request->data['GalleryEntry']['gallery_picture_id'] == null){
 					
-					$this->Session->setFlash(__('Your Gallery was not saved. You have to assign a title picture'), 'default', array('class' => 'flash_failure'));
-					$this->redirect(array(	'action' => 'create', $contentId,$menue_context));
+					$this->Session->setFlash(__d('gallery', 'Your Gallery was not saved. You have to assign a title picture'), 'default', array('class' => 'flash_failure'));
+					$this->redirect(array(	'action' => 'index', $contentId,$menue_context));
 				}else {
 					//check if parameters are set
 
 					if(!empty($this->request->data['GalleryEntry']['title']) || !empty($this->request->data['GalleryEntry']['description'])){
 						if($this->GalleryEntry->save($this->request->data)) {
 							
-							$this->Session->setFlash(__('Your Gallery was saved.'), 'default', array('class' => 'flash_success'));
+							$this->Session->setFlash(__d('gallery', 'Your Gallery was saved.'), 'default', array('class' => 'flash_success'));
 							$this->redirect(array('action' => 'index', $contentId,$menue_context));	
 						} else {
-							$this->Session->setFlash(__('Your Gallery was not saved.'), 'default', array('class' => 'flash_failure'));
+							$this->Session->setFlash(__d('gallery', 'Your Gallery was not saved.'), 'default', array('class' => 'flash_failure'));
 							$this->redirect(array(	'action' => 'index', $contentId,$menue_context));		
 						}	
 					} else {
-						$this->Session->setFlash(__('Your Gallery was not saved. You have to assign a title and a description to your gallery.'), 'default', array('class' => 'flash_failure'));
+						$this->Session->setFlash(__d('gallery', 'Your Gallery was not saved. You have to assign a title and a description to your gallery.'), 'default', array('class' => 'flash_failure'));
 						$this->redirect(array(	'action' => 'create', $contentId,$menue_context));		
 					}//check data
 				}		
@@ -158,10 +158,10 @@ class ManageGalleriesController  extends GalleryAppController{
 				}
 				//notify
 				if(! ($deleteditems <=0)){
-					$this->Session->setFlash(__('Deleted sucessfully'), 'default', array('class' => 'flash_success'),'GalleryNotification');
+					$this->Session->setFlash(__d('gallery', 'Deleted sucessfully'), 'default', array('class' => 'flash_success'),'GalleryNotification');
 				}//if
 			} else {
-					$this->Session->setFlash(__('Nothing selected.'), 'default', array('class' => 'flash_failure'),'GalleryNotification');
+					$this->Session->setFlash(__d('gallery', 'Nothing selected.'), 'default', array('class' => 'flash_failure'),'GalleryNotification');
 			}//else
 			
 			$this->redirect($this->referer());
@@ -181,11 +181,11 @@ class ManageGalleriesController  extends GalleryAppController{
 		
 		if ($this->request->is('post')) {
 				if($this->Gallery->save($this,$this->request->data)) {
-					$this->Session->setFlash(__('Your changes were saved!'), 'default', array('class' => 'flash_success'));
+					$this->Session->setFlash(__d('gallery', 'Your changes were saved!'), 'default', array('class' => 'flash_success'));
 					//redirect 
 					$this->redirect(array('action' => 'index', $contentId,$menue_context));	
 				} else {
-					$this->Session->setFlash(__('Your Gallery was not saved'), 'default', array('class' => 'flash_failure'));
+					$this->Session->setFlash(__d('gallery', 'Your Gallery was not saved'), 'default', array('class' => 'flash_failure'));
 					$this->redirect(array(	'action' => 'index', $contentId,$menue_context));		
 				}//else
 				$this->redirect($this->referer());
@@ -196,6 +196,17 @@ class ManageGalleriesController  extends GalleryAppController{
 		$this->set('data',$gallery);
 		$this->set('ContentId',$contentId);	
 		$this->set('mContext',$menue_context);	
+		
+		// set title picture
+		$pic_array = array();
+		$index = 0;
+		foreach( $this->GalleryPictureComp->getAllPictures($this) as $picture){
+				
+			$pic_array[$picture['id']] = $picture['title'];
+			$index++;
+		}
+		$this->set('pictures', $pic_array);
+		
 	}
 	
 	/**

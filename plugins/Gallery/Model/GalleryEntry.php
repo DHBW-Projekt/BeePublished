@@ -71,5 +71,9 @@ class GalleryEntry extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+	
+	function invalidate($field, $value = true) {
+		return parent::invalidate($field, __d('gallery', $value, true));
+	}
 
 }
