@@ -94,7 +94,7 @@ class ManageGalleriesController  extends GalleryAppController{
 				if($this->request->data['GalleryEntry']['gallery_picture_id'] == null){
 					
 					$this->Session->setFlash(__('Your Gallery was not saved. You have to assign a title picture'), 'default', array('class' => 'flash_failure'));
-					$this->redirect(array(	'action' => 'create', $contentId,$menue_context));
+					$this->redirect(array(	'action' => 'index', $contentId,$menue_context));
 				}else {
 					//check if parameters are set
 
@@ -196,6 +196,17 @@ class ManageGalleriesController  extends GalleryAppController{
 		$this->set('data',$gallery);
 		$this->set('ContentId',$contentId);	
 		$this->set('mContext',$menue_context);	
+		
+		// set title picture
+		$pic_array = array();
+		$index = 0;
+		foreach( $this->GalleryPictureComp->getAllPictures($this) as $picture){
+				
+			$pic_array[$picture['id']] = $picture['title'];
+			$index++;
+		}
+		$this->set('pictures', $pic_array);
+		
 	}
 	
 	/**
