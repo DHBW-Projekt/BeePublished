@@ -54,7 +54,7 @@
         <div id="pagelogo">
             <?php
             echo $this->Html->link(
-                $this->Html->image('beelogo_w_small.png'),
+                $this->Html->image('/uploads/logo.png'),
                 '/',
                 array('escape' => false)
             );
