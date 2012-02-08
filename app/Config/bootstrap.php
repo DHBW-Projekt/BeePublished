@@ -22,9 +22,6 @@
 // Setup a 'default' cache configuration for use in the application.
 Cache::config('default', array('engine' => 'File'));
 
-// Set default language
-Configure::write('Config.language', 'de');
-
 //Load CMS Plugins
 CakePlugin::loadAll();
 foreach (CakePlugin::loaded() as $plugin) {
