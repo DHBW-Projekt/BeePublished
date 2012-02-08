@@ -9,6 +9,7 @@
     $this->Js->set('webroot', $this->request->webroot);
     echo $this->Html->css('yaml/core/base');
     echo $this->Html->css('fancybox/jquery.fancybox-1.3.4');
+    echo $this->Html->css('admin/flashmessages');
     echo $this->Html->css('designs/' . $design);
    
     if ($mobile) {
