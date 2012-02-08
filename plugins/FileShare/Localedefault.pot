@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2012-01-26 11:47+0100\n"
+"POT-Creation-Date: 2012-02-02 14:23+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -14,36 +14,112 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: View\Elements\MyFiles.ctp:71
-msgid "Filename"
+#: Controller\MyFilesController.php:13
+msgid "You don't have permissions to upload a file!"
 msgstr ""
 
-#: View\Elements\MyFiles.ctp:72
-msgid "Size"
+#: Controller\MyFilesController.php:29
+msgid "A file with the specified name already exists!"
 msgstr ""
 
-#: View\Elements\MyFiles.ctp:73
-msgid "Options"
+#: Controller\MyFilesController.php:39
+msgid "The file with the filename "
 msgstr ""
 
-#: View\Elements\MyFiles.ctp:83;83
-msgid "Delete file"
+#: Controller\MyFilesController.php:39
+msgid " has been uploaded."
 msgstr ""
 
-#: View\Elements\MyFiles.ctp:83
-msgid "Do you really want to delete this file?"
+#: Controller\MyFilesController.php:42
+msgid "Unable to upload your file"
 msgstr ""
 
-#: View\Elements\MyFiles.ctp:84
-msgid "Download"
+#: Controller\MyFilesController.php:48
+msgid "No file selected!"
+msgstr ""
+
+#: Controller\MyFilesController.php:53
+msgid "Your file is bigger than "
+msgstr ""
+
+#: Controller\MyFilesController.php:102
+msgid "You don't have permissions to delete "
+msgstr ""
+
+#: Controller\MyFilesController.php:107
+msgid "The file "
+msgstr ""
+
+#: Controller\MyFilesController.php:107
+msgid " has been deleted."
+msgstr ""
+
+#: Controller\MyFilesController.php:110
+msgid "An error occurred while deleting "
+msgstr ""
+
+#: Controller\MyFilesController.php:136
+msgid "Saved successfully"
+msgstr ""
+
+#: View\Elements\MyFiles.ctp:18
+msgid "Browse"
+msgstr ""
+
+#: View\Elements\MyFiles.ctp:20
+msgid "Upload"
+msgstr ""
+
+#: View\Elements\MyFiles.ctp:81
+msgid "Your files"
 msgstr ""
 
 #: View\Elements\MyFiles.ctp:85
+msgid "Filename"
+msgstr ""
+
+#: View\Elements\MyFiles.ctp:86
+msgid "Size"
+msgstr ""
+
+#: View\Elements\MyFiles.ctp:87
+msgid "Options"
+msgstr ""
+
+#: View\Elements\MyFiles.ctp:97;97
+msgid "Delete file"
+msgstr ""
+
+#: View\Elements\MyFiles.ctp:97
+msgid "Do you really want to delete this file?"
+msgstr ""
+
+#: View\Elements\MyFiles.ctp:98
+msgid "Download"
+msgstr ""
+
+#: View\Elements\MyFiles.ctp:99
 msgid "Download Expiring"
+msgstr ""
+
+#: View\MyFiles\admin.ctp:3
+msgid "Cryptkey"
+msgstr ""
+
+#: View\MyFiles\admin.ctp:4
+msgid "Expire time"
+msgstr ""
+
+#: View\MyFiles\admin.ctp:4
+msgid " in seconds"
 msgstr ""
 
 #: View\MyFiles\admin.ctp:5
 msgid "save"
+msgstr ""
+
+#: View\MyFiles\expired.ctp:2
+msgid "Your link expired "
 msgstr ""
 
 #: Model\MyFile.php:validation for field ID;validation for field size;validation for field owner

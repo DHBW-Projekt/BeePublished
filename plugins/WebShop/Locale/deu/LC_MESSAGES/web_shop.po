@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2012-01-24 16:06+0100\n"
-"PO-Revision-Date: 2012-01-24 16:16+0100\n"
+"PO-Revision-Date: 2012-02-02 13:30+0100\n"
 "Last-Translator: Patrick Zamzow <p.zamzow@live.de>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -97,14 +97,13 @@ msgstr "Suchergebnisse"
 
 #: View\Elements\search.ctp:20
 msgid "Search result"
-msgstr "Suchergebniss"
+msgstr "Suchergebnis"
 
 #: View\WebShop\admin.ctp:16
 msgid "Create new product"
 msgstr "Erstelle neues Produkt"
 
-#: View\WebShop\admin.ctp:20
-#, fuzzy
+#: View\WebShop\admin.ctp:38
 msgid "Create product"
 msgstr "Erstelle Produkt"
 
@@ -210,14 +209,18 @@ msgstr "Gesamtpreis"
 msgid "Number of Products"
 msgstr "Produktanzahl"
 
-#: Model\WebshopProduct.php:validation for field name
+#: Model\WebshopProduct.php:validation
+#: for field name
 msgid ""Name" is mandatory."
 msgstr "\"Name\" ist ein Pflichtfeld"
 
-#: Model\WebshopProduct.php:validation for field description
+#: Model\WebshopProduct.php:validation
+#: for field description
 msgid ""Description" is mandatory."
 msgstr "\"Beschreibung\" ist ein Pflichtfeld"
 
-#: Model\WebshopProduct.php:validation for field price
+#: Model\WebshopProduct.php:validation
+#: for field price
 msgid ""Price" is mandatory."
 msgstr "\"Preis\" ist ein Pflichtfeld"
+

@@ -1,0 +1,20 @@
+@CHARSET "utf-8";
+
+.flash_success,.flash_failure,#flashMessage {
+	padding: 10px;
+	margin: 15px 0;
+}
+
+.validation_error {
+	color: #A00000;
+}
+
+.flash_success,#flashMessage.message {
+	border: 3px solid #bedf5d;
+	background: #e2f1a8;
+}
+
+.flash_failure {
+	border: 3px solid #990000;
+	background: #f97d88;
+}

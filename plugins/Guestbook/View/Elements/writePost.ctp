@@ -63,13 +63,15 @@ if (($errors != NULL) && array_key_exists('text', $errors) && array_key_exists('
 	echo $this->Html->div('validation_error',$errors['text']['0']);
 }
 
+echo '<br /><p>' . __d('Guestbook', 'Please enter the two words in the Captcha. This is needed to prevent spmamming.') . '</p>';
+
 //CAPTCHA
 App::import('Vendor','recaptcha/recaptchalib');
 $publickey = "6LfzYcwSAAAAAN3vRDzZKXkC0rYkwaKQTi8hMkj6"; 
 echo recaptcha_get_html($publickey);
 
 // end of form
-echo $this->Form->end('Save Post');
+echo $this->Form->end(__d('Guestbook', 'Save Post'));
 ?>
 
 </div>

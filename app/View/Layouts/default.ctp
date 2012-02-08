@@ -3,15 +3,20 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <?php echo $this->Html->charset('UTF-8'); ?>
+	 <?php echo $this->Html->charset('UTF-8'); ?>
     <title><?php echo $title_for_layout?></title>
     <?php
     $this->Js->set('webroot', $this->request->webroot);
     echo $this->Html->css('yaml/core/base');
     echo $this->Html->css('fancybox/jquery.fancybox-1.3.4');
+    echo $this->Html->css('admin/flashmessages');
     echo $this->Html->css('designs/' . $design);
+   
     if ($mobile) {
         echo $this->Html->css('mobile');
+    ?>
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;"></meta>
+    <?php
     } else {
         echo $this->Html->css('template');
     }
@@ -44,7 +49,7 @@
         <div id="pagelogo">
             <?php
             echo $this->Html->link(
-                $this->Html->image('beelogo.png'),
+                $this->Html->image('/uploads/logo.png'),
                 '/',
                 array('escape' => false)
             );

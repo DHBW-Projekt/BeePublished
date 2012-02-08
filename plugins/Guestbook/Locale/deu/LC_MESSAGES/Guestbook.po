@@ -138,6 +138,14 @@ msgstr "Name:"
 msgid "Title:"
 msgstr "Titel:"
 
+#: View\Elements\writePost.ctp:66
+msgid "Please enter the two words in the Captcha. This is needed to prevent spmamming."
+msgstr "Bitte geben Sie die zweit Wörter in das Captcha ein. Dies ist nötig um Spam zu unterbinden."
+
+#: View\Elements\writePost.ctp:74
+msgid "Save Post"
+msgstr "Eintrag speichern"
+
 #: View\Emails\html\notification.ctp:2
 #: View\Emails\text\notification.ctp:1
 msgid "Hi Admin,"

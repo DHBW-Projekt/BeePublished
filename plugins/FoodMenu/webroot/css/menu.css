@@ -1,19 +1,18 @@
 ul.FoodMenuMenu {
-  margin: 0; padding: 0.8em;
+  margin: 0; 
+  padding: 0 0 1em 0;
   text-align: left;
 }
 
 ul.FoodMenuMenu li {
   list-style: none;
   display: inline;
-  margin: 0.4em; padding: 0;
+  margin: 0.4em;
+  padding: 0;
 }
 
 ul.FoodMenuMenu a:hover, ul#FoodMenuMenu span {
   text-decoration: underline;
-}
-
-ul.FoodMenuMenu a:link, a:visited {
 }
 
 ul.FoodMenuMenu a:active {
@@ -26,33 +25,14 @@ ul.FoodMenuMenu a:active {
 	height:5em;
 }
 
-.buttonlink {
-	float:none;
-    margin-left:5px;
-    margin-right:5px;
+.ui-datepicker-trigger { 
+	height: 25px;
+	width: 25px;
 }
 
-.buttonlink ul {
-	list-style:none;
-}
-
-.buttonlink li {
-        display:inline;
-        float:none;
-}
-
-.buttonlink a {
-    border-radius:4px;
-    background:none repeat scroll 0 0 #eee;
-    border:1px solid #999;
-    width:200px;
-    cursor:pointer;
-    padding:4px;
-    color:#000;
-    text-decoration:none;
-}
-
-.ui-datepicker-trigger { height: 20px; }
+#tableEntries {
+	width: 70%;
+	}
 
 .tableicon {
 	width:5%;
@@ -78,14 +58,6 @@ ul.FoodMenuMenu a:active {
 
 #userMenuEntries table{
 	width:100%; 
-}
-
-.entryName {
-
-}
-
-.entryPrice {
-
 }
 
 .entryDescription {

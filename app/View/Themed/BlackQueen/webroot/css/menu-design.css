@@ -1,0 +1,12 @@
+ol.nav {
+    font-size: 13px;
+}
+
+ol.nav li a {
+    color: #2E2E2E;
+    text-decoration: none;
+}
+
+ol.nav li a:hover {
+    text-decoration: underline;
+}

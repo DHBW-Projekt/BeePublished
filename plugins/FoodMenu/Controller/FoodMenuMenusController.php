@@ -1,4 +1,23 @@
 <?php
+/*
+ * This file is part of BeePublished which is based on CakePHP.
+ * BeePublished is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3
+ * of the License, or any later version.
+ * BeePublished is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public
+ * License along with BeePublished. If not, see
+ * http://www.gnu.org/licenses/.
+ *
+ * @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+ * @author Benedikt Steffan
+ * 
+ * @description Controller to perform create, edit and delete of menus
+ */
 App::uses('Sanitize', 'Utility');
 class FoodMenuMenusController extends FoodMenuAppController {
 	
@@ -15,11 +34,13 @@ class FoodMenuMenusController extends FoodMenuAppController {
         $this->set('pluginId', $pluginId);
     }
 
+    //put all menus into an array
 	public function index() {
 		$menus = $this->FoodMenuMenu->find('all', array('order' => array('valid_until ASC'), 'conditions' => array('deleted' => null)));
 		$this->set('menus', $menus);	
 	}
 	
+	//create a new menu
 	function create() {
 		$pluginId = $this->getPluginId();
 		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create', true);
@@ -40,6 +61,7 @@ class FoodMenuMenusController extends FoodMenuAppController {
         }//if
 	}//create
 	
+	//edit an existing menu
 	function edit($name = null, $id = null) {
 		
 		$pluginId = $this->getPluginId();
@@ -75,6 +97,7 @@ class FoodMenuMenusController extends FoodMenuAppController {
 			
 	}//edit
 	
+	//delete a menu
 	function delete($name = null, $id = null) {
 		$pluginId = $this->getPluginId();
 		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete', true);
@@ -84,6 +107,7 @@ class FoodMenuMenusController extends FoodMenuAppController {
 			$this->request->data = $this->FoodMenuMenu->read();
 			$this->request->data['FoodMenuMenu']['deleted'] = date("Y-m-d H:i:s");
 			$save['FoodMenuMenu'] = $this->request->data['FoodMenuMenu'];
+			//if deletion was successful, delete associations, too.
 			if($this->FoodMenuMenu->save($save)) {
 				$this->FoodMenuMenusFoodMenuCategory->deleteAll(array('FoodMenuMenusFoodMenuCategory.food_menu_menu_id' => $id), false);
 				$this->Session->setFlash(__d('food_menu', 'The menu was deleted successfully.', array('class' => 'flash_success')));
@@ -92,6 +116,7 @@ class FoodMenuMenusController extends FoodMenuAppController {
 		}//if
 	}//delete
 	
+	//delete more than one menu at once
 	function deleteMultiple() {
 		$pluginId = $this->getPluginId();
 		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete', true);
@@ -102,6 +127,7 @@ class FoodMenuMenusController extends FoodMenuAppController {
 					$this->FoodMenuMenu->id = $id;
 					$this->request->data = $this->FoodMenuMenu->read();
 					$this->request->data['FoodMenuMenu']['deleted'] = date("Y-m-d H:i:s");
+					//if deletion was successful, delete associations, too.
 					if($this->FoodMenuMenu->save($this->request->data)) {
 						$this->FoodMenuMenusFoodMenuCategory->deleteAll(array('FoodMenuMenusFoodMenuCategory.food_menu_menu_id' => $id), false);
 						continue;

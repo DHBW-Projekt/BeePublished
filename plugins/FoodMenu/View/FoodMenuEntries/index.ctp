@@ -1,26 +1,45 @@
-<div id="adminEntryOverview">
-	<?php 
-		$this->Html->script('jquery/jquery.quicksearch', false);
-		$this->Html->script('/food_menu/js/foodmenu', false);
-		echo $this->element('admin_menu');
+<?php
+/*
+ * This file is part of BeePublished which is based on CakePHP.
+ * BeePublished is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3
+ * of the License, or any later version.
+ * BeePublished is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public
+ * License along with BeePublished. If not, see
+ * http://www.gnu.org/licenses/.
+ *
+ * @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+ * @author Benedikt Steffan
+ * 
+ * @description View for indexing entries
+ */
+	$this->Html->script('jquery/jquery.quicksearch', false);
+	$this->Html->script('/food_menu/js/foodmenu', false);
+	echo '<div id="adminEntryOverview">';
+	echo $this->element('admin_menu');
 		
-		$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create');
-		$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'edit');
-		$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete');
-		
-		if($createAllowed) {
-			echo $this->Form->create('FoodMenuCreateEntry', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuEntries', 'action' => 'create')));
-			echo '<h1>'.(__d('food_menu', 'Create new entry')).'</h1>';
-			echo $this->Form->end(__d('food_menu', 'New entry'));
-			echo '<br /><hr /><br />';
-		}
-		echo '<h1>'.(__d('food_menu', 'Entries')).'</h1>';
-		echo '<form>Search entry: <input type="text" id="search" /> </form>';
-		echo $this->Form->create('FoodMenuEntry', array(
-								'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuEntries', 'action' => 'deleteMultiple'), 
-								'onsubmit' => 'return confirm(\''. __d('food_menu', 'Do you really want to delete the selected entries?') .'\');'));
+	$createAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'create');
+	$editAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'edit');
+	$deleteAllowed = $this->PermissionValidation->actionAllowed($pluginId, 'delete');
 
-	?>
+	//check permission of current user
+	if($createAllowed) {
+		echo $this->Form->create('FoodMenuCreateEntry', array('url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuEntries', 'action' => 'create')));
+		echo '<h1>'.(__d('food_menu', 'Create new entry')).'</h1>';
+		echo $this->Form->end(__d('food_menu', 'New entry'));
+		echo '<br /><hr /><br />';
+	}
+	echo '<h1>'.(__d('food_menu', 'Entries')).'</h1>';
+	echo '<form>Search entry: <input type="text" id="search" /> </form>';
+	echo $this->Form->create('FoodMenuEntry', array(
+							'url' => array('plugin' => 'FoodMenu', 'controller' => 'FoodMenuEntries', 'action' => 'deleteMultiple'), 
+							'onsubmit' => 'return confirm(\''. __d('food_menu', 'Do you really want to delete the selected entries?') .'\');'));
+?>
 	<table id="tableEntries">
 	<thead>
 	<tr>
@@ -57,6 +76,8 @@
 	?>
 	</tbody>
 	<?php
+	
+	//check permission of current user
 	if($deleteAllowed) { ?>
 	<tfoot>
 	<tr>

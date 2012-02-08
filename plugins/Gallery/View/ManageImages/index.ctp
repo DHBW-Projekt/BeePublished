@@ -25,39 +25,38 @@ echo $this->element('admin_menu',array("ContentId" => $ContentId, "mContext" => 
 echo $this->Session->flash('Image saved');
 echo $this->Session->flash('Image deleted');
 
-echo "<h2>".__('Add single image')."</h2>";
+echo "<h2>".__d('gallery', 'Add single image')."</h2>";
 
 echo $this->Form->create('addImage', array('url' => array('plugin' => 'Gallery','controller' => 'ManageImages','action' => 'uploadImage',$ContentId,$mContext),'type' => 'file'));
 
-echo $this->Form->input(__('Title'));
-echo $this->Form->label(__('File'));
+echo $this->Form->input(__d('gallery', 'Title'));
+echo $this->Form->label(__d('gallery', 'File'));
 echo $this->Form->file('File');
 
-echo $this->Form->submit(__('Add image'));
+echo $this->Form->submit(__d('gallery', 'Add image'));
 echo $this->Form->end();
 
-echo "<h2>".__('Add multiple images')."</h2>";
+echo "<h2>".__d('gallery', 'Add multiple images')."</h2>";
 
 echo $this->Form->create('addImage', array('url' => array('plugin' => 'Gallery','controller' => 'ManageImages','action' => 'uploadImages',$ContentId,$mContext),'type' => 'file'));
 echo $this->Form->input('data', array('label'=>'Files', 'type'=>'file', 'name' => 'files[]', 'multiple'));
-echo $this->Form->submit(__('Add images'));
+echo $this->Form->submit(__d('gallery', 'Add images'));
 echo $this->Form->end();
 
 echo "<br>";
 echo "<hr>";
 echo "<br>";
 
-echo "<h1>".__('Existing images')."</h1>";
+echo "<h1>".__d('gallery', 'Existing images')."</h1>";
 
 echo '<table>';
 	echo '<thead>';
 		echo '<tr>';
 			echo '<th></th>';
-			echo '<th>'.__('Id').'</th>';
-			echo '<th>'.__('Preview').'</th>';
-			echo '<th>'.__('Title').'</th>';
-			echo '<th>'.__('Edit').'</th>';
-			echo '<th>'.__('Delete').'</th>';
+			echo '<th>'.__d('gallery', 'Preview').'</th>';
+			echo '<th>'.__d('gallery', 'Title').'</th>';
+			echo '<th>'.__d('gallery', 'Edit').'</th>';
+			echo '<th>'.__d('gallery', 'Delete').'</th>';
 		echo '</tr>';
 	echo '</thead>';
 echo '<tbody>';
@@ -66,18 +65,15 @@ echo $this->Form->create('selectPictures', array(
 				'plugin' => 'Gallery',
 				'controller' => 'ManageImages',
 				'action' => 'deleteSelected',$ContentId),
-				'onsubmit'=>'return confirm(\''.__('Do you really want to delete the selected images?').'\');'));
+				'onsubmit'=>'return confirm(\''.__d('gallery', 'Do you really want to delete the selected images?').'\');'));
 
 foreach ($data['AllPictures'] as $picture){
 	echo "<tr>";
 	
 	echo "<td>".$this->Form->checkbox($picture['id'])."</td>";
-	
-	echo "<td>".$picture['id']."</td>";
-	
+		
 	echo '<td>'.'<img src="'.$this->webroot.$picture['thumb'].'" width="35px" /></td>';
-	
-	
+
 	echo "<td>".$picture['title']."</td>";
 	
 	echo '<td>';
@@ -89,7 +85,7 @@ foreach ($data['AllPictures'] as $picture){
 	echo $this->Html->link($this->Html->image('delete.png', array(
 								'height' => 20, 
 								'width' => 20, 
-								'alt' => __('[x]Delete'))),
+								'alt' => __d('gallery', '[x]Delete'))),
 								array(
 									'plugin' => 'Gallery', 
 									'controller' => 'ManageImages', 
@@ -98,8 +94,8 @@ foreach ($data['AllPictures'] as $picture){
 									$ContentId,$mContext),
 								array(
 									'escape' => false, 
-									'title' => __('Delete Image')),
-	__('Do you really want to delete this image?'));
+									'title' => __d('gallery', 'Delete Image')),
+	__d('gallery', 'Do you really want to delete this image?'));
 
 	echo '</td>';	
 	
@@ -114,11 +110,11 @@ echo '</tbody>';
 						'width' => 20));
 				echo '</td>';
 				echo '<td>';
-					echo $this->Form->submit(__('Delete'), array(
+					echo $this->Form->submit(__d('gallery', 'Delete'), array(
 							'height' => 20,
 							'width' => 20,
-							'alt' => __('[x]Delete'),
-							'onsubmit'=>'return confirm(\''.__('Do you really want to delete the selected images?').'\');'));
+							'alt' => __d('gallery', '[x]Delete'),
+							'onsubmit'=>'return confirm(\''.__d('gallery', 'Do you really want to delete the selected images?').'\');'));
 					echo $this->Form->end();
 				echo '</td>';
 			echo '</tr>';

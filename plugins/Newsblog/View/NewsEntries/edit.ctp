@@ -1,7 +1,28 @@
 <?php 
+/*
+* This file is part of BeePublished which is based on CakePHP.
+* BeePublished is free software: you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation, either version 3
+* of the License, or any later version.
+* BeePublished is distributed in the hope that it will be useful, but
+* WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+* You should have received a copy of the GNU General Public
+* License along with BeePublished. If not, see
+* http://www.gnu.org/licenses/.
+*
+* @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+* @author Philipp Scholl
+*
+* @description View to edit a certain news entry
+*/
+
 	App::uses('Sanitize', 'Utility');
-	$newsentry = Sanitize::clean($newsentry);
-	$this->Html->css('/css/jquery-ui-1.8.16.custom', null, array('inline' => false));
+	$newsentry = Sanitize::clean($newsentry, array('unicode' => true, 'encode' => false, 'remove_html' => true));
+	$this->Html->css('/css/jqueryui/jquery-ui-1.8.17.custom', null, array('inline' => false));
+	$this->Html->css('/css/jqueryui/jquery-ui-timepicker-addon.css', null, array('inline' => false));
 	$this->Html->css('/newsblog/css/editNews', null, array('inline' => false));
 	$this->Html->script('jquery/jquery-ui-timepicker-addon', array('inline' => false));
 	$this->Html->script('/newsblog/js/editNews', array('inline' => false));
@@ -45,14 +66,14 @@
 		//'div' => 'editNewsTitle',
 		'label' => __d('newsblog','Title:'),
 		'name' => 'title',
-		'value'=> Sanitize::html($newsentry['NewsEntry']['title'])
+		'value'=> $newsentry['NewsEntry']['title']
 	));
 	//create subtitle input
 	echo $this->Form->input('NewsEntry.subtitle', array(
 		//'div' => 'writeNewsSubtitle',
 		'label' => __d('newsblog', 'Subtitle:'),
 		'name' => 'subtitle',
-		'value'=> Sanitize::html($newsentry['NewsEntry']['subtitle'])
+		'value'=> $newsentry['NewsEntry']['subtitle']
 	));
 	//create entrytext textarea
 	echo $this->Form->input('NewsEntry.text', array(
@@ -60,9 +81,11 @@
 		'label' => false,
 		'id' => 'editNewsTextEditor',
 		'name' => 'text',
-		'value' => Sanitize::html($newsentry['NewsEntry']['text'])
+		'value' => $newsentry['NewsEntry']['text']
 	));
 	//create validFrom input
+	$validFrom = $newsentry['NewsEntry']['validFrom'];
+	$validFrom =  substr($validFrom, 0, strlen($validFrom)-3);
 	echo $this->Form->input('NewsEntry.validFrom', array(
 		'div' => 'editNewsValidConfig',
 		'type' => 'text',
@@ -70,9 +93,11 @@
 		'name' => 'validFromUI',
 		'class' => 'datepicker',
 		'label' => __d('newsblog', 'Valid from:'),
-		'value'=> Sanitize::html($newsentry['NewsEntry']['validFrom'])
+		'value'=> $validFrom
 	));
 	//create validTo input
+	$validTo = $newsentry['NewsEntry']['validFrom'];
+	$validTo =  substr($validTo, 0, strlen($validTo)-3);
 	echo $this->Form->input('NewsEntry.validTo', array(
 		'div' => 'editNewsValidConfig',
 		'type' => 'text',
@@ -80,7 +105,7 @@
 		'name' => 'validToUI',
 		'class' => 'datepicker',
 		'label' => __d('newsblog', 'Valid to:'),
-		'value'=> Sanitize::html($newsentry['NewsEntry']['validTo'])
+		'value'=> $validTo
 	));
 	
 	echo $this->Form->end(__d('newsblog', 'Save changes'));

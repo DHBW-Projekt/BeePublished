@@ -1,6 +1,26 @@
 <?php 
+/*
+* This file is part of BeePublished which is based on CakePHP.
+* BeePublished is free software: you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation, either version 3
+* of the License, or any later version.
+* BeePublished is distributed in the hope that it will be useful, but
+* WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+* You should have received a copy of the GNU General Public
+* License along with BeePublished. If not, see
+* http://www.gnu.org/licenses/.
+*
+* @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+* @author Philipp Scholl
+*
+* @description View element to display the detail view of a certain news entry
+*/
+
 	App::uses('Sanitize', 'Utility');
-	$data = Sanitize::clean($data);
+	$data = Sanitize::clean($data, array('unicode' => true, 'encode' => false, 'remove_html' => true));;
 	
 	//bind javascript and css
 	$this->Html->script('/newsblog/js/displayFullNews', false);
@@ -25,10 +45,10 @@
 
 <div class='showFullNewsContainer'>
 	<h2 class='showFullNewsTitle'>
-		<?php echo Sanitize::html($data['NewsEntry']['title']);?>
+		<?php echo $data['NewsEntry']['title'];?>
 	</h2>
 	<?php if($data['NewsEntry']['subtitle'] != null & $data['NewsEntry']['subtitle'] != ''){
-		echo '<h3 class="showFullNewsSubtitle">'.Sanitize::html($data['NewsEntry']['subtitle']).'</h3>';
+		echo '<h3 class="showFullNewsSubtitle">'.$data['NewsEntry']['subtitle'].'</h3>';
 	}?>
 	<div class='showFullNewsInfo'>
 		<?php 
@@ -57,16 +77,35 @@
 		?>
 	</div>
 	<div class='showFullNewsBody'>
-		<?php echo $this->BBCode->transformBBCode(Sanitize::html($data['NewsEntry']['text']));?>
+		<?php echo $this->BBCode->transformBBCode($data['NewsEntry']['text']);?>
 	</div>
 	<div class='showFullNewsSocial'>
 		<?php
+			$socialNetworks = $data['socialNetworks'];
 			//Facebook
-			echo $this->SocialNetwork->insertFacebookShare();
+			if($socialNetworks['facebook']){
+				echo $this->SocialNetwork->insertFacebookShare();
+			}
+			
 			//Google+
-			echo $this->SocialNetwork->insertGoogleShare();
+			if($socialNetworks['googleplus']){
+				echo $this->SocialNetwork->insertGoogleShare();
+			}
+			
 			//Twitter
-			echo $this->SocialNetwork->insertTwitterShare();
+			if($socialNetworks['twitter']){
+				echo $this->SocialNetwork->insertTwitterShare();
+			}
+			
+			//Xing
+			if($socialNetworks['xing']){
+				echo $this->SocialNetwork->insertXingShare();
+			}
+			
+			//LinkedIn
+			if($socialNetworks['linkedin']){
+				echo $this->SocialNetwork->insertLinkedShare();
+			}
 		?>
 	</div>
 	<div class='showFullNewsOptions'>

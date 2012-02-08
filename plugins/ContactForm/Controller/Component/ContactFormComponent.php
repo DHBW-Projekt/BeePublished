@@ -1,22 +1,36 @@
 <?php
-
+/*
+* This file is part of BeePublished which is based on CakePHP.
+* BeePublished is free software: you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation, either version 3
+* of the License, or any later version.
+* BeePublished is distributed in the hope that it will be useful, but
+* WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+* You should have received a copy of the GNU General Public
+* License along with BeePublished. If not, see
+* http://www.gnu.org/licenses/.
+*
+* @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+* @author Maximilian Stüber, Corinna Knick
+*
+* @description send method of contact form
+*/
 App::uses('Sanitize', 'Utility');
 App::import('Vendor','recaptcha/recaptchalib');
 
 class ContactFormComponent extends Component {
 
 	//LOAD components
-	public $uses = array('Sanitize');
 	var $components = array('BeeEmail', 'PermissionValidation', 'Config');
 
 	/**
 	* Method to transfer data from plugin to CMS.
 	*/
 	public function getData($controller, $params, $url, $contentId, $myUrl)
-	{
-		//SET title
-		$controller->set('title_for_layout', __d('contact_form','Contact Form'));
-			
+	{			
 		//CHECK url
 		if (isset($url)){
 			$data['Element'] = array_shift($url);
@@ -58,18 +72,21 @@ class ContactFormComponent extends Component {
 		}	
 		
 		//SANITIZE
-		$controller->data =  Sanitize::clean($controller->data);
+		$name_clean = Sanitize::html($controller->data['ContactRequest']['name']);
+		$email_clean = Sanitize::html($controller->data['ContactRequest']['email']);
+		$subject_clean = Sanitize::html($controller->data['ContactRequest']['subject']);
+		$body_clean = Sanitize::html($controller->data['ContactRequest']['body']);
 
-		//SET data
-		$controller->ContactRequest->set($controller->data['ContactRequest']);
+		//SET input data
+		$controller->ContactRequest->set(array('name' => $name_clean, 'email' => $email_clean, 'subject' => $subject_clean, 'body' => $body_clean));
 		
-		//VALIDATE data
+		//VALIDATE input data
 		if(!$controller->ContactRequest->validates()){
 			$controller->Session->setFlash(__d('contact_form','Please fill out all mandatory fields correctly.'), 'flash_failure');
 			return array('data' => $controller->ContactRequest, 'Element' => 'request');
 		}
 				
-		//GET captcha
+		//GET CAPTCHA
 		$privatekey = "6LfzYcwSAAAAAEH-Nr-u6qaFaNdIc6h9nlbm0i76";
 		$resp = recaptcha_check_answer( $privatekey,
 										$_SERVER["REMOTE_ADDR"],

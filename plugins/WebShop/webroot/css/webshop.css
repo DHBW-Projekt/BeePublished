@@ -12,6 +12,11 @@
 	-khtml-border-radius:15px;
 }
 
+#websop_searchbar label{
+	width: auto;
+	margin-right:10px;
+}
+
 #webshop_cart p{
 	margin-top:5px;
 }
@@ -24,10 +29,6 @@
 
 #webshop_cart td{
 	vertical-align: top;
-}
-
-#websop_productcatalog li{
-	color: #000000;
 }
 
 #websop_productcatalog img{
@@ -136,6 +137,7 @@
 	background-color: #EEEEEE;
 	border: 1px solid #CCCCCC;
 	margin-top: 10px;
+	width:300px;
 }
 
 .webshop_infobox td{

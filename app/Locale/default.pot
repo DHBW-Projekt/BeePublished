@@ -1,0 +1,536 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2012-02-08 21:56+0100\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: Controller/ConfigurationsController.php:57
+#: Controller/EmailTemplatesController.php:166;242
+#: Controller/PermissionsController.php:40
+msgid "Successfully saved"
+msgstr ""
+
+#: Controller/ConfigurationsController.php:59
+#: Controller/EmailTemplatesController.php:168;247
+msgid "Saving failed"
+msgstr ""
+
+#: Controller/ContainersController.php:57
+msgid "Invalid container"
+msgstr ""
+
+#: Controller/ContainersController.php:75
+#: Controller/ContentsController.php:71
+msgid "Invalid role"
+msgstr ""
+
+#: Controller/ContentsController.php:56
+msgid "Invalid content"
+msgstr ""
+
+#: Controller/EmailTemplatesController.php:159
+msgid "Saving failed. You have to include the text \"EMAILTEXTCONTENT\" once."
+msgstr ""
+
+#: Controller/EmailTemplatesController.php:214
+msgid "Successfully deleted"
+msgstr ""
+
+#: Controller/EmailTemplatesController.php:224
+msgid "Deletion failed"
+msgstr ""
+
+#: Controller/MenuEntriesController.php:95
+msgid "Invalid Menu Entry"
+msgstr ""
+
+#: Controller/MenuEntriesController.php:126
+#: Controller/PagesController.php:203
+msgid "Invalid menu entry"
+msgstr ""
+
+#: Controller/PluginsController.php:170
+msgid "Plugin tables are now up to date."
+msgstr ""
+
+#: Controller/PluginsController.php:204
+msgid "Plugin successfully uninstalled."
+msgstr ""
+
+#: Controller/UsersController.php:86
+msgid "The user has been created."
+msgstr ""
+
+#: Controller/UsersController.php:89
+msgid "The user couldn't be created!"
+msgstr ""
+
+#: Controller/UsersController.php:111
+msgid "Your user has been activated."
+msgstr ""
+
+#: Controller/UsersController.php:114
+msgid "Token invalid! Your user hasn't been activated."
+msgstr ""
+
+#: Controller/UsersController.php:119;136;161;312
+msgid "Invalid user"
+msgstr ""
+
+#: Controller/UsersController.php:140
+msgid "The user has been saved"
+msgstr ""
+
+#: Controller/UsersController.php:142
+msgid "The user could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/UsersController.php:164
+msgid "You cannot delete your own user."
+msgstr ""
+
+#: Controller/UsersController.php:168
+msgid "User deleted"
+msgstr ""
+
+#: Controller/UsersController.php:171
+msgid "User was not deleted"
+msgstr ""
+
+#: Controller/UsersController.php:185
+msgid "You are already logged in!"
+msgstr ""
+
+#: Controller/UsersController.php:196
+msgid "Welcome"
+msgstr ""
+
+#: Controller/UsersController.php:199
+msgid "Your username or password was incorrect."
+msgstr ""
+
+#: Controller/UsersController.php:203
+msgid "Login wasn't possible! Your user either hasn't been activated yet or has been locked!"
+msgstr ""
+
+#: Controller/UsersController.php:220
+msgid "Good-Bye"
+msgstr ""
+
+#: Controller/UsersController.php:263
+msgid "Your password has been resetted. The new password was send to your emailaddress."
+msgstr ""
+
+#: Controller/UsersController.php:267
+msgid "Username and/or Email were wrong!"
+msgstr ""
+
+#: Controller/UsersController.php:289
+msgid "Your password has been changed!"
+msgstr ""
+
+#: Controller/UsersController.php:293
+msgid "Your password hasn't been changed!"
+msgstr ""
+
+#: Controller/Component/ConfigComponent.php:31
+msgid "invalid key"
+msgstr ""
+
+#: View/Configurations/index.ctp:21
+msgid "Save Configuration"
+msgstr ""
+
+#: View/Elements/display-container.ctp:14
+msgid "Unknown module"
+msgstr ""
+
+#: View/Elements/sidebar.ctp:10;18
+msgid "User Management"
+msgstr ""
+
+#: View/Elements/sidebar.ctp:26
+msgid "Plugin Management"
+msgstr ""
+
+#: View/Elements/sidebar.ctp:34
+msgid "Permission Management"
+msgstr ""
+
+#: View/Elements/sidebar.ctp:42
+msgid "Email Templates"
+msgstr ""
+
+#: View/EmailTemplates/index.ctp:37
+msgid "Template"
+msgstr ""
+
+#: View/EmailTemplates/index.ctp:49
+msgid "Create new template"
+msgstr ""
+
+#: View/EmailTemplates/index.ctp:60
+msgid "Active Template: "
+msgstr ""
+
+#: View/MenuEntries/add.ctp:6
+msgid "create"
+msgstr ""
+
+#: View/MenuEntries/edit.ctp:6
+msgid "edit"
+msgstr ""
+
+#: View/Pages/offline.ctp:4
+msgid "The page is currently offline"
+msgstr ""
+
+#: View/Plugins/index.ctp:3
+msgid "Installed"
+msgstr ""
+
+#: View/Plugins/index.ctp:7;40
+#: View/Users/view.ctp:118
+msgid "Name"
+msgstr ""
+
+#: View/Plugins/index.ctp:8;41
+msgid "Version"
+msgstr ""
+
+#: View/Plugins/index.ctp:9;42
+msgid "Author"
+msgstr ""
+
+#: View/Plugins/index.ctp:22
+msgid "No Database tables"
+msgstr ""
+
+#: View/Plugins/index.ctp:24
+msgid "Update plugin"
+msgstr ""
+
+#: View/Plugins/index.ctp:26
+msgid "Up to date"
+msgstr ""
+
+#: View/Plugins/index.ctp:28
+msgid "Unknown Plugin"
+msgstr ""
+
+#: View/Plugins/index.ctp:31
+msgid "Uninstall plugin"
+msgstr ""
+
+#: View/Plugins/index.ctp:36
+msgid "Available"
+msgstr ""
+
+#: View/Plugins/index.ctp:52
+msgid "Install plugin"
+msgstr ""
+
+#: View/Users/change_password.ctp:8
+#: View/Users/reset_password.ctp:5
+msgid "Old Password:"
+msgstr ""
+
+#: View/Users/change_password.ctp:9
+msgid "New Password:"
+msgstr ""
+
+#: View/Users/change_password.ctp:10
+#: View/Users/register.ctp:8
+msgid "Confirm Password:"
+msgstr ""
+
+#: View/Users/change_password.ctp:11
+msgid "Change password!"
+msgstr ""
+
+#: View/Users/edit.ctp:4
+#: View/Users/view.ctp:54
+msgid "Edit User"
+msgstr ""
+
+#: View/Users/edit.ctp:11
+msgid "Submit"
+msgstr ""
+
+#: View/Users/login.ctp:4
+#: View/Users/register.ctp:6
+#: View/Users/reset_password.ctp:4
+msgid "Username:"
+msgstr ""
+
+#: View/Users/login.ctp:5
+#: View/Users/register.ctp:7
+msgid "Password:"
+msgstr ""
+
+#: View/Users/login.ctp:6
+msgid "Login"
+msgstr ""
+
+#: View/Users/register.ctp:4
+msgid "Register new User"
+msgstr ""
+
+#: View/Users/register.ctp:9
+msgid "Email:"
+msgstr ""
+
+#: View/Users/register.ctp:12
+msgid "Create User"
+msgstr ""
+
+#: View/Users/view.ctp:2
+msgid "User"
+msgstr ""
+
+#: View/Users/view.ctp:4;71;114
+msgid "Id"
+msgstr ""
+
+#: View/Users/view.ctp:9
+msgid "Role"
+msgstr ""
+
+#: View/Users/view.ctp:14
+msgid "Username"
+msgstr ""
+
+#: View/Users/view.ctp:19
+msgid "Password"
+msgstr ""
+
+#: View/Users/view.ctp:24
+msgid "Email"
+msgstr ""
+
+#: View/Users/view.ctp:29
+msgid "Last Login"
+msgstr ""
+
+#: View/Users/view.ctp:34
+msgid "Registered"
+msgstr ""
+
+#: View/Users/view.ctp:39
+msgid "Confirmation Token"
+msgstr ""
+
+#: View/Users/view.ctp:44
+msgid "Status"
+msgstr ""
+
+#: View/Users/view.ctp:52;79;126
+msgid "Actions"
+msgstr ""
+
+#: View/Users/view.ctp:55
+msgid "Delete User"
+msgstr ""
+
+#: View/Users/view.ctp:55;96;147
+msgid "Are you sure you want to delete # %s?"
+msgstr ""
+
+#: View/Users/view.ctp:56
+msgid "List Users"
+msgstr ""
+
+#: View/Users/view.ctp:57
+msgid "New User"
+msgstr ""
+
+#: View/Users/view.ctp:58
+msgid "List Roles"
+msgstr ""
+
+#: View/Users/view.ctp:59
+msgid "New Role"
+msgstr ""
+
+#: View/Users/view.ctp:60
+msgid "List Log Entries"
+msgstr ""
+
+#: View/Users/view.ctp:61;105
+msgid "New Log Entry"
+msgstr ""
+
+#: View/Users/view.ctp:62
+msgid "List Pages"
+msgstr ""
+
+#: View/Users/view.ctp:63;156
+msgid "New Page"
+msgstr ""
+
+#: View/Users/view.ctp:67
+msgid "Related Log Entries"
+msgstr ""
+
+#: View/Users/view.ctp:72;116
+msgid "User Id"
+msgstr ""
+
+#: View/Users/view.ctp:73
+msgid "Ipaddress"
+msgstr ""
+
+#: View/Users/view.ctp:74
+msgid "Action"
+msgstr ""
+
+#: View/Users/view.ctp:75
+msgid "ActionDate"
+msgstr ""
+
+#: View/Users/view.ctp:76
+msgid "Object Class"
+msgstr ""
+
+#: View/Users/view.ctp:77
+msgid "Object Id"
+msgstr ""
+
+#: View/Users/view.ctp:78
+msgid "Data"
+msgstr ""
+
+#: View/Users/view.ctp:94;145
+msgid "View"
+msgstr ""
+
+#: View/Users/view.ctp:95;146
+msgid "Edit"
+msgstr ""
+
+#: View/Users/view.ctp:96;147
+msgid "Delete"
+msgstr ""
+
+#: View/Users/view.ctp:110
+msgid "Related Pages"
+msgstr ""
+
+#: View/Users/view.ctp:115
+msgid "Container Id"
+msgstr ""
+
+#: View/Users/view.ctp:117
+msgid "Title"
+msgstr ""
+
+#: View/Users/view.ctp:119
+msgid "ValidFrom"
+msgstr ""
+
+#: View/Users/view.ctp:120
+msgid "ValidTo"
+msgstr ""
+
+#: View/Users/view.ctp:121
+msgid "Published"
+msgstr ""
+
+#: View/Users/view.ctp:122
+msgid "MetaTags"
+msgstr ""
+
+#: View/Users/view.ctp:123
+msgid "DateCreated"
+msgstr ""
+
+#: View/Users/view.ctp:124
+msgid "DateLastChange"
+msgstr ""
+
+#: View/Users/view.ctp:125
+msgid "Description"
+msgstr ""
+
+#: Model/EmailTemplate.php:validation for field name
+msgid "This field cannot be empty."
+msgstr ""
+
+#: Model/EmailTemplate.php:validation for field name;validation for field name
+msgid "The name already exists."
+msgstr ""
+
+#: Model/EmailTemplate.php:validation for field active
+msgid "boolean"
+msgstr ""
+
+#: Model/MenuEntry.php:validation for field name
+msgid "Menu entry name can not be empty."
+msgstr ""
+
+#: Model/Page.php:validation for field name
+msgid "Not a valid URL. (Starting with / and characters a-z, 0-9 and -)"
+msgstr ""
+
+#: Model/Page.php:validation for field name
+msgid "URL already in use."
+msgstr ""
+
+#: Model/Page.php:validation for field name
+msgid "Page name can not be empty."
+msgstr ""
+
+#: Model/User.php:validation for field username
+msgid "A username is required."
+msgstr ""
+
+#: Model/User.php:validation for field username
+msgid "This username has already been taken. Please choose another username."
+msgstr ""
+
+#: Model/User.php:validation for field username
+msgid "Usernames must only contain letters and numbers."
+msgstr ""
+
+#: Model/User.php:validation for field password
+msgid "A password is required"
+msgstr ""
+
+#: Model/User.php:validation for field password
+msgid "Password is too short. Please choose a password with at least 8 characters."
+msgstr ""
+
+#: Model/User.php:validation for field current_password
+msgid "Please enter your current password."
+msgstr ""
+
+#: Model/User.php:validation for field current_password
+msgid "Current password was not entered correctly"
+msgstr ""
+
+#: Model/User.php:validation for field password_confirm
+msgid "Passwords do not match"
+msgstr ""
+
+#: Model/User.php:validation for field email
+msgid "Please supply a valid & active email address."
+msgstr ""
+
+#: Model/User.php:validation for field email
+msgid "This email has already been taken. If you forgot your password, please reset it."
+msgstr ""
+
+#: webroot/test.php:87
+msgid "Debug setting does not allow access to this url."
+msgstr ""
+

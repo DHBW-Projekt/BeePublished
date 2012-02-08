@@ -19,8 +19,9 @@
  * @description Application Admin-View
  */
 
- $this->Html->css('menu-design', NULL, array('inline' => false));?>
- $this->Html->css('menu-template', NULL, array('inline' => false));?>
+ $this->Html->css('menu-design', NULL, array('inline' => false));
+ $this->Html->css('menu-template', NULL, array('inline' => false));
+?>
 
 <div id="menu" class="overlay">
     <ol class="nav">
