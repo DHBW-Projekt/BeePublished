@@ -23,7 +23,7 @@ App::uses('Sanitize', 'Utility');
 
 class GalleryPictureCompComponent extends Component
 {
-	public $uses = array ('Gallery.GalleryPicture');
+	public $uses = array ('Gallery.GalleryPicture','Gallery.GalleryEntry');
 	
 	/**
 	 * loads a picture from db
@@ -113,6 +113,9 @@ class GalleryPictureCompComponent extends Component
 		
 		$controller->loadModel('Gallery.GalleryPicture');
 		$pictures = $controller->GalleryPicture->delete($picture);
+		
+		
+		
 	}
 	
 	/**
