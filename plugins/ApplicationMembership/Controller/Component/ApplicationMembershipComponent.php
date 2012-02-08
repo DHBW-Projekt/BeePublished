@@ -75,11 +75,32 @@ class ApplicationMembershipComponent extends Component {
 			$data_error = true;
 	
 		//SANITIZE
-		$controller->data = Sanitize::clean($controller->data);
+		$lastname_clean = Sanitize::html($controller->data['ApplicationMembership']['last_name']);
+		$firstname_clean = Sanitize::html($controller->data['ApplicationMembership']['first_name']);
+		$email_clean = Sanitize::html($controller->data['ApplicationMembership']['email']);
+		$telephone_clean = Sanitize::html($controller->data['ApplicationMembership']['telephone']);
+		$street_clean = Sanitize::html($controller->data['ApplicationMembership']['street']);
+		$zip_clean = Sanitize::html($controller->data['ApplicationMembership']['zip']);
+		$city_clean = Sanitize::html($controller->data['ApplicationMembership']['city']);
+		$comment_clean = Sanitize::html($controller->data['ApplicationMembership']['comment']);
 		
 		//VALIDATE data
 		if(!$data_error){
-			$controller->ApplicationMembership->set($controller->data['ApplicationMembership']);
+			
+			//SET input data
+			$controller->ApplicationMembership->set(array(
+						'type' => $controller->data['ApplicationMembership']['type'],
+						'title' => $controller->data['ApplicationMembership']['title'],
+						'last_name' => $lastname_clean,
+						'first_name' => $firstname_clean,
+						'date_of_birth' => $controller->data['ApplicationMembership']['date_of_birth'],
+						'email' => $email_clean,
+						'telephone' => $telephone_clean,
+						'street' => $street_clean,
+						'zip' => $zip_clean,
+						'city' => $city_clean,
+						'comment' => $comment_clean,
+			));
 		
 			if(!$controller->ApplicationMembership->validates()){
 				$data_error = true;
@@ -118,15 +139,17 @@ class ApplicationMembershipComponent extends Component {
 		
 		//SEND email
 		if(!$data_error){
-			$this->BeeEmail->sendHtmlEmail($to = $mailaddress,
-			$subject = 'New Application for Membership',
-			$viewVars = array('data' => $controller->data['ApplicationMembership'], 'url' => $this->Config->getValue('page_name')),
-			$viewName = 'ApplicationMembership.application');
+			$this->BeeEmail->sendHtmlEmail(
+				$to = $mailaddress,
+				$subject = 'New Application for Membership',
+				$viewVars = array('data' => $controller->ApplicationMembership->data['ApplicationMembership'], 'url' => $this->Config->getValue('page_name')),
+				$viewName = 'ApplicationMembership.application'
+			);
 		}
 		 
 		//SAVE in db
 		if(!$data_error){
-			$data_error = !$controller->ApplicationMembership->save($controller->data['ApplicationMembership']);
+			$data_error = !$controller->ApplicationMembership->save();
 		}
 
 		//PRINT error messages
