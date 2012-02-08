@@ -36,11 +36,12 @@ public \$default = array(
 	'login' => '$dblogin',
 	'password' => '$dbpw',
 	'database' => '$dbname',
+	'encoding' => 'utf8'
 );
 } ?>";
 	
 	//set up file handle
-	$filename = "../../app/Config/database.php";
+	$filename = "../../../Config/database.php";
 
 	$dbfile = fopen($filename, "w+");
 
