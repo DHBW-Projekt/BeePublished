@@ -42,7 +42,7 @@ class AppController extends Controller
         $this->theme = $this->Config->getValue('active_template');
         $this->set('mobile',$this->RequestHandler->isMobile());
         $this->set('design', $this->Config->getValue('active_design'));
-        $this->Session->write('Config.language', Configure::read('Config.language'));
+        $this->Session->write('Config.language', $this->Config->getValue('language'));
     }
 
     function afterFilter()

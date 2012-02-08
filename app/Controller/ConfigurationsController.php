@@ -46,13 +46,16 @@ class ConfigurationsController extends AppController
             $config['config_name'] = 'default';
             $config['active_design'] = 'default';
             $config['active_template'] = 'BeeDefault';
+            $config['language'] = 'eng';
             $this->Configuration->save($config);
             $this->redirect(array('action' => 'index'));
         }
-
+		
         if ($this->request->is('post') || $this->request->is('put')) {
             //Save configuration data
             $this->Configuration->id = $config['Configuration']['id'];
+            if (isset($this->request->data['Configuration']['submittedfile']))
+            	$this->uploadImage($this->data['Configuration']['submittedfile'], true);
             if ($this->Configuration->save($this->request->data)) {
                 $this->Session->setFlash('Successfully saved');
             } else {
@@ -100,6 +103,48 @@ class ConfigurationsController extends AppController
             $designsSelect[$design] = $design;
         }
         return $designsSelect;
+    }
+    
+    
+    /**
+    * Function to upload image.
+     */
+    private function uploadImage($file, $init_creation, $file_old="logo.png"){
+	    
+	    /* FILE */
+    	$file_path = WWW_ROOT.'uploads\\';
+    	$file_name = "logo.png";
+    	$upload_error = true;
+    	
+	    //CREATE folder
+	    if(!is_dir ($file_path))
+	    	@mkdir($file_path);
+	    	
+	    //CHECK filetype
+	    $permitted = array('image/gif','image/jpeg','image/pjpeg','image/png');
+	    
+	    foreach($permitted as $type) {
+		    if($type == $file['type']) {
+			    $upload_error = false;
+			    break;
+		    }
+	    }
+	    
+	    //REMOVE old image
+	    if(!$upload_error && !$init_creation){
+	    	@unlink($file_path.$file_old);
+		}
+
+    	//MOVE file
+    	if(!$upload_error){
+    		$upload_error = !@move_uploaded_file($file['tmp_name'], $file_path.$file_name);
+    	}
+    
+    	//RESULT data
+    	$result['error'] = $upload_error;
+    	$result['file_name'] = $file_name;
+    
+    	return $result;
     }
 }
 
