@@ -81,12 +81,31 @@
 	</div>
 	<div class='showFullNewsSocial'>
 		<?php
+			$socialNetworks = $data['socialNetworks'];
 			//Facebook
-			echo $this->SocialNetwork->insertFacebookShare();
+			if($socialNetworks['facebook']){
+				echo $this->SocialNetwork->insertFacebookShare();
+			}
+			
 			//Google+
-			echo $this->SocialNetwork->insertGoogleShare();
+			if($socialNetworks['googleplus']){
+				echo $this->SocialNetwork->insertGoogleShare();
+			}
+			
 			//Twitter
-			echo $this->SocialNetwork->insertTwitterShare();
+			if($socialNetworks['twitter']){
+				echo $this->SocialNetwork->insertTwitterShare();
+			}
+			
+			//Xing
+			if($socialNetworks['xing']){
+				echo $this->SocialNetwork->insertXingShare();
+			}
+			
+			//LinkedIn
+			if($socialNetworks['linkedin']){
+				echo $this->SocialNetwork->insertLinkedShare();
+			}
 		?>
 	</div>
 	<div class='showFullNewsOptions'>
