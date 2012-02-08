@@ -30,10 +30,7 @@ class ContactFormComponent extends Component {
 	* Method to transfer data from plugin to CMS.
 	*/
 	public function getData($controller, $params, $url, $contentId, $myUrl)
-	{
-		//SET title
-		$controller->set('title_for_layout', __d('contact_form','Contact Form'));
-			
+	{			
 		//CHECK url
 		if (isset($url)){
 			$data['Element'] = array_shift($url);
