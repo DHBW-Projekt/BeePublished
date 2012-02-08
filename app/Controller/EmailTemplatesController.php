@@ -151,12 +151,12 @@ class EmailTemplatesController extends AppController
     function save($templateId) {
     	$this->EmailTemplate->set($this->request->data);
     	// save the template on template id
-    	if(isset($templateId)) {
+    	if(isset($templateId) && $templateId != 'NEW') {
     		$this->EmailTemplate->set('id',$templateId);
     	}
     	// check the content and return if noch "EMAILTEXTCONTENT" is included
     	if(!($this->checkContent($this->request->data['EmailTemplate']['content']))) {
-    		$this->Session->setFlash(__('Saving failed. You have to include the text "EMAILTEXTCONTENT" once.'));
+    		$this->Session->setFlash(__('Saving failed. You have to include the text "EMAILTEXTCONTENT" once.'), 'default', array('class' => 'flash_failure'));
     		$this->redirect($this->referer());
     	} else {
     		// prepare the content by replacing relative urls with absolute urls
@@ -165,7 +165,7 @@ class EmailTemplatesController extends AppController
 	    	if ($this->EmailTemplate->save()) {
 	        	$this->Session->setFlash(__('Successfully saved'));
 	        } else {
-	            $this->Session->setFlash(__('Saving failed'));
+	            $this->Session->setFlash(__('Saving failed'), 'default', array('class' => 'flash_failure'));
 			}
 			if(isset($templateId)) {
 				$this->redirect($this->referer());			
@@ -221,7 +221,7 @@ class EmailTemplatesController extends AppController
     			$this->createInitialTemplate();
     		}
         } else {
-            $this->Session->setFlash(__('Deletion failed'));
+            $this->Session->setFlash(__('Deletion failed'), 'default', array('class' => 'flash_failure'));
 		}
 		$this->redirect($this->referer());
     }
@@ -244,7 +244,7 @@ class EmailTemplatesController extends AppController
 					$this->EmailTemplate->save($selectedTemplate);                	
         		}
         } else {
-        	$this->Session->setFlash(__('Saving failed'));
+        	$this->Session->setFlash(__('Saving failed'), 'default', array('class' => 'flash_failure'));
         }
         $this->redirect($this->referer('/emailtemplates/index/'));
     }
