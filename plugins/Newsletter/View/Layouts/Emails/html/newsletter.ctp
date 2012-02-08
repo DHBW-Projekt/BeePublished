@@ -19,7 +19,7 @@
 *
 * @description Basic Settings for all controllers
 */
-*?>
+?>
 
 
 <html>

@@ -22,7 +22,8 @@
 
 $this->Html->script('jquery/jquery.dataTables.min', false);
 $this->Html->script('/newsletter/js/newsletter', false);
-$lang = Configure::read("Config.language");
+$lang = $this->Session->read("Config.language");
+$lang = substr($lang, 0, 2);
 $path = $this->Html->url("/language/".$lang.".txt", true);
 $this->Js->set('language_path', $path);
 

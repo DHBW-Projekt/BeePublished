@@ -33,8 +33,10 @@ echo '<div id="subscription">';
 	// title
 	echo '<h1>'.__d('newsletter','Newsletter').'</h1>';
 	// echo text that is saved in content values
-	echo $data['text'];
-	echo '<br><br>';
+	if (($data['text'] != ' ') || ($data['text'] != '') || !($data['text'] == null) || !(isset($data['text']))){
+		echo $data['text'];
+		echo '<br><br>';
+	}
 	if (!($user)){	
 		// show form with input field to unSubscribe
 		echo '<div class="subscription_form">';
