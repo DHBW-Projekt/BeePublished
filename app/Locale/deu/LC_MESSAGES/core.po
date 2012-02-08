@@ -537,7 +537,7 @@ msgstr "Die Debugging-Einstellungen erlauben keinen Zugriff auf diese URL"
 msgid "Configuration:"
 msgstr "Konfiguration:"
 
-msgid "Page Name:"
+msgid "Page name:"
 msgstr "Seitenname:"
 
 msgid "Email:"
