@@ -30,10 +30,7 @@ class ContactFormComponent extends Component {
 	* Method to transfer data from plugin to CMS.
 	*/
 	public function getData($controller, $params, $url, $contentId, $myUrl)
-	{
-		//SET title
-		$controller->set('title_for_layout', __d('contact_form','Contact Form'));
-			
+	{			
 		//CHECK url
 		if (isset($url)){
 			$data['Element'] = array_shift($url);
@@ -75,10 +72,13 @@ class ContactFormComponent extends Component {
 		}	
 		
 		//SANITIZE
-		$controller->data =  Sanitize::clean($controller->data);
+		$name_clean = Sanitize::html($controller->data['ContactRequest']['name']);
+		$email_clean = Sanitize::html($controller->data['ContactRequest']['email']);
+		$subject_clean = Sanitize::html($controller->data['ContactRequest']['subject']);
+		$body_clean = Sanitize::html($controller->data['ContactRequest']['body']);
 
 		//SET input data
-		$controller->ContactRequest->set($controller->data['ContactRequest']);
+		$controller->ContactRequest->set(array('name' => $name_clean, 'email' => $email_clean, 'subject' => $subject_clean, 'body' => $body_clean));
 		
 		//VALIDATE input data
 		if(!$controller->ContactRequest->validates()){
