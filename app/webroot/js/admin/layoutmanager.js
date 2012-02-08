@@ -275,12 +275,6 @@ function generatePluginHandler(id) {
 }
 
 function setSettingOptions(container, id) {
-    $(".plugin_content").mouseenter(function () {
-        $(".setting_button", this).css("display", "inline");
-    });
-    $(".plugin_content").mouseleave(function () {
-        $(".setting_button", this).css("display", "none");
-    });
     $("a#overlay").fancybox({
         'type':'iframe',
         width:'90%',
