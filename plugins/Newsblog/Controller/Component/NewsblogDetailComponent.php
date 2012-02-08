@@ -20,7 +20,7 @@
 */
 
 class NewsblogDetailComponent extends Component {
-
+	var $components = array('Config');
 	public function getData($controller, $params, $url, $id){
 		$urlParts = explode('-', $url[0], 2);
 		$newsEntryId = $urlParts[0];
@@ -31,6 +31,13 @@ class NewsblogDetailComponent extends Component {
 		
 		$newsEntry = $controller->NewsEntry->findById($newsEntryId);
 		
+		$socialNetworks['facebook'] = $this->Config->getValue('facebook');
+		$socialNetworks['twitter'] = $this->Config->getValue('twitter');
+		$socialNetworks['googleplus'] = $this->Config->getValue('googleplus');
+		$socialNetworks['xing'] = $this->Config->getValue('xing');
+		$socialNetworks['linkedin'] = $this->Config->getValue('linkedin');
+		
+		$data['socialNetworks'] = $socialNetworks;
 		$data['NewsEntry'] = $newsEntry['NewsEntry'];
 		$data['Author'] = $newsEntry['Author']['username'];
 		$data['view'] = 'NewsblogDetail';

@@ -130,4 +130,7 @@
 
 .newsblog_entry_social{
 	margin-bottom:5px;
+	vertical-align: middle;
+	line-height: 25px;
+	height: 25px;
 }

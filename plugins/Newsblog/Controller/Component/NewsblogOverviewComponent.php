@@ -20,7 +20,7 @@
 */
 
 class NewsblogOverviewComponent extends Component {
-	var $components = array('ContentValueManager');
+	var $components = array('ContentValueManager', 'Config');
 	public function getData($controller, $params, $url, $id){
 		$controller->loadModel('Newsblog.NewsEntry');
 		
@@ -29,6 +29,12 @@ class NewsblogOverviewComponent extends Component {
 		$optionsNE['conditions'] = $conditionsNE;
 		$optionsNE['order'] = array('createdOn DESC');
 		
+		$socialNetworks['facebook'] = $this->Config->getValue('facebook');
+		$socialNetworks['twitter'] = $this->Config->getValue('twitter');
+		$socialNetworks['googleplus'] = $this->Config->getValue('googleplus');
+		$socialNetworks['xing'] = $this->Config->getValue('xing');
+		$socialNetworks['linkedin'] = $this->Config->getValue('linkedin');
+		
 		$contentValues = $this->ContentValueManager->getContentValues($id);
 		if (array_key_exists('newsblogtitle', $contentValues)) {
 			$newsblogtitle = $contentValues['newsblogtitle'];
@@ -36,6 +42,7 @@ class NewsblogOverviewComponent extends Component {
 			$newsblogtitle = null;
 		}
 		
+		$data['socialNetworks'] = $socialNetworks;
 		$data['publishedNewsEntries'] = $controller->NewsEntry->find('all',$optionsNE);
 		$data['newsblogTitle'] = $newsblogtitle;
 		$data['view'] = 'NewsblogOverview';
