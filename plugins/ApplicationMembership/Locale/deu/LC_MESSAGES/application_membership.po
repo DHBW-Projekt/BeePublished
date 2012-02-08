@@ -14,198 +14,214 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: Controller\Component\ApplicationMembershipComponent.php:64
+#: Controller\Component\ApplicationMembershipComponent.php
 msgid "Please fill out all mandatory fields."
 msgstr "Bitte füllen Sie die Pflichtfelder aus."
 
-#: Controller\Component\ApplicationMembershipComponent.php:80
+#: Controller\Component\ApplicationMembershipComponent.php
 msgid "Please fill out the CAPTCHA field."
 msgstr "Bitte füllen Sie das CAPTCHA-Feld aus."
 
-#: Controller\Component\ApplicationMembershipComponent.php:92
+#: Controller\Component\ApplicationMembershipComponent.php
 msgid "An error occurred, your request could not be sent. Please contact an administrator."
 msgstr "Es ist ein Fehler aufgetreten. Ihre Anfrage konnte nicht versendet werden. Bitte wenden Sie sich an einen Administrator."
 
-#: Controller\Component\ApplicationMembershipComponent.php:112
+#: Controller\Component\ApplicationMembershipComponent.php
 msgid "Thank you for your interest. Your request has been sent."
 msgstr "Vielen Dank für Ihr Interesse. Ihr Antrag wurde erfolgreich versendet."
 
-#: View\ApplicationMembership\admin.ctp:11
+#: View\ApplicationMembership\admin.ctp
 #: View\Elements\admin_menu.ctp:6
 msgid "Open Applications"
 msgstr "Offene Anträge"
 
-#: View\ApplicationMembership\admin.ctp:21;101
+#: View\ApplicationMembership\admin.ctp
 msgid "Done"
 msgstr "Erledigt"
 
-#: View\ApplicationMembership\admin.ctp:22
+#: View\ApplicationMembership\admin.ctp
 msgid "Application"
 msgstr "Antrag"
 
-#: View\ApplicationMembership\admin.ctp:23
+#: View\ApplicationMembership\admin.ctp
 msgid "Action"
 msgstr "Aktion"
 
-#: View\ApplicationMembership\admin.ctp:36
+#: View\ApplicationMembership\admin.ctp
 msgid "Address:"
 msgstr "Anschrift:"
 
-#: View\ApplicationMembership\admin.ctp:39
-#: View\Emails\html\application.ctp:17
+#: View\ApplicationMembership\admin.ctp
+#: View\Emails\html\application.ctp:
 msgid "Title:"
 msgstr "Anrede:"
 
-#: View\ApplicationMembership\admin.ctp:43
+#: View\ApplicationMembership\request.ctp
+msgid "active"
+msgstr "aktiv"
+
+#: View\ApplicationMembership\request.ctp
+msgid "passive"
+msgstr "passiv"
+
+#: View\ApplicationMembership\admin.ctp
 msgid "Last Name:"
 msgstr "Nachname:"
 
-#: View\ApplicationMembership\admin.ctp:47
+#: View\ApplicationMembership\admin.ctp
 msgid "First Name:"
 msgstr "Vorname:"
 
-#: View\ApplicationMembership\admin.ctp:51
-#: View\Emails\html\application.ctp:29
+#: View\ApplicationMembership\admin.ctp
+#: View\Emails\html\application.ctp
 msgid "Date of birth:"
 msgstr "Geburtsdatum:"
 
-#: View\ApplicationMembership\admin.ctp:55
+#: View\ApplicationMembership\admin.ctp
 msgid "Email:"
 msgstr "Email:"
 
-#: View\ApplicationMembership\admin.ctp:59
-#: View\Emails\html\application.ctp:37
+#: View\ApplicationMembership\admin.ctp
+#: View\Emails\html\application.ctp
 msgid "Telephone:"
 msgstr "Telefon:"
 
-#: View\ApplicationMembership\admin.ctp:63
-#: View\Emails\html\application.ctp:41
+#: View\ApplicationMembership\admin.ctp
+#: View\Emails\html\application.ctp
 msgid "Street:"
 msgstr "Straße:"
 
-#: View\ApplicationMembership\admin.ctp:67
+#: View\ApplicationMembership\admin.ctp
 msgid "ZIP:"
 msgstr "PLZ:"
 
-#: View\ApplicationMembership\admin.ctp:71
-#: View\Emails\html\application.ctp:49
+#: View\ApplicationMembership\admin.ctp
+#: View\Emails\html\application.ctp
 msgid "City:"
 msgstr "Stadt:"
 
-#: View\ApplicationMembership\admin.ctp:76
-#: View\Emails\html\application.ctp:53
+#: View\ApplicationMembership\admin.ctp
+#: View\Emails\html\application.ctp
 msgid "Comment:"
 msgstr "Kommentar:"
 
-#: View\ApplicationMembership\admin.ctp:81
+#: View\ApplicationMembership\admin.ctp
 msgid "Type:"
 msgstr "Mitgliedsart:"
 
-#: View\Elements\request.ctp:8
+#: View\Elements\request.ctp
 msgid "Application for membership"
 msgstr "Antrag auf Mitgliedschaft"
 
-#: View\Elements\request.ctp:15
+#: View\Elements\request.ctp
 msgid "I hereby apply for membership in this association:"
 msgstr "Hiermit stelle ich einen Antrag auf Mitgliedschaft in dieser Organisation:"
 
-#: View\Elements\request.ctp:22
+#: View\Elements\request.ctp
 msgid "Membership*"
 msgstr "Mitgliedsart*"
 
-#: View\Elements\request.ctp:31;34
+#: View\Elements\request.ctp
 msgid "Form of address*"
 msgstr "Anrede*"
 
-#: View\Elements\request.ctp:38
+#: View\Elements\request.ctp
+msgid "Ms/Mrs"
+msgstr "Frau"
+
+#: View\Elements\request.ctp
+msgid "Mr"
+msgstr "Herr"
+
+#: View\Elements\request.ctp
 msgid "Lastname*"
 msgstr "Nachname*"
 
-#: View\Elements\request.ctp:39
+#: View\Elements\request.ctp
 msgid "Firstname*"
 msgstr "Vorname*"
 
-#: View\Elements\request.ctp:43
+#: View\Elements\request.ctp
 msgid "Date of birth*"
 msgstr "Geburtsdatum*"
 
-#: View\Elements\request.ctp:52
+#: View\Elements\request.ctp
 msgid "Email*"
 msgstr "Email*"
 
-#: View\Elements\request.ctp:53
+#: View\Elements\request.ctp
 msgid "Telephone"
 msgstr "Telefon"
 
-#: View\Elements\request.ctp:54
+#: View\Elements\request.ctp
 msgid "Street and street number*"
 msgstr "Straße und Hausnummer*"
 
-#: View\Elements\request.ctp:55
+#: View\Elements\request.ctp
 msgid "Zip*"
 msgstr "PLZ*"
 
-#: View\Elements\request.ctp:56
+#: View\Elements\request.ctp
 msgid "City*"
 msgstr "Stadt*"
 
-#: View\Elements\request.ctp:57
+#: View\Elements\request.ctp
 msgid "Comment"
 msgstr "Kommentar"
 
-#: View\Elements\request.ctp:62
-msgid "Captcha"
-msgstr "Captcha"
+#: View\Elements\request.ctp
+msgid "For your own security please insert the following words:"
+msgstr "Für Ihre eigene Sicherheit geben Sie die folgenden Wörter ein:" 
 
-#: View\Elements\request.ctp:68
+#: View\Elements\request.ctp
 msgid "The marked fields(*) are required."
 msgstr "Die gekennzeichneten Felder (*) sind Pflichtfelder."
 
-#: View\Elements\request.ctp:71
+#: View\Elements\request.ctp
 msgid "Send"
 msgstr "Abschicken"
 
-#: View\Emails\html\application.ctp:2
+#: View\Emails\html\application.ctp
 msgid "Hi Admin"
 msgstr "Hi Admin"
 
-#: View\Emails\html\application.ctp:3
+#: View\Emails\html\application.ctp
 msgid "likes to become a member of your association."
 msgstr "möchte Mitglied in Ihrer Organisation werden."
 
-#: View\Emails\html\application.ctp:5
+#: View\Emails\html\application.ctp
 msgid "Please decide whether you like to accept following person as a member:"
 msgstr "Bitte entscheiden Sie, ob Sie folgende Person als Mitglied akzeptieren möchten:"
 
-#: View\Emails\html\application.ctp:9
+#: View\Emails\html\application.ctp
 msgid "Field"
 msgstr "Feld"
 
-#: View\Emails\html\application.ctp:10
+#: View\Emails\html\application.ctp
 msgid "Input"
 msgstr "Eingabe"
 
-#: View\Emails\html\application.ctp:13
+#: View\Emails\html\application.ctp
 msgid "Active:"
 msgstr "Ausstehend:"
 
-#: View\Emails\html\application.ctp:21
+#: View\Emails\html\application.ctp
 msgid "Name:"
 msgstr "Name:"
 
-#: View\Emails\html\application.ctp:25
+#: View\Emails\html\application.ctp
 msgid "First name:"
 msgstr "Vorname:"
 
-#: View\Emails\html\application.ctp:33
+#: View\Emails\html\application.ctp
 msgid "E-mail:"
 msgstr "Email:"
 
-#: View\Emails\html\application.ctp:45
+#: View\Emails\html\application.ctp
 msgid "Zip:"
 msgstr "PLZ:"
 
-#: View\Emails\html\application.ctp:58
+#: View\Emails\html\application.ctp
 msgid "Yours sincerely,"
 msgstr "Viele Grüße,"
 
