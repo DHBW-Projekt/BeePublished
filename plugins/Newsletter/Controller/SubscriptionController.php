@@ -38,9 +38,13 @@ class SubscriptionController extends NewsletterAppController {
 
 	function beforeRender(){
 		parent::beforeRender();
-		
 		$pluginId = $this->getPluginId();
 		$this->set('pluginId', $pluginId);
+	}
+	
+	function beforeFilter(){
+		$this->Auth->allow('guestUnSubscribe');
+		parent::beforeFilter();
 	}
 	
 	// get and set data that is necessary for the admin overlay
@@ -63,7 +67,6 @@ class SubscriptionController extends NewsletterAppController {
  	
  	// unSubscribe as guest
  	public function guestUnSubscribe(){
-//  		echo 'test';
  		if ($this->request->is('post')){
  			// check if recipient exists
  			if($recipient = $this->NewsletterRecipient->findByEmail($this->request->data['NewsletterRecipient']['email'])){
@@ -100,7 +103,7 @@ class SubscriptionController extends NewsletterAppController {
  				$this->add();
  			}
  		}
- 		// get back to calling page
+//  		get back to calling page
  		$this->redirect($this->referer());
  	}
  	
@@ -140,12 +143,12 @@ class SubscriptionController extends NewsletterAppController {
  										'class' => 'flash_success'), 
  										'NewsletterRecipient');
  				} else {
- 					$this->Session->setFlash('You have unsubscribed successfully.', 'default', array(
+ 					$this->Session->setFlash(__d('newsletter', 'You have unsubscribed successfully.'), 'default', array(
  									'class' => 'flash_success'), 
  									'NewsletterRecipient');
  				}
  			} else {
- 				$this->Session->setFlash('The subscription was not successful.', 'default', array(
+ 				$this->Session->setFlash(__d('newsletter', 'The subscription was not successful.'), 'default', array(
  								'class' => 'flash_failure'), 
  								'NewsletterRecipient');
  				$this->_persistValidation('NewsletterRecipient');
