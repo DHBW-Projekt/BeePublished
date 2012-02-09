@@ -23,7 +23,7 @@
 <?php $this->Html->css('menu-template', NULL, array('inline' => false));?>
 <div id="menu" class="overlay">
     <ol class="nav">
-        <li><?php echo $this->Html->link(__d('Youtube','Settings'),array('plugin' => 'Youtube', 'controller' => 'Youtube', 'action' => 'admin', $contentId), array('title' => __d('Youtube', 'Settings')));?></li>
+        <li><?php echo $this->Html->link(__d('youtube','Settings'),array('plugin' => 'Youtube', 'controller' => 'Youtube', 'action' => 'admin', $contentId), array('title' => __d('youtube', 'Settings')));?></li>
     </ol>
     <div style="clear:both;"></div>
 </div>

@@ -30,12 +30,12 @@ $errors = $this->Session->read('Validation.YoutubeLink.validationErrors')
 <?php echo $this->Session->flash('Youtube.Admin');?>
 
 <div id="youtube_settings">
-<p><?php echo __d('Youtube', 'In order for this plugin to work correctly, go to youtube, select the video and copy the link provided at the top of your browser.');?></p>
+<p><?php echo __d('youtube', 'In order for this plugin to work correctly, go to youtube, select the video and copy the link provided at the top of your browser.');?></p>
 <br/>
 <?php 
 if (!empty($currentLink)){
-	echo '<p>' . __d('Youtube', 'The current video has the following url: ') . $this->Html->link($currentLink, $currentLink, array('target' => '_blank')) . '</p>';
-	echo '<p>' . __d('Youtube', 'You can change the used url by saving a new one.') . '</p>';
+	echo '<p>' . __d('youtube', 'The current video has the following url: ') . $this->Html->link($currentLink, $currentLink, array('target' => '_blank')) . '</p>';
+	echo '<p>' . __d('youtube', 'You can change the used url by saving a new one.') . '</p>';
 	echo '<br/>';
 }
 
@@ -54,6 +54,6 @@ if (($errors != NULL) && array_key_exists('url', $errors) && array_key_exists('0
 	echo $this->Html->div('validation_error',$errors['url']['0']);
 }
 // end of form
-echo $this->Form->end(__d('Youtube', 'Save'));
+echo $this->Form->end(__d('youtube', 'Save'));
 ?>
 </div>

@@ -35,9 +35,9 @@ echo $this->Form->create('GuestbookPost', array('url' => array('plugin' => 'Gues
 // for each input field check whether a value is already present or an error had occured
 // author
 if (($input != NULL) && array_key_exists('author', $input['GuestbookPost'])){
-	echo $this->Form->input('GuestbookPost.author', array('label' => __d('Guestbook', 'Name:'), 'value' => $input['GuestbookPost']['author']));
+	echo $this->Form->input('GuestbookPost.author', array('label' => __d('guestbook', 'Name:'), 'value' => $input['GuestbookPost']['author']));
 } else {
-	echo $this->Form->input('GuestbookPost.author', array('label' => __d('Guestbook', 'Name:')));
+	echo $this->Form->input('GuestbookPost.author', array('label' => __d('guestbook', 'Name:')));
 }
 if (($errors != NULL) && array_key_exists('author', $errors) && array_key_exists('0', $errors['author'])){
 	echo $this->Html->div('validation_error',$errors['author']['0']);
@@ -45,9 +45,9 @@ if (($errors != NULL) && array_key_exists('author', $errors) && array_key_exists
 
 // title
 if (($input != NULL) && array_key_exists('title', $input['GuestbookPost'])){
-	echo $this->Form->input('GuestbookPost.title', array('label' => __d('Guestbook', 'Title:'), 'value' => $input['GuestbookPost']['title']));
+	echo $this->Form->input('GuestbookPost.title', array('label' => __d('guestbook', 'Title:'), 'value' => $input['GuestbookPost']['title']));
 } else{
-	echo $this->Form->input('GuestbookPost.title', array('label' => __d('Guestbook', 'Title:')));
+	echo $this->Form->input('GuestbookPost.title', array('label' => __d('guestbook', 'Title:')));
 }
 if (($errors != NULL) && array_key_exists('title', $errors) && array_key_exists('0', $errors['title'])){
 	echo $this->Html->div('validation_error',$errors['title']['0']);
@@ -63,7 +63,7 @@ if (($errors != NULL) && array_key_exists('text', $errors) && array_key_exists('
 	echo $this->Html->div('validation_error',$errors['text']['0']);
 }
 
-echo '<br /><p>' . __d('Guestbook', 'Please enter the two words in the Captcha. This is needed to prevent spmamming.') . '</p>';
+echo '<br /><p>' . __d('guestbook', 'Please enter the two words in the Captcha. This is needed to prevent spmamming.') . '</p>';
 
 //CAPTCHA
 App::import('Vendor','recaptcha/recaptchalib');
@@ -71,7 +71,7 @@ $publickey = "6LfzYcwSAAAAAN3vRDzZKXkC0rYkwaKQTi8hMkj6";
 echo recaptcha_get_html($publickey);
 
 // end of form
-echo $this->Form->end(__d('Guestbook', 'Save Post'));
+echo $this->Form->end(__d('guestbook', 'Save Post'));
 ?>
 
 </div>

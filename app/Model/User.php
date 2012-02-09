@@ -4,7 +4,6 @@ App::uses('AppModel', 'Model', 'AuthComponent', 'Controller/Component');
  * User Model
  *
  * @property Role $Role
- * @property LogEntry $LogEntry
  * @property Page $Page
  */
 class User extends AppModel
@@ -87,28 +86,6 @@ class User extends AppModel
             'order' => ''
         )
     );
-
-    /**
-     * hasMany associations
-     *
-     * @var array
-     */
-    public $hasMany = array(
-        'LogEntry' => array(
-            'className' => 'LogEntry',
-            'foreignKey' => 'user_id',
-            'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
-            'counterQuery' => ''
-        )
-    );
-
 
     /**
      * beforeSave function
