@@ -25,7 +25,7 @@
 
 <?php
 if ($data == NULL || empty($data['YoutubeLink']['url'])){
-	echo __d('Youtube', 'Please enter a video URL in the plugin configuration.');
+	echo __d('youtube', 'Please enter a video URL in the plugin configuration.');
 } else { 
 ?>
 <div class="youtube_video">
