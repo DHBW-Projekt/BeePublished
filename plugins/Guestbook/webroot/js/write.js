@@ -24,7 +24,7 @@ $(document).ready(function () {
         	toolbar : [
         	           ['Undo', 'Redo'],
         	           ['Bold', 'Italic', 'Underline'],
-        	           ['Link', 'Unlink', 'Image', 'Smiley', 'SpecialChar'],
+        	           ['Link', 'Unlink', 'Smiley', 'SpecialChar'],
         	           ['NumberedList', 'BulletedList', '-', 'Blockquote'],
         	       ],
         });

@@ -63,7 +63,7 @@ if (($errors != NULL) && array_key_exists('text', $errors) && array_key_exists('
 	echo $this->Html->div('validation_error',$errors['text']['0']);
 }
 
-echo '<br /><p>' . __d('guestbook', 'Please enter the two words in the Captcha. This is needed to prevent spmamming.') . '</p>';
+echo '<br /><p>' . __d('guestbook', 'Please enter the two words in the Captcha. This is needed to prevent spaming.') . '</p>';
 
 //CAPTCHA
 App::import('Vendor','recaptcha/recaptchalib');
