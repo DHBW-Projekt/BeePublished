@@ -37,18 +37,18 @@ $this->Html->css('/Guestbook/css/design',null,array('inline' => false));
 	<thead>
 		<tr>
 			<th></th>
-			<th><?php echo __d('Guestbook', 'Author');?></th>
-			<th><?php echo __d('Guestbook', 'Title');?></th>
-			<th><?php echo __d('Guestbook', 'Text');?></th>
-			<th><?php echo __d('Guestbook', 'Date');?></th>
+			<th><?php echo __d('guestbook', 'Author');?></th>
+			<th><?php echo __d('guestbook', 'Title');?></th>
+			<th><?php echo __d('guestbook', 'Text');?></th>
+			<th><?php echo __d('guestbook', 'Date');?></th>
 		</tr>
 	</thead>
 	<tfoot>
 		<tr>
 			<td colspan="3">
 				<?php echo $this->Html->image('/img/arrow.png', array('height' => 20,'width' => 20));?>
-				<?php echo $this->Form->submit(__d('Guestbook', 'Release'), array('name' => 'release', 'div' => false));?>
-				<?php echo $this->Form->submit(__d('Guestbook', 'Delete'), array('name' => 'delete', 'div' => false));?>
+				<?php echo $this->Form->submit(__d('guestbook', 'Release'), array('name' => 'release', 'div' => false));?>
+				<?php echo $this->Form->submit(__d('guestbook', 'Delete'), array('name' => 'delete', 'div' => false));?>
 			</td>
 		</tr>
 	</tfoot>
