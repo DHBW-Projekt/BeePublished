@@ -7,6 +7,10 @@
 
 <div class="staticText_show">
 <?php
+if ($data == '') {
+	echo '<br/><br/>';	
+} else {
 	echo $this->BBCode->transformBBCode(Sanitize::html($data));
+}
 ?>
 </div>

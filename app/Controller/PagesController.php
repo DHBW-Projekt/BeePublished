@@ -87,7 +87,7 @@ class PagesController extends AppController
             $this->set('menu', $this->Menu->buildMenu($this, NULL));
             $this->set('pageid', $page['Page']['id']);
             $this->set('systemPage', false);
-            $this->set('title_for_layout', $page['Page']['title']);
+            $this->set('title_for_layout', $page['Page']['title'] . ' - ' . $this->Config->getValue('page_name'));
         }
     }
 
