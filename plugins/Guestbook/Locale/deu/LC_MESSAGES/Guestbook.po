@@ -139,7 +139,7 @@ msgid "Title:"
 msgstr "Titel:"
 
 #: View\Elements\writePost.ctp:66
-msgid "Please enter the two words in the Captcha. This is needed to prevent spmamming."
+msgid "Please enter the two words in the Captcha. This is needed to prevent spaming."
 msgstr "Bitte geben Sie die zweit Wörter in das Captcha ein. Dies ist nötig um Spam zu unterbinden."
 
 #: View\Elements\writePost.ctp:74
