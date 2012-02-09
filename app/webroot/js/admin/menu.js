@@ -62,8 +62,14 @@ function createMenu(menuData, append, parentid) {
         }
     } // if
 
+    if (window.app.language == 'de'){
+    	var text = 'Eintrag hinzuf&uuml;gen'
+    } else {
+    	var text = 'Add entry'
+    }
+    
     var link = $('<a></a>')
-        .html('Add Entry')
+        .html(text)
         .attr('href', window.app.webroot+'menuentries/add/' + parentid)
         .attr('class', 'iframe')
         .fancybox({

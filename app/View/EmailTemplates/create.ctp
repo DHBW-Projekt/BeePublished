@@ -28,7 +28,7 @@
 	echo $this->Form->create('EmailTemplate', array(
 		'url' => array(
     	'controller' => 'EmailTemplates',
-    	'action' => 'save')));
+    	'action' => 'save'),'NEW'));
 	echo $this->Form->input('name', array(
 		'label' => 'Name', 
 		'value' => ''));

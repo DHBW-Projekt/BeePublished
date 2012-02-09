@@ -52,7 +52,7 @@ if (isset($validationErrors['email'][0])){
 };
 echo $this->Form->end(__d('newsletter','Add'));
 echo '<hr>';
-echo '<h2>'.__d('newsletter','Subscriptions:').'</h2>';
+echo '<h2>'.__d('newsletter','Recipients:').'</h2>';
 // flash for deletion here
 echo $this->Session->flash('RecipientDeleted');
 // form to delete selected recipients

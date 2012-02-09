@@ -18,7 +18,26 @@ $(document).ready(function () {
 
     initMenu();
     initAdmin();
+    
+    $(".plugin_administration a", this).css("display", "none");
+    
+	$(".plugin_content").mouseenter(function () {
+		$(".plugin_administration a", this).css("display", "inline");
+		});
+		$(".plugin_content").mouseleave(function () {
+		$(".plugin_administration a", this).css("display", "none");
+		});
 });
+
+
+function setSettingOptions(container, id) {
+	$(".plugin_content").mouseenter(function () {
+	$(".plugin_administration a", this).css("display", "inline");
+	});
+	$(".plugin_content").mouseleave(function () {
+	$(".plugin_administration a", this).css("display", "none");
+	});
+	} 
 
 function initAdmin() {
     $(".plugin_administration a").fancybox({
