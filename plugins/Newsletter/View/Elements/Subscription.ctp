@@ -47,7 +47,6 @@ echo '<div id="subscription">';
 					'action' => 'guestUnSubscribe')));
 			echo $this->Form->input('NewsletterRecipient.email', array('label' => __d('newsletter','E-Mail:')));
 			echo $this->Html->div('validation_error',$validationErrors['email'][0]);
-			echo "</div>";
    			echo $this->Form->end(__d('newsletter','(Un)subscribe'));
    			echo $this->Session->flash('NewsletterRecipient');
    		echo '</div>';

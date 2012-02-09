@@ -318,3 +318,8 @@ msgstr "Das Feld E-Mail muss ausgefüllt werden."
 msgid "The e-mail address was not entered correctly."
 msgstr "Bitte geben Sie eine korrekte E-Mail-Adresse ein."
 
+msgid "You have unsubscribed successfully."
+msgstr "Sie haben sich erfolgreich abgemeldet."
+
+msgid "The subscription was not successful."
+msgstr "Sie konnten nicht angemeldet werden".

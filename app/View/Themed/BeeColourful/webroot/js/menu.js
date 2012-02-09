@@ -21,8 +21,8 @@ function initMenu() {
 	var hidden = "false";
 	if (document.cookie) {
 		cookiefile = document.cookie;
-//		hidden = cookiefile.slice(cookiefile.indexOf("hidden=") + 7, cookiefile
-//				.indexOf("hidden=") + 12);
+		hidden = cookiefile.slice(cookiefile.indexOf("hidden=") + 7, cookiefile
+				.indexOf("hidden=") + 12);
 		if (hidden == "false") {
 			$("#pagelogo").show();
 			$("#menu").show();
