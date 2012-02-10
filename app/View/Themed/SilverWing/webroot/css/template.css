@@ -164,17 +164,22 @@ h2, h1, h3, h4, h5, h6 {
 }
 
 .plugin_administration {
-    position: relative;
     padding: 2px;
-    margin-bottom: 10px;
+	margin-bottom: 10px;
+    bottom: 0;
+    position: absolute; 	
+    right: 0;
+    z-index: 500;
 }
 
 .setting_button {
-    position: absolute;
-    top: 40px;
-    right: 0px;
+	display: inline;
+	padding: 2px;
+	margin-bottom: 10px;
+    bottom: 0;
+    position: absolute; 	
+    right: 0;
     z-index: 500;
-    display: none;
 }
 
 .setting_image {

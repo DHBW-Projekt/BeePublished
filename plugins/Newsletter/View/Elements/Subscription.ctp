@@ -33,8 +33,10 @@ echo '<div id="subscription">';
 	// title
 	echo '<h1>'.__d('newsletter','Newsletter').'</h1>';
 	// echo text that is saved in content values
-	echo $data['text'];
-	echo '<br><br>';
+	if (($data['text'] != ' ') || ($data['text'] != '') || !($data['text'] == null) || !(isset($data['text']))){
+		echo $data['text'];
+		echo '<br><br>';
+	}
 	if (!($user)){	
 		// show form with input field to unSubscribe
 		echo '<div class="subscription_form">';
@@ -45,7 +47,6 @@ echo '<div id="subscription">';
 					'action' => 'guestUnSubscribe')));
 			echo $this->Form->input('NewsletterRecipient.email', array('label' => __d('newsletter','E-Mail:')));
 			echo $this->Html->div('validation_error',$validationErrors['email'][0]);
-			echo "</div>";
    			echo $this->Form->end(__d('newsletter','(Un)subscribe'));
    			echo $this->Session->flash('NewsletterRecipient');
    		echo '</div>';

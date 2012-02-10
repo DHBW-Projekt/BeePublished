@@ -25,7 +25,7 @@ $this->Html->script('/gallery/js/fbtest', false);
 $this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
 
 if(!isset($data)){
-	echo __("No gallery assigned");
+	echo __d('gallery', "No gallery assigned");
 } else {
 	?>	
 	<div class="newsblogtitle">
@@ -35,7 +35,7 @@ if(!isset($data)){
 	</div> 
 <?php
 if(!isset($data['GalleryPicture'])){
-	echo __('No pictures in gallery.');
+	echo __d('gallery', 'No pictures in gallery.');
 } else {
 		$titlepic  = $data['GalleryEntry']['titlepicture'];
 		$title_is_inGallery = false;

@@ -25,7 +25,8 @@ $this->Html->script('/newsletter/js/newsletter', false);
 $this->Html->script('jquery/jquery.dataTables.min', false);
 echo $this->Html->css('/newsletter/css/newsletter', NULL, array('inline' => false));
 echo $this->Html->css('/css/jQueryDataTables.css', NULL, array('inline' => false));
-$lang = Configure::read("Config.language");
+$lang = $this->Session->read("Config.language");
+$lang = substr($lang, 0, 2);
 $path = $this->Html->url("/language/".$lang.".txt", true);
 $this->Js->set('language_path', $path);
 
@@ -51,7 +52,7 @@ if (isset($validationErrors['email'][0])){
 };
 echo $this->Form->end(__d('newsletter','Add'));
 echo '<hr>';
-echo '<h2>'.__d('newsletter','Subscriptions:').'</h2>';
+echo '<h2>'.__d('newsletter','Recipients:').'</h2>';
 // flash for deletion here
 echo $this->Session->flash('RecipientDeleted');
 // form to delete selected recipients

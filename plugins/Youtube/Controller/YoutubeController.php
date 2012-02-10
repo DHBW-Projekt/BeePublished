@@ -53,11 +53,11 @@ class YoutubeController extends YoutubeAppController{
 			// save and set message
 			if (!$this->YoutubeLink->save($newLink)){
 				$this->_persistValidation('YoutubeLink');
-				$this->Session->setFlash(__d('Youtube', 'An error occured.'), 'default', array('class' => 'flash_failure'), 'Youtube.Admin');
+				$this->Session->setFlash(__d('youtube', 'An error occured.'), 'default', array('class' => 'flash_failure'), 'Youtube.Admin');
 				$this->redirect($this->referer());
 			}
 			$this->_deleteValidation();
-			$this->Session->setFlash(__d('Youtube', 'Save succesful.'), 'default', array('class' => 'flash_success'), 'Youtube.Admin');
+			$this->Session->setFlash(__d('youtube', 'Save succesful.'), 'default', array('class' => 'flash_success'), 'Youtube.Admin');
 			$this->redirect($this->referer());
 		}
 	}

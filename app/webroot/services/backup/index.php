@@ -63,7 +63,7 @@ public \$default = array(
 } ?>";
 	
 	//set up file handle
-	$filename = "../../app/Config/database.php";
+	$filename = "../../../Config/database.php";
 	$dbfile = fopen($filename, "w+");
 	//put data into file
 	fputs($dbfile, $file);

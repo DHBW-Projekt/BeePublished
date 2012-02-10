@@ -1,0 +1,325 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2012-02-08 21:30+0100\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: Controller\NewsletterLettersController.php:134;170
+msgid "The newsletter was saved successfully."
+msgstr "Der Newsletter wurde erfolgreich gespeichert."
+
+#: Controller\NewsletterLettersController.php:138;176
+msgid "The newsletter couldn't be saved."
+msgstr "Der Newsletter konnte nicht gespeichert werden."
+
+#: Controller\NewsletterLettersController.php:222
+msgid "The newsletter has been deleted"
+msgstr "Der Newsletter wurde gelöscht."
+
+#: Controller\NewsletterLettersController.php:226
+msgid "The newsletter couldn't be deleted"
+msgstr "Der Newsletter konnte nicht gelöscht werden."
+
+#: Controller\NewsletterLettersController.php:251
+msgid "If you want to unsubscribe from our newsletter, click "
+msgstr "Wenn Sie sich von unserem Newsletter abmelden wollen, klicken Sie "
+
+#: Controller\NewsletterLettersController.php:256
+msgid "here"
+msgstr "hier"
+
+#: Controller\NewsletterLettersController.php:269
+msgid "The newsletter has been sent successful."
+msgstr "Der Newsletter wurde wurde verschickt."
+
+#: Controller\NewsletterLettersController.php:295
+msgid "The selected newsletters have been deleted"
+msgstr "Der ausgewähle Newsletter wurde gelöscht."
+
+#: Controller\NewsletterLettersController.php:299
+msgid "The selected newsletters couldn't be deleted"
+msgstr "Die ausgewählten Newsletter konnten nicht gelöscht werden."
+
+#: Controller\NewsletterLettersController.php:306
+msgid "You haven't selected any newsletter to delete."
+msgstr "Sie haben keine Newsletter ausgewählt."
+
+#: Controller\NewsletterRecipientsController.php:58
+msgid "The recipient was deleted successfully."
+msgstr "Der Empfänger wurde erfolgreich gelöscht."
+
+#: Controller\NewsletterRecipientsController.php:62
+msgid "The recipient couldn't be deleted."
+msgstr "Der Empfänger konnte nicht gelöscht werden."
+
+#: Controller\NewsletterRecipientsController.php:106
+#: Controller\SubscriptionController.php:230
+msgid "The user was added successfully."
+msgstr "Der Benutzer wurde hinzugefügt."
+
+#: Controller\NewsletterRecipientsController.php:110
+#: Controller\SubscriptionController.php:234
+msgid "The user was removed successfully."
+msgstr "Der Benutzer wurde erfolgreich gelöscht."
+
+#: Controller\NewsletterRecipientsController.php:115
+#: Controller\SubscriptionController.php:239
+msgid "The user was not added."
+msgstr "Der Benutzer konnte nicht hinzugefügt werden."
+
+#: Controller\NewsletterRecipientsController.php:147
+msgid "The selected recipients have been deleted successfully."
+msgstr "Die ausgewählten Empfänger wurden gelöscht."
+
+#: Controller\NewsletterRecipientsController.php:151
+msgid "The recipients couldn't be deleted."
+msgstr "Die Empfänger konnten nicht gelöscht werden."
+
+#: Controller\NewsletterRecipientsController.php:158
+msgid "You haven't selected any recipient to delete."
+msgstr "Sie haben keine Empfänger ausgewählt."
+
+#: Controller\NewsletterSettingsController.php:39
+msgid "Here you can subscribe or unsubscribe to our newsletter."
+msgstr "Hier können Sie sich vom Newsletter an- oder abmelden."
+
+#: Controller\NewsletterSettingsController.php:55
+msgid "The text was saved successfully."
+msgstr "Der Text wurde erfolgreich gespeichert."
+
+#: Controller\SubscriptionController.php:84
+msgid "The recipient was added successfully."
+msgstr "Der Empfänger wurde erfolgreich hinzugefügt."
+
+#: Controller\SubscriptionController.php:88
+msgid "The recipient was removed successfully."
+msgstr "Der Empfänger wurde erfolgreich gelöscht."
+
+#: Controller\SubscriptionController.php:93
+msgid "The recipient was not added."
+msgstr "Der Empfänger konnte nicht hinzugefügt werden."
+
+#: Controller\SubscriptionController.php:139
+msgid "You have subscribed successfully."
+msgstr "Sie haben sich erfolgreich für den Newsletter registriert."
+
+#: Controller\SubscriptionController.php:176
+msgid "You have unsubscribed successfully."
+msgstr "Sie haben sich erfolgreich vom Newsletter abgemeldet."
+
+#: Controller\SubscriptionController.php:180
+msgid "You couldn't be unsubscribed."
+msgstr "Sie konnten nicht vom Newsletter abgemeldet werden."
+
+#: Controller\SubscriptionController.php:185;190
+msgid "You haven't subscribed"
+msgstr "Die Anmeldung für den Newsletter ist fehlgeschlagen."
+
+#: Controller\Component\SubscriptionComponent.php:63
+msgid "Here you can subscribe to or unsubscribe from our newsletter."
+msgstr "Hier können Sie sich vom Newsletter an- oder abmelden."
+
+#: Controller\Component\SubscriptionComponent.php:76
+msgid "no entries"
+msgstr "Keine Einträge"
+
+#: View\Elements\Subscription.ctp:34
+msgid "Newsletter"
+msgstr "Newsletter"
+
+#: View\Elements\Subscription.ctp:46
+#: View\NewsletterRecipients\index.ctp:48
+#: View\Subscription\un_subscribe_per_mail.ctp:35
+msgid "E-Mail:"
+msgstr "E-Mail:"
+
+#: View\Elements\Subscription.ctp:49
+msgid "(Un)subscribe"
+msgstr "An-/Abmelden"
+
+#: View\Elements\Subscription.ctp:60
+msgid "You subscribed to our newsletter"
+msgstr "Sie sind für unseren Newsletter registriert"
+
+#: View\Elements\Subscription.ctp:66
+#: View\Subscription\un_subscribe_per_mail.ctp:38
+msgid "Unsubscribe"
+msgstr "Abmelden"
+
+#: View\Elements\Subscription.ctp:69
+msgid "You didn't subscribe to our newsletter"
+msgstr "Sie sind nicht für unseren Newsletter registriert"
+
+#: View\Elements\Subscription.ctp:75
+msgid "Subscribe"
+msgstr "Anmelden"
+
+#: View\Elements\admin_menu.ctp:31
+msgid "Newsletters"
+msgstr "Newsletter"
+
+#: View\Elements\admin_menu.ctp:39
+msgid "Recipients"
+msgstr "Empfänger"
+
+#: View\Elements\admin_menu.ctp:48
+msgid "General Settings"
+msgstr "Allgemeine Einstellungen"
+
+#: View\Layouts\Emails\html\newsletter.ctp:44
+msgid "Please click here if you want to unsubscribe from this newsletter: "
+msgstr "Bitte klicken Sie hier um sich vom Newsletter abzumelden:"
+
+#: View\NewsletterLetters\create.ctp:41
+#: View\NewsletterLetters\edit.ctp:39
+#: View\NewsletterLetters\preview.ctp:38
+msgid "Subject:"
+msgstr "Betreff:"
+
+#: View\NewsletterLetters\create.ctp:50
+#: View\NewsletterLetters\edit.ctp:48
+#: View\NewsletterSettings\index.ctp:46
+msgid "Save"
+msgstr "Speichern"
+
+#: View\NewsletterLetters\edit.ctp:51
+msgid "Preview"
+msgstr "Vorschau"
+
+#: View\NewsletterLetters\index.ctp:34
+msgid "Create new newsletter:"
+msgstr "Neuen Newsletter erstellen"
+
+#: View\NewsletterLetters\index.ctp:41
+msgid "Create newsletter"
+msgstr "Newsletter erstellen"
+
+#: View\NewsletterLetters\index.ctp:44
+msgid "Newsletters:"
+msgstr "Newsletter:"
+
+#: View\NewsletterLetters\index.ctp:53
+msgid "Do you really want to delete the selected newsletters?"
+msgstr "Wollen Sie die ausgewählten Newsletter wirklich löschen?"
+
+#: View\NewsletterLetters\index.ctp:59
+msgid "Subject"
+msgstr "Betreff"
+
+#: View\NewsletterLetters\index.ctp:60
+msgid "Date"
+msgstr "Datum"
+
+#: View\NewsletterLetters\index.ctp:61
+msgid "Status"
+msgstr "Status"
+
+#: View\NewsletterLetters\index.ctp:86
+msgid "draft"
+msgstr "Entwurf"
+
+#: View\NewsletterLetters\index.ctp:88
+msgid "sent"
+msgstr "versendet"
+
+#: View\NewsletterLetters\index.ctp:113;136;155
+#: View\NewsletterRecipients\index.ctp:88;112
+msgid "[x]Delete"
+msgstr "[x]Löschen"
+
+#: View\NewsletterLetters\index.ctp:120
+msgid "Delete newsletter"
+msgstr "Newsletter löschen"
+
+#: View\NewsletterLetters\index.ctp:121
+msgid "Do you really want to delete this newsletter?"
+msgstr "Wollen Sie diesen Newsletter wirklich löschen?"
+
+#: View\NewsletterLetters\index.ctp:152
+#: View\NewsletterRecipients\index.ctp:109
+msgid "Delete"
+msgstr "Löschen"
+
+#: View\NewsletterLetters\preview.ctp:47
+msgid "Send"
+msgstr "Senden"
+
+#: View\NewsletterLetters\preview.ctp:50
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: View\NewsletterLetters\preview.ctp:55
+msgid "This newsletter has been sent on "
+msgstr "Der News letter wurde verschickt am "
+
+#: View\NewsletterRecipients\index.ctp:38
+msgid "Add recipient:"
+msgstr "Empfänger hinzufügen"
+
+#: View\NewsletterRecipients\index.ctp:52
+msgid "Add"
+msgstr "Hinzufügen"
+
+#: View\NewsletterRecipients\index.ctp:54
+msgid "Recipients:"
+msgstr "Empfänger:"
+
+#: View\NewsletterRecipients\index.ctp:63
+msgid "Do you really want to delete the selected recipients?"
+msgstr "Wollen Sie die ausgewählten Empfänger wirklich löschen"
+
+#: View\NewsletterRecipients\index.ctp:69
+msgid "Email"
+msgstr "E-Mail"
+
+#: View\NewsletterRecipients\index.ctp:70
+msgid "Username"
+msgstr "Benutzername"
+
+#: View\NewsletterRecipients\index.ctp:95
+msgid "Delete recipient"
+msgstr "Empfänger löschen"
+
+#: View\NewsletterRecipients\index.ctp:96
+msgid "Do you really want to delete this recipient?"
+msgstr "Wollen Sie diesen Empfänger wirklich löschen?"
+
+#: View\NewsletterSettings\index.ctp:31
+msgid "Information text on subscription view:"
+msgstr "Informationstext auf dem Plugin:"
+
+#: View\Subscription\un_subscribe_per_mail.ctp:26
+msgid "Here you can unsubscribe from our newsletter"
+msgstr "Hier können Sie sich von unserem Newsletter abmelden"
+
+#: Model\NewsletterLetter.php:validation for field subject
+msgid "A subject is missing."
+msgstr "Bitte geben Sie einen Betreff an"
+
+#: Model\NewsletterRecipient.php:validation for field email
+msgid "This e-mail address is already registered."
+msgstr "Diese E-Mail Adresse ist bereits registriert."
+
+#: Model\NewsletterRecipient.php:validation for field email
+msgid "This field email has to be filled."
+msgstr "Das Feld E-Mail muss ausgefüllt werden."
+
+#: Model\NewsletterRecipient.php:validation for field email
+msgid "The e-mail address was not entered correctly."
+msgstr "Bitte geben Sie eine korrekte E-Mail-Adresse ein."
+
+msgid "You have unsubscribed successfully."
+msgstr "Sie haben sich erfolgreich abgemeldet."
+
+msgid "The subscription was not successful."
+msgstr "Sie konnten nicht angemeldet werden".

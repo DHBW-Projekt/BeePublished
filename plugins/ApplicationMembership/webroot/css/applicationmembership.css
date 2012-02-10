@@ -58,6 +58,14 @@ label{
 	padding-top:10px;
 }
 
+#applicationmembership_captcha{
+	margin-top:15px;
+}
+
+#applicationmembership_form input{
+	width: 50%;
+}
+
 /**
  *  Styling of Cake coding
  */
@@ -66,7 +74,7 @@ label{
 }
 
 #ApplicationMembershipComment{
-	width:300px;
+	width:50%;
 	visibility: visible;
 }
 

@@ -10,11 +10,11 @@ CKEDITOR.editorConfig = function (config) {
     config.extraPlugins = 'bbcode';
     config.removePlugins = 'bidi,button,dialogadvtab,div,flash,format,forms,horizontalrule,iframe,indent,justify,liststyle,pagebreak,showborders,stylescombo,table,tabletools,templates';
     config.disableObjectResizing = true;
-    config.fontSize_sizes = "10/10px;12/12px;14/14px;16/16px;20/20px;22/22px;24/24px";
+    //config.fontSize_sizes = "10/10px;12/12px;14/14px;16/16px;20/20px;22/22px;24/24px";
     config.toolbar = [
         ['Undo', 'Redo'],
         ['Bold', 'Italic', 'Underline'],
-        ['FontSize'],
+        //['FontSize'],
         ['TextColor'],
         ['Link', 'Unlink', 'Image', 'Smiley', 'SpecialChar'],
         ['NumberedList', 'BulletedList', '-', 'Blockquote'],

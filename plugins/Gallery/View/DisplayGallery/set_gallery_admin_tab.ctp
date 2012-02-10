@@ -23,7 +23,7 @@ echo $this->element('admin_menu',array("ContentId" => $ContentId, "mContext" => 
 
 $this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
 $this->Html->script('/gallery/js/gallerytableassign', false);
-echo "<h1> ".__('Assign a gallery')."</h1>";
+echo "<h1> ".__d('gallery', 'Assign a gallery')."</h1>";
 
 echo $this->Session->flash();
 $curr_galleryid=-1;
@@ -32,13 +32,13 @@ if(array_key_exists('galleryID', $data['CurrGallery'])){
 }
 
 
-echo '<div class="galleryinfo">'.__('Please assign a gallery to the view.').'</div>';
+echo '<div class="galleryinfo">'.__d('gallery', 'Please assign a gallery to the view.').'</div>';
 
 echo '<table>';
 	echo '<thead>';
 		echo '<tr>';
-			echo '<th>'.__('Title').'</th>';
-			echo '<th>'.__('Description').'</th>';
+			echo '<th>'.__d('gallery', 'Title').'</th>';
+			echo '<th>'.__d('gallery', 'Description').'</th>';
 			echo '<th></th>';
 		echo '</tr>';
 	echo '</thead>';

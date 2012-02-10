@@ -59,7 +59,7 @@ class GuestbookController extends GuestbookAppController {
 		if($this->request->is('post')){
 			// save data
 			$this->ContentValueManager->saveContentValues($contentId, $this->request->data['settings']);	
-			$this->Session->setFlash(__d('Guestbook', 'Your settings were saved.'), 'default', array('class' => 'flash_success'), 'Guestbook.Admin');
+			$this->Session->setFlash(__d('guestbook', 'Your settings were saved.'), 'default', array('class' => 'flash_success'), 'Guestbook.Admin');
 			$this->redirect($this->referer());
 		} else{
 			// get current values
@@ -78,11 +78,11 @@ class GuestbookController extends GuestbookAppController {
 			// delete flagged posts from db
 			if ($this->Guestbook->deleteAll(array('contentId' => $contentId,
 												  'deleted NOT' => '0000-00-00 00:00:00'))){
-			$this->Session->setFlash(__d('Guestbook', 'Database cleaned.'), 'default', array('class' => 'flash_success'), 'Guestbook.Admin');
+			$this->Session->setFlash(__d('guestbook', 'Database cleaned.'), 'default', array('class' => 'flash_success'), 'Guestbook.Admin');
 			$this->redirect($this->referer());
 			}
 			else {
-				$this->Session->setFlash(__d('Guestbook', 'An error has occured.'), 'default', array('class' => 'flash_failure'), 'Guestbook.Admin');
+				$this->Session->setFlash(__d('guestbook', 'An error has occured.'), 'default', array('class' => 'flash_failure'), 'Guestbook.Admin');
 				$this->redirect($this->referer());
 			}
 		}
@@ -104,7 +104,7 @@ class GuestbookController extends GuestbookAppController {
 				// save changed posts
 				if (!$this->GuestbookPost->save($onePost)) {
 					// error occured -> abort all remaining and set error message
-					$this->Session->setFlash(__d('Guestbook', 'An error has occured.'), 'default', array('class' => 'flash_failure'), 'Guestbook.Admin');
+					$this->Session->setFlash(__d('guestbook', 'An error has occured.'), 'default', array('class' => 'flash_failure'), 'Guestbook.Admin');
 					$this->redirect($this->referer());
 				}
 				$index++;
@@ -115,10 +115,10 @@ class GuestbookController extends GuestbookAppController {
 			$this->redirect($this->referer());
 		}
 		else if ($index == 1){
-			$this->Session->setFlash(__d('Guestbook', 'Post released.'), 'default', array('class' => 'flash_success'), 'Guestbook.Admin');
+			$this->Session->setFlash(__d('guestbook', 'Post released.'), 'default', array('class' => 'flash_success'), 'Guestbook.Admin');
 			$this->redirect($this->referer());
 		} else {
-			$this->Session->setFlash(__d('Guestbook', 'Posts released.'), 'default', array('class' => 'flash_success'), 'Guestbook.Admin');
+			$this->Session->setFlash(__d('guestbook', 'Posts released.'), 'default', array('class' => 'flash_success'), 'Guestbook.Admin');
 			$this->redirect($this->referer());
 		}
 
@@ -140,7 +140,7 @@ class GuestbookController extends GuestbookAppController {
 				//delete post from database and set positive message
 				if (!$this->GuestbookPost->delete($id)) {
 					// errors occured -> set error message
-					$this->Session->setFlash(__d('Guestbook', 'An error has occured.'), 'default', array('class' => 'flash_failure'), 'Guestbook.Admin');
+					$this->Session->setFlash(__d('guestbook', 'An error has occured.'), 'default', array('class' => 'flash_failure'), 'Guestbook.Admin');
 					$this->redirect($this->referer());
 				}
 				$index++;
@@ -151,10 +151,10 @@ class GuestbookController extends GuestbookAppController {
 			$this->redirect($this->referer());
 		}
 		else if ($index == 1){
-			$this->Session->setFlash(__d('Guestbook', 'Post deleted.'), 'default', array('class' => 'flash_success'), 'Guestbook.Admin');
+			$this->Session->setFlash(__d('guestbook', 'Post deleted.'), 'default', array('class' => 'flash_success'), 'Guestbook.Admin');
 			$this->redirect($this->referer());
 		} else {
-			$this->Session->setFlash(__d('Guestbook', 'Posts deleted.'), 'default', array('class' => 'flash_success'), 'Guestbook.Admin');
+			$this->Session->setFlash(__d('guestbook', 'Posts deleted.'), 'default', array('class' => 'flash_success'), 'Guestbook.Admin');
 			$this->redirect($this->referer());
 		}
 	}	

@@ -29,6 +29,11 @@
     echo $this->Html->script('jquery/jquery.cookie');
     echo $this->Html->script('dualon');
     echo $this->Html->script('menu');
+    
+    $lang = $this->Session->read("Config.language");
+    $lang = substr($lang, 0, 2);
+    $this->Js->set('language', $lang);
+    
     if ($adminMode) {
         if (isset($pageid)) {
             $this->Js->set('pageid', $pageid);
@@ -49,7 +54,7 @@
         <div id="pagelogo">
             <?php
             echo $this->Html->link(
-                $this->Html->image('beelogo_w_small.png'),
+                $this->Html->image('/uploads/logo.png'),
                 '/',
                 array('escape' => false)
             );
