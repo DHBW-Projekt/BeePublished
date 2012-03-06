@@ -23,27 +23,27 @@
 	$this->Html->script('http://maps.googleapis.com/maps/api/js?sensor=true&amp;language=de&amp;region=DE', false);
 	$this->Html->script('/google_maps/js/googlemaps', false);
 	
+	$mapID = "map_" . $contentId;
+	
 	//if location is set show it on map
 	if ($data <> __('no location')) {
-		$location = 'showLocation(\'map\', \'' . implode(",", $data['GoogleMapsLocation']) . '\');';
+		$location = 'showLocation(\''.$mapID.'\', \'' . implode(",", array_slice($data['GoogleMapsLocation'], 2)) . '\');';
 	} else {
-		$location = '';
+		$location = 'showLocation(\''.$mapID.'\', \'\');';
 	}
 	
 	//init map and show location
 	$this->Html->scriptBlock('
 	        $(document).ready(function () {
-	        	
 	        	if (lock==undefined) { 
-	        		//window.location.reload();
+	        		window.location.reload();
 	        	} else {
-		            initializeGoogleMaps(\'map\');
 		            '.$location.'
 		        }
 	        });
 	        ', array('inline' => false)
 	);
+	
+	echo '<div id="'.$mapID.'" style="width:100%; height:200px"></div>';
 ?>
-
-<div id="map" style="width:100%; height:200px"></div>
 
