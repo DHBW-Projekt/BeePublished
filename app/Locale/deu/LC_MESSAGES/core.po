@@ -181,7 +181,7 @@ msgstr "Neue Vorlage erstellen"
 
 #: View/EmailTemplates/index.ctp:60
 msgid "Active Template: "
-msgstr "Vorlage aktivieren"
+msgstr "Aktives Template: "
 
 #: View/MenuEntries/add.ctp:6
 msgid "create"
@@ -540,6 +540,15 @@ msgstr "Konfiguration:"
 msgid "Page name:"
 msgstr "Seitenname:"
 
+msgid "Language:"
+msgstr "Sprache:"
+
+msgid "User Mode"
+msgstr "User-Modus"
+
+msgid "Admin Mode"
+msgstr "Admin-Modus"
+
 msgid "Email:"
 msgstr "E-Mail:"
 
@@ -578,3 +587,23 @@ msgstr "Englisch"
 
 msgid "German"
 msgstr "Deutsch"
+
+msgid "Register"
+msgstr "Registrieren"
+
+msgid "Forgot your password?"
+msgstr "Passwort vergessen?"
+
+msgid "Login"
+msgstr "Anmelden"
+
+msgid "Have an account?"
+msgstr "Bereits registriert?"
+
+msgid "Logout"
+msgstr "Abmelden"
+
+msgid "Powered by BeePublished - All rights reserved - &copy; Copyright 2011-2012"
+msgstr "Powered by BeePublished - Alle Rechte vorbehalten - &copy; Copyright 2011-2012"
+
+
