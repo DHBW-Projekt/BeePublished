@@ -49,7 +49,7 @@ echo '<div id="subscription">';
 			echo $this->Html->div('validation_error',$validationErrors['email'][0]);
    			echo $this->Form->end(__d('newsletter','(Un)subscribe'));
    			echo $this->Session->flash('NewsletterRecipient');
-   		echo '</div>';
+   		echo '</div></div>';
     } 
 	// 	if current user is registered
     else if ($user) {
