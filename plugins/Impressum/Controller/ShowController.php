@@ -151,6 +151,7 @@ class ShowController extends AppController {
 					$data['Impressum']['regulations_name'] = null;
 					$data['Impressum']['regulations_link'] = null;
 					$data['Impressum']['adm_office'] = true; //usually it needs an admission office
+					$data['Impressum']['reg'] = false; //it never needs a register
 
 					if($this->Impressum->save($data)) {
 						$this->render('publicData');

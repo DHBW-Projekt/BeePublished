@@ -35,33 +35,40 @@ class ConfigurationsController extends AppController
     {
         $this->layout = 'overlay';
 
-        $config = $this->Configuration->find('first');
+        $config = $this->getConfig();
 
-        //if no config entry exists a new one has to be created
-        if (!$config) {
-            $config = $this->Configuration->create();
-            $config['config_name'] = 'default';
-            $config['page_name'] = 'BeePublish';
-            $config['status'] = true;
-            $config['config_name'] = 'default';
-            $config['active_design'] = 'default';
-            $config['active_template'] = 'BeeDefault';
-            $config['language'] = 'eng';
-            $this->Configuration->save($config);
-            $this->redirect(array('action' => 'index'));
-        }
-		
         if ($this->request->is('post') || $this->request->is('put')) {
             //Save configuration data
             $this->Configuration->id = $config['Configuration']['id'];
-            if (isset($this->request->data['Configuration']['submittedfile']))
-            	$this->uploadImage($this->data['Configuration']['submittedfile'], true);
             if ($this->Configuration->save($this->request->data)) {
                 $this->Session->setFlash(__('Successfully saved'));
             } else {
                 $this->Session->setFlash(__('Saving failed'));
             }
             $this->redirect(array('action' => 'index'));
+        } else {
+            //load configuration data
+            $this->request->data = $config;
+        }
+    } //index()
+
+    public function layout()
+    {
+        $this->layout = 'overlay';
+
+        $config = $this->getConfig();
+
+        if ($this->request->is('post') || $this->request->is('put')) {
+            //Save configuration data
+            $this->Configuration->id = $config['Configuration']['id'];
+            if (isset($this->request->data['Configuration']['submittedfile']))
+                $this->uploadImage($this->data['Configuration']['submittedfile'], true);
+            if ($this->Configuration->save($this->request->data)) {
+                $this->Session->setFlash(__('Successfully saved'));
+            } else {
+                $this->Session->setFlash(__('Saving failed'));
+            }
+            $this->redirect(array('action' => 'layout'));
         } else {
             //load configuration data
             $this->request->data = $config;
@@ -84,11 +91,87 @@ class ConfigurationsController extends AppController
 
     } //index()
 
+    public function offline()
+    {
+        $this->layout = 'overlay';
+
+        $config = $this->getConfig();
+
+        if ($this->request->is('post') || $this->request->is('put')) {
+            //Save configuration data
+            $this->Configuration->id = $config['Configuration']['id'];
+            if ($this->Configuration->save($this->request->data)) {
+                $this->Session->setFlash(__('Successfully saved'));
+            } else {
+                $this->Session->setFlash(__('Saving failed'));
+            }
+            $this->redirect(array('action' => 'offline'));
+        } else {
+            //load configuration data
+            $this->request->data = $config;
+        }
+    } //index()
+
+    public function social()
+    {
+        $this->layout = 'overlay';
+
+        $config = $this->getConfig();
+
+        if ($this->request->is('post') || $this->request->is('put')) {
+            //Save configuration data
+            $this->Configuration->id = $config['Configuration']['id'];
+            if ($this->Configuration->save($this->request->data)) {
+                $this->Session->setFlash(__('Successfully saved'));
+            } else {
+                $this->Session->setFlash(__('Saving failed'));
+            }
+            $this->redirect(array('action' => 'social'));
+        } else {
+            //load configuration data
+            $this->request->data = $config;
+        }
+    } //index()
+
+    private function getConfig()
+    {
+        $config = $this->Configuration->find('first');
+
+        //if no config entry exists a new one has to be created
+        if (!$config) {
+            $config = $this->Configuration->create();
+            $config['config_name'] = 'default';
+            $config['page_name'] = 'BeePublish';
+            $config['status'] = true;
+            $config['config_name'] = 'default';
+            $config['active_design'] = 'default';
+            $config['active_template'] = 'BeeDefault';
+            $config['language'] = 'eng';
+            $this->Configuration->save($config);
+            $this->redirect(array('action' => 'index'));
+        }
+        return $config;
+    }
+
     public function designs()
     {
         $name = $_GET['data']['Configuration']['active_template'];
         $this->layout = null;
         $this->set('designs', json_encode($this->getDesignsForTemplate($name)));
+    }
+
+    public function themePreview($template, $layout)
+    {
+        $fileName = APP . 'View' . DS . 'Themed' . DS . $template . DS . 'webroot' . DS . 'img' . DS . 'preview-' . $layout . '.jpg';
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $type = finfo_file($finfo, $fileName);
+        finfo_close($finfo);
+
+        $fp = fopen($fileName, 'rb');
+        header("Content-Type: " . $type);
+        header("Content-Length: " . filesize($fileName));
+        fpassthru($fp);
+        exit;
     }
 
     private function getDesignsForTemplate($template)
@@ -104,47 +187,48 @@ class ConfigurationsController extends AppController
         }
         return $designsSelect;
     }
-    
-    
-    /**
-    * Function to upload image.
-     */
-    private function uploadImage($file, $init_creation, $file_old="logo.png"){
-	    
-	    /* FILE */
-    	$file_path = WWW_ROOT.'uploads/';
-    	$file_name = "logo.png";
-    	$upload_error = true;
-    	
-	    //CREATE folder
-	    if(!is_dir ($file_path))
-	    	@mkdir($file_path);
-	    	
-	    //CHECK filetype
-	    $permitted = array('image/gif','image/jpeg','image/pjpeg','image/png');
-	    
-	    foreach($permitted as $type) {
-		    if($type == $file['type']) {
-			    $upload_error = false;
-			    break;
-		    }
-	    }
-	    
-	    //REMOVE old image
-	    if(!$upload_error && !$init_creation){
-	    	@unlink($file_path.$file_old);
-		}
 
-    	//MOVE file
-    	if(!$upload_error){
-    		$upload_error = !@move_uploaded_file($file['tmp_name'], $file_path.$file_name);
-    	}
-    
-    	//RESULT data
-    	$result['error'] = $upload_error;
-    	$result['file_name'] = $file_name;
-    
-    	return $result;
+
+    /**
+     * Function to upload image.
+     */
+    private function uploadImage($file, $init_creation, $file_old = "logo.png")
+    {
+
+        /* FILE */
+        $file_path = WWW_ROOT . 'uploads/';
+        $file_name = "logo.png";
+        $upload_error = true;
+
+        //CREATE folder
+        if (!is_dir($file_path))
+            @mkdir($file_path);
+
+        //CHECK filetype
+        $permitted = array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/png');
+
+        foreach ($permitted as $type) {
+            if ($type == $file['type']) {
+                $upload_error = false;
+                break;
+            }
+        }
+
+        //REMOVE old image
+        if (!$upload_error && !$init_creation) {
+            @unlink($file_path . $file_old);
+        }
+
+        //MOVE file
+        if (!$upload_error) {
+            $upload_error = !@move_uploaded_file($file['tmp_name'], $file_path . $file_name);
+        }
+
+        //RESULT data
+        $result['error'] = $upload_error;
+        $result['file_name'] = $file_name;
+
+        return $result;
     }
 }
 

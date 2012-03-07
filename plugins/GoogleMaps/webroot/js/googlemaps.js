@@ -31,21 +31,41 @@ function initializeGoogleMaps(panel) {
 	        center: latlng,
 	        mapTypeId:google.maps.MapTypeId.ROADMAP
 	    };
-	  
+	    
 	    if (!lock) {
-	    	map = new google.maps.Map(document.getElementById(panel), myOptions);
+	    	if (panel=getPanelID(panel, 'map')) {
+	    		return new google.maps.Map(document.getElementById(panel), myOptions);
+	    	}
+	    		return null;
 	    }
 	} catch(e) {
 	    window.location.reload();
 	}
 }
 
+//get an existing div id
+function getPanelID(panel, type) {
+	if (!document.getElementById(panel)) {
+    	var elems = document.getElementsByTagName("div");
+    	for (var i=0;i<elems.length;i++) {
+    		var match = new RegExp ("^"+type+"_[0-9]*");
+    		if (elems[i].id.match(match)!=null) {
+    			return elems[i].id;
+    		}
+    	}
+    	return null;
+    } else {
+    	return panel;
+    }
+}
+
 //show location
 function showLocation(panel, home) {
+    var map = initializeGoogleMaps(panel);
     var geocoder = new google.maps.Geocoder();
     var position;
     
-    if (!lock) {
+    if (!lock && home!='' && map!=null) {
 	    geocoder.geocode({ 'address':home}, function (results, status) {
 	            if (status == google.maps.GeocoderStatus.OK) {
 	                map.setCenter(results[0].geometry.location);
@@ -53,8 +73,6 @@ function showLocation(panel, home) {
 	                    map:map,
 	                    position:results[0].geometry.location
 	                });
-	            } else {
-	                alert('Geocode was not successful for the following reason: ' + status);
 	            }
 	        }
 	    );
@@ -62,18 +80,20 @@ function showLocation(panel, home) {
 }
 
 //print route
-function printRoute(panel, start, destination) {
+function printRoute(routingPanel, start, destination) {
+    //get first map which is on the current page
+    var map = initializeGoogleMaps("map");
     var directionsDisplay = new google.maps.DirectionsRenderer();
     var directionsService = new google.maps.DirectionsService();
-    
+
     var request = {
         origin:start,
         destination:destination,
         travelMode:google.maps.DirectionsTravelMode.DRIVING
     };
-
-    directionsDisplay.setMap(map);
-    directionsDisplay.setPanel(document.getElementById(panel));
+    
+    if (map!=undefined) directionsDisplay.setMap(map);
+    directionsDisplay.setPanel(document.getElementById(getPanelID(routingPanel, "routing")));
 
     directionsService.route(request, function (response, status) {
         if (status == google.maps.DirectionsStatus.OK) {
