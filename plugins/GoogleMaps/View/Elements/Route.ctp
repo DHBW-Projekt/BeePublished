@@ -22,19 +22,17 @@
 	$this->Html->script('http://maps.googleapis.com/maps/api/js?sensor=true&amp;language=de&amp;region=DE', false);
 	$this->Html->script('/google_maps/js/googlemaps', false);
 	
-	//show route if location and destination is set
-	if ($data <> __('no location') and isset($this->data['location']['address'])) {
-		$route = 'printRoute(\'routing\', \'' . $this->data['location']['address'] . '\',\'' . implode(",", $data['GoogleMapsLocation']) . '\');';
-	} else {
-		$route = '';
-	}
+	$routingID = "routing_".$contentId;
 	
 	//show route and map
-	if (isset($this->data['location']) && isset($data['GoogleMapsLocation'])) {
+	if (!empty($this->data['location']['address']) && $data <> __('no location')) {
 	    $this->Html->scriptBlock('
 	            $(document).ready(function () {
-	                initializeGoogleMaps(\'map\');'.
-	    			$route.'
+	                printRoute(
+						\'' . $routingID . '\', 
+						\'' . $this->data['location']['address'] . '\',
+						\'' . implode(",", array_slice($data['GoogleMapsLocation'], 2)) . '\'
+					);
 	            });
 	            ', array('inline' => false)
 	    );
@@ -46,6 +44,7 @@
 	    echo $this->Form->create('location', array('url' => $url));
 	    echo $this->Form->input('address', array('label' => (__d("google_maps", 'Location').':'), 'style' => "width:100%"));
 	    echo $this->Form->end(__d("google_maps", "Calculate Route"));
+	    
+	    echo '<div id="'.$routingID.'"></div>';
     ?>
-    <div id="routing"></div>
 </div>
