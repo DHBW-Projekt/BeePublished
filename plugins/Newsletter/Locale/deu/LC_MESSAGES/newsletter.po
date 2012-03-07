@@ -98,8 +98,8 @@ msgid "The text was saved successfully."
 msgstr "Der Text wurde erfolgreich gespeichert."
 
 #: Controller\SubscriptionController.php:84
-msgid "The recipient was added successfully."
-msgstr "Der Empfänger wurde erfolgreich hinzugefügt."
+msgid "The recipient was added successfully. Please confirm your subscription in the e-mail that was sent to you."
+msgstr "Der Empfänger wurde erfolgreich hinzugefügt. Bitte bestätigen Sie die Anmeldung in der Ihnen zugesandten E-Mail."
 
 #: Controller\SubscriptionController.php:88
 msgid "The recipient was removed successfully."
@@ -323,3 +323,33 @@ msgstr "Sie haben sich erfolgreich abgemeldet."
 
 msgid "The subscription was not successful."
 msgstr "Sie konnten nicht angemeldet werden".
+
+msgid "Please confirm your subscription for our newsletter by clicking "
+msgstr "Zum bestätigen Ihrer Anmeldung für unseren Newsletter klicken Sie bitte "
+
+msgid "Please confirm your newsletter subscription"
+msgstr "Bitte bestätigen Sie Ihre Anmeldung für unseren Newsletter"
+
+msgid "Your subscription was successfull."
+msgstr "Ihre Anmeldung war erfolgreich."
+
+msgid "Your subscription wasn\'t successfull. Please contact the administrator of this homepage."
+msgstr "Ihr Anmeldung war nicht erfolgreich. Bitte kontaktieren Sie den Administrator dieser Seite."
+
+msgid "You have successfully been unsubscribed from our newsletter"
+msgstr "Sie haben sich erfolgreich von unserem Newsletter abgemeldet"
+
+msgid "You have successfully been unsubscribed from our newsletter."
+msgstr "Sie haben sich erfolgreich von unserem Newsletter abgemeldet."
+
+msgid "The field email has to be filled."
+msgstr "Das Feld E-Mail muss ausgefüllt sein."
+
+msgid "This e-mail address is already registered."
+msgstr "Diese E-Mail-Adresse ist bereits angemeldet."
+
+msgid "The e-mail address was not entered correctly."
+msgstr "Die E-Mail-Adresse wurde nicht korrekt eingegeben."
+
+msgid "A subject is missing."
+msgstr "Bitte einen Betreff angeben."

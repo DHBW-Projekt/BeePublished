@@ -627,4 +627,24 @@ msgstr ", um Ihr Benutzerkonto zu aktivieren."
 msgid "Yours sincerly,"
 msgstr "Mit freundlichen Grüßen,"
 
+msgid "Page is online"
+msgstr "Die Seite ist online"
+
+msgid "Save page status"
+msgstr "Status speichern"
+
+msgid "Size of logo should be 180x50 pixels"
+msgstr "Bitte laden Sie ein Logo mit einer Größe von 180x50 Pixeln hoch."
+
+msgid "Save Layout & Design"
+msgstr "Layout & Design speichern"
+
+msgid "Social Network Integration"
+msgstr "Soziale Netzwerke"
+
+msgid "Offline Mode"
+msgstr "Offline Modus"
+
+msgid "Please select the social networks, that should be active in your website."
+msgstr "Bitte wählen Sie die Sozialen Netzwerke aus, welche auf Ihrer Seite angeboten werden sollen."
 

@@ -33,7 +33,7 @@ class SubscriptionController extends NewsletterAppController {
 	
 	public $name = 'Subscription';
 	public $uses = array('Newsletter.NewsletterRecipient', 'User', 'Newsletter.NewsletterLetter', 'MenuEntry');
-	public $components = array('Menu');
+	public $components = array('Menu','BeeEmail');
  	
 
 	function beforeRender(){
@@ -44,6 +44,7 @@ class SubscriptionController extends NewsletterAppController {
 	
 	function beforeFilter(){
 		$this->Auth->allow('guestUnSubscribe');
+		$this->Auth->allow('activateRecipient');
 		parent::beforeFilter();
 	}
 	
@@ -65,6 +66,74 @@ class SubscriptionController extends NewsletterAppController {
 			'action' => 'index', $contentID, $pluginId));
  	}
  	
+ 	public function activateRecipient($email = null, $token = null){
+ 		$recipient = $this->NewsletterRecipient->findByEmail($email);
+ 		$this->set('menu', $this->Menu->buildMenu($this, NULL));
+ 		$this->set('adminMode', false);
+ 		$this->set('systemPage', true);
+ 		if (isset($recipient)){
+ 			if ($recipient['NewsletterRecipient']['confirmation_token'] == $token){
+ 				// set recipient active
+ 				$recipient['NewsletterRecipient']['active'] = 1;
+ 				$this->NewsletterRecipient->set($recipient);
+ 				if ($this->NewsletterRecipient->save()){
+ 					$this->Session->setFlash(__d('newsletter','Your subscription was successfull.'), 'default', array(
+ 										'class' => 'flash_success'), 
+ 										'activateRecipient');
+ 				} else {
+ 					$this->Session->setFlash(__d('newsletter','Your subscription wasn\'t successfull. Please contact the administrator of this homepage.'), 'default', array(
+ 					 										'class' => 'flash_failure'), 
+ 					 										'activateRecipient');
+ 				};
+ 			} else {
+ 				$this->Session->setFlash(__d('newsletter','Your subscription wasn\'t successfull. Please contact the administrator of this homepage.'), 'default', array(
+ 				 					 										'class' => 'flash_failure'), 
+ 				 					 										'activateRecipient');
+ 			}
+ 		} else {
+ 			$this->Session->setFlash(__d('newsletter','Your subscription wasn\'t successfull. Please contact the administrator of this homepage.'), 'default', array(
+ 			 				 					 										'class' => 'flash_failure'), 
+ 			 				 					 										'activateRecipient');
+ 		}
+ 	}
+ 	
+ 	public function sendConfirmationMail($recipient = null){
+ 		// get server URL
+ 		$url = "http://".env('SERVER_NAME');
+ 		if (env('SERVER_PORT') != 80){
+ 			$url = $url.":".env('SERVER_PORT');
+ 		};
+ 		$url = $url.$this->webroot."activatepermail/".$recipient['NewsletterRecipient']['email'].'/'.$recipient['NewsletterRecipient']['confirmation_token'];
+ 		$subject = __d('newsletter', 'Please confirm your newsletter subscription');
+ 		$content = 
+ 		"<br>"
+ 		.__d('newsletter', 'Please confirm your subscription for our newsletter by clicking ')
+ 		."<a href='"
+ 		.$url
+ 		."'>"
+ 		.__d('newsletter', 'here')."."
+ 		."</a>"
+		."<br><br>";
+ 		// send mail
+ 		$this->BeeEmail->sendHtmlEmail(
+ 		$recipient['NewsletterRecipient']['email'],
+ 		$subject,
+ 		$content);
+ 	}
+ 	
+ 	public function sendInfoMail($recipient){
+ 		$subject = __d('newsletter', 'You have successfully been unsubscribed from our newsletter');
+ 		$content =
+ 		 		"<br>"
+ 		.__d('newsletter', 'You have successfully been unsubscribed from our newsletter.')
+ 		."<br><br>";
+ 		// send mail
+ 		$this->BeeEmail->sendHtmlEmail(
+ 		$recipient['NewsletterRecipient']['email'],
+ 		$subject,
+ 		$content);
+ 	}
+ 	
  	// unSubscribe as guest
  	public function guestUnSubscribe(){
  		if ($this->request->is('post')){
@@ -74,17 +143,19 @@ class SubscriptionController extends NewsletterAppController {
  				if($recipient['NewsletterRecipient']['active'] == 1){
  					// inactivate recipient
  					$recipient['NewsletterRecipient']['active'] = 0;
+ 					$this->sendInfoMail($recipient);
  					$action = 'delete';
  				} else {
  					// else activate recipient
- 					$recipient['NewsletterRecipient']['active'] = 1;
+//  					$recipient['NewsletterRecipient']['active'] = 1;
+ 					$this->sendConfirmationMail($recipient);
  					$action = 'add';
  				}
  				// save recipient and show flash
  				$this->NewsletterRecipient->set($recipient);
  				if($this->NewsletterRecipient->save()) {
  					if ($action == 'add'){
- 						$this->Session->setFlash(__d('newsletter','The recipient was added successfully.'), 'default', array(
+ 						$this->Session->setFlash(__d('newsletter','The recipient was added successfully. Please confirm your subscription in the e-mail that was sent to you.'), 'default', array(
  										'class' => 'flash_success'), 
  										'NewsletterRecipient');
  					} else {
