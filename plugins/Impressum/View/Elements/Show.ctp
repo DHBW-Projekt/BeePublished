@@ -39,13 +39,14 @@
 	<?php echo $mdata['Impressum']['country']; ?>
 	<br>
 </p>
-<br>
 
 <!-- authorised representative is only necessary if type is company, club or public -->
 <?php if ($mdata['Impressum']['type']==('comp') or  $mdata['Impressum']['type']==('club') or $mdata['Impressum']['type']==('public')) { ?>
+	<br>
 	<h3>
 		<?php echo __('Vertretungsberechtigt').': '; ?>
 	</h3>
+	<br>
 	<p>
 		<?php echo $mdata['Impressum']['auth_rep_first_name'].' '.$mdata['Impressum']['auth_rep_last_name']; ?>
 	</p>
@@ -103,9 +104,11 @@
 
 	<!-- maybe it has to be registered -->
 	<?php if ($mdata['Impressum']['reg']) {?>
+		<br>
 		<h2>
 			<?php echo __('Registereintrag'); ?>
 		</h2>
+		<br>
 		<p>
 			<?php echo __('Eintragung beim ').$mdata['Impressum']['reg_name']; ?>
 			<br>
@@ -160,6 +163,7 @@
 		<h2>
 			<?php echo __('Aufsichtsbehörde'); ?>
 		</h2>
+		<br>
 		<p>
 			<!-- job title is only needed if the person has a special job -->
 			<?php 
@@ -190,17 +194,19 @@
 				}
 			?>
 		</p>
-		<br>
 	<?php } //adm_office == true ?>
 <?php } //type != priv ?>
 
 <!-- now everybody needs the following -->
+<br>
 <h2>
 	<?php echo __('Haftungsausschluss'); ?>
 </h2>
+<br>
 <h3>
 	<?php echo __('Haftung für Inhalte'); ?>
 </h3>
+<br>
 <p align="justify">
 	<?php echo __('Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für
 		die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir
@@ -222,6 +228,7 @@
 <h3>
 	<?php echo __('Urheberrecht'); ?>
 </h3>
+<br>
 <p align="justify">
 	<?php echo __('Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen
 		Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung,
@@ -241,6 +248,7 @@
 <h3>
 	<?php echo __('Datenschutz'); ?>
 </h3>
+<br>
 <p align="justify">
 	<?php echo __('Die Nutzung unserer Webseite ist in der Regel ohne Angabe
 		personenbezogener Daten möglich. Soweit auf unseren Seiten
@@ -423,12 +431,13 @@
 <?php }//linkedin == true?>
 
 <!-- and now write where we stole the texts ;-) -->
+<br>
 <p style="font-style: italic;">
 	<small>
 		<?php
 			echo __('Quelle der Texte: ').$this->Html->link(__('Impressum-Generator von e-Recht24', array('target' => '_blank')), "http://www.e-recht24.de");
 			echo '<br>';
-			echo __('Diese Seite wurde mit ').$this->Html->link(__('YAML'), 'http://www.yaml.de', array('target' => '_blank')).__(' erstellt.');
+			echo __('Diese Seite wurde mit ').$this->Html->link(__('beePublished'), 'http://www.beepublished.de', array('target' => '_blank')).__(' erstellt und verwendet ').$this->Html->link(__('YAML'), 'http://www.yaml.de', array('target' => '_blank')).__('.');
 		?>
 	</small>
 	
