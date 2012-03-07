@@ -32,6 +32,12 @@ $this->Html->css('/Guestbook/css/design',null,array('inline' => false));
 
 <div id='guestbook_maintenance'>
 
+<?php 
+if (!array_key_exists(0, $unreleasedPosts)) {
+	echo '<p>' . __d('guestbook', 'There are no new posts to be released.') . '</p>';
+} else {
+?>
+
 <?php echo $this->Form->create('maintenance', array('url' => array('plugin' => 'Guestbook', 'controller' => 'Guestbook','action' => 'admin', $contentId)));?>
 <table>
 	<thead>
@@ -66,4 +72,5 @@ $this->Html->css('/Guestbook/css/design',null,array('inline' => false));
 	
 </table>	
 <?php echo $this->Form->end();?>
+<?php } ?>
 </div>
