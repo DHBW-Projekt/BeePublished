@@ -36,5 +36,6 @@ echo __d('newsletter', 'Here you can unsubscribe from our newsletter');
 			'value' => $email ));
 		echo $this->Html->div('validation_error',$validationErrors['email'][0]);
    		echo $this->Form->end(__d('newsletter','Unsubscribe'));
+   		echo "</div>";
 
 ?>

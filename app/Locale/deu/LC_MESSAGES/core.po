@@ -604,6 +604,27 @@ msgid "Logout"
 msgstr "Abmelden"
 
 msgid "Powered by BeePublished - All rights reserved - &copy; Copyright 2011-2012"
-msgstr "Powered by BeePublished - Alle Rechte vorbehalten - &copy; Copyright 2011-2012"
+msgstr "Bereitgestellt von BeePublished - Alle Rechte vorbehalten - &copy; Copyright 2011-2012"
+
+msgid "Registration complete - Please confirm your account"
+msgstr "Registrierung abgeschlossen - Bitte bestätigen Sie Ihr Benutzerkonto"
+
+msgid "Hi"
+msgstr "Hallo"
+
+msgid "Thank you for your registration at"
+msgstr "Vielen Dank für Ihre Registrierung bei"
+
+msgid "Your account has been created. Please click "
+msgstr "Ihr Benutzerkonto wurde erstellt. Bitte klicken Sie "
+
+msgid "here"
+msgstr "hier"
+
+msgid " to activate your account."
+msgstr ", um Ihr Benutzerkonto zu aktivieren."
+
+msgid "Yours sincerly,"
+msgstr "Mit freundlichen Grüßen,"
 
 
