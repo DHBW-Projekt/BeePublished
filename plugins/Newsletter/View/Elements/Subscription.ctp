@@ -58,7 +58,7 @@ echo '<div id="subscription">';
 		if (isset($userAsRecipient)){
 			// if user has subscribed, show unsubscribe button
 			if ((isset($userAsRecipient['NewsletterRecipient']['active'])) && ($userAsRecipient['NewsletterRecipient']['active'] == 1)){
-				echo __d('newsletter','You subscribed to our newsletter');
+				echo __d('newsletter','You subscribed to our newsletter.');
 				echo $this->Form->create('UserSubscription', array(
 				    		'url' => array(
 				    			'plugin' => 'Newsletter',
@@ -67,7 +67,7 @@ echo '<div id="subscription">';
 				echo $this->Form->end(__d('newsletter','Unsubscribe'));
 			} else {
 				// if user hasn't subscribed, show subscribe button
-				echo __d('newsletter','You didn\'t subscribe to our newsletter');
+				echo __d('newsletter','You didn\'t subscribe to our newsletter.');
 				echo $this->Form->create('UserSubscription', array(
 				    		'url' => array(
 				    			'plugin' => 'Newsletter',

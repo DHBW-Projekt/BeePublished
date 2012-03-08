@@ -148,8 +148,8 @@ msgid "(Un)subscribe"
 msgstr "An-/Abmelden"
 
 #: View\Elements\Subscription.ctp:60
-msgid "You subscribed to our newsletter"
-msgstr "Sie sind für unseren Newsletter registriert"
+msgid "You subscribed to our newsletter."
+msgstr "Sie sind für unseren Newsletter registriert."
 
 #: View\Elements\Subscription.ctp:66
 #: View\Subscription\un_subscribe_per_mail.ctp:38
@@ -157,8 +157,8 @@ msgid "Unsubscribe"
 msgstr "Abmelden"
 
 #: View\Elements\Subscription.ctp:69
-msgid "You didn't subscribe to our newsletter"
-msgstr "Sie sind nicht für unseren Newsletter registriert"
+msgid "You didn't subscribe to our newsletter."
+msgstr "Sie sind nicht für unseren Newsletter registriert."
 
 #: View\Elements\Subscription.ctp:75
 msgid "Subscribe"
@@ -353,3 +353,20 @@ msgstr "Die E-Mail-Adresse wurde nicht korrekt eingegeben."
 
 msgid "A subject is missing."
 msgstr "Bitte einen Betreff angeben."
+
+msgid "The recipient was added successfully. A confirmation link was sent per e-mail."
+msgstr "Der Empfänger wurde erfolgreich hinzugefügt. Ein Bestätigungslink wurde per E-Mail verschickt."
+
+msgid "You have subscribed successfully. A confirmation link was sent per e-mail."
+msgstr "Sie haben sich erfolgreich angemeldet. Ein Link zur Bestätigung der Anmeldung wurde an die angegebene E-Mail-Adresse geschickt."
+
+msgid "Here you can subscribe to our newsletter."
+msgstr "Hier können Sie sich für unseren Newsletter anmelden."
+
+msgid "If you want to subcribe to our newsletter again, click "
+msgstr "Wenn Sie sich wieder anmelden wollen, klicken Sie "
+
+msgid "The recipient was not added."
+msgstr "Der Empfänger wurde nicht hinzugefügt."
+
+

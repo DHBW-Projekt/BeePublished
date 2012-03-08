@@ -20,7 +20,22 @@
 * @description Basic Settings for all controllers
 */
 
-// this route is needed to provide a link in newsletters for direct unsubscription
-Router::connect('/unsubscribepermail/*', array('plugin' => 'newsletter', 'controller' => 'Subscription', 'action' => 'unSubscribePerMail'));
-Router::connect('/activatepermail/*', array('plugin' => 'newsletter', 'controller' => 'Subscription', 'action' => 'activateRecipient'));
-Router::connect('/subscribepermail/*', array('plugin' => 'newsletter', 'controller' => 'Subscription', 'action' => 'subscribePerMail'));
+// get validation errors
+$validationErrors = $this->Session->read('Validation.NewsletterRecipient.validationErrors');
+
+echo __d('newsletter', 'Here you can subscribe to our newsletter.');
+	echo $this->Session->flash('subscribePerMail');
+	// form for unsubscription
+	echo $this->Form->create('Subscription',array(
+			'url' => array(
+				'plugin' => 'Newsletter',
+				'controller' => 'Subscription',
+				'action' => 'subscribe')));
+		echo $this->Form->input('NewsletterRecipient.email', array(
+			'label' => __d('newsletter','E-Mail:'),
+			'value' => $email ));
+		echo $this->Html->div('validation_error',$validationErrors['email'][0]);
+   		echo $this->Form->end(__d('newsletter','Subscribe'));
+   		echo "</div>";
+
+?>

@@ -45,6 +45,9 @@ class SubscriptionController extends NewsletterAppController {
 	function beforeFilter(){
 		$this->Auth->allow('guestUnSubscribe');
 		$this->Auth->allow('activateRecipient');
+		$this->Auth->allow('subscribePerMail');
+		$this->Auth->allow('unsubscribe');
+		$this->Auth->allow('subscribe');
 		parent::beforeFilter();
 	}
 	
@@ -66,6 +69,7 @@ class SubscriptionController extends NewsletterAppController {
 			'action' => 'index', $contentID, $pluginId));
  	}
  	
+ 	// activate recipient via mail
  	public function activateRecipient($email = null, $token = null){
  		$recipient = $this->NewsletterRecipient->findByEmail($email);
  		$this->set('menu', $this->Menu->buildMenu($this, NULL));
@@ -97,6 +101,7 @@ class SubscriptionController extends NewsletterAppController {
  		}
  	}
  	
+ 	// send confirmation mail before activating recipient
  	public function sendConfirmationMail($recipient = null){
  		// get server URL
  		$url = "http://".env('SERVER_NAME');
@@ -121,11 +126,24 @@ class SubscriptionController extends NewsletterAppController {
  		$content);
  	}
  	
+ 	// send mail with information that recipient has been unsubscribed
  	public function sendInfoMail($recipient){
+ 		$url = "http://".env('SERVER_NAME');
+ 		if (env('SERVER_PORT') != 80){
+ 			$url = $url.":".env('SERVER_PORT');
+ 		};
+ 		$url = $url.$this->webroot."subscribepermail/".$recipient['NewsletterRecipient']['email'];
  		$subject = __d('newsletter', 'You have successfully been unsubscribed from our newsletter');
  		$content =
  		 		"<br>"
  		.__d('newsletter', 'You have successfully been unsubscribed from our newsletter.')
+ 		.'<br>'
+ 		.__d('newsletter', 'If you want to subcribe to our newsletter again, click ')
+ 		."<a href='"
+ 		.$url
+ 		."'>"
+ 		.__d('newsletter', 'here')."."
+ 		."</a>"
  		."<br><br>";
  		// send mail
  		$this->BeeEmail->sendHtmlEmail(
@@ -147,7 +165,6 @@ class SubscriptionController extends NewsletterAppController {
  					$action = 'delete';
  				} else {
  					// else activate recipient
-//  					$recipient['NewsletterRecipient']['active'] = 1;
  					$this->sendConfirmationMail($recipient);
  					$action = 'add';
  				}
@@ -155,7 +172,7 @@ class SubscriptionController extends NewsletterAppController {
  				$this->NewsletterRecipient->set($recipient);
  				if($this->NewsletterRecipient->save()) {
  					if ($action == 'add'){
- 						$this->Session->setFlash(__d('newsletter','The recipient was added successfully. Please confirm your subscription in the e-mail that was sent to you.'), 'default', array(
+ 						$this->Session->setFlash(__d('newsletter','The recipient was added successfully. A confirmation link was sent per e-mail.'), 'default', array(
  										'class' => 'flash_success'), 
  										'NewsletterRecipient');
  					} else {
@@ -191,26 +208,30 @@ class SubscriptionController extends NewsletterAppController {
  				if($recipient['NewsletterRecipient']['active'] == 1){
  					// inactivate recipient
  					$recipient['NewsletterRecipient']['active'] = 0;
+ 					$this->sendInfoMail($recipient);
  					$action = 'delete';
  				} else {
  					// else activate recipient
- 					$recipient['NewsletterRecipient']['active'] = 1;
+					$this->sendConfirmationMail($recipient);
  					$action = 'add';
  				}
  			} else {
+ 				$token = sha1($user['email'] . rand(0, 100));
  				// if recipient doesn't exist, create a new one
  				$recipient = array(
  											'NewsletterRecipient' => array(
  												'email' => $user['email'],
  												'user_id' => $user['id'],
- 												'active' => '1'));
+ 												'active' => '0',
+ 												'confirmation_token' => $token));
+ 				$this->sendConfirmationMail($recipient);
  				$action = 'add';
  			}
  			// update or save recipient and show flash
  			$this->NewsletterRecipient->set($recipient);
  			if($this->NewsletterRecipient->save()) {
  				if ($action == 'add'){
- 					$this->Session->setFlash(__d('newsletter','You have subscribed successfully.'), 'default', array(
+ 					$this->Session->setFlash(__d('newsletter','You have subscribed successfully. A confirmation link was sent per e-mail.'), 'default', array(
  										'class' => 'flash_success'), 
  										'NewsletterRecipient');
  				} else {
@@ -228,12 +249,54 @@ class SubscriptionController extends NewsletterAppController {
  		}
  	}
  	
+ 	// set data for subscription per mail
+ 	public function subscribePerMail($email){
+ 		$this->set('email', $email);
+ 		$this->set('menu', $this->Menu->buildMenu($this, NULL));
+ 		$this->set('adminMode', false);
+ 		$this->set('systemPage', true);
+ 	}
+ 	
  	// set data for unsubscription per mail
  	public function unSubscribePerMail($email){
  		$this->set('email', $email);
  		$this->set('menu', $this->Menu->buildMenu($this, NULL));
  		$this->set('adminMode', false);
  		$this->set('systemPage', true);
+ 	}
+ 	
+ 	//subscribe per mail
+ 	public function subscribe(){
+ 		if ($this->request->is('post')){
+ 			if($recipient = $this->NewsletterRecipient->findByEmail($this->request->data['NewsletterRecipient']['email'])){
+ 				// check if recipient is active
+ 				if($recipient['NewsletterRecipient']['active'] == 0){
+ 					// inactivate recipient per mail
+ 					$this->sendConfirmationMail($recipient);
+ 					$action = 'add';
+ 					$this->NewsletterRecipient->set($recipient);
+ 					if($this->NewsletterRecipient->save()) {
+ 						$this->Session->setFlash(__d('newsletter','You have subscribed successfully. A confirmation link was sent per e-mail.'), 'default', array(
+ 		 					 									'class' => 'flash_success'), 
+ 		 					 									'subscribePerMail');
+ 					} else {
+ 						$this->Session->setFlash(__d('newsletter','You couldn\'t be subscribed.'), 'default', array(
+ 		 						 					 			'class' => 'flash_failure'), 
+ 		 						 					 			'subscribePerMail');
+ 					}
+ 				}else {
+ 					$this->Session->setFlash(__d('newsletter','You haven\'t unsubscribed'), 'default', array(
+ 		 					 				 						 					 			'class' => 'flash_failure'), 
+ 		 					 				 						 					 			'subscribePerMail');
+ 				}
+ 			} else {
+ 				$this->Session->setFlash(__d('newsletter','You haven\'t unsubscribed'), 'default', array(
+ 		 				 				 						 					 			'class' => 'flash_failure'), 
+ 		 				 				 						 					 			'subscribePerMail');
+ 			}
+ 		}
+ 		$this->redirect($this->referer());
+ 		
  	}
  	
  	// unsubscribe per mail
@@ -244,6 +307,7 @@ class SubscriptionController extends NewsletterAppController {
  				if($recipient['NewsletterRecipient']['active'] == 1){
  					// inactivate recipient
  					$recipient['NewsletterRecipient']['active'] = 0;
+ 					$this->sendInfoMail($recipient);
  					$action = 'delete';
  					$this->NewsletterRecipient->set($recipient);
  					if($this->NewsletterRecipient->save()) {
@@ -277,23 +341,28 @@ class SubscriptionController extends NewsletterAppController {
  			$recipient = $this->NewsletterRecipient->findByEmail($email);
  			if (($recipient) && ($recipient['NewsletterRecipient']['active'] == 0)){
  				// set active
- 				$recipient['NewsletterRecipient']['active'] = 1;
+ 				$this->sendConfirmationMail($recipient);
  			} else {
  				// create new recipient
  				// check, if recipient is user
  				$user = $this->User->findByEmail($email);
+ 				$token = sha1($email . rand(0, 100));
  				if(isset($user)){
  					$recipient = array(
  							'NewsletterRecipient' => array(
  								'email' => $email,
  								'user_id' => $user['User']['id'],
- 								'active' => '1'));
+ 								'active' => '0',
+ 								'confirmation_token' => $token));
+ 					$this->sendConfirmationMail($recipient);
  				} else {
  					$recipient = array(
  							'NewsletterRecipient' => array(
  								'email' => $email,
  								'user_id' => NULL,
- 								'active' => '1'));
+ 								'active' => '0',
+ 								'confirmation_token' => $token));
+ 					$this->sendConfirmationMail($recipient);
  				}
  			}
  			$action = 'add';
@@ -301,7 +370,7 @@ class SubscriptionController extends NewsletterAppController {
  			$this->NewsletterRecipient->set($recipient);
  			if($this->NewsletterRecipient->save()) {
  				if ($action == 'add'){
- 					$this->Session->setFlash(__d('newsletter','The user was added successfully.'), 'default', array(
+ 					$this->Session->setFlash(__d('newsletter','The recipient was added successfully. A confirmation link was sent per e-mail.'), 'default', array(
  							'class' => 'flash_success'), 
  							'NewsletterRecipient');
  				} else {
