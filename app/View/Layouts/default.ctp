@@ -74,14 +74,14 @@
                     }
                     if (!$systemPage && ($role == 6 || $role == 7)) {
                         if (!$adminMode) {
-                            echo $this->Html->link('Admin Mode', '/admin/' . $path);
+                            echo $this->Html->link(__('Admin Mode'), '/admin/' . $path);
                         } else {
                             $link = '/' . substr($path, 6);
-                            echo $this->Html->link('User Mode', $link);
+                            echo $this->Html->link(__('User Mode'), $link);
                         }
                     }
                     echo $this->Html->link(AuthComponent::user('username'), array('controller' => 'Users', 'action' => 'changePassword'), array('class' => 'signout'));
-                    echo $this->Html->link('Logout', array('controller' => 'Users', 'action' => 'logout'), array('class' => 'signout'));
+                    echo $this->Html->link(__('Logout'), array('controller' => 'Users', 'action' => 'logout'), array('class' => 'signout'));
                 }
                 ?>
             </div>
@@ -109,7 +109,7 @@
         <?php echo $content_for_layout ?>
     </div>
     <div id="footer">
-        Powered by BeePublished - All rights reserved - &copy; Copyright 2011-2012
+        <?php echo __('Powered by BeePublished - All rights reserved - &copy; Copyright 2011-2012'); ?>
     </div>
 </div>
 <?php if ($adminMode) {

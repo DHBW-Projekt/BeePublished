@@ -22,3 +22,5 @@
 
 // this route is needed to provide a link in newsletters for direct unsubscription
 Router::connect('/unsubscribepermail/*', array('plugin' => 'newsletter', 'controller' => 'Subscription', 'action' => 'unSubscribePerMail'));
+Router::connect('/activatepermail/*', array('plugin' => 'newsletter', 'controller' => 'Subscription', 'action' => 'activateRecipient'));
+Router::connect('/subscribepermail/*', array('plugin' => 'newsletter', 'controller' => 'Subscription', 'action' => 'subscribePerMail'));

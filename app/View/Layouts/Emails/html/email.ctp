@@ -14,7 +14,7 @@
 		?>
 	</div>
 	<div style="background-color: #ffffff; font-size: 12px; padding: 10px 20px; padding-bottom: 30px; margin-bottom: 30px; color: #cccccc;">
-		Powered by BeePublished - All rights reserved - &copy; Copyright 2011-2012
+		<?php echo __('Powered by BeePublished - All rights reserved - &copy; Copyright 2011-2012'); ?>
 	</div>
 	</body>
 </html>

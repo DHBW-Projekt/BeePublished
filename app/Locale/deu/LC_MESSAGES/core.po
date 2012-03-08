@@ -181,7 +181,7 @@ msgstr "Neue Vorlage erstellen"
 
 #: View/EmailTemplates/index.ctp:60
 msgid "Active Template: "
-msgstr "Vorlage aktivieren"
+msgstr "Aktives Template: "
 
 #: View/MenuEntries/add.ctp:6
 msgid "create"
@@ -540,6 +540,15 @@ msgstr "Konfiguration:"
 msgid "Page name:"
 msgstr "Seitenname:"
 
+msgid "Language:"
+msgstr "Sprache:"
+
+msgid "User Mode"
+msgstr "User-Modus"
+
+msgid "Admin Mode"
+msgstr "Admin-Modus"
+
 msgid "Email:"
 msgstr "E-Mail:"
 
@@ -578,3 +587,64 @@ msgstr "Englisch"
 
 msgid "German"
 msgstr "Deutsch"
+
+msgid "Register"
+msgstr "Registrieren"
+
+msgid "Forgot your password?"
+msgstr "Passwort vergessen?"
+
+msgid "Login"
+msgstr "Anmelden"
+
+msgid "Have an account?"
+msgstr "Bereits registriert?"
+
+msgid "Logout"
+msgstr "Abmelden"
+
+msgid "Powered by BeePublished - All rights reserved - &copy; Copyright 2011-2012"
+msgstr "Bereitgestellt von BeePublished - Alle Rechte vorbehalten - &copy; Copyright 2011-2012"
+
+msgid "Registration complete - Please confirm your account"
+msgstr "Registrierung abgeschlossen - Bitte bestätigen Sie Ihr Benutzerkonto"
+
+msgid "Hi"
+msgstr "Hallo"
+
+msgid "Thank you for your registration at"
+msgstr "Vielen Dank für Ihre Registrierung bei"
+
+msgid "Your account has been created. Please click "
+msgstr "Ihr Benutzerkonto wurde erstellt. Bitte klicken Sie "
+
+msgid "here"
+msgstr "hier"
+
+msgid " to activate your account."
+msgstr ", um Ihr Benutzerkonto zu aktivieren."
+
+msgid "Yours sincerly,"
+msgstr "Mit freundlichen Grüßen,"
+
+msgid "Page is online"
+msgstr "Die Seite ist online"
+
+msgid "Save page status"
+msgstr "Status speichern"
+
+msgid "Size of logo should be 180x50 pixels"
+msgstr "Bitte laden Sie ein Logo mit einer Größe von 180x50 Pixeln hoch."
+
+msgid "Save Layout & Design"
+msgstr "Layout & Design speichern"
+
+msgid "Social Network Integration"
+msgstr "Soziale Netzwerke"
+
+msgid "Offline Mode"
+msgstr "Offline Modus"
+
+msgid "Please select the social networks, that should be active in your website."
+msgstr "Bitte wählen Sie die Sozialen Netzwerke aus, welche auf Ihrer Seite angeboten werden sollen."
+
