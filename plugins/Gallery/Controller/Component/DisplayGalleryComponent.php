@@ -13,24 +13,27 @@
  * License along with BeePublished. If not, see
  * http://www.gnu.org/licenses/.
  *
- * @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
- * @author Alexander Müller & Fabian Kajzar
+ * @copyright 2012 Duale Hochschule Baden-Wï¿½rttemberg Mannheim
+ * @author Alexander Mï¿½ller & Fabian Kajzar
  * 
  * @description Component to display a gallery
  */
 
 class DisplayGalleryComponent extends Component
 {
-	public $components = array('Gallery.Gallery');
+	public $components = array('Gallery.Gallery', 'Config');
 	
 	public function getData($controller, $params, $url, $id)
 	{		
 		if(isset($params['galleryID'])){
+			$socialNetworks['facebook'] = $this->Config->getValue('facebook');
+			
 			$data = $this->Gallery->getGallery($controller,$params['galleryID']);
 			if(!isset($data)){
 				return null;
 			}
 			$data['view'] = 'Single';
+			$data['socialNetworks'] = $socialNetworks;
 			return $data;
 		} else {
 			return null;

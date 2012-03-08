@@ -13,20 +13,34 @@
  * License along with BeePublished. If not, see
  * http://www.gnu.org/licenses/.
  *
- * @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
- * @author Alexander Müller & Fabian Kajzar
+ * @copyright 2012 Duale Hochschule Baden-Wï¿½rttemberg Mannheim
+ * @author Alexander Mï¿½ller & Fabian Kajzar
  * 
  * @description Element to display a single gallery
  */
 
 
-$this->Html->script('/gallery/js/imageoverlay', false);
-$this->Html->script('/gallery/js/fbtest', false);
+
+// only load when fb is enabled
+
+
+
+
 $this->Html->css('/gallery/css/galleries', NULL, array('inline' => false));
 
 if(!isset($data)){
 	echo __d('gallery', "No gallery assigned");
+
+	
 } else {
+
+	$socialNetworks = $data['socialNetworks'];
+	if($socialNetworks['facebook']){
+		$this->Html->script('/gallery/js/imageoverlay', false);
+	}else{
+		$this->Html->script('/gallery/js/imageoverlay2', false);
+	}
+		
 	?>	
 	<div class="newsblogtitle">
 		<h1>
@@ -73,6 +87,7 @@ if(!isset($data['GalleryPicture'])){
 	
 		echo '</div>';
 	}
+
 echo '<div id="fb-root"></div>';
 echo '<div style="clear:both;"></div>';
 }
