@@ -112,11 +112,27 @@
 		<p>
 			<?php echo __('Eintragung beim ').$mdata['Impressum']['reg_name']; ?>
 			<br>
-			<?php echo $mdata['Impressum']['reg_street'].' '.$mdata['Impressum']['reg_house_no']; ?>
+			<?php
+				if (!empty($mdata['Impressum']['reg_street'])) {
+					echo $mdata['Impressum']['reg_street'];
+					if (!empty($mdata['Impressum']['reg_house_no'])) {
+						echo ' '.$mdata['Impressum']['reg_house_no'];
+					}
+				}
+			?>
 			<br>
-			<?php echo $mdata['Impressum']['reg_post_code'].' '.$mdata['Impressum']['reg_city']; ?>
+			<?php
+				if (!empty($mdata['Impressum']['reg_post_code'])) {
+					echo $mdata['Impressum']['reg_post_code'].' ';
+				}
+				echo $mdata['Impressum']['reg_city'];
+			?>
 			<br>
-			<?php echo $mdata['Impressum']['reg_country']; ?>
+			<?php 
+				if (!empty($mdata['Impressum']['reg_country'])) {
+					echo $mdata['Impressum']['reg_country'];
+				}
+			?>
 			<br>
 			<br>
 			<?php echo __('Registernummer: ').$mdata['Impressum']['reg_no']; ?>
@@ -378,8 +394,8 @@
 			Datenerhebung und die weitere Verarbeitung und Nutzung der erfassten Daten durch Google sowie 
 			Ihre diesbezüglichen Rechte und Einstellungsmöglichkeiten zum Schutz Ihrer Privatsphäre 
 			entnehmen Sie bitte den ').
-			$this->Html->link(__('Datenschutzhinweisen'), "http://www.google.com/intl/de/+/policy/+1button.html", array('target' => '_blank')).
-			__('von Google zur "+1"-Schaltfläche. Wenn Sie bei Google Plus registriert sind und nicht möchten, 
+			$this->Html->link(__('Datenschutzhinweisen von Google'), "http://www.google.com/intl/de/+/policy/+1button.html", array('target' => '_blank')).
+			__(' zur "+1"-Schaltfläche. Wenn Sie bei Google Plus registriert sind und nicht möchten, 
 			dass Google über unsere Website Daten über Sie sammelt und mit Ihren bei Google gespeicherten 
 			Mitgliedsdaten verknüpft, müssen Sie sich vor Ihrem Besuch unserer Website bei Google Plus ausloggen.'); 
 		?>
@@ -400,7 +416,7 @@
 			Wenn Sie den Xing-Button anklicken, wird die entsprechende Information von Ihrem Browser 
 			direkt an Xing übermittelt und dort gespeichert. Wir haben keinen Einfluss auf Umfang, 
 			Inhalt und Art der Daten, die Xing mit der Schaltfläche erfasst. Details zum Umgang mit Ihren 
-			persönlichen Daten durch Xing sowie Ihren diesbezüglichen Rechten entnehmen Sie bitte den').
+			persönlichen Daten durch Xing sowie Ihren diesbezüglichen Rechten entnehmen Sie bitte den ').
 			$this->Html->link(__('Datenschutzhinweisen von Xing'), "http://www.xing.com/privacy", array('target' => '_blank')).
 			__('. Wenn Sie Xing-Mitglied sind und nicht möchten, dass Xing über unsere Webseite Daten 
 			Daten über Sie sammelt, sollten Sie sich vor dem Besuch unserer Webseite bei Xing ausloggen.'); 
@@ -422,7 +438,7 @@
 			Wenn Sie den LinkedIn-Button anklicken, wird die entsprechende Information von Ihrem Browser 
 			direkt an LinkedIn übermittelt und dort gespeichert. Wir haben keinen Einfluss auf Umfang, 
 			Inhalt und Art der Daten, die LinkedIn mit der Schaltfläche erfasst. Details zum Umgang mit Ihren 
-			persönlichen Daten durch LinkedIn sowie Ihren diesbezüglichen Rechten entnehmen Sie bitte den').
+			persönlichen Daten durch LinkedIn sowie Ihren diesbezüglichen Rechten entnehmen Sie bitte den ').
 			$this->Html->link(__('Datenschutzhinweisen von LinkedIn'), "http://de.linkedin.com/static?key=privacy_policy", array('target' => '_blank')).
 			__('. Wenn Sie LinkedIn-Mitglied sind und nicht möchten, dass LinkedIn über unsere Webseite Daten 
 			Daten über Sie sammelt, sollten Sie sich vor dem Besuch unserer Webseite bei LinkedIn ausloggen.'); 
