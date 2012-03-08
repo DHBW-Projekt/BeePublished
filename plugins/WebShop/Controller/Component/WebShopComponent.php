@@ -163,8 +163,11 @@ class WebShopComponent extends Component {
 		//COLLECT data
 		foreach ((!isset($productIDs)) ? array() : $productIDs as $productID) {
 			$product = $controller->WebshopProduct->findById($productID['id'], array('fields' => 'WebshopProduct.id, WebshopProduct.name, WebshopProduct.price, WebshopProduct.picture'));
-			$product['count'] = $productID['count'];
-			array_push($data, $product);
+			
+			if(!empty($product)){
+				$product['count'] = $productID['count'];
+				array_push($data, $product);
+			}
 		}
 		
 		//RETURN products
@@ -278,15 +281,18 @@ class WebShopComponent extends Component {
 		
 		foreach ((!isset($productIDs)) ? array() : $productIDs as $productID) {
 			$product = $controller->WebshopProduct->findById($productID['id'], array('fields' => 'WebshopProduct.id, WebshopProduct.name, WebshopProduct.price'));
-			$product['count'] = $productID['count'];
-			array_push($order, $product);
 			
-			array_push($pos_data,
-					   array('WebshopPosition' => array(
-									'product_id' => $productID['id'][0],
-									'order_id' => $controller->WebshopOrder->id,
-									'count' => $product['count']))
-			);
+			if(!empty($product)){
+				$product['count'] = $productID['count'];
+				array_push($order, $product);
+			
+				array_push($pos_data,
+						   array('WebshopPosition' => array(
+										'product_id' => $productID['id'][0],
+										'order_id' => $controller->WebshopOrder->id,
+										'count' => $product['count']))
+				);
+			}
 		}
 		
 		//CREATE positions on DB

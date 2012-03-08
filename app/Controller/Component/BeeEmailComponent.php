@@ -54,7 +54,12 @@ class BeeEmailComponent extends Component{
 		$email->subject($subject);
 		$email->viewVars($viewVars);
 		$email->transport('Mail');
-		$email->send();
+		try{
+			$email->send();
+		}catch (Exception $e){
+			
+		}
+		
 	}
 	
 	function prepareContent($checkString) {
