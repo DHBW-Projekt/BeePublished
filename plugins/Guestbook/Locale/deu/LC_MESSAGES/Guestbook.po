@@ -273,3 +273,6 @@ msgstr "Bitte geben Sie einen Titel ein."
 msgid "Please enter some text."
 msgstr "Bitte geben Sie einen Text ein."
 
+#: View\Guestbook\admin.ctp:37
+msgid "There are no new posts to be released."
+msgstr "Es sind keine neuen Einträge zur Freigabe vorhanden."
