@@ -5,7 +5,3 @@ $(document).ready(function () {
 
         });
 });
-
-function newTextSaved() {
-    window.location.reload(true);
-}
