@@ -45,11 +45,11 @@ class SubscriptionComponent extends Component {
 			'NewsletterRecipient.email' => $user['email']));
 		$userAsRecipient = $controller->NewsletterRecipient->find('first', array(
 			'conditions' => $conditions));
-		if (isset($userAsRecipient)){
+		if ($userAsRecipient != null){
 			if ($userAsRecipient && !($userAsRecipient['NewsletterRecipient']['user_id']) && ($user['id'])){
 				$userAsRecipient['NewsletterRecipient']['user_id'] = $user['id'];
 				$controller->NewsletterRecipient->set($userAsRecipient);
-				$controller->NewsletterRecipient->save();
+ 				$controller->NewsletterRecipient->save();
 			};
 			// check if user changed emailaddress
 			if((isset($user)) && ($user['email'] != $userAsRecipient['NewsletterRecipient']['email'])){
@@ -70,9 +70,9 @@ class SubscriptionComponent extends Component {
 			'contentId' => $contentID,
 			'NewsletterRecipient' => $recipients,
 			'userAsRecipient' => $userAsRecipient);
-		if ($data != null) 
+		if ($data != null){ 
 			return $data;
-		else 
+		} else 
 			return __d('newsletter','no entries');
 	}
 }

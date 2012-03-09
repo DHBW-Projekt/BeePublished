@@ -13,8 +13,8 @@
  * License along with BeePublished. If not, see
  * http://www.gnu.org/licenses/.
  *
- * @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
- * @author Alexander Müller & Fabian Kajzar
+ * @copyright 2012 Duale Hochschule Baden-Wï¿½rttemberg Mannheim
+ * @author Alexander Mï¿½ller & Fabian Kajzar
  * 
  * @description index view for images
  */
@@ -36,7 +36,7 @@ echo $this->Form->file('File');
 echo $this->Form->submit(__d('gallery', 'Add image'));
 echo $this->Form->end();
 
-echo "<h2>".__d('gallery', 'Add multiple images')."</h2>";
+echo "<h2>".__d('gallery', 'Add multiple images (Not supported in IE)')."</h2>";
 
 echo $this->Form->create('addImage', array('url' => array('plugin' => 'Gallery','controller' => 'ManageImages','action' => 'uploadImages',$ContentId,$mContext),'type' => 'file'));
 echo $this->Form->input('data', array('label'=>'Files', 'type'=>'file', 'name' => 'files[]', 'multiple'));

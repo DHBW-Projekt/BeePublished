@@ -29,24 +29,26 @@ App::uses('AppModel', 'Model');
 class NewsletterRecipient extends AppModel {
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
-
-	public $validate = array(
-        'email' => array(
-	        'email_isunique' => array(
-            	'rule'    => 'isUnique',
-            	'message' => 'This e-mail address is already registered.',
-         	),
-		'email_notEmpty' => array(
-	                        'rule'    => 'notEmpty', 
-	                         'required' => true,
-	                      'message' => 'This field email has to be filled.'
-			),
-        	'email_address_verification' => array(
-            	'rule'    => array('email'),
-            	'message' => 'The e-mail address was not entered correctly.'
-        	)
-        )
-    );
+	function __construct($id = false, $table = null, $ds = null){
+		parent::__construct($id, $table, $ds);
+		$this->validate = array(
+	        'email' => array(
+		        'email_isunique' => array(
+	            	'rule'    => 'isUnique',
+	            	'message' => __d('newsletter','This e-mail address is already registered.'),
+	         	),
+			'email_notEmpty' => array(
+		          	'rule'    => 'notEmpty', 
+		            'required' => true,
+		            'message' => __d('newsletter','The field email has to be filled.')
+				),
+	        	'email_address_verification' => array(
+	            	'rule'    => array('email'),
+	            	'message' => __d('newsletter','The e-mail address was not entered correctly.')
+	        	)
+	        )
+	    );
+	}
 /**
  * belongsTo associations
  *

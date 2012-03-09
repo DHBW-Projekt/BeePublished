@@ -243,6 +243,12 @@ class NewsletterLettersController extends NewsletterAppController {
 				'active' => 1)));
 		// send newsletter to each recipients
 		foreach ($recipients as $recipient){
+			// get server URL
+			$url = "http://".env('SERVER_NAME');
+			if (env('SERVER_PORT') != 80){
+				$url = $url.":".env('SERVER_PORT');
+			};
+			$url = $url.$this->webroot."unsubscribepermail/".$recipient['NewsletterRecipient']['email'];
 			// add line with unsubscription link to email-content
 			$content = $newsletter['NewsletterLetter']['content'];
 			$content = $content
@@ -250,11 +256,10 @@ class NewsletterLettersController extends NewsletterAppController {
 					."<span style='font-size: 9px'>"
 					.__d('newsletter', 'If you want to unsubscribe from our newsletter, click ')
 					."<a href='"
-					.env('SERVER_NAME')
-					."/unsubscribepermail/"
-					.$recipient['NewsletterRecipient']['email']
-					.__d('newsletter', 'here')
-					."</a>."
+					.$url
+					."'>"
+					.__d('newsletter', 'here')."."
+					."</a>"
 					."</span>";
 			// send mail
 			$this->BeeEmail->sendHtmlEmail(

@@ -82,7 +82,7 @@ class UsersController extends AppController
 					'url' => env('SERVER_NAME'),
 					'confirmationToken' => $user['confirmation_token']
 				);
-				$this->BeeEmail->sendHtmlEmail($user['email'], 'Registration complete - Please confirm your account', $viewVars, 'user_confirmation');
+				$this->BeeEmail->sendHtmlEmail($user['email'], __('Registration complete - Please confirm your account'), $viewVars, 'user_confirmation');
 				$this->Session->setFlash(__('The user has been created.'));
 				$this->redirect(array('action' => 'login'));
 			} else{

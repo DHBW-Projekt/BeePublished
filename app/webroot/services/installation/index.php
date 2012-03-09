@@ -11,7 +11,8 @@ if(isset($_POST['HomeUrl']) &&isset($_POST['DBHost']) && isset($_POST['DBName'])
 		$db_login = trim($_POST['DBLogin']);
 
 		$return_code = build_DB($db_server, $db_login, $db_pw, $db_name, $db_script_path);
-
+		
+		
 		if ($return_code == 1065 || $return_code == 0) {
 			echo getAnswer( getRC0Xml());
 		} else {

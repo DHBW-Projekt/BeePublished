@@ -13,7 +13,6 @@ class DisplayTextController extends StaticTextAppController {
 	 */
 	public function admin($contentId){
 		$this->set('contentId',$contentId );
-		$this->layout = 'overlay';
 		//Load datatable
 		$this->loadModel('Plugin');
 		//find plugin

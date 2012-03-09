@@ -86,7 +86,7 @@ class EmailTemplatesController extends AppController
 	    position: fixed;
 	    width: 100%;
 	    z-index: 998;background-color: #2E2E2E;
-	    font-size: 11px;"> Powered by BeePublished - All rights reserved - &copy; Copyright 2011-2012 </div>
+	    font-size: 11px;">'.__('Powered by BeePublished - All rights reserved - &copy; Copyright 2011-2012').'</div>
 	</div>';
     	// save the standard layout 
     	$selectedTemplate = $this->EmailTemplate->find('first');
