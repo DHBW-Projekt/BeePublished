@@ -14,7 +14,6 @@ class DisplayTextController extends StaticTextAppController {
 	public function admin($contentId){
 		$this->layout = 'overlay';
 		$this->set('contentId',$contentId );
-		$this->layout = 'overlay';
 		//Load datatable
 		$this->loadModel('Plugin');
 		//find plugin
@@ -29,7 +28,6 @@ class DisplayTextController extends StaticTextAppController {
 			if ($this->request->is('post')) {
 				$this->ContentValueManager->saveContentValues($contentId, $this->request->data['null']);
 				$this->Session->setFlash(__d('static_text', 'Successfully saved'),'default', array('class' => 'flash_success'), 'StaticText.Admin');
-				//$this->render('close');
 			}
 			//load data with contentId
 			$contentValues = $this->ContentValueManager->getContentValues($contentId);
