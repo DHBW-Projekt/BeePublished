@@ -76,7 +76,7 @@ class GuestbookController extends GuestbookAppController {
 		// check request
 		if($this->request->is('post')){
 			// delete flagged posts from db
-			if ($this->Guestbook->deleteAll(array('contentId' => $contentId,
+			if ($this->GuestbookPost->deleteAll(array('contentId' => $contentId,
 												  'deleted NOT' => '0000-00-00 00:00:00'))){
 			$this->Session->setFlash(__d('guestbook', 'Database cleaned.'), 'default', array('class' => 'flash_success'), 'Guestbook.Admin');
 			$this->redirect($this->referer());

@@ -12,6 +12,7 @@ class DisplayTextController extends StaticTextAppController {
 	 * Tests if the actual user has the right to edit-text
 	 */
 	public function admin($contentId){
+		$this->layout = 'overlay';
 		$this->set('contentId',$contentId );
 		//Load datatable
 		$this->loadModel('Plugin');
