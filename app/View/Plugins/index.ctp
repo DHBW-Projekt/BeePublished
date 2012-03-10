@@ -1,6 +1,7 @@
 <?php echo $this->element('config-menu'); ?>
 <div id="plugin_config">
 <h2><?php echo __('Installed');?></h2>
+<?php if(count($installed)>=1) {?>
 <table>
     <thead>
     <tr>
@@ -33,7 +34,11 @@
         <?php endforeach; ?>
     </tbody>
 </table>
+<?php } else {
+echo __('There are no plugins installed.');
+}?>
 <h2><?php echo __('Available');?></h2>
+<?php if(count($available)>=1){?>
 <table>
     <thead>
     <tr>
@@ -54,4 +59,7 @@
         <?php endforeach; ?>
     </tbody>
 </table>
+<?php } else {
+echo __('There are no more plugins available for installation.');
+}?>
 </div>
