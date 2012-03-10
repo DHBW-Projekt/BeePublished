@@ -648,3 +648,9 @@ msgstr "Offline Modus"
 msgid "Please select the social networks, that should be active in your website."
 msgstr "Bitte wählen Sie die Sozialen Netzwerke aus, welche auf Ihrer Seite angeboten werden sollen."
 
+msgid "There are no plugins installed."
+msgstr "Es sind keine Plugins installiert."
+
+msgid "There are no more plugins available for installation."
+msgstr "Es sind keine weiteren Plugins zur Installation vorhanden."
+
