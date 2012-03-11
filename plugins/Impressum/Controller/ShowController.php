@@ -718,34 +718,19 @@ class ShowController extends AppController {
 			$this->complete = false;
 			$this->Session->setFlash(__('Registername fehlt'), 'default', array('class' => 'flash_failure'));
 		} else {
-			if (empty($data['Impressum']['reg_street'])) {
+			if (empty($data['Impressum']['reg_street']) && !empty($data['Impressum']['reg_house_no'])) {
 				$this->complete = false;
-				$this->Session->setFlash(__('Straße des Registers fehlt'), 'default', array('class' => 'flash_failure'));
+				$this->Session->setFlash(__('Es muss auch eine Straße angegeben werden.'), 'default', array('class' => 'flash_failure'));
 			} else {
-				if (empty($data['Impressum']['reg_house_no'])) {
+				if (empty($data['Impressum']['reg_city'])) {
 					$this->complete = false;
-					$this->Session->setFlash(__('Hausnummer des Registers fehlt'), 'default', array('class' => 'flash_failure'));
+					$this->Session->setFlash(__('Ort fehlt'), 'default', array('class' => 'flash_failure'));
 				} else {
-					if (empty($data['Impressum']['reg_post_code'])) {
+					if (empty($data['Impressum']['reg_no'])) {
 						$this->complete = false;
-						$this->Session->setFlash(__('Postleitzahl des Registers fehlt'), 'default', array('class' => 'flash_failure'));
+						$this->Session->setFlash(__('Registernummer fehlt'), 'default', array('class' => 'flash_failure'));
 					} else {
-						if (empty($data['Impressum']['reg_city'])) {
-							$this->complete = false;
-							$this->Session->setFlash(__('Ort des Registers fehlt'), 'default', array('class' => 'flash_failure'));
-						} else {
-							if (empty($data['Impressum']['reg_country'])) {
-								$this->complete = false;
-								$this->Session->setFlash(__('Land des Registers fehlt'), 'default', array('class' => 'flash_failure'));
-							} else {
-								if (empty($data['Impressum']['reg_no'])) {
-									$this->complete = false;
-									$this->Session->setFlash(__('Registernummer fehlt'), 'default', array('class' => 'flash_failure'));
-								} else {
-									$this->complete = true;
-								}
-							}
-						}
+						$this->complete = true;
 					}
 				}
 			}
