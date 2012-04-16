@@ -1,0 +1,278 @@
+﻿# LANGUAGE translation of CakePHP Application
+#
+# This file is part of BeePublished which is based on CakePHP.
+# BeePublished is free software: you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation, either version 3
+# of the License, or any later version.
+# BeePublished is distributed in the hope that it will be useful, # but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+# You should have received a copy of the GNU General Public
+# License along with BeePublished. If not, see
+# http://www.gnu.org/licenses/.
+#
+# @copyright 2012 Duale Hochschule Baden-Württemberg Mannheim
+# @author Sebastian Haase
+# 
+# @description Translation
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2012-01-24 12:03+0100\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: Sebastian Haase\n"
+"Language-Team: German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: Controller\GuestbookController.php:39;56
+msgid "Your settings were saved."
+msgstr "Ihre Einstellungen wurden gespeichert."
+
+#: Controller\GuestbookController.php:59
+msgid "Database cleaned."
+msgstr "Die Datenbank wurde gesäubert."
+
+#: Controller\GuestbookController.php:77;113
+#: Controller\GuestbookPostController.php:52;106;113;144;172
+msgid "An error has occured."
+msgstr "Ein Fehler ist aufgetreten."
+
+#: Controller\GuestbookController.php:88
+#: Controller\GuestbookPostController.php:148
+msgid "Post released."
+msgstr "Der Eintrag wurde freigegeben."
+
+#: Controller\GuestbookController.php:91
+msgid "Posts released."
+msgstr "Die Einträge wurden freigegeben."
+
+#: Controller\GuestbookController.php:124
+#: Controller\GuestbookPostController.php:117;176
+msgid "Post deleted."
+msgstr "Der Eintrag wurde entfernt."
+
+#: Controller\GuestbookController.php:127
+msgid "Posts deleted."
+msgstr "Die Einträge wurden entfernt."
+
+#: Controller\GuestbookPostController.php:32
+msgid "An error has occured. Please check your data."
+msgstr "Ein Fehler ist aufgetreten. Bitte überprüfen Sie Ihre Eingabe."
+
+#: Controller\GuestbookPostController.php:44
+msgid "The reCAPTCHA wasn't entered correctly. Please try again."
+msgstr "Das reCAPTCHA wurde nicht korrekt eingegeben. Bitte versuchen Sie es erneut."
+
+#: Controller\GuestbookPostController.php:72
+msgid "There is a new post for your guestbook!"
+msgstr "Es gibt einen neuen Eintrag für Ihr Gästebuch!"
+
+#: View\Guestbook\admin.ctp:41
+#: Controller\GuestbookPostController.php:78
+msgid "Release"
+msgstr "Freigeben"
+
+#: View\Guestbook\admin.ctp:42
+#: Controller\GuestbookPostController.php:80
+#: View\Elements\displayPosts.ctp:18;20
+msgid "Delete"
+msgstr "Löschen"
+
+#: Controller\GuestbookPostController.php:87
+msgid "Your post was saved. It will be released by an administrator."
+msgstr "Ihr Eintrag wurde gespeichert. Er wird von einem Administrator freigegeben."
+
+#: Controller\GuestbookPostController.php:130;160
+msgid "The post has already been deleted."
+msgstr "Der Eintrag wurde bereits gelsöcht."
+
+#: Controller\GuestbookPostController.php:136;166
+msgid "Token is invalid. Post was not released."
+msgstr "Das verwendete Token war falsch. Der Eintrag wurde nicht freigegeben."
+
+#: Controller\Component\GuestbookComponent.php:19
+msgid "Guestbook"
+msgstr "Gästebuch"
+
+#: View\Elements\Guestbook.ctp:13
+msgid "Display posts"
+msgstr "Einträge anzeigen"
+
+#: View\Elements\Guestbook.ctp:40
+msgid "Write a post"
+msgstr "Eintrag schreiben"
+
+#: View\Elements\adminMenu.ctp:5;5
+msgid "Unreleased posts"
+msgstr "Nicht freigegebene Einträge"
+
+#: View\Elements\adminMenu.ctp:6;6
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: View\Elements\displayPosts.ctp:12
+msgid " on "
+msgstr " am "
+
+#: View\Elements\displayPosts.ctp:12
+msgid " at "
+msgstr " um "
+
+#: View\Elements\displayPosts.ctp:21
+msgid "Do you really want to delete this post?"
+msgstr "Möchten Sie diesen Eintrag wirklich entfernen?"
+
+#: View\Elements\writePost.ctp:19;21
+msgid "Name:"
+msgstr "Name:"
+
+#: View\Elements\writePost.ctp:29;31
+#: View\Emails\text\notification.ctp:7
+msgid "Title:"
+msgstr "Titel:"
+
+#: View\Elements\writePost.ctp:66
+msgid "Please enter the two words in the Captcha. This is needed to prevent spaming."
+msgstr "Bitte geben Sie die zweit Wörter in das Captcha ein. Dies ist nötig um Spam zu unterbinden."
+
+#: View\Elements\writePost.ctp:74
+msgid "Save Post"
+msgstr "Eintrag speichern"
+
+#: View\Emails\html\notification.ctp:2
+#: View\Emails\text\notification.ctp:1
+msgid "Hi Admin,"
+msgstr "Hi Admin,"
+
+#: View\Emails\html\notification.ctp:3
+#: View\Emails\text\notification.ctp:2
+msgid "Someone wrote a new post for your guestbook."
+msgstr "Jemand hat einen Eintrag für Ihr Gästebuch verfasst."
+
+#: View\Emails\html\notification.ctp:7
+#: View\Emails\text\notification.ctp:4
+msgid "Author: "
+msgstr "Autor: "
+
+#: View\Emails\html\notification.ctp:11
+msgid "Title: "
+msgstr "Titel: "
+
+#: View\Emails\html\notification.ctp:15
+#: View\Emails\text\notification.ctp:10
+msgid "Text: "
+msgstr "Text: "
+
+#: View\Emails\html\notification.ctp:19
+#: View\Emails\text\notification.ctp:13
+msgid "Submit time: "
+msgstr "Zeit des Eintrags: "
+
+#: View\Emails\html\notification.ctp:24
+#: View\Emails\text\notification.ctp:17
+msgid "If you like to release this post immediately please click "
+msgstr "Wenn Sie den Eintrag sofort freigeben möchten klicken Sie bitte "
+
+#: View\Emails\html\notification.ctp:25
+#: View\Emails\text\notification.ctp:20
+msgid "If you like to delete this post immediately please click "
+msgstr "Wenn Sie den Eintrag sofort löschen möchten klicken Sie bitte "
+
+#: View\Emails\html\notification.ctp:26
+#: View\Emails\text\notification.ctp:23
+msgid "You can always check new posts and release or delete them in your administration area of the guestbook plugin."
+msgstr "Sie können neue Einträge immer im Adminbereich der Gäastebuch Plugins ansehen, freigeben oder entfernen."
+
+#: View\Emails\html\notification.ctp:28
+#: View\Emails\text\notification.ctp:25
+msgid "Yours sincerly,"
+msgstr "Viele Grüße,"
+
+#: View\Guestbook\admin.ctp:21
+msgid "Author"
+msgstr "Autor"
+
+#: View\Guestbook\admin.ctp:22
+msgid "Title"
+msgstr "Titel"
+
+#: View\Guestbook\admin.ctp:23
+msgid "Text"
+msgstr "Text"
+
+#: View\Guestbook\admin.ctp:24
+msgid "Date"
+msgstr "Datum"
+
+#: View\Guestbook\admin.ctp:40
+msgid "Clear selection"
+msgstr "Auswahl aufheben"
+
+#: View\Guestbook\settings.ctp:13
+msgid "You can change the number of posts which are displayed on a single pgae here."
+msgstr "Sie können die Anzahl der Einträge die auf jeder Seite angezeigt werden sollen hier einstellen."
+
+#: View\Guestbook\settings.ctp:14
+msgid "Posts per page:"
+msgstr "Einträge pro Seite:"
+
+#: View\Guestbook\settings.ctp:21
+msgid "The following option determins whether an e-mail is send to you everytime a new post is submitted."
+msgstr "Diese Option bestimmt, ob E-Mails für jeden neuen Eintrag an den Administrator gesendet werden sollen."
+
+#: View\Guestbook\settings.ctp:22
+msgid "Send e-mails:"
+msgstr "E-Mails versenden:"
+
+#: View\Guestbook\settings.ctp:23
+#: View\Guestbook\settings.ctp:31
+msgid "Yes"
+msgstr "Ja"
+
+#: View\Guestbook\settings.ctp:23
+#: View\Guestbook\settings.ctp:31
+msgid "No"
+msgstr "Nein"
+
+#: View\Guestbook\settings.ctp:29
+msgid "If set to \"No\", released and then deleted posts will only be hidden and not deleted from database."
+msgstr "Wird \"Nein\" ausgewählt, so werden die Einträge nur ausgeblendet und nicht von der Datenbank gelöscht."
+
+#: View\Guestbook\settings.ctp:30
+msgid "Delete immediately:"
+msgstr "Sofort löschen:"
+
+#: View\Guestbook\settings.ctp:32
+msgid "Save settings"
+msgstr "Einstellungen speichern"
+
+#: View\Guestbook\settings.ctp:37
+msgid "If \"Delete immediately\" is set to \"No\", deleted posts can be removed from database here."
+msgstr "Wenn \"Sofort löschen\" auf \"Nein\" gesetzt ist können gelöschte Einträge hier von der Datenbank entfernt werden."
+
+#: View\Guestbook\settings.ctp:39
+msgid "Clean database"
+msgstr "Datenbank säubern"
+
+#: Model\GuestbookPost.php:validation for field author
+msgid "Please enter your name."
+msgstr "Bitte geben Sie Ihren Namen ein."
+
+#: Model\GuestbookPost.php:validation for field title
+msgid "Please enter a title."
+msgstr "Bitte geben Sie einen Titel ein."
+
+#: Model\GuestbookPost.php:validation for field text
+msgid "Please enter some text."
+msgstr "Bitte geben Sie einen Text ein."
+
+#: View\Guestbook\admin.ctp:37
+msgid "There are no new posts to be released."
+msgstr "Es sind keine neuen Einträge zur Freigabe vorhanden."
